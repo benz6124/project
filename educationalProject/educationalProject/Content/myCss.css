@@ -1,0 +1,692 @@
+ .nav-tabs > li.active > a,
+        .nav-tabs > li.active > a:hover,
+        .nav-tabs > li.active > a:focus,.nav-tabs > li > a:hover {
+          color: white ;
+          cursor: pointer;
+          background-color: #6F002B;
+          border: none;
+          border-bottom-color: transparent;
+          } 
+
+* {
+  font-family: 'Helvetica',"FreesiaUPC" ;
+
+ /* font-size: 20px;*/
+}
+
+.aside-body {
+
+}
+.mySelect{
+  background-color: #E8E8E8    !important;
+
+}
+
+
+
+td > a:link,td > a:visited,td > a:active{
+  color:#000000;
+}
+
+td.download > a:hover{
+  color:#6F002B;
+}
+td,.normal{
+  font-size:18px !important;
+}
+
+
+button{
+  vertical-align: middle !important;
+  text-align: center !important;
+  font-size:20px !important;
+  text-align: center;
+    font-family: "FreesiaUPC" !important;    
+
+}
+
+
+
+.nav-tabs>li>a{
+  color:white;
+
+}
+.small-nav{
+  background-color:#686868
+}
+.big-nav{
+  margin-left:92px;
+  width:90%;
+  background-color:#484848;
+}
+
+.aside{
+  background-color:#686868 !important   ;
+  color:#E0E0E0 !important ;
+
+}
+
+.aside-body li a:visited,.aside-body li a:hover{
+  background-color: #6F002B;
+  color:#E0E0E0;
+  font-weight: bold;
+
+}
+
+
+{
+  background-color: yellow;
+}
+.aside-header{
+  color:white;
+
+  background-color:#484848;
+
+}
+
+div.navbar>div.container-fluid>ul>li>a:hover{
+  background-color: #6F002B;
+
+}
+
+.navbar{
+  background-color:#6F002B; 
+  border:none
+}
+table.evidence, table.evidence th, table.evidence td{
+    border: 1px solid #383838 ;
+    background-color:#F0F0F0 ;
+    color:black;
+    border-radius:5px;
+    border-collapse:separate;
+
+}
+
+table.evidence{
+  border:none;
+  background-color:transparent;;
+}
+table.evidence th{
+  text-align: center;
+  background-color:#6F002B ;
+  color:white;
+  font-size: 20px;
+}
+
+table.evidence  td{
+  font-family: "FreesiaUPC";
+  font-size: 18px;
+  color:black;
+
+}
+
+td.larger{
+    width:450px;
+    text-indent: 10px;
+
+}
+
+td.download{
+  width:150px;
+  text-align: center;
+  padding-left: 0px;
+}
+
+td.code{
+  width:150px;
+  text-align: center;
+  padding-left: 0px;
+}
+
+
+.btn.editor:hover,.btn.editor:active {
+
+    background-color:#484848 !important;
+}
+
+.btn.editor{
+  border:none;
+  background-color:#909090   ; 
+   color:white;
+
+}
+
+.btn.form-control:hover,.btn.form-control:active {
+
+    background-color:#B8B8B8  !important;
+}
+
+
+
+
+
+.btn.fetch:hover,.btn.fetch:active {
+    color:#6F002B;
+    background-color:#F0F0F0   !important;
+}
+
+.btn.fetch{
+  color: white;
+}
+
+.modal-form{
+  font-size: 22px;
+   font-family: 'Helvetica',"FreesiaUPC" !important;
+
+}
+
+
+.modal-body{
+  max-height: 400px;
+
+}
+th.point,td.point{
+    text-align: center;
+  width: 68px;
+  
+}
+.img-thumbnail{
+  max-width: 250px;
+
+}
+
+.gall{
+  margin-left: 28px;
+}
+th.number,td.number{
+    text-align: center;
+  width: 70px;
+}
+
+
+th.topic{
+  width: 500px;
+
+}
+
+td.topic{
+  text-indent: 10px;
+}
+/*table.evaluation, table.evaluation th, table.evaluation td{
+   border: 1px solid #000000 ;
+    background-color:#F0F0F0 ;
+    color:black;
+  
+    border-collapse:collapse;
+    font-family: "FreesiaUPC";
+}
+*/
+
+
+
+
+optgroup {
+  font-family: FreesiaUPC;
+}
+
+
+.btn.self-evaluate:hover,.btn.self-evaluate:active {
+
+    background-color:#B8B8B8 !important;
+}
+
+.btn.self-evaluate{
+  border:none;
+  background-color:white   ; 
+  color:#6F002B;  
+  font-weight: bold;
+  font-size: 25px;
+  font-style: italic;
+}
+
+.topicHeader {
+  font-family:  "FreesiaUPC";
+  font-weight: bold;;
+  font-size: 23px !important;
+
+}
+
+
+span.topic{
+  font-family:  "FreesiaUPC";
+
+  font-size: 23px !important;
+}
+.headerModal {
+  font-family:  "FreesiaUPC";
+  font-weight: bold;;
+  font-size: 40px;
+  margin-top: 5px;
+  margin-bottom: 5px ;
+}
+
+/*.dropdown-menu {
+  background-color:#D3D3D3;
+}
+*/
+ input[type='text'] { 
+
+  font-family:  "FreesiaUPC";
+  font-size: 20px !important;
+
+
+}
+ input[type='number'] { 
+
+  font-family:  "FreesiaUPC";
+  font-size: 18px;
+  text-align: center;
+}
+ input[type='password'] { 
+
+  font-family:  "FreesiaUPC";
+  font-size: 18px;
+
+}
+
+input.form-control[placeholder]{
+   font-size: 18px;
+   font-family:  "FreesiaUPC";
+
+}
+
+
+.select-option{
+  text-align: center;
+  font-family: "FreesiaUPC";
+  font-size: 20px;
+
+}
+
+ 
+
+.select-option:hover{
+  background-color: #FFE6EE !important;
+
+}
+
+
+button[data-toggle="dropdown"]{
+    font-size: 20px;
+   font-family:  "FreesiaUPC";
+
+}
+
+button ul li label{
+      font-size: 20px;
+   font-family:  "FreesiaUPC";
+   color: green;
+}
+
+.tooltip{
+   font-size: 17px;
+   font-family:  "FreesiaUPC";
+
+}
+
+.hvr-pulse{
+   transition-duration: 20s;
+   backface-visibility: hidden;
+}
+
+td button li label{
+     font-size: 20px;
+   font-family:  "FreesiaUPC";
+}
+
+    ul li ul.dropdown{
+        min-width: 200px; /* Set width of the dropdown */
+        background: #6F002B  ;
+        display: none;
+       
+        z-index: 999;
+        float: right;
+    
+
+     position: absolute;
+          top: 50%;
+          right: -200px;
+          margin-top: -27px;
+         padding-left: 0px;
+         text-align: center;
+     
+    }
+
+   ul li ul.dropdownImg{
+        min-width: 150px; /* Set width of the dropdown */
+
+        display: none;
+       
+        z-index: 999;
+        float: left;
+    
+
+     position: absolute;
+          top: 50%;
+          right: 36px;
+          margin-top: 49px;
+         padding-left: 0px;
+
+         text-align: center;
+     
+    }
+
+    ul.dropdown li:hover{
+      font-weight: bold;
+      color: white;
+
+    }
+    ul li:hover ul.dropdown{
+        display: block; 
+        background-color: #484848;
+
+    }
+
+     ul li:hover ul.dropdownImg{
+        display: block; 
+        background-color: #6F002B;
+
+    }
+
+     ul.dropdown li{
+    
+      list-style-type: none;
+    }
+
+         ul.dropdownImg li{
+    
+      list-style-type: none;
+    }
+    ul li ul.dropdown li a{
+        display: block;
+    }
+
+    ul.dropdownImg a{
+      font-size:22px;
+      color:white;
+    }
+
+    ul.dropdownImg li.profile_name{
+      font-family: "FreesiaUPC";
+      font-size:30px;
+      color:#6F002B;
+      background-color: #A0A0A0 ;
+      font-weight: bolder;
+    }
+    ul.dropdownImg li.bull:hover{
+      background-color: #686868 ;
+      font-weight: bold;
+      color:#6F002B;
+    }
+
+div.aside-body ul.nav li:hover {background: #6F002B; }
+div.aside-body ul.nav li:hover ul {display: block;}
+
+    ul.dropdown a:hover{
+      text-decoration: none;
+      color: white;
+
+    }
+
+div#leftMenuAside{
+  overflow:visible !important;
+}
+
+
+
+/*select {
+  text-align: center !important;
+
+}
+
+option {
+  text-align: center !important;
+  
+}
+*/
+.topic-modal{
+  text-align: center;
+}
+
+.plusgreen{
+  background-color: #339900;
+  border-color: #008800;
+
+}
+a[data-title="Delete"] i{
+  color:red !important;
+}
+
+a[data-title="Delete"] i:hover{
+  color:#990000 !important;
+}
+
+a[data-title="Update"] i{
+  color:#FF9900 !important;
+}
+
+
+a[data-title="Do"] i{
+  color:#3399CC !important;
+}
+
+a[data-title="Download"] i{
+  color:#990033 !important;
+}
+
+a[data-title="Download"] i:hover{
+  color:#660033 !important;
+}
+thead.flattened tr td{
+  text-align: center;
+
+}
+table.table_modal .user{
+  background-color:#808080  ;
+  vertical-align: middle;
+
+}
+
+table.table_modal .make_topic{
+  background-color:#989898 ;  
+  
+}
+
+table.table_modal .data_topic{
+ background-color:#B0B0B0  
+  
+}
+
+
+table.table_modal .evaluate_topic{
+ background-color:#C8C8C8  ; 
+  
+}
+
+table.table_modal th{
+  font-size: 23px !important;
+  text-align: center;
+  color: #6F002B;
+  background-color: #E8E8E8   ;
+}
+
+table.table_modal td,table.table_modal td div{
+  font-family:  "FreesiaUPC" !important;
+  font-size: 20px !important;
+  text-align: center;
+  vertical-align: middle;
+}
+
+table.table_modal td.larger, table.table_modal td.topic{
+  text-align: left;
+}
+/*tbody.pri td img{
+  margin-left: 30px;
+}*/
+
+
+.img-thumbnail{
+  width: 200px;
+}
+.left_column{
+  text-align: left !important;
+}
+
+.panel-title{
+  font-size: 30px !important;
+  color:#6F002B;
+  font-weight: bold;;
+}
+
+button.plusgreen:hover{
+  background-color: #006600;
+}
+
+.custom-header{
+  height: 80px;
+  margin-top: 10px;
+  background-color:#6F002B;
+  color:white;
+}
+
+.custom-footer{
+  background-color:#6F002B !important;
+
+}
+.panel-heading{
+  background-color: #808080 !important;
+}
+
+.modal-backdrop
+{
+    opacity:0.8 !important;
+}
+
+.custom-body{
+  overflow:hidden !important;
+}
+
+h1.headerModalH1{
+text-align:center;
+color:white;
+margin-top:7px;
+  font-family:  "FreesiaUPC";
+  font-weight: bold;;
+  font-size: 40px;
+}
+
+
+
+.panel-default{
+  margin-bottom:0px !important;
+  
+}
+
+input[type=checkbox] {
+  /* All browsers except webkit*/
+  transform: scale(1.5);
+
+  /* Webkit browsers*/
+  -webkit-transform: scale(1.5);
+}
+
+input[type=radio] {
+  /* All browsers except webkit*/
+  transform: scale(1.5);
+
+  /* Webkit browsers*/
+  -webkit-transform: scale(1.5);
+  cursor:pointer;
+}
+
+.profile_pic{
+  cursor:pointer;
+}
+.myColorBold{
+  color:#6F002B;
+  font-weight: bold;
+}
+
+h4{
+  font-family: "FreesiaUPC" ;
+}
+
+table.research td, table.research td div{
+  font-size:22px !important;
+}
+a{
+  text-decoration: none !important;
+}
+/*.modal .modal-body {
+    max-height: 500px;
+    overflow-y: hidden;
+}*/
+
+textarea{
+  font-family: "FreesiaUPC";
+  font-size: 20px;
+}
+
+h1.headerPanel{
+  font-family: "FreesiaUPC" !important;
+  font-weight: bold;
+  text-align: center;
+}
+
+h2.headerSubPanel{
+  font-family: "FreesiaUPC" !important;
+  font-weight: bold;
+}
+table.evaluation th{
+  background-color: #6F002B;
+    text-align: center;
+  font-weight: bold;
+  color:white;
+  font-size: 22px !important;
+  font-family: "FreesiaUPC" !important;
+}
+
+table.evaluation td{
+  background-color: #F4F4F4  ;
+  color:black;
+}
+
+
+table.evidence th{
+  background-color: #6F002B;
+    text-align: center;
+  font-weight: bold;
+  color:white;
+}
+
+
+table.evidence td{
+   background-color: #F4F4F4  ;
+   color:black;
+}
+
+table.evaluation{
+  width: 1200px;
+
+}
+
+table.evidence{
+  width: 650px;
+}
+
+
+table.evaluation{
+   margin: auto !important;
+}
+
+.myTip{
+  font-family: "FreesiaUPC" !important;
+  font-size: 20px !important;
+ 
+}
+
+.panel.pageable-edit-panel.panel-stretch .panel-footer .btn{
+  background-color: red !important;
+
+}
+
