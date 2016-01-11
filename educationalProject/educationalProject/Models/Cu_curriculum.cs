@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace educationalProject.Models
+{
+    public class Cu_curriculum
+    {
+        private string _curri_id;
+        private string _year;
+        private string _curr_tname;
+        private string _curr_ename;
+        private string _degree_t_full;
+        private string _degree_t_bf;
+        private string _degree_e_full;
+        private string _degree_e_bf;
+        private char _level;
+        private char _period;
+        public string curri_id { get { return _curri_id; } set { _curri_id = value; } }
+        public string year { get { return _year; } set { _year = value; } }
+        public string curr_tname { get { return _curr_tname; } set { _curr_tname = value; } }
+        public string curr_ename { get { return _curr_ename; } set { _curr_ename = value; } }
+        public string degree_t_full { get { return _degree_t_full; } set { _degree_t_full = value; } }
+        public string degree_t_bf { get { return _degree_t_bf; } set { _degree_t_bf = value; } }
+        public string degree_e_full { get { return _degree_e_full; } set { _degree_e_full = value; } }
+        public string degree_e_bf { get { return _degree_e_bf; } set { _degree_e_bf = value; } }
+        public char level { get { return _level; } set { _level = value; } }
+        public char period { get { return _period; } set { _period = value; } }
+    }
+}
