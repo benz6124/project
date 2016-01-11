@@ -14,5 +14,12 @@ namespace educationalProject.Controllers
 
             return View();
         }
+
+        public ActionResult test()
+        {
+            ViewBag.Title = "Home Page";
+
+            return View();
+        }
     }
 }

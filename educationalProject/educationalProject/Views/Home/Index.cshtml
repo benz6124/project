@@ -1,11 +1,14 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="myProject">
 <head>
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width" />
     <title>KMITL CUPT-QA ONLINE</title>
+
+
+
     <link rel="shortcut icon" href="~/bower_components/quantumui/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="~/bower_components/quantumui/images/favicon.ico" type="image/x-icon">
     <link href="~/bower_components/hover/css/hover.css" rel="stylesheet" media="all">
@@ -29,13 +32,14 @@
     <script type="text/javascript" src="~/bower_components/fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
     <script src="~/bower_components/quantumui/dist/js/quantumui-all.min.js"></script>
     <script src="~/bower_components/quantumui/config/icons.js"></script>
-    <script src="~/bower_components/ckeditor/ckeditor.js"></script>
+    <script src="//cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
     <link href="~/Content/dropdowns-enhancement.css" rel="stylesheet" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="~/Content/myCss.css" rel="stylesheet" />
     <link href="~/bower_components/quantumui/dist/css/quantumui.min.css" rel="stylesheet" />
     <script type="text/javascript" src="~/bower_components/dropdowns-enhancement/dropdowns-enhancement.js"></script>
-
+    <script src="~/app/app.js" ></script>
+    <script src="~/app/controllers/indexController.js" ></script>
 
 
     <script>
@@ -169,7 +173,7 @@ $('.profile_pic').mouseover(function(){
       }
     </script>
 </head>
-<body>
+<body ng-controller="indexController">
 
     <section class="wow">
         <div class="navbar" style="">
@@ -2705,9 +2709,10 @@ $('.profile_pic').mouseover(function(){
 
 
                     <form>
-                        <textarea name="editor1" class="editor" rows="10" cols="80"></textarea>
-                        <script>
-      CKEDITOR.replace( 'editor1' );
+                        <textarea name="editor1" rows="10" cols="80"></textarea>
+                    
+                        <script type="text/javascript">
+    CKEDITOR.replace("editor1");
                         </script>
                     </form>
                     <br />

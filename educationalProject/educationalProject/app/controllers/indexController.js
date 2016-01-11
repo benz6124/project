@@ -1,4 +1,4 @@
-﻿
+﻿'use strict';
 app.controller('indexController', function ($scope, $http) {
 
     $http.get("/api/curriculum").success(function (data, status, headers, config) {
