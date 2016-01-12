@@ -8,7 +8,7 @@ namespace educationalProject.Models.Wrappers
 {
     public class oIndicator : Indicator
     {
-        public Object Select()
+        public object Select()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())

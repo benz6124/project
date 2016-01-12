@@ -6,14 +6,14 @@ using System.Data;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
 {
-    public class oCu_Curriculum : Cu_curriculum
+    public class oCu_curriculum : Cu_curriculum
     {
-        public Object Select()
+        public object Select()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            List<oCu_Curriculum> result = new List<oCu_Curriculum>();
+            List<oCu_curriculum> result = new List<oCu_curriculum>();
             d.iCommand.CommandText = String.Format("select * from cu_curriculum");
             try
             {
@@ -62,7 +62,7 @@ namespace educationalProject.Models.Wrappers
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            List<oCu_Curriculum> result = new List<oCu_Curriculum>();
+            List<oCu_curriculum> result = new List<oCu_curriculum>();
             d.iCommand.CommandText = String.Format("select * from cu_curriculum where {0}", wherecond);
             try
             {
