@@ -22,5 +22,14 @@ namespace educationalProject.Controllers
 	        };
 		    return Ok(list);
         }
+        public IHttpActionResult Get1(string test)
+        {
+            return Ok();
+        }
+        public IHttpActionResult Get2(string test1)
+        {
+            return Ok();
+        }
+
     }
 }

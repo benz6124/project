@@ -23,5 +23,10 @@ namespace educationalProject.Controllers
             };
             return Ok(list);
         }
+
+        public IHttpActionResult PostByCurriculum(Cu_curriculum obj)
+        {
+            return Ok();
+        }
     }
 }
