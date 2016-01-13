@@ -24,17 +24,19 @@ namespace educationalProject.Models.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        this.curri_id = item.ItemArray[data.Columns["curri_id"].Ordinal].ToString();
-                        this.curr_tname = item.ItemArray[data.Columns["curr_tname"].Ordinal].ToString();
-                        this.curr_ename = item.ItemArray[data.Columns["curr_ename"].Ordinal].ToString();
-                        this.degree_e_bf = item.ItemArray[data.Columns["degree_e_bf"].Ordinal].ToString();
-                        this.degree_e_full = item.ItemArray[data.Columns["degree_e_full"].Ordinal].ToString();
-                        this.degree_t_bf = item.ItemArray[data.Columns["degree_t_bf"].Ordinal].ToString();
-                        this.degree_t_full = item.ItemArray[data.Columns["degree_t_full"].Ordinal].ToString();
-                        this.level = Convert.ToChar(item.ItemArray[data.Columns["level"].Ordinal]);
-                        this.period = Convert.ToChar(item.ItemArray[data.Columns["period"].Ordinal]);
-                        this.year = item.ItemArray[data.Columns["year"].Ordinal].ToString();
-                        result.Add(this);
+                        result.Add(new oCu_curriculum
+                        {
+                            curri_id = item.ItemArray[data.Columns["curri_id"].Ordinal].ToString(),
+                            curr_tname = item.ItemArray[data.Columns["curr_tname"].Ordinal].ToString(),
+                            curr_ename = item.ItemArray[data.Columns["curr_ename"].Ordinal].ToString(),
+                            degree_e_bf = item.ItemArray[data.Columns["degree_e_bf"].Ordinal].ToString(),
+                            degree_e_full = item.ItemArray[data.Columns["degree_e_full"].Ordinal].ToString(),
+                            degree_t_bf = item.ItemArray[data.Columns["degree_t_bf"].Ordinal].ToString(),
+                            degree_t_full = item.ItemArray[data.Columns["degree_t_full"].Ordinal].ToString(),
+                            level = Convert.ToChar(item.ItemArray[data.Columns["level"].Ordinal]),
+                            period = Convert.ToChar(item.ItemArray[data.Columns["period"].Ordinal]),
+                            year = item.ItemArray[data.Columns["year"].Ordinal].ToString()
+                        });
                     }
                     res.Close();
                     data.Dispose();
@@ -73,17 +75,19 @@ namespace educationalProject.Models.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        this.curri_id = item.ItemArray[data.Columns["curri_id"].Ordinal].ToString();
-                        this.curr_tname = item.ItemArray[data.Columns["curr_tname"].Ordinal].ToString();
-                        this.curr_ename = item.ItemArray[data.Columns["curr_ename"].Ordinal].ToString();
-                        this.degree_e_bf = item.ItemArray[data.Columns["degree_e_bf"].Ordinal].ToString();
-                        this.degree_e_full = item.ItemArray[data.Columns["degree_e_full"].Ordinal].ToString();
-                        this.degree_t_bf = item.ItemArray[data.Columns["degree_t_bf"].Ordinal].ToString();
-                        this.degree_t_full = item.ItemArray[data.Columns["degree_t_full"].Ordinal].ToString();
-                        this.level = Convert.ToChar(item.ItemArray[data.Columns["level"].Ordinal]);
-                        this.period = Convert.ToChar(item.ItemArray[data.Columns["period"].Ordinal]);
-                        this.year = item.ItemArray[data.Columns["year"].Ordinal].ToString();
-                        result.Add(this);
+                        result.Add(new oCu_curriculum
+                        {
+                            curri_id = item.ItemArray[data.Columns["curri_id"].Ordinal].ToString(),
+                            curr_tname = item.ItemArray[data.Columns["curr_tname"].Ordinal].ToString(),
+                            curr_ename = item.ItemArray[data.Columns["curr_ename"].Ordinal].ToString(),
+                            degree_e_bf = item.ItemArray[data.Columns["degree_e_bf"].Ordinal].ToString(),
+                            degree_e_full = item.ItemArray[data.Columns["degree_e_full"].Ordinal].ToString(),
+                            degree_t_bf = item.ItemArray[data.Columns["degree_t_bf"].Ordinal].ToString(),
+                            degree_t_full = item.ItemArray[data.Columns["degree_t_full"].Ordinal].ToString(),
+                            level = Convert.ToChar(item.ItemArray[data.Columns["level"].Ordinal]),
+                            period = Convert.ToChar(item.ItemArray[data.Columns["period"].Ordinal]),
+                            year = item.ItemArray[data.Columns["year"].Ordinal].ToString()
+                        });
                     }
                     res.Close();
                     data.Dispose();

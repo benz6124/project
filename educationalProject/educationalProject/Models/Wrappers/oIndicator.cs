@@ -24,10 +24,12 @@ namespace educationalProject.Models.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        this.aca_year = Convert.ToInt32(item.ItemArray[data.Columns["aca_year"].Ordinal]);
-                        this.indicator_num = Convert.ToInt32(item.ItemArray[data.Columns["indicator_num"].Ordinal]);
-                        this.indicator_name = item.ItemArray[data.Columns["indicator_name"].Ordinal].ToString();
-                        result.Add(this);
+                        result.Add(new oIndicator
+                        {
+                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns["aca_year"].Ordinal]),
+                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns["indicator_num"].Ordinal]),
+                            indicator_name = item.ItemArray[data.Columns["indicator_name"].Ordinal].ToString()
+                        });
                     }
                     res.Close();
                     data.Dispose();
@@ -66,10 +68,58 @@ namespace educationalProject.Models.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        this.aca_year = Convert.ToInt32(item.ItemArray[data.Columns["aca_year"].Ordinal]);
-                        this.indicator_num = Convert.ToInt32(item.ItemArray[data.Columns["indicator_num"].Ordinal]);
-                        this.indicator_name = item.ItemArray[data.Columns["indicator_name"].Ordinal].ToString();
-                        result.Add(this);
+                        result.Add(new oIndicator
+                        {
+                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns["aca_year"].Ordinal]),
+                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns["indicator_num"].Ordinal]),
+                            indicator_name = item.ItemArray[data.Columns["indicator_name"].Ordinal].ToString()
+                        });
+                    }
+                    res.Close();
+                    data.Dispose();
+                }
+                else
+                {
+                    //Reserved for return error string
+                }
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return result;
+        }
+
+        public object SelectWhereOrderBy(string wherecond,string orderbycol,int? dir)
+        {
+            string[] direction = { "ASC", "DESC" };
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+            List<oIndicator> result = new List<oIndicator>();
+            d.iCommand.CommandText = String.Format("select * from indicator where {0} order by {1} {2}", 
+                wherecond,orderbycol,((dir != null)?direction[dir.Value]:""));
+            try
+            {
+                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                if (res.HasRows)
+                {
+                    DataTable data = new DataTable();
+                    data.Load(res);
+                    foreach (DataRow item in data.Rows)
+                    {
+                        result.Add(new oIndicator
+                        {
+                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns["aca_year"].Ordinal]),
+                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns["indicator_num"].Ordinal]),
+                            indicator_name = item.ItemArray[data.Columns["indicator_name"].Ordinal].ToString()
+                        });
                     }
                     res.Close();
                     data.Dispose();

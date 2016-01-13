@@ -11,7 +11,6 @@ namespace educationalProject.Controllers
     public class CurriculumAcademicController : ApiController
     {
         private oCurriculum_academic datacontext = new oCurriculum_academic();
-        
         //Retrieve curriculum_academic data by use Cu_curriculum
         public IHttpActionResult PostByCurriculum(oCu_curriculum data)
         {

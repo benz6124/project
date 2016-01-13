@@ -24,9 +24,11 @@ namespace educationalProject.Models.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        this.curri_id = item.ItemArray[data.Columns["curri_id"].Ordinal].ToString();
-                        this.aca_year = Convert.ToInt32(item.ItemArray[data.Columns["aca_year"].Ordinal]);
-                        result.Add(this);
+                        result.Add(new oCurriculum_academic
+                        {
+                            curri_id = item.ItemArray[data.Columns["curri_id"].Ordinal].ToString(),
+                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns["aca_year"].Ordinal])
+                        });
                     }
                     res.Close();
                     data.Dispose();
@@ -65,9 +67,11 @@ namespace educationalProject.Models.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        this.curri_id = item.ItemArray[data.Columns["curri_id"].Ordinal].ToString();
-                        this.aca_year = Convert.ToInt32(item.ItemArray[data.Columns["aca_year"].Ordinal]);
-                        result.Add(this);
+                        result.Add(new oCurriculum_academic
+                        {
+                            curri_id = item.ItemArray[data.Columns["curri_id"].Ordinal].ToString(),
+                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns["aca_year"].Ordinal])
+                        });
                     }
                     res.Close();
                     data.Dispose();
