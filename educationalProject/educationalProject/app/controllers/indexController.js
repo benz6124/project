@@ -1,8 +1,10 @@
 ﻿'use strict';
 app.controller('indexController', function ($scope, $http) {
+	$scope.curri_choosen = "aa";
+
 
     $http.get("/api/curriculum").success(function (data, status, headers, config) {
-        $scope.curriculums = data;
+        $scope.all_curriculums = data;
 
     });
 

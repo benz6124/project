@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html ng-app="myProject">
+<html data-ng-app="myProject">
 <head>
 
     <meta charset="UTF-8">
@@ -7,8 +7,10 @@
     <meta name="viewport" content="width=device-width" />
     <title>KMITL CUPT-QA ONLINE</title>
 
-
-
+   <!--  // <script src="/app/app.js"></script>
+    // <script src="/app/controllers/indexController.js"></script> -->
+<!--     // <script type="text/javascript" src="/app/app.js"></script>
+    // <script type="text/javascript" src="/app/controllers/indexController.js"></script> -->
     <link rel="shortcut icon" href="/bower_components/quantumui/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/bower_components/quantumui/images/favicon.ico" type="image/x-icon">
     <link href="/bower_components/hover/css/hover.css" rel="stylesheet" media="all">
@@ -38,9 +40,38 @@
     <link href="/Content/myCss.css" rel="stylesheet" />
     <link href="/bower_components/quantumui/dist/css/quantumui.min.css" rel="stylesheet" />
     <script type="text/javascript" src="/bower_components/dropdowns-enhancement/dropdowns-enhancement.js"></script>
-    <script src="/app/app.js"></script>
-    <script src="/app/controllers/indexController.js"></script>
+    <script type="text/javascript">
+     var app = angular.module('myProject', [
+        'ngSanitize',
+        'ngAnimate',
+        'ngQuantum'
+      ]);
 
+      app.controller('indexController', function ($scope, $http) {
+        $scope.curri_choosen = "";
+
+        
+        $http.get("/api/curriculum").success(function (data, status, headers, config) {
+              $scope.all_curriculums = data;
+
+          });
+
+        // $http.get("/api/curriculumAcademic").success(function (data, status, headers, config) {
+        //       $scope.aca_yrs = data;
+
+        //   });
+
+        $scope.sendCurriAndGetYears =  function (curri){
+          
+           $http.post('/api/trivia', { 'Cu_curriculum': curri }).success(function (data, status, headers, config) {
+            $scope.corresponding_aca_years = data;
+        });
+        }
+
+
+      });
+
+    </script>
 
     <script>
 $(document).ready(function(){
@@ -177,9 +208,7 @@ $('.profile_pic').mouseover(function(){
 
     <section class="wow">
         <div class="navbar" style="">
-            <!--  <div class="navbar-header">
-                <a class="navbar-brand" href="" ><span class="glyphicon glyphicon-list-alt"> </span> AUN online for Computer Engineering KMITL</a>
-            </div> -->
+      
             <div class="container-fluid">
 
 
@@ -501,28 +530,22 @@ $('.profile_pic').mouseover(function(){
                 <li tabindex="-1" role="presentation"><a href="" role="menuitem"><i class="fic fu-cog"></i> Action 3</a></li>
                 <li tabindex="-1" role="presentation"><a href="" role="menuitem"><i class="fic fu-cog"></i> Action 3</a></li>
             </ul> -->
+           
             <div class="col-sm-6">
 
-                <select data-qo-button-class="mySelect" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
-                    <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
-                    <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
-                    <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
-                    <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
+                <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums"data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="curri_choosen" ngChange="sendCurriAndGetYears(curri)">
+               
                 </select>
+
             </div>
 
             <div class="col-sm-4">
-                <select data-qo-button-class="mySelect" data-qo-button-class="mySelect" data-nq-select="" data-qo-speed="fastest" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
-                    <option>2557</option>
-                    <option>2556</option>
-                    <option>2555</option>
-                    <option>2554</option>
-                    <option>2553</option>
-                    <option>2552</option>
-                    <option>2551</option>
 
-
+            <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years"data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="" >
+               
                 </select>
+
+
             </div>
 
             <div class="col-sm-1">

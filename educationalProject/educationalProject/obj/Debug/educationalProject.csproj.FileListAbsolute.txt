@@ -177,6 +177,7 @@ C:\Users\SiS_M7\Desktop\newProject\project\educationalProject\educationalProject
 C:\Users\SiS_M7\Desktop\newProject\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
 C:\Users\SiS_M7\Desktop\newProject\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 C:\Users\SiS_M7\Desktop\newProject\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb
+D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\ApplicationInsights.config
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\roslyn\csc.exe
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -267,4 +268,3 @@ C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProjec
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb
-D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
