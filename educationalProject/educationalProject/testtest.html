@@ -64,10 +64,25 @@
 
      
         $scope.sendCurriAndGetYears =  function (curri){
+
+
+
         	 $scope.curri_me = curri;
-           $http.post('/api/curriculumacademic',  {'Cu_curriculum': curri }).success(function (data, status, headers, config) {
-            $scope.corresponding_aca_years = data;
-        });
+        //    $http.post('/api/curriculumacademic',  {'Cu_curriculum': curri }).success(function (data, status, headers, config) {
+        //     $scope.corresponding_aca_years = data;
+        // });
+
+           $http.post(
+                '/api/curriculumacademic',
+                JSON.stringify(curri),
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            ).success(function (data) {
+                $scope.corresponding_aca_years = data;
+            });
         }
 
 
