@@ -14,7 +14,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oCu_curriculum> result = new List<oCu_curriculum>();
-            d.iCommand.CommandText = String.Format("select * from cu_curriculum");
+            d.iCommand.CommandText = String.Format("select * from {0}",FieldName.TABLE_NAME);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -26,16 +26,16 @@ namespace educationalProject.Models.Wrappers
                     {
                         result.Add(new oCu_curriculum
                         {
-                            curri_id = item.ItemArray[data.Columns["curri_id"].Ordinal].ToString(),
-                            curr_tname = item.ItemArray[data.Columns["curr_tname"].Ordinal].ToString(),
-                            curr_ename = item.ItemArray[data.Columns["curr_ename"].Ordinal].ToString(),
-                            degree_e_bf = item.ItemArray[data.Columns["degree_e_bf"].Ordinal].ToString(),
-                            degree_e_full = item.ItemArray[data.Columns["degree_e_full"].Ordinal].ToString(),
-                            degree_t_bf = item.ItemArray[data.Columns["degree_t_bf"].Ordinal].ToString(),
-                            degree_t_full = item.ItemArray[data.Columns["degree_t_full"].Ordinal].ToString(),
-                            level = Convert.ToChar(item.ItemArray[data.Columns["level"].Ordinal]),
-                            period = Convert.ToChar(item.ItemArray[data.Columns["period"].Ordinal]),
-                            year = item.ItemArray[data.Columns["year"].Ordinal].ToString()
+                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
+                            curr_tname = item.ItemArray[data.Columns[FieldName.CURR_TNAME].Ordinal].ToString(),
+                            curr_ename = item.ItemArray[data.Columns[FieldName.CURR_ENAME].Ordinal].ToString(),
+                            degree_e_bf = item.ItemArray[data.Columns[FieldName.DEGREE_E_BF].Ordinal].ToString(),
+                            degree_e_full = item.ItemArray[data.Columns[FieldName.DEGREE_E_FULL].Ordinal].ToString(),
+                            degree_t_bf = item.ItemArray[data.Columns[FieldName.DEGREE_T_BF].Ordinal].ToString(),
+                            degree_t_full = item.ItemArray[data.Columns[FieldName.DEGREE_T_FULL].Ordinal].ToString(),
+                            level = Convert.ToChar(item.ItemArray[data.Columns[FieldName.LEVEL].Ordinal]),
+                            period = Convert.ToChar(item.ItemArray[data.Columns[FieldName.PERIOD].Ordinal]),
+                            year = item.ItemArray[data.Columns[FieldName.YEAR].Ordinal].ToString()
                         });
                     }
                     res.Close();
@@ -58,14 +58,14 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
-
+        
         public object SelectWhere(string wherecond)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oCu_curriculum> result = new List<oCu_curriculum>();
-            d.iCommand.CommandText = String.Format("select * from cu_curriculum where {0}", wherecond);
+            d.iCommand.CommandText = String.Format("select * from {0} where {1}",FieldName.TABLE_NAME,wherecond);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -77,16 +77,16 @@ namespace educationalProject.Models.Wrappers
                     {
                         result.Add(new oCu_curriculum
                         {
-                            curri_id = item.ItemArray[data.Columns["curri_id"].Ordinal].ToString(),
-                            curr_tname = item.ItemArray[data.Columns["curr_tname"].Ordinal].ToString(),
-                            curr_ename = item.ItemArray[data.Columns["curr_ename"].Ordinal].ToString(),
-                            degree_e_bf = item.ItemArray[data.Columns["degree_e_bf"].Ordinal].ToString(),
-                            degree_e_full = item.ItemArray[data.Columns["degree_e_full"].Ordinal].ToString(),
-                            degree_t_bf = item.ItemArray[data.Columns["degree_t_bf"].Ordinal].ToString(),
-                            degree_t_full = item.ItemArray[data.Columns["degree_t_full"].Ordinal].ToString(),
-                            level = Convert.ToChar(item.ItemArray[data.Columns["level"].Ordinal]),
-                            period = Convert.ToChar(item.ItemArray[data.Columns["period"].Ordinal]),
-                            year = item.ItemArray[data.Columns["year"].Ordinal].ToString()
+                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
+                            curr_tname = item.ItemArray[data.Columns[FieldName.CURR_TNAME].Ordinal].ToString(),
+                            curr_ename = item.ItemArray[data.Columns[FieldName.CURR_ENAME].Ordinal].ToString(),
+                            degree_e_bf = item.ItemArray[data.Columns[FieldName.DEGREE_E_BF].Ordinal].ToString(),
+                            degree_e_full = item.ItemArray[data.Columns[FieldName.DEGREE_E_FULL].Ordinal].ToString(),
+                            degree_t_bf = item.ItemArray[data.Columns[FieldName.DEGREE_T_BF].Ordinal].ToString(),
+                            degree_t_full = item.ItemArray[data.Columns[FieldName.DEGREE_T_FULL].Ordinal].ToString(),
+                            level = Convert.ToChar(item.ItemArray[data.Columns[FieldName.LEVEL].Ordinal]),
+                            period = Convert.ToChar(item.ItemArray[data.Columns[FieldName.PERIOD].Ordinal]),
+                            year = item.ItemArray[data.Columns[FieldName.YEAR].Ordinal].ToString()
                         });
                     }
                     res.Close();

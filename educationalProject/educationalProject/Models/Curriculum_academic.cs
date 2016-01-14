@@ -7,6 +7,12 @@ namespace educationalProject.Models
 {
     public class Curriculum_academic
     {
+        protected struct FieldName
+        {
+            public static readonly string CURRI_ID = "CURRI_ID";
+            public static readonly string ACA_YEAR = "ACA_YEAR";
+            public static readonly string TABLE_NAME = "CURRICULUM_ACADEMIC";
+        }
         private string _curri_id;
         private int _aca_year;
         public string curri_id { get { return _curri_id; } set { _curri_id = value; } }

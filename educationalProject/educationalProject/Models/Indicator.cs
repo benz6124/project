@@ -7,6 +7,14 @@ namespace educationalProject.Models
 {
     public class Indicator
     {
+        protected struct FieldName
+        {
+            public static readonly string ACA_YEAR = "ACA_YEAR";
+            public static readonly string INDICATOR_NUM = "INDICATOR_NUM";
+            public static readonly string INDICATOR_NAME = "INDICATOR_NAME";
+            public static readonly string TABLE_NAME = "INDICATOR";
+        }
+
         private int _aca_year;
         private int _indicator_num;
         private string _indicator_name;

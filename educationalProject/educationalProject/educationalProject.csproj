@@ -238,7 +238,8 @@
     <Compile Include="Controllers\CurriculumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndicatorController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\SubIndicatorController.cs" />
+    <Compile Include="Controllers\UserTypeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -248,9 +249,19 @@
     <Compile Include="Models\Cu_curriculum.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Indicator.cs" />
+    <Compile Include="Models\Primary_evidence.cs" />
+    <Compile Include="Models\Research.cs" />
+    <Compile Include="Models\Student_cnt.cs" />
+    <Compile Include="Models\Sub_indicator.cs" />
+    <Compile Include="Models\User_type.cs" />
     <Compile Include="Models\Wrappers\oCurriculum_academic.cs" />
     <Compile Include="Models\Wrappers\oCu_Curriculum.cs" />
     <Compile Include="Models\Wrappers\oIndicator.cs" />
+    <Compile Include="Models\Wrappers\oPrimary_evidence.cs" />
+    <Compile Include="Models\Wrappers\oResearch.cs" />
+    <Compile Include="Models\Wrappers\oStudent_cnt.cs" />
+    <Compile Include="Models\Wrappers\oSub_indicator.cs" />
+    <Compile Include="Models\Wrappers\oUser_type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />

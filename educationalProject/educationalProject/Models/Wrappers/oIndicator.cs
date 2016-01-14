@@ -14,7 +14,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oIndicator> result = new List<oIndicator>();
-            d.iCommand.CommandText = String.Format("select * from indicator");
+            d.iCommand.CommandText = String.Format("select * from {0}",FieldName.TABLE_NAME);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -26,9 +26,9 @@ namespace educationalProject.Models.Wrappers
                     {
                         result.Add(new oIndicator
                         {
-                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns["aca_year"].Ordinal]),
-                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns["indicator_num"].Ordinal]),
-                            indicator_name = item.ItemArray[data.Columns["indicator_name"].Ordinal].ToString()
+                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
+                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
+                            indicator_name = item.ItemArray[data.Columns[FieldName.INDICATOR_NAME].Ordinal].ToString()
                         });
                     }
                     res.Close();
@@ -58,7 +58,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oIndicator> result = new List<oIndicator>();
-            d.iCommand.CommandText = String.Format("select * from indicator where {0}",wherecond);
+            d.iCommand.CommandText = String.Format("select * from {0} where {1}",FieldName.TABLE_NAME,wherecond);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -70,9 +70,9 @@ namespace educationalProject.Models.Wrappers
                     {
                         result.Add(new oIndicator
                         {
-                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns["aca_year"].Ordinal]),
-                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns["indicator_num"].Ordinal]),
-                            indicator_name = item.ItemArray[data.Columns["indicator_name"].Ordinal].ToString()
+                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
+                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
+                            indicator_name = item.ItemArray[data.Columns[FieldName.INDICATOR_NAME].Ordinal].ToString()
                         });
                     }
                     res.Close();
@@ -103,8 +103,8 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oIndicator> result = new List<oIndicator>();
-            d.iCommand.CommandText = String.Format("select * from indicator where {0} order by {1} {2}", 
-                wherecond,orderbycol,((dir != null)?direction[dir.Value]:""));
+            d.iCommand.CommandText = String.Format("select * from {0} where {1} order by {2} {3}", 
+                FieldName.TABLE_NAME,wherecond,orderbycol,((dir != null)?direction[dir.Value]:""));
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -116,9 +116,9 @@ namespace educationalProject.Models.Wrappers
                     {
                         result.Add(new oIndicator
                         {
-                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns["aca_year"].Ordinal]),
-                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns["indicator_num"].Ordinal]),
-                            indicator_name = item.ItemArray[data.Columns["indicator_name"].Ordinal].ToString()
+                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
+                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
+                            indicator_name = item.ItemArray[data.Columns[FieldName.INDICATOR_NAME].Ordinal].ToString()
                         });
                     }
                     res.Close();

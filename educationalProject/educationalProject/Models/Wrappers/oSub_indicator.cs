@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Data;
 using educationalProject.Utils;
+using System.Data;
 namespace educationalProject.Models.Wrappers
 {
-    public class oCurriculum_academic : Curriculum_academic
+    public class oSub_indicator : Sub_indicator
     {
         public object Select()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            List<oCurriculum_academic> result = new List<oCurriculum_academic>();
+            List<oSub_indicator> result = new List<oSub_indicator>();
             d.iCommand.CommandText = String.Format("select * from {0}",FieldName.TABLE_NAME);
             try
             {
@@ -24,10 +24,12 @@ namespace educationalProject.Models.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        result.Add(new oCurriculum_academic
+                        result.Add(new oSub_indicator
                         {
-                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal])
+                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
+                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
+                            sub_indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.SUB_INDICATOR_NUM].Ordinal]),
+                            sub_indicator_name = item.ItemArray[data.Columns[FieldName.SUB_INDICATOR_NAME].Ordinal].ToString()
                         });
                     }
                     res.Close();
@@ -56,7 +58,7 @@ namespace educationalProject.Models.Wrappers
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            List<oCurriculum_academic> result = new List<oCurriculum_academic>();
+            List<oSub_indicator> result = new List<oSub_indicator>();
             d.iCommand.CommandText = String.Format("select * from {0} where {1}",FieldName.TABLE_NAME,wherecond);
             try
             {
@@ -67,10 +69,12 @@ namespace educationalProject.Models.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        result.Add(new oCurriculum_academic
+                        result.Add(new oSub_indicator
                         {
-                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal])
+                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
+                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
+                            sub_indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.SUB_INDICATOR_NUM].Ordinal]),
+                            sub_indicator_name = item.ItemArray[data.Columns[FieldName.SUB_INDICATOR_NAME].Ordinal].ToString()
                         });
                     }
                     res.Close();
@@ -92,11 +96,6 @@ namespace educationalProject.Models.Wrappers
                 d.SQLDisconnect();
             }
             return result;
-        }
-
-        public object SelectCustom(string wherecond, string groupbycol, string havingcond, string orderbycol)
-        {
-            return "Ok";
         }
     }
 }

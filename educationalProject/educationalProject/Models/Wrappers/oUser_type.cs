@@ -4,17 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using educationalProject.Utils;
+
 namespace educationalProject.Models.Wrappers
 {
-    public class oCurriculum_academic : Curriculum_academic
+    public class oUser_type : User_type
     {
         public object Select()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            List<oCurriculum_academic> result = new List<oCurriculum_academic>();
-            d.iCommand.CommandText = String.Format("select * from {0}",FieldName.TABLE_NAME);
+            List<oUser_type> result = new List<oUser_type>();
+            d.iCommand.CommandText = String.Format("select * from {0}", FieldName.TABLE_NAME);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -24,10 +25,9 @@ namespace educationalProject.Models.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        result.Add(new oCurriculum_academic
+                        result.Add(new oUser_type
                         {
-                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal])
+                            user_type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString()
                         });
                     }
                     res.Close();
@@ -56,8 +56,8 @@ namespace educationalProject.Models.Wrappers
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            List<oCurriculum_academic> result = new List<oCurriculum_academic>();
-            d.iCommand.CommandText = String.Format("select * from {0} where {1}",FieldName.TABLE_NAME,wherecond);
+            List<oUser_type> result = new List<oUser_type>();
+            d.iCommand.CommandText = String.Format("select * from {0} where {1}", FieldName.TABLE_NAME, wherecond);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -67,10 +67,9 @@ namespace educationalProject.Models.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        result.Add(new oCurriculum_academic
+                        result.Add(new oUser_type
                         {
-                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal])
+                            user_type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString()
                         });
                     }
                     res.Close();
@@ -92,11 +91,6 @@ namespace educationalProject.Models.Wrappers
                 d.SQLDisconnect();
             }
             return result;
-        }
-
-        public object SelectCustom(string wherecond, string groupbycol, string havingcond, string orderbycol)
-        {
-            return "Ok";
         }
     }
 }

@@ -85,7 +85,6 @@ D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.Twitter.xml
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\4D\project\educationalProject\educationalProject\bin\System.Web.Http.Owin.xml
-D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
 D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb
 C:\Users\SiS_M7\Desktop\newProject\project\educationalProject\educationalProject\bin\ApplicationInsights.config
@@ -268,3 +267,4 @@ C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProjec
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb
+D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache

@@ -6,15 +6,15 @@ using System.Data;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
 {
-    public class oCurriculum_academic : Curriculum_academic
+    public class oPrimary_evidence : Primary_evidence
     {
         public object Select()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            List<oCurriculum_academic> result = new List<oCurriculum_academic>();
-            d.iCommand.CommandText = String.Format("select * from {0}",FieldName.TABLE_NAME);
+            List<oPrimary_evidence> result = new List<oPrimary_evidence>();
+            d.iCommand.CommandText = String.Format("select * from {0}", FieldName.TABLE_NAME);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -24,10 +24,13 @@ namespace educationalProject.Models.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        result.Add(new oCurriculum_academic
+                        result.Add(new oPrimary_evidence
                         {
-                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal])
+                            primary_evidence_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]),
+                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
+                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
+                            evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
+                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString()
                         });
                     }
                     res.Close();
@@ -56,8 +59,8 @@ namespace educationalProject.Models.Wrappers
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            List<oCurriculum_academic> result = new List<oCurriculum_academic>();
-            d.iCommand.CommandText = String.Format("select * from {0} where {1}",FieldName.TABLE_NAME,wherecond);
+            List<oPrimary_evidence> result = new List<oPrimary_evidence>();
+            d.iCommand.CommandText = String.Format("select * from {0} where {1}", FieldName.TABLE_NAME, wherecond);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -67,10 +70,13 @@ namespace educationalProject.Models.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        result.Add(new oCurriculum_academic
+                        result.Add(new oPrimary_evidence
                         {
-                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal])
+                            primary_evidence_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]),
+                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
+                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
+                            evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
+                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString()
                         });
                     }
                     res.Close();
@@ -92,11 +98,6 @@ namespace educationalProject.Models.Wrappers
                 d.SQLDisconnect();
             }
             return result;
-        }
-
-        public object SelectCustom(string wherecond, string groupbycol, string havingcond, string orderbycol)
-        {
-            return "Ok";
         }
     }
 }

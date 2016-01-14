@@ -7,6 +7,21 @@ namespace educationalProject.Models
 {
     public class Cu_curriculum
     {
+        public struct FieldName
+        {
+            public static readonly string CURRI_ID = "CURRI_ID";
+            public static readonly string YEAR = "YEAR";
+            public static readonly string CURR_TNAME = "CURR_TNAME";
+            public static readonly string CURR_ENAME = "CURR_ENAME";
+            public static readonly string DEGREE_T_FULL = "DEGREE_T_FULL";
+            public static readonly string DEGREE_T_BF = "DEGREE_T_BF";
+            public static readonly string DEGREE_E_FULL = "DEGREE_E_FULL";
+            public static readonly string DEGREE_E_BF = "DEGREE_E_BF";
+            public static readonly string LEVEL = "LEVEL";
+            public static readonly string PERIOD = "PERIOD";
+            public static readonly string TABLE_NAME = "CU_CURRICULUM";
+        }
+
         private string _curri_id;
         private string _year;
         private string _curr_tname;
