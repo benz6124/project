@@ -32,7 +32,7 @@
     <script type="text/javascript" src="/bower_components/fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
     <link rel="stylesheet" href="/bower_components/fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
     <script type="text/javascript" src="/bower_components/fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
-    <script src="/bower_components/quantumui/dist/js/quantumui-all.min.js"></script>
+    <script src="/bower_components/quantumui/dist/js/quantumui-all.js"></script>
     <script src="/bower_components/quantumui/config/icons.js"></script>
     <script src="//cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
     <link href="/Content/dropdowns-enhancement.css" rel="stylesheet" />
@@ -204,7 +204,7 @@ $('.profile_pic').mouseover(function(){
       }
     </script>
 </head>
-<body ng-controller="indexController">
+<body ng-controller="choice_index_controller">
 
     <section class="wow">
         <div class="navbar" style="">
@@ -519,7 +519,7 @@ $('.profile_pic').mouseover(function(){
 
 
 
-        <div class="row">
+        <div class="row" >
             <!-- <div > -->
             <!--    <button type="button" data-nq-dropdown=""  class="btn-lg" data-qo-effect="fade-down" data-qo-speed="fastest" style="width: 500px; height: 50px; background-color: #7A0029; color :white; border:none" data-show-arrow="true" >กรุณาเลือกหลักสูตร <span class="caret"></span></button>
               <ul class="dropdown-menu" tabindex="-1" role="menu">
@@ -533,17 +533,14 @@ $('.profile_pic').mouseover(function(){
            
             <div class="col-sm-6">
 
-                <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums"data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="curri_choosen" ngChange="sendCurriAndGetYears(curri)">
-               
-                </select>
-
+               <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)" data-ng-model="$parent.curri_choosen">
+</select>
             </div>
 
             <div class="col-sm-4">
 
-            <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years"data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="" >
-               
-                </select>
+          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen">
+</select>      
 
 
             </div>
@@ -578,7 +575,8 @@ $('.profile_pic').mouseover(function(){
         <div class="big-nav">
             <ul class="nav nav-tabs">
 
-                <li class="active"><a data-toggle="tab" href="#menu1" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title=" ผลการเรียนรู้ที่คาดหวัง">AUN 1</a></li>
+                <li class="active">
+                <a data-toggle="tab" href="#menu1" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title=" ผลการเรียนรู้ที่คาดหวัง">AUN 1</a></li>
 
                 <li><a data-toggle="tab" href="#menu1" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="ข้อกำหนดของหลักสูตร">AUN 2</a></li>
 
@@ -6804,5 +6802,8 @@ $('.profile_pic').mouseover(function(){
                     <br />
                     Components By <a href="http://quantumui.org/">QuantumUI</a> available under the <a href="http://opensource.org/licenses/mit-license.html">MIT License</a>
                 </div>
+                  <script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="indexController.js"></script> 
+
 </body>
 </html>

@@ -267,4 +267,3 @@ C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProjec
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\System.Web.Http.Owin.xml
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb
-C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache

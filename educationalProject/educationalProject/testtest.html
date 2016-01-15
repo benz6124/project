@@ -91,9 +91,47 @@
 </select>
 
 	<h1>Year</h1>
-
+<h1>{{year_choosen}}</h1>
 	<select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen">
-</select>			 
+</select>	
+ <button type="button" class="btn hvr-grow" style="background-color:#000000; color:white;" data-nq-loading-button="loadingIndexPage()" data-loading-text="กำลังโหลด...">  <span class="glyphicon glyphicon-ok-sign"></span> ยืนยัน </span></button>
+
+
+
+
+<h1>{{corresponding_indicators}}		 </h1>
+
+
+ <div class="wow flipInX" data-wow-delay="0.8s" data-wow-duration="3s">
+        <div class="big-nav">
+            <ul class="nav nav-tabs">
+            	  <li class="active">
+                <a data-toggle="tab" href="#menu0" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="ภาพรวมการประเมิน" >ภาพรวม</a></li>
+
+
+                <li  data-ng-repeat="curri in all_curriculums">
+                <a data-toggle="tab" href="#menu{{curri.curri_id}}" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="{{curri.curr_tname}}" ng-click="sendIndicatorAndGetSubIndicators(curri)">{{curri.curri_id}}</a></li>
+
+            </ul>
+
+
+         <div class="wow flipInX" data-wow-delay="1.3s">
+                <div class="small-nav">
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs">
+
+                            <li data-ng-repeat="curri in all_curriculums">
+                                <a data-toggle="tab" href="#sub{{curri.curri_id}}" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="การกำหนดผลการเรียนรู้ที่คาดหวังมีความชัดเจนและแสดงไว้ในหลักสูตร">AUN 1.1</a>
+                            </li>
+                           
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
     <script type="text/javascript" src="app.js"></script>
 <script type="text/javascript" src="indexController.js"></script> 
