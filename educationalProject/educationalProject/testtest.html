@@ -87,10 +87,13 @@
     <div  ng-controller="choice_index_controller">
 <h1>{{curri_choosen}}</h1>
 <br/>
-     <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()" data-ng-model="$parent.curri_choosen">
+     <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)" data-ng-model="$parent.curri_choosen">
 </select>
 
-				 
+	<h1>Year</h1>
+
+	<select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen">
+</select>			 
 </div>
     <script type="text/javascript" src="app.js"></script>
 <script type="text/javascript" src="indexController.js"></script> 
