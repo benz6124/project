@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html data-ng-app="myProject">
+<html>
 <head>
 
     <meta charset="UTF-8">
@@ -9,8 +9,6 @@
 
    <!--  // <script src="/app/app.js"></script>
     // <script src="/app/controllers/indexController.js"></script> -->
-<!--     // <script type="text/javascript" src="/app/app.js"></script>
-    // <script type="text/javascript" src="/app/controllers/indexController.js"></script> -->
     <link rel="shortcut icon" href="/bower_components/quantumui/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/bower_components/quantumui/images/favicon.ico" type="image/x-icon">
     <link href="/bower_components/hover/css/hover.css" rel="stylesheet" media="all">
@@ -32,199 +30,23 @@
     <script type="text/javascript" src="/bower_components/fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
     <link rel="stylesheet" href="/bower_components/fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
     <script type="text/javascript" src="/bower_components/fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
-    <script src="/bower_components/quantumui/dist/js/quantumui-all.min.js"></script>
+    <script src="/bower_components/quantumui/dist/js/quantumui-all.js"></script>
     <script src="/bower_components/quantumui/config/icons.js"></script>
     <script src="//cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
     <link href="/Content/dropdowns-enhancement.css" rel="stylesheet" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
     <link href="/Content/myCss.css" rel="stylesheet" />
     <link href="/bower_components/quantumui/dist/css/quantumui.min.css" rel="stylesheet" />
     <script type="text/javascript" src="/bower_components/dropdowns-enhancement/dropdowns-enhancement.js"></script>
-    <script type="text/javascript">
-     var app = angular.module('myProject', [
-        'ngSanitize',
-        'ngAnimate',
-        'ngQuantum'
-      ]);
-
-      app.controller('indexController', function ($scope, $http) {
-        $scope.curri_choosen = "";
-        $scope.curri_me = "";
-        
-        $http.get("/api/curriculum").success(function (data, status, headers, config) {
-
-              $scope.all_curriculums = data;
-
-          });
-
-        // $http.get("/api/curriculumAcademic").success(function (data, status, headers, config) {
-        //       $scope.aca_yrs = data;
-
-        //   });
-
-     
-        $scope.sendCurriAndGetYears =  function (curri){
 
 
 
-        	 $scope.curri_me = curri;
-        //    $http.post('/api/curriculumacademic',  {'Cu_curriculum': curri }).success(function (data, status, headers, config) {
-        //     $scope.corresponding_aca_years = data;
-        // });
-
-           $http.post(
-                '/api/curriculumacademic',
-                JSON.stringify(curri),
-                {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }
-            ).success(function (data) {
-                $scope.corresponding_aca_years = data;
-            });
-        }
-
-
-
-
-
-      });
-
-    </script>
-
-    <script>
-$(document).ready(function(){
-
-  $('[data-toggle="tooltip"]').tooltip();
-
-
-});
-
-$('.profile_pic').mouseover(function(){
-    if ($(this).hasClass('selected')) return;
-    $('.selected').removeClass('selected');
-    $(this).addClass('selected');
-
-});
-
-
-    });
-    </script>
     <script src="/bower_components/wow/dist/wow.min.js"></script>
-    <script>
-              wow = new WOW(
-                      {
-                      boxClass:     'wow',      // default
-                      animateClass: 'animated', // default
-                      offset:       20,          // default
-                      mobile:       true,       // default
-                      live:         true        // default
-                    }
-                    )
-                    wow.init();
-    </script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-      /*
-       *  Simple image gallery. Uses default settings
-       */
-   $('.fancybox').fancybox({
-            openEffect : 'elastic',
-        closeEffect : 'elastic',
-      autoResize : true,
-        nextClick : true,
-    width       : 800,
-    height      : 450,
-    aspectRatio : true,
-
-
-        helpers : {
-          title : {
-            type : 'inside'
-          },
-          thumbs : {
-            width  : 50,
-            height : 50
-          }
-        }
-      });
-
-    });
-    </script>
-
-    <script type="text/javascript">
-
-      var inputNum = 0;
-      function deleteQuestion(surveyName,nameButton){
-
-        // var survey = document.getElementById(surveyName);
-        // var divToDel = document.getElementById(nameButton);
-
-        surveyName.removeChild(nameButton);
-      }
-
-      function sum(name){
-        // var my_input1 = document.getElementById('my_input1').value;
-        // var my_input2 = document.getElementById('my_input2').value;
-        var num1 = document.getElementById(name+"1").value;
-        var num2 = document.getElementById(name+"2").value;
-        var result = document.getElementById(name+"Sum");
-
-        var sum = parseInt(num1) + parseInt(num2);
-
-        result.value = sum
-        // alert(num1.value)
-
-      }
-
-      function addQuestionInSurvey(surveyName,addButtonId,placeholderName){
-        var survey = document.getElementById(surveyName);
-        var button = document.getElementById(addButtonId);
-
-        var newRow = document.createElement("div");
-        newRow.setAttribute("class","row");
-        var nameButton = "button"+inputNum.toString()
-        newRow.setAttribute("id",nameButton);
-
-          var newDiv = document.createElement("div");
-          var newDiv2 = document.createElement("div");
-          newDiv.setAttribute("class","col-md-10");
-          newDiv2.setAttribute("class","col-md-2");
-          var delButton = document.createElement("button")
-          delButton.setAttribute("class","btn btn-default btn-md hvr-pulse")
-
-          delButton.setAttribute("onclick",'deleteQuestion('+surveyName+','+nameButton+')');
-          delButton.style.marginLeft = "0px"
-
-          delButton.style.backgroundColor = " transparent"
-          delButton.style.border = " none"
-          var newSpan = document.createElement("span");
-          newSpan.setAttribute("class","glyphicon glyphicon-minus-sign");
-          newSpan.style.color ="red";
-          delButton.appendChild(newSpan);
-
-          var inputBox = document.createElement("input");
-          inputBox.setAttribute("type","text");
-          inputBox.style.marginLeft = "30px"
-          inputBox.setAttribute("class","form-control");
-          inputBox.setAttribute("placeholder",placeholderName);
-        newDiv2.appendChild(delButton);
-
-
-          newDiv.appendChild(inputBox);
-
-          newRow.appendChild(newDiv);
-          newRow.appendChild(newDiv2);
-
-          survey.insertBefore(newRow,button);
-          inputNum = inputNum +1;
-
-
-      }
-    </script>
+ 
+  
 </head>
-<body ng-controller="indexController">
+<body ng-app="myProject">
 <!-- 
                    <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears(curri)" data-ng-model="curri_choosen">
             
@@ -244,8 +66,8 @@ $('.profile_pic').mouseover(function(){
             <option>Chocolate</option>
           </select> -->
 
-        <select ng-model="curri_choosen" class="form-control" ng-change="sendCurriAndGetYears(curri_choosen)">
-       		<option class="form-control" ng-repeat="curri in all_curriculums" value="{{curri}}">{{curri.curr_tname}}</option>
+<!--         <select ng-model="curri_choosen" class="form-control" ng-change="sendCurriAndGetYears(curri_choosen)">
+       		<option class="form-control" ng-repeat="curri in all_curriculums" value="{{curri.curr_tname}}">{{curri.curr_tname}}</option>
         </select>
            
         {{corresponding_aca_years}}
@@ -253,5 +75,26 @@ $('.profile_pic').mouseover(function(){
        		<option class="form-control" ng-repeat="year in corresponding_aca_years" value="{{year}}">{{year.aca_year}}</option>
         </select>
         {{curri_me}}
+ -->
+<!-- <div data-ng-app="myApp" data-ng-controller="myCtrl">
+
+  <select ng-model="curri_choosen" class="form-control" ng-change="sendCurriAndGetYears(curri_choosen)">
+       		<option class="form-control" ng-repeat="curri in all_curriculums" value="{{curri.curr_tname}}">{{curri.curr_tname}}</option>
+        </select>
+
+</div> -->
+
+    <div  ng-controller="choice_index_controller">
+<h1>{{curri_choosen}}</h1>
+<br/>
+     <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()" data-ng-model="$parent.curri_choosen">
+</select>
+
+				 
+</div>
+    <script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="indexController.js"></script> 
+
 </body>
+
 </html>

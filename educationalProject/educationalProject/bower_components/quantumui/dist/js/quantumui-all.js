@@ -7203,7 +7203,7 @@ var selectApp = angular.module('ngQuantum.select', [
                   }
                   if (angular.isDefined(attr.ngChange)) {
                       scope.$parent.$watch(function () { return controller.$modelValue }, function (newValue, oldValue) {
-                          scope.$parent.$eval(attr.ngChange);
+                          // scope.$parent.$eval(attr.ngChange);
                       });
                   }
                   function renderController() {

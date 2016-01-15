@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+</head>
+<body >
+<div class="col-sm-3" ng-controller="ColorController" >
+      <select  name="myColorSelection"  data-nq-select="" data-ng-init = "selectInit()" data-ng-model="selectData.singleSelect"  data-qo-placeholder="static select options"  data-ng-change="staticChange()">
+        <option>Yellow</option>
+        <option>Red</option>
+        <option>Aqua</option>
+        <option>Teal</option>
+        <option>Magenta</option>
+        <option>Orange</option>
+        <option>Blue</option>
+        <option>Chocolate</option>
+      </select>
+    </div>
+<script type="text/javascript">
+ngApp.controller('ColorController', function ColorController($scope) {
+
+$scope.selectInit = function () {
+    $scope.selectData = {
+        singleSelect: 'Yellow'
+    };
+};
+
+$scope.staticChange = function () {
+    console.log('new color selected');
+    console.log($scope.selectData.singleSelect);
+};
+
+});
+</script>
+</body>
+
+</html>
