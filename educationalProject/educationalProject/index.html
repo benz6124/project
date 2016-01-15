@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html data-ng-app="myProject">
+<html data-ng-app="myProject" >
 <head>
 
     <meta charset="UTF-8">
@@ -37,7 +37,7 @@
     <script src="//cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
     <link href="/Content/dropdowns-enhancement.css" rel="stylesheet" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link href="/Content/myCss.css" rel="stylesheet" />
+
     <link href="/bower_components/quantumui/dist/css/quantumui.min.css" rel="stylesheet" />
     <script type="text/javascript" src="/bower_components/dropdowns-enhancement/dropdowns-enhancement.js"></script>
     <script type="text/javascript">
@@ -217,7 +217,7 @@ $('.profile_pic').mouseover(function(){
                 <ul class="nav navbar-nav navbar-left">
 
                     <li><img src="/myImages/logo_kmitl.gif" width="100px" style="margin-left:80px" /></li>
-                    <li><a href="" style="font-size:40px;color:#E0E0E0;margin-top:25px"><b>CUPT-QA Online For Computer Engineering KMITL</b></a></li>
+                    <li><a href="" style="font-size:30px;color:#E0E0E0;margin-top:25px"><b>CUPT-QA Online For Computer Engineering KMITL</b></a></li>
 
                 </ul>
 
@@ -531,24 +531,22 @@ $('.profile_pic').mouseover(function(){
                 <li tabindex="-1" role="presentation"><a href="" role="menuitem"><i class="fic fu-cog"></i> Action 3</a></li>
             </ul> -->
            
-            <div class="col-sm-6">
+            <div class="col-sm-6" style="margin-left:85px">
 
-               <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)" data-ng-model="$parent.curri_choosen">
+                 <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen">
 </select>
             </div>
 
-            <div class="col-sm-4">
+            <div class="col-sm-2">
 
-          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen">
-</select>      
+        <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen">
+</select>    
 
 
             </div>
 
             <div class="col-sm-1">
-                <button class="btn hvr-grow" type="button" style="background-color:#000000; color:white;">
-                    <span class="glyphicon glyphicon-ok-sign"></span> ยืนยัน </span>
-                </button>
+               <button type="button" class="btn hvr-grow" style="background-color:#000000; color:white;" data-nq-loading-button="sendYearAndGetIndicators(year_choosen)" data-loading-text="กำลังโหลด...">  <span class="glyphicon glyphicon-ok-sign"></span> ยืนยัน </span></button>
 
             </div>
 
@@ -571,44 +569,21 @@ $('.profile_pic').mouseover(function(){
 
     </div>
 
-    <div class="wow flipInX" data-wow-delay="0.8s" data-wow-duration="3s">
+  <div class="wow flipInX" data-wow-delay="0.8s" data-wow-duration="3s">
         <div class="big-nav">
             <ul class="nav nav-tabs">
-
                 <li class="active">
-                <a data-toggle="tab" href="#menu1" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title=" ผลการเรียนรู้ที่คาดหวัง">AUN 1</a></li>
+                <a data-toggle="tab" href="#menu0" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="ภาพรวมการประเมิน" >ภาพรวม</a></li>
 
-                <li><a data-toggle="tab" href="#menu1" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="ข้อกำหนดของหลักสูตร">AUN 2</a></li>
 
-                <li><a data-toggle="tab" href="#menu1" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="โครงสร้างและเนื้อหาของหลักสูตร">AUN 3</a></li>
-
-                <li><a data-toggle="tab" href="#menu1" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="กลยุทธ์การเรียนและการสอน">AUN 4</a></li>
-
-                <li><a data-toggle="tab" href="#menu1" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="การประเมินผู้เรียน">AUN 5</a></li>
-
-                <li><a data-toggle="tab" href="#menu1" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="คุณภาพบุคลากรสายวิชาการ">AUN 6</a></li>
-
-                <li><a data-toggle="tab" href="#menu1" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="คุณภาพบุคลากรสายสนับสนุน">AUN 7</a></li>
-
-                <li><a data-toggle="tab" href="#menu1" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="คุณภาพผู้เรียน">AUN 8</a></li>
-
-                <li><a data-toggle="tab" href="#menu1" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="การสนับสนุนและการให้คำปรึกษาผู้เรียน">AUN 9</a></li>
-
-                <li><a data-toggle="tab" href="#menu1" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="สิ่งอำนวยความสะดวกและโครงสร้างพื้นฐาน">AUN 10</a></li>
-
-                <li><a data-toggle="tab" href="#menu1" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="การประกันคุณภาพกระบวนการเรียนและการสอน">AUN 11</a></li>
-
-                <li><a data-toggle="tab" href="#menu1" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="กิจกรรมพัฒนาบุคลากร">AUN 12</a></li>
-
-                <li><a data-toggle="tab" href="#menu1" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="ข้อมูลป้อนกลับจากผู้มีส่วนได้ส่วนเสีย">AUN 13</a></li>
-
-                <li><a data-toggle="tab" href="#menu1" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="ผลผลิต">AUN 14</a></li>
-
-                <li><a data-toggle="tab" href="#menu1" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="ความพึงพอใจของผู้มีส่วนได้ส่วนเสีย">AUN 15</a></li>
+                <li  data-ng-repeat="indicator in corresponding_indicators">
+                <a data-toggle="tab" href="#menu{{indicator.indicator_num}}" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="{{indicator.indicator_name}}" ng-click="sendIndicatorAndGetSubIndicators(indicator)">AUN {{indicator.indicator_num}}</a></li>
 
             </ul>
-        </div>
-    </div>
+
+ </div>
+ </div>
+
     <div class="tab-content" style="margin-left:92px;width:90%">
 
 
@@ -617,7 +592,7 @@ $('.profile_pic').mouseover(function(){
 
 
             <h2 style="margin-top:0px"><b>ผลการประเมินตนเอง</b></h2>
-            <table class="table table-bordered table-hover table_modal evaluation">
+            <table class="table table-bordered table-hover table_modal  evaluation">
 
                 <thead>
 
@@ -686,25 +661,15 @@ $('.profile_pic').mouseover(function(){
             <h4 style="text-align:right;">ประเมิน ณ วันที่ 20/11/2558 เวลา 20.58</h4>
 
 
-            <div class="wow flipInX" data-wow-delay="1.3s">
+           <div class="wow flipInX" data-wow-delay="1.3s">
                 <div class="small-nav">
                     <div class="tabbable">
                         <ul class="nav nav-tabs">
 
-                            <li class="active">
-                                <a data-toggle="tab" href="#sub11" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="การกำหนดผลการเรียนรู้ที่คาดหวังมีความชัดเจนและแสดงไว้ในหลักสูตร">AUN 1.1</a>
+                            <li data-ng-repeat="sub_indicator in corresponding_sub_indicators">
+                                <a data-toggle="tab" href="#sub{{sub_indicator.sub_indicator_num}}" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="{{sub_indicator.sub_indicator_name}}">AUN {{indicator_choosen.indicator_num}}.{{sub_indicator.sub_indicator_num}}</a>
                             </li>
-                            <li>
-                                <a data-toggle="tab" href="#sub12" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="หลักสูตรส่งเสริมการเรียนรู้ตลอดชีวิต">AUN 1.2</a>
-                            </li>
-
-                            <li>
-                                <a data-toggle="tab" href="#sub13" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="ผลการเรียนรู้ที่คาดหวังครอบคลุมทั้งความรู้และทักษะทั่วไปรวมทั้งความรู้และทักษะเฉพาะทาง">AUN 1.3</a>
-                            </li>
-
-                            <li>
-                                <a data-toggle="tab" href="#sub14" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="ผลการเรียนรู้ที่คาดหวังสะท้อนความต้องการของผู้มีส่วนได้ส่วนเสีย">AUN 1.4</a>
-                            </li>
+                           
                         </ul>
                     </div>
 
@@ -6804,6 +6769,6 @@ $('.profile_pic').mouseover(function(){
                 </div>
                   <script type="text/javascript" src="app.js"></script>
 <script type="text/javascript" src="indexController.js"></script> 
-
+                <link href="/Content/myCss.css" rel="stylesheet" />
 </body>
 </html>
