@@ -9,7 +9,7 @@
           } 
 
 * {
-  font-family: 'Helvetica',"FreesiaUPC" ;
+  font-family:"FreesiaUPC" ;
 
  /* font-size: 20px;*/
 }
@@ -112,7 +112,7 @@ table.evidence th{
   text-align: center;
   background-color:#6F002B ;
   color:white;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 table.evidence  td{
@@ -252,7 +252,7 @@ optgroup {
 span.topic{
   font-family:  "FreesiaUPC";
 
-  font-size: 23px !important;
+  font-size: 20px !important;
 }
 .headerModal {
   font-family:  "FreesiaUPC";
@@ -321,8 +321,9 @@ button ul li label{
 }
 
 .tooltip{
-   font-size: 15px !important;
+   font-size: 17px !important;
    font-family:  "FreesiaUPC" !important;
+opacity: 0.9 !important;
 
 }
 
@@ -635,6 +636,8 @@ h1.headerPanel{
   text-align: center;
 }
 
+
+
 h2.headerSubPanel{
   font-family: "FreesiaUPC" !important;
   font-weight: bold;
@@ -697,4 +700,20 @@ table.evaluation{
 .big-nav li a,.small-nav li a{
   font-weight: normal !important;
   font-size:11px !important;
+  font-family: 'Helvetica' ;
+}
+
+.alertPop{
+  font-size: 18px !important;
+      color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+a.headerWeb{
+ 
+  font-size:50px;
+  color:#E0E0E0;
+  margin-top:25px;
+    font-family: 'Helvetica' ;
 }

@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-app.controller('choice_index_controller', function($scope, $http) {
+app.controller('choice_index_controller', function($scope, $http,$alert) {
 
     // 
      console.log("it's me na");
@@ -14,6 +14,7 @@ app.controller('choice_index_controller', function($scope, $http) {
      $scope.indicator_choosen = {};
      $scope.sub_indicator_choosen = {};
      $scope.select_overall = true;
+     $scope.select_all_complete = false;
      }
 
     $http.get("/api/curriculum").success(function (data, status, headers, config) {
@@ -22,9 +23,13 @@ app.controller('choice_index_controller', function($scope, $http) {
 
     });
 
-
+    $scope.choose_overall = function(){
+        $scope.select_overall = true;
+    }
     $scope.sendCurriAndGetYears = function (curri) {
-
+        $scope.select_all_complete = false;
+         $scope.not_select_curri_and_year = true;
+           $scope.year_choosen = {};
         console.log("it's me");
       
         //    $http.post('/api/curriculumacademic',  {'Cu_curriculum': curri }).success(function (data, status, headers, config) {
@@ -43,13 +48,18 @@ app.controller('choice_index_controller', function($scope, $http) {
              $scope.corresponding_aca_years = data;
          });
     }
-    $scope.loadingIndexPage = function(){
-        $event = $scope.sendYearAndGetIndicators($scope.year_choosen);
+    // $scope.loadingIndexPage = function(){
+    //     $event = $scope.sendYearAndGetIndicators($scope.year_choosen);
+    // }
+    $scope.chooseYear = function(year){
+            $scope.select_all_complete = true;
     }
      $scope.sendYearAndGetIndicators = function (year) {
-   $scope.not_select_curri_and_year = false;
-
-    $scope.not_select_sub_indicator = true;
+        
+        if ($scope.select_all_complete  == true){
+         $scope.not_select_curri_and_year = false;
+        $scope.select_overall = true;
+        $scope.not_select_sub_indicator = true;
         console.log(year);
         console.log(year.aca_year);
 
@@ -64,7 +74,18 @@ app.controller('choice_index_controller', function($scope, $http) {
          ).success(function (data) {
              $scope.corresponding_indicators = data;
          });
+
+         }
+         else{ 
+
+            $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกหลักสูตรและปีการศึกษา',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+                
+
+            // $alert('กรุณาเลือกหลักสูตรและปีการศึกษา','เกิดข้อผิดพลาด', 'danger', 'bottom-right')
+         }
     }
+
     $scope.send_sub_indicator = function(sub_indicator){
         $scope.sub_indicator_choosen = sub_indicator;
         $scope.not_select_sub_indicator = false;

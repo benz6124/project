@@ -186,7 +186,7 @@ $('.profile_pic').mouseover(function(){
                 <ul class="nav navbar-nav navbar-left">
 
                     <li><img src="/myImages/logo_kmitl.gif" width="100px" style="margin-left:80px" /></li>
-                    <li><a href="" style="font-size:30px;color:#E0E0E0;margin-top:25px"><b>CUPT-QA Online For Computer Engineering KMITL</b></a></li>
+                    <li><a href="" class="headerWeb" style="font-family:'Helvetica'"><b>CUPT-QA Online For Computer Engineering KMITL</b></a></li>
 
                 </ul>
 
@@ -493,20 +493,20 @@ $('.profile_pic').mouseover(function(){
            
             <div class="col-sm-6" style="margin-left:85px">
 
-                 <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen">
+                 <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             </select>
             </div>
 
             <div class="col-sm-2">
 
-        <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen">
+        <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="chooseYear(year_choosen)" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
 </select>    
 
 
             </div>
 
             <div class="col-sm-1">
-               <button type="button" class="btn hvr-grow" style="background-color:#000000; color:white;" data-nq-loading-button="sendYearAndGetIndicators(year_choosen)" data-loading-text="กำลังโหลด...">  <span class="glyphicon glyphicon-ok-sign"></span> ยืนยัน </button>
+               <button type="button" class="btn hvr-wobble-vertical" style="background-color:#000000; color:white;" data-nq-loading-button="sendYearAndGetIndicators(year_choosen)" data-loading-text="กำลังโหลด...">  <span class="glyphicon glyphicon-ok-sign"></span> ยืนยัน </button>
 
             </div>
 
@@ -530,11 +530,11 @@ $('.profile_pic').mouseover(function(){
     </div>
 <!--start the dependent on curriculum and aca_year -->
 <div ng-hide="not_select_curri_and_year">
-  <div class="wow flipInX" data-wow-delay="0.8s" data-wow-duration="3s"  >
+  <div class="wow flipInX" data-wow-delay="0.3s" data-wow-duration="3s"  >
         <div class="big-nav">
             <ul class="nav nav-tabs">
                 <li class="active">
-                <a data-toggle="tab" href="#menu0" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="ภาพรวมการประเมิน" >overall</a></li>
+                <a data-toggle="tab" href="#menu0" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="ภาพรวมการประเมิน" ng-click="choose_overall()" >overall</a></li>
 
 
                 <li  data-ng-repeat="indicator in corresponding_indicators">
@@ -548,13 +548,13 @@ $('.profile_pic').mouseover(function(){
     <div class="tab-content" style="margin-left:92px;width:90%">
 
 
-        <div class="tab-pane fade active in" id="menu1">
+        <div class="tab-pane fade active in" >
         <div ng-hide="select_overall">
-            <h1 class="headerPanel" style="margin-bottom:0px">{{indicator_choosen.indicator_name}}</h1>
+            <h2 class="headerPanel wow flipInX" data-wow-duration="3s" style="text-align:center">AUN {{indicator_choosen.indicator_num}} {{indicator_choosen.indicator_name}}</h2>
 
 
            
-            <table class="table table-bordered table-hover table_modal  evaluation">
+            <table class="table table-bordered table-hover table_modal  evaluation wow flipInX" data-wow-delay="1s" data-wow-duration="5s">
 
                 <thead>
 
@@ -577,12 +577,16 @@ $('.profile_pic').mouseover(function(){
 
             </table>
 
+          <div data-wow-delay="0.5s" class="inline wow bounceInRight"data-wow-duration="2s" style="display: inline-block;margin-left:575px">
+            <h4 style="text-align:right;margin-right:15px"><b>ผู้ประเมิน: </b> อาจารย์วิบูลย์ พร้อมพานิชย์</h4>
+            <h4 style="text-align:right;"><b>ประเมิน ณ วันที่ </b>20/11/2558 เวลา 20.58</h4>
+</div>
 
-            <h4 style="text-align:right;"><b>ผู้ประเมิน: </b> อาจารย์วิบูลย์ พร้อมพานิชย์</h4>
-            <h4 style="text-align:right;">ประเมิน ณ วันที่ 20/11/2558 เวลา 20.58</h4>
-
-
-              <table class="table table-bordered table-hover table_modal evidence ">
+         <div data-wow-delay="0.5s" class="wow bounceInRight"data-wow-duration="2s" style="margin-left:35px;  display: inline-block;">
+            <h4 style="text-align:right;margin-right:15px"><b>ผู้ประเมิน: </b> อาจารย์วิบูลย์ พร้อมพานิชย์</h4>
+            <h4 style="text-align:right;"><b>ประเมิน ณ วันที่ </b>20/11/2558 เวลา 20.58</h4>
+</div>
+              <table class="table table-bordered table-hover table_modal evidence wow bounceInLeft" data-wow-delay="2s" data-wow-duration="5s">
 
                         <tr>
                             <th class="code">รหัสหลักฐาน</th>
@@ -633,11 +637,11 @@ $('.profile_pic').mouseover(function(){
 
             <div class="tab-content">
                 <div class="tab-pane fade active in" id="sub11" ng-hide="not_select_sub_indicator">
-                    <br />
+                
 
-                    <h2 class="headerSubPanel">AUN {{indicator_choosen.indicator_num}}.{{sub_indicator_choosen.sub_indicator_num}} {{sub_indicator_choosen.sub_indicator_name}}</h2>
+              <h2 class="headerPanel wow flipInX" data-wow-duration="3s" style="text-align:center">AUN {{indicator_choosen.indicator_num}}.{{sub_indicator_choosen.sub_indicator_num}} {{sub_indicator_choosen.sub_indicator_name}}</h2>
+                 
                     <hr />
-             
 
                     <h3><b>ข้อมูลสนับสนุนการประเมินตนเอง</b></h3>
 
