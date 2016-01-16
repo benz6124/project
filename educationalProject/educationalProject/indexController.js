@@ -2,11 +2,20 @@
 
 app.controller('choice_index_controller', function($scope, $http) {
 
+    // 
+     console.log("it's me na");
+    // console.log(select_nothing);
 
+     $scope.init_var = function(){
+    $scope.not_select_curri_and_year = true;
+    $scope.not_select_sub_indicator = true;
     $scope.year_choosen = {};
      $scope.curri_choosen={};
      $scope.indicator_choosen = {};
-     $scope.already_choose_curri = false;
+     $scope.sub_indicator_choosen = {};
+     $scope.select_overall = true;
+     }
+
     $http.get("/api/curriculum").success(function (data, status, headers, config) {
 
         $scope.all_curriculums = data;
@@ -15,8 +24,9 @@ app.controller('choice_index_controller', function($scope, $http) {
 
 
     $scope.sendCurriAndGetYears = function (curri) {
-          $scope.already_choose_curri = true;
-        console.log(curri);
+
+        console.log("it's me");
+      
         //    $http.post('/api/curriculumacademic',  {'Cu_curriculum': curri }).success(function (data, status, headers, config) {
         //     $scope.corresponding_aca_years = data;
         // });
@@ -37,17 +47,12 @@ app.controller('choice_index_controller', function($scope, $http) {
         $event = $scope.sendYearAndGetIndicators($scope.year_choosen);
     }
      $scope.sendYearAndGetIndicators = function (year) {
- 
+   $scope.not_select_curri_and_year = false;
+
+    $scope.not_select_sub_indicator = true;
         console.log(year);
         console.log(year.aca_year);
-        //    $http.post('/api/curriculumacademic',  {'Cu_curriculum': curri }).success(function (data, status, headers, config) {
-        //     $scope.corresponding_aca_years = data;
-        // });
-  // console.log(" ");
-        // year = new Object();
-        // year.curri_id = "20";
-        // year.aca_year = 2554;
-          // console.log(year);
+
         $http.post(
              '/api/indicator',
              JSON.stringify(year),
@@ -60,20 +65,17 @@ app.controller('choice_index_controller', function($scope, $http) {
              $scope.corresponding_indicators = data;
          });
     }
-
+    $scope.send_sub_indicator = function(sub_indicator){
+        $scope.sub_indicator_choosen = sub_indicator;
+        $scope.not_select_sub_indicator = false;
+    }
      $scope.sendIndicatorAndGetSubIndicators = function (indicator) {
+        $scope.not_select_sub_indicator = true;
           $scope.indicator_choosen = indicator;
+          $scope.select_overall = false;
         console.log("sendIndicatorAndGetSubIndicators")
         console.log(indicator);
 
-        //    $http.post('/api/curriculumacademic',  {'Cu_curriculum': curri }).success(function (data, status, headers, config) {
-        //     $scope.corresponding_aca_years = data;
-        // });
-  // console.log(" ");
-        // year = new Object();
-        // year.curri_id = "20";
-        // year.aca_year = 2554;
-          // console.log(year);
         $http.post(
              '/api/subindicator',
              JSON.stringify(indicator),

@@ -265,5 +265,6 @@ C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProjec
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\System.Web.Http.Owin.xml
+C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb

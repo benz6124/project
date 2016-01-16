@@ -17,6 +17,8 @@
 .aside-body {
 
 }
+
+
 .mySelect{
   background-color: #E8E8E8    !important;
 
@@ -200,7 +202,7 @@ th.number,td.number{
 
 
 th.topic{
-  width: 600px;
+  width: 800px;
 
 }
 
@@ -319,8 +321,8 @@ button ul li label{
 }
 
 .tooltip{
-   font-size: 17px;
-   font-family:  "FreesiaUPC";
+   font-size: 15px !important;
+   font-family:  "FreesiaUPC" !important;
 
 }
 
@@ -679,14 +681,20 @@ table.evaluation{
    margin: auto !important;
 }
 
-.myTip{
+/*.myTip{
   font-family: "FreesiaUPC" !important;
   font-size: 20px !important;
  
-}
+}*/
 
 .panel.pageable-edit-panel.panel-stretch .panel-footer .btn{
   background-color: red !important;
 
 }
 
+
+
+.big-nav li a,.small-nav li a{
+  font-weight: normal !important;
+  font-size:11px !important;
+}
