@@ -15,8 +15,21 @@ app.controller('choice_index_controller', function($scope, $http,$alert) {
      $scope.sub_indicator_choosen = {};
      $scope.select_overall = true;
      $scope.select_all_complete = false;
+     $scope.questions = [];
      }
 
+         $scope.add_question = function(){
+            console.log("welcome to add_question");
+            var newItemNo = $scope.questions.length+1;
+           $scope.questions.push({'id':newItemNo,'hide':false});
+         }
+
+         $scope.remove_question = function(question){
+            question.hide = true;
+            // console.log(id);
+            // $scope.questions.splice(id-1, 1);
+            // console.log($scope.questions)
+         }
     $http.get("/api/curriculum").success(function (data, status, headers, config) {
 
         $scope.all_curriculums = data;
