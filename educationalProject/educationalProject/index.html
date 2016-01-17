@@ -178,15 +178,15 @@ $('.profile_pic').mouseover(function(){
     <section class="wow">
         <div class="navbar" style="">
       
-            <div class="container-fluid">
+            <div class="container-fluid" style="  border-style: solid;border-width: 1px;border-color:#6F002B">
 
 
 
 
-                <ul class="nav navbar-nav navbar-left">
+                <ul class="nav navbar-nav navbar-left" >
 
-                    <li><img src="/myImages/logo_kmitl.gif" width="100px" style="margin-left:80px" /></li>
-                    <li><a href="" class="headerWeb" style="font-family:'Helvetica'"><b>CUPT-QA Online For Computer Engineering KMITL</b></a></li>
+                   <!--  <li><img src="/myImages/logo_kmitl.gif" width="100px" style="margin-left:80px" /></li> -->
+                    <li ><a href="" class="headerWeb" style="margin-left:70px">CUPT-QA Online For Computer Engineering KMITL</a></li>
 
                 </ul>
 
@@ -472,35 +472,29 @@ $('.profile_pic').mouseover(function(){
 
                 <thead>
 
-                <th class="col-xs-1 number">ข้อที่</th>
-                <th class="col-xs-6 topic">หัวข้อการประเมิน</th>
-                <th class="col-xs-3 result">ผลการประเมินตนเอง</th>
-                <th class="col-xs-3 result">ผลการประเมินจากภายนอก</th>
+                <th class="col-md-1 number">ข้อที่</th>
+                <th class="col-md-7 topic">หัวข้อการประเมิน</th>
+                <th class="col-md-2 result"><a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ประเมินโดย {{evaluation_result.teacher.teacher_name}} <br/> วันที่ {{evaluation_result.teacher.date}} เวลา {{evaluation_result.teacher.time}}" style="color:white;cursor:default;"> ผลการประเมินตนเอง</a></th>
+
+                <th class="col-md-2 result"><a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ประเมินโดย {{evaluation_result.assessor.assessor_name}} <br/> วันที่ {{evaluation_result.assessor.date}} เวลา {{evaluation_result.assessor.time}}" style="color:white;cursor:default;">ผลการประเมิน<br />จากภายนอก</a></th>
   
 
                 </thead>
 
 
-             <!--    <tr>
-                    <td class="number">1.1</td>
-                    <td class="topic">การกำหนดผลการเรียนรู้ที่คาดหวังมีความชัดเจนและแสดงไว้ในหลักสูตร</td>
-                    <td class="result">5</td>
-                    <td class="result">4</td>
-                
-                </tr> -->
-
+   
                 <tr ng-repeat="result in evaluation_result.results">
                   <td class="number">{{indicator_choosen.indicator_num}}.{{result.sub_indicator_num}}</td>
                   <td class="topic">{{result.sub_indicator_name}}</td>
-                  <div class="result">
-                   <td ng-class="{resultGreen: result.other_result>result.self_result  , resultRed:result.self_result>result.other_result }">{{result.self_result}}</td>
-                    <td ng-class="{resultGreen: result.other_result>result.self_result  , resultRed:result.self_result>result.other_result }">{{result.other_result}}</td>
-                    </div>
+              
+                   <td class="result" ng-class="{resultGreen: result.other_result>result.self_result  , resultRed:result.self_result>result.other_result }" >{{result.self_result}}</td>
+                    <td class="result"  ng-class="{resultGreen: result.other_result>result.self_result  , resultRed:result.self_result>result.other_result }" >{{result.other_result}}</td>
+                  
                 </tr>
 
             </table>
 
-          <div data-wow-delay="0.5s" class="inline wow bounceInRight"data-wow-duration="2s" style="display: inline-block;margin-left:575px">
+    <!--       <div data-wow-delay="0.5s" class="inline wow bounceInRight"data-wow-duration="2s" style="display: inline-block;margin-left:575px">
             <h4 style="text-align:right;margin-right:15px;"><b>ผู้ประเมิน: </b> {{evaluation_result.teacher.teacher_name}}</h4>
             <h4 style="text-align:right;"><b>ประเมิน ณ วันที่ </b>{{evaluation_result.teacher.date}} เวลา {{evaluation_result.teacher.time}}</h4>
 </div>
@@ -508,8 +502,11 @@ $('.profile_pic').mouseover(function(){
          <div data-wow-delay="0.5s" class="wow bounceInRight"data-wow-duration="2s" style="margin-left:35px;  display: inline-block">
             <h4 style="text-align:right;margin-right:15px"><b>ผู้ประเมิน: </b> {{evaluation_result.assessor.assessor_name}}</h4>
             <h4 style="text-align:right;"><b>ประเมิน ณ วันที่ </b>{{evaluation_result.assessor.date}} เวลา {{evaluation_result.assessor.time}}</h4>
-</div>
-              <table class="table table-bordered table-hover table_modal evidence wow bounceInLeft" data-wow-delay="2s" data-wow-duration="3s">
+</div> -->
+
+<br/>
+   <h3 class="headerPanel wow flipInX"data-wow-delay="3s" data-wow-duration="2s" style="text-align:left">หลักฐานสนับสนุนการประเมิน</h3>
+              <table class="table table-bordered table-hover table_modal evidence wow bounceInLeft" data-wow-delay="3s" data-wow-duration="3s">
 
                         <tr>
                             <th class="code">รหัสหลักฐาน</th>

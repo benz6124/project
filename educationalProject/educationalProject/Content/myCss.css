@@ -93,14 +93,15 @@ div.navbar>div.container-fluid>ul>li>a:hover{
 
 .navbar{
   background-color:#6F002B; 
-  border:none
+
 }
+
 table.evidence, table.evidence th, table.evidence td{
     border: 1px solid #383838 ;
     background-color:#F0F0F0 ;
     color:black;
-    border-radius:5px;
-    border-collapse:separate;
+/*    border-radius:5px;
+    border-collapse:separate;*/
 
 }
 
@@ -325,7 +326,12 @@ button ul li label{
    font-family:  "FreesiaUPC" !important;
 opacity: 0.9 !important;
 
+
 }
+div.tooltip-inner {
+  max-width: 900px !important;
+}
+
 
 .hvr-pulse{
    transition-duration: 20s;
@@ -654,8 +660,17 @@ table.evaluation th{
 table.evaluation td{
   background-color: #F4F4F4  ;
   color:black;
+
 }
 
+.table-hover tr:hover td {
+  background-color: #e9e9e9;
+}
+
+table.evaluation td.result{
+
+  font-size: 23px !important;
+}
 
 table.evidence th{
   background-color: #6F002B;
@@ -715,11 +730,13 @@ table.evaluation{
 
 a.headerWeb{
  
-  font-size:50px;
+  font-size:40px;
   color:#E0E0E0;
   margin-top:25px;
     font-family: 'Helvetica' ;
+    font-weight: normal;
 }
+
 
 .resultGreen{
   color:green !important;
@@ -728,3 +745,13 @@ a.headerWeb{
 .resultRed{
   color:red !important;
 }
+
+table.evaluation th{
+  vertical-align:middle !important;
+
+}
+
+
+
+
+
