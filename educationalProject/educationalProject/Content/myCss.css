@@ -372,7 +372,7 @@ td button li label{
 
      position: absolute;
           top: 50%;
-          right: 36px;
+          right: 8px;
           margin-top: 49px;
          padding-left: 0px;
 
@@ -420,7 +420,7 @@ td button li label{
       font-size:30px;
       color:#6F002B;
       background-color: #A0A0A0 ;
-      font-weight: bolder;
+ 
     }
     ul.dropdownImg li.bull:hover{
       background-color: #686868 ;
@@ -738,9 +738,9 @@ font-weight: bold;
 
 li.headerWeb{
  
-  font-size:39px;
+  font-size:40px;
  color:#D8D8D8  ;
-  margin-top:20px;
+  margin-top:18px;
     font-family: 'Quicksand' ;
     font-weight: normal;
 }
