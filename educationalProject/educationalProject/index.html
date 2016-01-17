@@ -11,6 +11,7 @@
     // <script src="/app/controllers/indexController.js"></script> -->
 <!--     // <script type="text/javascript" src="/app/app.js"></script>
     // <script type="text/javascript" src="/app/controllers/indexController.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Quicksand" />
     <link rel="shortcut icon" href="/bower_components/quantumui/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/bower_components/quantumui/images/favicon.ico" type="image/x-icon">
     <link href="/bower_components/hover/css/hover.css" rel="stylesheet" media="all">
@@ -186,7 +187,7 @@ $('.profile_pic').mouseover(function(){
                 <ul class="nav navbar-nav navbar-left" >
 
                    <!--  <li><img src="/myImages/logo_kmitl.gif" width="100px" style="margin-left:80px" /></li> -->
-                    <li ><a href="" class="headerWeb" style="margin-left:70px">CUPT-QA Online For Computer Engineering KMITL</a></li>
+                    <li class="headerWeb" style="margin-left:70px"><span class="boldPlease">CUPT-QA</span> Online For Computer Engineering KMITL</li>
 
                 </ul>
 
@@ -452,7 +453,7 @@ $('.profile_pic').mouseover(function(){
 
 
                 <li  data-ng-repeat="indicator in corresponding_indicators">
-                <a data-toggle="tab" href="#menu{{indicator.indicator_num}}" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="{{indicator.indicator_name}}" ng-click="sendIndicatorAndGetSubIndicators(indicator)">AUN {{indicator.indicator_num}}</a></li>
+                <a data-toggle="tab"  data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="{{indicator.indicator_name}}" ng-click="sendIndicatorAndGetSubIndicators(indicator)">AUN {{indicator.indicator_num}}</a></li>
 
             </ul>
 
@@ -545,7 +546,7 @@ $('.profile_pic').mouseover(function(){
                         <ul class="nav nav-tabs">
 
                             <li data-ng-repeat="sub_indicator in corresponding_sub_indicators">
-                                <a data-toggle="tab" href="#sub{{sub_indicator.sub_indicator_num}}" data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="{{sub_indicator.sub_indicator_name}}" ng-click="send_sub_indicator(sub_indicator)">AUN {{indicator_choosen.indicator_num}}.{{sub_indicator.sub_indicator_num}}</a>
+                                <a data-toggle="tab"  data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="{{sub_indicator.sub_indicator_name}}" ng-click="send_sub_indicator(sub_indicator)">AUN {{indicator_choosen.indicator_num}}.{{sub_indicator.sub_indicator_num}}</a>
                             </li>
                            
                         </ul>
@@ -565,11 +566,12 @@ $('.profile_pic').mouseover(function(){
                  
                     <hr />
 
-                    <h3><b>ข้อมูลสนับสนุนการประเมินตนเอง</b></h3>
+                    <h3>ข้อมูลสนับสนุนการประเมินตนเอง</h3>
 
-                    <button class="btn editor wow flipInX" data-nq-toggle-modal="#another_aca" data-wow-duration="1s" data-placement="top" style="background-color:#6B0033;border:none;margin-left:35px;"> <span class="glyphicon glyphicon-export" /><span class="normal"> ดึงข้อมูลจากปีการศึกษาอื่น</span></button>
+                    <button class="btn editor hvr-wobble-vertical " type="button" data-nq-toggle-modal="#another_aca" data-wow-duration="1s"  style="background-color:#6F002B;border:none;"> <span class="glyphicon glyphicon-export" /><span class="normal"> ดึงข้อมูลจากปีการศึกษาอื่น</span></button>
 
   <br />  <br />
+
                         <form>
                         <textarea name="editor1" rows="10" cols="80"></textarea>
 
@@ -579,14 +581,21 @@ $('.profile_pic').mouseover(function(){
                     </form>
 
                     <br />
+                     
+                        <button class="btn editor hvr-wobble-vertical pull-right " type="button" data-nq-toggle-modal="#another_aca" data-wow-duration="1s"  style="background-color:#6F002B;border:none;margin-right:0px;"> <span class="glyphicon glyphicon-ok-sign" /><span class="normal"> ยืนยันการเปลี่ยนแปลง</span></button>
 
-              <div class="topicHeader pull-right">
-                        <button class="btn editor wow flipInX" data-nq-toggle-modal="#another_aca" data-wow-duration="1s" data-placement="top" style="background-color:#6B0033;border:none;margin-left:35px;"> <span class="glyphicon glyphicon-ok-sign" /><span class="normal"> ยืนยันการเปลี่ยนแปลง</span></button>
+                       
+
+                   <br />
+
+
+    
+               <p style="font-size:20px;margin-left:727px" >
+                    <br />
+                    Components By <a href="http://quantumui.org/"  >QuantumUI</a> available under the <a href="http://opensource.org/licenses/mit-license.html">MIT License</a>
+                    </p>
+          
                     </div>
-                    </div>
-
-</div>
-
 
 
 </div>
@@ -594,7 +603,12 @@ $('.profile_pic').mouseover(function(){
 
 
 </div>
+
+
+
 </div>
+</div>
+
 </div>
    </div>       
                     <div id="login_form" data-nq-modal="" data-qo-independent="true">
@@ -6594,18 +6608,12 @@ $('.profile_pic').mouseover(function(){
                     </div>
 
                 </div> -->
-                <br />
-                <br />
+               
 
 
 
 
-               <!--  
-don't forget to give credit
-               <div class="pull-right">
-                    <br />
-                    Components By <a href="http://quantumui.org/">QuantumUI</a> available under the <a href="http://opensource.org/licenses/mit-license.html">MIT License</a>
-                </div> -->
+        
                   <script type="text/javascript" src="app.js"></script>
 <script type="text/javascript" src="indexController.js"></script> 
                 <link href="/Content/myCss.css" rel="stylesheet" />

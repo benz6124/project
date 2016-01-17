@@ -142,11 +142,11 @@ td.code{
 }
 
 
-.btn.editor:hover,.btn.editor:active {
+/*.btn.editor:hover,.btn.editor:active {
 
     background-color:#484848 !important;
 }
-
+*/
 .btn.editor{
   border:none;
   background-color:#909090   ; 
@@ -328,7 +328,7 @@ opacity: 0.9 !important;
 
 
 }
-div.tooltip-inner {
+.tooltip-inner {
   max-width: 900px !important;
 }
 
@@ -728,16 +728,22 @@ table.evaluation{
     border-color: #d43f3a;
 }
 
-a.headerWeb{
- 
-  font-size:40px;
-  color:#E0E0E0;
-  margin-top:25px;
-    font-family: 'Helvetica' ;
-    font-weight: normal;
+
+
+li.headerWeb span.boldPlease{
+  font-family: 'Quicksand' ;
+font-weight: bold;
+ color:#E0E0E0;
 }
 
-
+li.headerWeb{
+ 
+  font-size:39px;
+ color:#D8D8D8  ;
+  margin-top:20px;
+    font-family: 'Quicksand' ;
+    font-weight: normal;
+}
 .resultGreen{
   color:green !important;
 }
