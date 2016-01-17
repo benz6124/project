@@ -237,6 +237,7 @@
     <Compile Include="Controllers\CurriculumAcademicController.cs" />
     <Compile Include="Controllers\CurriculumController.cs" />
     <Compile Include="Controllers\EvaluationResultController.cs" />
+    <Compile Include="Controllers\EvidenceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndicatorController.cs" />
     <Compile Include="Controllers\SubIndicatorController.cs" />
@@ -249,6 +250,8 @@
     <Compile Include="Models\Assessor.cs" />
     <Compile Include="Models\Curriculum_academic.cs" />
     <Compile Include="Models\Cu_curriculum.cs" />
+    <Compile Include="Models\Evidence.cs" />
+    <Compile Include="Models\Evidence_indicator.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Indicator.cs" />
     <Compile Include="Models\Others_evaluation.cs" />
@@ -268,6 +271,7 @@
     <Compile Include="Models\ViewModels\Wrappers\oEvaluation_overall_result.cs" />
     <Compile Include="Models\Wrappers\oCurriculum_academic.cs" />
     <Compile Include="Models\Wrappers\oCu_Curriculum.cs" />
+    <Compile Include="Models\Wrappers\oEvidence.cs" />
     <Compile Include="Models\Wrappers\oIndicator.cs" />
     <Compile Include="Models\Wrappers\oPrimary_evidence.cs" />
     <Compile Include="Models\Wrappers\oResearch.cs" />
