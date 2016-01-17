@@ -7,7 +7,7 @@ namespace educationalProject.Models
 {
     public class Assessor : User
     {
-        protected struct FieldName
+        internal struct FieldName
         {
             public static readonly string USERNAME = "USERNAME";
             public static readonly string PASSWORD = "PASSWORD";

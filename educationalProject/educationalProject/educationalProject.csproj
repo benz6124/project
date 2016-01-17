@@ -236,6 +236,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CurriculumAcademicController.cs" />
     <Compile Include="Controllers\CurriculumController.cs" />
+    <Compile Include="Controllers\EvaluationResultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndicatorController.cs" />
     <Compile Include="Controllers\SubIndicatorController.cs" />
@@ -264,6 +265,7 @@
     <Compile Include="Models\ViewModels\vOthers_evaluation_assessor.cs" />
     <Compile Include="Models\ViewModels\vSelf_evaluation.cs" />
     <Compile Include="Models\ViewModels\vSelf_evaluation_teacher.cs" />
+    <Compile Include="Models\ViewModels\Wrappers\oEvaluation_overall_result.cs" />
     <Compile Include="Models\Wrappers\oCurriculum_academic.cs" />
     <Compile Include="Models\Wrappers\oCu_Curriculum.cs" />
     <Compile Include="Models\Wrappers\oIndicator.cs" />
@@ -278,6 +280,7 @@
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\DBConnector.cs" />
+    <Compile Include="Utils\NameManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="aa.js" />

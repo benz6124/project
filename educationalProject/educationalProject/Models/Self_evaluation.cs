@@ -7,7 +7,7 @@ namespace educationalProject.Models
 {
     public class Self_evaluation
     {
-        protected struct FieldName
+        internal struct FieldName
         {
             public static readonly string INDICATOR_NUM = "INDICATOR_NUM";
             public static readonly string SUB_INDICATOR_NUM = "SUB_INDICATOR_NUM";

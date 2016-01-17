@@ -12,7 +12,7 @@ namespace educationalProject.Models.ViewModels
 
         private List<vOthers_evaluation_assessor> _others;
         public List<vOthers_evaluation_assessor> others { get { return _others; } set { _others = value; } }
-        Evaluation_overall_result()
+        public Evaluation_overall_result()
         {
             self = new List<vSelf_evaluation_teacher>();
             others = new List<vOthers_evaluation_assessor>();
