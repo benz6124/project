@@ -173,7 +173,7 @@ $('.profile_pic').mouseover(function(){
       }
     </script>
 </head>
-<body ng-controller="choice_index_controller" ng-init="init_var()">
+<body >
 
     <section class="wow">
         <div class="navbar" style="">
@@ -395,7 +395,8 @@ $('.profile_pic').mouseover(function(){
    
     </div>
 
- 
+<!--index part -->
+ <div ng-controller="choice_index_controller" ng-init="init_var()">
     <div class="container">
 
 
@@ -412,7 +413,7 @@ $('.profile_pic').mouseover(function(){
 
             <div class="col-sm-2">
 
-        <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="chooseYear(year_choosen)" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
+        <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="chooseYear(year_choosen)" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" data-ng-click="check_curri()">
 </select>    
 
 
@@ -467,7 +468,7 @@ $('.profile_pic').mouseover(function(){
 
 
            
-            <table class="table table-bordered table-hover table_modal  evaluation wow flipInX" data-wow-delay="1s" data-wow-duration="5s">
+            <table class="table table-bordered table-hover table_modal  evaluation wow bounceInDown" data-wow-duration="2s">
 
                 <thead>
 
@@ -499,35 +500,35 @@ $('.profile_pic').mouseover(function(){
             <h4 style="text-align:right;margin-right:15px"><b>ผู้ประเมิน: </b> อาจารย์วิบูลย์ พร้อมพานิชย์</h4>
             <h4 style="text-align:right;"><b>ประเมิน ณ วันที่ </b>20/11/2558 เวลา 20.58</h4>
 </div>
-              <table class="table table-bordered table-hover table_modal evidence wow bounceInLeft" data-wow-delay="2s" data-wow-duration="5s">
+              <table class="table table-bordered table-hover table_modal evidence wow bounceInLeft" data-wow-delay="2s" data-wow-duration="3s">
 
                         <tr>
                             <th class="code">รหัสหลักฐาน</th>
                             <th class="larger">หัวข้อ</th>
-                            <th class="download">ดาวน์โหลด</th>
+                            <th class="download ">ดาวน์โหลด</th>
                         </tr>
 
                         <tr>
                             <td class="code">1-01</td>
                             <td class="larger">คำอธิบายรายวิชาแต่ละวิชาในหลักสูตร</td>
-                            <td class="download"><a href=""><span class="glyphicon glyphicon-download-alt" /></a></td>
+                            <td class="download hvr-wobble-vertical"><a href=""><span class="glyphicon glyphicon-download-alt" /></a></td>
                         </tr>
                         <tr>
                             <td class="code">1-02</td>
                             <td class="larger">มาตรฐานคุณวุฒิระดับอุดมศึกษาแห่งชาติ</td>
-                            <td class="download"><a href=""><span class="glyphicon glyphicon-download-alt" /></a></td>
+                            <td class="download hvr-wobble-vertical"><a href=""><span class="glyphicon glyphicon-download-alt" /></a></td>
                         </tr>
 
                         <tr>
                             <td class="code">1-03</td>
                             <td class="larger">มาตรฐานคุณวุฒิระดับปริญญาตรี สาขาคอมพิวเตอร์</td>
-                            <td class="download"><a href=""><span class="glyphicon glyphicon-download-alt" /></a></td>
+                            <td class="download hvr-wobble-vertical"><a href=""><span class="glyphicon glyphicon-download-alt" /></a></td>
                         </tr>
 
                         <tr>
                             <td class="code">1-04</td>
                             <td class="larger">เอกลักษณ์,อัตลักษณ์พร้อมตัวบ่งชี้ของสถาบัน</td>
-                            <td class="download"><a href=""><span class="glyphicon glyphicon-download-alt" /></a></td>
+                            <td class="download hvr-wobble-vertical"><a href=""><span class="glyphicon glyphicon-download-alt" /></a></td>
                         </tr>
 
 
@@ -542,6 +543,8 @@ $('.profile_pic').mouseover(function(){
                             </li>
                            
                         </ul>
+
+
                     </div>
 
                 </div>
@@ -587,7 +590,7 @@ $('.profile_pic').mouseover(function(){
 </div>
 </div>
 </div>
-                   
+   </div>       
                     <div id="login_form" data-nq-modal="" data-qo-independent="true">
 
 
@@ -6600,5 +6603,10 @@ don't forget to give credit
                   <script type="text/javascript" src="app.js"></script>
 <script type="text/javascript" src="indexController.js"></script> 
                 <link href="/Content/myCss.css" rel="stylesheet" />
+
+         
+<script type="text/javascript" src="http://arrow.scrolltotop.com/arrow13.js"></script>
+<noscript>Not seeing a <a href="http://www.scrolltotop.com/">Scroll to Top Button</a>? Go to our FAQ page for more info.</noscript>
+
 </body>
 </html>

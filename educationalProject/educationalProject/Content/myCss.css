@@ -112,7 +112,7 @@ table.evidence th{
   text-align: center;
   background-color:#6F002B ;
   color:white;
-  font-size: 18px;
+  font-weight: normal;
 }
 
 table.evidence  td{
@@ -645,9 +645,9 @@ h2.headerSubPanel{
 table.evaluation th{
   background-color: #6F002B;
     text-align: center;
-  font-weight: bold;
   color:white;
   font-size: 22px !important;
+  font-weight: normal !important;
   font-family: "FreesiaUPC" !important;
 }
 
@@ -660,14 +660,17 @@ table.evaluation td{
 table.evidence th{
   background-color: #6F002B;
     text-align: center;
-  font-weight: bold;
+/*  font-weight: bold;*/
+ font-size: 22px !important;
   color:white;
+
 }
 
 
 table.evidence td{
    background-color: #F4F4F4  ;
    color:black;
+   font-size: 18px;
 }
 
 table.evaluation{
