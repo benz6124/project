@@ -492,19 +492,21 @@ $('.profile_pic').mouseover(function(){
                 <tr ng-repeat="result in evaluation_result.results">
                   <td class="number">{{indicator_choosen.indicator_num}}.{{result.sub_indicator_num}}</td>
                   <td class="topic">{{result.sub_indicator_name}}</td>
-                   <td class="result">{{result.self_result}}</td>
-                    <td class="result">{{result.other_result}}</td>
+                  <div class="result">
+                   <td ng-class="{resultGreen: result.other_result>result.self_result  , resultRed:result.self_result>result.other_result }">{{result.self_result}}</td>
+                    <td ng-class="{resultGreen: result.other_result>result.self_result  , resultRed:result.self_result>result.other_result }">{{result.other_result}}</td>
+                    </div>
                 </tr>
 
             </table>
 
-          <div data-wow-delay="0.5s" class="inline wow bounceInRight"data-wow-duration="2s" style="display: inline-block;margin-left:575px;color:#6F002B">
+          <div data-wow-delay="0.5s" class="inline wow bounceInRight"data-wow-duration="2s" style="display: inline-block;margin-left:575px">
             <h4 style="text-align:right;margin-right:15px;"><b>ผู้ประเมิน: </b> {{evaluation_result.teacher.teacher_name}}</h4>
             <h4 style="text-align:right;"><b>ประเมิน ณ วันที่ </b>{{evaluation_result.teacher.date}} เวลา {{evaluation_result.teacher.time}}</h4>
 </div>
 
-         <div data-wow-delay="0.5s" class="wow bounceInRight"data-wow-duration="2s" style="margin-left:35px;  display: inline-block;color:#6F002B">
-            <h4 style="text-align:right;margin-right:15px;color:#6F002B"><b>ผู้ประเมิน: </b> {{evaluation_result.assessor.assessor_name}}</h4>
+         <div data-wow-delay="0.5s" class="wow bounceInRight"data-wow-duration="2s" style="margin-left:35px;  display: inline-block">
+            <h4 style="text-align:right;margin-right:15px"><b>ผู้ประเมิน: </b> {{evaluation_result.assessor.assessor_name}}</h4>
             <h4 style="text-align:right;"><b>ประเมิน ณ วันที่ </b>{{evaluation_result.assessor.date}} เวลา {{evaluation_result.assessor.time}}</h4>
 </div>
               <table class="table table-bordered table-hover table_modal evidence wow bounceInLeft" data-wow-delay="2s" data-wow-duration="3s">

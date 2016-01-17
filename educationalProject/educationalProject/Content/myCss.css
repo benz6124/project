@@ -720,3 +720,11 @@ a.headerWeb{
   margin-top:25px;
     font-family: 'Helvetica' ;
 }
+
+.resultGreen{
+  color:green !important;
+}
+
+.resultRed{
+  color:red !important;
+}
