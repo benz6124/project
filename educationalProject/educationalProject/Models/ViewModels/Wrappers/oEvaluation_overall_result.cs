@@ -44,7 +44,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             teacher_id = item.ItemArray[data.Columns[Self_evaluation.FieldName.TEACHER_ID].Ordinal].ToString(),
                             t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
                             date = Convert.ToDateTime(item.ItemArray[data.Columns[Self_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
-                            time = h + '.' + m
+                            time = (timeofday.Hour > 9 ? "" : "0") + h + '.' + (timeofday.Minute > 9 ? "" : "0") + m
                         });
                     }
                     res.Close();
@@ -86,7 +86,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             assessor_id = item.ItemArray[data.Columns[Others_evaluation.FieldName.ASSESSOR_ID].Ordinal].ToString(),
                             t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Assessor.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Assessor.FieldName.T_NAME].Ordinal].ToString(),
                             date = Convert.ToDateTime(item.ItemArray[data.Columns[Others_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
-                            time = h + '.' + m,
+                            time = (timeofday.Hour > 9 ? "" : "0") + h + '.' + (timeofday.Minute > 9 ? "" : "0") + m,
                             detail = item.ItemArray[data.Columns[Others_evaluation.FieldName.DETAIL].Ordinal].ToString(),
                             others_evaluation_id = Convert.ToInt32(item.ItemArray[data.Columns[Others_evaluation.FieldName.OTHERS_EVALUATION_ID].Ordinal])
                         });
@@ -124,7 +124,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 "(select * from " +
                 "(select * from {2} as s1 where s1.{3} = {4} and s1.{5} = '{6}' and s1.{7} = {8} and " +
                 "s1.{9} >= ALL(select {9} from {2} as s2 where s2.{3} = {4} and s2.{10} = s1.{10} and s2.{5} = '{6}' and s2.{7} = {8})) as r1 " +
-                "where r1.{11} >= ALL(select r2.{11} from {2} as r2 where r2.{3} = {4} and r2.{10} = r1.{10} and r2.{5} = '{6}' and r2.{7} = {8})) as self_eval_result INNER JOIN {12} on self_eval_result.{13} = {12}.{14}",
+                "where r1.{11} >= ALL(select r2.{11} from {2} as r2 where r2.{3} = {4} and r2.{10} = r1.{10} and r2.{5} = '{6}' and r2.{7} = {8} and r2.{9}=r1.{9})) as self_eval_result INNER JOIN {12} on self_eval_result.{13} = {12}.{14}",
                 Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, Self_evaluation.FieldName.TABLE_NAME,
                 Self_evaluation.FieldName.INDICATOR_NUM, inddata.indicator_num, Self_evaluation.FieldName.CURRI_ID, curri_id,
                 Self_evaluation.FieldName.ACA_YEAR,inddata.aca_year,Self_evaluation.FieldName.DATE,
@@ -155,7 +155,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             teacher_id = item.ItemArray[data.Columns[Self_evaluation.FieldName.TEACHER_ID].Ordinal].ToString(),
                             t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
                             date = Convert.ToDateTime(item.ItemArray[data.Columns[Self_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
-                            time = h + '.' + m
+                            time = (timeofday.Hour > 9 ? "" : "0")+h + '.' + (timeofday.Minute > 9 ? "" : "0") + m
                         });
                     }
                     res.Close();
@@ -173,7 +173,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 "(select * from " +
                 "(select * from {2} as o1 where o1.{3} = {4} and o1.{5} = '{6}' and o1.{7} = {8} and " +
                 "o1.{9} >= ALL(select {9} from {2} as o2 where o2.{3} = {4} and o2.{10} = o1.{10} and o2.{5} = '{6}' and o2.{7} = {8})) as r1 " +
-                "where r1.{11} >= ALL(select r2.{11} from {2} as r2 where r2.{3} = {4} and r2.{10} = r1.{10} and r2.{5} = '{6}' and r2.{7} = {8})) as others_eval_result INNER JOIN {12} on others_eval_result.{13} = {12}.{14}",
+                "where r1.{11} >= ALL(select r2.{11} from {2} as r2 where r2.{3} = {4} and r2.{10} = r1.{10} and r2.{5} = '{6}' and r2.{7} = {8} and r2.{9}=r1.{9})) as others_eval_result INNER JOIN {12} on others_eval_result.{13} = {12}.{14}",
                 Assessor.FieldName.T_PRENAME, Assessor.FieldName.T_NAME, Others_evaluation.FieldName.TABLE_NAME,
                 Others_evaluation.FieldName.INDICATOR_NUM, inddata.indicator_num, Others_evaluation.FieldName.CURRI_ID, curri_id,
                 Others_evaluation.FieldName.ACA_YEAR, inddata.aca_year, Others_evaluation.FieldName.DATE,
@@ -203,7 +203,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             assessor_id = item.ItemArray[data.Columns[Others_evaluation.FieldName.ASSESSOR_ID].Ordinal].ToString(),
                             t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Assessor.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Assessor.FieldName.T_NAME].Ordinal].ToString(),
                             date = Convert.ToDateTime(item.ItemArray[data.Columns[Others_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
-                            time = h + '.' + m,
+                            time = (timeofday.Hour > 9 ? "" : "0") + h + '.' + (timeofday.Minute > 9 ? "" : "0") + m,
                             detail = item.ItemArray[data.Columns[Others_evaluation.FieldName.DETAIL].Ordinal].ToString(),
                             others_evaluation_id = Convert.ToInt32(item.ItemArray[data.Columns[Others_evaluation.FieldName.OTHERS_EVALUATION_ID].Ordinal])
                         });
