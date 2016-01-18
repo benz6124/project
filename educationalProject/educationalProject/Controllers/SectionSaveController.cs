@@ -37,10 +37,16 @@ namespace educationalProject.Controllers
         public IHttpActionResult PutForSectionSave(oSection_save data)
         {
             DateTime d = DateTime.Now;
+            datacontext.date = d.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
+            datacontext.time = d.GetDateTimeFormats()[101];
+            datacontext.aca_year = data.aca_year;
+            datacontext.curri_id = data.curri_id;
+            datacontext.detail = data.detail;
+            datacontext.indicator_num = data.indicator_num;
+            datacontext.sub_indicator_num = data.sub_indicator_num;
+            datacontext.teacher_id = data.teacher_id;
             if (data.date == null || data.time == null)
             {
-                data.date = d.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
-                data.time = d.GetDateTimeFormats()[101];
                 object result = datacontext.Insert();
                 if (result == null)
                     return Ok();
@@ -49,8 +55,6 @@ namespace educationalProject.Controllers
 
             }
             else {
-                data.date = d.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
-                data.time = d.GetDateTimeFormats()[101];
                 object result = datacontext.Update();
                 if (result == null)
                     return Ok();
