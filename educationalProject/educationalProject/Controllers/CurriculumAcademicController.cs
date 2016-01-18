@@ -18,6 +18,21 @@ namespace educationalProject.Controllers
             object result = datacontext.SelectWhere(String.Format("curri_id='{0}'", data.curri_id));
             return Ok(result);
         }
+
+        public IHttpActionResult PostNewCurriculumAcademic(oCurriculum_academic data)
+        {
+            object result = data.Insert();
+            if (result == null)
+                return Ok();
+            else if (result.ToString().Contains("Duplicate")) {
+                return BadRequest("มีหลักสูตร-ปีการศึกษานี้อยู่ในระบบแล้ว กรุณาระบุปีการศึกษาใหม่อีกครั้ง");
+            }
+            else
+            {
+                return BadRequest(result.ToString());
+            }
+        }
+
         public IHttpActionResult Get()
         {
             datacontext.curri_id = "21";

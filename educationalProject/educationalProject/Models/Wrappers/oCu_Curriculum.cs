@@ -116,8 +116,8 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             
-            d.iCommand.CommandText = String.Format("insert into {0} values ((select MAX({1})+1 FROM {0}),'{2}','{3}','','','','','','','')",
-                FieldName.TABLE_NAME, FieldName.CURRI_ID, year, curr_tname);
+            d.iCommand.CommandText = String.Format("insert into {0} values ((select MAX({1})+1 FROM {0}),'{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}')",
+                FieldName.TABLE_NAME, FieldName.CURRI_ID, year, curr_tname, curr_ename, degree_t_full, degree_t_bf, degree_e_full, degree_e_bf, level, period);
             try
             {
                 int rowAffected = d.iCommand.ExecuteNonQuery();

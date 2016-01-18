@@ -114,10 +114,13 @@ namespace educationalProject.Models.Wrappers
                     return "No cu_curriculum academic are inserted.";
                 }
             }
-            catch (Exception ex)
+            catch (System.Data.SqlClient.SqlException ex)
             {
-                //Handle error from sql execution
-                return ex.Message;
+                if (ex.Number == 2601 || ex.Number == 2627)
+                    //Handle error from sql execution 2601 - duplicate
+                    return "Duplicate";
+                else
+                    return ex.Message;
             }
             finally
             {
