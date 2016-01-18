@@ -261,7 +261,7 @@ span.topic{
   font-family:  "FreesiaUPC";
 
   font-size: 40px;
-  margin-top: 5px;
+
   margin-bottom: 5px ;
 }
 
@@ -580,7 +580,7 @@ button.plusgreen:hover{
 h1.headerModalH1{
 text-align:center;
 color:white;
-margin-top:7px;
+margin-top:3px;
   font-family:  "FreesiaUPC";
   font-weight: normal !important;;
   font-size: 40px;
@@ -766,7 +766,12 @@ table.evaluation th{
 
 }
 
-
+.alertPopSuccess{
+    font-size: 18px !important;
+      color: #fff;
+    background-color: #5cb85c;
+    border-color:#4cae4c;
+}
 
 
 

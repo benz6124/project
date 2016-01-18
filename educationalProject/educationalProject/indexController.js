@@ -263,6 +263,7 @@ if($scope.select_year_support_text != 0){
 }
 $scope.get_support_content_from_other_year = function () {
     CKEDITOR.instances['support_text'].setData($scope.show_preview_support_text);
+    this.$hide();
 
   
     // alert( CKEDITOR.instances['support_text'].getData());
@@ -270,6 +271,7 @@ $scope.get_support_content_from_other_year = function () {
 }
 
 $scope.prepare_to_watch_support_text = function(){
+    console.log("prepare_to_watch_support_text");
     $scope.sendSectionSaveAndGetPreviewSupportText();
 }
 
@@ -287,18 +289,20 @@ $scope.send_support_text_change_to_server = function(){
          ).success(function (data) {
     
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
 
          });
 }
  $scope.sendSectionSaveAndGetPreviewSupportText = function () {
-
+ console.log("sendSectionSaveAndGetPreviewSupportText");
+console.log($scope.select_year_support_text.aca_year);
      $scope.section_save_to_send = new Object();
      $scope.section_save_to_send.teacher_id = "";
      $scope.section_save_to_send.detail  = "";
      $scope.section_save_to_send.date  = "";
      $scope.section_save_to_send.time  = "";
-     $scope.section_save_to_send.aca_year = $scope.year_choosen.select_year_support_text;
+
+     $scope.section_save_to_send.aca_year = $scope.select_year_support_text.aca_year;
      $scope.section_save_to_send.indicator_num  = $scope.indicator_choosen.indicator_num;
      $scope.section_save_to_send.sub_indicator_num   = $scope.sub_indicator_choosen.sub_indicator_num;
      $scope.section_save_to_send.curri_id = $scope.curri_choosen.curri_id;
@@ -311,12 +315,16 @@ $scope.send_support_text_change_to_server = function(){
                  }
              }
          ).success(function (data) {
-    
+    console.log(data);
             $scope.show_preview_support_text= data.detail;
 
          });
     }
 
+    // $scope.filter_not_selected_year =function(year){
+  
+    //     return $scope.year_choosen.aca_year != year.aca_year;
+    // }
         $scope.sendSectionSaveAndGetSupportText = function () {
 
      $scope.section_save_to_send = new Object();

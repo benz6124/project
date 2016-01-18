@@ -630,7 +630,7 @@ $('.profile_pic').mouseover(function(){
                                 <div class="topicHeader">
                              
 
-                                      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="prepare_to_watch_support_text()"data-ng-model="$parent.$parent.select_year_support_text" data-qo-disable-clear="true"  >
+                                      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="prepare_to_watch_support_text()"data-ng-model="$parent.$parent.select_year_support_text " data-qo-disable-clear="true"  >
 </select>    
                                 </div>
                             </div>
@@ -641,7 +641,7 @@ $('.profile_pic').mouseover(function(){
 
                         <div class="custom-footer">
                             <div class="topicHeader pull-right">
-                                <button class="btn btn-success  " ng-click="get_support_content_from_other_year()">ยืนยัน</button>
+                                <button class="btn btn-success  " ng-click="get_support_content_from_other_year(this)">ยืนยัน</button>
                                 <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                             </div>
 
