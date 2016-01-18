@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-app.controller('choice_index_controller', function($scope, $http,$alert,$loading,$timeout) {
+app.controller('choice_index_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog) {
 
     // 
 
@@ -16,6 +16,7 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
      $scope.indicator_choosen = {};
      $scope.sub_indicator_choosen = {};
      $scope.select_overall = true;
+     $scope.select_year_support_text = 0;
      $scope.select_all_complete = false;
      $scope.already_select_curri = false;
      $scope.questions = [];
@@ -38,7 +39,13 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
         $scope.all_curriculums = data;
 
     });
-
+    // $scope.choose_year_support_text = function(year){
+    //     $scope.select_year_support_text 
+    // }
+    $scope.clear_select_year_support_text_choosen = function(){
+        console.log("clear");
+        $scope.select_year_support_text = 0;
+    }
     $scope.choose_overall = function(){
         $scope.select_overall = true;
     }
@@ -68,7 +75,7 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
     // $scope.loadingIndexPage = function(){
     //     $event = $scope.sendYearAndGetIndicators($scope.year_choosen);
     // }
-    $scope.chooseYear = function(year){
+    $scope.chooseYear = function(){
             $scope.select_all_complete = true;
     }
 
@@ -221,7 +228,61 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
             console.log(data);
             $scope.corresponding_evidences = data;
             // $scope.loading.hide();
+            CKEDITOR.instances['support_text'].insertHtml("hello me");
+            var content = CKEDITOR.instances['support_text'].getData();
 
+            console.log(content)
+         });
+    }
+
+$scope.confirm_support_text = function () {
+    CKEDITOR.instances['support_text'].setData(CKEDITOR.instances['support_text'].getData());
+}
+
+$scope.watch_support_text_from_other_year= function(){
+    console.log($scope.select_year_support_text);
+if($scope.select_year_support_text != 0){
+      ngDialog.open({
+    template: CKEDITOR.instances['support_text'].getData(),
+    plain: true,
+    className: 'ngdialog-theme-default',
+    showClose :true,
+    
+});
+
+  }
+  else{
+     $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกปีการศึกษา',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+                
+  }
+}
+$scope.get_support_content_from_other_year = function () {
+    console.log("get_support_content_from_other_year");
+
+  
+    // alert( CKEDITOR.instances['support_text'].getData());
+    // CKEDITOR.instances['support_text'].setData("cheese pizza");
+}
+        $scope.sendSubIndicatorCurriAndGetSupportText = function () {
+
+     $scope.sub_indicator_choosen.curri_id = $scope.curri_choosen.curri_id;
+
+        $http.post(
+             '/api/evidence',
+             JSON.stringify($scope.sub_indicator_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            console.log(data);
+
+            CKEDITOR.instances['support_text'].setData(data);
+            // var content = CKEDITOR.instances['support_text'].getData();
+
+            // console.log(content)
          });
     }
 });

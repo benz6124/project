@@ -246,7 +246,7 @@ optgroup {
 
 .topicHeader {
   font-family:  "FreesiaUPC";
-  font-weight: bold;;
+
   font-size: 23px !important;
 
 }
@@ -582,7 +582,7 @@ text-align:center;
 color:white;
 margin-top:7px;
   font-family:  "FreesiaUPC";
-  font-weight: bold;;
+  font-weight: normal !important;;
   font-size: 40px;
 }
 

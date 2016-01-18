@@ -1,40 +1,24 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <title></title>
+    <head>
+        <meta charset="utf-8">
+        <title>A Simple Page with CKEditor</title>
+        <!-- Make sure the path to CKEditor is correct. -->
+        
+    </head>
+    <body>dadada
+      <script src="/bower_components/ckeditor/ckeditor.js"></script>
+        <form>
+            <textarea name="editor1" id="editor1" rows="10" cols="80">
+                This is my textarea to be replaced with CKEditor.
+            </textarea>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'editor1' );
+            </script>
 
-</head>
-<body >
-<div class="col-sm-3" ng-controller="ColorController" >
-      <select  name="myColorSelection"  data-nq-select="" data-ng-init = "selectInit()" data-ng-model="selectData.singleSelect"  data-qo-placeholder="static select options"  data-ng-change="staticChange()">
-        <option>Yellow</option>
-        <option>Red</option>
-        <option>Aqua</option>
-        <option>Teal</option>
-        <option>Magenta</option>
-        <option>Orange</option>
-        <option>Blue</option>
-        <option>Chocolate</option>
-      </select>
-    </div>
-<script type="text/javascript">
-ngApp.controller('ColorController', function ColorController($scope) {
-
-$scope.selectInit = function () {
-    $scope.selectData = {
-        singleSelect: 'Yellow'
-    };
-};
-
-$scope.staticChange = function () {
-    console.log('new color selected');
-    console.log($scope.selectData.singleSelect);
-};
-
-});
-</script>
-</body>
-
+        </form>
+    </body>
 </html>
