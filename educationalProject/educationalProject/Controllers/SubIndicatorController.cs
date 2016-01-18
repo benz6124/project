@@ -10,7 +10,6 @@ namespace educationalProject.Controllers
     public class SubIndicatorController : ApiController
     {
         private oSub_indicator datacontext = new oSub_indicator();
-
         //Retrieve sub_indicator by indicator data
         public IHttpActionResult PostByIndicator(oIndicator data)
         {
