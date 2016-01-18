@@ -16,19 +16,13 @@ namespace educationalProject.Controllers
             object result = datacontext.Select();
 		    return Ok(result);
         }
-        public IHttpActionResult Get1(string test)
-        {
-            String test1 = "test";
-            String ss = test1.GetType().ToString();
-            return Ok();
-        }
 
         public IHttpActionResult PostNewCurriculum(oCu_curriculum data)
         {
             data.year = (DateTime.Now.Year+543).ToString();
             object result = data.Insert();
             if (result == null)
-                return Ok();
+                return Ok(datacontext.Select());
             else
                 return InternalServerError(new Exception(result.ToString()));
         }

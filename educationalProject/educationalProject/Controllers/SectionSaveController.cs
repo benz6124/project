@@ -18,13 +18,13 @@ namespace educationalProject.Controllers
 
             return Ok(DateTime.Now.Year);
             // Print out july28 in all DateTime formats using the default culture.
-            int count = 0;
+            /*int count = 0;
             foreach(string s in july28Formats)
             {
                 if (s.CompareTo("2009") == 0) return Ok(count);
                 count++;
             }
-            return Ok(july28Formats);
+            return Ok(july28Formats*/
         }
         public IHttpActionResult PostToQuerySectionSave(oSection_save data)
         {

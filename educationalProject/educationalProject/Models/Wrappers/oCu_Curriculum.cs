@@ -14,7 +14,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oCu_curriculum> result = new List<oCu_curriculum>();
-            d.iCommand.CommandText = String.Format("select * from {0}",FieldName.TABLE_NAME);
+            d.iCommand.CommandText = string.Format("select * from {0}",FieldName.TABLE_NAME);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();

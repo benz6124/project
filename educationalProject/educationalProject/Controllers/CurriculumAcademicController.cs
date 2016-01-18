@@ -12,33 +12,29 @@ namespace educationalProject.Controllers
     {
         private oCurriculum_academic datacontext = new oCurriculum_academic();
         //Retrieve curriculum_academic data by use Cu_curriculum
+        [ActionName("getByCurriculum")]
         public IHttpActionResult PostByCurriculum(oCu_curriculum data)
         {
             if (data.curri_id == null) return BadRequest("กรุณาเลือกหลักสูตร");
-            object result = datacontext.SelectWhere(String.Format("curri_id='{0}'", data.curri_id));
+            object result = datacontext.SelectWhere(string.Format("curri_id='{0}'", data.curri_id));
             return Ok(result);
         }
-
+      
+        [ActionName("add")]
         public IHttpActionResult PostNewCurriculumAcademic(oCurriculum_academic data)
         {
             object result = data.Insert();
             if (result == null)
                 return Ok();
-            else if (result.ToString().Contains("Duplicate")) {
+            else if (result.ToString().Contains("Duplicate"))
+            {
                 return BadRequest("มีหลักสูตร-ปีการศึกษานี้อยู่ในระบบแล้ว กรุณาระบุปีการศึกษาใหม่อีกครั้ง");
             }
             else
             {
                 return BadRequest(result.ToString());
             }
-        }
 
-        public IHttpActionResult Get()
-        {
-            datacontext.curri_id = "21";
-            datacontext.aca_year = 2558;
-            object result = datacontext.Insert();
-            return Ok(result);
         }
     }
 }
