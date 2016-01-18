@@ -110,6 +110,37 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
+        public object Insert()
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+            
+            d.iCommand.CommandText = String.Format("insert into {0} values ((select MAX({1})+1 FROM {0}),'{2}','{3}','','','','','','','')",
+                FieldName.TABLE_NAME, FieldName.CURRI_ID, year, curr_tname);
+            try
+            {
+                int rowAffected = d.iCommand.ExecuteNonQuery();
+                if (rowAffected == 1)
+                {
+                    return null;
+                }
+                else
+                {
+                    return "No cu_curriculum are inserted.";
+                }
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+        }
         public object SelectCustom(string wherecond,string groupbycol,string havingcond,string orderbycol)
         {
             return "Ok";

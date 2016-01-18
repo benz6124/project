@@ -94,6 +94,38 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
+        public object Insert()
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+
+            d.iCommand.CommandText = String.Format("insert into {0} values ('{1}',{2})",
+                FieldName.TABLE_NAME, curri_id, aca_year);
+            try
+            {
+                int rowAffected = d.iCommand.ExecuteNonQuery();
+                if (rowAffected == 1)
+                {
+                    return null;
+                }
+                else
+                {
+                    return "No cu_curriculum academic are inserted.";
+                }
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+        }
+
         public object SelectCustom(string wherecond, string groupbycol, string havingcond, string orderbycol)
         {
             return "Ok";

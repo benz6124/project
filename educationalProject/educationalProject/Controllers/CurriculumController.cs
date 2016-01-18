@@ -23,5 +23,15 @@ namespace educationalProject.Controllers
             return Ok();
         }
 
+        public IHttpActionResult PostNewCurriculum(oCu_curriculum data)
+        {
+            data.year = (DateTime.Now.Year+543).ToString();
+            object result = data.Insert();
+            if (result == null)
+                return Ok();
+            else
+                return InternalServerError(new Exception(result.ToString()));
+        }
+
     }
 }

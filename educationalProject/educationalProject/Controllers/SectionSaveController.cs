@@ -16,12 +16,12 @@ namespace educationalProject.Controllers
 
             string[] july28Formats = july28.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"));
 
-
+            return Ok(DateTime.Now.Year);
             // Print out july28 in all DateTime formats using the default culture.
             int count = 0;
             foreach(string s in july28Formats)
             {
-                if (s.CompareTo("2009-07-28") == 0) return Ok(count);
+                if (s.CompareTo("2009") == 0) return Ok(count);
                 count++;
             }
             return Ok(july28Formats);

@@ -18,5 +18,12 @@ namespace educationalProject.Controllers
             object result = datacontext.SelectWhere(String.Format("curri_id='{0}'", data.curri_id));
             return Ok(result);
         }
+        public IHttpActionResult Get()
+        {
+            datacontext.curri_id = "21";
+            datacontext.aca_year = 2558;
+            object result = datacontext.Insert();
+            return Ok(result);
+        }
     }
 }
