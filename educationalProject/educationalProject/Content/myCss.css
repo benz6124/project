@@ -120,11 +120,13 @@ table.evidence  td{
   font-family: "FreesiaUPC";
   font-size: 18px;
   color:black;
-
+padding:0px !important; 
+     margin:0px !important;
+     vertical-align: middle !important;
 }
 
 td.larger{
-    width:450px;
+    width:1200px;
     text-indent: 10px;
 
 }
@@ -686,6 +688,7 @@ table.evidence td{
    background-color: #F4F4F4  ;
    color:black;
    font-size: 18px;
+
 }
 
 table.evaluation{
@@ -693,10 +696,16 @@ table.evaluation{
 
 }
 
-table.evidence{
+table.evaluation td{
+ 
+     padding:0px !important; 
+     margin:0px !important;
+     vertical-align: middle !important;
+}
+/*table.evidence{
   width: 650px;
 }
-
+*/
 
 table.evaluation{
    margin: auto !important;

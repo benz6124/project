@@ -421,7 +421,7 @@ $('.profile_pic').mouseover(function(){
             </div>
 
             <div class="col-sm-1">
-               <button type="button" class="btn hvr-wobble-vertical" style="background-color:#000000; color:white;" data-nq-loading-button="sendYearAndGetIndicators(year_choosen)" data-loading-text="กำลังโหลด...">  <span class="glyphicon glyphicon-ok-sign"></span> ยืนยัน </button>
+               <button type="button" class="btn hvr-wobble-vertical" style="background-color:#000000; color:white;" ng-click="sendYearAndGetIndicators(year_choosen)" >  <span class="glyphicon glyphicon-ok-sign"></span> ยืนยัน </button>
 
             </div>
 
@@ -475,9 +475,9 @@ $('.profile_pic').mouseover(function(){
 
                 <th class="col-md-1 number">ข้อที่</th>
                 <th class="col-md-7 topic">หัวข้อการประเมิน</th>
-                <th class="col-md-2 result"><a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ประเมินโดย {{evaluation_result.teacher.teacher_name}} <br/> วันที่ {{evaluation_result.teacher.date}} เวลา {{evaluation_result.teacher.time}}" style="color:white;cursor:default;"> ผลการประเมินตนเอง</a></th>
+                <th class="col-md-2 result"><a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ประเมินโดย {{evaluation_result_receive.self[0].t_name}} <br/> วันที่ {{evaluation_result_receive.self[0].date}} เวลา {{evaluation_result_receive.self[0].time}}" style="color:white;cursor:default;"> ผลการประเมินตนเอง</a></th>
 
-                <th class="col-md-2 result"><a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ประเมินโดย {{evaluation_result.assessor.assessor_name}} <br/> วันที่ {{evaluation_result.assessor.date}} เวลา {{evaluation_result.assessor.time}}" style="color:white;cursor:default;">ผลการประเมิน<br />จากภายนอก</a></th>
+                <th class="col-md-2 result"><a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ประเมินโดย {{evaluation_result_receive.others[0].t_name}} <br/> วันที่ {{evaluation_result_receive.others[0].date}} เวลา {{evaluation_result_receive.others[0].time}}" style="color:white;cursor:default;">ผลการประเมิน<br />จากภายนอก</a></th>
   
 
                 </thead>
@@ -515,12 +515,12 @@ $('.profile_pic').mouseover(function(){
                             <th class="download ">ดาวน์โหลด</th>
                         </tr>
 
-                        <tr>
-                            <td class="code">1-01</td>
-                            <td class="larger">คำอธิบายรายวิชาแต่ละวิชาในหลักสูตร</td>
-                            <td class="download hvr-wobble-vertical"><a href=""><span class="glyphicon glyphicon-download-alt" /></a></td>
+                        <tr ng-repeat="evidence in corresponding_evidences">
+                            <td class="code">{{indicator_choosen.indicator_num}}-<span ng-hide="$index+1>=10">0</span>{{$index+1}}</td>
+                            <td class="larger">{{evidence.evidence_name}}</td>
+                            <td class="download"><a href="" ng-click="download_file(evidence.file_name)" ng-hide="evidence.secret==1"class=" hvr-wobble-vertical"><span class="glyphicon glyphicon-download-alt " /></a></td>
                         </tr>
-                        <tr>
+                 <!--        <tr>
                             <td class="code">1-02</td>
                             <td class="larger">มาตรฐานคุณวุฒิระดับอุดมศึกษาแห่งชาติ</td>
                             <td class="download hvr-wobble-vertical"><a href=""><span class="glyphicon glyphicon-download-alt" /></a></td>
@@ -536,7 +536,7 @@ $('.profile_pic').mouseover(function(){
                             <td class="code">1-04</td>
                             <td class="larger">เอกลักษณ์,อัตลักษณ์พร้อมตัวบ่งชี้ของสถาบัน</td>
                             <td class="download hvr-wobble-vertical"><a href=""><span class="glyphicon glyphicon-download-alt" /></a></td>
-                        </tr>
+                        </tr> -->
 
 
                     </table>

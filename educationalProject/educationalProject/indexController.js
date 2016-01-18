@@ -1,9 +1,11 @@
 ﻿'use strict';
 
-app.controller('choice_index_controller', function($scope, $http,$alert) {
+app.controller('choice_index_controller', function($scope, $http,$alert,$loading,$timeout) {
 
     // 
-     console.log("it's me na");
+
+
+
     // console.log(select_nothing);
 
      $scope.init_var = function(){
@@ -20,7 +22,7 @@ app.controller('choice_index_controller', function($scope, $http,$alert) {
      }
 
          $scope.add_question = function(){
-            console.log("welcome to add_question");
+            // console.log("welcome to add_question");
             var newItemNo = $scope.questions.length+1;
            $scope.questions.push({'id':newItemNo,'hide':false});
          }
@@ -45,7 +47,7 @@ app.controller('choice_index_controller', function($scope, $http,$alert) {
          $scope.not_select_curri_and_year = true;
          $scope.already_select_curri = true;
            $scope.year_choosen = {};
-        console.log("it's me");
+        // console.log("it's me");
       
         //    $http.post('/api/curriculumacademic',  {'Cu_curriculum': curri }).success(function (data, status, headers, config) {
         //     $scope.corresponding_aca_years = data;
@@ -71,7 +73,7 @@ app.controller('choice_index_controller', function($scope, $http,$alert) {
     }
 
     $scope.check_curri = function(){
-        console.log("welcome check_curri");
+        // console.log("welcome check_curri");
         if ($scope.already_select_curri == false){
               $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกหลักสูตรที่ต้องการก่อน',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
@@ -84,8 +86,8 @@ app.controller('choice_index_controller', function($scope, $http,$alert) {
          $scope.not_select_curri_and_year = false;
         $scope.select_overall = true;
         $scope.not_select_sub_indicator = true;
-        console.log(year);
-        console.log(year.aca_year);
+        // console.log(year);
+        // console.log(year.aca_year);
 
         $http.post(
              '/api/indicator',
@@ -120,13 +122,19 @@ app.controller('choice_index_controller', function($scope, $http,$alert) {
         $scope.sub_indicator_choosen = sub_indicator;
         $scope.not_select_sub_indicator = false;
     }
-
+     // $scope.loading = new $loading({
+     //        busyText: 'ระบบกำลังดำเนินการโหลด...',
+     //        theme: 'success',
+     //        timeout: false,
+     //        delayHide: 1000,
+     //        showSpinner:false
+     //    });
      $scope.sendIndicatorAndGetSubIndicators = function (indicator) {
+        // $scope.loading.show();
         $scope.not_select_sub_indicator = true;
           $scope.indicator_choosen = indicator;
           $scope.select_overall = false;
-        console.log("sendIndicatorAndGetSubIndicators")
-        console.log(indicator);
+
 
         $http.post(
              '/api/subindicator',
@@ -142,12 +150,13 @@ app.controller('choice_index_controller', function($scope, $http,$alert) {
          });
 
     }
-
+    
     $scope.sendIndicatorCurriAndGetEvaluation = function () {
-
+        // $scope.loading = new $loading();
+        // $scope.loading.show();
         $scope.indicator_choosen.curri_id = $scope.curri_choosen.curri_id;
 
-        console.log($scope.indicator_choosen);
+        // console.log($scope.indicator_choosen);
 
         $http.post(
              '/api/evaluationresult',
@@ -158,20 +167,21 @@ app.controller('choice_index_controller', function($scope, $http,$alert) {
                  }
              }
          ).success(function (data) {
-            console.log(data);
+            // console.log(data);
              $scope.evaluation_result_receive = data;
              $scope.evaluation_result= [];
              var index;
-             console.log($scope.evaluation_result_receive);
-             console.log($scope.evaluation_result_receive.self.length);
-             $scope.evaluation_result.teacher = []
-            $scope.evaluation_result.teacher.teacher_name = $scope.evaluation_result_receive.self[0].t_name;
-            $scope.evaluation_result.teacher.date = $scope.evaluation_result_receive.self[0].date;
-            $scope.evaluation_result.teacher.time = $scope.evaluation_result_receive.self[0].time;
-             $scope.evaluation_result.assessor = [];
-             $scope.evaluation_result.assessor.assessor_name = $scope.evaluation_result_receive.others[0].t_name;
-              $scope.evaluation_result.assessor.date = $scope.evaluation_result_receive.others[0].date;
-               $scope.evaluation_result.assessor.time = $scope.evaluation_result_receive.others[0].time;
+             // console.log($scope.evaluation_result_receive);
+             // console.log($scope.evaluation_result_receive.self.length);
+            //  $scope.evaluation_result.teacher = []
+            // $scope.evaluation_result.teacher.teacher_name = $scope.evaluation_result_receive.self[0].t_name;
+            // $scope.evaluation_result.teacher.date = $scope.evaluation_result_receive.self[0].date;
+            // $scope.evaluation_result.teacher.time = $scope.evaluation_result_receive.self[0].time;
+            //  $scope.evaluation_result.assessor = [];
+            //  $scope.evaluation_result.assessor.assessor_name = $scope.evaluation_result_receive.others[0].t_name;
+            //   $scope.evaluation_result.assessor.date = $scope.evaluation_result_receive.others[0].date;
+            //    $scope.evaluation_result.assessor.time = $scope.evaluation_result_receive.others[0].time;
+
              $scope.evaluation_result.results = {};
              for (index = 0; index < $scope.evaluation_result_receive.self.length; index++) {
                 $scope.evaluation_result.results[index] = []
@@ -182,8 +192,36 @@ app.controller('choice_index_controller', function($scope, $http,$alert) {
          
             }
 
-
+            $scope.sendIndicatorCurriAndGetEvidence();
          });
     }
 
+    $scope.download_file = function(path) { 
+        window.open(path, '_blank', '');  
+    }
+
+
+
+
+    $scope.sendIndicatorCurriAndGetEvidence = function () {
+
+  
+
+        console.log($scope.indicator_choosen);
+
+        $http.post(
+             '/api/evidence',
+             JSON.stringify($scope.indicator_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            console.log(data);
+            $scope.corresponding_evidences = data;
+            // $scope.loading.hide();
+
+         });
+    }
 });
