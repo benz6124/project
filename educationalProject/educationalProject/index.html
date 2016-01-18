@@ -410,13 +410,13 @@ $('.profile_pic').mouseover(function(){
            
             <div class="col-sm-6" style="margin-left:85px">
 
-                 <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                 <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             </select>
             </div>
 
             <div class="col-sm-2">
 
-        <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="chooseYear(year_choosen)" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" data-ng-click="check_curri()">
+        <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="chooseYear(year_choosen)" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" data-ng-click="check_curri()">
 </select>    
 
 
@@ -584,7 +584,7 @@ $('.profile_pic').mouseover(function(){
 
                     <br />
                      
-                        <button class="btn editor hvr-wobble-vertical pull-right " type="button" ng-click="confirm_support_text()" data-wow-duration="1s"  style="background-color:#6F002B;border:none;margin-right:0px;"> <span class="glyphicon glyphicon-ok-sign" /><span class="normal"> ยืนยันการเปลี่ยนแปลง</span></button>
+                        <button class="btn editor hvr-wobble-vertical pull-right " type="button" ng-click="send_support_text_change_to_server()" data-wow-duration="1s"  style="background-color:#6F002B;border:none;margin-right:0px;"> <span class="glyphicon glyphicon-ok-sign" /><span class="normal"> ยืนยันการเปลี่ยนแปลง</span></button>
 
                        
 
@@ -630,7 +630,7 @@ $('.profile_pic').mouseover(function(){
                                 <div class="topicHeader">
                              
 
-                                      <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.$parent.select_year_support_text" data-qo-disable-clear="true"  >
+                                      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="prepare_to_watch_support_text()"data-ng-model="$parent.$parent.select_year_support_text" data-qo-disable-clear="true"  >
 </select>    
                                 </div>
                             </div>
@@ -700,7 +700,7 @@ $('.profile_pic').mouseover(function(){
 
 
                             <div class="col-md-10" style="margin-left:48px">
-                                <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
+                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                     <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                     <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                     <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -709,7 +709,7 @@ $('.profile_pic').mouseover(function(){
 
                             </div>
                             <!--          <div class="col-md-3">
-                                           <select data-qo-button-class="mySelect"   name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel" >
+                                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect"   name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel" >
                                                      <option>2556</option>
                                                      <option>2555</option>
                                                      <option>2554</option>
@@ -769,7 +769,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
                                     <td>Wiboon</td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -779,7 +779,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -789,7 +789,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -800,7 +800,7 @@ $('.profile_pic').mouseover(function(){
 
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและแก้ไข</option>
@@ -810,7 +810,7 @@ $('.profile_pic').mouseover(function(){
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -821,7 +821,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -832,7 +832,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -843,7 +843,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -854,7 +854,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -864,7 +864,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -878,7 +878,7 @@ $('.profile_pic').mouseover(function(){
                                     <td><img src="/myImages/profile_pic/ชมพูนุท.jpg" class="img-circle" width="50" /></td>
                                     <td>Chompoonuch </td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -888,7 +888,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -898,7 +898,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -909,7 +909,7 @@ $('.profile_pic').mouseover(function(){
 
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและแก้ไข</option>
@@ -919,7 +919,7 @@ $('.profile_pic').mouseover(function(){
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -930,7 +930,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -941,7 +941,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -952,7 +952,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -963,7 +963,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -973,7 +973,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -986,7 +986,7 @@ $('.profile_pic').mouseover(function(){
                                     <td><img src="/myImages/profile_pic/รัตธิตา.jpg" class="img-circle" width="50" /></td>
                                     <td>P'Fluke</td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -996,7 +996,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1006,7 +1006,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1017,7 +1017,7 @@ $('.profile_pic').mouseover(function(){
 
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและแก้ไข</option>
@@ -1027,7 +1027,7 @@ $('.profile_pic').mouseover(function(){
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1038,7 +1038,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1049,7 +1049,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1060,7 +1060,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1071,7 +1071,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1081,7 +1081,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1095,7 +1095,7 @@ $('.profile_pic').mouseover(function(){
                                     <td><img src="/myImages/profile_pic/อวยพร.jpg" class="img-circle" width="50" /></td>
                                     <td> P'Kung</td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1105,7 +1105,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1115,7 +1115,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1126,7 +1126,7 @@ $('.profile_pic').mouseover(function(){
 
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและแก้ไข</option>
@@ -1136,7 +1136,7 @@ $('.profile_pic').mouseover(function(){
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1147,7 +1147,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1158,7 +1158,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1169,7 +1169,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1180,7 +1180,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1190,7 +1190,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1203,7 +1203,7 @@ $('.profile_pic').mouseover(function(){
                                     <td><img src="/myImages/profile_pic/สรยุทธ.jpg" class="img-circle" width="50" /></td>
                                     <td> Sorayut</td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1213,7 +1213,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1223,7 +1223,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1234,7 +1234,7 @@ $('.profile_pic').mouseover(function(){
 
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและแก้ไข</option>
@@ -1244,7 +1244,7 @@ $('.profile_pic').mouseover(function(){
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1255,7 +1255,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1266,7 +1266,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1277,7 +1277,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1288,7 +1288,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1298,7 +1298,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1312,7 +1312,7 @@ $('.profile_pic').mouseover(function(){
                                     <td><img src="/myImages/profile_pic/อรัญญา.jpg" class="img-circle" width="50" /></td>
                                     <td> Aranya</td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1322,7 +1322,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1332,7 +1332,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1343,7 +1343,7 @@ $('.profile_pic').mouseover(function(){
 
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและแก้ไข</option>
@@ -1353,7 +1353,7 @@ $('.profile_pic').mouseover(function(){
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1364,7 +1364,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1375,7 +1375,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1386,7 +1386,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1397,7 +1397,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1407,7 +1407,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1459,7 +1459,7 @@ $('.profile_pic').mouseover(function(){
 
 
                             <div class="col-md-10" style="margin-left:48px">
-                                <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
+                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                     <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                     <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                     <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -1468,7 +1468,7 @@ $('.profile_pic').mouseover(function(){
 
                             </div>
                             <!--             <div class="col-md-3">
-                                           <select data-qo-button-class="mySelect"   name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel" >
+                                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect"   name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel" >
                                                      <option>2556</option>
                                                      <option>2555</option>
                                                      <option>2554</option>
@@ -1525,7 +1525,7 @@ $('.profile_pic').mouseover(function(){
                                 <tr>
                                     <td>กรรมการหลักสูตร</td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1535,7 +1535,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1545,7 +1545,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1556,7 +1556,7 @@ $('.profile_pic').mouseover(function(){
 
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและแก้ไข</option>
@@ -1566,7 +1566,7 @@ $('.profile_pic').mouseover(function(){
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1577,7 +1577,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1588,7 +1588,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1599,7 +1599,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1610,7 +1610,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1620,7 +1620,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1632,7 +1632,7 @@ $('.profile_pic').mouseover(function(){
                                 <tr>
                                     <td>อาจารย์</td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1642,7 +1642,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1652,7 +1652,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1663,7 +1663,7 @@ $('.profile_pic').mouseover(function(){
 
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและแก้ไข</option>
@@ -1673,7 +1673,7 @@ $('.profile_pic').mouseover(function(){
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1684,7 +1684,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1695,7 +1695,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1706,7 +1706,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1717,7 +1717,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1727,7 +1727,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1740,7 +1740,7 @@ $('.profile_pic').mouseover(function(){
                                 <tr>
                                     <td>เจ้าหน้าที่</td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1750,7 +1750,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1760,7 +1760,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1771,7 +1771,7 @@ $('.profile_pic').mouseover(function(){
 
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและแก้ไข</option>
@@ -1781,7 +1781,7 @@ $('.profile_pic').mouseover(function(){
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1792,7 +1792,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1803,7 +1803,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1814,7 +1814,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1825,7 +1825,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1835,7 +1835,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1847,7 +1847,7 @@ $('.profile_pic').mouseover(function(){
                                 <tr>
                                     <td>นักศึกษา</td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1857,7 +1857,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1867,7 +1867,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1878,7 +1878,7 @@ $('.profile_pic').mouseover(function(){
 
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและแก้ไข</option>
@@ -1888,7 +1888,7 @@ $('.profile_pic').mouseover(function(){
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1899,7 +1899,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1910,7 +1910,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1921,7 +1921,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -1932,7 +1932,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1942,7 +1942,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1955,7 +1955,7 @@ $('.profile_pic').mouseover(function(){
                                 <tr>
                                     <td>ศิษย์เก่า</td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1965,7 +1965,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1975,7 +1975,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -1986,7 +1986,7 @@ $('.profile_pic').mouseover(function(){
 
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและแก้ไข</option>
@@ -1996,7 +1996,7 @@ $('.profile_pic').mouseover(function(){
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -2007,7 +2007,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -2018,7 +2018,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -2029,7 +2029,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -2040,7 +2040,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -2050,7 +2050,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -2063,7 +2063,7 @@ $('.profile_pic').mouseover(function(){
                                 <tr>
                                     <td>บริษัท</td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -2073,7 +2073,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -2083,7 +2083,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -2094,7 +2094,7 @@ $('.profile_pic').mouseover(function(){
 
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและแก้ไข</option>
@@ -2104,7 +2104,7 @@ $('.profile_pic').mouseover(function(){
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -2115,7 +2115,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -2126,7 +2126,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -2137,7 +2137,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -2148,7 +2148,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -2158,7 +2158,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -2170,7 +2170,7 @@ $('.profile_pic').mouseover(function(){
                                 <tr>
                                     <td>ผู้มาประเมินจากภายนอก</td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -2180,7 +2180,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -2190,7 +2190,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-primary" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -2201,7 +2201,7 @@ $('.profile_pic').mouseover(function(){
 
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและแก้ไข</option>
@@ -2211,7 +2211,7 @@ $('.profile_pic').mouseover(function(){
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -2222,7 +2222,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -2233,7 +2233,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-info" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -2244,7 +2244,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>ห้ามดู</option>
                                             <option>ดูเท่านั้น</option>
                                             <option>ดูและสร้าง</option>
@@ -2255,7 +2255,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -2265,7 +2265,7 @@ $('.profile_pic').mouseover(function(){
                                     </td>
 
                                     <td>
-                                        <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                        <select data-qo-disable-clear="true" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-button-class="btn-warning" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
                                             <option>อนุญาติ</option>
                                             <option>ไม่อนุญาติ</option>
 
@@ -2388,7 +2388,7 @@ $('.profile_pic').mouseover(function(){
 
 
                             <div class="col-md-7" style="margin-left:25px">
-                                <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
+                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                     <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                     <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                     <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -2397,7 +2397,7 @@ $('.profile_pic').mouseover(function(){
 
                             </div>
                             <div class="col-md-4">
-                                <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
+                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
                                     <option>2557</option>
                                     <option>2556</option>
                                     <option>2555</option>
@@ -2432,7 +2432,7 @@ $('.profile_pic').mouseover(function(){
                         </div>
 
                     </div>
-                    <div id="add_aca_year" data-nq-modal="" data-qo-independent="true" data-qo-size="lg">
+                    <div id="add_aca_year" data-nq-modal="" data-qo-independent="true">
                         <div class="custom-header">
                             <h1 class="headerModalH1"> เพิ่มปีการศึกษา</h1>
                         </div>
@@ -2444,7 +2444,7 @@ $('.profile_pic').mouseover(function(){
 
                             <div class="col-md-9">
                                 <div class="topicHeader">
-                                    <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
+                                    <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                         <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                         <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                         <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -2511,7 +2511,7 @@ $('.profile_pic').mouseover(function(){
 
                             <div class="col-md-8">
                                 <div class="topicHeader">
-                                    <select data-qo-button-class="mySelect" name="staticSelectModel" data-nq-select="" data-qo-disable-clear="true" data-qo-placeholder="กรุณาเลือกประเภทของบัญชี" data-ng-model="staticSelectModel">
+                                    <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-nq-select="" data-qo-disable-clear="true" data-qo-placeholder="กรุณาเลือกประเภทของบัญชี" data-ng-model="staticSelectModel">
                                         <option>อาจารย์</option>
                                         <option>นักศึกษา</option>
                                         <option>บริษัทภายนอก</option>
@@ -2584,7 +2584,7 @@ $('.profile_pic').mouseover(function(){
 
                             <div class="col-md-8">
                                 <div class="topicHeader">
-                                    <select data-qo-button-class="mySelect" name="staticSelectModel" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษาของอัลบั้ม" data-ng-model="staticSelectModel">
+                                    <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษาของอัลบั้ม" data-ng-model="staticSelectModel">
                                         <option>2557</option>
                                         <option>2556</option>
                                         <option>2555</option>
@@ -2606,7 +2606,7 @@ $('.profile_pic').mouseover(function(){
                             </div>
                             <div class="col-md-8">
                                 <div class="topicHeader">
-                                    <select data-qo-button-class="mySelect" name="staticSelectModel" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักฐานที่ต้องการ" data-ng-model="staticSelectModel">
+                                    <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักฐานที่ต้องการ" data-ng-model="staticSelectModel">
                                         <option>รูปนักศึกษาฝึกงาน</option>
                                         <option>รูปงานวันแสดงวิชาโครงงาน</option>
                                         <option>รูปห้องปฏิบัติการ</option>
@@ -2667,7 +2667,7 @@ $('.profile_pic').mouseover(function(){
 
 
                         <div class="col-md-7" style="margin-left:15px">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -2676,7 +2676,7 @@ $('.profile_pic').mouseover(function(){
 
                         </div>
                         <div class="col-md-3">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
                                 <option>2557</option>
                                 <option>2556</option>
                                 <option>2555</option>
@@ -2875,7 +2875,7 @@ $('.profile_pic').mouseover(function(){
                                         </div>
 
                                         <div class="col-md-8">
-                                            <select data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกผู้วิจัย" data-ng-model="staticSelectModel">
+                                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกผู้วิจัย" data-ng-model="staticSelectModel">
                                                 <option> อ. วิบูลย์ พร้อมพานิชย์</option>
                                                 <option>ดร. ชมพูนุท จินจาคาม</option>
                                                 <option>ผศ. ดร. อรัญญา วลัยรัชต์</option>
@@ -2941,7 +2941,7 @@ $('.profile_pic').mouseover(function(){
 
 
                         <div class="col-md-7" style="margin-left:15px">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -2950,7 +2950,7 @@ $('.profile_pic').mouseover(function(){
 
                         </div>
                         <div class="col-md-3">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
                                 <option>2557</option>
                                 <option>2556</option>
                                 <option>2555</option>
@@ -3072,7 +3072,7 @@ $('.profile_pic').mouseover(function(){
 
 
                         <div class="col-md-7" style="margin-left:15px">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -3081,7 +3081,7 @@ $('.profile_pic').mouseover(function(){
 
                         </div>
                         <div class="col-md-3">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
                                 <option>2557</option>
                                 <option>2556</option>
                                 <option>2555</option>
@@ -3261,7 +3261,7 @@ $('.profile_pic').mouseover(function(){
                                         </div>
 
                                         <div class="col-md-8">
-                                            <select data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกผู้เข้าร่วมประชุม" data-ng-model="staticSelectModel">
+                                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกผู้เข้าร่วมประชุม" data-ng-model="staticSelectModel">
                                                 <option> อ. วิบูลย์ พร้อมพานิชย์</option>
                                                 <option>ดร. ชมพูนุท จินจาคาม</option>
                                                 <option>ผศ. ดร. อรัญญา วลัยรัชต์</option>
@@ -3304,7 +3304,7 @@ $('.profile_pic').mouseover(function(){
 
 
                         <div class="col-md-7" style="margin-left:40px">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -3313,7 +3313,7 @@ $('.profile_pic').mouseover(function(){
 
                         </div>
                         <div class="col-md-3">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
                                 <option>2557</option>
                                 <option>2556</option>
                                 <option>2555</option>
@@ -3338,7 +3338,7 @@ $('.profile_pic').mouseover(function(){
                         </div>
 
                         <div class="col-md-7">
-                            <select data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหัวข้อที่ต้องการประเมิน" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหัวข้อที่ต้องการประเมิน" data-ng-model="staticSelectModel">
                                 <option>AUN 1 ผลการเรียนรู้ที่คาดหวัง</option>
                                 <option>AUN 2 ข้อกำหนดของหลักสูตร</option>
                                 <option>AUN 3 โครงสร้างและเนื้อหาของหลักสูตร</option>
@@ -3557,7 +3557,7 @@ $('.profile_pic').mouseover(function(){
                         </div>
 
                         <div class="col-md-4">
-                            <select data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อหลัก" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อหลัก" data-ng-model="staticSelectModel">
                                 <option>AUN 1</option>
                                 <option>AUN 2</option>
                                 <option>AUN 3</option>
@@ -3587,7 +3587,7 @@ $('.profile_pic').mouseover(function(){
                         </div>
 
                         <div class="col-md-4">
-                            <select data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อย่อย" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อย่อย" data-ng-model="staticSelectModel">
                                 <option>AUN 3.1</option>
                                 <option>AUN 3.2</option>
                                 <option>AUN 3.3</option>
@@ -3626,7 +3626,7 @@ $('.profile_pic').mouseover(function(){
 
 
                         <div class="col-md-10" style="margin-left:5px">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -3637,7 +3637,7 @@ $('.profile_pic').mouseover(function(){
                     </div>
                     <div class="row">
                         <div class="col-md-5" style="margin-left:5px;margin-top:5px">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
                                 <option>2557</option>
                                 <option>2556</option>
                                 <option>2555</option>
@@ -3658,7 +3658,7 @@ $('.profile_pic').mouseover(function(){
                     </div>
                     <div class="row">
                         <div class="col-md-10">
-                            <select data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หลักฐานที่พบ" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หลักฐานที่พบ" data-ng-model="staticSelectModel">
                                 <option>คำอธิบายรายวิชาแต่ละวิชาในหลักสูตร</option>
                                 <option>มาตรฐานคุณวุฒิระดับอุดมศึกษาแห่งชาติ</option>
                                 <option>มาตรฐานคุณวุฒิระดับปริญญาตรี สาขาคอมพิวเตอร์</option>
@@ -3682,7 +3682,7 @@ $('.profile_pic').mouseover(function(){
                         </div>
 
                         <div class="col-md-4">
-                            <select data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อหลัก" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อหลัก" data-ng-model="staticSelectModel">
                                 <option>AUN 1</option>
                                 <option>AUN 2</option>
                                 <option>AUN 3</option>
@@ -3712,7 +3712,7 @@ $('.profile_pic').mouseover(function(){
                         </div>
 
                         <div class="col-md-4">
-                            <select data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อหลัก" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อหลัก" data-ng-model="staticSelectModel">
                                 <option>AUN 5.1</option>
                                 <option>AUN 5.2</option>
                                 <option>AUN 5.3</option>
@@ -3747,7 +3747,7 @@ $('.profile_pic').mouseover(function(){
 
 
                         <div class="col-md-7" style="margin-left:65px">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -3756,7 +3756,7 @@ $('.profile_pic').mouseover(function(){
 
                         </div>
                         <div class="col-md-3">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
                                 <option>2557</option>
                                 <option>2556</option>
                                 <option>2555</option>
@@ -3797,7 +3797,7 @@ $('.profile_pic').mouseover(function(){
 
                         <div class="col-md-8">
                             <div class="topicHeader">
-                                <select data-qo-button-class="mySelect" name="staticSelectModel" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษาของหลักฐาน" data-ng-model="staticSelectModel">
+                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษาของหลักฐาน" data-ng-model="staticSelectModel">
                                     <option>2557</option>
                                     <option>2556</option>
                                     <option>2555</option>
@@ -3819,7 +3819,7 @@ $('.profile_pic').mouseover(function(){
                         </div>
                         <div class="col-md-8">
                             <div class="topicHeader">
-                                <select data-qo-button-class="mySelect" name="staticSelectModel" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักฐานที่ต้องการ" data-ng-model="staticSelectModel">
+                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักฐานที่ต้องการ" data-ng-model="staticSelectModel">
                                     <option>คำอธิบายรายวิชาแต่ละวิชาในหลักสูตร</option>
                                     <option>มาตรฐานคุณวุฒิระดับอุดมศึกษาแห่งชาติ</option>
                                     <option>มาตรฐานคุณวุฒิระดับปริญญาตรี สาขาคอมพิวเตอร์</option>
@@ -3854,7 +3854,7 @@ $('.profile_pic').mouseover(function(){
 
 
                         <div class="col-md-7" style="margin-left:15px">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -3863,7 +3863,7 @@ $('.profile_pic').mouseover(function(){
 
                         </div>
                         <div class="col-md-3">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
                                 <option>2557</option>
                                 <option>2556</option>
                                 <option>2555</option>
@@ -3980,8 +3980,8 @@ $('.profile_pic').mouseover(function(){
                     <div class="row">
 
 
-                        <div class="col-md-7" style="margin-left:15px">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
+                        <div class="col-md-6" style="margin-left:15px">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -3989,8 +3989,8 @@ $('.profile_pic').mouseover(function(){
                             </select>
 
                         </div>
-                        <div class="col-md-3">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
+                        <div class="col-md-2">
+                            <select data-qo-disable-clear="true" data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="ปีการศึกษา" data-ng-model="staticSelectModel">
                                 <option>2557</option>
                                 <option>2556</option>
                                 <option>2555</option>
@@ -4002,20 +4002,8 @@ $('.profile_pic').mouseover(function(){
 
                             </select>
                         </div>
-
-                        <div class="col-md-1">
-                            <button class="btn btn-primary hvr-rotate" style="margin-bottom:10px"><i class="glyphicon glyphicon-search"></i> ค้นหา</button>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-md-2" style="margin-left:15px">
-                            <h3 style="margin-top:0px;"><span class="topicHeader">หัวข้อหลัก:  </span></h3>
-                        </div>
-
-                        <div class="col-md-3">
-                            <select data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อหลัก" data-ng-model="staticSelectModel">
+  <div class="col-md-2">
+                            <select data-qo-disable-clear="true" data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อหลัก" data-ng-model="staticSelectModel">
                                 <option>AUN 1</option>
                                 <option>AUN 2</option>
                                 <option>AUN 3</option>
@@ -4036,23 +4024,41 @@ $('.profile_pic').mouseover(function(){
 
 
                         </div>
-                        <div class="col-md-2">
-                            <h3 style="margin-top:0px;"><span class="topicHeader">หัวข้อย่อย:  </span></h3>
-                        </div>
-
-                        <div class="col-md-3" style="margin-right:15px">
-                            <select data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อย่อย" data-ng-model="staticSelectModel">
-
-                                <option>AUN 1.1</option>
-                                <option>AUN 1.2</option>
-                                <option>AUN 1.3</option>
-                                <option>AUN 1.4</option>
-
-
-
-                            </select>
+                        <div class="col-md-1">
+                            <button class="btn btn-primary hvr-rotate" style="margin-bottom:10px"><i class="glyphicon glyphicon-search"></i> ค้นหา</button>
                         </div>
                     </div>
+
+
+                 <!--    <div class="row">
+                        <div class="col-md-2" style="margin-left:15px;margin-top:5px">
+                            <h3 style="margin-top:0px;"><span class="topicHeader">หัวข้อหลัก:  </span></h3>
+                        </div>
+
+                        <div class="col-md-3">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อหลัก" data-ng-model="staticSelectModel">
+                                <option>AUN 1</option>
+                                <option>AUN 2</option>
+                                <option>AUN 3</option>
+                                <option>AUN 4</option>
+                                <option>AUN 5</option>
+                                <option>AUN 6</option>
+                                <option>AUN 7</option>
+                                <option>AUN 8</option>
+                                <option>AUN 9</option>
+                                <option>AUN 10</option>
+                                <option>AUN 11</option>
+                                <option>AUN 12</option>
+                                <option>AUN 13</option>
+                                <option>AUN 14</option>
+                                <option>AUN 15</option>
+
+                            </select>
+
+
+                        </div>
+                      
+                    </div> -->
 
 
 
@@ -4438,7 +4444,7 @@ $('.profile_pic').mouseover(function(){
 
                     <div class="row">
                         <div class="col-md-10">
-                            <select data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา" data-ng-model="staticSelectModel">
                                 <option> อ. วิบูลย์ พร้อมพานิชย์</option>
                                 <option>ดร. ชมพูนุท จินจาคาม</option>
                                 <option>ผศ. ดร. อรัญญา วลัยรัชต์</option>
@@ -4476,7 +4482,7 @@ $('.profile_pic').mouseover(function(){
 
 
                         <div class="col-md-10" style="margin-left:15px">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -4485,7 +4491,7 @@ $('.profile_pic').mouseover(function(){
 
                         </div>
                         <!--             <div class="col-md-3">
-                                       <select data-qo-button-class="mySelect"   name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel" >
+                                       <select data-qo-disable-clear="true" data-qo-button-class="mySelect"   name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel" >
                                                  <option>2557</option><option>2556</option>
                                                  <option>2555</option>
                                                  <option>2554</option>
@@ -4666,7 +4672,7 @@ $('.profile_pic').mouseover(function(){
 
 
                         <div class="col-md-7" style="margin-left:15px">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -4675,7 +4681,7 @@ $('.profile_pic').mouseover(function(){
 
                         </div>
                         <div class="col-md-3">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
                                 <option>2557</option>
                                 <option>2556</option>
                                 <option>2555</option>
@@ -4923,7 +4929,7 @@ $('.profile_pic').mouseover(function(){
                                         </div>
 
                                         <div class="col-md-8">
-                                            <select data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา" data-ng-model="staticSelectModel">
+                                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา" data-ng-model="staticSelectModel">
                                                 <option> อ. วิบูลย์ พร้อมพานิชย์</option>
                                                 <option>ดร. ชมพูนุท จินจาคาม</option>
                                                 <option>ผศ. ดร. อรัญญา วลัยรัชต์</option>
@@ -4964,7 +4970,7 @@ $('.profile_pic').mouseover(function(){
 
 
                         <div class="col-md-7" style="margin-left:15px">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -4973,7 +4979,7 @@ $('.profile_pic').mouseover(function(){
 
                         </div>
                         <div class="col-md-3">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
                                 <option>2557</option>
                                 <option>2556</option>
                                 <option>2555</option>
@@ -5171,7 +5177,7 @@ $('.profile_pic').mouseover(function(){
                                 <h3 style="margin-top:0px;"><span class="topicHeader">คำนำหน้า:   </span></h3>
                             </div>
                             <div class="col-md-6">
-                                <select data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกคำนำหน้าชื่อ" data-ng-model="staticSelectModel">
+                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกคำนำหน้าชื่อ" data-ng-model="staticSelectModel">
                                     <option>นาย</option>
                                     <option>นางสาว</option>
                                     <option>นาง</option>
@@ -5237,7 +5243,7 @@ $('.profile_pic').mouseover(function(){
                                 <h3 style="margin-top:0px;"><span class="topicHeader">สถานะ:   </span></h3>
                             </div>
                             <div class="col-md-6">
-                                <select data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกสถานะ" data-ng-model="staticSelectModel">
+                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกสถานะ" data-ng-model="staticSelectModel">
                                     <option>ทำงานอยู่</option>
                                     <option>ศึกษาต่อ</option>
                                     <option>ลาคลอด</option>
@@ -5433,7 +5439,7 @@ $('.profile_pic').mouseover(function(){
 
 
                         <div class="col-md-10" style="margin-left:45px">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -5442,7 +5448,7 @@ $('.profile_pic').mouseover(function(){
 
                         </div>
                         <!--   <div class="col-md-3">
-                                       <select data-qo-button-class="mySelect"   name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel" >
+                                       <select data-qo-disable-clear="true" data-qo-button-class="mySelect"   name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel" >
                                                  <option>2557</option><option>2556</option>
                                                  <option>2555</option>
                                                  <option>2554</option>
@@ -5751,7 +5757,7 @@ $('.profile_pic').mouseover(function(){
 
 
                         <div class="col-md-7" style="margin-left:15px">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -5760,7 +5766,7 @@ $('.profile_pic').mouseover(function(){
 
                         </div>
                         <div class="col-md-3">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
 
                                 <option>2557</option>
                                 <option>2556</option>
@@ -5918,7 +5924,7 @@ $('.profile_pic').mouseover(function(){
 
                         <div class="col-md-10">
                             <div class="topicHeader">
-                                <select data-qo-button-class="mySelect" name="staticSelectModel" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีของการศึกษา" data-ng-model="staticSelectModel">
+                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีของการศึกษา" data-ng-model="staticSelectModel">
                                     <option>หลักสูตรวิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                     <option>หลักสูตรวิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                     <option>หลักสูตรวิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -5936,7 +5942,7 @@ $('.profile_pic').mouseover(function(){
 
                         <div class="col-md-8">
                             <div class="topicHeader">
-                                <select data-qo-button-class="mySelect" id="watch_gallery_year" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
+                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" id="watch_gallery_year" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
                                     <option>2557</option>
                                     <option value="2556">2556</option>
                                     <option>2555</option>
@@ -5993,7 +5999,7 @@ $('.profile_pic').mouseover(function(){
 
 
                         <div class="col-md-7" style="margin-left:15px">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
@@ -6002,7 +6008,7 @@ $('.profile_pic').mouseover(function(){
 
                         </div>
                         <div class="col-md-3">
-                            <select data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
                                 <option>2557</option>
                                 <option>2556</option>
                                 <option>2555</option>
@@ -6165,7 +6171,7 @@ $('.profile_pic').mouseover(function(){
                                         </div>
 
                                         <div class="col-md-8">
-                                            <select data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกกลุ่มเป้าหมาย" data-ng-model="staticSelectModel">
+                                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกกลุ่มเป้าหมาย" data-ng-model="staticSelectModel">
                                                 <option>นักศึกษา</option>
                                                 <option>ศิษย์เก่า</option>
                                                 <option>อาจารย์</option>

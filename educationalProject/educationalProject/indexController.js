@@ -20,6 +20,8 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
      $scope.select_all_complete = false;
      $scope.already_select_curri = false;
      $scope.questions = [];
+     $scope.show_preview_support_text = 0;
+     $scope.current_section_save = [];
      }
 
          $scope.add_question = function(){
@@ -128,6 +130,9 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
     $scope.send_sub_indicator = function(sub_indicator){
         $scope.sub_indicator_choosen = sub_indicator;
         $scope.not_select_sub_indicator = false;
+        $scope.sendSectionSaveAndGetSupportText();
+
+
     }
      // $scope.loading = new $loading({
      //        busyText: 'ระบบกำลังดำเนินการโหลด...',
@@ -136,6 +141,8 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
      //        delayHide: 1000,
      //        showSpinner:false
      //    });
+
+    
      $scope.sendIndicatorAndGetSubIndicators = function (indicator) {
         // $scope.loading.show();
         $scope.not_select_sub_indicator = true;
@@ -227,23 +234,20 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
          ).success(function (data) {
             console.log(data);
             $scope.corresponding_evidences = data;
-            // $scope.loading.hide();
-            CKEDITOR.instances['support_text'].insertHtml("hello me");
-            var content = CKEDITOR.instances['support_text'].getData();
-
-            console.log(content)
+       
          });
     }
 
-$scope.confirm_support_text = function () {
-    CKEDITOR.instances['support_text'].setData(CKEDITOR.instances['support_text'].getData());
-}
+// $scope.confirm_support_text = function () {
+//     CKEDITOR.instances['support_text'].setData(CKEDITOR.instances['support_text'].getData());
+//     send_support_text_change_to_server
+// }
 
 $scope.watch_support_text_from_other_year= function(){
     console.log($scope.select_year_support_text);
 if($scope.select_year_support_text != 0){
       ngDialog.open({
-    template: CKEDITOR.instances['support_text'].getData(),
+    template:$scope.show_preview_support_text,
     plain: true,
     className: 'ngdialog-theme-default',
     showClose :true,
@@ -258,31 +262,86 @@ if($scope.select_year_support_text != 0){
   }
 }
 $scope.get_support_content_from_other_year = function () {
-    console.log("get_support_content_from_other_year");
+    CKEDITOR.instances['support_text'].setData($scope.show_preview_support_text);
 
   
     // alert( CKEDITOR.instances['support_text'].getData());
     // CKEDITOR.instances['support_text'].setData("cheese pizza");
 }
-        $scope.sendSubIndicatorCurriAndGetSupportText = function () {
 
-     $scope.sub_indicator_choosen.curri_id = $scope.curri_choosen.curri_id;
+$scope.prepare_to_watch_support_text = function(){
+    $scope.sendSectionSaveAndGetPreviewSupportText();
+}
 
-        $http.post(
-             '/api/evidence',
-             JSON.stringify($scope.sub_indicator_choosen),
+$scope.send_support_text_change_to_server = function(){
+    console.log("send_support_text_change_to_server");
+    $scope.current_section_save.detail = CKEDITOR.instances['support_text'].getData();
+      $http.put(
+             '/api/sectionsave',
+             JSON.stringify( $scope.current_section_save),
              {
                  headers: {
                      'Content-Type': 'application/json'
                  }
              }
          ).success(function (data) {
+    
+                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+
+         });
+}
+ $scope.sendSectionSaveAndGetPreviewSupportText = function () {
+
+     $scope.section_save_to_send = new Object();
+     $scope.section_save_to_send.teacher_id = "";
+     $scope.section_save_to_send.detail  = "";
+     $scope.section_save_to_send.date  = "";
+     $scope.section_save_to_send.time  = "";
+     $scope.section_save_to_send.aca_year = $scope.year_choosen.select_year_support_text;
+     $scope.section_save_to_send.indicator_num  = $scope.indicator_choosen.indicator_num;
+     $scope.section_save_to_send.sub_indicator_num   = $scope.sub_indicator_choosen.sub_indicator_num;
+     $scope.section_save_to_send.curri_id = $scope.curri_choosen.curri_id;
+        $http.post(
+             '/api/sectionsave',
+             JSON.stringify($scope.section_save_to_send),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+    
+            $scope.show_preview_support_text= data.detail;
+
+         });
+    }
+
+        $scope.sendSectionSaveAndGetSupportText = function () {
+
+     $scope.section_save_to_send = new Object();
+     $scope.section_save_to_send.teacher_id = "";
+     $scope.section_save_to_send.detail  = "";
+     $scope.section_save_to_send.date  = "";
+     $scope.section_save_to_send.time  = "";
+     $scope.section_save_to_send.aca_year = $scope.year_choosen.aca_year;
+     $scope.section_save_to_send.indicator_num  = $scope.indicator_choosen.indicator_num;
+     $scope.section_save_to_send.sub_indicator_num   = $scope.sub_indicator_choosen.sub_indicator_num;
+     $scope.section_save_to_send.curri_id = $scope.curri_choosen.curri_id;
+        $http.post(
+             '/api/sectionsave',
+             JSON.stringify($scope.section_save_to_send),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+             console.log("sendSectionSaveAndGetSupportText");
             console.log(data);
+            $scope.current_section_save = data;
+            CKEDITOR.instances['support_text'].setData(data.detail);
 
-            CKEDITOR.instances['support_text'].setData(data);
-            // var content = CKEDITOR.instances['support_text'].getData();
-
-            // console.log(content)
          });
     }
 });
