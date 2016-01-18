@@ -2379,7 +2379,7 @@ $('.profile_pic').mouseover(function(){
                
 
 
-                    <div id="upload_aun" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
+                    <div id="upload_aun" data-nq-modal="" data-qo-size="md" data-qo-independent="true">
                         <div class="custom-header">
                             <h1 class="headerModalH1"> อัพโหลดเล่มรายงานการประเมินตนเอง</h1>
                         </div>
@@ -2387,7 +2387,7 @@ $('.profile_pic').mouseover(function(){
                         <div class="row">
 
 
-                            <div class="col-md-7" style="margin-left:25px">
+                            <div class="col-md-8">
                                 <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                     <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                     <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
@@ -2395,8 +2395,9 @@ $('.profile_pic').mouseover(function(){
                                     <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
                                 </select>
 
-                            </div>
-                            <div class="col-md-4">
+                        
+                        </div>
+                        <div class="col-md-4">
                                 <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
                                     <option>2557</option>
                                     <option>2556</option>
@@ -2408,17 +2409,18 @@ $('.profile_pic').mouseover(function(){
 
 
                                 </select>
-                            </div>
+                           </div>
                         </div>
 
-                        <div style="background-color:#484848">
+                  <!--       <div style="background-color:#484848">
                             <h3 class="topicHeader" style="text-align:center;color:#FFFFFF;font-style:italic;"> &nbsp; &nbsp; </h3>
-                        </div>
+                        </div> -->
+                        <br />
                         <div class="row">
-                            <div class="col-md-3">
-                                <h3 style="margin-left:60px;margin-top:0px;"><span class="topicHeader">ไฟล์เล่มรายงาน:  </span></h3>
+                            <div class="col-md-4">
+                                <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">ไฟล์เล่มรายงาน:  </span></h3>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <input type="file" class="form-control" placeholder="ไฟล์เล่มรายงาน">
                             </div>
 
@@ -2432,6 +2434,9 @@ $('.profile_pic').mouseover(function(){
                         </div>
 
                     </div>
+
+
+
                     <div id="add_aca_year" data-nq-modal="" data-qo-independent="true">
                         <div class="custom-header">
                             <h1 class="headerModalH1"> เพิ่มปีการศึกษา</h1>
@@ -2476,24 +2481,105 @@ $('.profile_pic').mouseover(function(){
                         </div>
 
                     </div>
-                    <div id="create_curri" data-nq-modal="" data-qo-independent="true">
+
+<!-- create_curriculum controller -->
+                    <div id="create_curri" data-nq-modal="" data-qo-independent="true" data-ng-controller="create_curriculum">
                         <div class="custom-header">
                             <h1 class="headerModalH1">สร้างหลักสูตร</h1>
                         </div>
-                        <div class="row">
+
+                          <div class="row">
                             <div class="col-md-4">
-                                <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">ชื่อหลักสูตร:   </span></h3>
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อหลักสูตรภาษาไทย   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="ชื่อหลักสูตร"><span class="normal">  </span>
+                                <input type="text" class="form-control" placeholder="" ng-model="new_curri.curr_tname"><span class="normal">  </span>
 
                             </div>
                         </div>
+
+                  <div class="row">
+                 <div class="col-md-4">
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อหลักสูตรภาษาอังกฤษ   </span></h3>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" placeholder="" ng-model="new_curri.curr_ename"><span class="normal">  </span>
+
+                            </div>
+                        </div>
+
+
+                    <div class="row">
+                  <div class="col-md-4">
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(ย่อ)   </span></h3>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" placeholder=""  ng-model="new_curri.degree_t_bf"><span class="normal">  </span>
+
+                            </div>
+                        </div>
+
+                      <div class="row">
+                  <div class="col-md-4">
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(ย่อ)   </span></h3>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" placeholder=""  ng-model="new_curri.degree_e_bf"><span class="normal">  </span>
+
+                            </div>
+                        </div>
+    <div class="row">
+                    <div class="col-md-4">
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(เต็ม)  </span></h3>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" placeholder=""  ng-model="new_curri.degree_t_full"><span class="normal">  </span>
+
+                            </div>
+                        </div>
+
+                      <div class="row">
+                   <div class="col-md-4">
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(เต็ม)</span></h3>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" placeholder=""  ng-model="new_curri.degree_e_full"><span class="normal">  </span>
+
+                            </div>
+                        </div>
+
+
+                     <div class="row">
+                       <div class="col-md-4">
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ระดับปริญญา </span></h3>
+                            </div>
+                       <div class="col-md-8">
+                             <select name="staticSelectModel" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา" data-ng-model="new_curri.level" data-qo-disable-clear="true" >
+                              <option value="1">ปริญญาตรี</option>
+                              <option  value="2">ปริญญาโท</option>
+                              <option value="3">ปริญญาเอก</option>
+                             
+                            </select>
+                               </div> 
+                        </div> 
+
+                        <div class="row">
+                       <div class="col-md-4">
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ระยะเวลาการเรียน </span></h3>
+                            </div>
+
+                            <div class="col-md-8">
+                                <div class="topicHeader">
+                                    <input type="number" class="form-control" placeholder="" data-ng-model="new_curri.period"><span class="normal">  </span>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="custom-footer">
 
                             <div class="topicHeader pull-right">
-                                <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
-                                <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                                <button class="btn btn-success  hvr-wobble-vertical" ng-click="create_curri(this)">ยืนยัน</button>
+                                <button class="btn btn-default hvr-wobble-vertical" ng-click="$hide()">ยกเลิก</button>
                             </div>
                         </div>
                     </div>

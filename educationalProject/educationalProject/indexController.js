@@ -325,6 +325,8 @@ console.log($scope.select_year_support_text.aca_year);
   
     //     return $scope.year_choosen.aca_year != year.aca_year;
     // }
+
+
         $scope.sendSectionSaveAndGetSupportText = function () {
 
      $scope.section_save_to_send = new Object();
@@ -349,6 +351,41 @@ console.log($scope.select_year_support_text.aca_year);
             console.log(data);
             $scope.current_section_save = data;
             CKEDITOR.instances['support_text'].setData(data.detail);
+
+         });
+    }
+});
+
+app.controller('create_curriculum', function($scope, $http,$alert,$loading,$timeout,ngDialog) {
+    $scope.init = function(){
+        $scope.new_curri = []
+
+    }
+    $scope.create_curri = function(dada){
+          console.log($scope.new_curri);
+        // $scope.new_curri = {"curri_id":"19",
+        // "year":"2546",
+        // "curr_tname":"วิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546",
+        // "curr_ename":"Curriculum for Bachelor of Engineering Program in Computer",
+        // "degree_t_full":"วิศวกรรมศาสตรบัณฑิต (วิศวกรรมคอมพิวเตอร์)",
+        // "degree_t_bf":"วศ.บ. (วิศวกรรมคอมพิวเตอร์)",
+        // "degree_e_full":"Bachelor of Engineering (Computer Engineering)",
+        // "degree_e_bf":"B.Eng. (Computer Engineering)",
+        // "level":"1",
+        // "period":"4"}
+        $scope.new_curri.year= "";
+         $http.post(
+             '/api/curriculum',
+             JSON.stringify($scope.new_curri),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+             console.log("success");
+                 console.log(data);
+         
 
          });
     }

@@ -247,7 +247,7 @@ optgroup {
 .topicHeader {
   font-family:  "FreesiaUPC";
 
-  font-size: 23px !important;
+  font-size: 20px !important;
 
 }
 
@@ -263,6 +263,7 @@ span.topic{
   font-size: 40px;
 
   margin-bottom: 5px ;
+
 }
 
 /*.dropdown-menu {
@@ -577,21 +578,42 @@ button.plusgreen:hover{
   overflow:hidden !important;
 }
 
-h1.headerModalH1{
+.headerModalH1{
 text-align:center;
 color:white;
-margin-top:3px;
+
   font-family:  "FreesiaUPC";
   font-weight: normal !important;;
-  font-size: 40px;
+  font-size: 35px;
+  padding:0px !important; 
+     margin-top:3px;
+     padding-top: 0px !important;
+
+}
+.modal-header{
+  height:50px!important;
+    padding-top: 3px !important;
 }
 
+.modal-footer{
+    height:48px!important;
+    padding-top: 0px !important;
+}
 
+.custom-footer .topicHeader.pull-right {
+  padding-top: 4px !important;
 
+}
+
+.custom-footer .topicHeader.pull-right button{
+padding-top: 4px!important;
+padding-bottom: 4px!important;
+}
 .panel-default{
   margin-bottom:0px !important;
-  
+  padding-top: 10px !important;
 }
+
 
 input[type=checkbox] {
   /* All browsers except webkit*/
