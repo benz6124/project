@@ -109,5 +109,46 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
+
+        public object InsertOrUpdate()
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+
+            d.iCommand.CommandText = String.Format("IF NOT EXISTS (select * from {0} where {1}='{2}' and {3} = {4}) "+
+                                       "BEGIN "+
+                                       "INSERT INTO {0} VALUES " +
+                                       "('{2}', {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}) " +
+                                       "END " +
+                                       "ELSE " +
+                                       "BEGIN " +
+                                       "UPDATE {0} SET {12} = {5},{13} = {6},{14} = {7},{15} = {8},{16} = {9},{17} = {10},{18} = {11} where {1} = '{2}' and {3} = {4} " +
+                                       "END",
+                FieldName.TABLE_NAME, FieldName.CURRI_ID, curri_id,FieldName.YEAR,year,grad_in_time,grad_over_time,quity1,quity2,quity3,quity4,move_in,
+                    FieldName.GRAD_IN_TIME,FieldName.GRAD_OVER_TIME,FieldName.QUITY1, FieldName.QUITY2, FieldName.QUITY3, FieldName.QUITY4, FieldName.MOVE_IN);
+            try
+            {
+                int rowAffected = d.iCommand.ExecuteNonQuery();
+                if (rowAffected == 1)
+                {
+                    return null;
+                }
+                else
+                {
+                    return "No student_status_other are inserted or updated.";
+                }
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+        }
     }
 }

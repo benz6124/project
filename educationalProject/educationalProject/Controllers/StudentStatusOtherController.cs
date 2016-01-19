@@ -23,5 +23,13 @@ namespace educationalProject.Controllers
             else
                 return Ok(datacontext);
         }
+        public IHttpActionResult PutStudentStatusOther(oStudent_status_other data)
+        {
+            object result = data.InsertOrUpdate();
+            if (result == null)
+                return Ok();
+            else
+                return InternalServerError(new Exception(result.ToString()));
+        }
     }
 }
