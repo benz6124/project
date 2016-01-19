@@ -28,9 +28,9 @@ namespace educationalProject.Controllers
         }
         public IHttpActionResult PostToQuerySectionSave(oSection_save data)
         {
-            object result = datacontext.SelectWhere(string.Format("indicator_num = {0} and sub_indicator_num = {1} and aca_year = {2} and curri_id = '{3}'", data.indicator_num, data.sub_indicator_num, data.aca_year, data.curri_id));
+            object result = data.SelectWhere(string.Format("indicator_num = {0} and sub_indicator_num = {1} and aca_year = {2} and curri_id = '{3}'", data.indicator_num, data.sub_indicator_num, data.aca_year, data.curri_id));
             if (result == null)
-                return Ok(datacontext);
+                return Ok(data);
             else return InternalServerError(new Exception(result.ToString()));
         }
 
