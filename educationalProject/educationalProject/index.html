@@ -11,7 +11,7 @@
     // <script src="/app/controllers/indexController.js"></script> -->
 <!--     // <script type="text/javascript" src="/app/app.js"></script>
     // <script type="text/javascript" src="/app/controllers/indexController.js"></script> -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Quicksand" />
+ <link rel="stylesheet"  type="text/css"  href="//fonts.googleapis.com/css?family=Quicksand"/>
     <link rel="shortcut icon" href="/bower_components/quantumui/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/bower_components/quantumui/images/favicon.ico" type="image/x-icon">
     <link href="/bower_components/hover/css/hover.css" rel="stylesheet" media="all">
@@ -2493,7 +2493,7 @@ $('.profile_pic').mouseover(function(){
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อหลักสูตรภาษาไทย   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="" ng-model="new_curri.curr_tname"><span class="normal">  </span>
+                                <input type="text" class="form-control" placeholder="" ng-model="new_curri.curr_tname" required><span class="normal">  </span>
 
                             </div>
                         </div>
@@ -2503,7 +2503,7 @@ $('.profile_pic').mouseover(function(){
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อหลักสูตรภาษาอังกฤษ   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="" ng-model="new_curri.curr_ename"><span class="normal">  </span>
+                                <input type="text" class="form-control" placeholder="" ng-model="new_curri.curr_ename" required><span class="normal">  </span>
 
                             </div>
                         </div>
@@ -2514,7 +2514,7 @@ $('.profile_pic').mouseover(function(){
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(ย่อ)   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder=""  ng-model="new_curri.degree_t_bf"><span class="normal">  </span>
+                                <input type="text" class="form-control" placeholder=""  ng-model="new_curri.degree_t_bf" required><span class="normal">  </span>
 
                             </div>
                         </div>
@@ -2524,7 +2524,7 @@ $('.profile_pic').mouseover(function(){
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(ย่อ)   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder=""  ng-model="new_curri.degree_e_bf"><span class="normal">  </span>
+                                <input type="text" class="form-control" placeholder=""  ng-model="new_curri.degree_e_bf" required><span class="normal">  </span>
 
                             </div>
                         </div>
@@ -2533,7 +2533,7 @@ $('.profile_pic').mouseover(function(){
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(เต็ม)  </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder=""  ng-model="new_curri.degree_t_full"><span class="normal">  </span>
+                                <input type="text" class="form-control" placeholder=""  ng-model="new_curri.degree_t_full" required><span class="normal">  </span>
 
                             </div>
                         </div>
@@ -2543,7 +2543,7 @@ $('.profile_pic').mouseover(function(){
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(เต็ม)</span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder=""  ng-model="new_curri.degree_e_full"><span class="normal">  </span>
+                                <input type="text" class="form-control" placeholder=""  ng-model="new_curri.degree_e_full" required><span class="normal">  </span>
 
                             </div>
                         </div>
@@ -2554,7 +2554,7 @@ $('.profile_pic').mouseover(function(){
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ระดับปริญญา </span></h3>
                             </div>
                        <div class="col-md-8">
-                             <select name="staticSelectModel" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา" data-ng-model="new_curri.level" data-qo-disable-clear="true" >
+                             <select name="staticSelectModel" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา" data-ng-model="new_curri.level" data-qo-disable-clear="true" required>
                               <option value="1">ปริญญาตรี</option>
                               <option  value="2">ปริญญาโท</option>
                               <option value="3">ปริญญาเอก</option>
@@ -2570,7 +2570,7 @@ $('.profile_pic').mouseover(function(){
 
                             <div class="col-md-8">
                                 <div class="topicHeader">
-                                    <input type="number" class="form-control" placeholder="" data-ng-model="new_curri.period"><span class="normal">  </span>
+                                    <input type="number" class="form-control" placeholder="" data-ng-model="new_curri.period" required><span class="normal">  </span>
                                 </div>
                             </div>
                         </div>
@@ -6707,11 +6707,12 @@ $('.profile_pic').mouseover(function(){
         
                   <script type="text/javascript" src="app.js"></script>
 <script type="text/javascript" src="indexController.js"></script> 
+<script type="text/javascript" src="all_curriculums_service.js"></script> 
                 <link href="/Content/myCss.css" rel="stylesheet" />
 <link href="/bower_components/ng-dialog/css/ngDialog.css" rel="stylesheet" />
 <link href="/bower_components/ng-dialog/css/ngDialog-theme-default.css" rel="stylesheet" />
 
-      
+         
 <script type="text/javascript" src="http://arrow.scrolltotop.com/arrow13.js"></script>
 <noscript>Not seeing a <a href="http://www.scrolltotop.com/">Scroll to Top Button</a>? Go to our FAQ page for more info.</noscript>
 

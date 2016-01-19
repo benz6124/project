@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-app.controller('choice_index_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog) {
+app.controller('choice_index_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,all_curriculums_service) {
 
     // 
 
@@ -9,6 +9,7 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
     // console.log(select_nothing);
 
      $scope.init_var = function(){
+
     $scope.not_select_curri_and_year = true;
     $scope.not_select_sub_indicator = true;
     $scope.year_choosen = {};
@@ -22,6 +23,7 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
      $scope.questions = [];
      $scope.show_preview_support_text = 0;
      $scope.current_section_save = [];
+     $scope.all_curriculums = [];
      }
 
          $scope.add_question = function(){
@@ -32,18 +34,21 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
 
          $scope.remove_question = function(question){
             question.hide = true;
-            // console.log(id);
-            // $scope.questions.splice(id-1, 1);
-            // console.log($scope.questions)
+          
          }
-    $http.get("/api/curriculum").success(function (data, status, headers, config) {
 
-        $scope.all_curriculums = data;
+        all_curriculums_service.async().then(function(data) {
+            $scope.all_curriculums = data;
 
-    });
-    // $scope.choose_year_support_text = function(year){
-    //     $scope.select_year_support_text 
-    // }
+          });
+
+        $scope.update_all_curriculums = function(){
+              $scope.all_curriculums = all_curriculums_service.current_all_curriculums ;
+              console.log("update!");
+          };
+
+         // update_curriculums_service.register_observers($scope.update_all_curriculums);
+        
     $scope.clear_select_year_support_text_choosen = function(){
         console.log("clear");
         $scope.select_year_support_text = 0;
@@ -63,7 +68,7 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
         // });
       
         $http.post(
-             '/api/curriculumacademic',
+             '/api/curriculumacademic/getbycurriculum',
              JSON.stringify(curri),
              {
                  headers: {
@@ -356,7 +361,7 @@ console.log($scope.select_year_support_text.aca_year);
     }
 });
 
-app.controller('create_curriculum', function($scope, $http,$alert,$loading,$timeout,ngDialog) {
+app.controller('create_curriculum', function($scope, $http,$alert,$loading,$timeout,ngDialog,all_curriculums_service) {
     $scope.init = function(){
         $scope.new_curri = []
 
@@ -373,6 +378,7 @@ app.controller('create_curriculum', function($scope, $http,$alert,$loading,$time
         // "degree_e_bf":"B.Eng. (Computer Engineering)",
         // "level":"1",
         // "period":"4"}
+
         $scope.new_curri.year= "";
          $http.post(
              '/api/curriculum',
@@ -385,7 +391,8 @@ app.controller('create_curriculum', function($scope, $http,$alert,$loading,$time
          ).success(function (data) {
              console.log("success");
                  console.log(data);
-         
+         //เรียกฟังชั่นใน servce ให้อัพเดทค่า
+
 
          });
     }

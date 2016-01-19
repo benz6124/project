@@ -3,4 +3,5 @@
         'ngAnimate',
         'ngQuantum',
         'ngDialog'
+   
 ]);
