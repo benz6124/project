@@ -20,8 +20,11 @@ namespace educationalProject.Controllers
             {
                 return Ok(((IEnumerable<oStudent_status_other>)result).First());
             }
-            else
+            else {
+                datacontext.curri_id = data.curri_id;
+                datacontext.year = data.aca_year;
                 return Ok(datacontext);
+            }
         }
         public IHttpActionResult PutStudentStatusOther(oStudent_status_other data)
         {

@@ -20,7 +20,11 @@ namespace educationalProject.Controllers
                 return Ok(((IEnumerable<oStudent_count>)result).First());
             }
             else
+            {
+                datacontext.curri_id = data.curri_id;
+                datacontext.year = data.aca_year;
                 return Ok(datacontext);
+            }
         }
         public IHttpActionResult PutStudentCount(oStudent_count data)
         {
