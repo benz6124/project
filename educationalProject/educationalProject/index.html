@@ -509,7 +509,7 @@ $('.profile_pic').mouseover(function(){
 
 <br/>
    <h3 class="headerPanel wow flipInX"data-wow-delay="3s" data-wow-duration="2s" style="text-align:left">หลักฐานสนับสนุนการประเมิน</h3>
-              <table class="table table-bordered table-hover table_modal evidence wow bounceInLeft" data-wow-delay="3s" data-wow-duration="3s">
+              <table class="table table-bordered table-hover table_modal evidence wow bounceInLeft" data-wow-delay="2s" data-wow-duration="3s">
 
                         <tr>
                             <th class="code">รหัสหลักฐาน</th>
@@ -620,7 +620,7 @@ $('.profile_pic').mouseover(function(){
                             <h1 class="headerModalH1">ดึงข้อมูลจากปีการศึกษาอื่น</h1>
                         </div>
 
-
+ <form name="fetch_support_text_another_year_form" novalidate>
                         <div class="row">
                             <div class="col-md-4">
                                 <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">ปีการศึกษา:   </span></h3>
@@ -630,18 +630,18 @@ $('.profile_pic').mouseover(function(){
                                 <div class="topicHeader">
                              
 
-                                      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="prepare_to_watch_support_text()"data-ng-model="$parent.$parent.select_year_support_text " data-qo-disable-clear="true"  >
+                                      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="prepare_to_watch_support_text()"data-ng-model="$parent.$parent.select_year_support_text " data-qo-disable-clear="true"  required>
 </select>    
                                 </div>
                             </div>
                             <div class="col-md-2">
-                             <h3 style="margin-top:5px;color:#6F002B" class="hvr-wobble-vertical"><a href="" ng-click="watch_support_text_from_other_year()"><i class="glyphicon glyphicon-search"></i> </a>  </h3>
+                             <h3 style="margin-top:5px;color:#6F002B" class="hvr-wobble-vertical"><a  ng-disabled="select_year_support_text==0"  href="" ng-click="watch_support_text_from_other_year()"><i class="glyphicon glyphicon-search"></i> </a>  </h3>
                           </div>
                         </div>
-
+</form>
                         <div class="custom-footer">
                             <div class="topicHeader pull-right">
-                                <button class="btn btn-success  " ng-click="get_support_content_from_other_year(this)">ยืนยัน</button>
+                                <button class="btn btn-success  " ng-disabled="select_year_support_text==0" ng-click="get_support_content_from_other_year(this)">ยืนยัน</button>
                                 <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                             </div>
 
@@ -2468,7 +2468,7 @@ $('.profile_pic').mouseover(function(){
                             <div class="col-md-10">
                                 <div class="topicHeader">
                       
-                                    <input type="number" ng-class="{ danger: add_year_form.choose_aca_year.$invalid }" name ="choose_aca_year" class="form-control" ng-model="new_curri_academic.aca_year" placeholder="กรุณากรอกปีการศึกษา"  min="0" required><span class="normal">  </span>
+                                    <input type="number" ng-class="{ little_danger: add_year_form.choose_aca_year.$invalid && add_year_form.$dirty }" name ="choose_aca_year" class="form-control" ng-model="new_curri_academic.aca_year" placeholder="กรุณากรอกปีการศึกษา"  min="0" required><span class="normal">  </span>
                               
                                 </div>
                             </div>
@@ -2477,7 +2477,7 @@ $('.profile_pic').mouseover(function(){
                     </form>
                         <div class="custom-footer">
                             <div class="topicHeader pull-right">
-                                <button class="btn btn-success  " ng-click="add_aca_year_to_server()">ยืนยัน</button>
+                                <button class="btn btn-success  " ng-disabled="add_year_form.$invalid" ng-click="add_aca_year_to_server()">ยืนยัน</button>
                                 <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                             </div>
                         </div>
@@ -3987,7 +3987,7 @@ $('.profile_pic').mouseover(function(){
                         </div>
 
                         <div class="col-md-2">
-                            <h3 style="margin-left:340px;margin-top:0px"><span class="topicHeader">รวม</span></h3>
+                            <h3 style="margin-left:348px;margin-top:0px" ng-hide="choose_not_complete"><span class="topicHeader">รวม</span></h3>
                         </div>
                     </div>
 
@@ -4008,7 +4008,9 @@ $('.profile_pic').mouseover(function(){
 
                         </div>
                         <div class="col-md-2">
-                            <input type="number" id="quota_study_sum" class="form-control" disabled="disabled"><span class="normal">  </span>
+                           <!--  <input type="number" id="quota_study_sum" class="form-control" disabled="disabled" value="{{result.num_goodstudy_m}} +{{result.num_goodstudy_f}}"><span class="normal">  </span> -->
+                           <h3 style="margin-top:2px;text-align:center"><span class="topicHeader">{{result.num_goodstudy_m+result.num_goodstudy_f}}   </span></h3>
+
 
                         </div>
 
@@ -4028,7 +4030,7 @@ $('.profile_pic').mouseover(function(){
 
                         </div>
                         <div class="col-md-2">
-                            <input type="number" id="quota_child_sum" class="form-control" disabled="disabled"><span class="normal">  </span>
+                          <h3 style="margin-top:2px;text-align:center"><span class="topicHeader">{{result.num_childstaff_m+result.num_childstaff_f}}   </span></h3>
 
                         </div>
 
@@ -4049,7 +4051,7 @@ $('.profile_pic').mouseover(function(){
                         </div>
 
                         <div class="col-md-2">
-                            <input type="number"  id="direct_sum" onchange="sum('direct');" disabled="disabled" class="form-control"><span class="normal">  </span>
+                            <h3 style="margin-top:2px;text-align:center"><span class="topicHeader">{{result.num_direct_f+result.num_direct_m}}   </span></h3>
 
                         </div>
                     </div>
@@ -4069,7 +4071,7 @@ $('.profile_pic').mouseover(function(){
                         </div>
 
                         <div class="col-md-2">
-                            <input type="number"  id="admission_sum" onchange="sum('admission');" disabled="disabled" class="form-control"><span class="normal">  </span>
+                       <h3 style="margin-top:2px;text-align:center"><span class="topicHeader">{{result.num_admis_m+result.num_admis_f}}   </span></h3>
 
                         </div>
                     </div>
@@ -4089,14 +4091,14 @@ $('.profile_pic').mouseover(function(){
                         </div>
 
                         <div class="col-md-2">
-                            <input type="number"  id="other_sum" onchange="sum('other');" disabled="disabled" class="form-control"><span class="normal">  </span>
+                                  <h3 style="margin-top:2px;text-align:center"><span class="topicHeader">{{result.num_others_m+result.num_others_f}}   </span></h3>
 
                         </div>
                     </div>
 </form>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="new_student_stat_form.$invalid"  ng-click="$hide()">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                         </div>
                     </div>
@@ -5203,7 +5205,7 @@ $('.profile_pic').mouseover(function(){
 </form>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click="save_to_server()">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="student_stat_form.$invalid"  ng-click="save_to_server()">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                         </div>
                     </div>

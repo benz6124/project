@@ -334,31 +334,38 @@ $scope.send_support_text_change_to_server = function(){
     
 }
  $scope.sendSectionSaveAndGetPreviewSupportText = function () {
- console.log("sendSectionSaveAndGetPreviewSupportText");
-console.log($scope.select_year_support_text.aca_year);
-     $scope.section_save_to_send = new Object();
-     $scope.section_save_to_send.teacher_id = "";
-     $scope.section_save_to_send.detail  = "";
-     $scope.section_save_to_send.date  = "";
-     $scope.section_save_to_send.time  = "";
+    if($scope.select_year_support_text!=0){
+         console.log("sendSectionSaveAndGetPreviewSupportText");
+        console.log($scope.select_year_support_text.aca_year);
+             $scope.section_save_to_send = new Object();
+             $scope.section_save_to_send.teacher_id = "";
+             $scope.section_save_to_send.detail  = "";
+             $scope.section_save_to_send.date  = "";
+             $scope.section_save_to_send.time  = "";
 
-     $scope.section_save_to_send.aca_year = $scope.select_year_support_text.aca_year;
-     $scope.section_save_to_send.indicator_num  = $scope.indicator_choosen.indicator_num;
-     $scope.section_save_to_send.sub_indicator_num   = $scope.sub_indicator_choosen.sub_indicator_num;
-     $scope.section_save_to_send.curri_id = $scope.curri_choosen.curri_id;
-        $http.post(
-             '/api/sectionsave',
-             JSON.stringify($scope.section_save_to_send),
-             {
-                 headers: {
-                     'Content-Type': 'application/json'
+             $scope.section_save_to_send.aca_year = $scope.select_year_support_text.aca_year;
+             $scope.section_save_to_send.indicator_num  = $scope.indicator_choosen.indicator_num;
+             $scope.section_save_to_send.sub_indicator_num   = $scope.sub_indicator_choosen.sub_indicator_num;
+             $scope.section_save_to_send.curri_id = $scope.curri_choosen.curri_id;
+                $http.post(
+                     '/api/sectionsave',
+                     JSON.stringify($scope.section_save_to_send),
+                     {
+                         headers: {
+                             'Content-Type': 'application/json'
+                         }
+                     }
+                 ).success(function (data) {
+            console.log(data);
+                    $scope.show_preview_support_text= data.detail;
+
+                 });
+
                  }
-             }
-         ).success(function (data) {
-    console.log(data);
-            $scope.show_preview_support_text= data.detail;
-
-         });
+                 else{
+                      $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกปีการศึกษาก่อน',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+                 }
     }
 
     // $scope.filter_not_selected_year =function(year){
