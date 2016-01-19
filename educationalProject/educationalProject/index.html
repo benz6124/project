@@ -3058,15 +3058,15 @@ $('.profile_pic').mouseover(function(){
                         <h3 class="topicHeader" style="text-align:center;color:#FFFFFF;font-style:italic;"> &nbsp; &nbsp; </h3>
                     </div> -->
                     
-                    <div ng-hide="choose_not_complete" >
+                    <div  >
                          <br /> 
                      <form name="graduated_form" novalidate>
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 style="margin-left:210px;margin-top:3px;"><span class="topicHeader">จำนวนนักศึกษาที่จบภายใน 4 ปี: <span></h3>
+                            <h3 style="margin-left:210px;margin-top:4px;"><span class="topicHeader">จำนวนนักศึกษาที่จบภายใน 4 ปี: <span></h3>
                         </div>
                         <div class="col-md-3" style="margin-right:60px;">
-                            <input ng-class="{ danger: graduated_form.grad_in_time.$invalid && graduated_form.grad_in_time.$dirty }"name ="grad_in_time" type="number" class="form-control" ng-model="result.grad_in_time" required><span class="normal">  </span>
+                            <input ng-class="{ danger: graduated_form.grad_in_time.$invalid && graduated_form.grad_in_time.$dirty }"name ="grad_in_time" type="number" class="form-control" ng-model="result.grad_in_time" ng-disabled="choose_not_complete" required><span class="normal">  </span>
 
                         </div>
                       
@@ -3075,72 +3075,72 @@ $('.profile_pic').mouseover(function(){
 
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 style="margin-left:210px;margin-top:6px;"><span class="topicHeader">จำนวนนักศึกษาที่จบมากกว่า 4 ปี: <span></h3>
+                            <h3 style="margin-left:210px;margin-top:4px;"><span class="topicHeader">จำนวนนักศึกษาที่จบมากกว่า 4 ปี: <span></h3>
                         </div>
                    
 
                           <div class="col-md-3" style="margin-right:60px;">
-                            <input ng-class="{ danger: graduated_form.grad_over_time.$invalid && graduated_form.grad_over_time.$dirty }"name ="grad_over_time" type="number" class="form-control" ng-model="result.grad_over_time" required><span class="normal">  </span>
+                            <input ng-class="{ danger: graduated_form.grad_over_time.$invalid && graduated_form.grad_over_time.$dirty }"name ="grad_over_time" type="number" class="form-control" ng-model="result.grad_over_time" ng-disabled="choose_not_complete" required><span class="normal">  </span>
 
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 style="margin-left:210px;margin-top:0px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี1: <span></h3>
+                            <h3 style="margin-left:210px;margin-top:4px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี1: <span></h3>
                         </div>
                      
 
                           <div class="col-md-3" style="margin-right:60px;">
-                            <input ng-class="{ danger: graduated_form.quity1.$invalid && graduated_form.quity1.$dirty }"name ="quity1" type="number" class="form-control" ng-model="result.quity1" required><span class="normal">  </span>
+                            <input ng-class="{ danger: graduated_form.quity1.$invalid && graduated_form.quity1.$dirty }"name ="quity1" type="number" class="form-control" ng-model="result.quity1" ng-disabled="choose_not_complete" required><span class="normal">  </span>
 
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 style="margin-left:210px;margin-top:0px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี2: <span></h3>
+                            <h3 style="margin-left:210px;margin-top:4px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี2: <span></h3>
                         </div>
               
 
                           <div class="col-md-3" style="margin-right:60px;">
-                            <input ng-class="{ danger: graduated_form.quity2.$invalid && graduated_form.quity2.$dirty }"name ="quity2" type="number" class="form-control" ng-model="result.quity2" required><span class="normal">  </span>
+                            <input ng-class="{ danger: graduated_form.quity2.$invalid && graduated_form.quity2.$dirty }"name ="quity2" type="number" class="form-control" ng-disabled="choose_not_complete" ng-model="result.quity2" required><span class="normal">  </span>
 
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 style="margin-left:210px;margin-top:0px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี3: <span></h3>
+                            <h3 style="margin-left:210px;margin-top:4px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี3: <span></h3>
                         </div>
                  
 
                            <div class="col-md-3" style="margin-right:60px;">
-                            <input ng-class="{ danger: graduated_form.quity3.$invalid && graduated_form.quity3.$dirty }"name ="quity3" type="number" class="form-control" ng-model="result.quity3" required><span class="normal">  </span>
+                            <input ng-class="{ danger: graduated_form.quity3.$invalid && graduated_form.quity3.$dirty }"name ="quity3" type="number" class="form-control" ng-disabled="choose_not_complete" ng-model="result.quity3" required><span class="normal">  </span>
 
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 style="margin-left:210px;margin-top:0px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี4: <span></h3>
+                            <h3 style="margin-left:210px;margin-top:4px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี4: <span></h3>
                         </div>
                   
 
                          <div class="col-md-3" style="margin-right:60px;">
-                            <input ng-class="{ danger: graduated_form.quity4.$invalid && graduated_form.quity4.$dirty }"name ="quity4" type="number" class="form-control" ng-model="result.quity4" required><span class="normal">  </span>
+                            <input ng-class="{ danger: graduated_form.quity4.$invalid && graduated_form.quity4.$dirty }"name ="quity4" type="number" class="form-control" ng-disabled="choose_not_complete" ng-model="result.quity4" required><span class="normal">  </span>
 
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 style="margin-left:210px;margin-top:0px;"><span class="topicHeader">จำนวนนักศึกษาที่ย้ายสาขาวิชามา: <span></h3>
+                            <h3 style="margin-left:210px;margin-top:4px;"><span class="topicHeader">จำนวนนักศึกษาที่ย้ายสาขาวิชามา: <span></h3>
                         </div>
             
 
                         <div class="col-md-3" style="margin-right:60px;">
-                            <input ng-class="{ danger: graduated_form.move_in.$invalid && graduated_form.move_in.$dirty }"name ="move_in" type="number" class="form-control" ng-model="result.move_in" required><span class="normal" required>  </span>
+                            <input ng-class="{ danger: graduated_form.move_in.$invalid && graduated_form.move_in.$dirty }"name ="move_in" type="number" class="form-control" ng-disabled="choose_not_complete" ng-model="result.move_in" required><span class="normal" required>  </span>
 
                         </div>
                     </div>

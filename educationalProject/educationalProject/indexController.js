@@ -520,7 +520,7 @@ $scope.init =function() {
         console.log($scope.year_choosen);
 
         $http.post(
-             '/api/curriculumacademic/getbycurriculum',
+             '/api/studentstatusother',
              JSON.stringify($scope.year_choosen),
              {
                  headers: {
@@ -528,6 +528,8 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
+            
+            console.log(data);
              $scope.result = data;
              $scope.choose_not_complete = false;
          });
