@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-app.controller('choice_index_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,all_curriculums_service) {
+app.controller('choice_index_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
 
     // 
 
@@ -23,7 +23,10 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
      $scope.questions = [];
      $scope.show_preview_support_text = 0;
      $scope.current_section_save = [];
-     $scope.all_curriculums = [];
+
+       $rootScope.all_curriculums = [];
+
+
      }
 
          $scope.add_question = function(){
@@ -37,18 +40,18 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
           
          }
 
-        all_curriculums_service.async().then(function(data) {
-            $scope.all_curriculums = data;
+        // request_all_curriculums_service_server.async().then(function(data) {
+        //     $rootScope.all_curriculums = data;
 
+        //   });
+
+        $http.get('/api/curriculum').success(function (data) {
+            
+            $rootScope.all_curriculums = data;
           });
+            
 
-        $scope.update_all_curriculums = function(){
-              $scope.all_curriculums = all_curriculums_service.current_all_curriculums ;
-              console.log("update!");
-          };
 
-         // update_curriculums_service.register_observers($scope.update_all_curriculums);
-        
     $scope.clear_select_year_support_text_choosen = function(){
         console.log("clear");
         $scope.select_year_support_text = 0;
@@ -280,9 +283,32 @@ $scope.prepare_to_watch_support_text = function(){
     $scope.sendSectionSaveAndGetPreviewSupportText();
 }
 
+$scope.download_aun_book = function(){
+         $http.post(
+             '/api/aunbook',
+             JSON.stringify($scope.year_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            $scope.download_file(data);
+
+
+         });
+         // .error(function (data) {
+            
+         //        $alert({title:'เกิดข้อผิดพลาด', content:'ไม่พบข้อมูล',alertType:'success',
+         //                 placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+
+
+         // });
+}
 $scope.send_support_text_change_to_server = function(){
     console.log("send_support_text_change_to_server");
     $scope.current_section_save.detail = CKEDITOR.instances['support_text'].getData();
+    $scope.current_section_save.teacher_id = "00010";
       $http.put(
              '/api/sectionsave',
              JSON.stringify( $scope.current_section_save),
@@ -361,7 +387,7 @@ console.log($scope.select_year_support_text.aca_year);
     }
 });
 
-app.controller('create_curriculum', function($scope, $http,$alert,$loading,$timeout,ngDialog,all_curriculums_service) {
+app.controller('create_curriculum', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
     $scope.init = function(){
         $scope.new_curri = []
 
@@ -391,6 +417,7 @@ app.controller('create_curriculum', function($scope, $http,$alert,$loading,$time
          ).success(function (data) {
              console.log("success");
                  console.log(data);
+                 $rootScope.all_curriculums =data;
          //เรียกฟังชั่นใน servce ให้อัพเดทค่า
 
 
