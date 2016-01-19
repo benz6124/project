@@ -28,7 +28,7 @@ namespace educationalProject.Controllers
                 return Ok();
             else if (result.ToString().Contains("Duplicate"))
             {
-                return BadRequest("มีปีการศึกษาดังกล่าวในหลักสูตรนี้แล้ว");
+                return BadRequest("มีหลักสูตร-ปีการศึกษานี้อยู่ในระบบแล้ว กรุณาระบุปีการศึกษาใหม่อีกครั้ง");
             }
             else
             {

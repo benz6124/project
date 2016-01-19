@@ -54,6 +54,14 @@ namespace educationalProject.Controllers
                     return InternalServerError(new Exception(result.ToString()));
 
             }
+            else if(data.date == "" || data.time == "")
+            {
+                object result = datacontext.Insert();
+                if (result == null)
+                    return Ok();
+                else
+                    return InternalServerError(new Exception(result.ToString()));
+            }
             else {
                 object result = datacontext.Update();
                 if (result == null)

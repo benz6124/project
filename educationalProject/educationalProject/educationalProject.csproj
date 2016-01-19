@@ -242,6 +242,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndicatorController.cs" />
     <Compile Include="Controllers\SectionSaveController.cs" />
+    <Compile Include="Controllers\StudentStatusOtherController.cs" />
     <Compile Include="Controllers\SubIndicatorController.cs" />
     <Compile Include="Controllers\UserTypeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -263,6 +264,7 @@
     <Compile Include="Models\Section_save.cs" />
     <Compile Include="Models\Self_evaluation.cs" />
     <Compile Include="Models\Student_cnt.cs" />
+    <Compile Include="Models\Student_status_other.cs" />
     <Compile Include="Models\Sub_indicator.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Models\User.cs" />
@@ -283,6 +285,7 @@
     <Compile Include="Models\Wrappers\oSection_save.cs" />
     <Compile Include="Models\Wrappers\oSelf_evaluation.cs" />
     <Compile Include="Models\Wrappers\oStudent_cnt.cs" />
+    <Compile Include="Models\Wrappers\oStudent_status_other.cs" />
     <Compile Include="Models\Wrappers\oSub_indicator.cs" />
     <Compile Include="Models\Wrappers\oUser_type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
