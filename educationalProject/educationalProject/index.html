@@ -121,7 +121,7 @@ $('.profile_pic').mouseover(function(){
         // var my_input2 = document.getElementById('my_input2').value;
         var num1 = document.getElementById(name+"1").value;
         var num2 = document.getElementById(name+"2").value;
-        var result = document.getElementById(name+"Sum");
+        var result = document.getElementById(name+"_sum");
 
         var sum = parseInt(num1) + parseInt(num2);
 
@@ -2445,7 +2445,7 @@ $('.profile_pic').mouseover(function(){
                 <!--          <h3 ng-show='add_aca_year_form.$error.required && error_leaw ' style="color:red;margin-top:0px">
         *กรุณาเลือกหลักสูตร และ กรอกปีการศึกษา
       </h3> -->
-                      
+                       <form name="add_year_form" novalidate>
                         <div class="row">
                             <div class="col-md-2">
                                 <h3 style="margin-top:5px;"><span class="topicHeader">หลักสูตร:   </span></h3>
@@ -2467,13 +2467,14 @@ $('.profile_pic').mouseover(function(){
 
                             <div class="col-md-10">
                                 <div class="topicHeader">
-                                <form>
-                                    <input type="number" name ="choose_aca_year" class="form-control" ng-model="new_curri_academic.aca_year" placeholder="กรุณากรอกปีการศึกษา"  min="0" required><span class="normal">  </span>
-                                    </form>
+                      
+                                    <input type="number" ng-class="{ danger: add_year_form.choose_aca_year.$invalid }" name ="choose_aca_year" class="form-control" ng-model="new_curri_academic.aca_year" placeholder="กรุณากรอกปีการศึกษา"  min="0" required><span class="normal">  </span>
+                              
                                 </div>
                             </div>
                         </div>
                     <!--   </form> -->
+                    </form>
                         <div class="custom-footer">
                             <div class="topicHeader pull-right">
                                 <button class="btn btn-success  " ng-click="add_aca_year_to_server()">ยืนยัน</button>
@@ -3954,46 +3955,29 @@ $('.profile_pic').mouseover(function(){
 
                 </div>
 
-                <div id="new_students" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
+                <div id="new_students" data-nq-modal="" data-qo-size="lg" data-qo-independent="true" data-ng-controller="stat_new_student_controller" data-ng-init = "init()">
                     <div class="custom-header">
                         <h1 class="headerModalH1">สถิติการรับนักศึกษาใหม่</h1>
                     </div>
                     <div class="row">
 
 
-                        <div class="col-md-7" style="margin-left:15px">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            </select>
+                        <div class="col-md-8" >
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+            </select>
 
                         </div>
-                        <div class="col-md-3">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
-                                <option>2557</option>
-                                <option>2556</option>
-                                <option>2555</option>
-                                <option>2554</option>
-                                <option>2553</option>
-                                <option>2552</option>
-                                <option>2551</option>
-
-
-                            </select>
+                        <div class="col-md-4" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+</select>   
                         </div>
 
-                        <div class="col-md-1">
-                            <button class="btn btn-primary hvr-rotate" style="margin-bottom:10px"><i class="glyphicon glyphicon-search"></i> ค้นหา</button>
-                        </div>
                     </div>
 
 
-                    <div style="background-color:#484848">
-                        <h3 class="topicHeader" style="text-align:center;color:#FFFFFF;font-style:italic;"> &nbsp; &nbsp; </h3>
-                    </div>
+              <br />
 
+               <form name="new_student_stat_form" novalidate>
                     <div class="row">
                         <div class="col-md-2">
                             <h3 style="margin-left:340px;margin-top:0px"><span class="topicHeader">ชาย</span></h3>
@@ -4010,19 +3994,21 @@ $('.profile_pic').mouseover(function(){
 
                     <div class="row">
                         <div class="col-md-4">
-                            <h3 style="margin-left:180px;margin-top:0px"><span class="topicHeader">โควตา:   </span></h3>
+                            <h3 style="margin-left:150px;margin-top:0px"><span class="topicHeader">โควตาเรียนดี:   </span></h3>
                         </div>
                         <div class="col-md-2">
-                            <input type="number" id="quota1" class="form-control" value="34" onchange="sum('quota');"><span class="normal">  </span>
+                            <input type="number" id="quota_study1" class="form-control" onchange="sum('quota_study');" ng-class="{ danger: new_student_stat_form.num_goodstudy_m.$invalid && new_student_stat_form.num_goodstudy_m.$dirty }"name ="num_goodstudy_m" type="number" ng-model="result.num_goodstudy_m" ng-disabled="choose_not_complete" min="0" required /><span class="normal">  </span>
+
+
 
                         </div>
 
                         <div class="col-md-2">
-                            <input type="number" value="14" id="quota2" onchange="sum('quota');" class="form-control"><span class="normal">  </span>
+                            <input type="number" id="quota_study2" onchange="sum('quota_study');" class="form-control" ng-class="{ danger: new_student_stat_form.num_goodstudy_f.$invalid && new_student_stat_form.num_goodstudy_f.$dirty }"name ="num_goodstudy_f" type="number" class="form-control" ng-model="result.num_goodstudy_f" ng-disabled="choose_not_complete" min="0" required /> <span class="normal"> </span>
 
                         </div>
                         <div class="col-md-2">
-                            <input type="number" value="48" id="quotaSum" class="form-control" disabled="disabled"><span class="normal">  </span>
+                            <input type="number" id="quota_study_sum" class="form-control" disabled="disabled"><span class="normal">  </span>
 
                         </div>
 
@@ -4030,44 +4016,84 @@ $('.profile_pic').mouseover(function(){
 
                     <div class="row">
                         <div class="col-md-4">
-                            <h3 style="margin-left:180px;margin-top:0px"><span class="topicHeader">รับตรง:   </span></h3>
+                            <h3 style="margin-left:150px;margin-top:0px"><span class="topicHeader">โควตาบุตรบุคลากร:   </span></h3>
                         </div>
                         <div class="col-md-2">
-                            <input type="number" value="40" id="direct1" onchange="sum('direct');" class="form-control"><span class="normal">  </span>
-
-                        </div>
-
-                        <div class="col-md-2">
-                            <input type="number" value="7" id="direct2" onchange="sum('direct');" class="form-control"><span class="normal">  </span>
+                            <input type="number" id="quota_child1" class="form-control"  onchange="sum('quota_child');" ng-class="{ danger: new_student_stat_form.num_childstaff_m.$invalid && new_student_stat_form.num_childstaff_m.$dirty }"name ="num_childstaff_m" type="number" class="form-control" ng-model="result.num_childstaff_m" ng-disabled="choose_not_complete" min="0" required /><span class="normal">  </span>
 
                         </div>
 
                         <div class="col-md-2">
-                            <input type="number" value="47" id="directSum" onchange="sum('direct');" disabled="disabled" class="form-control"><span class="normal">  </span>
+                            <input type="number"  id="quota_child2" onchange="sum('quota_child');" class="form-control" ng-class="{ danger: new_student_stat_form.num_childstaff_f.$invalid && new_student_stat_form.num_childstaff_f.$dirty }"name ="num_childstaff_f" type="number" class="form-control" ng-model="result.num_childstaff_f" ng-disabled="choose_not_complete" min="0" required /> <span class="normal" ></span>
+
+                        </div>
+                        <div class="col-md-2">
+                            <input type="number" id="quota_child_sum" class="form-control" disabled="disabled"><span class="normal">  </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3 style="margin-left:150px;margin-top:0px"><span class="topicHeader">สอบตรง:   </span></h3>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="number"  id="direct1" onchange="sum('direct');" class="form-control" ng-class="{ danger: new_student_stat_form.num_direct_m.$invalid && new_student_stat_form.num_direct_m.$dirty }"name ="num_direct_m" type="number" class="form-control" ng-model="result.num_direct_m" ng-disabled="choose_not_complete" min="0" required /><span class="normal" > </span>
+
+                        </div>
+
+                        <div class="col-md-2">
+                            <input type="number" id="direct2" onchange="sum('direct');" class="form-control" ng-class="{ danger: new_student_stat_form.num_direct_f.$invalid && new_student_stat_form.num_direct_f.$dirty }"name ="num_direct_f" type="number" class="form-control" ng-model="result.num_direct_f" ng-disabled="choose_not_complete" min="0" required /><span class="normal" > </span>
+
+                        </div>
+
+                        <div class="col-md-2">
+                            <input type="number"  id="direct_sum" onchange="sum('direct');" disabled="disabled" class="form-control"><span class="normal">  </span>
 
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-4">
-                            <h3 style="margin-left:180px;margin-top:0px"><span class="topicHeader">แอดมิชชั่น:   </span></h3>
+                            <h3 style="margin-left:150px;margin-top:0px"><span class="topicHeader">แอดมิชชั่น:   </span></h3>
                         </div>
                         <div class="col-md-2">
-                            <input type="number" value="15" id="admission1" onchange="sum('admission');" class="form-control"><span class="normal">  </span>
-
-                        </div>
-
-                        <div class="col-md-2">
-                            <input type="number" value="7" id="admission2" onchange="sum('admission');" class="form-control"><span class="normal">  </span>
+                            <input type="number" id="admission1" onchange="sum('admission');" class="form-control" ng-class="{ danger: new_student_stat_form.num_admis_m.$invalid && new_student_stat_form.num_admis_m.$dirty }"name ="num_admis_m" type="number" class="form-control" ng-model="result.num_admis_m" ng-disabled="choose_not_complete" min="0" required /><span class="normal" > </span>
 
                         </div>
 
                         <div class="col-md-2">
-                            <input type="number" value="22" id="admissionSum" onchange="sum('admission');" disabled="disabled" class="form-control"><span class="normal">  </span>
+                            <input type="number"  id="admission2" onchange="sum('admission');" class="form-control" ng-class="{ danger: new_student_stat_form.num_admis_f.$invalid && new_student_stat_form.num_admis_f.$dirty }"name ="num_admis_f" type="number" class="form-control" ng-model="result.num_admis_f" ng-disabled="choose_not_complete" min="0" required /><span class="normal"  ></span>
+
+                        </div>
+
+                        <div class="col-md-2">
+                            <input type="number"  id="admission_sum" onchange="sum('admission');" disabled="disabled" class="form-control"><span class="normal">  </span>
 
                         </div>
                     </div>
 
+ <div class="row">
+                        <div class="col-md-4">
+                            <h3 style="margin-left:150px;margin-top:0px"><span class="topicHeader">อื่นๆ:   </span></h3>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="number"  id="other1" onchange="sum('other');" class="form-control" ng-class="{ danger: new_student_stat_form.num_others_m.$invalid && new_student_stat_form.num_others_m.$dirty }"name ="num_others_m" type="number" class="form-control" ng-model="result.num_others_m" ng-disabled="choose_not_complete" min="0" required /><span class="normal"  ></span>
+
+                        </div>
+
+                        <div class="col-md-2">
+                            <input type="number" id="other2" onchange="sum('other');" class="form-control" ng-class="{ danger: new_student_stat_form.num_others_f.$invalid && new_student_stat_form.num_others_f.$dirty }"name ="num_others_f" type="number" class="form-control" ng-model="result.num_others_f" ng-disabled="choose_not_complete" min="0" required /> <span class="normal"> </span>
+
+                        </div>
+
+                        <div class="col-md-2">
+                            <input type="number"  id="other_sum" onchange="sum('other');" disabled="disabled" class="form-control"><span class="normal">  </span>
+
+                        </div>
+                    </div>
+</form>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
                             <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
@@ -5177,7 +5203,7 @@ $('.profile_pic').mouseover(function(){
 </form>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-click="save_to_server()">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                         </div>
                     </div>
