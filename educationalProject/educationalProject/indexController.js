@@ -271,7 +271,7 @@ if($scope.select_year_support_text != 0){
 }
 $scope.get_support_content_from_other_year = function () {
     CKEDITOR.instances['support_text'].setData($scope.show_preview_support_text);
-    this.$hide();
+
 
   
     // alert( CKEDITOR.instances['support_text'].getData());
@@ -293,6 +293,7 @@ $scope.download_aun_book = function(){
                  }
              }
          ).success(function (data) {
+        console.log(data);
             $scope.download_file(data);
 
 
@@ -322,7 +323,15 @@ $scope.send_support_text_change_to_server = function(){
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
 
-         });
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    
 }
  $scope.sendSectionSaveAndGetPreviewSupportText = function () {
  console.log("sendSectionSaveAndGetPreviewSupportText");
@@ -386,15 +395,63 @@ console.log($scope.select_year_support_text.aca_year);
          });
     }
 });
+app.controller('add_aca_year', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
+    $scope.init = function(){
+        $scope.curri_choosen = "none";
+               $scope.new_curri_academic = {};
+        $scope.new_curri_academic.aca_year = ""
+ 
+        $scope.error_leaw = false;
+    
+    }
 
+    $scope.add_aca_year_to_server = function(){
+        console.log("add_aca_year_to_server");
+if( $scope.curri_choosen!= "none" && $scope.new_curri_academic.aca_year != ""){
+        $scope.new_curri_academic.curri_id = $scope.curri_choosen.curri_id;
+  console.log($scope.new_curri_academic);
+              $http.post(
+             '/api/curriculumacademic/add',
+             JSON.stringify($scope.new_curri_academic),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            console.log("success");
+                 console.log(data);
+            
+                  $alert({title:'ดำเนินการสำเร็จ', content:'เพิ่มปีการศึกษาเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+         
+
+         })
+         .error(function(data, status, headers, config) {
+                  if(status==400){
+     $alert({title:'เกิดข้อผิดพลาด', content:data.message,alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+
+     }else{
+       $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกหลักสูตรและปีการศึกษา',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+
+     }
+    }
+});
 app.controller('create_curriculum', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
     $scope.init = function(){
-        $scope.new_curri = []
+        $scope.new_curri = {}
 
     }
-    $scope.create_curri = function(dada){
+    $scope.create_curri = function(){
           console.log($scope.new_curri);
-        // $scope.new_curri = {"curri_id":"19",
+
+        if ($scope.new_curri.curr_tname && $scope.new_curri.curr_ename && $scope.new_curri.degree_t_full && $scope.new_curri.degree_t_bf && $scope.new_curri.degree_e_full && $scope.new_curri.degree_e_bf && $scope.new_curri.level && $scope.new_curri.period ){
         // "year":"2546",
         // "curr_tname":"วิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546",
         // "curr_ename":"Curriculum for Bachelor of Engineering Program in Computer",
@@ -403,7 +460,7 @@ app.controller('create_curriculum', function($scope, $http,$alert,$loading,$time
         // "degree_e_full":"Bachelor of Engineering (Computer Engineering)",
         // "degree_e_bf":"B.Eng. (Computer Engineering)",
         // "level":"1",
-        // "period":"4"}
+        // "period":"4")
 
         $scope.new_curri.year= "";
          $http.post(
@@ -418,9 +475,78 @@ app.controller('create_curriculum', function($scope, $http,$alert,$loading,$time
              console.log("success");
                  console.log(data);
                  $rootScope.all_curriculums =data;
+                   $alert({title:'ดำเนินการสำเร็จ', content:'สร้างหลักสูตรเรียบร้อยแล้ว',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
          //เรียกฟังชั่นใน servce ให้อัพเดทค่า
 
 
          });
+    }
+    else{
+          $alert({title:'เกิดข้อผิดพลาด', content:'กรุณากรอกข้อมูลให้ครบถ้วน',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+    }
+}
+});
+
+
+app.controller('stat_graduated_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+}
+      $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+       $scope.sendCurriAndGetYears = function () {
+        $scope.choose_not_complete =true;
+        $scope.year_choosen = {}
+    console.log($scope.curri_choosen);
+      
+        $http.post(
+             '/api/curriculumacademic/getbycurriculum',
+             JSON.stringify($scope.curri_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+             $scope.corresponding_aca_years = data;
+         });
+    }
+
+    $scope.find_information = function(){
+
+          console.log("find_information");
+        console.log($scope.year_choosen);
+
+        $http.post(
+             '/api/curriculumacademic/getbycurriculum',
+             JSON.stringify($scope.year_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+             $scope.result = data;
+             $scope.choose_not_complete = false;
+         });
+
+    }
+
+    $scope.save_to_server = function(){
+        console.log("save_to_server");
+        console.log($scope.result);
+        // $http.post(
+        //      '/api/curriculumacademic/getbycurriculum',
+        //      JSON.stringify($scope.year_choosen),
+        //      {
+        //          headers: {
+        //              'Content-Type': 'application/json'
+        //          }
+        //      }
+        //  ).success(function (data) {
+        //      $scope.result = data;
+        //  });
     }
 });

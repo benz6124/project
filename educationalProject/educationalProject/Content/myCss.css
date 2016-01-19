@@ -797,3 +797,13 @@ table.evaluation th{
 
 
 
+
+.danger{
+   background-color: #d9534f;
+}
+
+
+.little_danger{
+  border:1px solid #d9534f;
+  background-color: white;
+}

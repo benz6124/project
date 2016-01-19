@@ -2437,45 +2437,46 @@ $('.profile_pic').mouseover(function(){
 
 
 
-                    <div id="add_aca_year" data-nq-modal="" data-qo-independent="true">
+                    <div id="add_aca_year" data-nq-modal="" data-qo-independent="true" data-ng-controller="add_aca_year" data-ng-init="init()">
                         <div class="custom-header">
-                            <h1 class="headerModalH1"> เพิ่มปีการศึกษา</h1>
+                            <h1 class="headerModalH1"> เพิ่มปีการศึกษา </h1>
                         </div>
-
+                   <!--      <form name="add_aca_year_form"> -->
+                <!--          <h3 ng-show='add_aca_year_form.$error.required && error_leaw ' style="color:red;margin-top:0px">
+        *กรุณาเลือกหลักสูตร และ กรอกปีการศึกษา
+      </h3> -->
+                      
                         <div class="row">
-                            <div class="col-md-3">
-                                <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">หลักสูตร:   </span></h3>
+                            <div class="col-md-2">
+                                <h3 style="margin-top:5px;"><span class="topicHeader">หลักสูตร:   </span></h3>
                             </div>
 
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <div class="topicHeader">
-                                    <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
-                                        <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
-                                        <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
-                                        <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
-                                        <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                                    </select>
+                                   <select data-qo-disable-clear="true" name = "choose_curri" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true"  >
+                                  </select>
                                 </div>
                             </div>
 
                         </div>
-
+                      
                         <div class="row">
-                            <div class="col-md-3">
-                                <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">ปีการศึกษา: <span></h3>
+                            <div class="col-md-2">
+                                <h3 style="margin-top:5px;"><span class="topicHeader">ปีการศึกษา: <span></h3>
                             </div>
 
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <div class="topicHeader">
-                                    <input type="number" class="form-control" placeholder="กรุณากรอกปีการศึกษา"><span class="normal">  </span>
+                                <form>
+                                    <input type="number" name ="choose_aca_year" class="form-control" ng-model="new_curri_academic.aca_year" placeholder="กรุณากรอกปีการศึกษา"  ><span class="normal">  </span>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-
-
+                    <!--   </form> -->
                         <div class="custom-footer">
                             <div class="topicHeader pull-right">
-                                <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
+                                <button class="btn btn-success  " ng-click="add_aca_year_to_server()">ยืนยัน</button>
                                 <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                             </div>
                         </div>
@@ -2483,17 +2484,18 @@ $('.profile_pic').mouseover(function(){
                     </div>
 
 <!-- create_curriculum controller -->
-                    <div id="create_curri" data-nq-modal="" data-qo-independent="true" data-ng-controller="create_curriculum">
+                    <div id="create_curri" data-nq-modal="" data-qo-independent="true" data-ng-controller="create_curriculum" data-ng-init="init()">
                         <div class="custom-header">
                             <h1 class="headerModalH1">สร้างหลักสูตร</h1>
                         </div>
 
+<form name="create_curri_form" novalidate>
                           <div class="row">
                             <div class="col-md-4">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อหลักสูตรภาษาไทย   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="" ng-model="new_curri.curr_tname" required><span class="normal">  </span>
+                                <input ng-class="{ little_danger: create_curri_form.curr_tname.$invalid && create_curri_form.$dirty }" type="text" name="curr_tname" class="form-control" placeholder="" ng-model="new_curri.curr_tname" required><span class="normal">  </span>
 
                             </div>
                         </div>
@@ -2502,10 +2504,12 @@ $('.profile_pic').mouseover(function(){
                  <div class="col-md-4">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อหลักสูตรภาษาอังกฤษ   </span></h3>
                             </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="" ng-model="new_curri.curr_ename" required><span class="normal">  </span>
+                               <div class="col-md-8">
+                                <input ng-class="{ little_danger: create_curri_form.curr_ename.$invalid && create_curri_form.$dirty }" type="text" name="curr_ename" class="form-control" placeholder="" ng-model="new_curri.curr_ename" required><span class="normal">  </span>
 
                             </div>
+
+                          
                         </div>
 
 
@@ -2513,8 +2517,10 @@ $('.profile_pic').mouseover(function(){
                   <div class="col-md-4">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(ย่อ)   </span></h3>
                             </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder=""  ng-model="new_curri.degree_t_bf" required><span class="normal">  </span>
+                          
+
+                                <div class="col-md-8">
+                                <input ng-class="{ little_danger: create_curri_form.degree_t_bf.$invalid && create_curri_form.$dirty }" type="text" name="degree_t_bf" class="form-control" placeholder="" ng-model="new_curri.degree_t_bf" required><span class="normal">  </span>
 
                             </div>
                         </div>
@@ -2523,8 +2529,10 @@ $('.profile_pic').mouseover(function(){
                   <div class="col-md-4">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(ย่อ)   </span></h3>
                             </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder=""  ng-model="new_curri.degree_e_bf" required><span class="normal">  </span>
+                    
+
+                             <div class="col-md-8">
+                                <input ng-class="{ little_danger: create_curri_form.degree_e_bf.$invalid && create_curri_form.$dirty }" type="text" name="degree_e_bf" class="form-control" placeholder="" ng-model="new_curri.degree_e_bf" required><span class="normal">  </span>
 
                             </div>
                         </div>
@@ -2532,8 +2540,10 @@ $('.profile_pic').mouseover(function(){
                     <div class="col-md-4">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(เต็ม)  </span></h3>
                             </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder=""  ng-model="new_curri.degree_t_full" required><span class="normal">  </span>
+                     
+
+                              <div class="col-md-8">
+                                <input ng-class="{ little_danger: create_curri_form.degree_t_full.$invalid && create_curri_form.$dirty }" type="text" name="degree_t_full" class="form-control" placeholder="" ng-model="new_curri.degree_t_full" required><span class="normal">  </span>
 
                             </div>
                         </div>
@@ -2542,8 +2552,10 @@ $('.profile_pic').mouseover(function(){
                    <div class="col-md-4">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(เต็ม)</span></h3>
                             </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder=""  ng-model="new_curri.degree_e_full" required><span class="normal">  </span>
+                       
+
+                               <div class="col-md-8">
+                                <input ng-class="{ little_danger: create_curri_form.degree_e_full.$invalid && create_curri_form.$dirty }" type="text" name="degree_e_full" class="form-control" placeholder="" ng-model="new_curri.degree_e_full" required><span class="normal">  </span>
 
                             </div>
                         </div>
@@ -2554,7 +2566,7 @@ $('.profile_pic').mouseover(function(){
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ระดับปริญญา </span></h3>
                             </div>
                        <div class="col-md-8">
-                             <select name="staticSelectModel" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา" data-ng-model="new_curri.level" data-qo-disable-clear="true" required>
+                             <select ng-class="{ little_danger: create_curri_form.level.$untouched && create_curri_form.$dirty }" name="level" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา" data-ng-model="new_curri.level" data-qo-disable-clear="true" required>
                               <option value="1">ปริญญาตรี</option>
                               <option  value="2">ปริญญาโท</option>
                               <option value="3">ปริญญาเอก</option>
@@ -2568,17 +2580,18 @@ $('.profile_pic').mouseover(function(){
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ระยะเวลาการเรียน </span></h3>
                             </div>
 
-                            <div class="col-md-8">
-                                <div class="topicHeader">
-                                    <input type="number" class="form-control" placeholder="" data-ng-model="new_curri.period" required><span class="normal">  </span>
-                                </div>
+                     
+
+                                  <div class="col-md-8">
+                                <input ng-class="{ little_danger: create_curri_form.period.$invalid && create_curri_form.$dirty }" type="number" name="period" class="form-control" placeholder="" ng-model="new_curri.period" required><span class="normal">  </span>
+
                             </div>
                         </div>
-
+</form>
                         <div class="custom-footer">
 
                             <div class="topicHeader pull-right">
-                                <button class="btn btn-success  hvr-wobble-vertical" ng-click="create_curri(this)">ยืนยัน</button>
+                                <button class="btn btn-success  hvr-wobble-vertical" ng-disabled="create_curri_form.$invalid" ng-click="create_curri()">ยืนยัน</button>
                                 <button class="btn btn-default hvr-wobble-vertical" ng-click="$hide()">ยกเลิก</button>
                             </div>
                         </div>
@@ -3017,7 +3030,7 @@ $('.profile_pic').mouseover(function(){
                 </div>
 
 
-                <div id="stat_grad" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
+                <div id="stat_grad" data-nq-modal="" data-qo-size="lg" data-qo-independent="true" data-ng-controller="stat_graduated_controller" data-ng-init="init()">
                     <div class="custom-header">
                         <h1 class="headerModalH1">สถิติการจบการศึกษา</h1>
                     </div>
@@ -3026,108 +3039,117 @@ $('.profile_pic').mouseover(function(){
                     <div class="row">
 
 
-                        <div class="col-md-7" style="margin-left:15px">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            </select>
+                        <div class="col-md-8" >
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+            </select>
 
                         </div>
-                        <div class="col-md-3">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
-                                <option>2557</option>
-                                <option>2556</option>
-                                <option>2555</option>
-                                <option>2554</option>
-                                <option>2553</option>
-                                <option>2552</option>
-                                <option>2551</option>
-
-
-                            </select>
+                        <div class="col-md-4" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+</select>   
                         </div>
-
+<!-- 
                         <div class="col-md-1">
-                            <button class="btn btn-primary hvr-rotate" style="margin-bottom:10px"><i class="glyphicon glyphicon-search"></i> ค้นหา</button>
-                        </div>
+                            <button class="btn btn-primary hvr-rotate" style="margin-bottom:10px" ng-click="find_information()"><i class="glyphicon glyphicon-search"></i> ค้นหา</button>
+                        </div> -->
                     </div>
-                    <div style="background-color:#484848">
+
+               <!--      <div style="background-color:#484848">
                         <h3 class="topicHeader" style="text-align:center;color:#FFFFFF;font-style:italic;"> &nbsp; &nbsp; </h3>
-                    </div>
+                    </div> -->
+                    
+                    <div ng-hide="choose_not_complete" >
+                         <br /> 
+                     <form name="graduated_form" novalidate>
                     <div class="row">
-                        <div class="col-md-8">
-                            <h3 style="margin-left:150px;margin-top:0px;"><span class="topicHeader">จำนวนนักศึกษาที่จบภายใน 4 ปี: <span></h3>
+                        <div class="col-md-6">
+                            <h3 style="margin-left:210px;margin-top:3px;"><span class="topicHeader">จำนวนนักศึกษาที่จบภายใน 4 ปี: <span></h3>
                         </div>
-                        <div class="col-md-2" style="margin-right:40px;">
-                            <input type="number" class="form-control"><span class="normal">  </span>
+                        <div class="col-md-3" style="margin-right:60px;">
+                            <input ng-class="{ danger: graduated_form.grad_in_time.$invalid && graduated_form.grad_in_time.$dirty }"name ="grad_in_time" type="number" class="form-control" ng-model="result.grad_in_time" required><span class="normal">  </span>
 
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h3 style="margin-left:150px;margin-top:0px;"><span class="topicHeader">จำนวนนักศึกษาที่จบมากกว่า 4 ปี: <span></h3>
-                        </div>
-                        <div class="col-md-2" style="margin-right:40px;">
-                            <input type="number" class="form-control"><span class="normal">  </span>
-
-                        </div>
+                      
                     </div>
 
+
                     <div class="row">
-                        <div class="col-md-8">
-                            <h3 style="margin-left:150px;margin-top:0px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี1: <span></h3>
+                        <div class="col-md-6">
+                            <h3 style="margin-left:210px;margin-top:6px;"><span class="topicHeader">จำนวนนักศึกษาที่จบมากกว่า 4 ปี: <span></h3>
                         </div>
-                        <div class="col-md-2" style="margin-right:40px;">
-                            <input type="number" class="form-control"><span class="normal">  </span>
+                   
+
+                          <div class="col-md-3" style="margin-right:60px;">
+                            <input ng-class="{ danger: graduated_form.grad_over_time.$invalid && graduated_form.grad_over_time.$dirty }"name ="grad_over_time" type="number" class="form-control" ng-model="result.grad_over_time" required><span class="normal">  </span>
 
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-8">
-                            <h3 style="margin-left:150px;margin-top:0px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี2: <span></h3>
+                        <div class="col-md-6">
+                            <h3 style="margin-left:210px;margin-top:0px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี1: <span></h3>
                         </div>
-                        <div class="col-md-2" style="margin-right:40px;">
-                            <input type="number" class="form-control"><span class="normal">  </span>
+                     
+
+                          <div class="col-md-3" style="margin-right:60px;">
+                            <input ng-class="{ danger: graduated_form.quity1.$invalid && graduated_form.quity1.$dirty }"name ="quity1" type="number" class="form-control" ng-model="result.quity1" required><span class="normal">  </span>
 
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-8">
-                            <h3 style="margin-left:150px;margin-top:0px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี3: <span></h3>
+                        <div class="col-md-6">
+                            <h3 style="margin-left:210px;margin-top:0px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี2: <span></h3>
                         </div>
-                        <div class="col-md-2" style="margin-right:40px;">
-                            <input type="number" class="form-control"><span class="normal">  </span>
+              
+
+                          <div class="col-md-3" style="margin-right:60px;">
+                            <input ng-class="{ danger: graduated_form.quity2.$invalid && graduated_form.quity2.$dirty }"name ="quity2" type="number" class="form-control" ng-model="result.quity2" required><span class="normal">  </span>
 
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-8">
-                            <h3 style="margin-left:150px;margin-top:0px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี4: <span></h3>
+                        <div class="col-md-6">
+                            <h3 style="margin-left:210px;margin-top:0px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี3: <span></h3>
                         </div>
-                        <div class="col-md-2" style="margin-right:40px;">
-                            <input type="number" class="form-control"><span class="normal">  </span>
+                 
+
+                           <div class="col-md-3" style="margin-right:60px;">
+                            <input ng-class="{ danger: graduated_form.quity3.$invalid && graduated_form.quity3.$dirty }"name ="quity3" type="number" class="form-control" ng-model="result.quity3" required><span class="normal">  </span>
 
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-8">
-                            <h3 style="margin-left:150px;margin-top:0px;"><span class="topicHeader">จำนวนนักศึกษาที่ย้ายสาขาวิชามา: <span></h3>
+                        <div class="col-md-6">
+                            <h3 style="margin-left:210px;margin-top:0px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี4: <span></h3>
                         </div>
-                        <div class="col-md-2" style="margin-right:40px;">
-                            <input type="number" class="form-control"><span class="normal">  </span>
+                  
+
+                         <div class="col-md-3" style="margin-right:60px;">
+                            <input ng-class="{ danger: graduated_form.quity4.$invalid && graduated_form.quity4.$dirty }"name ="quity4" type="number" class="form-control" ng-model="result.quity4" required><span class="normal">  </span>
 
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 style="margin-left:210px;margin-top:0px;"><span class="topicHeader">จำนวนนักศึกษาที่ย้ายสาขาวิชามา: <span></h3>
+                        </div>
+            
+
+                        <div class="col-md-3" style="margin-right:60px;">
+                            <input ng-class="{ danger: graduated_form.move_in.$invalid && graduated_form.move_in.$dirty }"name ="move_in" type="number" class="form-control" ng-model="result.move_in" required><span class="normal" required>  </span>
+
+                        </div>
+                    </div>
+                          </form>
+
+                          </div>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
+                            <button ng-disabled="graduated_form.$invalid" class="btn btn-success  " ng-click="save_to_server()">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                         </div>
                     </div>
