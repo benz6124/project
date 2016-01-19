@@ -5,7 +5,7 @@ using System.Web;
 
 namespace educationalProject.Models
 {
-    public class Student_cnt
+    public class Student_count
     {
         protected struct FieldName
         {
@@ -19,7 +19,7 @@ namespace educationalProject.Models
             public static readonly string NY8 = "NY8";
             public static readonly string CURRI_ID = "CURRI_ID";
             public static readonly string YEAR = "YEAR";
-            public static readonly string TABLE_NAME = "STUDENT_CNT";
+            public static readonly string TABLE_NAME = "STUDENT_COUNT";
         }
         private int _ny1;
         private int _ny2;
