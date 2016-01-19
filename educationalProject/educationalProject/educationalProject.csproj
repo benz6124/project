@@ -241,6 +241,7 @@
     <Compile Include="Controllers\EvidenceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndicatorController.cs" />
+    <Compile Include="Controllers\NewStudentCountController.cs" />
     <Compile Include="Controllers\SectionSaveController.cs" />
     <Compile Include="Controllers\StudentCountController.cs" />
     <Compile Include="Controllers\StudentStatusOtherController.cs" />
@@ -259,6 +260,7 @@
     <Compile Include="Models\Evidence_indicator.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Indicator.cs" />
+    <Compile Include="Models\New_student_count.cs" />
     <Compile Include="Models\Others_evaluation.cs" />
     <Compile Include="Models\Primary_evidence.cs" />
     <Compile Include="Models\Research.cs" />
@@ -281,6 +283,7 @@
     <Compile Include="Models\Wrappers\oCu_Curriculum.cs" />
     <Compile Include="Models\Wrappers\oEvidence.cs" />
     <Compile Include="Models\Wrappers\oIndicator.cs" />
+    <Compile Include="Models\Wrappers\oNew_student_count.cs" />
     <Compile Include="Models\Wrappers\oPrimary_evidence.cs" />
     <Compile Include="Models\Wrappers\oResearch.cs" />
     <Compile Include="Models\Wrappers\oSection_save.cs" />

@@ -6,14 +6,14 @@ using System.Data;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
 {
-    public class oStudent_count : Student_count
+    public class oNew_student_count : New_student_count
     {
         public object Select()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            List<oStudent_count> result = new List<oStudent_count>();
+            List<oNew_student_count> result = new List<oNew_student_count>();
             d.iCommand.CommandText = String.Format("select * from {0}", FieldName.TABLE_NAME);
             try
             {
@@ -24,16 +24,18 @@ namespace educationalProject.Models.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        result.Add(new oStudent_count
+                        result.Add(new oNew_student_count
                         {
-                            ny1 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY1].Ordinal]),
-                            ny2 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY2].Ordinal]),
-                            ny3 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY3].Ordinal]),
-                            ny4 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY4].Ordinal]),
-                            ny5 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY5].Ordinal]),
-                            ny6 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY6].Ordinal]),
-                            ny7 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY7].Ordinal]),
-                            ny8 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY8].Ordinal]),
+                            num_admis_f = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_ADMIS_F].Ordinal]),
+                            num_admis_m = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_ADMIS_M].Ordinal]),
+                            num_childstaff_f = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_CHILDSTAFF_F].Ordinal]),
+                            num_childstaff_m = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_CHILDSTAFF_M].Ordinal]),
+                            num_direct_f = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_DIRECT_F].Ordinal]),
+                            num_direct_m = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_DIRECT_M].Ordinal]),
+                            num_goodstudy_f = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_GOODSTUDY_F].Ordinal]),
+                            num_goodstudy_m = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_GOODSTUDY_M].Ordinal]),
+                            num_others_f = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_OTHERS_F].Ordinal]),
+                            num_others_m = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_OTHERS_M].Ordinal]),
                             curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                             year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.YEAR].Ordinal])
                         });
@@ -64,7 +66,7 @@ namespace educationalProject.Models.Wrappers
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            List<oStudent_count> result = new List<oStudent_count>();
+            List<oNew_student_count> result = new List<oNew_student_count>();
             d.iCommand.CommandText = String.Format("select * from {0} where {1}", FieldName.TABLE_NAME, wherecond);
             try
             {
@@ -75,16 +77,18 @@ namespace educationalProject.Models.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        result.Add(new oStudent_count
+                        result.Add(new oNew_student_count
                         {
-                            ny1 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY1].Ordinal]),
-                            ny2 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY2].Ordinal]),
-                            ny3 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY3].Ordinal]),
-                            ny4 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY4].Ordinal]),
-                            ny5 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY5].Ordinal]),
-                            ny6 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY6].Ordinal]),
-                            ny7 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY7].Ordinal]),
-                            ny8 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY8].Ordinal]),
+                            num_admis_f = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_ADMIS_F].Ordinal]),
+                            num_admis_m = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_ADMIS_M].Ordinal]),
+                            num_childstaff_f = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_CHILDSTAFF_F].Ordinal]),
+                            num_childstaff_m = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_CHILDSTAFF_M].Ordinal]),
+                            num_direct_f = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_DIRECT_F].Ordinal]),
+                            num_direct_m = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_DIRECT_M].Ordinal]),
+                            num_goodstudy_f = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_GOODSTUDY_F].Ordinal]),
+                            num_goodstudy_m = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_GOODSTUDY_M].Ordinal]),
+                            num_others_f = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_OTHERS_F].Ordinal]),
+                            num_others_m = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NUM_OTHERS_M].Ordinal]),
                             curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                             year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.YEAR].Ordinal])
                         });
@@ -119,14 +123,14 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = String.Format("IF NOT EXISTS (select * from {0} where {1}='{2}' and {3} = {4}) " +
                                        "BEGIN " +
                                        "INSERT INTO {0} VALUES " +
-                                       "('{2}', {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11},{12}) " +
+                                       "('{2}', {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11},{12},{13},{14}) " +
                                        "END " +
                                        "ELSE " +
                                        "BEGIN " +
-                                       "UPDATE {0} SET {13} = {5},{14} = {6},{15} = {7},{16} = {8},{17} = {9},{18} = {10},{19} = {11},{20} = {12} where {1} = '{2}' and {3} = {4} " +
+                                       "UPDATE {0} SET {15} = {5},{16} = {6},{17} = {7},{18} = {8},{19} = {9},{20} = {10},{21} = {11},{22} = {12},{23} = {13},{24} = {14} where {1} = '{2}' and {3} = {4} " +
                                        "END",
-                FieldName.TABLE_NAME, FieldName.CURRI_ID, curri_id, FieldName.YEAR, year, ny1, ny2, ny3, ny4, ny5, ny6, ny7,ny8,
-                    FieldName.NY1, FieldName.NY2, FieldName.NY3, FieldName.NY4, FieldName.NY5, FieldName.NY6, FieldName.NY7,FieldName.NY8);
+                FieldName.TABLE_NAME, FieldName.CURRI_ID, curri_id, FieldName.YEAR, year,num_goodstudy_m,num_goodstudy_f,num_childstaff_m,num_childstaff_f,num_direct_m,num_direct_f,num_admis_m,num_admis_f,num_others_m,num_others_f,
+                    FieldName.NUM_GOODSTUDY_M, FieldName.NUM_GOODSTUDY_F, FieldName.NUM_CHILDSTAFF_M, FieldName.NUM_CHILDSTAFF_F, FieldName.NUM_DIRECT_M, FieldName.NUM_DIRECT_F, FieldName.NUM_ADMIS_M, FieldName.NUM_ADMIS_F,FieldName.NUM_OTHERS_M,FieldName.NUM_OTHERS_F);
             try
             {
                 int rowAffected = d.iCommand.ExecuteNonQuery();
@@ -136,7 +140,7 @@ namespace educationalProject.Models.Wrappers
                 }
                 else
                 {
-                    return "No student_count are inserted or updated.";
+                    return "No new_student_count are inserted or updated.";
                 }
             }
             catch (Exception ex)

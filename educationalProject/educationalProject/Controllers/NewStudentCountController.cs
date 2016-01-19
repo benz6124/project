@@ -7,22 +7,22 @@ using System.Web.Http;
 using educationalProject.Models.Wrappers;
 namespace educationalProject.Controllers
 {
-    public class StudentCountController : ApiController
+    public class NewStudentCountController : ApiController
     {
-        private oStudent_count datacontext = new oStudent_count();
+        private oNew_student_count datacontext = new oNew_student_count();
         public IHttpActionResult PostByCurriculumAcademic(oCurriculum_academic data)
         {
             object result = datacontext.SelectWhere(string.Format("curri_id = {0} and year = {1}", data.curri_id, data.aca_year));
             if (result.GetType().ToString().CompareTo("System.String") == 0)
                 return InternalServerError(new Exception(result.ToString()));
-            else if (((List<oStudent_count>)result).Count != 0)
+            else if (((List<oNew_student_count>)result).Count != 0)
             {
-                return Ok(((IEnumerable<oStudent_count>)result).First());
+                return Ok(((IEnumerable<oNew_student_count>)result).First());
             }
             else
                 return Ok(datacontext);
         }
-        public IHttpActionResult PutStudentCount(oStudent_count data)
+        public IHttpActionResult PutNewStudentCount(oNew_student_count data)
         {
             object result = data.InsertOrUpdate();
             if (result == null)
