@@ -807,3 +807,7 @@ table.evaluation th{
   border:1px solid #d9534f;
   background-color: white;
 }
+
+table.evidence td.larger:hover{
+  cursor: pointer;
+}

@@ -219,11 +219,13 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
     }
 
     $scope.download_file = function(path) { 
-        window.open(path, '_blank', "width=800, left=260,top=0,height=700");  
+        window.open(path, '_blank', "");  
     }
 
 
-
+    $scope.watch_file = function(path) { 
+        window.open(path, '_blank', "width=800, left=230,top=0,height=700");  
+    }
 
     $scope.sendIndicatorCurriAndGetEvidence = function () {
 
@@ -735,16 +737,50 @@ app.directive('fileUpload', function () {
 
 
 
-app.controller('my_upload_controller', function ctrl($scope, $http) {
+app.controller('upload_aun_controller', function ctrl($scope, $alert,$http) {
+
+    $scope.init =function() {
+        console.log("init");
+     $scope.choose_not_complete = true;
+           $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+  $scope.files = [];
+  
+}
+
+  $scope.find_information = function(){
+
+      
+          $scope.choose_not_complete = false;
+    }
+
+    $scope.file_not_already_upload = function(){
+
+        return $scope.files.length==0;
+    }
+       $scope.sendCurriAndGetYears = function () {
+        $scope.choose_not_complete =true;
+        $scope.year_choosen = {}
+    console.log($scope.curri_choosen);
+      
+        $http.post(
+             '/api/curriculumacademic/getbycurriculum',
+             JSON.stringify($scope.curri_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+             $scope.corresponding_aca_years = data;
+         });
+    }
+
 
     //a simple model to bind to and send to the server
-    $scope.model = {
-        name: "test coconut",
-        comments: "it's me"
-    };
 
-    //an array of files selected
-    $scope.files = [];
+
+
 
     //listen for the file selected event
     $scope.$on("fileSelected", function (event, args) {
@@ -754,7 +790,9 @@ app.controller('my_upload_controller', function ctrl($scope, $http) {
         });
     });
     
-    $scope.save = function() {
+    $scope.save_to_server = function() {
+
+      $scope.model  = {"file_name":"pap","personnel_id":"00007","date":"","curri_id":$scope.curri_choosen.curri_id,"aca_year":$scope.year_choosen.aca_year}
 
       var formData = new FormData();
 
@@ -777,10 +815,44 @@ app.controller('my_upload_controller', function ctrl($scope, $http) {
 
         }).
         success(function (data, status, headers, config) {
-            alert("success!");
+                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
         }).
         error(function (data, status, headers, config) {
-            alert("failed!");
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
     };
 });
+
+
+ // $scope.save = function() {
+
+ //      $scope.model  = {"file_name":"","personnel_id":"00007","date":"","curri_id":curri_choosen.curri_id,"aca_year":year_choosen.aca_year}
+
+ //      var formData = new FormData();
+
+ //    formData.append("model", angular.toJson($scope.model));
+
+ //        for (var i = 0; i < $scope.files.length; i++) {
+        
+ //            formData.append("file" + i, $scope.files[i]);
+ //        }
+
+ //        $http({
+ //            method: 'POST',
+ //            url: "/Api/aunbook",
+
+ //            headers: { 'Content-Type': undefined },
+
+
+ //            data:formData,
+ //            transformRequest: angular.indentity 
+
+ //        }).
+ //        success(function (data, status, headers, config) {
+ //            alert("success!");
+ //        }).
+ //        error(function (data, status, headers, config) {
+ //            alert("failed!");
+ //        });

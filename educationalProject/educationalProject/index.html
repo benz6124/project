@@ -519,7 +519,7 @@ $('.profile_pic').mouseover(function(){
 
                         <tr ng-repeat="evidence in corresponding_evidences">
                             <td class="code">{{indicator_choosen.indicator_num}}-<span ng-hide="$index+1>=10">0</span>{{$index+1}}</td>
-                            <td class="larger hvr-wobble-vertical" ng-click="download_file(evidence.file_name)">{{evidence.evidence_name}}</td>
+                            <td class="larger" ng-click="watch_file(evidence.file_name)"><a href="" class=" hvr-grow">{{evidence.evidence_name}}</a></td>
                             <td class="download"><a href="" ng-click="download_file(evidence.file_name)" ng-hide="evidence.secret==1"class=" hvr-wobble-vertical"><span class="glyphicon glyphicon-download-alt " /></a></td>
                         </tr>
                  <!--        <tr>
@@ -2379,55 +2379,60 @@ $('.profile_pic').mouseover(function(){
                
 
 
-                    <div id="upload_aun" data-nq-modal="" data-ng-controller="my_upload_controller" data-qo-size="md" data-qo-independent="true">
+                    <div id="upload_aun" data-nq-modal="" data-ng-controller="upload_aun_controller" data-qo-size="lg" data-qo-independent="true" data-ng-init="init()">
 
 
-    <input type="file" file-upload multiple/>
+<!--     <input type="file" file-upload multiple/>
     <ul>
         <li ng-repeat="file in files">{{file.name}}</li>
     </ul>
-    <button ng-click="save()"></button>
+    <button ng-click="save()"></button> -->
 
-                    <!--     <div class="custom-header">
+                        <div class="custom-header">
                             <h1 class="headerModalH1"> อัพโหลดเล่มรายงานการประเมินตนเอง</h1>
                         </div>
-
+ <form name="upload_aun_form" novalidate>
                         <div class="row">
 
 
                             <div class="col-md-8">
-                             <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                             <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
             </select>
 
                         
                         </div>
                         <div class="col-md-4">
-                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="chooseYear(year_choosen)" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" data-ng-click="check_curri()">
+                         
+
+                                     <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" name="choose_year_select"  required>
 </select>    
                            </div>
                         </div>
 
-                         <div style="background-color:#484848">
+                      <!--    <div style="background-color:#484848">
                             <h3 class="topicHeader" style="text-align:center;color:#FFFFFF;font-style:italic;"> &nbsp; &nbsp; </h3>
-                        </div> 
+                        </div>  -->
                         <br />
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">ไฟล์เล่มรายงาน:  </span></h3>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-10">
                               
-                                <input type="file" class="form-control" placeholder="ไฟล์เล่มรายงาน" file-upload multiple/>
+                                <input type="file" name="upload_file_input" class="form-control" placeholder="ไฟล์เล่มรายงาน" file-upload  data-ng-model="files" ng-disabled="choose_not_complete" required/>
                             </div>
 
                         </div>
-
+                              
+</form>
                         <div class="custom-footer">
                             <div class="topicHeader pull-right">
-                                <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
+
+
+                                <button class="btn btn-success  " ng-disabled="file_not_already_upload() || choose_not_complete  " ng-click="save_to_server()">ยืนยัน</button>
                                 <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                             </div>
-                        </div> -->
+                        </div>
 
                     </div>
 
