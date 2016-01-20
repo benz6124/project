@@ -267,3 +267,4 @@ C:\Users\SiS_M7\Desktop\newProject\project\educationalProject\educationalProject
 C:\Users\SiS_M7\Desktop\newProject\project\educationalProject\educationalProject\bin\System.Web.Http.Owin.xml
 C:\Users\SiS_M7\Desktop\newProject\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 C:\Users\SiS_M7\Desktop\newProject\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb
+C:\Users\SiS_M7\Desktop\newProject\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache

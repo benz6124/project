@@ -519,7 +519,7 @@ $('.profile_pic').mouseover(function(){
 
                         <tr ng-repeat="evidence in corresponding_evidences">
                             <td class="code">{{indicator_choosen.indicator_num}}-<span ng-hide="$index+1>=10">0</span>{{$index+1}}</td>
-                            <td class="larger">{{evidence.evidence_name}}</td>
+                            <td class="larger hvr-wobble-vertical" ng-click="download_file(evidence.file_name)">{{evidence.evidence_name}}</td>
                             <td class="download"><a href="" ng-click="download_file(evidence.file_name)" ng-hide="evidence.secret==1"class=" hvr-wobble-vertical"><span class="glyphicon glyphicon-download-alt " /></a></td>
                         </tr>
                  <!--        <tr>

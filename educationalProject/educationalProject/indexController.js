@@ -219,7 +219,7 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
     }
 
     $scope.download_file = function(path) { 
-        window.open(path, '_blank', '');  
+        window.open(path, '_blank', "width=800, left=260,top=0,height=700");  
     }
 
 
