@@ -519,7 +519,7 @@ table.table_modal th{
   font-size: 23px !important;
   text-align: center;
   color: #6F002B;
-  background-color: #E8E8E8   ;
+  background-color: #cccccc   ;
 }
 
 table.table_modal td,table.table_modal td div{
@@ -565,9 +565,9 @@ button.plusgreen:hover{
   background-color:#6F002B !important;
 
 }
-.panel-heading{
+/*.panel-heading{
   background-color: #808080 !important;
-}
+}*/
 
 .modal-backdrop
 {
@@ -816,13 +816,28 @@ table.evaluate_aun td{
    padding:0px !important; 
      margin:0px !important;
      padding-left: 10px !important;
+     padding-top: 5px!important;
+     padding-bottom: 5px!important;
      vertical-align: middle !important;
+      background-color: #F4F4F4  ;
 }
-
+table.evaluate_aun th{
+  background-color: #6F002B;
+  color:white;
+  font-weight: normal;
+}
 table.evaluate_aun .point{
   width: 50px;
 }
 
 table.evaluate_aun .topic_evaluation{
   width: 500px;
+}
+
+.panel{
+  height: 500px;
+}
+
+.panel-footer{
+  height: 0px!important;
 }
