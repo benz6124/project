@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Newtonsoft.Json.Linq;
 using educationalProject.Models.Wrappers;
+using educationalProject.Models;
 namespace educationalProject.Controllers
 {
     public class EvidenceController : ApiController

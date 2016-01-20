@@ -21,13 +21,5 @@ namespace educationalProject.Controllers
             };
             return Ok(datacontext.SelectByIndicatorAndCurriculum(data, obj["curri_id"].ToString()));
         }
-       /* public IHttpActionResult Get()
-        {
-            oIndicator i = new oIndicator();
-            i.indicator_num = 15;
-            i.aca_year = 2558;
-            return Ok(datacontext.SelectByIndicatorAndCurriculum(i, "21"));
-           // return Ok(Convert.ToDateTime("2015-12-31",).GetDateTimeFormats()[3]);
-        }*/
     }
 }

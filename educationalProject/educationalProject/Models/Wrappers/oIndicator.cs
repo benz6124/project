@@ -14,7 +14,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oIndicator> result = new List<oIndicator>();
-            d.iCommand.CommandText = String.Format("select * from {0}",FieldName.TABLE_NAME);
+            d.iCommand.CommandText = string.Format("select * from {0}",FieldName.TABLE_NAME);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -28,7 +28,8 @@ namespace educationalProject.Models.Wrappers
                         {
                             aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
                             indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
-                            indicator_name = item.ItemArray[data.Columns[FieldName.INDICATOR_NAME].Ordinal].ToString()
+                            indicator_name_t = item.ItemArray[data.Columns[FieldName.INDICATOR_NAME_T].Ordinal].ToString(),
+                            indicator_name_e = item.ItemArray[data.Columns[FieldName.INDICATOR_NAME_E].Ordinal].ToString()
                         });
                     }
                     res.Close();
@@ -72,7 +73,8 @@ namespace educationalProject.Models.Wrappers
                         {
                             aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
                             indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
-                            indicator_name = item.ItemArray[data.Columns[FieldName.INDICATOR_NAME].Ordinal].ToString()
+                            indicator_name_t = item.ItemArray[data.Columns[FieldName.INDICATOR_NAME_T].Ordinal].ToString(),
+                            indicator_name_e = item.ItemArray[data.Columns[FieldName.INDICATOR_NAME_E].Ordinal].ToString()
                         });
                     }
                     res.Close();
@@ -118,7 +120,8 @@ namespace educationalProject.Models.Wrappers
                         {
                             aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
                             indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
-                            indicator_name = item.ItemArray[data.Columns[FieldName.INDICATOR_NAME].Ordinal].ToString()
+                            indicator_name_t = item.ItemArray[data.Columns[FieldName.INDICATOR_NAME_T].Ordinal].ToString(),
+                            indicator_name_e = item.ItemArray[data.Columns[FieldName.INDICATOR_NAME_E].Ordinal].ToString()
                         });
                     }
                     res.Close();

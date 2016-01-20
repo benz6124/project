@@ -5,7 +5,7 @@ using System.Web;
 
 namespace educationalProject.Models.ViewModels
 {
-    public class vSelf_evaluation_teacher : vSelf_evaluation
+    public class vSelf_evaluation_teacher : Self_evaluation
     {
         private string _t_name;
         public string t_name { get { return _t_name; } set { _t_name = value; } }
