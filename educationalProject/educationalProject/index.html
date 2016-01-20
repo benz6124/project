@@ -12,6 +12,7 @@
 <!--     // <script type="text/javascript" src="/app/app.js"></script>
     // <script type="text/javascript" src="/app/controllers/indexController.js"></script> -->
  <link rel="stylesheet"  type="text/css"  href="//fonts.googleapis.com/css?family=Quicksand"/>
+<!--  // <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script> -->
     <link rel="shortcut icon" href="/bower_components/quantumui/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/bower_components/quantumui/images/favicon.ico" type="image/x-icon">
     <link href="/bower_components/hover/css/hover.css" rel="stylesheet" media="all">
@@ -3404,21 +3405,9 @@ $('.profile_pic').mouseover(function(){
                     </div>
                 </div>
 
+ 
 
-<div id="evaluate_me2" data-nq-modal="" data-qo-screen-mode="true" data-qo-independent="true">
- <div class="custom-header">
-                        <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>   <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>
-                    </div>
- <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>
-                     <div class="custom-footer">
-                        <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
-                        </div>
-                    </div>
-
-</div>
-                <div id="evaluate_me" data-nq-modal="" data-qo-screen-mode="true" data-qo-independent="true">
+                <div id="evaluate_me" data-nq-modal="" data-ng-controller="evaluate_by_me_controller" data-ng-init = "init()"data-qo-screen-mode="true" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>
                     </div>
@@ -3427,37 +3416,19 @@ $('.profile_pic').mouseover(function(){
                 <div class="row">
 
 
-                            <div class="col-md-6">
-                             <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
+                          <div class="col-md-6" >
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             </select>
 
-                        
                         </div>
-                        <div class="col-md-2">
-                         
-
-                                     <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" name="choose_year_select"  required>
-</select>    
-                           </div>
+                        <div class="col-md-2" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+</select>   
+                        </div>
   <div class="col-md-4">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหัวข้อที่ต้องการประเมิน" data-ng-model="staticSelectModel">
-                                <option>AUN 1 ผลการเรียนรู้ที่คาดหวัง</option>
-                                <option>AUN 2 ข้อกำหนดของหลักสูตร</option>
-                                <option>AUN 3 โครงสร้างและเนื้อหาของหลักสูตร</option>
-                                <option>AUN 4 กลยุทธ์การเรียนและการสอน</option>
-                                <option>AUN 5 การประเมินผู้เรียน</option>
-                                <option>AUN 6 คุณภาพบุคลากรสายวิชาการ</option>
-                                <option>AUN 7 คุณภาพบุคลากรสายสนับสนุน</option>
-                                <option>AUN 8 คุณภาพผู้เรียน</option>
-                                <option>AUN 9 การสนับสนุนและการให้คำปรึกษาผู้เรียน</option>
-                                <option>AUN 10 สิ่งอำนวยความสะดวกและโครงสร้างพื้นฐาน</option>
-                                <option>AUN 11 การประกันคุณภาพกระบวนการเรียนการสอน</option>
-                                <option>AUN 12 กิจกรรมพัฒนาบุคลากร</option>
-                                <option>AUN 13 ข้อมูลป้อนกลับจากผู้มีส่วนได้ส่วนเสีย</option>
-                                <option>AUN 14 ผลผลิต</option>
-                                <option>AUN 15 ความพึงพอใจของผู้มีส่วนได้ส่วนเสีย</option>
 
-                            </select>
+      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+</select>   
 
 
                         </div>
@@ -3466,25 +3437,14 @@ $('.profile_pic').mouseover(function(){
 
                         </div>
 
-                 <!--    <div class="row">
-                        <div class="col-md-3" style="margin-left:40px">
-                            <h3 style="margin-top:0px;"><span class="topicHeader">หัวข้อที่ต้องการประเมิน:  </span></h3>
-                        </div>
-
-                      
-
-                    </div> -->
                     <div class="container-fluid">
                         <div class="clearfix">
 <br />
 
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
                                  data-qo-selectable="true">
-                           <!--      <div class="panel-heading clearfix">
-                                  
-                                </div> -->
-
-                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="800px" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+              
+                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
                                     <table class="table table-bordered table-hover bg-white table_modal evaluate_aun">
                                       
@@ -3503,112 +3463,26 @@ $('.profile_pic').mouseover(function(){
                                             </tr>
                                         </thead>
                                         <tbody class="flattened">
-                                            <!--pageable-repeat is required sub directive-->
-                                            <tr>
-                                                <td>5.1</td>
+                                        <form name="evaluate_by_me_form" novalidate>
+                                            <!--pageable-repeat is required sub directive
+
+
+                                            <tr data-ng-repeat="result in corresponding_results">
+                                                <td>{{indicator_choosen.indicator_num}}.{{result.sub_indicator.}}</td>
                                                 <td class="left_column">มีการประเมินตั้งแต่การรับเข้า การติดตามความก้าวหน้าระหว่างการศึกษาและเมื่อสำเร็จการศึกษา</td>
 
 
-                                                <td><input type="radio" name="num51"> </td>
-                                                <td><input type="radio" name="num51"> </td>
-                                                <td><input type="radio" name="num51"> </td>
-                                                <td><input type="radio" name="num51"> </td>
-                                                <td><input type="radio" name="num51"> </td>
-                                                <td><input type="radio" name="num51"> </td>
-                                                <td><input type="radio" name="num51"> </td>
+                                                <td><input type="radio"  value="7" data-ng-model="result.point"> </td>
+                                                <td><input type="radio"  value="6"> </td>
+                                                <td><input type="radio" value="5"> </td>
+                                                <td><input type="radio"  value="4"> </td>
+                                                <td><input type="radio"  value="3"> </td>
+                                                <td><input type="radio" value="2"> </td>
+                                                <td><input type="radio" value="1"> </td>
 
                                             </tr>
-
-
-                                            <tr>
-                                                <td>5.2</td>
-                                                <td class="left_column">การประเมินมีเกณฑ์อ้างอิง</td>
-
-
-                                                <td><input type="radio" name="num52"> </td>
-                                                <td><input type="radio" name="num52"> </td>
-                                                <td><input type="radio" name="num52"> </td>
-                                                <td><input type="radio" name="num52"> </td>
-                                                <td><input type="radio" name="num52"> </td>
-                                                <td><input type="radio" name="num52"> </td>
-                                                <td><input type="radio" name="num52"> </td>
-
-                                            </tr>
-
-                                            <tr>
-                                                <td>5.3</td>
-                                                <td class="left_column">การประเมินใช้วิธีการที่หลากหลาย</td>
-
-
-                                                <td><input type="radio" name="num53"> </td>
-                                                <td><input type="radio" name="num53"> </td>
-                                                <td><input type="radio" name="num53"> </td>
-                                                <td><input type="radio" name="num53"> </td>
-                                                <td><input type="radio" name="num53"> </td>
-                                                <td><input type="radio" name="num53"> </td>
-                                                <td><input type="radio" name="num53"> </td>
-
-                                            </tr>
-
-                                            <tr>
-                                                <td>5.4</td>
-                                                <td class="left_column">การประเมินสะท้อนผลการเรียนรู้ที่คาดหวังแลพเนื้อหาของหลักสูตร</td>
-
-
-                                                <td><input type="radio" name="num54"> </td>
-                                                <td><input type="radio" name="num54"> </td>
-                                                <td><input type="radio" name="num54"> </td>
-                                                <td><input type="radio" name="num54"> </td>
-                                                <td><input type="radio" name="num54"> </td>
-                                                <td><input type="radio" name="num54"> </td>
-                                                <td><input type="radio" name="num54"> </td>
-
-                                            </tr>
-
-                                            <tr>
-                                                <td>5.5</td>
-                                                <td class="left_column">เกณฑ์ที่ใช้ประเมินมีความชัดเจนและเป็นที่รับรู้</td>
-
-
-                                                <td><input type="radio" name="num55"> </td>
-                                                <td><input type="radio" name="num55"> </td>
-                                                <td><input type="radio" name="num55"> </td>
-                                                <td><input type="radio" name="num55"> </td>
-                                                <td><input type="radio" name="num55"> </td>
-                                                <td><input type="radio" name="num55"> </td>
-                                                <td><input type="radio" name="num55"> </td>
-
-                                            </tr>
-
-                                            <tr>
-                                                <td>5.6</td>
-                                                <td class="left_column">วิธีการประเมินครอบคลุมวัตถุประสงค์ของหลักสูตร</td>
-
-
-                                                <td><input type="radio" name="num56"> </td>
-                                                <td><input type="radio" name="num56"> </td>
-                                                <td><input type="radio" name="num56"> </td>
-                                                <td><input type="radio" name="num56"> </td>
-                                                <td><input type="radio" name="num56"> </td>
-                                                <td><input type="radio" name="num56"> </td>
-                                                <td><input type="radio" name="num56"> </td>
-
-                                            </tr>
-
-                                            <tr>
-                                                <td>5.7</td>
-                                                <td class="left_column">มาตรฐานที่ใช้ในการประเมินมีความชัดเจนและคงเส้นคงวา</td>
-
-
-                                                <td><input type="radio" name="num57"> </td>
-                                                <td><input type="radio" name="num57"> </td>
-                                                <td><input type="radio" name="num57"> </td>
-                                                <td><input type="radio" name="num57"> </td>
-                                                <td><input type="radio" name="num57"> </td>
-                                                <td><input type="radio" name="num57"> </td>
-                                                <td><input type="radio" name="num57"> </td>
-
-                                            </tr>
+-->
+                                            </form>
                                         </tbody>
 
                                     </table>
@@ -3625,12 +3499,13 @@ $('.profile_pic').mouseover(function(){
 
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="evaluate_by_me_form.$invalid" ng-click="save_to_server()">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                         </div>
-                    </div>
+                    </div> 
                 </div>
 
+ 
                 <div id="upload_evidence" data-nq-modal="" data-qo-size="md" data-qo-independent="true">
                     <div class="custom-header">
 

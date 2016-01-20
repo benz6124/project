@@ -735,7 +735,91 @@ app.directive('fileUpload', function () {
     };
 });
 
+app.controller('evaluate_by_me_controller', function ctrl($scope, $alert,$http) {
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+}
+      $scope.year_choosen = {};
+              $scope.curri_choosen = {};
+$scope.indicator_choosen = {};
 
+       $scope.sendCurriAndGetYears = function () {
+        $scope.choose_not_complete =true;
+        $scope.year_choosen = {}
+    console.log($scope.curri_choosen);
+      
+        $http.post(
+             '/api/curriculumacademic/getbycurriculum',
+             JSON.stringify($scope.curri_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+             $scope.corresponding_aca_years = data;
+         });
+    }
+
+    $scope.find_indicators = function(){
+
+          console.log("find_indicators");
+        console.log($scope.year_choosen);
+
+        $http.post(
+             '/api/indicator',
+             JSON.stringify($scope.year_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            console.log("wait corresponding_indicators");
+            console.log(data);
+             $scope.corresponding_indicators = data;
+         });
+
+    }
+
+    $scope.get_results= function(){
+        console.log($scope.indicator_choosen);
+        $scope.indicator_choosen.curri_id = $scope.curri_choosen.curri_id ;
+        $http.post(
+             '/api/indicator',
+             JSON.stringify($scope.year_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+           
+             $scope.corresponding_results = data;
+         });
+
+    }
+
+    $scope.save_to_server = function(){
+
+        $http.post(
+             '/api/indicator',
+             JSON.stringify($scope.corresponding_results),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+              $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+         })
+         .error(function (data, status, headers, config) {
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        });
+    }
+});
 
 app.controller('upload_aun_controller', function ctrl($scope, $alert,$http) {
 
@@ -815,8 +899,13 @@ app.controller('upload_aun_controller', function ctrl($scope, $alert,$http) {
 
         }).
         success(function (data, status, headers, config) {
+    
+                $scope.files = [];
+             
+
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+           
         }).
         error(function (data, status, headers, config) {
             $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',

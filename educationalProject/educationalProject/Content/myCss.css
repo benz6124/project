@@ -71,7 +71,7 @@ button{
 .aside-body li a:visited,.aside-body li a:hover{
   background-color: #6F002B;
   color:#E0E0E0;
-  font-weight: bold;
+
 
 }
 
@@ -270,6 +270,20 @@ span.topic{
   background-color:#D3D3D3;
 }
 */
+input[type='file']{
+   font-family:  "FreesiaUPC" !important;
+  font-size: 18px !important;
+  vertical-align: middle !important;
+  line-height:1px;
+}
+ input[type='file']::-webkit-file-upload-button { 
+
+  font-family:  "FreesiaUPC" !important;
+  font-size: 18px !important;
+  vertical-align: middle !important;
+  line-height:1;
+
+}
  input[type='text'] { 
 
   font-family:  "FreesiaUPC";
@@ -358,7 +372,7 @@ td button li label{
      position: absolute;
           top: 50%;
           right: -200px;
-          margin-top: -27px;
+          margin-top: -24.5px;
          padding-left: 0px;
          text-align: center;
      
@@ -384,7 +398,7 @@ td button li label{
     }
 
     ul.dropdown li:hover{
-      font-weight: bold;
+
       color: white;
 
     }
@@ -610,8 +624,8 @@ padding-top: 4px!important;
 padding-bottom: 4px!important;
 }
 .panel-default{
-  margin-bottom:0px !important;
-  padding-top: 10px !important;
+  /*margin-bottom:0px !important;
+  padding-top: 10px !important;*/
 }
 
 
@@ -822,7 +836,7 @@ table.evaluate_aun td{
       background-color: #F4F4F4  ;
 }
 table.evaluate_aun th{
-  background-color: #6F002B;
+  background-color: #800031;
   color:white;
   font-weight: normal;
 }
@@ -834,10 +848,11 @@ table.evaluate_aun .topic_evaluation{
   width: 500px;
 }
 
-.panel{
-  height: 500px;
-}
 
 .panel-footer{
   height: 0px!important;
+}
+
+.modal-body{
+  max-height: 100%!important;
 }
