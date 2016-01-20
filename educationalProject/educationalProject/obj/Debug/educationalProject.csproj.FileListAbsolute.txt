@@ -32,11 +32,7 @@ D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.dll
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Host.SystemWeb.dll
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.Cookies.dll
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.dll
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.Facebook.dll
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.Google.dll
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.OAuth.dll
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.Twitter.dll
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Web.Infrastructure.dll
 D:\4D\project\educationalProject\educationalProject\bin\Newtonsoft.Json.dll
 D:\4D\project\educationalProject\educationalProject\bin\Owin.dll
@@ -78,12 +74,8 @@ D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AspNet.Identit
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.xml
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Host.SystemWeb.xml
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.xml
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.Facebook.xml
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.Cookies.xml
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.OAuth.xml
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.Google.xml
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.Twitter.xml
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\4D\project\educationalProject\educationalProject\bin\System.Web.Http.Owin.xml
 D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb
