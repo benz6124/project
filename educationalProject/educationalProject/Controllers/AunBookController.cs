@@ -30,14 +30,14 @@ namespace educationalProject.Controllers
         //        return InternalServerError(new Exception(result.ToString()));
         //}
 
-        public async Task<IHttpActionResult> PostForUpload()
+        public async Task<IHttpActionResult> PutForUpload()
         {
             //if (!Request.Content.IsMimeMultipartContent())
             //{
             //    return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType,Request);
             //}
 
-            string savepath = "D:\\";
+            string savepath = HttpContext.Current.Server.MapPath("~/download/aunbook");
             var result = new MultipartFormDataStreamProvider(savepath);
 
             try
