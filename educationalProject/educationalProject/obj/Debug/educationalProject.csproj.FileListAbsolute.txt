@@ -17,13 +17,6 @@ D:\4D\project\educationalProject\educationalProject\bin\educationalProject.pdb
 D:\4D\project\educationalProject\educationalProject\bin\Antlr3.Runtime.dll
 D:\4D\project\educationalProject\educationalProject\bin\EntityFramework.dll
 D:\4D\project\educationalProject\educationalProject\bin\EntityFramework.SqlServer.dll
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AI.Agent.Intercept.dll
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AI.DependencyCollector.dll
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AI.PerfCounterCollector.dll
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AI.ServerTelemetryChannel.dll
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AI.Web.dll
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AI.WindowsServer.dll
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.ApplicationInsights.dll
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AspNet.Identity.Core.dll
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AspNet.Identity.Owin.dll
@@ -48,11 +41,6 @@ D:\4D\project\educationalProject\educationalProject\bin\System.Web.WebPages.Depl
 D:\4D\project\educationalProject\educationalProject\bin\System.Web.WebPages.dll
 D:\4D\project\educationalProject\educationalProject\bin\System.Web.WebPages.Razor.dll
 D:\4D\project\educationalProject\educationalProject\bin\WebGrease.dll
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AI.DependencyCollector.xml
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AI.ServerTelemetryChannel.xml
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AI.Web.xml
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AI.WindowsServer.xml
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.ApplicationInsights.xml
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\4D\project\educationalProject\educationalProject\bin\Newtonsoft.Json.xml
 D:\4D\project\educationalProject\educationalProject\bin\System.Net.Http.Formatting.xml
