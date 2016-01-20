@@ -47,7 +47,7 @@ namespace educationalProject.Controllers
                 await Request.Content.ReadAsMultipartAsync(result);
 
                 //READ JSON DATA PART
-                JObject datareceive = JObject.Parse(result.FormData.GetValues(result.FormData[0])[0]);
+                JObject datareceive = JObject.Parse(result.FormData.GetValues(result.FormData.AllKeys[0])[0]);
                 datacontext.aca_year = Convert.ToInt32(datareceive["aca_year"]);
                 datacontext.curri_id = datareceive["curri_id"].ToString();
                 datacontext.date = DateTime.Now.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
@@ -56,7 +56,8 @@ namespace educationalProject.Controllers
                 //GET FILENAME WITH CHANGE FILENAME TO HAVE ITS EXTENSION
                 MultipartFileData file = result.FileData[0];
                 FileInfo fileInfo = new FileInfo(file.LocalFileName);
-                string newfilename = datacontext.file_name = string.Format("{0}.{1}", fileInfo.Name.Substring(9),file.Headers.ContentDisposition.FileName.Split('.').LastOrDefault().Split('\"').FirstOrDefault());
+                string newfilename = string.Format("{0}.{1}", fileInfo.Name.Substring(9),file.Headers.ContentDisposition.FileName.Split('.').LastOrDefault().Split('\"').FirstOrDefault());
+                datacontext.file_name = "download/aunbook/"+ newfilename;
                 File.Move(string.Format("{0}/{1}", savepath, fileInfo.Name), string.Format("{0}/{1}", savepath , newfilename));
 
                 object resultfromdb = datacontext.InsertOrUpdate();
