@@ -175,6 +175,7 @@
     <Compile Include="Controllers\IndicatorController.cs" />
     <Compile Include="Controllers\NewStudentCountController.cs" />
     <Compile Include="Controllers\SectionSaveController.cs" />
+    <Compile Include="Controllers\SelfEvaluationController.cs" />
     <Compile Include="Controllers\StudentCountController.cs" />
     <Compile Include="Controllers\StudentStatusOtherController.cs" />
     <Compile Include="Controllers\SubIndicatorController.cs" />
@@ -208,8 +209,10 @@
     <Compile Include="Models\User_type.cs" />
     <Compile Include="Models\ViewModels\Evaluation_overall_result.cs" />
     <Compile Include="Models\ViewModels\vOthers_evaluation_assessor.cs" />
+    <Compile Include="Models\ViewModels\vSelf_evaluation_sub_indicator_name.cs" />
     <Compile Include="Models\ViewModels\vSelf_evaluation_teacher.cs" />
     <Compile Include="Models\ViewModels\Wrappers\oEvaluation_overall_result.cs" />
+    <Compile Include="Models\ViewModels\Wrappers\oSelf_evaluation_sub_indicator_name.cs" />
     <Compile Include="Models\Wrappers\oAun_book.cs" />
     <Compile Include="Models\Wrappers\oCurriculum_academic.cs" />
     <Compile Include="Models\Wrappers\oCu_Curriculum.cs" />
