@@ -84,6 +84,46 @@ namespace educationalProject.Models.Wrappers
                 d.SQLDisconnect();
             }
         }
+        public object InsertOrUpdate()
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+
+            d.iCommand.CommandText = String.Format("IF NOT EXISTS (select * from {0} where {1}='{2}' and {3} = {4}) " +
+                                       "BEGIN " +
+                                       "INSERT INTO {0} VALUES " +
+                                       "('{2}', {4}, {5}, {6}, {7}) " +
+                                       "END " +
+                                       "ELSE " +
+                                       "BEGIN " +
+                                       "UPDATE {0} SET {8} = {5},{9} = {6},{10} = {7} where {1} = '{2}' and {3} = {4} " +
+                                       "END",
+                    FieldName.TABLE_NAME, FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year, file_name, personnel_id, date, 
+                    FieldName.FILE_NAME, FieldName.PERSONNEL_ID, FieldName.DATE);
+            try
+            {
+                int rowAffected = d.iCommand.ExecuteNonQuery();
+                if (rowAffected == 1)
+                {
+                    return null;
+                }
+                else
+                {
+                    return "No aun_book are inserted or updated.";
+                }
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+        }
 
     }
 }
