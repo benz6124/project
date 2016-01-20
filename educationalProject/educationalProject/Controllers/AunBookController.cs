@@ -18,26 +18,26 @@ namespace educationalProject.Controllers
             object result = datacontext.SelectFileDownloadLink(string.Format("curri_id = '55' and aca_year = 2560"));
             return Ok(datacontext.file_name);
         }
-        public IHttpActionResult PostToQueryDownloadLinkByCurriculumAcademic(oCurriculum_academic data)
-        {
-            if (data.curri_id == null) return BadRequest();
-            object result = datacontext.SelectFileDownloadLink(string.Format("curri_id = '{0}' and aca_year = {1}",data.curri_id,data.aca_year));
-            if (result == null)
-                return Ok(datacontext.file_name);
-            else if(result.ToString().Contains("notfound"))
-                return BadRequest("ไม่พบข้อมูลเล่ม AUN ในหลักสูตร-ปีการศึกษาที่เลือก");
-            else
-                return InternalServerError(new Exception(result.ToString()));
-        }
+        //public IHttpActionResult PostToQueryDownloadLinkByCurriculumAcademic(oCurriculum_academic data)
+        //{
+        //    if (data.curri_id == null) return BadRequest();
+        //    object result = datacontext.SelectFileDownloadLink(string.Format("curri_id = '{0}' and aca_year = {1}",data.curri_id,data.aca_year));
+        //    if (result == null)
+        //        return Ok(datacontext.file_name);
+        //    else if(result.ToString().Contains("notfound"))
+        //        return BadRequest("ไม่พบข้อมูลเล่ม AUN ในหลักสูตร-ปีการศึกษาที่เลือก");
+        //    else
+        //        return InternalServerError(new Exception(result.ToString()));
+        //}
 
-        public async Task<IHttpActionResult> PutForUpload()
+        public async Task<IHttpActionResult> PostForUpload()
         {
             //if (!Request.Content.IsMimeMultipartContent())
             //{
             //    return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType,Request);
             //}
 
-            string savepath = HttpContext.Current.Server.MapPath("~/download/aunbook");
+            string savepath = "D:\\";
             var result = new MultipartFormDataStreamProvider(savepath);
 
             try

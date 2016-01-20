@@ -754,28 +754,27 @@ app.controller('my_upload_controller', function ctrl($scope, $http) {
         });
     });
     
-    //the save method
     $scope.save = function() {
+
+      var formData = new FormData();
+
+    formData.append("model", angular.toJson($scope.model));
+
+        for (var i = 0; i < $scope.files.length; i++) {
+        
+            formData.append("file" + i, $scope.files[i]);
+        }
+
         $http({
-            method: 'PUT',
+            method: 'POST',
             url: "/Api/aunbook",
 
-            headers: { 'Content-Type': undefined  },
+            headers: { 'Content-Type': undefined },
 
-            transformRequest: function (data) {
-                var formData = new FormData();
 
-                formData.append("model", angular.toJson(data.model));
-                console.log(data);
-                for (var i = 0; i < data.files; i++) {
-                
-                    formData.append("file" + i, data.files[i]);
-                }
-                return formData;
-            },
-            //Create an object that contains the model and files which will be transformed
-            // in the above transformRequest method
-            data: { model: $scope.model, files: $scope.files }
+            data:formData,
+            transformRequest: angular.indentity 
+
         }).
         success(function (data, status, headers, config) {
             alert("success!");
