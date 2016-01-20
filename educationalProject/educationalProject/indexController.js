@@ -716,3 +716,72 @@ $scope.init =function() {
   }); 
     }
 });
+
+app.directive('fileUpload', function () {
+    return {
+        scope: true,        //create a new scope
+        link: function (scope, el, attrs) {
+            el.bind('change', function (event) {
+                var files = event.target.files;
+                //iterate files since 'multiple' may be specified on the element
+                for (var i = 0;i<files.length;i++) {
+                    //emit event upward
+                    scope.$emit("fileSelected", { file: files[i] });
+                }                                       
+            });
+        }
+    };
+});
+
+
+
+app.controller('my_upload_controller', function ctrl($scope, $http) {
+
+    //a simple model to bind to and send to the server
+    $scope.model = {
+        name: "test coconut",
+        comments: "it's me"
+    };
+
+    //an array of files selected
+    $scope.files = [];
+
+    //listen for the file selected event
+    $scope.$on("fileSelected", function (event, args) {
+        $scope.$apply(function () {            
+            //add the file object to the scope's files collection
+            $scope.files.push(args.file);
+        });
+    });
+    
+    //the save method
+    $scope.save = function() {
+        $http({
+            method: 'POST',
+            url: "/Api/PostStuff",
+
+            headers: { 'Content-Type': false },
+
+            transformRequest: function (data) {
+                var formData = new FormData();
+
+                formData.append("model", angular.toJson(data.model));
+          
+                for (var i = 0; i < data.files; i++) {
+                
+                    formData.append("file" + i, data.files[i]);
+                }
+                return formData;
+            },
+            //Create an object that contains the model and files which will be transformed
+            // in the above transformRequest method
+            data: { model: $scope.model, files: $scope.files }
+        }).
+        success(function (data, status, headers, config) {
+            alert("success!");
+        }).
+        error(function (data, status, headers, config) {
+            alert("failed!");
+        });
+    };
+});

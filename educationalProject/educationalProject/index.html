@@ -2379,8 +2379,16 @@ $('.profile_pic').mouseover(function(){
                
 
 
-                    <div id="upload_aun" data-nq-modal="" data-qo-size="md" data-qo-independent="true">
-                        <div class="custom-header">
+                    <div id="upload_aun" data-nq-modal="" data-ng-controller="my_upload_controller" data-qo-size="md" data-qo-independent="true">
+
+
+    <input type="file" file-upload multiple/>
+    <ul>
+        <li ng-repeat="file in files">{{file.name}}</li>
+    </ul>
+    <button ng-click="save()"></button>
+
+                    <!--     <div class="custom-header">
                             <h1 class="headerModalH1"> อัพโหลดเล่มรายงานการประเมินตนเอง</h1>
                         </div>
 
@@ -2388,40 +2396,28 @@ $('.profile_pic').mouseover(function(){
 
 
                             <div class="col-md-8">
-                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
-                                    <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
-                                    <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
-                                    <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
-                                    <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                                </select>
+                             <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+            </select>
 
                         
                         </div>
                         <div class="col-md-4">
-                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
-                                    <option>2557</option>
-                                    <option>2556</option>
-                                    <option>2555</option>
-                                    <option>2554</option>
-                                    <option>2553</option>
-                                    <option>2552</option>
-                                    <option>2551</option>
-
-
-                                </select>
+                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="chooseYear(year_choosen)" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" data-ng-click="check_curri()">
+</select>    
                            </div>
                         </div>
 
-                  <!--       <div style="background-color:#484848">
+                         <div style="background-color:#484848">
                             <h3 class="topicHeader" style="text-align:center;color:#FFFFFF;font-style:italic;"> &nbsp; &nbsp; </h3>
-                        </div> -->
+                        </div> 
                         <br />
                         <div class="row">
                             <div class="col-md-4">
                                 <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">ไฟล์เล่มรายงาน:  </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="file" class="form-control" placeholder="ไฟล์เล่มรายงาน">
+                              
+                                <input type="file" class="form-control" placeholder="ไฟล์เล่มรายงาน" file-upload multiple/>
                             </div>
 
                         </div>
@@ -2431,7 +2427,7 @@ $('.profile_pic').mouseover(function(){
                                 <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
                                 <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
 
@@ -4098,7 +4094,7 @@ $('.profile_pic').mouseover(function(){
 </form>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="new_student_stat_form.$invalid"  ng-click="$hide()">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="new_student_stat_form.$invalid"  ng-click="save_to_server()">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                         </div>
                     </div>
