@@ -3410,44 +3410,22 @@ $('.profile_pic').mouseover(function(){
                     </div>
 
 
-                    <div class="row">
+                <div class="row">
 
 
-                        <div class="col-md-7" style="margin-left:40px">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            </select>
+                            <div class="col-md-6">
+                             <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
+            </select>
 
+                        
                         </div>
-                        <div class="col-md-3">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
-                                <option>2557</option>
-                                <option>2556</option>
-                                <option>2555</option>
-                                <option>2554</option>
-                                <option>2553</option>
-                                <option>2552</option>
-                                <option>2551</option>
+                        <div class="col-md-2">
+                         
 
-
-                            </select>
-                        </div>
-
-                        <div class="col-md-1">
-                            <button class="btn btn-success hvr-rotate" style="margin-bottom:10px"><i class="glyphicon glyphicon-ok"></i> ยืนยัน</button>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-md-3" style="margin-left:40px">
-                            <h3 style="margin-top:0px;"><span class="topicHeader">หัวข้อที่ต้องการประเมิน:  </span></h3>
-                        </div>
-
-                        <div class="col-md-7">
+                                     <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" name="choose_year_select"  required>
+</select>    
+                           </div>
+  <div class="col-md-4">
                             <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหัวข้อที่ต้องการประเมิน" data-ng-model="staticSelectModel">
                                 <option>AUN 1 ผลการเรียนรู้ที่คาดหวัง</option>
                                 <option>AUN 2 ข้อกำหนดของหลักสูตร</option>
@@ -3470,7 +3448,18 @@ $('.profile_pic').mouseover(function(){
 
                         </div>
 
-                    </div>
+
+
+                        </div>
+
+                 <!--    <div class="row">
+                        <div class="col-md-3" style="margin-left:40px">
+                            <h3 style="margin-top:0px;"><span class="topicHeader">หัวข้อที่ต้องการประเมิน:  </span></h3>
+                        </div>
+
+                      
+
+                    </div> -->
                     <div class="container-fluid">
                         <div class="clearfix">
 
@@ -3478,31 +3467,25 @@ $('.profile_pic').mouseover(function(){
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
                                  data-qo-selectable="true">
                                 <div class="panel-heading clearfix">
-                                    <!-- <h1 class="panel-title pull-left"></i> รายงานการประชุม </h1> -->
-                                    <!--   <div class="pull-left" style="padding-left:15px;">
-                                         <button type="button" class="btn btn-xs btn-primary plusgreen hvr-buzz"data-nq-show-insert="" data-template-id="insertMinutes"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลห้องปฏิบัติการ</button>
-                                     </div> -->
-
+                                  
                                 </div>
 
                                 <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="470px" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
-
-                                    <!--          <div  data-qo-min-height="200px" data-nq-scroll="" data-qo-max-height="350px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden;"> -->
-                                    <table class="table table-bordered table-hover bg-white table_modal">
-                                        <!--nq-fix-table-scroll class would fix thead always visible at top of the table if you put the table into a scrollable container-->
+                                    <table class="table table-bordered table-hover bg-white table_modal evaluate_aun">
+                                      
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
-                                                <!--nq-column-sort directive would bind sorting handler to the element-->
-                                                <th class="col-xs-1">ข้อที่</th>
-                                                <th class="col-xs-4">หัวข้อการประเมิน</th>
-                                                <th class="col-xs-1">1</th>
-                                                <th class="col-xs-1">2</th>
-                                                <th class="col-xs-1">3</th>
-                                                <th class="col-xs-1">4</th>
-                                                <th class="col-xs-1">5</th>
-                                                <th class="col-xs-1">6</th>
-                                                <th class="col-xs-1">7</th>
+                                             
+                                                <th class="number">ข้อที่</th>
+                                                <th class="topic_evaluation">หัวข้อการประเมิน</th>
+                                                <th class="point">1</th>
+                                                <th class="point">2</th>
+                                                <th class="point">3</th>
+                                                <th class="point">4</th>
+                                                <th class="point">5</th>
+                                                <th class="point">6</th>
+                                                <th class="point">7</th>
                                             </tr>
                                         </thead>
                                         <tbody class="flattened">

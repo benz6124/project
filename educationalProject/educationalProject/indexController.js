@@ -804,7 +804,7 @@ app.controller('upload_aun_controller', function ctrl($scope, $alert,$http) {
         }
 
         $http({
-            method: 'POST',
+            method: 'PUT',
             url: "/Api/aunbook",
 
             headers: { 'Content-Type': undefined },
