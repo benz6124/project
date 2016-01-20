@@ -32,10 +32,10 @@ namespace educationalProject.Controllers
 
         public async Task<IHttpActionResult> PutForUpload()
         {
-            if (!Request.Content.IsMimeMultipartContent())
-            {
-                return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType,Request);
-            }
+            //if (!Request.Content.IsMimeMultipartContent())
+            //{
+            //    return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType,Request);
+            //}
 
             string savepath = HttpContext.Current.Server.MapPath("~/download/aunbook");
             var result = new MultipartFormDataStreamProvider(savepath);

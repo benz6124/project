@@ -757,16 +757,16 @@ app.controller('my_upload_controller', function ctrl($scope, $http) {
     //the save method
     $scope.save = function() {
         $http({
-            method: 'POST',
-            url: "/Api/PostStuff",
+            method: 'PUT',
+            url: "/Api/aunbook",
 
-            headers: { 'Content-Type': false },
+            headers: { 'Content-Type': undefined  },
 
             transformRequest: function (data) {
                 var formData = new FormData();
 
                 formData.append("model", angular.toJson(data.model));
-          
+                console.log(data);
                 for (var i = 0; i < data.files; i++) {
                 
                     formData.append("file" + i, data.files[i]);
