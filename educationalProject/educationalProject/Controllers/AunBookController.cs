@@ -4,8 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web;
+using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
+using System.IO;
 using educationalProject.Models.Wrappers;
 namespace educationalProject.Controllers
 {
@@ -32,35 +33,37 @@ namespace educationalProject.Controllers
 
         public async Task<IHttpActionResult> PutForUpload()
         {
-            //if (!Request.Content.IsMimeMultipartContent())
-            //{
-            //    return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType,Request);
-            //}
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType,Request);
+            }
 
-            string savepath = HttpContext.Current.Server.MapPath("~/download/aunbook");
+            //string savepath = HttpContext.Current.Server.MapPath("D:\\download\\aunbook\\");
+            string savepath = "D:\\download\\aunbook\\";
             var result = new MultipartFormDataStreamProvider(savepath);
 
             try
             {
                 await Request.Content.ReadAsMultipartAsync(result);
-                //var s = result.FormData["model"];
 
-                
-                // Retrieve all normal send data from JSON
-                foreach (var key in result.FormData.AllKeys)
-                {
-                    foreach (var val in result.FormData.GetValues(key))
-                    {
-                        //Trace.WriteLine(string.Format("{0}: {1}", key, val));
-                    }
-                }
+                //READ JSON DATA PART
+                JObject datareceive = JObject.Parse(result.FormData.GetValues(result.FormData[0])[0]);
+                datacontext.aca_year = Convert.ToInt32(datareceive["aca_year"]);
+                datacontext.curri_id = datareceive["curri_id"].ToString();
+                datacontext.date = DateTime.Now.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
+                datacontext.personnel_id = datareceive["personnel_id"].ToString();
 
-                foreach (MultipartFileData file in result.FileData)
-                {
-                    string str = file.Headers.ContentDisposition.FileName;
-                }
+                //GET FILENAME WITH CHANGE FILENAME TO HAVE ITS EXTENSION
+                MultipartFileData file = result.FileData[0];
+                FileInfo fileInfo = new FileInfo(file.LocalFileName);
+                string newfilename = datacontext.file_name = string.Format("{0}.{1}", fileInfo.Name.Substring(9),file.Headers.ContentDisposition.FileName.Split('.').LastOrDefault().Split('\"').FirstOrDefault());
+                File.Move(string.Format("{0}/{1}", savepath, fileInfo.Name), string.Format("{0}/{1}", savepath , newfilename));
 
-                return Ok();
+                object resultfromdb = datacontext.InsertOrUpdate();
+                if (resultfromdb == null)
+                    return Ok();
+                else
+                    return InternalServerError(new Exception(result.ToString()));
             }
             catch (System.Exception e)
             {
