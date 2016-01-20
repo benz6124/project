@@ -791,8 +791,8 @@ app.controller('upload_aun_controller', function ctrl($scope, $alert,$http) {
     });
     
     $scope.save_to_server = function() {
-
-      $scope.model  = {"file_name":"pap","personnel_id":"00007","date":"","curri_id":$scope.curri_choosen.curri_id,"aca_year":$scope.year_choosen.aca_year}
+ 
+      $scope.model  = {"file_name":$scope.files[0].name,"personnel_id":"00007","date":"","curri_id":$scope.curri_choosen.curri_id,"aca_year":$scope.year_choosen.aca_year}
 
       var formData = new FormData();
 
