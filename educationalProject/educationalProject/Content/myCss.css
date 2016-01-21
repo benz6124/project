@@ -858,11 +858,12 @@ table.evaluate_aun .topic_evaluation{
 }
 
 .manage_president_in_hide{
-  margin-left: 40px;
+  margin-left: 20px;
 
 }
 
+
 .manage_president_in_hide li{
-  margin-left: 130px !important;
-  
+
+  margin-left:30px  !important  ;
 }

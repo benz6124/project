@@ -40,15 +40,15 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
           
          }
 
-        // request_all_curriculums_service_server.async().then(function(data) {
-        //     $rootScope.all_curriculums = data;
-
-        //   });
-
-        $http.get('/api/curriculum').success(function (data) {
-            
+        request_all_curriculums_service_server.async().then(function(data) {
             $rootScope.all_curriculums = data;
+
           });
+
+        // $http.get('/api/curriculum').success(function (data) {
+            
+        //     $rootScope.all_curriculums = data;
+        //   });
             
 
 
@@ -499,28 +499,24 @@ app.controller('create_curriculum', function($scope, $http,$alert,$loading,$time
 });
 
 
-app.controller('stat_graduated_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
+app.controller('stat_graduated_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
 }
       $scope.year_choosen = {};
               $scope.curri_choosen = {}
-       $scope.sendCurriAndGetYears = function () {
+        $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
-    console.log($scope.curri_choosen);
+        $scope.indicator_choosen= {};
       
-        $http.post(
-             '/api/curriculumacademic/getbycurriculum',
-             JSON.stringify($scope.curri_choosen),
-             {
-                 headers: {
-                     'Content-Type': 'application/json'
-                 }
-             }
-         ).success(function (data) {
-             $scope.corresponding_aca_years = data;
-         });
+              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
+
+            $scope.corresponding_aca_years = data;
+
+          });
+
+
     }
 
     $scope.find_information = function(){
@@ -573,28 +569,24 @@ $scope.init =function() {
 
 
 
-app.controller('stat_student_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
+app.controller('stat_student_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
 }
       $scope.year_choosen = {};
               $scope.curri_choosen = {}
-       $scope.sendCurriAndGetYears = function () {
+        $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
-    console.log($scope.curri_choosen);
+        $scope.indicator_choosen= {};
       
-        $http.post(
-             '/api/curriculumacademic/getbycurriculum',
-             JSON.stringify($scope.curri_choosen),
-             {
-                 headers: {
-                     'Content-Type': 'application/json'
-                 }
-             }
-         ).success(function (data) {
-             $scope.corresponding_aca_years = data;
-         });
+              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
+
+            $scope.corresponding_aca_years = data;
+
+          });
+
+
     }
 
     $scope.find_information = function(){
@@ -647,28 +639,24 @@ $scope.init =function() {
 
 
 
-app.controller('stat_new_student_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
+app.controller('stat_new_student_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
 }
       $scope.year_choosen = {};
               $scope.curri_choosen = {}
-       $scope.sendCurriAndGetYears = function () {
+        $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
-    console.log($scope.curri_choosen);
+        $scope.indicator_choosen= {};
       
-        $http.post(
-             '/api/curriculumacademic/getbycurriculum',
-             JSON.stringify($scope.curri_choosen),
-             {
-                 headers: {
-                     'Content-Type': 'application/json'
-                 }
-             }
-         ).success(function (data) {
-             $scope.corresponding_aca_years = data;
-         });
+              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
+
+            $scope.corresponding_aca_years = data;
+
+          });
+
+
     }
 
     $scope.find_information = function(){
@@ -735,7 +723,7 @@ app.directive('fileUpload', function () {
     };
 });
 
-app.controller('evaluate_by_me_controller', function ctrl($scope, $alert,$http) {
+app.controller('evaluate_by_me_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
 
@@ -744,30 +732,31 @@ $scope.init =function() {
        
 $scope.indicator_choosen = {};
 
-     $scope.sendCurriAndGetYears = function () {
+      $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
         $scope.indicator_choosen= {};
-    console.log($scope.curri_choosen);
       
-        $http.post(
-             '/api/curriculumacademic/getbycurriculum',
-             JSON.stringify($scope.curri_choosen),
-             {
-                 headers: {
-                     'Content-Type': 'application/json'
-                 }
-             }
-         ).success(function (data) {
-             $scope.corresponding_aca_years = data;
-         });
+              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
+
+            $scope.corresponding_aca_years = data;
+
+          });
+
+
     }
 
+    $scope.$on("fileSelected", function (event, args) {
+        $scope.$apply(function () {            
+            //add the file object to the scope's files collection
+            $scope.files.push(args.file);
+        });
+    });
     $scope.find_indicators = function(){
 
           console.log("find_indicators");
         console.log($scope.year_choosen);
-
+$scope.indicator_choosen = {};
         $http.post(
              '/api/indicator',
              JSON.stringify($scope.year_choosen),
@@ -826,7 +815,150 @@ $scope.indicator_choosen = {};
     }
 });
 
-app.controller('upload_aun_controller', function ctrl($scope, $alert,$http) {
+
+app.controller('evaluate_by_other_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service) {
+    $scope.init =function() {
+ 
+     $scope.choose_not_complete = true;
+           $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+  $scope.files = [];
+  
+}
+
+
+      $scope.year_choosen = {};
+       
+$scope.indicator_choosen = {};
+
+  $scope.$on("fileSelected", function (event, args) {
+        $scope.$apply(function () {            
+            //add the file object to the scope's files collection
+            $scope.files.push(args.file);
+        });
+    });
+ $scope.file_not_already_upload = function(){
+
+        return $scope.files.length==0;
+    }
+     $scope.sendCurriAndGetYears = function () {
+        $scope.choose_not_complete =true;
+        $scope.year_choosen = {}
+        $scope.indicator_choosen= {};
+      
+              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
+
+            $scope.corresponding_aca_years = data;
+
+          });
+
+
+    }
+
+$scope.clear_files = function(){
+    $scope.files = [];
+}
+
+
+    $scope.find_indicators = function(){
+$scope.indicator_choosen = {};
+          console.log("find_indicators");
+        console.log($scope.year_choosen);
+
+        $http.post(
+             '/api/indicator',
+             JSON.stringify($scope.year_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+     
+             $scope.corresponding_indicators = data;
+         });
+
+    }
+
+    $scope.get_results= function(){
+        console.log($scope.indicator_choosen);
+        $scope.indicator_choosen.curri_id = $scope.curri_choosen.curri_id ;
+        $http.post(
+             '/api/selfevaluation',
+             JSON.stringify($scope.indicator_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+                   console.log("wait results");
+            console.log(data);
+ 
+             $scope.corresponding_results = data;
+             $scope.choose_not_complete = false;
+     
+         });
+
+    }
+
+ $scope.save_to_server = function() {
+
+      var formData = new FormData();
+
+    formData.append("model", angular.toJson($scope.corresponding_results));
+
+        for (var i = 0; i < $scope.files.length; i++) {
+        
+            formData.append("file" + i, $scope.files[i]);
+        }
+
+        $http({
+            method: 'PUT',
+            url: "/Api/aunbook",
+
+            headers: { 'Content-Type': undefined },
+
+
+            data:formData,
+            transformRequest: angular.indentity 
+
+        }).
+        success(function (data, status, headers, config) {
+              $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+        }).
+        error(function (data, status, headers, config) {
+               $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        });
+}
+
+    // $scope.save_to_server = function(){
+
+    //     $http.put(
+    //          '/api/selfevaluation',
+    //          JSON.stringify($scope.corresponding_results),
+    //          {
+    //              headers: {
+    //                  'Content-Type': 'application/json'
+    //              }
+    //          }
+    //      ).success(function (data) {
+    //           $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+    //                      placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+    //           $scope.files=[];
+    //      })
+    //      .error(function (data, status, headers, config) {
+    //         $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+    //                      placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+    //     });
+    // }
+});
+
+
+app.controller('upload_aun_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service) {
 
     $scope.init =function() {
         console.log("init");
@@ -850,19 +982,15 @@ app.controller('upload_aun_controller', function ctrl($scope, $alert,$http) {
        $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
-    console.log($scope.curri_choosen);
+        $scope.indicator_choosen= {};
       
-        $http.post(
-             '/api/curriculumacademic/getbycurriculum',
-             JSON.stringify($scope.curri_choosen),
-             {
-                 headers: {
-                     'Content-Type': 'application/json'
-                 }
-             }
-         ).success(function (data) {
-             $scope.corresponding_aca_years = data;
-         });
+              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
+
+            $scope.corresponding_aca_years = data;
+
+          });
+
+
     }
 
 
@@ -919,30 +1047,27 @@ app.controller('upload_aun_controller', function ctrl($scope, $alert,$http) {
     };
 });
 
-app.controller('manage_president_controller', function ctrl($scope, $alert,$http) {
+app.controller('manage_president_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
 }
       $scope.year_choosen = {};
               $scope.curri_choosen = {}
 
-       $scope.sendCurriAndGetYears = function () {
+  $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
-    console.log($scope.curri_choosen);
+        $scope.indicator_choosen= {};
       
-        $http.post(
-             '/api/curriculumacademic/getbycurriculum',
-             JSON.stringify($scope.curri_choosen),
-             {
-                 headers: {
-                     'Content-Type': 'application/json'
-                 }
-             }
-         ).success(function (data) {
-             $scope.corresponding_aca_years = data;
-         });
+              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
+
+            $scope.corresponding_aca_years = data;
+
+          });
+
+
     }
+
 
     $scope.find_information = function(){
 

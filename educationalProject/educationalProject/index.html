@@ -277,6 +277,13 @@ $('.profile_pic').mouseover(function(){
                         <li>
                             <a href="" data-nq-toggle-modal="#evaluate_me" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-pencil"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;ประเมินหลักสูตรตนเอง</span></span>
+                            </a>
+                        </li>
+
+                          <li>
+                            <a href="" data-nq-toggle-modal="#evaluate_other" data-effect="from-left" data-placement="right">
+                                <i class="glyphicon glyphicon-pencil"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;ประเมินหลักสูตร</span></span>
                             </a>
                         </li>
@@ -3433,22 +3440,22 @@ $('.profile_pic').mouseover(function(){
                         </div>
 
                         <div ng-show="choose_not_complete">
-                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                         </div>
     <div ng-hide="choose_not_complete" class="manage_president_in_hide">
     <div class="row">
-   <div class="col-md-6" style="margin-left:200px;margin-top:10px">
+   <div class="col-md-6" style="margin-left:200px;margin-top:15px">
       <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="result.evaluation_score for result in corresponding_results" data-qo-effect="flip-x" data-qo-placeholder="ประธานหลักสูตรคนปัจจุบัน"  data-ng-init="$parent.mock_result" data-ng-model="$parent.mock_result" data-qo-disable-clear="true">
             </select>
    </div>
 </div>
-      <img src="/myImages/profile_pic/วิบูลย์.jpg" class="img-circle" width="220" style="float:left;margin-top:20px;margin-left:40px;" />
-      <div style="margin-top:20px">
+      <img src="/myImages/profile_pic/วิบูลย์.jpg" class="img-circle" width="240" style="float:right;margin-top:20px;margin-right:20px" />
+      <div style="margin-top:10px">
       <span class="topicHeader manage_president_in_hide" ><b>ชื่อผู้ใช้งาน:</b> {{}} tebza55 </span><br/>
       <span class="topicHeader manage_president_in_hide"><b>ชื่อภาษาไทย:</b> {{}} ดไนาดนไ ดฟาไดไฟาด </span><br/>
       <span class="topicHeader manage_president_in_hide"><b>ชื่อภาษาอังกฤษ:</b> {{}} fafwf wrrqrg </span><br/>
-      <span class="topicHeader manage_president_in_hide"><b>ประวัติการศึกษา:</b><br/> <ul ><li >ปริญญาตรี วิศวกรรมคอมพิวเตอร์ สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง</li><li >ปริญญาโท วิศวกรรมบลาๆ กฟสกยฟสกยฟาดฟดาฟดาฟดยบฟไาดฟบดย</li><li >ปริญญาโท วิศวกรรมบลาๆ กฟสกยฟสกยฟาดฟดาฟดาฟดยบฟไาดฟบดย</li><li >ปริญญาโท วิศวกรรมบลาๆ กฟสกยฟสกยฟาดฟดาฟดาฟดยบฟไาดฟบดย</li></ul>  </span></h3>
-     <span class="topicHeader manage_president_in_hide pull-right" style="margin-right:80px;"><b>อีเมล์: </b>{{}}  </span>
+      <span class="topicHeader manage_president_in_hide"><b>ประวัติการศึกษา:</b> <ul ><li style="margin-left:60px">ปริญญาตรี วิศวกรรมคอมพิวเตอร์ สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง</li><li >ปริญญาโท วิศวกรรมบลาๆ กฟสกยฟสกยฟาดฟดาฟดาฟดยบฟไาดฟบดย</li><li >ปริญญาโท วิศวกรรมบลาๆ กฟสกยฟสกยฟาดฟดาฟดาฟดยบฟไาดฟบดย</li><li >ปริญญาโท วิศวกรรมบลาๆ กฟสกยฟสกยฟาดฟดาฟดาฟดยบฟไาดฟบดย</li></ul>  </span></h3>
+     <span class="topicHeader manage_president_in_hide "><b>อีเมล์: </b>{{}}dadadad@adadad.com  </span>
  <!--      <h3 ><span class="topicHeader manage_president_in_hide"><b>เบอร์โทร:</b> {{}}  </span></h3> -->
      </div>
 </div>
@@ -3460,9 +3467,147 @@ $('.profile_pic').mouseover(function(){
                     </div>   
 
 </div>
-                <div id="evaluate_me" data-nq-modal="" data-ng-controller="evaluate_by_me_controller" data-ng-init = "init()"data-qo-screen-mode="true" data-qo-independent="true">
+
+              <div id="evaluate_other" data-nq-modal="" data-ng-controller="evaluate_by_other_controller" data-ng-init = "init()"data-qo-screen-mode="true" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>
+                    </div>
+
+
+                <div class="row">
+
+
+                          <div class="col-md-6" >
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+            </select>
+
+                        </div>
+                        <div class="col-md-2" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+</select>   
+                        </div>
+  <div class="col-md-4">
+
+      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+</select>   
+
+
+                        </div>
+
+
+
+                        </div>
+
+                    <div class="container-fluid" ng-hide="choose_not_complete">
+                        <div class="clearfix">
+<br />
+
+                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
+                                 data-qo-selectable="true">
+              
+                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+  <!--     <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="result.evaluation_score for result in corresponding_results" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร"  data-ng-init="$parent.mock_result" data-ng-model="$parent.mock_result" data-qo-disable-clear="true">
+            </select> -->
+                                    <table class="table table-bordered table-hover bg-white table_modal evaluate_aun">
+                                      
+                                        <thead class="nq-fix-table-scroll">
+                                            <tr>
+                                             
+                                                <th class="number">ข้อที่</th>
+                                                <th class="topic_evaluation">หัวข้อการประเมิน</th>
+                                                <th class="point">7</th>
+                                                <th class="point">6</th>
+                                                <th class="point">5</th>
+                                                <th class="point">4</th>
+                                                <th class="point">3</th>
+                                                <th class="point">2</th>
+                                                <th class="point">1</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="flattened">
+                                        <form name="evaluate_by_me_form" novalidate>
+                                          
+
+                                            <tr data-ng-repeat="result in corresponding_results">
+                                                <td>{{result.indicator_num}}.{{result.sub_indicator_num}}</td>
+                                                <td class="left_column">{{result.sub_indicator_name}}</td>
+
+
+                                                <td><input type="radio"  value="7" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio"  value="6" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio" value="5" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio"  value="4" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio"  value="3" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio" value="2" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio" value="1" data-ng-model="result.evaluation_score"> </td>
+
+                                            </tr>
+
+                                            </form>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                      
+    <div class="row">
+                            <div class="col-md-4">
+                                <h3 style="margin-left:20px;margin-top:5px;color:#6F002B;font-weight:bold"><span class="topicHeader">ไฟล์สนับสนุนการประเมิน:  </span></h3>
+
+                            </div>
+ <div class="col-md-1">
+                             <button class="btn btn-danger" style="paddle:0px;vertical-align:middle" ng-click="clear_files()">ล้างข้อมูล</button>
+</div>
+                            <div class="col-md-6">
+                             
+                                <input type="file" style="margin-right:20px;" name="upload_file_input" class="form-control" placeholder="ไฟล์เล่มรายงาน" data-ng-model="files" ng-disabled="choose_not_complete" required="required" file-upload   multiple/>
+                            </div>
+
+                        </div>
+                    <div class="row">
+                      <ul>
+                           <span class="topicHeader"> <li style="color:#6F002B;margin-left:30px" ng-repeat="file in files">{{file.name}}</li></span>
+                        </ul>
+                    </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button class="btn btn-success  " ng-disabled="evaluate_by_me_form.$invalid || choose_not_complete" ng-click="save_to_server()">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                        </div>
+                    </div> 
+                </div>
+
+
+
+
+
+
+  <div id="manage_indicators" data-nq-modal=""  data-qo-screen-mode="true" data-qo-independent="true">
+                    <div class="custom-header">
+                        <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการตัวบ่งชี้</span></h1>
+                    </div>
+
+ <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button class="btn btn-success  " ng-disabled="evaluate_by_me_form.$invalid || choose_not_complete" ng-click="save_to_server()">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                        </div>
+                    </div> 
+                    </div>
+
+
+
+
+
+                <div id="evaluate_me" data-nq-modal="" data-ng-controller="evaluate_by_me_controller" data-ng-init = "init()"data-qo-screen-mode="true" data-qo-independent="true">
+                    <div class="custom-header">
+                        <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตรตนเอง</span></h1>
                     </div>
 
 
