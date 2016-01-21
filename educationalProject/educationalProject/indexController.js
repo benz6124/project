@@ -738,14 +738,16 @@ app.directive('fileUpload', function () {
 app.controller('evaluate_by_me_controller', function ctrl($scope, $alert,$http) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
+
 }
       $scope.year_choosen = {};
-              $scope.curri_choosen = {};
+       
 $scope.indicator_choosen = {};
 
-       $scope.sendCurriAndGetYears = function () {
+     $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
+        $scope.indicator_choosen= {};
     console.log($scope.curri_choosen);
       
         $http.post(
@@ -775,8 +777,7 @@ $scope.indicator_choosen = {};
                  }
              }
          ).success(function (data) {
-            console.log("wait corresponding_indicators");
-            console.log(data);
+     
              $scope.corresponding_indicators = data;
          });
 
@@ -786,16 +787,20 @@ $scope.indicator_choosen = {};
         console.log($scope.indicator_choosen);
         $scope.indicator_choosen.curri_id = $scope.curri_choosen.curri_id ;
         $http.post(
-             '/api/indicator',
-             JSON.stringify($scope.year_choosen),
+             '/api/selfevaluation',
+             JSON.stringify($scope.indicator_choosen),
              {
                  headers: {
                      'Content-Type': 'application/json'
                  }
              }
          ).success(function (data) {
-           
+                   console.log("wait results");
+            console.log(data);
+ 
              $scope.corresponding_results = data;
+             $scope.choose_not_complete = false;
+             $scope.mock_result = data[0];
          });
 
     }
@@ -914,7 +919,78 @@ app.controller('upload_aun_controller', function ctrl($scope, $alert,$http) {
     };
 });
 
+app.controller('manage_president_controller', function ctrl($scope, $alert,$http) {
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+}
+      $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+              
+       $scope.sendCurriAndGetYears = function () {
+        $scope.choose_not_complete =true;
+        $scope.year_choosen = {}
+    console.log($scope.curri_choosen);
+      
+        $http.post(
+             '/api/curriculumacademic/getbycurriculum',
+             JSON.stringify($scope.curri_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+             $scope.corresponding_aca_years = data;
+         });
+    }
 
+    $scope.find_information = function(){
+
+          console.log("find_information");
+        console.log($scope.year_choosen);
+
+        $http.post(
+             '/api/newstudentcount',
+             JSON.stringify($scope.year_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            
+            console.log(data);
+             $scope.result = data;
+             $scope.choose_not_complete = false;
+         });
+
+    }
+
+    $scope.save_to_server = function(){
+        console.log("save_to_server");
+        console.log($scope.result);
+        $http.put(
+             '/api/newstudentcount',
+             JSON.stringify($scope.result),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+                    
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    }
+});
  // $scope.save = function() {
 
  //      $scope.model  = {"file_name":"","personnel_id":"00007","date":"","curri_id":curri_choosen.curri_id,"aca_year":year_choosen.aca_year}

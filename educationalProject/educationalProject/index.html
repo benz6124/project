@@ -388,7 +388,12 @@ $('.profile_pic').mouseover(function(){
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;อัพโหลดเล่มรายงาน</span></span>
                             </a>
                         </li>
-            
+                          <li>
+                            <a href="" data-nq-toggle-modal="#manage_president" data-effect="from-left" data-placement="bottom">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการประธานหลักสูตร</span></span>
+                            </a>
+                        </li>
                     </ul>
 
 
@@ -3405,8 +3410,56 @@ $('.profile_pic').mouseover(function(){
                     </div>
                 </div>
 
- 
+     <div id="manage_president" data-nq-modal=""  data-ng-controller="manage_president_controller" data-ng-init="init()" data-qo-size="lg" data-qo-independent="true">
+                    <div class="custom-header">
+                        <h1 class="headerModalH1"><span class="headerModal"> จัดการประธานหลักสูตร</span></h1>
+                    </div>
 
+                    <div class="row">
+
+
+                            <div class="col-md-8">
+                             <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
+            </select>
+
+                        
+                        </div>
+                        <div class="col-md-4">
+                         
+
+                                     <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" name="choose_year_select"  required>
+</select>    
+                           </div>
+                        </div>
+
+                        <div ng-show="choose_not_complete">
+                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                        </div>
+    <div ng-hide="choose_not_complete" class="manage_president_in_hide">
+    <div class="row">
+   <div class="col-md-6" style="margin-left:200px;margin-top:10px">
+      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="result.evaluation_score for result in corresponding_results" data-qo-effect="flip-x" data-qo-placeholder="ประธานหลักสูตรคนปัจจุบัน"  data-ng-init="$parent.mock_result" data-ng-model="$parent.mock_result" data-qo-disable-clear="true">
+            </select>
+   </div>
+</div>
+      <img src="/myImages/profile_pic/วิบูลย์.jpg" class="img-circle" width="220" style="float:left;margin-top:20px;margin-left:40px;" />
+      <div style="margin-top:20px">
+      <span class="topicHeader manage_president_in_hide" ><b>ชื่อผู้ใช้งาน:</b> {{}} tebza55 </span><br/>
+      <span class="topicHeader manage_president_in_hide"><b>ชื่อภาษาไทย:</b> {{}} ดไนาดนไ ดฟาไดไฟาด </span><br/>
+      <span class="topicHeader manage_president_in_hide"><b>ชื่อภาษาอังกฤษ:</b> {{}} fafwf wrrqrg </span><br/>
+      <span class="topicHeader manage_president_in_hide"><b>ประวัติการศึกษา:</b><br/> <ul ><li >ปริญญาตรี วิศวกรรมคอมพิวเตอร์ สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง</li><li >ปริญญาโท วิศวกรรมบลาๆ กฟสกยฟสกยฟาดฟดาฟดาฟดยบฟไาดฟบดย</li><li >ปริญญาโท วิศวกรรมบลาๆ กฟสกยฟสกยฟาดฟดาฟดาฟดยบฟไาดฟบดย</li><li >ปริญญาโท วิศวกรรมบลาๆ กฟสกยฟสกยฟาดฟดาฟดาฟดยบฟไาดฟบดย</li></ul>  </span></h3>
+     <span class="topicHeader manage_president_in_hide pull-right" style="margin-right:80px;"><b>อีเมล์: </b>{{}}  </span>
+ <!--      <h3 ><span class="topicHeader manage_president_in_hide"><b>เบอร์โทร:</b> {{}}  </span></h3> -->
+     </div>
+</div>
+                    <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button class="btn btn-success  " ng-disabled="choose_not_complete" ng-click="save_to_server()">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                        </div>
+                    </div>   
+
+</div>
                 <div id="evaluate_me" data-nq-modal="" data-ng-controller="evaluate_by_me_controller" data-ng-init = "init()"data-qo-screen-mode="true" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>
@@ -3437,7 +3490,7 @@ $('.profile_pic').mouseover(function(){
 
                         </div>
 
-                    <div class="container-fluid">
+                    <div class="container-fluid" ng-hide="choose_not_complete">
                         <div class="clearfix">
 <br />
 
@@ -3445,7 +3498,8 @@ $('.profile_pic').mouseover(function(){
                                  data-qo-selectable="true">
               
                                 <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
-
+  <!--     <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="result.evaluation_score for result in corresponding_results" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร"  data-ng-init="$parent.mock_result" data-ng-model="$parent.mock_result" data-qo-disable-clear="true">
+            </select> -->
                                     <table class="table table-bordered table-hover bg-white table_modal evaluate_aun">
                                       
                                         <thead class="nq-fix-table-scroll">
@@ -3464,24 +3518,23 @@ $('.profile_pic').mouseover(function(){
                                         </thead>
                                         <tbody class="flattened">
                                         <form name="evaluate_by_me_form" novalidate>
-                                            <!--pageable-repeat is required sub directive
-
+                                          
 
                                             <tr data-ng-repeat="result in corresponding_results">
-                                                <td>{{indicator_choosen.indicator_num}}.{{result.sub_indicator.}}</td>
-                                                <td class="left_column">มีการประเมินตั้งแต่การรับเข้า การติดตามความก้าวหน้าระหว่างการศึกษาและเมื่อสำเร็จการศึกษา</td>
+                                                <td>{{result.indicator_num}}.{{result.sub_indicator_num}}</td>
+                                                <td class="left_column">{{result.sub_indicator_name}}</td>
 
 
-                                                <td><input type="radio"  value="7" data-ng-model="result.point"> </td>
-                                                <td><input type="radio"  value="6"> </td>
-                                                <td><input type="radio" value="5"> </td>
-                                                <td><input type="radio"  value="4"> </td>
-                                                <td><input type="radio"  value="3"> </td>
-                                                <td><input type="radio" value="2"> </td>
-                                                <td><input type="radio" value="1"> </td>
+                                                <td><input type="radio"  value="7" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio"  value="6" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio" value="5" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio"  value="4" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio"  value="3" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio" value="2" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio" value="1" data-ng-model="result.evaluation_score"> </td>
 
                                             </tr>
--->
+
                                             </form>
                                         </tbody>
 
@@ -3499,7 +3552,7 @@ $('.profile_pic').mouseover(function(){
 
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="evaluate_by_me_form.$invalid" ng-click="save_to_server()">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="evaluate_by_me_form.$invalid || choose_not_complete" ng-click="save_to_server()">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                         </div>
                     </div> 

@@ -856,3 +856,13 @@ table.evaluate_aun .topic_evaluation{
 .modal-body{
   max-height: 100%!important;
 }
+
+.manage_president_in_hide{
+  margin-left: 40px;
+
+}
+
+.manage_president_in_hide li{
+  margin-left: 130px !important;
+  
+}
