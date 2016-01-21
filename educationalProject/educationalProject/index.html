@@ -401,6 +401,13 @@ $('.profile_pic').mouseover(function(){
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการประธานหลักสูตร</span></span>
                             </a>
                         </li>
+
+                          <li>
+                            <a href="" data-nq-toggle-modal="#manage_indicators" data-effect="from-left" data-placement="right">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการตัวบ่งชี้</span></span>
+                            </a>
+                        </li>
                     </ul>
 
 
@@ -490,9 +497,17 @@ $('.profile_pic').mouseover(function(){
 
                 <th class="col-md-1 number">ข้อที่</th>
                 <th class="col-md-7 topic">หัวข้อการประเมิน</th>
-                <th class="col-md-2 result"><a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ประเมินโดย {{evaluation_result_receive.self[0].t_name}} <br/> วันที่ {{evaluation_result_receive.self[0].date}} เวลา {{evaluation_result_receive.self[0].time}}" style="color:white;cursor:default;"> ผลการประเมินตนเอง</a></th>
+                <th class="col-md-2 result"><a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ประเมินโดย {{evaluation_result_receive.self[0].t_name}} <br/> วันที่ {{evaluation_result_receive.self[0].date}} เวลา {{evaluation_result_receive.self[0].time}}" style="color:white;cursor:default;" ng-hide="self_not_evaluated"> ผลการประเมินตนเอง</a>
 
-                <th class="col-md-2 result"><a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ประเมินโดย {{evaluation_result_receive.others[0].t_name}} <br/> วันที่ {{evaluation_result_receive.others[0].date}} เวลา {{evaluation_result_receive.others[0].time}}" style="color:white;cursor:default;">ผลการประเมิน<br />จากภายนอก</a></th>
+                <a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ยังไม่มีการประเมิน" style="color:white;cursor:default;" ng-show="self_not_evaluated"> ผลการประเมินตนเอง</a>
+
+                </th>
+
+                <th class="col-md-2 result"><a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ประเมินโดย {{evaluation_result_receive.others[0].t_name}} <br/> วันที่ {{evaluation_result_receive.others[0].date}} เวลา {{evaluation_result_receive.others[0].time}}" style="color:white;cursor:default;" ng-hide="others_not_evaluated">ผลการประเมิน<br />จากภายนอก</a>
+
+
+<a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ยังไม่มีการประเมิน" style="color:white;cursor:default;" ng-show="others_not_evaluated">ผลการประเมิน<br />จากภายนอก</a>
+                </th>
   
 
                 </thead>
@@ -3584,14 +3599,172 @@ $('.profile_pic').mouseover(function(){
                 </div>
 
 
-
-
-
-
-  <div id="manage_indicators" data-nq-modal=""  data-qo-screen-mode="true" data-qo-independent="true">
+  <div id="manage_indicators" data-ng-controller="manage_indicators_controller" data-nq-modal=""  data-qo-screen-mode="true"  data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการตัวบ่งชี้</span></h1>
                     </div>
+<div class="row">
+                          <!--   <div class="col-md-4">
+                                <h3 ><span class="topicHeader" style="margin-left:15px;margin-top:0px;paddle:0px">ตัวบ่งชี้ดั้งเดิมตั้งแต่ปีการศึกษา:  </span></h3>
+
+                            </div> -->
+<div class="col-md-6" style="margin-left:275px;margin-bottom:15px">
+
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year in all_indicator_years" data-qo-effect="flip-x" data-ng-change="get_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษาที่ตัวบ่งชี้เริ่มมีผล" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+</select>   
+
+</div>
+
+</div>
+    <div class="container-fluid" >
+                        <div class="clearfix">
+
+
+                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
+                                 data-qo-selectable="true">
+              
+                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun">
+                                      
+                                        <thead class="nq-fix-table-scroll">
+                                            <tr>
+                                             
+                                                <th class="number_indicator">ข้อที่</th>
+
+                                                <th class="topic_indicator">ชื่อตัวบ่งชี้ (ภาษาไทย)</th>
+                                                <th class="topic_indicator">ชื่อตัวบ่งชี้ (ภาษาอังกฤษ)</th>
+                                                <th class="number_indicator">ข้อย่อย</th>
+                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody class="flattened">
+                                        <form name="evaluate_by_me_form" novalidate>
+                                          
+
+                                            <tr data-ng-repeat="indicator in indicators_result">
+                                           
+                                                 <td class="number_indicator"><input style="margin-right:10px" type="number" max = "99"  ng-model="indicator.indicator_num " /></td>
+
+
+
+                                                <td class="topic_indicator left_column"><input size="72" type="text" ng-model="indicator.indicator_name_t " />
+                                                </td>
+                                                 <td class="topic_indicator left_column"><input size="72" type="text" ng-model="indicator.indicator_name_e " /></td>
+
+                                     <td class="number_indicator"> <a style="margin-right:10px"href="" data-ng-click="choose_indicator(indicator)" data-nq-toggle-modal="#manage_sub_indicators" data-effect="slide-left">
+                                        <span class="topic"><i class="glyphicon glyphicon-zoom-in"></i> </span>
+                                    </a></td>
+
+
+
+                                            </tr>
+
+                                            </form>
+                                        </tbody>
+
+                                    </table>
+         </div>         </div>         </div>         </div>
+
+<!-- <div class="row">
+<div class="col-md-6">
+    <h3 class="topicHeader"  style="margin-left:55px;margin-top:5px">ตัวบ่งชี้ที่ </h3>
+    </div>
+    <div class="col-md-3">
+     <span class="topicHeader"  style="margin-left:55px;margin-top:5px">ชื่อตัวบ่งชี้ </span>
+     </div>
+</div> -->
+<!-- <div class="row" ng-repeat="indicator in indicators_result">
+     <div class="col-md-6">
+{{indicator.indicator_num}}
+</div>
+     <div class="col-md-6">
+{{indicator.indicator_name_t}} 
+
+{{indicator.indicator_name_e}}
+
+ 
+</div>
+</div> -->
+
+ <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button class="btn btn-success  " ng-disabled="evaluate_by_me_form.$invalid || choose_not_complete" ng-click="save_to_server()">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                        </div>
+                    </div> 
+                    </div>
+
+
+
+  <div id="manage_sub_indicators" data-ng-controller="manage_sub_indicators_controller" data-nq-modal=""  data-qo-size="lg"  data-qo-independent="true">
+                    <div class="custom-header">
+                        <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการตัวบ่งชี้ย่อย</span></h1>
+                    </div>
+
+                     <h2 class="headerPanel" style="text-align:center;margin-top:0px;margin-bottom:0px">AUN {{manage_indicators_indicator_choosen.indicator_num}} {{manage_indicators_indicator_choosen.indicator_name_t}} ({{manage_indicators_indicator_choosen.indicator_name_e}})</h2>
+    <div class="container-fluid" >
+                        <div class="clearfix">
+
+
+                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
+                                 data-qo-selectable="true">
+              
+                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun">
+                                      
+                                        <thead class="nq-fix-table-scroll">
+                                            <tr>
+                                             
+                                                <th class="number_indicator">ข้อย่อยที่</th>
+
+                                                <th class="topic_evaluation">ชื่อตัวบ่งชี้</th>
+                                           <!--      <th class="topic_evaluation">ชื่อตัวบ่งชี้ (ภาษาอังกฤษ)</th> -->
+                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody class="flattened">
+                                        <form name="evaluate_by_me_form" novalidate>
+
+                                            <tr data-ng-repeat="sub_indicator in manage_indicators_indicator_choosen.sub_indicator_list">
+                                           
+                                                 <td class="number_indicator"><input style="margin-right:10px" type="number" max = "99"  ng-model="sub_indicator.sub_indicator_num " /></td>
+
+
+
+                                                <td class="topic_evaluation left_column"><input size="120" style="margin-right:10px"type="text" ng-model="sub_indicator.sub_indicator_name " />
+                                                </td>
+                                              <!--    <td class="topic_evaluation left_column"><input size="70" type="text" ng-model="indicator.indicator_name_e " /></td> -->
+
+                                  
+
+                                            </tr>
+
+                                            </form>
+                                        </tbody>
+
+                                    </table>
+         </div>         </div>         </div>         </div>
+
+<!-- <div class="row">
+<div class="col-md-6">
+    <h3 class="topicHeader"  style="margin-left:55px;margin-top:5px">ตัวบ่งชี้ที่ </h3>
+    </div>
+    <div class="col-md-3">
+     <span class="topicHeader"  style="margin-left:55px;margin-top:5px">ชื่อตัวบ่งชี้ </span>
+     </div>
+</div> -->
+<!-- <div class="row" ng-repeat="indicator in indicators_result">
+     <div class="col-md-6">
+{{indicator.indicator_num}}
+</div>
+     <div class="col-md-6">
+{{indicator.indicator_name_t}} 
+
+{{indicator.indicator_name_e}}
+
+ 
+</div>
+</div> -->
 
  <div class="custom-footer">
                         <div class="topicHeader pull-right">
@@ -3670,13 +3843,13 @@ $('.profile_pic').mouseover(function(){
                                                 <td class="left_column">{{result.sub_indicator_name}}</td>
 
 
-                                                <td><input type="radio"  value="7" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio"  value="6" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio" value="5" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio"  value="4" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio"  value="3" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio" value="2" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio" value="1" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio"  value="7" min="1" data-ng-model="result.evaluation_score" required> </td>
+                                                <td><input type="radio"  value="6" min="1" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio" value="5" min="1" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio"  value="4" min="1" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio"  value="3" min="1" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio" value="2" min="1" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio" value="1" min="1" data-ng-model="result.evaluation_score"> </td>
 
                                             </tr>
 

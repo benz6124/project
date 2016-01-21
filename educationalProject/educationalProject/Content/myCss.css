@@ -75,9 +75,9 @@ button{
 
 }
 
-
-{
-  background-color: yellow;
+.aside-body li a{
+  padding-top: 4px!important;
+  padding-bottom: 4px!important;
 }
 .aside-header{
   color:white;
@@ -162,8 +162,11 @@ td.code{
 }
 
 
-
-
+/*ul.nav.nav-stacked li{
+  padding: 0px !important;
+  background-color: pin
+}
+*/
 
 .btn.fetch:hover,.btn.fetch:active {
     color:#6F002B;
@@ -866,4 +869,18 @@ table.evaluate_aun .topic_evaluation{
 .manage_president_in_hide li{
 
   margin-left:30px  !important  ;
+}
+
+
+th.number_indicator,td.number_indicator{
+    text-align: center;
+  width: 60px;
+}
+
+td.number_indicator input[type=number]{
+    width: 40px;
+} 
+
+td.topic_indicator{
+  width: 400px;
 }
