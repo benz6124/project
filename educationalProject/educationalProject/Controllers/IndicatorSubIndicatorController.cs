@@ -10,7 +10,7 @@ namespace educationalProject.Controllers
     public class IndicatorSubIndicatorController : ApiController
     {
         private oIndicator_sub_indicator_list datacontext = new oIndicator_sub_indicator_list();
-        public IHttpActionResult PostToQueryIndicatorSubIndicator(int year)
+        public IHttpActionResult PostToQueryIndicatorSubIndicator([FromBody]int year)
         {
             return Ok(datacontext.SelectByAcademicYear(year));
         }
