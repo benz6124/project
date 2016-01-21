@@ -11,6 +11,7 @@ namespace educationalProject.Controllers
 {
     public class SelfEvaluationController : ApiController
     {
+        private oSelf_evaluation datacontext = new oSelf_evaluation();
         public IHttpActionResult PostToQuerySelfEvaluationData(JObject obj)
         {
             oSelf_evaluation_sub_indicator_name datacontext = new oSelf_evaluation_sub_indicator_name();
@@ -20,9 +21,27 @@ namespace educationalProject.Controllers
                 indicator_num = Convert.ToInt32(obj["indicator_num"])
             };
             object result = datacontext.SelectByIndicatorAndCurriculum(data, obj["curri_id"].ToString());
-            if (result != null)
-                return Ok(result);
-            else return Ok("");
+            return Ok(result);
         }
+
+        public IHttpActionResult PutForUpdateSelfEvaluation(List<oSelf_evaluation> list)
+        {
+            DateTime d = DateTime.Now;
+            foreach (oSelf_evaluation item in list)
+            {
+                item.date = d.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
+                item.time = d.GetDateTimeFormats()[101];
+            }
+            datacontext.aca_year = list.First().aca_year;
+            datacontext.curri_id = list.First().curri_id;
+            datacontext.indicator_num = list.First().indicator_num;
+            object result = datacontext.InsertOrUpdate(list);
+            if (result == null)
+                return Ok();
+            else
+                return InternalServerError(new Exception(result.ToString()));
+        }
+
+
     }
 }

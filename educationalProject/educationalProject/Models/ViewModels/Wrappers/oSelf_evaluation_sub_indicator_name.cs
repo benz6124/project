@@ -51,7 +51,37 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 }
                 else
                 {
-                    return null;
+                    //Since no self evaluation result in database we query once again to get sub_indicator name
+                    res.Close();
+                    d.iCommand.CommandText = string.Format("select * from {0} where {1} = {2} and {3} = {4})",
+                    Sub_indicator.FieldName.TABLE_NAME, Sub_indicator.FieldName.INDICATOR_NUM,inddata.indicator_num,
+                    FieldName.ACA_YEAR, inddata.aca_year);
+                    if (res.HasRows)
+                    {
+                        DataTable data = new DataTable();
+                        data.Load(res);
+                        foreach (DataRow item in data.Rows)
+                        {
+                            result.Add(new oSelf_evaluation_sub_indicator_name
+                            {
+                                aca_year = inddata.aca_year,
+                                curri_id = curri_id,
+                                indicator_num = inddata.indicator_num,
+                                sub_indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.SUB_INDICATOR_NUM].Ordinal]),
+                                sub_indicator_name = item.ItemArray[data.Columns[Sub_indicator.FieldName.SUB_INDICATOR_NAME].Ordinal].ToString(),
+                                date = "",
+                                time = "",
+                                evaluation_score = 0,
+                                teacher_id = "00000"
+                            });
+                        }
+                        res.Close();
+                        data.Dispose();
+                    }
+                    else
+                    {
+                        //Reserved for return error string
+                    }
                 }
             }
             catch (Exception ex)
