@@ -23,6 +23,13 @@ namespace educationalProject.Controllers
             else {
                 datacontext.curri_id = data.curri_id;
                 datacontext.year = data.aca_year;
+                datacontext.grad_in_time = -1;
+                datacontext.grad_over_time = -1;
+                datacontext.move_in = -1;
+                datacontext.quity1 = -1;
+                datacontext.quity2 = -1;
+                datacontext.quity3 = -1;
+                datacontext.quity4 = -1;
                 return Ok(datacontext);
             }
         }

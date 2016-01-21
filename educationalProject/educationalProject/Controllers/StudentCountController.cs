@@ -23,6 +23,14 @@ namespace educationalProject.Controllers
             {
                 datacontext.curri_id = data.curri_id;
                 datacontext.year = data.aca_year;
+                datacontext.ny1 = -1;
+                datacontext.ny2 = -1;
+                datacontext.ny3 = -1;
+                datacontext.ny4 = -1;
+                datacontext.ny5 = -1;
+                datacontext.ny6 = -1;
+                datacontext.ny7 = -1;
+                datacontext.ny8 = -1;
                 return Ok(datacontext);
             }
         }

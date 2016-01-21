@@ -74,5 +74,88 @@ namespace educationalProject.Models.ViewModels.Wrappers
             }
             return result;
         }
+
+        public object UpdateEntireList(List<oIndicator_sub_indicator_list> list)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+            string delcmd = string.Format("delete from {0} where {1} = {2}", FieldName.TABLE_NAME, FieldName.ACA_YEAR, list.First().aca_year);
+            string insertintoindicatorcmd = string.Format("insert into {0} values ", FieldName.TABLE_NAME);
+            string insertintosubindicatorcmd = string.Format("insert into {0} values ", Sub_indicator.FieldName.TABLE_NAME);
+            foreach (oIndicator_sub_indicator_list item in list)
+            {
+                insertintoindicatorcmd += string.Format("({0},{1},'{2}','{3}')", item.aca_year, item.indicator_num, item.indicator_name_t, item.indicator_name_e);
+                if (item != list.Last()) insertintoindicatorcmd += ",";
+                foreach(Sub_indicator sub_item in item.sub_indicator_list)
+                {
+                    insertintosubindicatorcmd += string.Format("({0},{1},{2},'{3}')", sub_item.aca_year, sub_item.indicator_num, sub_item.sub_indicator_num, sub_item.sub_indicator_name);
+                    if(sub_item != item.sub_indicator_list.Last()) insertintosubindicatorcmd += ",";
+                }
+            }
+
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} END",delcmd,insertintoindicatorcmd,insertintosubindicatorcmd);
+            try
+            {
+                int rowAffected = d.iCommand.ExecuteNonQuery();
+                if (rowAffected > 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    return "No indicator-sub indicator data are updated.";
+                }
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+        }
+
+        public object UpdateOnlySubIndicatorList(List<Sub_indicator> list)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+            string delcmd = string.Format("delete from {0} where {1} = {2}", Sub_indicator.FieldName.TABLE_NAME, FieldName.ACA_YEAR, list.First().aca_year);
+            string insertintosubindicatorcmd = string.Format("insert into {0} values ", Sub_indicator.FieldName.TABLE_NAME);
+
+            foreach (Sub_indicator item in list)
+            {
+                insertintosubindicatorcmd += string.Format("({0},{1},{2},'{3}')", item.aca_year, item.indicator_num, item.sub_indicator_num, item.sub_indicator_name);
+                if (item != list.Last()) insertintosubindicatorcmd += ",";
+            }
+
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} END", delcmd, insertintosubindicatorcmd);
+            try
+            {
+                int rowAffected = d.iCommand.ExecuteNonQuery();
+                if (rowAffected > 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    return "No sub_indicator data are updated.";
+                }
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+        }
     }
 }

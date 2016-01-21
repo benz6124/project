@@ -23,6 +23,16 @@ namespace educationalProject.Controllers
             {
                 datacontext.curri_id = data.curri_id;
                 datacontext.year = data.aca_year;
+                datacontext.num_admis_f = -1;
+                datacontext.num_admis_m = -1;
+                datacontext.num_childstaff_f = -1;
+                datacontext.num_childstaff_m = -1;
+                datacontext.num_direct_f = -1;
+                datacontext.num_direct_m = -1;
+                datacontext.num_goodstudy_f = -1;
+                datacontext.num_goodstudy_m = -1;
+                datacontext.num_others_f = -1;
+                datacontext.num_others_m = -1;
                 return Ok(datacontext);
             }
         }
