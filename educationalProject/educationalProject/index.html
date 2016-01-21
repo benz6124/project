@@ -2464,8 +2464,8 @@ $('.profile_pic').mouseover(function(){
                             <div class="topicHeader pull-right">
 
 
-                                <button class="btn btn-success  " ng-disabled="file_not_already_upload() || choose_not_complete  " ng-click="save_to_server()">ยืนยัน</button>
-                                <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                                <button class="btn btn-success  " ng-disabled="file_not_already_upload() || choose_not_complete  " ng-click="save_to_server(this)">ยืนยัน</button>
+                                <button class="btn btn-default " ng-click="close_modal()">ยกเลิก</button>
                             </div>
                         </div>
 
@@ -2513,8 +2513,8 @@ $('.profile_pic').mouseover(function(){
                     </form>
                         <div class="custom-footer">
                             <div class="topicHeader pull-right">
-                                <button class="btn btn-success  " ng-disabled="add_year_form.$invalid" ng-click="add_aca_year_to_server()">ยืนยัน</button>
-                                <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                                <button class="btn btn-success  " ng-disabled="add_year_form.$invalid" ng-click="add_aca_year_to_server(this)">ยืนยัน</button>
+                                <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                             </div>
                         </div>
 
@@ -2628,11 +2628,14 @@ $('.profile_pic').mouseover(function(){
                         <div class="custom-footer">
 
                             <div class="topicHeader pull-right">
-                                <button class="btn btn-success  hvr-wobble-vertical" ng-disabled="create_curri_form.$invalid" ng-click="create_curri()">ยืนยัน</button>
-                                <button class="btn btn-default hvr-wobble-vertical" ng-click="$hide()">ยกเลิก</button>
+                                <button class="btn btn-success  hvr-wobble-vertical" ng-disabled="create_curri_form.$invalid" ng-click="create_curri(this)">ยืนยัน</button>
+                                <button class="btn btn-default hvr-wobble-vertical" ng-click="close_modal(this)">ยกเลิก</button>
                             </div>
                         </div>
                     </div>
+
+
+
                     <div id="create_user" data-nq-modal="" data-qo-independent="true">
 
 
@@ -3186,8 +3189,8 @@ $('.profile_pic').mouseover(function(){
                           </div>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="graduated_form.$invalid" class="btn btn-success  " ng-click="save_to_server()">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                            <button ng-disabled="graduated_form.$invalid" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
                 </div>
@@ -3486,9 +3489,9 @@ $('.profile_pic').mouseover(function(){
                                         <form name="manage_indicators_form" novalidate>
                                           
 
-                                            <tr data-ng-repeat="indicator in indicators_result">
+                                            <tr data-ng-repeat="indicator in manage_indicators_and_sub_result">
                                            
-                                                 <td class="number_indicator"><input style="margin-right:10px" type="number" max = "99"  ng-model="indicator.indicator_num " /></td>
+                                                 <td class="number_indicator"><input style="margin-right:10px" type="number"  ng-model="indicator.indicator_num " /></td>
 
 
 
@@ -3567,8 +3570,8 @@ $('.profile_pic').mouseover(function(){
 </div>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="choose_not_complete" ng-click="save_to_server()">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                            <button class="btn btn-success  " ng-disabled="choose_not_complete" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>   
 
@@ -3683,8 +3686,8 @@ $('.profile_pic').mouseover(function(){
 
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="evaluate_by_me_form.$invalid || choose_not_complete" ng-click="save_to_server()">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                            <button class="btn btn-success  " ng-disabled="evaluate_by_me_form.$invalid || choose_not_complete" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div> 
                 </div>
@@ -3693,12 +3696,15 @@ $('.profile_pic').mouseover(function(){
   <div id="manage_indicators" data-ng-controller="manage_indicators_controller" data-nq-modal=""  data-qo-screen-mode="true"  data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการตัวบ่งชี้</span></h1>
+
+                         
                     </div>
 <div class="row">
                           <!--   <div class="col-md-4">
                                 <h3 ><span class="topicHeader" style="margin-left:15px;margin-top:0px;paddle:0px">ตัวบ่งชี้ดั้งเดิมตั้งแต่ปีการศึกษา:  </span></h3>
 
                             </div> -->
+
 <div class="col-md-6" style="margin-left:275px;margin-bottom:15px">
 
                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in all_indicator_years" data-qo-effect="flip-x" data-ng-change="get_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษาที่ตัวบ่งชี้เริ่มมีผล" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
@@ -3715,6 +3721,10 @@ $('.profile_pic').mouseover(function(){
                                  data-qo-selectable="true">
               
                                 <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+
+                                <button class="btn btn-warning hvr-pulse"style="margin-bottom:5px;padding-top:4px;padding-bottom:4px" ng-click="recover_indicator_all()"><i class="glyphicon glyphicon-wrench"></i> ดึงข้อมูลตั้งต้นใหม่</button>
+
+
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun">
                                       
                                         <thead class="nq-fix-table-scroll">
@@ -3725,6 +3735,7 @@ $('.profile_pic').mouseover(function(){
                                                 <th class="topic_indicator">ชื่อตัวบ่งชี้ (ภาษาไทย)</th>
                                                 <th class="topic_indicator">ชื่อตัวบ่งชี้ (ภาษาอังกฤษ)</th>
                                                 <th class="number_indicator">ข้อย่อย</th>
+                                                 <th class="number_indicator">ลบ</th>
                                             
                                             </tr>
                                         </thead>
@@ -3732,21 +3743,23 @@ $('.profile_pic').mouseover(function(){
                                         <form name="manage_indicators_form" novalidate>
                                           
 
-                                            <tr data-ng-repeat="indicator in indicators_result">
+                                            <tr data-ng-repeat="indicator in manage_indicators_and_sub_result">
                                            
-                                                 <td class="number_indicator"><input style="margin-right:10px" type="number" max = "99"  ng-model="indicator.indicator_num " /></td>
+                                                 <td class="number_indicator"><input style="margin-right:10px" type="number" ng-model="indicator.indicator_num " /></td>
 
 
 
-                                                <td class="topic_indicator left_column"><input size="72" type="text" ng-model="indicator.indicator_name_t " />
+                                                <td class="topic_indicator left_column"><input size="64" type="text" ng-model="indicator.indicator_name_t " />
                                                 </td>
-                                                 <td class="topic_indicator left_column"><input size="72" type="text" ng-model="indicator.indicator_name_e " /></td>
+                                                 <td class="topic_indicator left_column"><input size="64" type="text" ng-model="indicator.indicator_name_e " /></td>
 
-                                     <td class="number_indicator"> <a style="margin-right:10px"href="" data-ng-click="choose_indicator(indicator)" data-nq-toggle-modal="#manage_sub_indicators" data-effect="slide-left">
+                                     <td class="number_indicator"> <a style="margin-right:10px"href="" data-ng-click="choose_indicator(indicator)" class="hvr-pulse" data-nq-toggle-modal="#manage_sub_indicators" data-effect="slide-left">
                                         <span class="topic"><i class="glyphicon glyphicon-zoom-in"></i> </span>
                                     </a></td>
 
-
+                                       <td class="number_indicator"> <a style="margin-right:10px"href="" data-ng-click="remove_indicator($index)" class="hvr-pulse">
+                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                    </a></td>
 
                                             </tr>
 
@@ -3754,40 +3767,24 @@ $('.profile_pic').mouseover(function(){
                                         </tbody>
 
                                     </table>
+                                      <button type="button" style="margin-top:5px;margin-left:500px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_indicator()"style="color:green;font-size:30px"></i> </span></button>
          </div>         </div>         </div>         </div>
 
-<!-- <div class="row">
-<div class="col-md-6">
-    <h3 class="topicHeader"  style="margin-left:55px;margin-top:5px">ตัวบ่งชี้ที่ </h3>
-    </div>
-    <div class="col-md-3">
-     <span class="topicHeader"  style="margin-left:55px;margin-top:5px">ชื่อตัวบ่งชี้ </span>
-     </div>
-</div> -->
-<!-- <div class="row" ng-repeat="indicator in indicators_result">
-     <div class="col-md-6">
-{{indicator.indicator_num}}
-</div>
-     <div class="col-md-6">
-{{indicator.indicator_name_t}} 
 
-{{indicator.indicator_name_e}}
 
- 
-</div>
-</div> -->
 
  <div class="custom-footer">
+         
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="manage_indicators_form.$invalid || choose_not_complete || manage_indicators_form.$untouched" ng-click="save_to_server()">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                            <button class="btn btn-success  " ng-disabled="manage_indicators_form.$invalid || choose_not_complete || manage_indicators_form.$pristine  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div> 
                     </div>
 
 
 
-  <div id="manage_sub_indicators" data-ng-controller="manage_sub_indicators_controller" data-nq-modal=""  data-qo-size="lg"  data-qo-independent="true">
+  <div id="manage_sub_indicators" data-ng-controller="manage_sub_indicators_controller" data-nq-modal=""  data-qo-screen-mode="true"  data-ng-init ="init()" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการตัวบ่งชี้ย่อย</span></h1>
                     </div>
@@ -3801,6 +3798,8 @@ $('.profile_pic').mouseover(function(){
                                  data-qo-selectable="true">
               
                                 <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+
+ <button class="btn btn-warning hvr-pulse"style="margin-bottom:5px;padding-top:4px;padding-bottom:4px" ng-click="recover_indicator()"><i class="glyphicon glyphicon-wrench"></i> ดึงข้อมูลตั้งต้นใหม่</button>
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun">
                                       
                                         <thead class="nq-fix-table-scroll">
@@ -3810,7 +3809,7 @@ $('.profile_pic').mouseover(function(){
 
                                                 <th class="topic_evaluation">ชื่อตัวบ่งชี้</th>
                                            <!--      <th class="topic_evaluation">ชื่อตัวบ่งชี้ (ภาษาอังกฤษ)</th> -->
-                                            
+                                                <th class="number_indicator">ลบ</th>
                                             </tr>
                                         </thead>
                                         <tbody class="flattened">
@@ -3818,7 +3817,7 @@ $('.profile_pic').mouseover(function(){
 
                                             <tr data-ng-repeat="sub_indicator in manage_indicators_indicator_choosen.sub_indicator_list">
                                            
-                                                 <td class="number_indicator"><input style="margin-right:10px" type="number" max = "99"  ng-model="sub_indicator.sub_indicator_num " /></td>
+                                                 <td class="number_indicator"><input style="margin-right:10px" type="number"  ng-model="sub_indicator.sub_indicator_num " /></td>
 
 
 
@@ -3826,7 +3825,9 @@ $('.profile_pic').mouseover(function(){
                                                 </td>
                                               <!--    <td class="topic_evaluation left_column"><input size="70" type="text" ng-model="indicator.indicator_name_e " /></td> -->
 
-                                  
+                                      <td class="number_indicator"> <a style="margin-right:10px"href="" data-ng-click="remove_sub_indicator($index)" class="hvr-pulse">
+                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                    </a></td>
 
                                             </tr>
 
@@ -3834,6 +3835,8 @@ $('.profile_pic').mouseover(function(){
                                         </tbody>
 
                                     </table>
+   <button type="button" style="margin-top:5px;margin-left:500px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_sub_indicator()"style="color:green;font-size:30px"></i> </span></button>
+
          </div>         </div>         </div>         </div>
 
 <!-- <div class="row">
@@ -3844,7 +3847,7 @@ $('.profile_pic').mouseover(function(){
      <span class="topicHeader"  style="margin-left:55px;margin-top:5px">ชื่อตัวบ่งชี้ </span>
      </div>
 </div> -->
-<!-- <div class="row" ng-repeat="indicator in indicators_result">
+<!-- <div class="row" ng-repeat="indicator in manage_indicators_and_sub_result">
      <div class="col-md-6">
 {{indicator.indicator_num}}
 </div>
@@ -3859,8 +3862,8 @@ $('.profile_pic').mouseover(function(){
 
  <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="evaluate_by_me_form.$invalid || choose_not_complete" ng-click="save_to_server()">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                            <button class="btn btn-success  " ng-disabled="evaluate_by_me_form.$invalid || choose_not_complete" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div> 
                     </div>
@@ -3961,8 +3964,8 @@ $('.profile_pic').mouseover(function(){
 
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="evaluate_by_me_form.$invalid || choose_not_complete" ng-click="save_to_server()">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                            <button class="btn btn-success  " ng-disabled="evaluate_by_me_form.$invalid || choose_not_complete" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div> 
                 </div>
@@ -5538,8 +5541,8 @@ $('.profile_pic').mouseover(function(){
 </form>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="student_stat_form.$invalid"  ng-click="save_to_server()">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                            <button class="btn btn-success  " ng-disabled="student_stat_form.$invalid"  ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 

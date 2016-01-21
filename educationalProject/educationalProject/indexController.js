@@ -467,8 +467,17 @@ app.controller('add_aca_year', function($scope, $http,$alert,$loading,$timeout,n
         $scope.error_leaw = false;
     
     }
+  $scope.curri_choosen = "none";
+               $scope.new_curri_academic = {};
+        $scope.new_curri_academic.aca_year = ""
+ 
+        $scope.error_leaw = false;
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
 
-    $scope.add_aca_year_to_server = function(){
+    $scope.add_aca_year_to_server = function(my_modal){
         console.log("add_aca_year_to_server");
 if( $scope.curri_choosen!= "none" && $scope.new_curri_academic.aca_year != ""){
         $scope.new_curri_academic.curri_id = $scope.curri_choosen.curri_id;
@@ -487,7 +496,9 @@ if( $scope.curri_choosen!= "none" && $scope.new_curri_academic.aca_year != ""){
             
                   $alert({title:'ดำเนินการสำเร็จ', content:'เพิ่มปีการศึกษาเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-               
+
+                  my_modal.$hide();
+               $scope.init();
          
 
          })
@@ -511,7 +522,16 @@ app.controller('create_curriculum', function($scope, $http,$alert,$loading,$time
         $scope.new_curri = {}
 
     }
-    $scope.create_curri = function(){
+ $scope.new_curri = {}
+
+ 
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+
+    $scope.create_curri = function(my_modal){
           console.log($scope.new_curri);
 
         if ($scope.new_curri.curr_tname && $scope.new_curri.curr_ename && $scope.new_curri.degree_t_full && $scope.new_curri.degree_t_bf && $scope.new_curri.degree_e_full && $scope.new_curri.degree_e_bf && $scope.new_curri.level && $scope.new_curri.period ){
@@ -540,6 +560,8 @@ app.controller('create_curriculum', function($scope, $http,$alert,$loading,$time
                  $rootScope.all_curriculums =data;
                    $alert({title:'ดำเนินการสำเร็จ', content:'สร้างหลักสูตรเรียบร้อยแล้ว',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+                   my_modal.$hide();
+                    $scope.new_curri = {};
          //เรียกฟังชั่นใน servce ให้อัพเดทค่า
 
 
@@ -556,9 +578,12 @@ app.controller('create_curriculum', function($scope, $http,$alert,$loading,$time
 app.controller('stat_graduated_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
-}
-      $scope.year_choosen = {};
+         $scope.year_choosen = {};
               $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+}
+  
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
@@ -594,8 +619,11 @@ $scope.init =function() {
          });
 
     }
-
-    $scope.save_to_server = function(){
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+    $scope.save_to_server = function(my_modal){
         console.log("save_to_server");
         console.log($scope.result);
         $http.put(
@@ -609,6 +637,7 @@ $scope.init =function() {
          ).success(function (data) {
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+               $scope.close_modal(my_modal);
          })
     .error(function(data, status, headers, config) {
                   if(status==500){
@@ -626,9 +655,12 @@ $scope.init =function() {
 app.controller('stat_student_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
-}
-      $scope.year_choosen = {};
+        $scope.year_choosen = {};
               $scope.curri_choosen = {}
+               $scope.indicator_choosen= {};
+                  $scope.result ={};
+}
+   
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
@@ -665,7 +697,12 @@ $scope.init =function() {
 
     }
 
-    $scope.save_to_server = function(){
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+    $scope.save_to_server = function(my_modal){
         console.log("save_to_server");
         console.log($scope.result);
         $http.put(
@@ -679,6 +716,7 @@ $scope.init =function() {
          ).success(function (data) {
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+                $scope.close_modal();
          })
     .error(function(data, status, headers, config) {
                   if(status==500){
@@ -696,9 +734,13 @@ $scope.init =function() {
 app.controller('stat_new_student_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
+       $scope.year_choosen = {};
+              $scope.curri_choosen = {};
+                 $scope.indicator_choosen= {};
+                   $scope.result = {};
+
 }
-      $scope.year_choosen = {};
-              $scope.curri_choosen = {}
+    
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
@@ -735,7 +777,12 @@ $scope.init =function() {
 
     }
 
-    $scope.save_to_server = function(){
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+    $scope.save_to_server = function(my_modal){
         console.log("save_to_server");
         console.log($scope.result);
         $http.put(
@@ -749,6 +796,7 @@ $scope.init =function() {
          ).success(function (data) {
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+               $scope.close_modal(my_modal);
          })
     .error(function(data, status, headers, config) {
                   if(status==500){
@@ -780,11 +828,14 @@ app.directive('fileUpload', function () {
 app.controller('evaluate_by_me_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
-
-}
-      $scope.year_choosen = {};
-       
+   $scope.year_choosen = {};
+       $scope.curri_choosen = {};
 $scope.indicator_choosen = {};
+}
+       $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
 
       $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
@@ -800,12 +851,7 @@ $scope.indicator_choosen = {};
 
     }
 
-    $scope.$on("fileSelected", function (event, args) {
-        $scope.$apply(function () {            
-            //add the file object to the scope's files collection
-            $scope.files.push(args.file);
-        });
-    });
+
     $scope.find_indicators = function(){
 
           console.log("find_indicators");
@@ -848,7 +894,7 @@ $scope.indicator_choosen = {};
 
     }
 
-    $scope.save_to_server = function(){
+    $scope.save_to_server = function(my_modal){
 
         $http.put(
              '/api/selfevaluation',
@@ -861,6 +907,8 @@ $scope.indicator_choosen = {};
          ).success(function (data) {
               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+              my_modal.$hide();
+              $scope.init();
          })
          .error(function (data, status, headers, config) {
             $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
@@ -877,13 +925,13 @@ app.controller('evaluate_by_other_controller', function($scope, $alert,$http,req
            $scope.year_choosen = {};
               $scope.curri_choosen = {}
   $scope.files = [];
-  
+     $scope.year_choosen = {};
+       
+$scope.indicator_choosen = {};
 }
 
 
-      $scope.year_choosen = {};
-       
-$scope.indicator_choosen = {};
+   
 
   $scope.$on("fileSelected", function (event, args) {
         $scope.$apply(function () {            
@@ -956,7 +1004,13 @@ $scope.indicator_choosen = {};
 
     }
 
- $scope.save_to_server = function() {
+
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+ $scope.save_to_server = function(my_modal) {
 
       var formData = new FormData();
 
@@ -981,6 +1035,8 @@ $scope.indicator_choosen = {};
         success(function (data, status, headers, config) {
               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+              my_modal.$hide();
+                  $scope.init ();
         }).
         error(function (data, status, headers, config) {
                $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
@@ -1061,7 +1117,14 @@ app.controller('upload_aun_controller', function($scope, $alert,$http,request_ye
         });
     });
     
-    $scope.save_to_server = function() {
+
+        $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+
+    $scope.save_to_server = function(my_modal) {
  
       $scope.model  = {"file_name":$scope.files[0].name,"personnel_id":"00007","date":"","curri_id":$scope.curri_choosen.curri_id,"aca_year":$scope.year_choosen.aca_year}
 
@@ -1087,11 +1150,12 @@ app.controller('upload_aun_controller', function($scope, $alert,$http,request_ye
         }).
         success(function (data, status, headers, config) {
     
-                $scope.files = [];
              
 
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+                $scope.close_modal(my_modal);
            
         }).
         error(function (data, status, headers, config) {
@@ -1104,9 +1168,12 @@ app.controller('upload_aun_controller', function($scope, $alert,$http,request_ye
 app.controller('manage_president_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
-}
-      $scope.year_choosen = {};
+        $scope.year_choosen = {};
               $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                $scope.result={};
+}
+   
 
   $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
@@ -1145,7 +1212,13 @@ $scope.init =function() {
 
     }
 
-    $scope.save_to_server = function(){
+
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+    $scope.save_to_server = function(my_modal){
         console.log("save_to_server");
         console.log($scope.result);
         $http.put(
@@ -1159,6 +1232,8 @@ $scope.init =function() {
          ).success(function (data) {
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+               $scope.close_modal(my_modal);
          })
     .error(function(data, status, headers, config) {
                   if(status==500){
@@ -1203,21 +1278,42 @@ $scope.init =function() {
 
 
 app.controller('manage_indicators_controller', function($scope, $alert,$http,$rootScope){
-    $scope.init =function() {
-         
-    }
-    $scope.choose_not_complete = true;
-      $scope.year_choosen = 0;
-      $scope.mum = "mummy is here";
-      $scope.curri_choosen = {};
   
-      // $scope.indicators_result = [{"sub_indicator_list":[{"aca_year":2559,"indicator_num":1,"sub_indicator_num":1,"sub_indicator_name":"ข้อย่อย 1"}
+
+
+      // $rootScope.manage_indicators_and_sub_result = [{"sub_indicator_list":[{"aca_year":2559,"indicator_num":1,"sub_indicator_num":1,"sub_indicator_name":"ข้อย่อย 1"}
       // ,{"aca_year":2559,"indicator_num":1,"sub_indicator_num":2,"sub_indicator_name":"ข้อย่อย 2"}
       // ,{"aca_year":2559,"indicator_num":1,"sub_indicator_num":3,"sub_indicator_name":"ข้อย่อย 3"}]
       // ,"aca_year":2559,"indicator_num":1,"indicator_name_t":"ชื่อไทย","indicator_name_e":"Eng name"}
       // ,{"sub_indicator_list":[{"aca_year":2559,"indicator_num":2,"sub_indicator_num":1,"sub_indicator_name":"ข้อย่อย 1"},{"aca_year":2559,"indicator_num":2,"sub_indicator_num":2,"sub_indicator_name":"ข้อย่อย 2"}],"aca_year":2559,"indicator_num":2,"indicator_name_t":"ชื่อไทย2","indicator_name_e":"Eng name2"}];
+$scope.init = function(){
+     $scope.choose_not_complete = true;
+     $scope.year_choosen = 0;
+
+         $scope.choose_not_complete = true;
+      $rootScope.manage_indicators_and_subs_year_choosen = 0;
+      
+
+      $scope.curri_choosen = {};
+
+    $rootScope.my_backup_indicators = {};
+ }
+         
+  $scope.choose_not_complete = true;
+     $scope.year_choosen = 0;
+
+         $scope.choose_not_complete = true;
+      $rootScope.manage_indicators_and_subs_year_choosen = 0;
+      
+
+      $scope.curri_choosen = {};
+
+    $rootScope.my_backup_indicators = {};
 
 
+      $scope.recover_indicator_all =function(){
+            $rootScope.manage_indicators_and_sub_result = angular.copy($rootScope.my_backup_indicators);
+      }
 
         $http.get('/api/indicator').success(function (data) {
             console.log("all_indicator_years");
@@ -1225,23 +1321,63 @@ console.log(data);
             $scope.all_indicator_years = data;
           });
 
-
+        // $scope.tell_root_to_change = function(){
+        //     console.log("tell");
+          
+        //     console.log($scope.year_choosen);
+        //     console.log($rootScope.manage_indicators_and_subs_year_choosen);
+        // }
       $scope.choose_indicator = function(in_indi){
+
+        console.log("receive");
+        console.log(in_indi);
+        $rootScope.manage_indicators_and_sub_save_indicator = {};
+        $rootScope.manage_indicators_and_sub_save_indicator.save_content = [];
+        $rootScope.manage_indicators_and_sub_save_indicator.save_index = 0;
         console.log("choose_indicator");
             $rootScope.manage_indicators_indicator_choosen = in_indi;
-         
+           $rootScope.manage_indicators_and_sub_save_indicator.save_content =  angular.copy(in_indi);
+            console.log('index');
+            console.log( $rootScope.manage_indicators_and_sub_result.indexOf(in_indi));
+             console.log($rootScope.manage_indicators_and_sub_save_indicator.save_index);
+          
+
+            $rootScope.manage_indicators_and_sub_save_indicator.save_index = angular.copy($rootScope.manage_indicators_and_sub_result.indexOf(in_indi));
+       
+
+        console.log("my back_up")
+         console.log($rootScope.manage_indicators_and_sub_save_indicator.save_content);
+
       }
 
 
 
     
+      $scope.add_indicator = function(){
+        // $scope.new_indicator = {"sub_indicator_list":[]
+        // ,"aca_year":$scope.year_choosen
+        // ,"indicator_num":$rootScope.manage_indicators_and_sub_result.length+1
+        // ,"indicator_name_t":"","indicator_name_e":""}
+
+
+         $rootScope.manage_indicators_and_sub_result.push({"sub_indicator_list":[]
+        ,"aca_year":$rootScope.manage_indicators_and_subs_year_choosen
+        ,"indicator_num":""
+        ,"indicator_name_t":"","indicator_name_e":""});
+      }
+
+      $scope.remove_indicator = function(index_indicator_to_remove) { 
+      $rootScope.manage_indicators_and_sub_result.splice(index_indicator_to_remove, 1);     
+      console.log($rootScope.manage_indicators_and_sub_result);
+    }
 
     $scope.get_indicators = function(){
+          $rootScope.manage_indicators_and_subs_year_choosen = $scope.year_choosen;
 $scope.choose_not_complete = false;
-
+console.log($rootScope.manage_indicators_and_subs_year_choosen);
           $http.post(
              '/api/indicatorsubindicator',
-             JSON.stringify($scope.year_choosen),
+             JSON.stringify($rootScope.manage_indicators_and_subs_year_choosen),
              {
                  headers: {
                      'Content-Type': 'application/json'
@@ -1250,22 +1386,168 @@ $scope.choose_not_complete = false;
          ).success(function (data) {
             console.log("get_indicators");
             console.log(data);
-            $scope.indicators_result =data;
+             $rootScope.my_backup_indicators = angular.copy(data);
+            $rootScope.manage_indicators_and_sub_result =data;
          });
     }
+
+
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+
+        $scope.save_to_server = function(my_modal){
+
+
+        console.log("save_to_server");
+        console.log($rootScope.manage_indicators_and_sub_result);
+        $http.put(
+             '/api/indicatorsubindicator/saveindicator',
+             JSON.stringify($rootScope.manage_indicators_and_sub_result),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+                // $rootScope.manage_indicators_and_sub_result[$rootScope.manage_indicators_and_sub_save_indicator.save_index] = angular.copy($rootScope.manage_indicators_indicator_choosen);
+                $rootScope.my_backup_indicators = angular.copy($rootScope.manage_indicators_and_sub_result);
+                    $scope.close_modal(my_modal);
+                // $rootScope.manage_indicators_and_sub_save_indicator.save_content = angular.copy($rootScope.manage_indicators_indicator_choosen);
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    }
+
+
 });
+
+
+
+
+
 
 app.controller('manage_sub_indicators_controller', function($scope, $alert,$http,$rootScope){
 
+    // $scope.init = function(){
+    //     console.log("manage_sub_indicators_controller init")
+    //         $scope.save_indicator = $rootScope.manage_indicators_indicator_choosen;
+    // }
+
+    // $scope.$on("open_sub_indicator_modal", function (event, args) {
+    //     $scope.$apply(function () {            
+    //         //add the file object to the scope's files collection
+    //         console.log("backup working...")
+
+    //         $scope.save_indicator = $rootScope.manage_indicators_indicator_choosen;
+    //     });
+    // });
+
+    $scope.recover_indicator = function(){
+        // console.log("backup is");
+        // console.log($rootScope.manage_indicators_and_sub_save_indicator);
+        // console.log("to replace");
+        // console.log($rootScope.manage_indicators_indicator_choosen);
+
+        // angular.copy($rootScope.manage_indicators_and_sub_save_indicator,$rootScope.manage_indicators_indicator_choosen);
+       $rootScope.manage_indicators_and_sub_result[$rootScope.manage_indicators_and_sub_save_indicator.save_index] = {};
+     
+       $rootScope.manage_indicators_indicator_choosen = {};
+
+       console.log("index");
+       console.log($rootScope.manage_indicators_and_sub_save_indicator.save_index);
+console.log("backup");
+console.log($rootScope.manage_indicators_and_sub_save_indicator.save_content);
+       $rootScope.manage_indicators_indicator_choosen = angular.copy($rootScope.manage_indicators_and_sub_save_indicator.save_content);
+         $rootScope.manage_indicators_and_sub_result[$rootScope.manage_indicators_and_sub_save_indicator.save_index] =  angular.copy($rootScope.manage_indicators_indicator_choosen);
+    
+
+    console.log("manage_indicators_indicator_choosen");
+console.log($rootScope.manage_indicators_indicator_choosen);
+    console.log("all");
+    console.log($rootScope.manage_indicators_and_sub_result);
+
+    }
+
+        $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+     $scope.add_sub_indicator = function(){
+
+
+         $rootScope.manage_indicators_indicator_choosen.sub_indicator_list.push({
+            "aca_year":$rootScope.manage_indicators_and_subs_year_choosen
+            ,"indicator_num":$rootScope.manage_indicators_indicator_choosen.indicator_num,
+            "sub_indicator_num":"","sub_indicator_name":""});
+      }
+
+
+      $scope.remove_sub_indicator = function(index_sub_indicator_to_remove) { 
+      $rootScope.manage_indicators_indicator_choosen.sub_indicator_list.splice(index_sub_indicator_to_remove, 1);     
+      console.log($rootScope.manage_indicators_indicator_choosen);
+    }
+
+        $scope.close_modal = function(my_modal){
+       
+        my_modal.$hide();
+    }
+
+
+    $scope.save_to_server = function(my_modal){
+
+
+        console.log("save_to_server");
+        console.log($rootScope.manage_indicators_indicator_choosen);
+        $http.put(
+             '/api/indicatorsubindicator/savesubindicator',
+             JSON.stringify($rootScope.manage_indicators_indicator_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+
+
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+                $rootScope.manage_indicators_and_sub_result[$rootScope.manage_indicators_and_sub_save_indicator.save_index] = angular.copy($rootScope.manage_indicators_indicator_choosen);
+                $rootScope.my_backup_indicators[$rootScope.manage_indicators_and_sub_save_indicator.save_index] = angular.copy($rootScope.manage_indicators_indicator_choosen);
+                $rootScope.manage_indicators_and_sub_save_indicator.save_content = angular.copy($rootScope.manage_indicators_indicator_choosen);
+                $scope.close_modal(my_modal);
+
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    }
 });
 
 
 app.controller('manage_primary_evidences_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
-}
-      $scope.year_choosen = {};
+        $scope.year_choosen = {};
               $scope.curri_choosen = {}
+}
+   
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
@@ -1302,29 +1584,5 @@ $scope.init =function() {
 
     }
 
-    $scope.save_to_server = function(){
-        console.log("save_to_server");
-        console.log($scope.result);
-        $http.put(
-             '/api/studentstatusother',
-             JSON.stringify($scope.result),
-             {
-                 headers: {
-                     'Content-Type': 'application/json'
-                 }
-             }
-         ).success(function (data) {
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-         })
-    .error(function(data, status, headers, config) {
-                  if(status==500){
-
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
-
-  }); 
-    }
 });
 
