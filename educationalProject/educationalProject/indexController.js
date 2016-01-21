@@ -1211,11 +1211,20 @@ app.controller('manage_indicators_controller', function($scope, $alert,$http,$ro
       $scope.mum = "mummy is here";
       $scope.curri_choosen = {};
   
-      $scope.indicators_result = [{"sub_indicator_list":[{"aca_year":2559,"indicator_num":1,"sub_indicator_num":1,"sub_indicator_name":"ข้อย่อย 1"}
-      ,{"aca_year":2559,"indicator_num":1,"sub_indicator_num":2,"sub_indicator_name":"ข้อย่อย 2"}
-      ,{"aca_year":2559,"indicator_num":1,"sub_indicator_num":3,"sub_indicator_name":"ข้อย่อย 3"}]
-      ,"aca_year":2559,"indicator_num":1,"indicator_name_t":"ชื่อไทย","indicator_name_e":"Eng name"}
-      ,{"sub_indicator_list":[{"aca_year":2559,"indicator_num":2,"sub_indicator_num":1,"sub_indicator_name":"ข้อย่อย 1"},{"aca_year":2559,"indicator_num":2,"sub_indicator_num":2,"sub_indicator_name":"ข้อย่อย 2"}],"aca_year":2559,"indicator_num":2,"indicator_name_t":"ชื่อไทย2","indicator_name_e":"Eng name2"}];
+      // $scope.indicators_result = [{"sub_indicator_list":[{"aca_year":2559,"indicator_num":1,"sub_indicator_num":1,"sub_indicator_name":"ข้อย่อย 1"}
+      // ,{"aca_year":2559,"indicator_num":1,"sub_indicator_num":2,"sub_indicator_name":"ข้อย่อย 2"}
+      // ,{"aca_year":2559,"indicator_num":1,"sub_indicator_num":3,"sub_indicator_name":"ข้อย่อย 3"}]
+      // ,"aca_year":2559,"indicator_num":1,"indicator_name_t":"ชื่อไทย","indicator_name_e":"Eng name"}
+      // ,{"sub_indicator_list":[{"aca_year":2559,"indicator_num":2,"sub_indicator_num":1,"sub_indicator_name":"ข้อย่อย 1"},{"aca_year":2559,"indicator_num":2,"sub_indicator_num":2,"sub_indicator_name":"ข้อย่อย 2"}],"aca_year":2559,"indicator_num":2,"indicator_name_t":"ชื่อไทย2","indicator_name_e":"Eng name2"}];
+
+
+
+        $http.get('/api/indicator').success(function (data) {
+            console.log("all_indicator_years");
+console.log(data);
+            $scope.all_indicator_years = data;
+          });
+
 
       $scope.choose_indicator = function(in_indi){
         console.log("choose_indicator");
@@ -1223,16 +1232,12 @@ app.controller('manage_indicators_controller', function($scope, $alert,$http,$ro
          
       }
 
-        $scope.find_indicator_year = function(){
 
-        $http.get('/api/indicator').success(function (data) {
-            
-            $scope.all_indicator_years = data;
-          });
-    }
+
+    
 
     $scope.get_indicators = function(){
-
+$scope.choose_not_complete = false;
 
           $http.post(
              '/api/indicatorsubindicator',
@@ -1253,3 +1258,73 @@ app.controller('manage_indicators_controller', function($scope, $alert,$http,$ro
 app.controller('manage_sub_indicators_controller', function($scope, $alert,$http,$rootScope){
 
 });
+
+
+app.controller('manage_primary_evidences_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+}
+      $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+        $scope.sendCurriAndGetYears = function () {
+        $scope.choose_not_complete =true;
+        $scope.year_choosen = {}
+        $scope.indicator_choosen= {};
+      
+              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
+
+            $scope.corresponding_aca_years = data;
+
+          });
+
+
+    }
+
+    $scope.find_information = function(){
+
+          console.log("find_information");
+        console.log($scope.year_choosen);
+
+        $http.post(
+             '/api/studentstatusother',
+             JSON.stringify($scope.year_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            
+            console.log(data);
+             $scope.result = data;
+             $scope.choose_not_complete = false;
+         });
+
+    }
+
+    $scope.save_to_server = function(){
+        console.log("save_to_server");
+        console.log($scope.result);
+        $http.put(
+             '/api/studentstatusother',
+             JSON.stringify($scope.result),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    }
+});
+

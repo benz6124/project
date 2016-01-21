@@ -408,6 +408,13 @@ $('.profile_pic').mouseover(function(){
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการตัวบ่งชี้</span></span>
                             </a>
                         </li>
+
+                             <li>
+                            <a href="" data-nq-toggle-modal="#manage_primary_evidences" data-effect="from-left" data-placement="right">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการหลักฐานพื้นฐาน</span></span>
+                            </a>
+                        </li>
                     </ul>
 
 
@@ -3432,9 +3439,43 @@ $('.profile_pic').mouseover(function(){
                     </div>
                 </div>
 
+
+
+
+ <div id="manage_primary_evidences" data-ng-controller="manage_primary_evidences_controller" data-ng-init="init()"data-nq-modal=""  data-qo-size="lg" data-qo-independent="true">
+      <div class="custom-header">
+          <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการหลักฐานพื้นฐาน</span></h1>
+      </div>
+
+   <div class="row">
+
+
+                        <div class="col-md-8" >
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+            </select>
+
+                        </div>
+                        <div class="col-md-4" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+</select>   
+                        </div>
+
+                    </div>
+        <div class="custom-footer">
+          <div class="topicHeader pull-right">
+              <button class="btn btn-success  " ng-disabled="choose_not_complete" ng-click="save_to_server()">ยืนยัน</button>
+              <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+          </div>
+      </div>   
+ </div>
+
+
+
+
+
      <div id="manage_president" data-nq-modal=""  data-ng-controller="manage_president_controller" data-ng-init="init()" data-qo-size="lg" data-qo-independent="true">
                     <div class="custom-header">
-                        <h1 class="headerModalH1"><span class="headerModal"> จัดการประธานหลักสูตร</span></h1>
+                        <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการประธานหลักสูตร</span></h1>
                     </div>
 
                     <div class="row">
@@ -3610,13 +3651,13 @@ $('.profile_pic').mouseover(function(){
                             </div> -->
 <div class="col-md-6" style="margin-left:275px;margin-bottom:15px">
 
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year in all_indicator_years" data-qo-effect="flip-x" data-ng-change="get_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษาที่ตัวบ่งชี้เริ่มมีผล" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in all_indicator_years" data-qo-effect="flip-x" data-ng-change="get_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษาที่ตัวบ่งชี้เริ่มมีผล" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 </select>   
 
 </div>
 
 </div>
-    <div class="container-fluid" >
+    <div class="container-fluid" ng-hide="choose_not_complete">
                         <div class="clearfix">
 
 
@@ -3638,7 +3679,7 @@ $('.profile_pic').mouseover(function(){
                                             </tr>
                                         </thead>
                                         <tbody class="flattened">
-                                        <form name="evaluate_by_me_form" novalidate>
+                                        <form name="manage_indicators_form" novalidate>
                                           
 
                                             <tr data-ng-repeat="indicator in indicators_result">
@@ -3688,7 +3729,7 @@ $('.profile_pic').mouseover(function(){
 
  <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="evaluate_by_me_form.$invalid || choose_not_complete" ng-click="save_to_server()">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="manage_indicators_form.$invalid || choose_not_complete || manage_indicators_form.$untouched" ng-click="save_to_server()">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                         </div>
                     </div> 
