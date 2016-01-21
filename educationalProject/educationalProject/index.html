@@ -461,7 +461,7 @@ $('.profile_pic').mouseover(function(){
 
 
                 <li  data-ng-repeat="indicator in corresponding_indicators">
-                <a data-toggle="tab"  data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="{{indicator.indicator_name}}" ng-click="sendIndicatorAndGetSubIndicators(indicator)">AUN {{indicator.indicator_num}}</a></li>
+                <a data-toggle="tab"  data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="{{indicator.indicator_name_t}}" ng-click="sendIndicatorAndGetSubIndicators(indicator)">AUN {{indicator.indicator_num}}</a></li>
 
             </ul>
 
@@ -473,7 +473,7 @@ $('.profile_pic').mouseover(function(){
 
         <div class="tab-pane fade active in" >
         <div ng-hide="select_overall">
-            <h2 class="headerPanel wow flipInX" data-wow-duration="3s" style="text-align:center">AUN {{indicator_choosen.indicator_num}} {{indicator_choosen.indicator_name}}</h2>
+            <h2 class="headerPanel wow flipInX" data-wow-duration="3s" style="text-align:center">AUN {{indicator_choosen.indicator_num}} {{indicator_choosen.indicator_name_t}} ({{indicator_choosen.indicator_name_e}})</h2>
 
 
            

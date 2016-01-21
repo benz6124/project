@@ -807,8 +807,8 @@ $scope.indicator_choosen = {};
 
     $scope.save_to_server = function(){
 
-        $http.post(
-             '/api/indicator',
+        $http.put(
+             '/api/selfevaluation',
              JSON.stringify($scope.corresponding_results),
              {
                  headers: {
@@ -925,7 +925,7 @@ $scope.init =function() {
 }
       $scope.year_choosen = {};
               $scope.curri_choosen = {}
-              
+
        $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
