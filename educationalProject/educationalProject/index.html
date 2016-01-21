@@ -3442,7 +3442,7 @@ $('.profile_pic').mouseover(function(){
 
 
 
- <div id="manage_primary_evidences" data-ng-controller="manage_primary_evidences_controller" data-ng-init="init()"data-nq-modal=""  data-qo-size="lg" data-qo-independent="true">
+ <div id="manage_primary_evidences" data-ng-controller="manage_primary_evidences_controller" data-ng-init="init()"data-nq-modal=""  data-qo-screen-mode ="true" data-qo-independent="true">
       <div class="custom-header">
           <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการหลักฐานพื้นฐาน</span></h1>
       </div>
@@ -3459,6 +3459,56 @@ $('.profile_pic').mouseover(function(){
                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 </select>   
                         </div>
+
+
+                           <div class="container-fluid" ng-hide="choose_not_complete">
+                        <div class="clearfix">
+
+
+                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
+                                 data-qo-selectable="true">
+              
+                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun">
+                                      
+                                        <thead class="nq-fix-table-scroll">
+                                            <tr>
+                                             
+                                                <th class="number_indicator">ข้อที่</th>
+
+                                                <th class="topic_indicator">ชื่อตัวบ่งชี้ (ภาษาไทย)</th>
+                                                <th class="topic_indicator">ชื่อตัวบ่งชี้ (ภาษาอังกฤษ)</th>
+                                                <th class="number_indicator">ข้อย่อย</th>
+                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody class="flattened">
+                                        <form name="manage_indicators_form" novalidate>
+                                          
+
+                                            <tr data-ng-repeat="indicator in indicators_result">
+                                           
+                                                 <td class="number_indicator"><input style="margin-right:10px" type="number" max = "99"  ng-model="indicator.indicator_num " /></td>
+
+
+
+                                                <td class="topic_indicator left_column"><input size="72" type="text" ng-model="indicator.indicator_name_t " />
+                                                </td>
+                                                 <td class="topic_indicator left_column"><input size="72" type="text" ng-model="indicator.indicator_name_e " /></td>
+
+                                     <td class="number_indicator"> <a style="margin-right:10px"href="" data-ng-click="choose_indicator(indicator)" data-nq-toggle-modal="#manage_sub_indicators" data-effect="slide-left">
+                                        <span class="topic"><i class="glyphicon glyphicon-zoom-in"></i> </span>
+                                    </a></td>
+
+
+
+                                            </tr>
+
+                                            </form>
+                                        </tbody>
+
+                                    </table>
+         </div>         </div>         </div>         </div>
 
                     </div>
         <div class="custom-footer">
