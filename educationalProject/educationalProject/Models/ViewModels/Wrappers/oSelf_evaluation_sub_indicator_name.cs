@@ -53,9 +53,10 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 {
                     //Since no self evaluation result in database we query once again to get sub_indicator name
                     res.Close();
-                    d.iCommand.CommandText = string.Format("select * from {0} where {1} = {2} and {3} = {4})",
+                    d.iCommand.CommandText = string.Format("select * from {0} where {1} = {2} and {3} = {4}",
                     Sub_indicator.FieldName.TABLE_NAME, Sub_indicator.FieldName.INDICATOR_NUM,inddata.indicator_num,
                     FieldName.ACA_YEAR, inddata.aca_year);
+                    res = d.iCommand.ExecuteReader();
                     if (res.HasRows)
                     {
                         DataTable data = new DataTable();
@@ -72,7 +73,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                 date = "",
                                 time = "",
                                 evaluation_score = 0,
-                                teacher_id = "00000"
+                                teacher_id = "00001"
                             });
                         }
                         res.Close();
