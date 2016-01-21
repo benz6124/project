@@ -15,5 +15,10 @@ namespace educationalProject.Controllers
             object result = datacontext.SelectWhereOrderBy(String.Format("aca_year=(select max(j.aca_year) from indicator as j where j.aca_year <= {0})", data.aca_year), "indicator_num", null);
             return Ok(result);
         }
+
+        public IHttpActionResult GetIndicatorYear()
+        {
+            return Ok(datacontext.SelectDistinctIndicatorYear());
+        }
     }
 }
