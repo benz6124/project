@@ -83,18 +83,20 @@ namespace educationalProject.Models.ViewModels.Wrappers
             string delcmd = string.Format("delete from {0} where {1} = {2}", FieldName.TABLE_NAME, FieldName.ACA_YEAR, list.First().aca_year);
             string insertintoindicatorcmd = string.Format("insert into {0} values ", FieldName.TABLE_NAME);
             string insertintosubindicatorcmd = string.Format("insert into {0} values ", Sub_indicator.FieldName.TABLE_NAME);
+            int isFirst = 1;
             foreach (oIndicator_sub_indicator_list item in list)
             {
                 insertintoindicatorcmd += string.Format("({0},{1},'{2}','{3}')", item.aca_year, item.indicator_num, item.indicator_name_t, item.indicator_name_e);
                 if (item != list.Last()) insertintoindicatorcmd += ",";
                 foreach(Sub_indicator sub_item in item.sub_indicator_list)
                 {
-                    insertintosubindicatorcmd += string.Format("({0},{1},{2},'{3}')", sub_item.aca_year, sub_item.indicator_num, sub_item.sub_indicator_num, sub_item.sub_indicator_name);
-                    if(sub_item != item.sub_indicator_list.Last()) insertintosubindicatorcmd += ",";
+                    if (isFirst == 0) insertintosubindicatorcmd += ",";
+                    else isFirst = 0;
+                        insertintosubindicatorcmd += string.Format("({0},{1},{2},'{3}')", sub_item.aca_year, sub_item.indicator_num, sub_item.sub_indicator_num, sub_item.sub_indicator_name);
                 }
             }
 
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} END",delcmd,insertintoindicatorcmd,insertintosubindicatorcmd);
+            d.iCommand.CommandText = string.Format("BEGIN\n{0}\n{1}\n{2}\nEND",delcmd,insertintoindicatorcmd,insertintosubindicatorcmd);
             try
             {
                 int rowAffected = d.iCommand.ExecuteNonQuery();
@@ -133,7 +135,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 if (item != list.Last()) insertintosubindicatorcmd += ",";
             }
 
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} END", delcmd, insertintosubindicatorcmd);
+            d.iCommand.CommandText = string.Format("BEGIN\n{0}\n{1}\nEND", delcmd, insertintosubindicatorcmd);
             try
             {
                 int rowAffected = d.iCommand.ExecuteNonQuery();
