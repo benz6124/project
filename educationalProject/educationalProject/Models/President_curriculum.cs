@@ -7,7 +7,7 @@ namespace educationalProject.Models
 {
     public class President_curriculum
     {
-        protected struct FieldName
+        internal struct FieldName
         {
             public static readonly string TEACHER_ID = "TEACHER_ID";
             public static readonly string CURRI_ID = "CURRI_ID";

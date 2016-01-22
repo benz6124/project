@@ -11,6 +11,12 @@ namespace educationalProject.Controllers
     public class CurriculumAcademicController : ApiController
     {
         private oCurriculum_academic datacontext = new oCurriculum_academic();
+
+        public IHttpActionResult GetMaxAcademicYear()
+        {
+            object result = datacontext.SelectMaxAcademicYear();
+            return Ok(result);
+        }
         //Retrieve curriculum_academic data by use Cu_curriculum
         [ActionName("getByCurriculum")]
         public IHttpActionResult PostByCurriculum(oCu_curriculum data)

@@ -50,6 +50,37 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
+        public object SelectMaxAcademicYear()
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+            List<oCurriculum_academic> result = new List<oCurriculum_academic>();
+            d.iCommand.CommandText = String.Format("select MAX({1})+1 from {0}", FieldName.TABLE_NAME,FieldName.ACA_YEAR);
+            try
+            {
+                object res = d.iCommand.ExecuteScalar();
+                if (res != null)
+                {
+                    return res;
+                }
+                else
+                {
+                    //Reserved for return error string
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+        }
 
         public object SelectWhere(string wherecond)
         {
