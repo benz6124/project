@@ -24,7 +24,11 @@
 
 }
 
-
+.mySelect_teacher{
+  background-color: #e6e6e6
+    !important;
+    max-width: 250px;
+}
 
 td > a:link,td > a:visited,td > a:active{
   color:#000000;
@@ -708,6 +712,11 @@ table.evaluation td{
   background-color: #e9e9e9;
 }
 
+
+.table-hover.special_teacher tr:hover td {
+  background-color:    #f0f0f0;
+}
+
 table.evaluation td.result{
 
   font-size: 23px !important;
@@ -838,6 +847,9 @@ table.evaluate_aun td{
      vertical-align: middle !important;
       background-color: #F4F4F4  ;
 }
+table.special_teacher td{
+  background-color: #F8f8f8  ;
+}
 table.evaluate_aun th{
   background-color: #800031;
   color:white;
@@ -861,14 +873,14 @@ table.evaluate_aun .topic_evaluation{
 }
 
 .manage_president_in_hide{
-  margin-left: 20px;
+  margin-left: 50px;
 
 }
 
 
 .manage_president_in_hide li{
 
-  margin-left:30px  !important  ;
+  margin-left:55px  !important  ;
 }
 
 
@@ -876,6 +888,17 @@ th.number_indicator,td.number_indicator{
     text-align: center;
   width: 60px;
 }
+
+th.noti,td.noti{
+    text-align: center;
+  width: 60px;
+}
+
+th.assign_man,td.assign_man{
+ 
+  width: 200px;
+}
+
 
 td.number_indicator input[type=number]{
     width: 40px;
@@ -893,4 +916,18 @@ th.number_sub_indicator,td.number_sub_indicator{
 td.number_sub_indicator input[type=number]{
     width: 60px;
 } 
+
+
+.already_send {
+  color:#4cae4c;
+}
+
+.not_send{
+  color:#d9534f;
+}
+
+input.form-control{
+      width: 98%;
+
+}
 

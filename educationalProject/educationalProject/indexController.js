@@ -1211,9 +1211,24 @@ $scope.init =function() {
         $scope.year_choosen = {};
               $scope.curri_choosen = {}
                 $scope.indicator_choosen= {};
-                $scope.result={};
+                $scope.results={};
+                $scope.my_president ={};
+                       $scope.personnel_choose = {};
 }
-   
+        $scope.choose_not_complete = true;
+        $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                $scope.results={};
+                $scope.my_president ={};
+                $scope.personnel_choose = {};
+// $scope.results =[
+
+// {"history":[{"personnel_id":"00001","degree":"1","major":"ce","pre_major":"วศ.บ.","grad_year":2558,"college":"sdsd"},{"personnel_id":"00001","degree":"2","major":"ce1","pre_major":"วศ.บ.","grad_year":2559,"college":"sdsds"}],
+// "teacher_id":"00001","degree":"1","position":"1","personnel_type":"1","person_id":"1","status":"normal","alive":49,"is_admin":"1","username":"kpwiboon","password":"1111111","user_type":"teacher","t_prename":"mr.","t_name":"wiboonth","e_prename":"mr.","e_name":"wiboon","citizen_id":"12448","gender":"m","email":"kpwiboon","tel":"000000","addr":"sd","file_name_pic":"บัณฑิต.jpg","timestamp":"2016-01-22T00:00:00+07:00"},
+
+// {"history":[{"personnel_id":"00002","degree":"1","major":"ce22222","pre_major":"วศ.บ.","grad_year":2558,"college":"sdsd"},{"personnel_id":"00002","degree":"2","major":"ce0000","pre_major":"วศ.บ.","grad_year":2560,"college":"sdsds"}],"teacher_id":"00002","degree":"2","position":"1","personnel_type":"1","person_id":"1","status":"normal","alive":50,"is_admin":"0","username":"kwakaarad","password":"10111","user_type":"teacher","t_prename":"mr.","t_name":"akaaradth","e_prename":"mr.","e_name":"akaara","citizen_id":"1248","gender":"m","email":"kwakkarad","tel":"000000","addr":"sd","file_name_pic":"อรทัย.jpg","timestamp":"2016-01-22T00:00:00+07:00"}];
+
 
   $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
@@ -1236,7 +1251,7 @@ $scope.init =function() {
         console.log($scope.year_choosen);
 
         $http.post(
-             '/api/newstudentcount',
+             '/api/PresidentCurriculum',
              JSON.stringify($scope.year_choosen),
              {
                  headers: {
@@ -1244,11 +1259,15 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
+            $scope.choose_not_complete = false;
+            $scope.results = data;
+            $scope.personnel_choose = $scope.results[0];
+
+
+
             
-            console.log(data);
-             $scope.result = data;
-             $scope.choose_not_complete = false;
          });
+
 
     }
 
@@ -1260,10 +1279,15 @@ $scope.init =function() {
 
     $scope.save_to_server = function(my_modal){
         console.log("save_to_server");
-        console.log($scope.result);
+        // console.log($scope.personnel_choose);
+        $scope.new_obj_to_send ={};
+
+        $scope.new_obj_to_send.teacher_id = $scope.personnel_choose.teacher_id;
+        $scope.new_obj_to_send.curri_id = $scope.curri_choosen.curri_id;
+        $scope.new_obj_to_send.aca_year = $scope.year_choosen.aca_year;
         $http.put(
-             '/api/newstudentcount',
-             JSON.stringify($scope.result),
+             '/api/PresidentCurriculum',
+             JSON.stringify($scope.new_obj_to_send),
              {
                  headers: {
                      'Content-Type': 'application/json'
@@ -1612,10 +1636,36 @@ $scope.init =function() {
      $scope.choose_not_complete = true;
         $scope.year_choosen = {};
               $scope.curri_choosen = {};
+               $scope.indicator_choosen= {};
+                $scope.corresponding_aca_years = {};
+                 $scope.corresponding_indicators = {};
 }
+     $scope.choose_not_complete = true;
+        $scope.year_choosen = {};
+              $scope.curri_choosen = {};
+               $scope.indicator_choosen= {};
+ $scope.corresponding_aca_years = {};
+       $scope.corresponding_indicators = {};
+
+$scope.all_teachers = [{"teacher_id":"00001","degree":"1","position":"1","personnel_type":"1","person_id":"1","status":"normal","alive":49,"is_admin":"1","username":"kpwiboon","password":"1111111","user_type":"teacher","t_prename":"mr.","t_name":"wiboonth","e_prename":"mr.","e_name":"wiboon","citizen_id":"12448","gender":"m","email":"kpwiboon","tel":"000000","addr":"sd","file_name_pic":"ssd","timestamp":"2016-01-22T00:00:00+07:00"},{"teacher_id":"00002","degree":"2","position":"1","personnel_type":"1","person_id":"1","status":"normal","alive":50,"is_admin":"0","username":"kwakaarad","password":"10111","user_type":"teacher","t_prename":"mr.","t_name":"akaaradth","e_prename":"mr.","e_name":"akaara","citizen_id":"1248","gender":"m","email":"kwakkarad","tel":"000000","addr":"sd","file_name_pic":"ssd","timestamp":"2016-01-22T00:00:00+07:00"}];
 
 
-   
+
+// $scope.find_corresponding_teacher_obj = function(teacher_id_in){
+//          angular.forEach($scope.all_teachers, function(value, key) {
+                 
+//                   if($scope.all_teachers[key].teacher_id == teacher_id_in){
+//                     console.log("found");
+//                     console.log($scope.all_teachers[key]);
+
+//                     var obj = 
+//                     return {
+//                         teacher_id:  teacher_id_in,
+//                         t_name: $scope.all_teachers[key].t_name
+//                     };
+//                   }
+//                 });
+// }
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
@@ -1624,33 +1674,219 @@ $scope.init =function() {
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
 
             $scope.corresponding_aca_years = data;
-            $scope.corresponding_aca_years = [2551,2555,2558,2559];
+            // $scope.corresponding_aca_years = [2551,2555,2558,2559];
           });
 
 
     }
 
-    // $scope.find_information = function(){
+     $scope.add_primary_evidence = function(){
+        // $scope.new_indicator = {"sub_indicator_list":[]
+        // ,"aca_year":$scope.year_choosen
+        // ,"indicator_num":$rootScope.manage_indicators_and_sub_result.length+1
+        // ,"indicator_name_t":"","indicator_name_e":""}
 
-    //       console.log("find_information");
-    //     console.log($scope.year_choosen);
 
-    //     $http.post(
-    //          '/api/studentstatusother',
-    //          JSON.stringify($scope.year_choosen),
-    //          {
-    //              headers: {
-    //                  'Content-Type': 'application/json'
-    //              }
-    //          }
-    //      ).success(function (data) {
+         $scope.result.push({ "primary_evidence_num":1,
+"aca_year":$scope.year_choosen.aca_year ,
+"indicator_num":$scope.indicator_choosen.indicator_num ,
+"curri_id":$scope.curri_choosen.curri_id ,
+"evidence_name":"",
+"just_create":true,
+"teacher_id":"",
+"status":0});
+      }
+
+      $scope.still_not_choose_complete =function(){
+            // angular.forEach($scope.result, function(value, key) {
+                 
+                  
+            //      if($scope.result[key].evidence_name == "" || ($scope.result[key].teacher_id == "" && $scope.result[key].just_create == true)){
+            //         console.log("true");
+            //         return 0;
+            //      }
+            //     else{
+            //         if (key== $scope.result.length-1){
+            //              return 1;
+            //         }
+            //     }
+               
+            //     });
+
+if($scope.choose_not_complete==false){
+var index;
+for (index =0;index< $scope.result.length ; index++){
+     if($scope.result[index].evidence_name == "" || $scope.result[index].teacher_id == "" ){
+          return true;
+
+              }
+
+}
+          
+
+       }
+
+        return false;
+      }
+
+
+$scope.send_email = function(teacher_id_to_send){
+
+if(angular.isUndefined(teacher_id_to_send)){
+      $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกผู้รับผิดชอบหลักฐานก่อนส่ง',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+
+}else{
+           $http.post(
+             '/api/primaryevidence/sendmail',
+             JSON.stringify(teacher_id_to_send),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+    
+                $alert({title:'ดำเนินการสำเร็จ', content:'ส่ง Email แจ้งเตือนเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+     $alert({title:'เกิดข้อผิดพลาด', content:'ส่ง Email แจ้งเตือนไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+}
+
+
+
+}
+    $scope.remove_primary_evidence = function(index_indicator_to_remove) { 
+      $scope.result.splice(index_indicator_to_remove, 1);     
+
+    }
+
+
+  $scope.find_indicators = function(){
+
+          console.log("find_indicators");
+        console.log($scope.year_choosen);
+$scope.indicator_choosen = {};
+        $http.post(
+             '/api/indicator',
+             JSON.stringify($scope.year_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+              $scope.corresponding_indicators = data;
+            $scope.get_all_teachers();
+
+         });
+
+    }
+
+    $scope.get_all_teachers = function(){
+
+      
+
+                $http.post(
+             '/api/teacher/getname',
+             JSON.stringify($scope.curri_choosen.curri_id),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+               $scope.all_teachers = data;
+               
+
+         });
+    }
+    $scope.find_information = function(){
+
+ 
+        // $http.post(
+        //      '/api/studentstatusother',
+        //      JSON.stringify($scope.indicator_choosen),
+        //      {
+        //          headers: {
+        //              'Content-Type': 'application/json'
+        //          }
+        //      }
+        //  ).success(function (data) {
             
-    //         console.log(data);
-    //          $scope.result = data;
-    //          $scope.choose_not_complete = false;
-    //      });
+        //     console.log(data);
+        //      $scope.result = data;
+        //      $scope.choose_not_complete = false;
+        //  });
 
-    // }
+ $scope.result =[
+{ "primary_evidence_num":1,
+"aca_year":2558 ,
+"indicator_num":1 ,
+"curri_id":2559 ,
+"evidence_name":"sdsd",
+"teacher_id":"00001",
+"status":1}
+,
+{ "primary_evidence_num":2,
+"aca_year":2558 ,
+"indicator_num":2,
+"curri_id":2559 ,
+"evidence_name":"fafaf",
+"teacher_id":"00002",
+"status":0}
+];
+ $scope.choose_not_complete = false;
+
+    }
+
+ $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+ $scope.save_to_server = function(my_modal){
+
+    
+        $http.put(
+             '/api/indicatorsubindicator/savesubindicator',
+             JSON.stringify($scope.result),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+
+
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+              
+                $scope.close_modal(my_modal);
+
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    }
+
+
+
+
+
+
 
 });
 
