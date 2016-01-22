@@ -410,7 +410,7 @@ $('.profile_pic').mouseover(function(){
                         </li>
 
                              <li>
-                            <a href="" data-nq-toggle-modal="#manage_primary_evidences" data-effect="from-left" data-placement="right">
+                            <a href="" data-nq-toggle-modal="#manage_primary_evidences_president" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-user"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการหลักฐานพื้นฐาน</span></span>
                             </a>
@@ -3445,7 +3445,7 @@ $('.profile_pic').mouseover(function(){
 
 
 
- <div id="manage_primary_evidences" data-ng-controller="manage_primary_evidences_controller" data-ng-init="init()"data-nq-modal=""  data-qo-screen-mode ="true" data-qo-independent="true">
+ <div id="manage_primary_evidences_president" data-ng-controller="manage_primary_evidences_president_controller" data-ng-init="init()"data-nq-modal=""  data-qo-screen-mode ="true" data-qo-independent="true">
       <div class="custom-header">
           <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการหลักฐานพื้นฐาน</span></h1>
       </div>
@@ -3453,18 +3453,23 @@ $('.profile_pic').mouseover(function(){
    <div class="row">
 
 
-                        <div class="col-md-8" >
+                        <div class="col-md-6" >
                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             </select>
 
                         </div>
-                        <div class="col-md-4" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                        <div class="col-md-2" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 </select>   
                         </div>
 
+  <div class="col-md-4" >
+ <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+</select>   
+  </div>
 
-                           <div class="container-fluid" ng-hide="choose_not_complete">
+</div>
+                      <!--      <div class="container-fluid" ng-hide="choose_not_complete">
                         <div class="clearfix">
 
 
@@ -3476,17 +3481,17 @@ $('.profile_pic').mouseover(function(){
                                       
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
-                                             
-                                                <th class="number_indicator">ข้อที่</th>
+                                              <th class="number_indicator">สถานะ</th>
+                                                <th class="topic_indicator">ชื่อหลักฐาน</th>
 
-                                                <th class="topic_indicator">ชื่อตัวบ่งชี้ (ภาษาไทย)</th>
-                                                <th class="topic_indicator">ชื่อตัวบ่งชี้ (ภาษาอังกฤษ)</th>
-                                                <th class="number_indicator">ข้อย่อย</th>
+                                                <th class="topic_indicator">ผู้รับผิชด</th>
+                                                <th class="number_indicator">ลบ</th>
+                                                <th class="number_indicator">แจ้งเตือน</th>
                                             
                                             </tr>
                                         </thead>
                                         <tbody class="flattened">
-                                        <form name="manage_indicators_form" novalidate>
+                                        <form name="manage_primary_evidence_form" novalidate>
                                           
 
                                             <tr data-ng-repeat="indicator in manage_indicators_and_sub_result">
@@ -3499,9 +3504,9 @@ $('.profile_pic').mouseover(function(){
                                                 </td>
                                                  <td class="topic_indicator left_column"><input size="72" type="text" ng-model="indicator.indicator_name_e " /></td>
 
-                                     <td class="number_indicator"> <a style="margin-right:10px"href="" data-ng-click="choose_indicator(indicator)" data-nq-toggle-modal="#manage_sub_indicators" data-effect="slide-left">
-                                        <span class="topic"><i class="glyphicon glyphicon-zoom-in"></i> </span>
-                                    </a></td>
+                                               <td class="number_indicator"> <a style="margin-right:10px"href="" data-ng-click="choose_indicator(indicator)" data-nq-toggle-modal="#manage_sub_indicators" data-effect="slide-left">
+                                                  <span class="topic"><i class="glyphicon glyphicon-zoom-in"></i> </span>
+                                              </a></td>
 
 
 
@@ -3511,9 +3516,11 @@ $('.profile_pic').mouseover(function(){
                                         </tbody>
 
                                     </table>
-         </div>         </div>         </div>         </div>
+         </div>         </div>        
 
-                    </div>
+          </div>         </div> -->
+
+                    
         <div class="custom-footer">
           <div class="topicHeader pull-right">
               <button class="btn btn-success  " ng-disabled="choose_not_complete" ng-click="save_to_server()">ยืนยัน</button>
@@ -3705,14 +3712,35 @@ $('.profile_pic').mouseover(function(){
 
                             </div> -->
 
-<div class="col-md-6" style="margin-left:275px;margin-bottom:15px">
+<div class="col-md-6" style="margin-bottom:15px;margin-left:45px">
 
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in all_indicator_years" data-qo-effect="flip-x" data-ng-change="get_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษาที่ตัวบ่งชี้เริ่มมีผล" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in all_indicator_years" data-qo-effect="flip-x" data-ng-change="get_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษาที่ต้องการดึงเทมเพลท" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 </select>   
 
-</div>
+
 
 </div>
+
+<div class="col-md-3 " >
+
+
+  <h3 style="margin-top:5px;margin-left:20px"><span class="topicHeader" >ปีการศึกษาที่ตัวบ่งชี้ที่สร้างจะเริ่มมีผล:   </span></h3>
+
+</div>
+
+  
+<div class="col-md-2" style="margin-left:0px">
+  <input style="margin-left:0px"type="number"class="form-control" ng-model="year_to_create" placeholder="กรุณากรอกปีการศึกษา"  min="max_year_curri_have" data-nq-tooltip="" data-qs-title="ค่าขั้นต่ำคือ {{max_year_curri_have}}" required><span class="normal">  </span>
+</div>
+
+                           <!--    <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in all_indicator_years" data-qo-effect="flip-x" data-ng-change="get_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษาที่ต้องการดึงเทมเพลท" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+</select>    -->
+
+
+
+</div>
+
+
     <div class="container-fluid" ng-hide="choose_not_complete">
                         <div class="clearfix">
 
@@ -3745,17 +3773,17 @@ $('.profile_pic').mouseover(function(){
 
                                             <tr data-ng-repeat="indicator in manage_indicators_and_sub_result">
                                            
-                                                 <td class="number_indicator"><input style="margin-right:10px" type="number" ng-model="indicator.indicator_num " /></td>
+                                                 <td class="number_indicator"><input style="margin-right:10px" type="number" ng-model="indicator.indicator_num " required/></td>
 
 
 
-                                                <td class="topic_indicator left_column"><input size="64" type="text" ng-model="indicator.indicator_name_t " />
+                                                <td class="topic_indicator left_column"><input size="64" type="text" ng-model="indicator.indicator_name_t " required/>
                                                 </td>
-                                                 <td class="topic_indicator left_column"><input size="64" type="text" ng-model="indicator.indicator_name_e " /></td>
+                                                 <td class="topic_indicator left_column"><input size="64" type="text" ng-model="indicator.indicator_name_e " required/></td>
 
-                                     <td class="number_indicator"> <a style="margin-right:10px"href="" data-ng-click="choose_indicator(indicator)" class="hvr-pulse" data-nq-toggle-modal="#manage_sub_indicators" data-effect="slide-left">
+                                     <td class="number_indicator"> <button style="margin-right:10px;background-color:transparent;border:none"href="" data-ng-click="choose_indicator(indicator)" class="hvr-pulse" data-nq-toggle-modal="#manage_sub_indicators" ng-disabled="validate_year_to_create()" data-effect="slide-left">
                                         <span class="topic"><i class="glyphicon glyphicon-zoom-in"></i> </span>
-                                    </a></td>
+                                    </button></td>
 
                                        <td class="number_indicator"> <a style="margin-right:10px"href="" data-ng-click="remove_indicator($index)" class="hvr-pulse">
                                         <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
@@ -3774,9 +3802,9 @@ $('.profile_pic').mouseover(function(){
 
 
  <div class="custom-footer">
-         
+     
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="manage_indicators_form.$invalid || choose_not_complete || manage_indicators_form.$pristine  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="validate_year_to_create()  || manage_indicators_form.$invalid || choose_not_complete || manage_indicators_form.$pristine  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div> 
@@ -3805,7 +3833,7 @@ $('.profile_pic').mouseover(function(){
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
                                              
-                                                <th class="number_indicator">ข้อย่อยที่</th>
+                                                <th class="number_sub_indicator" >ข้อย่อยที่</th>
 
                                                 <th class="topic_evaluation">ชื่อตัวบ่งชี้</th>
                                            <!--      <th class="topic_evaluation">ชื่อตัวบ่งชี้ (ภาษาอังกฤษ)</th> -->
@@ -3817,11 +3845,11 @@ $('.profile_pic').mouseover(function(){
 
                                             <tr data-ng-repeat="sub_indicator in manage_indicators_indicator_choosen.sub_indicator_list">
                                            
-                                                 <td class="number_indicator"><input style="margin-right:10px" type="number"  ng-model="sub_indicator.sub_indicator_num " /></td>
+                                                 <td class="number_sub_indicator"><input style="margin-right:10px" type="number"  ng-model="sub_indicator.sub_indicator_num " /></td>
 
 
 
-                                                <td class="topic_evaluation left_column"><input size="120" style="margin-right:10px"type="text" ng-model="sub_indicator.sub_indicator_name " />
+                                                <td class="topic_evaluation left_column"><input size="145" style="margin-right:10px"type="text" ng-model="sub_indicator.sub_indicator_name " />
                                                 </td>
                                               <!--    <td class="topic_evaluation left_column"><input size="70" type="text" ng-model="indicator.indicator_name_e " /></td> -->
 

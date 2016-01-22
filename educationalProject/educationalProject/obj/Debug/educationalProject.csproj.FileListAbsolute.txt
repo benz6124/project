@@ -192,12 +192,10 @@ C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProjec
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\System.Web.Http.Owin.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\System.Web.Http.WebHost.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\System.Web.Mvc.dll
-C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\System.Web.Optimization.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\System.Web.Razor.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\System.Web.WebPages.Deployment.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\System.Web.WebPages.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\System.Web.WebPages.Razor.dll
-C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\WebGrease.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\Newtonsoft.Json.xml
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\System.Net.Http.Formatting.xml
@@ -205,7 +203,6 @@ C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProjec
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\System.Web.Http.xml
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\System.Web.Http.WebHost.xml
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\System.Web.Mvc.xml
-C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\System.Web.Optimization.xml
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\System.Web.Razor.xml
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\System.Web.WebPages.xml
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\educationalProject\educationalProject\bin\System.Web.WebPages.Deployment.xml

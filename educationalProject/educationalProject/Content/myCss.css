@@ -250,7 +250,7 @@ optgroup {
 .topicHeader {
   font-family:  "FreesiaUPC";
 
-  font-size: 20px !important;
+  font-size: 21px !important;
 
 }
 
@@ -884,3 +884,13 @@ td.number_indicator input[type=number]{
 td.topic_indicator{
   width: 400px;
 }
+
+th.number_sub_indicator,td.number_sub_indicator{
+    text-align: center;
+  width: 40px;
+}
+
+td.number_sub_indicator input[type=number]{
+    width: 60px;
+} 
+

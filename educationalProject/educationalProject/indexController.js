@@ -613,9 +613,22 @@ $scope.init =function() {
              }
          ).success(function (data) {
             
-            console.log(data);
-             $scope.result = data;
+              $scope.result = data;
              $scope.choose_not_complete = false;
+             
+              var value;
+              var key;
+             if ($scope.result.num_admis_f==-1){
+             
+                angular.forEach($scope.result, function(value, key) {
+                 
+                  
+                  if(key !="year" && key != "curri_id"){
+                   
+                    $scope.result[key] = "";
+                  }
+                });
+             }
          });
 
     }
@@ -690,9 +703,22 @@ $scope.init =function() {
              }
          ).success(function (data) {
             
-            console.log(data);
-             $scope.result = data;
+               $scope.result = data;
              $scope.choose_not_complete = false;
+             
+              var value;
+              var key;
+             if ($scope.result.num_admis_f==-1){
+             
+                angular.forEach($scope.result, function(value, key) {
+                 
+                  
+                  if(key !="year" && key != "curri_id"){
+                   
+                    $scope.result[key] = "";
+                  }
+                });
+             }
          });
 
     }
@@ -770,9 +796,23 @@ $scope.init =function() {
              }
          ).success(function (data) {
             
-            console.log(data);
+            
              $scope.result = data;
              $scope.choose_not_complete = false;
+             
+              var value;
+              var key;
+             if ($scope.result.num_admis_f==-1){
+             
+                angular.forEach($scope.result, function(value, key) {
+                 
+                  
+                  if(key !="year" && key != "curri_id"){
+                   
+                    $scope.result[key] = "";
+                  }
+                });
+             }
          });
 
     }
@@ -1297,22 +1337,23 @@ $scope.init = function(){
       $scope.curri_choosen = {};
 
     $rootScope.my_backup_indicators = {};
+$rootScope.manage_indicators_year_to_create = "";
+    $scope.year_to_create = "";
  }
-         
-  $scope.choose_not_complete = true;
-     $scope.year_choosen = 0;
 
-         $scope.choose_not_complete = true;
-      $rootScope.manage_indicators_and_subs_year_choosen = 0;
-      
-
-      $scope.curri_choosen = {};
-
+ $scope.max_year_curri_have = 2558;
+    $scope.year_to_create = ""; 
+    $scope.choose_not_complete = true;
+    $scope.year_choosen = 0;
+    $scope.choose_not_complete = true;
+    $rootScope.manage_indicators_and_subs_year_choosen = 0;
+    $scope.curri_choosen = {};
     $rootScope.my_backup_indicators = {};
 
-
+    $rootScope.manage_indicators_year_to_create = "";
       $scope.recover_indicator_all =function(){
             $rootScope.manage_indicators_and_sub_result = angular.copy($rootScope.my_backup_indicators);
+
       }
 
         $http.get('/api/indicator').success(function (data) {
@@ -1327,8 +1368,14 @@ console.log(data);
         //     console.log($scope.year_choosen);
         //     console.log($rootScope.manage_indicators_and_subs_year_choosen);
         // }
-      $scope.choose_indicator = function(in_indi){
 
+        $scope.validate_year_to_create = function(){
+            // console.log("this is value");
+            // console.log($scope.year_to_create);
+            return   angular.isUndefined($scope.year_to_create) || $scope.year_to_create <= $scope.max_year_curri_have || $scope.year_to_create == "";
+        }
+      $scope.choose_indicator = function(in_indi){
+if( $scope.validate_year_to_create() != true){
         console.log("receive");
         console.log(in_indi);
         $rootScope.manage_indicators_and_sub_save_indicator = {};
@@ -1347,7 +1394,14 @@ console.log(data);
 
         console.log("my back_up")
          console.log($rootScope.manage_indicators_and_sub_save_indicator.save_content);
+         $rootScope.manage_indicators_year_to_create = $scope.year_to_create;
 
+         }
+         else{
+             $alert({title:'เกิดข้อผิดพลาด', content:'กรุณากรอกปีการศึกษาให้ถูกต้อง',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+    
+         }
       }
 
 
@@ -1361,7 +1415,7 @@ console.log(data);
 
 
          $rootScope.manage_indicators_and_sub_result.push({"sub_indicator_list":[]
-        ,"aca_year":$rootScope.manage_indicators_and_subs_year_choosen
+        ,"aca_year":$rootScope.year_to_create
         ,"indicator_num":""
         ,"indicator_name_t":"","indicator_name_e":""});
       }
@@ -1401,8 +1455,20 @@ console.log($rootScope.manage_indicators_and_subs_year_choosen);
         $scope.save_to_server = function(my_modal){
 
 
-        console.log("save_to_server");
+   
+        var index;
+ for (index = 0; index < $rootScope.manage_indicators_and_sub_result.length; index++) {
+    $rootScope.manage_indicators_and_sub_result[index].aca_year = $scope.year_to_create;
+ }
+
+      console.log("save_to_server");
         console.log($rootScope.manage_indicators_and_sub_result);
+//         angular.forEach($rootScope.manage_indicators_and_sub_result,  function(value, key) {
+
+//   this.push(key + ': ' + value);
+// });
+
+
         $http.put(
              '/api/indicatorsubindicator/saveindicator',
              JSON.stringify($rootScope.manage_indicators_and_sub_result),
@@ -1507,7 +1573,7 @@ console.log($rootScope.manage_indicators_indicator_choosen);
 
     $scope.save_to_server = function(my_modal){
 
-
+        $rootScope.manage_indicators_indicator_choosen.aca_year = $rootScope.manage_indicators_year_to_create;
         console.log("save_to_server");
         console.log($rootScope.manage_indicators_indicator_choosen);
         $http.put(
@@ -1541,12 +1607,14 @@ console.log($rootScope.manage_indicators_indicator_choosen);
 });
 
 
-app.controller('manage_primary_evidences_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_primary_evidences_president_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
+              $scope.curri_choosen = {};
 }
+
+
    
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
@@ -1556,33 +1624,33 @@ $scope.init =function() {
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
 
             $scope.corresponding_aca_years = data;
-
+            $scope.corresponding_aca_years = [2551,2555,2558,2559];
           });
 
 
     }
 
-    $scope.find_information = function(){
+    // $scope.find_information = function(){
 
-          console.log("find_information");
-        console.log($scope.year_choosen);
+    //       console.log("find_information");
+    //     console.log($scope.year_choosen);
 
-        $http.post(
-             '/api/studentstatusother',
-             JSON.stringify($scope.year_choosen),
-             {
-                 headers: {
-                     'Content-Type': 'application/json'
-                 }
-             }
-         ).success(function (data) {
+    //     $http.post(
+    //          '/api/studentstatusother',
+    //          JSON.stringify($scope.year_choosen),
+    //          {
+    //              headers: {
+    //                  'Content-Type': 'application/json'
+    //              }
+    //          }
+    //      ).success(function (data) {
             
-            console.log(data);
-             $scope.result = data;
-             $scope.choose_not_complete = false;
-         });
+    //         console.log(data);
+    //          $scope.result = data;
+    //          $scope.choose_not_complete = false;
+    //      });
 
-    }
+    // }
 
 });
 
