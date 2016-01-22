@@ -126,7 +126,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            string delcmd = string.Format("delete from {0} where {1} = {2}", Sub_indicator.FieldName.TABLE_NAME, FieldName.ACA_YEAR, list.First().aca_year);
+            string delcmd = string.Format("delete from {0} where {1} = {2} and {3} = {4}", Sub_indicator.FieldName.TABLE_NAME, FieldName.ACA_YEAR, list.First().aca_year,Sub_indicator.FieldName.INDICATOR_NUM,list.First().indicator_num);
             string insertintosubindicatorcmd = string.Format("insert into {0} values ", Sub_indicator.FieldName.TABLE_NAME);
 
             foreach (Sub_indicator item in list)
