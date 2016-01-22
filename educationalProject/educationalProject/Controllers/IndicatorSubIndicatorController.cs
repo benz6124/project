@@ -27,9 +27,9 @@ namespace educationalProject.Controllers
         }
 
         [ActionName("savesubindicator")]
-        public IHttpActionResult PutForUpdateSubIndicator(List<Sub_indicator> list)
+        public IHttpActionResult PutForUpdateSubIndicator(oIndicator_sub_indicator_list data)
         {
-            object result = datacontext.UpdateOnlySubIndicatorList(list);
+            object result = datacontext.UpdateOnlySubIndicatorList(data.sub_indicator_list);
             if (result == null)
                 return Ok();
             else
