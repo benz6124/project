@@ -160,6 +160,45 @@ namespace educationalProject.Models.Wrappers
             }
         }
 
+        public object SelectDistinctAcademicYear()
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+            List<int> result = new List<int>();
+            d.iCommand.CommandText = string.Format("select distinct {1} from {0}", FieldName.TABLE_NAME,FieldName.ACA_YEAR);
+            try
+            {
+                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                if (res.HasRows)
+                {
+                    DataTable data = new DataTable();
+                    data.Load(res);
+                    foreach (DataRow item in data.Rows)
+                    {
+                        result.Add(Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]));
+                    }
+                    data.Dispose();
+                }
+                else
+                {
+                    //Reserved for return error string
+                }
+                res.Close();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return result;
+        }
+
         public object SelectCustom(string wherecond, string groupbycol, string havingcond, string orderbycol)
         {
             return "Ok";

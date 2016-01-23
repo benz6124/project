@@ -279,5 +279,86 @@ namespace educationalProject.Models.Wrappers
                 d.SQLDisconnect();
             }
         }
+
+        public object UpdateDetail(List<Primary_evidence> list)
+        {
+            return null;
+            /*
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+            string insertintoprimaryevidencecmd = "";
+            string insertintoprievistatuscmd = "";
+            string updateprievistatuscmd = "";
+            string deletefromprimaryevidencecmd = "";
+            string deletefromprievistatuscmd = "";
+            string insertintoexclusiveprimaryevicmd = "";
+
+            foreach (Primary_evidence_detail item in list)
+            {
+                if (item.status == '0' || item.status == '1' || item.status == '4' || item.status == '5')
+                {
+                    updateprievistatuscmd += string.Format("update {0} set {1} = '{2}' where {3} = {4} and {5} = '{6}' ",
+                        Primary_evidence_status.FieldName.TABLE_NAME, Primary_evidence_status.FieldName.TEACHER_ID,
+                        item.teacher_id, Primary_evidence_status.FieldName.PRIMARY_EVIDENCE_NUM, item.primary_evidence_num,
+                        Primary_evidence_status.FieldName.CURRI_ID, item.curri_id);
+                }
+                else if (item.status == '3')
+                {
+                    deletefromprimaryevidencecmd += string.Format("delete from {0} where {1} = {2} ",
+                        FieldName.TABLE_NAME, FieldName.PRIMARY_EVIDENCE_NUM, item.primary_evidence_num);
+                }
+                else if (item.status == '6')
+                {
+                    insertintoprievistatuscmd += string.Format("insert into {0} values ({1},'{2}','{3}',{4}) ",
+                        Primary_evidence_status.FieldName.TABLE_NAME, item.primary_evidence_num, item.curri_id, item.teacher_id, '4');
+                }
+
+                else if (item.status == '7')
+                {
+                    deletefromprievistatuscmd += string.Format("delete from {0} where {1} = {2} and {3} = '{4}' ",
+                        Primary_evidence_status.FieldName.TABLE_NAME, Primary_evidence_status.FieldName.PRIMARY_EVIDENCE_NUM,
+                        item.primary_evidence_num, Primary_evidence_status.FieldName.CURRI_ID,
+                        item.curri_id);
+                    insertintoexclusiveprimaryevicmd += string.Format("insert into {0} values ({1},'{2}') ",
+                        Exclusive_curriculum_evidence.FieldName.TABLE_NAME, item.primary_evidence_num, item.curri_id);
+                }
+                else if (item.status == '2')
+                {
+                    insertintoprimaryevidencecmd += string.Format("insert into {0} values ({1},{2},'{3}','{4}') ",
+                        FieldName.TABLE_NAME, item.aca_year, item.indicator_num, item.curri_id, item.evidence_name);
+                    insertintoprimaryevidencecmd += string.Format("insert into {0} values ({1},'{2}','{3}',{4}) ",
+                        Primary_evidence_status.FieldName.TABLE_NAME,
+                        string.Format("(select max({0}) from {1})", FieldName.PRIMARY_EVIDENCE_NUM, FieldName.TABLE_NAME)
+                        , item.curri_id, item.teacher_id, '0');
+                }
+            }
+
+            d.iCommand.CommandText = String.Format("BEGIN {0} {1} {2} {3} {4} {5} END", insertintoprimaryevidencecmd,
+                insertintoprievistatuscmd, updateprievistatuscmd, deletefromprimaryevidencecmd, deletefromprievistatuscmd,
+                insertintoexclusiveprimaryevicmd);
+            try
+            {
+                int rowAffected = d.iCommand.ExecuteNonQuery();
+                if (rowAffected > 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    return "No primary_evidence data are updated.";
+                }
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }*/
+        }
     }
 }

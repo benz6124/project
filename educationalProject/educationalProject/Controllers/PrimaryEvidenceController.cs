@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
+using educationalProject.Models;
 using System.Web.Http;
 using educationalProject.Models.ViewModels;
 using educationalProject.Models.Wrappers;
@@ -23,6 +23,13 @@ namespace educationalProject.Controllers
             return Ok(datacontext.SelectWithDetail(inddata, data["curri_id"].ToString()));
         }
 
+        [ActionName("adminget")]
+        public IHttpActionResult PostToQueryPrimaryEvidenceDetailByIndicator(oIndicator data)
+        {
+            return Ok(datacontext.SelectWhere(string.Format("indicator_num = '{0}' and aca_year = '{1}' and curri_id = '0'", data.indicator_num,data.aca_year)));
+        }
+
+
         [ActionName("presidentcurrisave")]
         public IHttpActionResult PutToSavePrimaryEvidenceDetailByPresidentCurri(List<Primary_evidence_detail> list)
         {
@@ -31,6 +38,18 @@ namespace educationalProject.Controllers
                 return Ok();
             else
                 return InternalServerError(new Exception(result.ToString()));
+        }
+
+        [ActionName("adminsave")]
+        public IHttpActionResult PutToSavePrimaryEvidenceDetailByAdmin(List<Primary_evidence> list)
+        {
+            /*object result = datacontext.UpdateDetail(list);
+            if (result == null)
+                return Ok();
+            else
+                return InternalServerError(new Exception(result.ToString()));
+                */
+            return Ok();
         }
     }
 }

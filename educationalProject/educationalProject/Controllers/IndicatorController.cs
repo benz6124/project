@@ -11,10 +11,17 @@ namespace educationalProject.Controllers
     {
         private oIndicator datacontext = new oIndicator();
 
-        [ActionName("Get")]
+        [ActionName("querybycurriculumacademic")]
         public IHttpActionResult PostByCurriculumAcademic(oCurriculum_academic data)
         {
             object result = datacontext.SelectWhereOrderByWithKeepYearSource(string.Format("aca_year=(select max(j.aca_year) from indicator as j where j.aca_year <= {0})", data.aca_year), "indicator_num", null,data.aca_year);
+            return Ok(result);
+        }
+
+        [ActionName("querybyacademicyear")]
+        public IHttpActionResult PostByAcademicYear([FromBody]int year)
+        {
+            object result = datacontext.SelectWhereOrderByWithKeepYearSource(string.Format("aca_year=(select max(j.aca_year) from indicator as j where j.aca_year <= {0})", year), "indicator_num", null, year);
             return Ok(result);
         }
 

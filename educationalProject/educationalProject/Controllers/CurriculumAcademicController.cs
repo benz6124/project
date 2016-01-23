@@ -12,11 +12,20 @@ namespace educationalProject.Controllers
     {
         private oCurriculum_academic datacontext = new oCurriculum_academic();
 
+        [ActionName("getmaxacayear")]
         public IHttpActionResult GetMaxAcademicYear()
         {
             object result = datacontext.SelectMaxAcademicYear();
             return Ok(result);
         }
+
+        [ActionName("getdistinctacayear")]
+        public IHttpActionResult GetDistinctAcademicYear()
+        {
+            object result = datacontext.SelectDistinctAcademicYear();
+            return Ok(result);
+        }
+
         //Retrieve curriculum_academic data by use Cu_curriculum
         [ActionName("getByCurriculum")]
         public IHttpActionResult PostByCurriculum(oCu_curriculum data)
