@@ -10,6 +10,7 @@ namespace educationalProject.Controllers
     public class TeacherController : ApiController
     {
         private oTeacher datacontext = new oTeacher();
+        [ActionName("getname")]
         public IHttpActionResult PostToQueryTeacherNameInCurri([FromBody]string curri_id)
         {
             return Ok(datacontext.SelectTeacherIdAndTName(curri_id));
