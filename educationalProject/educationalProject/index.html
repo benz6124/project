@@ -677,7 +677,7 @@ $('.profile_pic').mouseover(function(){
                                 </div>
                             </div>
                             <div class="col-md-2">
-                             <h3 style="margin-top:5px;color:#6F002B" class="hvr-wobble-vertical"><a  ng-disabled="select_year_support_text==0"  href="" ng-click="watch_support_text_from_other_year()"><i class="glyphicon glyphicon-search"></i> </a>  </h3>
+                             <h3 style="margin-top:5px" class="hvr-wobble-vertical"><a  ng-disabled="select_year_support_text==0"  href="" ng-click="watch_support_text_from_other_year()"><i class="glyphicon glyphicon-search"></i> </a>  </h3>
                           </div>
                         </div>
 </form>
@@ -3579,44 +3579,49 @@ glyphicon glyphicon-bell"></i> </span>
   </div>
 
 </div>
+
+
+
+                           <div class="container-fluid"  >
+
+                        <div class="clearfix">
      <div class="panel-heading clearfix">
                                     <!-- <h1 class="panel-title pull-left"></i> รายงานการประชุม </h1> -->
 
+                       
 
-                                    <div class="pull-left" style="padding-left:15px;margin-left:250px">
-                                        <button type="button" class="btn btn-xs btn-success  hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#upload_evidence"><i class="fic glyphicon glyphicon-plus-sign"></i> อัพโหลดหลักฐานใหม่</button>
+
+                                </div>
+
+                            <div class="panel panel-default"  data-nq-pageable=""
+                                 data-qo-selectable="true">
+                          
+                                        <button type="button" style="margin-top:12px;margin-bottom:0px;margin-left:265px"class="btn btn-xs btn-success  hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#upload_evidence"><i class="fic glyphicon glyphicon-plus-sign"></i> อัพโหลดหลักฐานใหม่</button>
 
 
   &nbsp; &nbsp;
-                                        <button type="button" class="btn btn-xs btn-warning hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#import_evidence"><i class="fic glyphicon glyphicon-plus-sign"></i> อัพโหลดหลักฐานพื้นฐาน</button>
+                                        <button type="button" style="margin-top:12px;margin-bottom:0px;" class="btn btn-xs btn-warning hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#upload_primary_evidence"><i class="fic glyphicon glyphicon-plus-sign"></i> อัพโหลดหลักฐานพื้นฐาน</button>
 
 
                                         &nbsp; &nbsp;
-                                        <button type="button" class="btn btn-xs btn-info hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#import_evidence"><i class="fic glyphicon glyphicon-plus-sign"></i> นำเข้าหลักฐานที่มีอยู่</button>
+                                        <button type="button"  style="margin-top:12px;margin-bottom:0px;" class="btn btn-xs btn-info hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#import_evidence"><i class="fic glyphicon glyphicon-plus-sign"></i> นำเข้าหลักฐานที่มีอยู่</button>
 
 
-                                    </div>
-
-                                </div>
-<!-- 
-<br />
-                           <div class="container-fluid"  >
-                        <div class="clearfix">
-
-
-                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
-                                 data-qo-selectable="true">
-              
+                              
+                                    <br />
                                 <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
-  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
+  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher manage_evidence_table" style="margin-top:0px">
                                       
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
-                                              <th class="number_indicator">สถานะ</th>
+                                              <th class="code_evidence_column">รหัส</th>
                                                 <th class="topic_indicator">ชื่อหลักฐาน</th>
 
-                                                <th class="assign_man">ผู้รับผิดชอบ</th>
-                                                  <th class="noti">แจ้งเตือน</th>
+                                                <th class="assign_man">ผู้อัพโหลด</th>
+
+                                                  <th class="number_indicator">ดาวน์โหลด</th>
+                                                  <th class="number_indicator">แก้ไข</th>
+                                      
                                                 <th class="number_indicator">ลบ</th>
                                               
                                             
@@ -3626,36 +3631,46 @@ glyphicon glyphicon-bell"></i> </span>
                                         <form name="manage_evidences_form" novalidate>
                                           
 
-                                            <tr data-ng-repeat="primary_evidence in result">
+                                            <tr data-ng-repeat="evidence in result">
                                            
-                                                 <td class="number_indicator"><span class="topicHeader" style="margin-right:15px"><i  ng-class="{already_send: primary_evidence.status == 1 , not_send: primary_evidence.status == 0}" class="glyphicon glyphicon-exclamation-sign" ></i></span> </td>
+                                                 <td class="code_evidence_column">
 
+                                               
 
+                                                 <span class="topicHeader" >{{indicator_choosen.indicator_num}}-      <input class="form-control" type="number"style=" display: inline-block;margin-top:2px;margin-bottom:2px"  ng-model="evidence.evidence_real_code" required/></span>
 
-                                                <td class="topic_indicator left_column" ><span class="topicHeader" ng-hide="primary_evidence.just_create">{{primary_evidence.evidence_name}}</span>
+          </td>
 
-                                                <span class="topicHeader" ng-show="primary_evidence.just_create"> <input class="form-control"  type="text" ng-model="primary_evidence.evidence_name " required/></span>
+<!-- </td>
+                                                <td class="topic_indicator left_column" ><span class="topicHeader" ng-hide="primary_evidence.just_create">{{evidence.evidence_name}}</span>
+     </td>
+ -->
+
+                                                <td class="topic_indicator left_column"><input class="form-control"size="64" type="text" ng-model="evidence.evidence_name" style="margin-top:2px;margin-bottom:2px"  required/>
+                                                </td>
+
+       <td class="assign_man"><span class="topicHeader" style="margin-right:15px">{{evidence.teacher_id}}</span> </td>
+                                               <!--  <span class="topicHeader" ng-show="primary_evidence.just_create"> <input class="form-control"  type="text" ng-model="primary_evidence.evidence_name " required/></span> -->
 
 
                                             
 
 
-                                                </td>
-                                                 <td class="assign_man left_column">
+                                           
+                                                <!--  <td class="assign_man left_column">
 
-                                                       <select data-qo-disable-clear="true" data-qo-button-class="mySelect_teacher" data-qo-speed="fastest" data-nq-select="" data-ng-options="teacher.teacher_id as teacher.t_name for teacher in all_teachers" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกผู้รับผิดชอบ"  data-ng-init="primary_evidence.teacher_id" data-ng-model="primary_evidence.teacher_id" data-qo-disable-clear="true" required>
-            </select>
-
+                                                   
         
-                                                </td>
+                                                </td> -->
 
-   <td class="number_indicator"> <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="send_email(primary_evidence.teacher_id)">
-                                        <span class="topic"><i style="color:#eea236"class="
-glyphicon glyphicon-bell"></i> </span>
-                                    </a></td>
-                                    
+   <td class="number_indicator"> <a style="margin-right:10px"href=""  class="hvr-pulse" >
+                                        <span class="topicHeader"><i style="color:#398439"class="
+glyphicon glyphicon-download-alt"></i> </span></a></td>
+                 <td class="number_indicator"> <a style="margin-right:10px"href=""  class="hvr-pulse" >
+                                        <span class="topicHeader"><i style="color:#eea236" data-nq-toggle-modal="#fix_evidence" class="
+glyphicon glyphicon-wrench"></i> </span></a></td>                      
    <td class="noti"> <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="remove_primary_evidence($index)">
-                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                        <span class="topicHeader"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td>
 
                        
@@ -3673,7 +3688,7 @@ glyphicon glyphicon-bell"></i> </span>
          </div>         </div>        
 
           </div>         </div>
- -->
+
 
   <div class="custom-footer">
 
@@ -3737,10 +3752,24 @@ glyphicon glyphicon-bell"></i> </span>
                                         <form name="manage_primary_evidence_form" novalidate>
                                           
 
-                                            <tr data-ng-repeat="primary_evidence in result">
+                                            <tr data-ng-repeat="primary_evidence in result" ng-hide="dont_show_me(primary_evidence)">
                                            
-                                                 <td class="number_indicator"><span class="topicHeader" style="margin-right:15px"><i  ng-class="{already_send: primary_evidence.status == 1 , not_send: primary_evidence.status == 0}" class="glyphicon glyphicon-exclamation-sign" ></i></span> </td>
+                                                   <td class="number_indicator">
 
+                                              <!--      <span class="topicHeader" style="margin-right:15px"><i  ng-class="{already_send: primary_evidence.status == '1' || primary_evidence.status == '5' , not_send: primary_evidence.status == '0' || primary_evidence.status == '4'}" class="glyphicon glyphicon-exclamation-sign" ></i></span>  -->
+
+<span class="topicHeader" style="margin-right:15px"  ng-show="primary_evidence.status == '1' || primary_evidence.status == '5'"  data-nq-tooltip="" data-qs-title="หลักฐานถูกอัพโหลดเรียบร้อยแล้ว"><i class="glyphicon glyphicon-ok-sign already_send" ></i></span> 
+
+
+<span class="topicHeader" style="margin-right:15px" ng-show="primary_evidence.status == '2' || primary_evidence.status == '6'" data-nq-tooltip="" data-qs-title="ยังไม่มีการแต่งตั้งผู้รับผิดชอบ" > <i  class="glyphicon glyphicon-question-sign" ></i></span> 
+
+
+<span class="topicHeader" style="margin-right:15px" data-nq-tooltip="" data-qs-title="หลักฐานยังไม่ถูกอัพโหลด"  ng-show="primary_evidence.status == '0' || primary_evidence.status == '4'"><i  class="glyphicon glyphicon-remove-sign not_send" ></i></span> 
+
+
+
+
+                                                   </td>
 
 
                                                 <td class="topic_indicator left_column" ><span class="topicHeader" ng-hide="primary_evidence.just_create">{{primary_evidence.evidence_name}}</span>
@@ -3752,11 +3781,12 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                                                 </td>
-                                                 <td class="assign_man left_column"><!-- {{primary_evidence.teacher_id}} -->
+                                                 <td class="assign_man" ><!-- {{primary_evidence.teacher_id}} -->
+<span ng-hide="just_show_responsible(primary_evidence.status)">
+                                                       <select data-qo-disable-clear="true" data-qo-button-class="mySelect_teacher" data-qo-speed="fastest" data-nq-select="" data-ng-options="teacher.teacher_id as teacher.t_name for teacher in all_teachers" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกผู้รับผิดชอบ"  data-ng-init="primary_evidence.teacher_id" data-ng-model="primary_evidence.teacher_id" data-qo-disable-clear="true"  >
+            </select></span>
 
-                                                       <select data-qo-disable-clear="true" data-qo-button-class="mySelect_teacher" data-qo-speed="fastest" data-nq-select="" data-ng-options="teacher.teacher_id as teacher.t_name for teacher in all_teachers" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกผู้รับผิดชอบ"  data-ng-init="primary_evidence.teacher_id" data-ng-model="primary_evidence.teacher_id" data-qo-disable-clear="true" required>
-            </select>
-
+<span class="topicHeader"  ng-show="just_show_responsible(primary_evidence.status)">{{name_of_teacher_id(primary_evidence.teacher_id)}}</span>
         
                                                 </td>
 
@@ -4274,24 +4304,31 @@ glyphicon glyphicon-bell"></i> </span>
                 </div>
 
  
-                <div id="upload_evidence" data-nq-modal="" data-qo-size="md" data-qo-independent="true">
+       <div id="upload_primary_evidence" data-nq-modal="" data-qo-size="md" data-qo-independent="true">
                     <div class="custom-header">
 
-                        <h1 class="headerModalH1"><span class="headerModal"> เพิ่มหลักฐาน</span></h1>
+                        <h1 class="headerModalH1"><span class="headerModal"> เพิ่มหลักฐานพื้นฐาน</span></h1>
                     </div>
 
                     <div class="row">
                         <div class="col-md-4">
-                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">ชื่อหลักฐาน:   </span></h3>
+                            <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">ชื่อหลักฐาน:   </span></h3>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" placeholder="ชื่อหลักฐาน"><span class="normal">  </span>
+                                   <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="รายชื่อหลักฐานพื้นฐาน" data-ng-model="staticSelectModel">
+                                <option>คำอธิบายรายวิชาแต่ละวิชาในหลักสูตร</option>
+                                <option>มาตรฐานคุณวุฒิระดับอุดมศึกษาแห่งชาติ</option>
+                                <option>มาตรฐานคุณวุฒิระดับปริญญาตรี สาขาคอมพิวเตอร์</option>
+                                <option>เอกลักษณ์,อัตลักษณ์พร้อมตัวบ่งชี้ของสถาบัน</option>
+
+
+                            </select>
 
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">ไฟล์หลักฐาน:  </span></h3>
+                            <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">ไฟล์หลักฐาน:  </span></h3>
                         </div>
                         <div class="col-md-8">
                             <input type="file" class="form-control" placeholder="Password">
@@ -4299,59 +4336,12 @@ glyphicon glyphicon-bell"></i> </span>
 
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">หัวข้อหลัก:  </span></h3>
-                        </div>
-
-                        <div class="col-md-4">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อหลัก" data-ng-model="staticSelectModel">
-                                <option>AUN 1</option>
-                                <option>AUN 2</option>
-                                <option>AUN 3</option>
-                                <option>AUN 4</option>
-                                <option>AUN 5</option>
-                                <option>AUN 6</option>
-                                <option>AUN 7</option>
-                                <option>AUN 8</option>
-                                <option>AUN 9</option>
-                                <option>AUN 10</option>
-                                <option>AUN 11</option>
-                                <option>AUN 12</option>
-                                <option>AUN 13</option>
-                                <option>AUN 14</option>
-                                <option>AUN 15</option>
-
-                            </select>
-
-
-                        </div>
-
-                    </div>
-                    <div class="row">
-
-                        <div class="col-md-4">
-                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">หัวข้อย่อย:  </span></h3>
-                        </div>
-
-                        <div class="col-md-4">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อย่อย" data-ng-model="staticSelectModel">
-                                <option>AUN 3.1</option>
-                                <option>AUN 3.2</option>
-                                <option>AUN 3.3</option>
-                                <option>AUN 3.4</option>
-                                <option>AUN 3.5</option>
-
-
-                            </select>
-                        </div>
-                    </div>
+                
 
                     <div class="topicHeader" style="margin-left:20px;">
                         <input type="checkbox"> &nbsp;หลักฐานนี้เป็นความลับ (ระบบจะไม่เผยแพร่หลักฐานต่อบุคคลภายนอก)</input>
                     </div>
-                    <br />
-                    <br /><br /><br />
+                  
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
                             <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
@@ -4362,7 +4352,89 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-                <div id="import_evidence" data-nq-modal="" data-qo-size="md" data-qo-independent="true">
+       <div id="fix_evidence" data-nq-modal="" data-qo-size="md" data-qo-independent="true">
+                    <div class="custom-header">
+
+                        <h1 class="headerModalH1"><span class="headerModal"> แก้ไขหลักฐาน</span></h1>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">ชื่อหลักฐาน:   </span></h3>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" placeholder="ชื่อหลักฐานเดิม"><span class="normal">  </span>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">อัพโหลดไฟล์ใหม่:  </span></h3>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="file" class="form-control" placeholder="Password">
+                        </div>
+
+                    </div>
+
+                
+
+                    <div class="topicHeader" style="margin-left:20px;">
+                        <input type="checkbox"> &nbsp;หลักฐานนี้เป็นความลับ (ระบบจะไม่เผยแพร่หลักฐานต่อบุคคลภายนอก)</input>
+                    </div>
+                  
+                    <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div id="upload_evidence" data-nq-modal="" data-qo-size="md" data-qo-independent="true">
+                    <div class="custom-header">
+
+                        <h1 class="headerModalH1"><span class="headerModal"> เพิ่มหลักฐาน</span></h1>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">ชื่อหลักฐาน:   </span></h3>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" placeholder="ชื่อหลักฐาน"><span class="normal">  </span>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">ไฟล์หลักฐาน:  </span></h3>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="file" class="form-control" placeholder="Password">
+                        </div>
+
+                    </div>
+
+                
+
+                    <div class="topicHeader" style="margin-left:20px;">
+                        <input type="checkbox"> &nbsp;หลักฐานนี้เป็นความลับ (ระบบจะไม่เผยแพร่หลักฐานต่อบุคคลภายนอก)</input>
+                    </div>
+                  
+                    <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div id="import_evidence" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal"> นำเข้าหลักฐานที่มีอยู่</span></h1>
@@ -4373,7 +4445,7 @@ glyphicon glyphicon-bell"></i> </span>
                     <div class="row">
 
 
-                        <div class="col-md-10" style="margin-left:5px">
+                        <div class="col-md-8" >
                             <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
@@ -4382,9 +4454,7 @@ glyphicon glyphicon-bell"></i> </span>
                             </select>
 
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5" style="margin-left:5px;margin-top:5px">
+                          <div class="col-md-4" >
                             <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
                                 <option>2557</option>
                                 <option>2556</option>
@@ -4397,16 +4467,21 @@ glyphicon glyphicon-bell"></i> </span>
 
                             </select>
                         </div>
-                        <button class="btn btn-primary hvr-pulse" style="margin-bottom:10px;margin-top:5px"><i class="glyphicon glyphicon-search"></i> ค้นหา</button>
                     </div>
-                    <div class="row">
+                  <!--   <div class="row">
+                      
+                        <button class="btn btn-primary hvr-pulse" style="margin-bottom:10px;margin-top:5px"><i class="glyphicon glyphicon-search"></i> ค้นหา</button>
+                    </div> -->
+
+                      <h2 style="margin-top:15px" class="myColorBold"> เลือกหลักฐานที่ต้องการ:</h2>
+                 <!--    <div class="row">
                         <div class="col-md-4">
                             <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">หลักฐานที่พบ:  </span></h3>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row">
-                        <div class="col-md-10">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หลักฐานที่พบ" data-ng-model="staticSelectModel">
+                        <div class="col-md-11">
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หลักฐานที่พบในหลักสูตรและปีการศึกษาดังกล่าว" data-ng-model="staticSelectModel">
                                 <option>คำอธิบายรายวิชาแต่ละวิชาในหลักสูตร</option>
                                 <option>มาตรฐานคุณวุฒิระดับอุดมศึกษาแห่งชาติ</option>
                                 <option>มาตรฐานคุณวุฒิระดับปริญญาตรี สาขาคอมพิวเตอร์</option>
@@ -4417,64 +4492,16 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                         </div>
-                        <a href="" class="hvr-buzz">   <h2 style="margin-top:0px" class="myColorBold"><span class="glyphicon glyphicon-download-alt" /></h2>   </a>
-
+                        <div class="col-md-1">
+                        <a href="" class="hvr-buzz topicHeader">  <i style="font-size:25px;margin-top:3px"class="glyphicon glyphicon-search" ></i>   </a>
+</div>
                     </div>
 
 
-                    <h3 style="margin-top:0px" class="myColorBold"> นำเข้าไปยัง:</h3>
+       <!--              <h3 style="margin-top:0px" class="myColorBold"> นำเข้าไปยัง:</h3> -->
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">หัวข้อหลัก:  </span></h3>
-                        </div>
-
-                        <div class="col-md-4">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อหลัก" data-ng-model="staticSelectModel">
-                                <option>AUN 1</option>
-                                <option>AUN 2</option>
-                                <option>AUN 3</option>
-                                <option>AUN 4</option>
-                                <option>AUN 5</option>
-                                <option>AUN 6</option>
-                                <option>AUN 7</option>
-                                <option>AUN 8</option>
-                                <option>AUN 9</option>
-                                <option>AUN 10</option>
-                                <option>AUN 11</option>
-                                <option>AUN 12</option>
-                                <option>AUN 13</option>
-                                <option>AUN 14</option>
-                                <option>AUN 15</option>
-
-                            </select>
-
-
-                        </div>
-
-                    </div>
-                    <div class="row">
-
-                        <div class="col-md-4">
-                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">หัวข้อย่อย:  </span></h3>
-                        </div>
-
-                        <div class="col-md-4">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อหลัก" data-ng-model="staticSelectModel">
-                                <option>AUN 5.1</option>
-                                <option>AUN 5.2</option>
-                                <option>AUN 5.3</option>
-                                <option>AUN 5.4</option>
-                                <option>AUN 5.5</option>
-                                <option>AUN 5.6</option>
-                                <option>AUN 5.7</option>
-
-                            </select>
-                        </div>
-                    </div>
-
-                    <br />
-                    <br />  <br />
+                   
+          
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
                             <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>

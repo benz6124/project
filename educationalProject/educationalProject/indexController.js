@@ -1497,8 +1497,12 @@ console.log($rootScope.manage_indicators_and_subs_year_choosen);
 
    
         var index;
+          var sub_index;
  for (index = 0; index < $rootScope.manage_indicators_and_sub_result.length; index++) {
     $rootScope.manage_indicators_and_sub_result[index].aca_year = $scope.year_to_create;
+    for(sub_index =0; sub_index < $rootScope.manage_indicators_and_sub_result[index].sub_indicator_list.length ; sub_index++ ){
+        $rootScope.manage_indicators_and_sub_result[index].sub_indicator_list[sub_index].aca_year =$scope.year_to_create; 
+    }
  }
 
       console.log("save_to_server");
@@ -1584,7 +1588,7 @@ $scope.init =function() {
 
           console.log("find_indicators");
         console.log($scope.year_choosen);
-$scope.indicator_choosen = {};
+        $scope.indicator_choosen = {};
         $http.post(
              '/api/indicator',
              JSON.stringify($scope.year_choosen),
@@ -1595,12 +1599,15 @@ $scope.indicator_choosen = {};
              }
          ).success(function (data) {
               $scope.corresponding_indicators = data;
-            $scope.get_all_teachers();
+            // $scope.get_all_teachers();
 
          });
 
     }
-
+$scope.result= [{"evidence_real_code":1,"evidence_name":"momo1","file_name":"filefafa.pdf","secret":0,"teacher_id":"00007"},
+{"evidence_real_code":2,"evidence_name":"momo2","file_name":"filefafa2.pdf","secret":0,"teacher_id":"00005"},
+{"evidence_real_code":3,"evidence_name":"momo3","file_name":"filefafa3.pdf","secret":0,"teacher_id":"00004"},
+{"evidence_real_code":4,"evidence_name":"momo4","file_name":"filefafa4.pdf","secret":0,"teacher_id":"00003"}]
 
 });
 
@@ -1826,8 +1833,6 @@ $scope.init =function() {
 
 $scope.all_teachers = [{"teacher_id":"00001","degree":"1","position":"1","personnel_type":"1","person_id":"1","status":"normal","alive":49,"is_admin":"1","username":"kpwiboon","password":"1111111","user_type":"teacher","t_prename":"mr.","t_name":"wiboonth","e_prename":"mr.","e_name":"wiboon","citizen_id":"12448","gender":"m","email":"kpwiboon","tel":"000000","addr":"sd","file_name_pic":"ssd","timestamp":"2016-01-22T00:00:00+07:00"},{"teacher_id":"00002","degree":"2","position":"1","personnel_type":"1","person_id":"1","status":"normal","alive":50,"is_admin":"0","username":"kwakaarad","password":"10111","user_type":"teacher","t_prename":"mr.","t_name":"akaaradth","e_prename":"mr.","e_name":"akaara","citizen_id":"1248","gender":"m","email":"kwakkarad","tel":"000000","addr":"sd","file_name_pic":"ssd","timestamp":"2016-01-22T00:00:00+07:00"}];
 
-
-
 // $scope.find_corresponding_teacher_obj = function(teacher_id_in){
 //          angular.forEach($scope.all_teachers, function(value, key) {
                  
@@ -1843,6 +1848,22 @@ $scope.all_teachers = [{"teacher_id":"00001","degree":"1","position":"1","person
 //                   }
 //                 });
 // }
+$scope.just_show_responsible = function(ask_status){
+    if(ask_status == "5" || ask_status =="1"){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+$scope.name_of_teacher_id = function(ask_id){
+    var index;
+    for(index=0;index<$scope.all_teachers.length;index++){
+        if($scope.all_teachers[index].teacher_id == ask_id){
+            return $scope.all_teachers[index].t_name;
+        }
+    }
+}
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
@@ -1871,7 +1892,7 @@ $scope.all_teachers = [{"teacher_id":"00001","degree":"1","position":"1","person
 "evidence_name":"",
 "just_create":true,
 "teacher_id":"",
-"status":0});
+"status":"2"});
       }
 
       $scope.still_not_choose_complete =function(){
@@ -1941,7 +1962,18 @@ if(angular.isUndefined(teacher_id_to_send)){
 
 }
       $scope.remove_primary_evidence = function(index_primary_evidence_to_remove) { 
-      $scope.result.splice(index_primary_evidence_to_remove, 1);     
+        if($scope.result[index_primary_evidence_to_remove].status == "2"){
+                $scope.result.splice(index_primary_evidence_to_remove, 1);   
+        }
+        else{
+            if($scope.result[index_primary_evidence_to_remove].status == "0" || $scope.result[index_primary_evidence_to_remove].status == "1"){
+                $scope.result[index_primary_evidence_to_remove].status = "3";
+            }
+            else  if($scope.result[index_primary_evidence_to_remove].status == "4" || $scope.result[index_primary_evidence_to_remove].status == "5"  || $scope.result[index_primary_evidence_to_remove].status == "6"){
+                $scope.result[index_primary_evidence_to_remove].status = "7";
+            }
+        }
+    
 
     }
  $scope.close_modal = function(my_modal){
@@ -1989,44 +2021,44 @@ $scope.indicator_choosen = {};
          });
     }
     $scope.find_information = function(){
-
+$scope.indicator_choosen.curri_id = $scope.curri_choosen.curri_id;
  
-        // $http.post(
-        //      '/api/studentstatusother',
-        //      JSON.stringify($scope.indicator_choosen),
-        //      {
-        //          headers: {
-        //              'Content-Type': 'application/json'
-        //          }
-        //      }
-        //  ).success(function (data) {
+        $http.post(
+             '/api/primaryevidence/presidentcurriget',
+             JSON.stringify($scope.indicator_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
             
-        //     console.log(data);
-        //      $scope.result = data;
-        //      $scope.choose_not_complete = false;
-        //  });
+            console.log(data);
+             $scope.result = data;
+             $scope.choose_not_complete = false;
+         });
 
- $scope.result =[
-{ "primary_evidence_num":1,
-"aca_year":2558 ,
-"indicator_num":1 ,
-"curri_id":2559 ,
-"evidence_name":"sdsd",
-"teacher_id":"00001",
-"status":1}
-,
-{ "primary_evidence_num":2,
-"aca_year":2558 ,
-"indicator_num":2,
-"curri_id":2559 ,
-"evidence_name":"fafaf",
-"teacher_id":"00002",
-"status":0}
-];
- $scope.choose_not_complete = false;
+ // $scope.result =[
+
+
+ // {"teacher_id":"00001","status":"0","primary_evidence_num":1,"aca_year":2558,"indicator_num":1,"evidence_name":"หลักฐาน1","curri_id":"21"},
+ // {"teacher_id":"00001","status":"1","primary_evidence_num":2,"aca_year":2558,"indicator_num":1,"evidence_name":"หลักฐาน2","curri_id":"21"},
+ // {"teacher_id":"00001","status":"0","primary_evidence_num":3,"aca_year":2558,"indicator_num":1,"evidence_name":"หลักฐาน3","curri_id":"21"},
+ // {"teacher_id":"","status":"6","primary_evidence_num":4,"aca_year":2558,"indicator_num":1,"evidence_name":"หลักฐาน4","curri_id":"21"},
+ // {"teacher_id":"","status":"6","primary_evidence_num":4,"aca_year":2558,"indicator_num":1,"evidence_name":"หลักฐาน5","curri_id":"21"},
+ // {"teacher_id":"00001","status":"4","primary_evidence_num":5,"aca_year":2558,"indicator_num":1,"evidence_name":"หลักฐาน6","curri_id":"21"},
+ // {"teacher_id":"00001","status":"5","primary_evidence_num":6,"aca_year":2558,"indicator_num":1,"evidence_name":"หลักฐาน7","curri_id":"21"}]
+ // $scope.choose_not_complete = false;
 
     }
-
+$scope.dont_show_me =function(my_obj){
+    if(my_obj.status == '3' || my_obj.status == '7' ){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
  $scope.close_modal = function(my_modal){
         $scope.init();
         my_modal.$hide();
@@ -2036,7 +2068,7 @@ $scope.indicator_choosen = {};
 
     
         $http.put(
-             '/api/indicatorsubindicator/savesubindicator',
+             '/api/primaryevidence/presidentcurrisave',
              JSON.stringify($scope.result),
              {
                  headers: {

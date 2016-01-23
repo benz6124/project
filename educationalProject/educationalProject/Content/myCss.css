@@ -298,6 +298,11 @@ input[type='file']{
 
 
 }
+
+
+
+
+
  input[type='number'] { 
 
   font-family:  "FreesiaUPC";
@@ -924,7 +929,13 @@ td.number_sub_indicator input[type=number]{
     width: 60px;
 } 
 
+td.code_evidence_column, th.code_evidence_column{
+  width: 90px;
+}
 
+td.code_evidence_column input[type=number]{
+    width: 60px;
+} 
 .already_send {
   color:#4cae4c;
 }
@@ -938,3 +949,14 @@ input.form-control{
 
 }
 
+.manage_evidence_table input[type='text']{
+    font-family:  "FreesiaUPC";
+  font-size: 22px !important;
+  vertical-align: middle !important;
+}
+
+.manage_evidence_table input[type='number']{
+    font-family:  "FreesiaUPC";
+  font-size: 22px !important;
+  vertical-align: middle !important;
+}
