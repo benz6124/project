@@ -158,16 +158,17 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             time = (timeofday.Hour > 9 ? "" : "0")+h + '.' + (timeofday.Minute > 9 ? "" : "0") + m
                         });
                     }
-                    res.Close();
+
                     data.Dispose();
                     //Get another data....
                 }
                 else
                 {
+                    res.Close();
                     //Reserved for return error string
                     return "";
                 }
-
+                res.Close();
                 d.iCommand.CommandText = String.Format(
                 "select others_eval_result.*, {0}, {1} from " +
                 "(select * from " +
@@ -208,14 +209,13 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             others_evaluation_id = Convert.ToInt32(item.ItemArray[data.Columns[Others_evaluation.FieldName.OTHERS_EVALUATION_ID].Ordinal])
                         });
                     }
-                    res.Close();
                     data.Dispose();
                 }
                 else
                 {
                     //Reserved for return error string
                 }
-
+                res.Close();
             }
             catch (Exception ex)
             {

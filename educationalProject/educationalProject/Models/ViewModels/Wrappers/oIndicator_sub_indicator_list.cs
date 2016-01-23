@@ -159,5 +159,8 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 d.SQLDisconnect();
             }
         }
+
+        
+
     }
 }

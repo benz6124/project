@@ -17,9 +17,10 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 return "Cannot connect to database.";
             List<oSelf_evaluation_sub_indicator_name> result = new List<oSelf_evaluation_sub_indicator_name>();
             d.iCommand.CommandText = string.Format("select main_res.*,"+
-                "{0} from (select * from {1} where {2} = {3} and {4} = '{5}' and {6} = {7}) as main_res inner join (select * from {8} where {9} = {3} and  {10} = {7}) as sub_res on main_res.{11} = sub_res.{11}",
+                "{0} from (select * from {1} where {2} = {3} and {4} = '{5}' and {6} = {7}) as main_res inner join (select * from {8} where {9} = {3} and " +
+                "{10} = (select max(j.{10}) from {12} as j where j.{10} <= {7})) as sub_res on main_res.{11} = sub_res.{11}",
                 Sub_indicator.FieldName.SUB_INDICATOR_NAME,FieldName.TABLE_NAME,FieldName.INDICATOR_NUM,inddata.indicator_num,FieldName.CURRI_ID,curri_id,
-                FieldName.ACA_YEAR,inddata.aca_year,Sub_indicator.FieldName.TABLE_NAME, Sub_indicator.FieldName.INDICATOR_NUM, Sub_indicator.FieldName.ACA_YEAR,FieldName.SUB_INDICATOR_NUM);
+                FieldName.ACA_YEAR,inddata.aca_year,Sub_indicator.FieldName.TABLE_NAME, Sub_indicator.FieldName.INDICATOR_NUM, Sub_indicator.FieldName.ACA_YEAR,FieldName.SUB_INDICATOR_NUM,Indicator.FieldName.TABLE_NAME);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -53,9 +54,10 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 {
                     //Since no self evaluation result in database we query once again to get sub_indicator name
                     res.Close();
-                    d.iCommand.CommandText = string.Format("select * from {0} where {1} = {2} and {3} = {4}",
+                    d.iCommand.CommandText = string.Format("select * from {0} where {1} = {2} and " +
+                        "{3} = (select max(j.{3}) from {5} as j where j.{3} <= {4})",
                     Sub_indicator.FieldName.TABLE_NAME, Sub_indicator.FieldName.INDICATOR_NUM,inddata.indicator_num,
-                    FieldName.ACA_YEAR, inddata.aca_year);
+                    FieldName.ACA_YEAR, inddata.aca_year,Indicator.FieldName.TABLE_NAME);
                     res = d.iCommand.ExecuteReader();
                     if (res.HasRows)
                     {

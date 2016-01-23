@@ -10,9 +10,11 @@ namespace educationalProject.Controllers
     public class IndicatorController : ApiController
     {
         private oIndicator datacontext = new oIndicator();
+
+        [ActionName("Get")]
         public IHttpActionResult PostByCurriculumAcademic(oCurriculum_academic data)
         {
-            object result = datacontext.SelectWhereOrderBy(String.Format("aca_year=(select max(j.aca_year) from indicator as j where j.aca_year <= {0})", data.aca_year), "indicator_num", null);
+            object result = datacontext.SelectWhereOrderByWithKeepYearSource(string.Format("aca_year=(select max(j.aca_year) from indicator as j where j.aca_year <= {0})", data.aca_year), "indicator_num", null,data.aca_year);
             return Ok(result);
         }
 

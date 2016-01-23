@@ -97,5 +97,30 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
+
+        public object Delete(string wherecond)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+
+            //Delete from indicator will result in cascade delete in sub_indicator table
+            d.iCommand.CommandText = string.Format("delete from {0} where {1}", FieldName.TABLE_NAME, wherecond);
+            try
+            {
+                d.iCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return null;
+        }
     }
 }

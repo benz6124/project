@@ -139,7 +139,7 @@ namespace educationalProject.Models.Wrappers
                             teacher_id = item.ItemArray[data.Columns[Primary_evidence_status.FieldName.TEACHER_ID].Ordinal].ToString()
                         });
                     }
-                    res.Close();
+
                     data.Dispose();
                 }
                 else
@@ -147,6 +147,7 @@ namespace educationalProject.Models.Wrappers
                     //Reserved for return error string
                 }
                 //Retrieve primary evidence which define by admin but not assign any responsible teacher yet
+                res.Close();
                 d.iCommand.CommandText =
                 string.Format("select * from {0} where {1} = '0' and {2} = {3} and {4} = {5} " +
                               "and {0}.{6} not IN " +
@@ -179,13 +180,13 @@ namespace educationalProject.Models.Wrappers
                             teacher_id = ""
                         });
                     }
-                    res.Close();
                     data.Dispose();
                 }
                 else
                 {
 
                 }
+                res.Close();
             }
             catch (Exception ex)
             {
