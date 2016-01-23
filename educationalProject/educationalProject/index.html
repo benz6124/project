@@ -3790,7 +3790,9 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
         
                                                 </td>
 
-   <td class="number_indicator"> <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="send_email(primary_evidence.teacher_id)">
+   <td class="number_indicator"> 
+
+   <a style="margin-right:10px"href="" data-nq-tooltip="" data-qs-title="ส่งอีเมล์แจ้งเตือนผู้รับผิดชอบทันที" ng-hide="primary_evidence.status == '2' || primary_evidence.status == '6' ||primary_evidence.status == '1' || primary_evidence.status == '5' " class="hvr-pulse" data-ng-click="send_email(primary_evidence.teacher_id)">
                                         <span class="topic"><i style="color:#eea236"class="
 glyphicon glyphicon-bell"></i> </span>
                                     </a></td>
