@@ -3761,10 +3761,10 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
 <span class="topicHeader" style="margin-right:15px"  ng-show="primary_evidence.status == '1' || primary_evidence.status == '5'"  data-nq-tooltip="" data-qs-title="หลักฐานถูกอัพโหลดเรียบร้อยแล้ว"><i class="glyphicon glyphicon-ok-sign already_send" ></i></span> 
 
 
-<span class="topicHeader" style="margin-right:15px" ng-show="primary_evidence.status == '2' || primary_evidence.status == '6'" data-nq-tooltip="" data-qs-title="ยังไม่มีการแต่งตั้งผู้รับผิดชอบ" > <i  class="glyphicon glyphicon-question-sign" ></i></span> 
+<span class="topicHeader" style="margin-right:15px" ng-show="(primary_evidence.status == '2' && primary_evidence.by_pass!='1' )|| primary_evidence.status == '6'" data-nq-tooltip="" data-qs-title="ยังไม่มีการแต่งตั้งผู้รับผิดชอบ" > <i  class="glyphicon glyphicon-question-sign" ></i></span> 
 
 
-<span class="topicHeader" style="margin-right:15px" data-nq-tooltip="" data-qs-title="หลักฐานยังไม่ถูกอัพโหลด"  ng-show="primary_evidence.status == '0' || primary_evidence.status == '4'"><i  class="glyphicon glyphicon-remove-sign not_send" ></i></span> 
+<span class="topicHeader" style="margin-right:15px" data-nq-tooltip="" data-qs-title="หลักฐานยังไม่ถูกอัพโหลด"  ng-show="primary_evidence.status == '0' || primary_evidence.status == '4' || primary_evidence.by_pass == '1'"><i  class="glyphicon glyphicon-remove-sign not_send" ></i></span> 
 
 
 
@@ -3783,7 +3783,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                                 </td>
                                                  <td class="assign_man" ><!-- {{primary_evidence.teacher_id}} -->
 <span ng-hide="just_show_responsible(primary_evidence.status)">
-                                                       <select data-qo-disable-clear="true" data-qo-button-class="mySelect_teacher" data-qo-speed="fastest" data-nq-select="" data-ng-options="teacher.teacher_id as teacher.t_name for teacher in all_teachers" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกผู้รับผิดชอบ"  data-ng-init="primary_evidence.teacher_id" data-ng-model="primary_evidence.teacher_id" data-qo-disable-clear="true"  >
+                                                       <select data-qo-disable-clear="true" data-qo-button-class="mySelect_teacher" data-qo-speed="fastest" data-nq-select="" data-ng-options="teacher.teacher_id as teacher.t_name for teacher in all_teachers" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกผู้รับผิดชอบ" data-ng-change="choose_teacher(primary_evidence)" data-ng-init="primary_evidence.teacher_id" data-ng-model="primary_evidence.teacher_id" data-qo-disable-clear="true"  >
             </select></span>
 
 <span class="topicHeader"  ng-show="just_show_responsible(primary_evidence.status)">{{name_of_teacher_id(primary_evidence.teacher_id)}}</span>
@@ -3792,7 +3792,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
 
    <td class="number_indicator"> 
 
-   <a style="margin-right:10px"href="" data-nq-tooltip="" data-qs-title="ส่งอีเมล์แจ้งเตือนผู้รับผิดชอบทันที" ng-hide="primary_evidence.status == '2' || primary_evidence.status == '6' ||primary_evidence.status == '1' || primary_evidence.status == '5' " class="hvr-pulse" data-ng-click="send_email(primary_evidence.teacher_id)">
+   <a style="margin-right:10px"href="" data-nq-tooltip="" data-qs-title="ส่งอีเมล์แจ้งเตือนผู้รับผิดชอบทันที" ng-show="primary_evidence.by_pass == '1' "ng-hide="primary_evidence.status == '2' || primary_evidence.status == '6' ||primary_evidence.status == '1' || primary_evidence.status == '5' " class="hvr-pulse" data-ng-click="send_email(primary_evidence.teacher_id)">
                                         <span class="topic"><i style="color:#eea236"class="
 glyphicon glyphicon-bell"></i> </span>
                                     </a></td>

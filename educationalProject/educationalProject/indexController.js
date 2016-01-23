@@ -1505,6 +1505,12 @@ console.log($rootScope.manage_indicators_and_subs_year_choosen);
     }
  }
 
+
+if ($rootScope.manage_indicators_and_sub_result.length == 0){
+    $rootScope.manage_indicators_and_sub_result = [];
+   
+    $rootScope.manage_indicators_and_sub_result.push({'aca_year':$scope.year_to_create});
+}
       console.log("save_to_server");
         console.log($rootScope.manage_indicators_and_sub_result);
 //         angular.forEach($rootScope.manage_indicators_and_sub_result,  function(value, key) {
@@ -1754,6 +1760,8 @@ for (index =0;index< $scope.result.length ; index++){
       }
 
 
+
+
 $scope.add_primary_evidence = function(){
 
 
@@ -1895,6 +1903,12 @@ $scope.name_of_teacher_id = function(ask_id){
 "status":"2"});
       }
 
+$scope.choose_teacher = function(my_obj){
+    if(my_obj.status == "2"){
+        my_obj.by_pass="1";
+    }
+}
+
       $scope.still_not_choose_complete =function(){
             // angular.forEach($scope.result, function(value, key) {
                  
@@ -2032,7 +2046,7 @@ $scope.indicator_choosen.curri_id = $scope.curri_choosen.curri_id;
                  }
              }
          ).success(function (data) {
-            
+            console.log("this is data we received")
             console.log(data);
              $scope.result = data;
              $scope.choose_not_complete = false;
