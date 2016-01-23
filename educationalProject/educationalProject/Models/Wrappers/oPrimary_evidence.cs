@@ -247,7 +247,7 @@ namespace educationalProject.Models.Wrappers
                         FieldName.TABLE_NAME, item.aca_year, item.indicator_num, item.curri_id, item.evidence_name);
                     insertintoprimaryevidencecmd += string.Format("insert into {0} values ({1},'{2}','{3}',{4}) ",
                         Primary_evidence_status.FieldName.TABLE_NAME,
-                        string.Format("select max({0}) from {1}",FieldName.PRIMARY_EVIDENCE_NUM,FieldName.TABLE_NAME)
+                        string.Format("(select max({0}) from {1})",FieldName.PRIMARY_EVIDENCE_NUM,FieldName.TABLE_NAME)
                         ,item.curri_id, item.teacher_id, '0');
                 }
             }
