@@ -1363,9 +1363,25 @@ $scope.init = function(){
     $rootScope.my_backup_indicators = {};
 $rootScope.manage_indicators_year_to_create = "";
     $scope.year_to_create = "";
+
+      $http.get('/api/curriculumacademic').success(function (data) {
+            console.log("max_year_curri_have");
+             $scope.max_year_curri_have = data;
+             console.log(data);
+           });
+
+
  }
 
- $scope.max_year_curri_have = 2558;
+
+
+     $http.get('/api/curriculumacademic').success(function (data) {
+            console.log("max_year_curri_have");
+             $scope.max_year_curri_have = data;
+             console.log(data);
+           });
+
+
     $scope.year_to_create = ""; 
     $scope.choose_not_complete = true;
     $scope.year_choosen = 0;
@@ -1526,7 +1542,67 @@ console.log($rootScope.manage_indicators_and_subs_year_choosen);
 
 
 
+app.controller('manage_evidences_controller', function($scope, $alert,$http,$rootScope,request_years_from_curri_choosen_service){
 
+        $scope.choose_not_complete = true;
+        $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                $scope.results={};
+                $scope.my_president ={};
+                $scope.personnel_choose = {};
+
+
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+        $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                $scope.results={};
+                $scope.my_president ={};
+                       $scope.personnel_choose = {};
+}
+
+       $scope.sendCurriAndGetYears = function () {
+        $scope.choose_not_complete =true;
+        $scope.year_choosen = {}
+        $scope.indicator_choosen= {};
+      
+              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
+            console.log($scope.corresponding_aca_years);
+            $scope.corresponding_aca_years = data;
+            // $scope.corresponding_aca_years = [2551,2555,2558,2559];
+          });
+
+
+    }
+   $scope.find_information = function(){
+ $scope.choose_not_complete =false;
+   }
+
+      $scope.find_indicators = function(){
+
+          console.log("find_indicators");
+        console.log($scope.year_choosen);
+$scope.indicator_choosen = {};
+        $http.post(
+             '/api/indicator',
+             JSON.stringify($scope.year_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+              $scope.corresponding_indicators = data;
+            $scope.get_all_teachers();
+
+         });
+
+    }
+
+
+});
 
 app.controller('manage_sub_indicators_controller', function($scope, $alert,$http,$rootScope){
 
@@ -1629,6 +1705,107 @@ console.log($rootScope.manage_indicators_indicator_choosen);
   }); 
     }
 });
+
+app.controller('manage_primary_evidences_admin_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+
+
+$scope.corresponding_aca_years = [2551,2553,2555,2558];
+ $scope.choose_not_complete = true;
+        $scope.year_choosen = {};
+              $scope.curri_choosen = {};
+               $scope.indicator_choosen= {};
+     
+                 $scope.corresponding_indicators = {};
+                 $scope.result = [{"evidence_name":'my_god'},{"evidence_name":'my_god2'},{"evidence_name":'my_god3'},{"evidence_name":'my_god4'}];
+
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+        $scope.year_choosen = {};
+              $scope.curri_choosen = {};
+               $scope.indicator_choosen= {};
+
+                 $scope.corresponding_indicators = {};
+}
+
+      $scope.still_not_choose_complete =function(){
+
+
+if($scope.choose_not_complete==false){
+var index;
+for (index =0;index< $scope.result.length ; index++){
+     if($scope.result[index].evidence_name == "" ){
+          return true;
+
+              }
+
+}
+          
+
+       }
+
+        return false;
+      }
+
+
+$scope.add_primary_evidence = function(){
+
+
+         $scope.result.push({ "evidence_name":"","just_create":true,
+});
+      }
+
+    $scope.remove_primary_evidence = function(index_primary_evidence_to_remove) { 
+      $scope.result.splice(index_primary_evidence_to_remove, 1);     
+
+    }
+  $scope.find_indicators = function(){
+
+          console.log("find_indicators");
+        console.log($scope.year_choosen);
+$scope.indicator_choosen = {};
+        $http.post(
+             '/api/indicator',
+             JSON.stringify($scope.year_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+              $scope.corresponding_indicators = data;
+               $scope.choose_not_complete = false;
+
+         });
+
+    }
+
+  $scope.find_primary_evidences = function(){
+
+          console.log("find_primary_evidences");
+
+
+        // $http.post(
+        //      '/api/indicator',
+        //      JSON.stringify($scope.year_choosen),
+        //      {
+        //          headers: {
+        //              'Content-Type': 'application/json'
+        //          }
+        //      }
+        //  ).success(function (data) {
+        //       $scope.result = data;
+
+
+
+        //  });
+
+    
+
+    }
+
+
+});
+
 
 
 app.controller('manage_primary_evidences_president_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
@@ -1763,11 +1940,14 @@ if(angular.isUndefined(teacher_id_to_send)){
 
 
 }
-    $scope.remove_primary_evidence = function(index_indicator_to_remove) { 
-      $scope.result.splice(index_indicator_to_remove, 1);     
+      $scope.remove_primary_evidence = function(index_primary_evidence_to_remove) { 
+      $scope.result.splice(index_primary_evidence_to_remove, 1);     
 
     }
-
+ $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
 
   $scope.find_indicators = function(){
 

@@ -267,7 +267,7 @@ $('.profile_pic').mouseover(function(){
 
 
                         <li>
-                            <a href="" data-nq-toggle-modal="#manage_evidence" data-effect="from-left" data-placement="bottom">
+                            <a href="" data-nq-toggle-modal="#manage_evidences" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-briefcase"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการหลักฐาน</span></span>
                             </a>
@@ -412,7 +412,14 @@ $('.profile_pic').mouseover(function(){
                              <li>
                             <a href="" data-nq-toggle-modal="#manage_primary_evidences_president" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการหลักฐานพื้นฐาน</span></span>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการหลักฐานพื้นฐาน (ประธาน)</span></span>
+                            </a>
+                        </li>
+
+                          <li>
+                            <a href="" data-nq-toggle-modal="#manage_primary_evidences_admin" data-effect="from-left" data-placement="right">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการหลักฐานพื้นฐาน (แอดมิน)</span></span>
                             </a>
                         </li>
                     </ul>
@@ -3442,7 +3449,240 @@ $('.profile_pic').mouseover(function(){
                     </div>
                 </div>
 
+ <div id="manage_primary_evidences_admin" data-ng-controller="manage_primary_evidences_admin_controller" data-ng-init="init()"data-nq-modal=""  data-qo-size ="lg" data-qo-independent="true">
+      <div class="custom-header">
+          <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการหลักฐานพื้นฐาน</span></h1>
+      </div>
+<div class="row">
 
+         <div class="col-md-5" style="margin-left:72px" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+</select>   
+                        </div>
+
+  <div class="col-md-5" >
+ <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="find_primary_evidences()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+</select>   
+  </div>
+</div>
+
+<br />
+    <div class="container-fluid"  >
+                        <div class="clearfix">
+
+
+                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
+                                 data-qo-selectable="true">
+              
+                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="300px" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
+                                      
+                                        <thead class="nq-fix-table-scroll">
+                                            <tr>
+                          
+                                                <th class="primary_evidence_admin">ชื่อหลักฐาน</th>
+
+                                            
+                                      
+                                                <th class="number_indicator">ลบ</th>
+                                              
+                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody class="flattened">
+                                        <form name="manage_primary_evidence_admin_form" novalidate>
+                                          
+
+                                            <tr data-ng-repeat="primary_evidence in result">
+                                           
+                                     <!--             <td class="number_indicator"><span class="topicHeader" style="margin-right:15px"><i  ng-class="{already_send: primary_evidence.status == 1 , not_send: primary_evidence.status == 0}" class="glyphicon glyphicon-exclamation-sign" ></i></span> </td>
+ -->
+
+
+                                                <td class="primary_evidence_admin left_column" ><span class="topicHeader" ng-hide="primary_evidence.just_create">{{primary_evidence.evidence_name}}</span>
+
+                                                <span class="topicHeader" ng-show="primary_evidence.just_create"> <input class="form-control"  type="text" ng-model="primary_evidence.evidence_name " required/></span>
+
+
+                                            
+
+
+                                                </td>
+                                            <!--      <td class="assign_man left_column">
+
+                                                       <select data-qo-disable-clear="true" data-qo-button-class="mySelect_teacher" data-qo-speed="fastest" data-nq-select="" data-ng-options="teacher.teacher_id as teacher.t_name for teacher in all_teachers" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกผู้รับผิดชอบ"  data-ng-init="primary_evidence.teacher_id" data-ng-model="primary_evidence.teacher_id" data-qo-disable-clear="true" required>
+            </select>
+
+        
+                                                </td> -->
+
+  <!--  <td class="number_indicator"> <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="send_email(primary_evidence.teacher_id)">
+                                        <span class="topic"><i style="color:#eea236"class="
+glyphicon glyphicon-bell"></i> </span>
+                                    </a></td> -->
+                                    
+   <td class="number_indicator"> <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="remove_primary_evidence($index)">
+                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                    </a></td>
+
+                                 <!--               <td class="number_indicator"> <a style="margin-right:10px"href="" data-ng-click="choose_indicator(indicator)" data-nq-toggle-modal="#manage_sub_indicators" data-effect="slide-left">
+                                                  <span class="topic"><i class="glyphicon glyphicon-zoom-in"></i> </span>
+                                              </a></td> -->
+
+
+
+                                            </tr>
+
+                                            </form>
+                                        </tbody>
+
+                                    </table>
+
+                                         <button type="button" style="margin-top:5px;margin-left:360px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_primary_evidence()"style="color:green;font-size:30px"></i> </span></button>
+         </div>         </div>        
+
+          </div>         </div>
+
+       <div class="custom-footer">
+
+          <div class="topicHeader pull-right">
+              <button class="btn btn-success  " ng-disabled="choose_not_complete ||  still_not_choose_complete() ||manage_primary_evidence_admin_form.$pristined" ng-click="save_to_server(this)">    ยืนยัน</button>
+              <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+          </div>
+      </div>   
+
+    </div>
+
+
+ <div id="manage_evidences" data-ng-controller="manage_evidences_controller" data-ng-init="init()"data-nq-modal=""  data-qo-screen-mode ="true" data-qo-independent="true">
+      <div class="custom-header">
+          <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการหลักฐาน</span></h1>
+      </div>
+
+
+   <div class="row">
+
+
+                        <div class="col-md-6" >
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+            </select>
+
+                        </div>
+                        <div class="col-md-2" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+</select>   
+                        </div>
+
+  <div class="col-md-4" >
+ <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+</select>   
+  </div>
+
+</div>
+     <div class="panel-heading clearfix">
+                                    <!-- <h1 class="panel-title pull-left"></i> รายงานการประชุม </h1> -->
+
+
+                                    <div class="pull-left" style="padding-left:15px;margin-left:250px">
+                                        <button type="button" class="btn btn-xs btn-success  hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#upload_evidence"><i class="fic glyphicon glyphicon-plus-sign"></i> อัพโหลดหลักฐานใหม่</button>
+
+
+  &nbsp; &nbsp;
+                                        <button type="button" class="btn btn-xs btn-warning hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#import_evidence"><i class="fic glyphicon glyphicon-plus-sign"></i> อัพโหลดหลักฐานพื้นฐาน</button>
+
+
+                                        &nbsp; &nbsp;
+                                        <button type="button" class="btn btn-xs btn-info hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#import_evidence"><i class="fic glyphicon glyphicon-plus-sign"></i> นำเข้าหลักฐานที่มีอยู่</button>
+
+
+                                    </div>
+
+                                </div>
+<!-- 
+<br />
+                           <div class="container-fluid"  >
+                        <div class="clearfix">
+
+
+                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
+                                 data-qo-selectable="true">
+              
+                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
+                                      
+                                        <thead class="nq-fix-table-scroll">
+                                            <tr>
+                                              <th class="number_indicator">สถานะ</th>
+                                                <th class="topic_indicator">ชื่อหลักฐาน</th>
+
+                                                <th class="assign_man">ผู้รับผิดชอบ</th>
+                                                  <th class="noti">แจ้งเตือน</th>
+                                                <th class="number_indicator">ลบ</th>
+                                              
+                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody class="flattened">
+                                        <form name="manage_evidences_form" novalidate>
+                                          
+
+                                            <tr data-ng-repeat="primary_evidence in result">
+                                           
+                                                 <td class="number_indicator"><span class="topicHeader" style="margin-right:15px"><i  ng-class="{already_send: primary_evidence.status == 1 , not_send: primary_evidence.status == 0}" class="glyphicon glyphicon-exclamation-sign" ></i></span> </td>
+
+
+
+                                                <td class="topic_indicator left_column" ><span class="topicHeader" ng-hide="primary_evidence.just_create">{{primary_evidence.evidence_name}}</span>
+
+                                                <span class="topicHeader" ng-show="primary_evidence.just_create"> <input class="form-control"  type="text" ng-model="primary_evidence.evidence_name " required/></span>
+
+
+                                            
+
+
+                                                </td>
+                                                 <td class="assign_man left_column">
+
+                                                       <select data-qo-disable-clear="true" data-qo-button-class="mySelect_teacher" data-qo-speed="fastest" data-nq-select="" data-ng-options="teacher.teacher_id as teacher.t_name for teacher in all_teachers" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกผู้รับผิดชอบ"  data-ng-init="primary_evidence.teacher_id" data-ng-model="primary_evidence.teacher_id" data-qo-disable-clear="true" required>
+            </select>
+
+        
+                                                </td>
+
+   <td class="number_indicator"> <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="send_email(primary_evidence.teacher_id)">
+                                        <span class="topic"><i style="color:#eea236"class="
+glyphicon glyphicon-bell"></i> </span>
+                                    </a></td>
+                                    
+   <td class="noti"> <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="remove_primary_evidence($index)">
+                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                    </a></td>
+
+                       
+
+
+
+                                            </tr>
+
+                                            </form>
+                                        </tbody>
+
+                                    </table>
+
+                                         <button type="button" style="margin-top:5px;margin-left:500px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_primary_evidence()"style="color:green;font-size:30px"></i> </span></button>
+         </div>         </div>        
+
+          </div>         </div>
+ -->
+
+  <div class="custom-footer">
+
+          <div class="topicHeader pull-right">
+              <button class="btn btn-success  " ng-disabled="choose_not_complete ||  still_not_choose_complete() ||manage_evidences_form.$pristined" ng-click="save_to_server(this)">    ยืนยัน</button>
+              <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+          </div>
+      </div>   
+      </div>
 
 
  <div id="manage_primary_evidences_president" data-ng-controller="manage_primary_evidences_president_controller" data-ng-init="init()"data-nq-modal=""  data-qo-screen-mode ="true" data-qo-independent="true">
@@ -3599,7 +3839,7 @@ glyphicon glyphicon-bell"></i> </span>
     </select>
    </div>
 </div>
-      <img src="/myImages/profile_pic/{{personnel_choose.file_name_pic}}" class="img-circle" width="240" style="float:right;margin-top:10px;margin-right:70px" />
+      <img src="{{personnel_choose.file_name_pic}}" class="img-circle" width="240" style="float:right;margin-top:10px;margin-right:70px" />
       <div style="margin-top:10px">
       <span class="topicHeader manage_president_in_hide" ><b>ชื่อผู้ใช้งาน:</b> {{personnel_choose.username}}</span><br/>
       <span class="topicHeader manage_president_in_hide"><b>ชื่อภาษาไทย:</b> {{personnel_choose.t_name}}   </span><br/>
@@ -4505,7 +4745,7 @@ glyphicon glyphicon-bell"></i> </span>
                 </div>
 
 
-                <div id="manage_evidence" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
+                <div id="mwdadawdad" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal"> จัดการหลักฐาน</span></h1>

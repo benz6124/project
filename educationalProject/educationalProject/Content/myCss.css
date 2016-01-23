@@ -908,6 +908,13 @@ td.topic_indicator{
   width: 400px;
 }
 
+
+
+td.primary_evidence_admin{
+  width: 200px;
+}
+
+
 th.number_sub_indicator,td.number_sub_indicator{
     text-align: center;
   width: 40px;
