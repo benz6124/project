@@ -299,6 +299,11 @@ $('.profile_pic').mouseover(function(){
                                         <span class="topic"> แบบสอบถาม</span>
                                     </a>
                                 </li>
+  <li>
+                                    <a href="" data-nq-toggle-modal="#manage_surveysss" data-effect="slide-left">
+                                        <span class="topic"> แบบสอบถามเก่า</span>
+                                    </a>
+                                </li>
 
                                 <li>
                                     <a href="" data-nq-toggle-modal="#manage_gallery" data-effect="slide-left">
@@ -3688,7 +3693,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
 
                                     </table>
 
-                                         <button type="button" style="margin-top:5px;margin-left:500px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_primary_evidence()"style="color:green;font-size:30px"></i> </span></button>
+                                         <button type="button" style="margin-top:5px;margin-left:530px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_primary_evidence()"style="color:green;font-size:30px"></i> </span></button>
          </div>         </div>        
 
           </div>         </div>
@@ -6785,8 +6790,99 @@ glyphicon glyphicon-bell"></i> </span>
                 </div>
 
 
+ <div id="manage_survey" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_survey_controller">
 
-                <div id="manage_survey" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
+                    <div class="custom-header">
+                        <h1 class="headerModalH1">ส่วนการจัดการแบบสอบถาม</h1>
+                    </div>
+
+          <div class="row">
+
+
+                        <div class="col-md-8" >
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+            </select>
+
+                        </div>
+                        <div class="col-md-4" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+</select>   
+                        </div>
+
+                    </div>
+<br />
+  <div class="container-fluid" >
+                        <div class="clearfix">
+
+
+                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
+                                 data-qo-selectable="true">
+              
+                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="350px" data-qo-min-height="350px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
+                                      
+                                        <thead class="nq-fix-table-scroll">
+                                            <tr>
+                          
+                                                <th style="width:300px">ชื่อแบบสอบถาม</th>
+
+                                                <th style="width:90px">กลุ่มเป้าหมาย</th>
+                                                <th style="width:80px">วันที่สร้าง</th>
+                                                <th style="width:80px">ผู้สร้าง</th>
+                                                <th style="width:30px">ตอบ</th>
+                                                <th style="width:30px">ผลสำรวจ</th>
+                                                <th style="width:30px">ลบ</th>
+                                              
+                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody class="flattened">
+                                        <form name="manage_survey_form" novalidate>
+                                          
+
+                                            <tr data-ng-repeat="survey in result">
+                                           
+
+                                                <td>dadadad</td>
+                                                <td>adad</td>
+                                                <td>dadad</td>
+                                                    <td>dawd</td>
+                                                <td>d</td>
+                                                <td>da</td>
+                                                  <td>a</td>
+                                             <!--    <td class=" left_column" ><span class="topicHeader" ng-hide="primary_evidence.just_create">{{primary_evidence.evidence_name}}</span>
+
+                                                <span class="topicHeader" ng-show="primary_evidence.just_create"> <input class="form-control"  type="text" ng-model="primary_evidence.evidence_name " required/></span>
+
+
+                                                </td>
+  
+                                    
+   <td > <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="remove_primary_evidence($index)">
+                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                    </a></td> -->
+
+                                            </tr>
+
+                                            </form>
+                                        </tbody>
+
+                                    </table>
+
+                                         <button type="button" style="margin-top:5px;margin-left:520px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_primary_evidence()"style="color:green;font-size:30px"></i> </span></button>
+         </div>         </div>        
+
+          </div>         </div>
+     <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button ng-disabled="manage_survey_form.$invalid" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                        </div>
+                    </div>
+   </div>
+
+
+                <div id="manage_surveysss" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">แบบสอบถาม</h1>

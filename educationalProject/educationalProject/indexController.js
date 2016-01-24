@@ -1682,34 +1682,34 @@ app.controller('manage_sub_indicators_controller', function($scope, $alert,$http
 
 
 
-var index;
-if(angular.isUndefined($rootScope.manage_indicators_indicator_choosen.sub_indicator_list)){
-    $rootScope.manage_indicators_indicator_choosen.sub_indicator_list = [];
-}
+// var index;
+// if(angular.isUndefined($rootScope.manage_indicators_indicator_choosen.sub_indicator_list)){
+//     $rootScope.manage_indicators_indicator_choosen.sub_indicator_list = [];
+// }
 
-$scope.my_sub_num_indicators = [];
-for (index =0;index<  $rootScope.manage_indicators_indicator_choosen.sub_indicator_list.length ; index++){
+// $scope.my_sub_num_indicators = [];
+// for (index =0;index<  $rootScope.manage_indicators_indicator_choosen.sub_indicator_list.length ; index++){
 
-     if($scope.my_sub_num_indicators.indexOf($rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].sub_indicator_num) == -1) {
-        $scope.my_sub_num_indicators.push($rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].sub_indicator_num);
-    }
-    else {
+//      if($scope.my_sub_num_indicators.indexOf($rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].sub_indicator_num) == -1) {
+//         $scope.my_sub_num_indicators.push($rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].sub_indicator_num);
+//     }
+//     else {
     
-       return true;
+//        return true;
 
-    }
+//     }
 
-     if( $rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].sub_indicator_name == "" || $rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].sub_indicator_num == ""){
-          return true;
+//      if( $rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].sub_indicator_name == "" || $rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].sub_indicator_num == ""){
+//           return true;
 
-              }
+//               }
 
-}
+// }
           
 
      
 
-        return false;
+//         return false;
       }
 
 
@@ -2239,3 +2239,91 @@ $scope.dont_show_me =function(my_obj){
 
 });
 
+
+
+
+
+
+
+app.controller('manage_survey_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+}
+  
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+  
+        $scope.sendCurriAndGetYears = function () {
+        $scope.choose_not_complete =true;
+        $scope.year_choosen = {}
+        $scope.indicator_choosen= {};
+      
+              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
+
+            $scope.corresponding_aca_years = data;
+
+          });
+
+
+    }
+
+    $scope.find_information = function(){
+
+          console.log("find_information");
+        console.log($scope.year_choosen);
+
+        $http.post(
+             '/api/studentstatusother',
+             JSON.stringify($scope.year_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            
+              $scope.result = data;
+             $scope.choose_not_complete = false;
+             
+            
+    
+         });
+
+    }
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+    $scope.save_to_server = function(my_modal){
+        console.log("save_to_server");
+        console.log($scope.result);
+        $http.put(
+             '/api/studentstatusother',
+             JSON.stringify($scope.result),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+               $scope.close_modal(my_modal);
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    }
+});
