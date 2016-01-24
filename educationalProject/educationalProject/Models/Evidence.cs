@@ -15,6 +15,8 @@ namespace educationalProject.Models
             public static readonly string TEACHER_ID = "TEACHER_ID";
             public static readonly string SECRET = "SECRET";
             public static readonly string CURRI_ID = "CURRI_ID";
+            public static readonly string EVIDENCE_REAL_CODE = "EVIDENCE_REAL_CODE";
+            public static readonly string INDICATOR_NUM = "INDICATOR_NUM";
             public static readonly string ACA_YEAR = "ACA_YEAR";
             public static readonly string PRIMARY_EVIDENCE_NUM = "PRIMARY_EVIDENCE_NUM";
             public static readonly string TABLE_NAME = "EVIDENCE";
@@ -26,6 +28,8 @@ namespace educationalProject.Models
         private char _secret;
         private string _curri_id;
         private int _aca_year;
+        private int _indicator_num;
+        private int _evidence_real_code;
         private int _primary_evidence_num;
         public int evidence_code { get { return _evidence_code; } set { _evidence_code = value; } }
         public string file_name { get { return _file_name; } set { _file_name = value; } }
@@ -34,6 +38,8 @@ namespace educationalProject.Models
         public char secret { get { return _secret; } set { _secret = value; } }
         public string curri_id { get { return _curri_id; } set { _curri_id = value; } }
         public int aca_year { get { return _aca_year; } set { _aca_year = value; } }
+        public int indicator_num { get { return _indicator_num; } set { _indicator_num = value; } }
+        public int evidence_real_code { get { return _evidence_real_code; } set { _evidence_real_code = value; } }
         public int primary_evidence_num { get { return _primary_evidence_num; } set { _primary_evidence_num = value; } }
     }
 }
