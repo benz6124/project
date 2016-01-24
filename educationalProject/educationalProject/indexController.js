@@ -1377,6 +1377,7 @@ console.log(data);
 
  }
 
+
    $http.get('/api/indicator').success(function (data) {
             console.log("all_indicator_years");
 console.log(data);
@@ -1457,7 +1458,20 @@ if( $scope.validate_year_to_create() != true){
 
 if($scope.choose_not_complete==false){
 var index;
+
+$scope.my_num_indicators = [];
 for (index =0;index<  $rootScope.manage_indicators_and_sub_result.length ; index++){
+
+    if($scope.my_num_indicators.indexOf($rootScope.manage_indicators_and_sub_result[index].indicator_num) == -1) {
+        $scope.my_num_indicators.push($rootScope.manage_indicators_and_sub_result[index].indicator_num);
+    }
+    else {
+
+       return true;
+
+    }
+
+
      if( $rootScope.manage_indicators_and_sub_result[index].indicator_name_t == "" || $rootScope.manage_indicators_and_sub_result[index].indicator_name_e == "" ||$rootScope.manage_indicators_and_sub_result[index].indicator_num == "" ){
           return true;
 
@@ -1525,6 +1539,11 @@ console.log($rootScope.manage_indicators_and_subs_year_choosen);
           var sub_index;
  for (index = 0; index < $rootScope.manage_indicators_and_sub_result.length; index++) {
     $rootScope.manage_indicators_and_sub_result[index].aca_year = $scope.year_to_create;
+
+    if(angular.isUndefined($rootScope.manage_indicators_and_sub_result[index].sub_indicator_list)){
+        $rootScope.manage_indicators_and_sub_result[index].sub_indicator_list = [];
+    }
+
     for(sub_index =0; sub_index < $rootScope.manage_indicators_and_sub_result[index].sub_indicator_list.length ; sub_index++ ){
         $rootScope.manage_indicators_and_sub_result[index].sub_indicator_list[sub_index].aca_year =$scope.year_to_create; 
     }
@@ -1667,7 +1686,19 @@ var index;
 if(angular.isUndefined($rootScope.manage_indicators_indicator_choosen.sub_indicator_list)){
     $rootScope.manage_indicators_indicator_choosen.sub_indicator_list = [];
 }
+
+$scope.my_sub_num_indicators = [];
 for (index =0;index<  $rootScope.manage_indicators_indicator_choosen.sub_indicator_list.length ; index++){
+
+     if($scope.my_sub_num_indicators.indexOf($rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].sub_indicator_num) == -1) {
+        $scope.my_sub_num_indicators.push($rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].sub_indicator_num);
+    }
+    else {
+    
+       return true;
+
+    }
+
      if( $rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].sub_indicator_name == "" || $rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].sub_indicator_num == ""){
           return true;
 
