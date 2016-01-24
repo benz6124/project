@@ -286,9 +286,9 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
   
 
         console.log($scope.indicator_choosen);
-
+        $scope.indicator_choosen.curri_id = $scope.curri_choosen.curri_id;
         $http.post(
-             '/api/evidence',
+             '/api/evidence/getnormal',
              JSON.stringify($scope.indicator_choosen),
              {
                  headers: {
@@ -296,6 +296,7 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
                  }
              }
          ).success(function (data) {
+            console.log("/api/evidence/getnormal");
             console.log(data);
             $scope.corresponding_evidences = data;
        
@@ -1107,7 +1108,6 @@ $scope.indicator_choosen = {};
     // }
 });
 
-
 app.controller('upload_aun_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service) {
 
     $scope.init =function() {
@@ -1594,7 +1594,289 @@ if ($rootScope.manage_indicators_and_sub_result.length == 0){
 });
 
 
+app.controller('change_evidence_file_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service,$rootScope) {
+      
 
+       $scope.init =function() {
+    
+       $scope.my_temp_secret = false;
+             
+      $scope.files = [];
+      
+    }
+   $scope.files = [];
+
+    
+       $scope.my_temp_secret = false;
+    
+    $scope.$on("fileSelected", function (event, args) {
+        $scope.$apply(function () {    
+            $scope.files =[];        
+            //add the file object to the scope's files collection
+            $scope.files.push(args.file);
+        });
+    });
+
+
+         $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+
+    $scope.save_to_server=function(this_modal){
+ if($scope.my_temp_secret == false){
+            $rootScope.only_object_want_to_change.secret = 0;
+        }
+        else{
+            $rootScope.only_object_want_to_change.secret = 1;
+        }
+
+
+
+
+$rootScope.only_object_want_to_change.teacher_id = "00008";
+      var formData = new FormData();
+$rootScope.only_object_want_to_change.file_name = $scope.files[0].name;
+    
+    formData.append("model", angular.toJson($rootScope.only_object_want_to_change));
+
+            formData.append("file" , $scope.files[0]);
+        console.log("save to sserver");
+console.log($rootScope.only_object_want_to_change);
+        // $http({
+        //     method: 'PUT',
+        //     url: "/Api/aunbook",
+
+        //     headers: { 'Content-Type': undefined },
+
+
+        //     data:formData,
+        //     transformRequest: angular.indentity 
+
+        // }).
+        // success(function (data, status, headers, config) {
+    
+           //  $rootScope.manage_evidences_world_evidences = data;
+
+        //         $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+        //                  placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+        //         $scope.close_modal(my_modal);
+           
+        // }).
+        // error(function (data, status, headers, config) {
+        //     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+        //                  placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        // });
+    }
+});
+
+app.controller('add_new_evidence_controller', function($scope, $alert,$http,$rootScope,request_years_from_curri_choosen_service){
+ 
+    $scope.my_new_evidence = {};
+   $scope.my_new_evidence.evidence_real_code = "";
+   $scope.my_new_evidence.evidence_name = "";
+   $scope.my_new_evidence.secret = false;
+   $scope.my_new_evidence_file = [];
+ $scope.my_temp_secret_new = false;
+  $scope.my_new_evidence.teacher_id = "00007";
+    $scope.init =function() {
+         $scope.my_temp_secret_new = false;
+   $scope.my_new_evidence = {};
+   $scope.my_new_evidence.evidence_real_code = "";
+   $scope.my_new_evidence.evidence_name = "";
+   $scope.my_new_evidence_file = [];
+     $scope.my_new_evidence.secret = false;
+      $scope.my_new_evidence.evidence_name = "";
+        $scope.my_new_evidence.teacher_id = "00007";
+}
+
+    $scope.$on("fileSelected", function (event, args) {
+        $scope.$apply(function () {            
+            $scope.my_new_evidence_file = [];
+            //add the file object to the scope's files collection
+            $scope.my_new_evidence_file.push(args.file);
+            console.log("fileSelected");
+            console.log($scope.my_new_evidence_file);
+        });
+    });
+
+
+
+    $scope.new_evidence_still_not_complete =  function(){
+        if (angular.isUndefined($scope.my_new_evidence.evidence_real_code) == true || angular.isUndefined($scope.my_new_evidence.evidence_name) == true || $scope.my_new_evidence_file.length ==0){
+
+                return true;
+        }
+        else{
+             if ($scope.my_new_evidence.evidence_real_code <= 0){
+                   return true;
+                }
+            return false;
+        }
+    }
+
+ $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+    $scope.save_to_server =function(){
+        if($scope.my_temp_secret_new  == false){
+            $scope.my_new_evidence.secret = 0;
+        }
+        else{
+            $scope.my_new_evidence.secret = 1;
+        }
+
+
+
+      var formData = new FormData();
+$scope.my_new_evidence.file_name = $scope.my_new_evidence_file[0].name;
+$scope.my_new_evidence.curri_id =   $rootScope.manage_evidence_curri_id_now;
+$scope.my_new_evidence.aca_year = $rootScope.manage_evidence_year_now;
+
+
+
+    
+    formData.append("model", angular.toJson($scope.my_new_evidence));
+    formData.append("file" , $scope.my_new_evidence_file[0]);
+             console.log("save to sserver");
+console.log($scope.my_new_evidence);
+
+        // $http({
+        //     method: 'PUT',
+        //     url: "/Api/aunbook",
+
+        //     headers: { 'Content-Type': undefined },
+
+
+        //     data:formData,
+        //     transformRequest: angular.indentity 
+
+        // }).
+        // success(function (data, status, headers, config) {
+    
+             
+//               $rootScope.manage_evidences_world_evidences = data;
+        //         $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+        //                  placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+        //         $scope.close_modal(my_modal);
+           
+        // }).
+        // error(function (data, status, headers, config) {
+        //     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+        //                  placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        // });
+    }
+});
+
+
+app.controller('add_new_primary_controller', function($scope, $alert,$http,$rootScope,request_years_from_curri_choosen_service){
+ 
+    $scope.my_new_evidence = {};
+   $scope.my_new_evidence.evidence_real_code = "";
+   $scope.my_new_evidence.evidence_name = "";
+   $scope.my_new_evidence.secret = false;
+   $scope.my_new_evidence_file = [];
+ $scope.my_temp_secret_new = false;
+  $scope.my_new_evidence.teacher_id = "00007";
+$scope.primary_choosen = {}
+
+    $scope.init =function() {
+         $scope.my_temp_secret_new = false;
+   $scope.my_new_evidence = {};
+   $scope.my_new_evidence.evidence_real_code = "";
+   $scope.my_new_evidence.evidence_name = "";
+   $scope.my_new_evidence_file = [];
+     $scope.my_new_evidence.secret = false;
+      $scope.my_new_evidence.evidence_name = "";
+        $scope.my_new_evidence.teacher_id = "00007";
+        $scope.primary_choosen = {}
+}
+
+    $scope.$on("fileSelected", function (event, args) {
+        $scope.$apply(function () {            
+            $scope.my_new_evidence_file = [];
+            //add the file object to the scope's files collection
+            $scope.my_new_evidence_file.push(args.file);
+            console.log("fileSelected");
+            console.log($scope.my_new_evidence_file);
+        });
+    });
+
+
+
+    $scope.new_evidence_still_not_complete =  function(){
+        if (angular.isUndefined($scope.my_new_evidence.primary_choosen) == true ||angular.isUndefined($scope.my_new_evidence.evidence_real_code) == true || angular.isUndefined($scope.my_new_evidence.evidence_name) == true || $scope.my_new_evidence_file.length ==0){
+
+                return true;
+        }
+        else{
+             if ($scope.my_new_evidence.evidence_real_code <= 0){
+                   return true;
+                }
+            return false;
+        }
+    }
+
+ $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+    $scope.save_to_server =function(){
+        if($scope.my_temp_secret_new  == false){
+            $scope.my_new_evidence.secret = 0;
+        }
+        else{
+            $scope.my_new_evidence.secret = 1;
+        }
+
+
+
+      var formData = new FormData();
+$scope.my_new_evidence.file_name = $scope.my_new_evidence_file[0].name;
+$scope.my_new_evidence.curri_id =   $rootScope.manage_evidence_curri_id_now;
+$scope.my_new_evidence.aca_year = $rootScope.manage_evidence_year_now;
+
+
+
+    
+    formData.append("model", angular.toJson($scope.my_new_evidence));
+    formData.append("file" , $scope.my_new_evidence_file[0]);
+             console.log("save to sserver");
+console.log($scope.my_new_evidence);
+
+        // $http({
+        //     method: 'PUT',
+        //     url: "/Api/aunbook",
+
+        //     headers: { 'Content-Type': undefined },
+
+
+        //     data:formData,
+        //     transformRequest: angular.indentity 
+
+        // }).
+        // success(function (data, status, headers, config) {
+    
+             
+//               $rootScope.manage_evidences_world_evidences = data;
+        //         $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+        //                  placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+        //         $scope.close_modal(my_modal);
+           
+        // }).
+        // error(function (data, status, headers, config) {
+        //     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+        //                  placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        // });
+    }
+});
 
 app.controller('manage_evidences_controller', function($scope, $alert,$http,$rootScope,request_years_from_curri_choosen_service){
 
@@ -1602,17 +1884,55 @@ app.controller('manage_evidences_controller', function($scope, $alert,$http,$roo
         $scope.year_choosen = {};
               $scope.curri_choosen = {}
                 $scope.indicator_choosen= {};
-                $scope.results={};
+                $scope.result={};
                 $scope.my_president ={};
                 $scope.personnel_choose = {};
 
 
+    $scope.watch_file = function(path) { 
+        window.open(path, '_blank', "width=800, left=230,top=0,height=700");  
+    }
+
+$scope.choose_to_change_file = function(this_obj){
+    $rootScope.only_object_want_to_change = angular.copy(this_obj);
+    console.log("manage_evidence_indicator_num");
+    console.log($rootScope.manage_evidence_indicator_num);
+    $rootScope.manage_evidence_indicator_num = $scope.indicator_choosen.indicator_num;
+ if($rootScope.only_object_want_to_change.secret == 1){
+    $rootScope.only_object_want_to_change.secret = true;
+   }
+   else{
+     $rootScope.only_object_want_to_change.secret = false;
+   }
+
+
+
+
+}
+
+
+$scope.choose_to_add_new_file = function(){
+   
+    console.log($rootScope.manage_evidence_indicator_num);
+    $rootScope.manage_evidence_indicator_num = $scope.indicator_choosen.indicator_num;
+    $rootScope.manage_evidence_curri_id_now = $scope.curri_choosen.curri_id;
+    $rootScope.manage_evidence_year_now = $scope.year_choosen.aca_year;
+}
+
+
+$scope.choose_to_add_new_primary_file = function(){
+   
+    console.log($rootScope.manage_evidence_indicator_num);
+    $rootScope.manage_evidence_indicator_num = $scope.indicator_choosen.indicator_num;
+    $rootScope.manage_evidence_curri_id_now = $scope.curri_choosen.curri_id;
+    $rootScope.manage_evidence_year_now = $scope.year_choosen.aca_year;
+}
 $scope.init =function() {
      $scope.choose_not_complete = true;
         $scope.year_choosen = {};
               $scope.curri_choosen = {}
                 $scope.indicator_choosen= {};
-                $scope.results={};
+                $scope.result={};
                 $scope.my_president ={};
                        $scope.personnel_choose = {};
 }
@@ -1631,11 +1951,27 @@ $scope.init =function() {
 
     }
    $scope.find_information = function(){
- $scope.choose_not_complete =false;
+
+    $scope.indicator_choosen.curri_id = $scope.curri_choosen.curri_id;
+       $http.post(
+             '/api/evidence/getwithtname',
+             JSON.stringify($scope.indicator_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+              $rootScope.manage_evidences_world_evidences = data;
+            $scope.choose_not_complete =false;
+
+         });
+
+
    }
 
       $scope.find_indicators = function(){
-
+$scope.choose_not_complete =true;
           console.log("find_indicators");
         console.log($scope.year_choosen);
         $scope.indicator_choosen = {};
@@ -1654,10 +1990,7 @@ $scope.init =function() {
          });
 
     }
-$scope.result= [{"evidence_real_code":1,"evidence_name":"momo1","file_name":"filefafa.pdf","secret":0,"teacher_id":"00007"},
-{"evidence_real_code":2,"evidence_name":"momo2","file_name":"filefafa2.pdf","secret":0,"teacher_id":"00005"},
-{"evidence_real_code":3,"evidence_name":"momo3","file_name":"filefafa3.pdf","secret":0,"teacher_id":"00004"},
-{"evidence_real_code":4,"evidence_name":"momo4","file_name":"filefafa4.pdf","secret":0,"teacher_id":"00003"}]
+
 
 });
 
@@ -2327,3 +2660,108 @@ $scope.init =function() {
   }); 
     }
 });
+
+
+app.controller('import_evidence_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+ $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {};
+                $scope.evidence_we_want = {};
+                    $scope.result = {};
+
+
+   $scope.watch_file = function(path) { 
+        window.open(path, '_blank', "width=800, left=230,top=0,height=700");  
+    }
+
+
+   $scope.choose_evidence_already = function(){
+    $scope.choose_not_complete = false;
+   }
+$scope.watch_preview = function(){
+    if($scope.choose_not_complete == false){
+        $scope.watch_file($scope.evidence_we_want.file_name);
+    }
+    else{
+         $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกหลักฐานที่ต้องการดู',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+    }
+}
+
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.evidence_we_want = {}
+                    $scope.result = {};
+                }
+  
+  
+        $scope.sendCurriAndGetYears = function () {
+        $scope.choose_not_complete =true;
+        $scope.year_choosen = {}
+     
+      
+              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
+
+            $scope.corresponding_aca_years = data;
+
+          });
+
+
+    }
+
+    $scope.find_all_evidences_in_curri_and_year = function(){
+
+          console.log("find_information");
+        console.log($scope.year_choosen);
+
+        $http.post(
+             '/api/studentstatusother',
+             JSON.stringify($scope.year_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            
+              $scope.all_evidences = data;
+             $scope.choose_not_complete = true;
+       
+   
+         });
+
+    }
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+    $scope.save_to_server = function(my_modal){
+        console.log("save_to_server");
+        console.log($scope.result);
+        $http.put(
+             '/api/studentstatusother',
+             JSON.stringify($scope.result),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+               $scope.close_modal(my_modal);
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    }
+});
+
+

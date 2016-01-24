@@ -565,7 +565,7 @@ $('.profile_pic').mouseover(function(){
                         </tr>
 
                         <tr ng-repeat="evidence in corresponding_evidences">
-                            <td class="code">{{indicator_choosen.indicator_num}}-<span ng-hide="$index+1>=10">0</span>{{$index+1}}</td>
+                            <td class="code">{{indicator_choosen.indicator_num}}-{{evidence.evidence_real_code}}</td>
                             <td class="larger" ng-click="watch_file(evidence.file_name)"><a href="" class=" hvr-grow">{{evidence.evidence_name}}</a></td>
                             <td class="download"><a href="" ng-click="download_file(evidence.file_name)" ng-hide="evidence.secret==1"class=" hvr-wobble-vertical"><span class="glyphicon glyphicon-download-alt " /></a></td>
                         </tr>
@@ -3605,11 +3605,11 @@ glyphicon glyphicon-bell"></i> </span>
                             <div class="panel panel-default"  data-nq-pageable=""
                                  data-qo-selectable="true">
                           
-                                        <button type="button" style="margin-top:12px;margin-bottom:0px;margin-left:265px"class="btn btn-xs btn-success  hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#upload_evidence"><i class="fic glyphicon glyphicon-plus-sign"></i> อัพโหลดหลักฐานใหม่</button>
+                                        <button type="button" style="margin-top:12px;margin-bottom:0px;margin-left:265px"class="btn btn-xs btn-success  hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#upload_evidence" data-ng-click="choose_to_add_new_file()"><i class="fic glyphicon glyphicon-plus-sign"></i> อัพโหลดหลักฐานใหม่</button>
 
 
   &nbsp; &nbsp;
-                                        <button type="button" style="margin-top:12px;margin-bottom:0px;" class="btn btn-xs btn-warning hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#upload_primary_evidence"><i class="fic glyphicon glyphicon-plus-sign"></i> อัพโหลดหลักฐานพื้นฐาน</button>
+                                        <button type="button" style="margin-top:12px;margin-bottom:0px;" class="btn btn-xs btn-warning hvr-buzz" data-effect="flip-x"  data-ng-click="choose_to_add_new_primary_file()" data-nq-toggle-modal="#upload_primary_evidence"><i class="fic glyphicon glyphicon-plus-sign"></i> อัพโหลดหลักฐานพื้นฐาน</button>
 
 
                                         &nbsp; &nbsp;
@@ -3623,15 +3623,15 @@ glyphicon glyphicon-bell"></i> </span>
                                       
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
-                                              <th class="code_evidence_column">รหัส</th>
-                                                <th class="topic_indicator">ชื่อหลักฐาน</th>
+                                              <th style="width:30px">รหัส</th>
+                                                <th style="width:270px">ชื่อหลักฐาน</th>
 
-                                                <th class="assign_man">ผู้อัพโหลด</th>
+                                                <th style="width:80px">ผู้อัพโหลด</th>
 
-                                                  <th class="number_indicator">ดู</th>
-                                                  <th style="width:70px">แก้ไขไฟล์</th>
+                                                  <th style="width:3px">ดู</th>
+                                                  <th style="width:30px">แก้ไขไฟล์</th>
                                       
-                                                <th class="number_indicator">ลบ</th>
+                                                <th style="width:30px">ลบ</th>
                                               
                                             
                                             </tr>
@@ -3640,13 +3640,13 @@ glyphicon glyphicon-bell"></i> </span>
                                         <form name="manage_evidences_form" novalidate>
                                           
 
-                                            <tr data-ng-repeat="evidence in result">
+                                            <tr data-ng-repeat="evidence in manage_evidences_world_evidences">
                                            
-                                                 <td class="code_evidence_column">
+                                                 <td style="padding-left:0px">
 
                                                
 
-                                                 <span class="topicHeader" >{{indicator_choosen.indicator_num}}-      <input class="form-control" type="number"style=" display: inline-block;margin-top:2px;margin-bottom:2px;padding-top:0px"  ng-model="evidence.evidence_real_code" required/></span>
+                                                 <span  style="padding-left:0px;font-size:19px" >{{indicator_choosen.indicator_num}}-      <input class="form-control" type="number"style=" display: inline-block;margin-top:2px;margin-bottom:2px;width:50px;padding-top:2px;padding-left:13px;padding-right:2px;padding-bottom:5px"  ng-model="evidence.evidence_real_code" required/></span>
 
           </td>
 
@@ -3655,10 +3655,10 @@ glyphicon glyphicon-bell"></i> </span>
      </td>
  -->
 
-                                                <td class="topic_indicator left_column"><input class="form-control"size="64" type="text" ng-model="evidence.evidence_name" style="margin-top:2px;margin-bottom:2px"  required/>
+                                                <td class=" left_column"><input class="form-control"size="64" type="text" ng-model="evidence.evidence_name" style="margin-top:2px;margin-bottom:2px"  required/>
                                                 </td>
 
-       <td class="assign_man"><span class="topicHeader" style="margin-right:15px">{{evidence.teacher_id}}</span> </td>
+       <td ><span style="margin-right:15px;font-size:19px">{{evidence.t_name}}</span> </td>
                                                <!--  <span class="topicHeader" ng-show="primary_evidence.just_create"> <input class="form-control"  type="text" ng-model="primary_evidence.evidence_name " required/></span> -->
 
 
@@ -3672,13 +3672,18 @@ glyphicon glyphicon-bell"></i> </span>
         
                                                 </td> -->
 
-   <td class="number_indicator"> <a style="margin-right:10px"href=""  class="hvr-pulse" >
+   <td > <a style="margin-right:10px"href=""  class="hvr-pulse" ng-click="watch_file(evidence.file_name)">
                                         <span class="topicHeader"><i class="
 glyphicon glyphicon-eye-open"></i> </span></a></td>
-                 <td class="number_sub_indicator"> <a style="margin-right:10px"href=""  class="hvr-pulse" >
+
+
+
+                 <td > <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="choose_to_change_file(evidence)" >
                                         <span class="topicHeader"><i style="color:#eea236" data-nq-toggle-modal="#fix_evidence" class="
-glyphicon glyphicon-wrench"></i> </span></a></td>                      
-   <td class="noti"> <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="remove_primary_evidence($index)">
+glyphicon glyphicon-wrench"></i> </span></a></td>  
+
+
+   <td > <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="remove_primary_evidence($index)">
                                         <span class="topicHeader"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td>
 
@@ -3693,7 +3698,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
 
                                     </table>
 
-                                         <button type="button" style="margin-top:5px;margin-left:530px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_primary_evidence()"style="color:green;font-size:30px"></i> </span></button>
+                                         
          </div>         </div>        
 
           </div>         </div>
@@ -4314,12 +4319,28 @@ glyphicon glyphicon-bell"></i> </span>
                     </div> 
                 </div>
 
- 
-       <div id="upload_primary_evidence" data-nq-modal="" data-qo-size="md" data-qo-independent="true">
+ <!-- 
+       <div id="upload_primary_evidence" data-nq-modal="" data-ng-controller="add_new_primary_controller" data-qo-size="md" data-qo-independent="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal"> เพิ่มหลักฐานพื้นฐาน</span></h1>
                     </div>
+
+
+ <div class="row">
+                        <div class="col-md-4" > 
+                            <h3 style="margin-left:20px;margin-top:2px;"><span class="topicHeader">รหัสหลักฐาน:  </span></h3>
+                        </div>
+                        <div class="col-md-1" style="padding-right:0px">
+                        <span class="topicHeader" >{{manage_evidence_indicator_num}} -  </span>
+                        
+                        </div>
+ <div class="col-md-2" style="padding-left:0px">
+                            <input type="number" style="padding-top:3px" class="form-control" min="1" placeholder="รหัส" data-ng-model="my_new_evidence.evidence_real_code"><span class="normal">  </span>
+</div>
+                    </div>
+
+
 
                     <div class="row">
                         <div class="col-md-4">
@@ -4350,7 +4371,7 @@ glyphicon glyphicon-bell"></i> </span>
                 
 
                     <div class="topicHeader" style="margin-left:20px;">
-                        <input type="checkbox"> &nbsp;หลักฐานนี้เป็นความลับ (ระบบจะไม่เผยแพร่หลักฐานต่อบุคคลภายนอก)</input>
+                        <input type="checkbox" /> &nbsp;หลักฐานนี้เป็นความลับ (ระบบจะไม่เผยแพร่หลักฐานต่อบุคคลภายนอก)
                     </div>
                   
                     <div class="custom-footer">
@@ -4359,53 +4380,121 @@ glyphicon glyphicon-bell"></i> </span>
                             <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                         </div>
                     </div>
+                </div> -->
+
+
+                <div id="upload_primary_evidence" data-nq-modal="" data-ng-controller="add_new_primary_controller" data-qo-size="md" data-qo-independent="true">
+                    <div class="custom-header">
+
+                        <h1 class="headerModalH1"><span class="headerModal"> เพิ่มหลักฐาน</span></h1>
+                    </div>
+
+
+                     <form name="upload_evidence_form" novalidate>
+ <div class="row">
+                        <div class="col-md-4" > 
+                            <h3 style="margin-left:20px;margin-top:2px;"><span class="topicHeader">รหัสหลักฐาน:  </span></h3>
+                        </div>
+                        <div class="col-md-1" style="padding-right:0px">
+                        <span class="topicHeader" >{{manage_evidence_indicator_num}} -  </span>
+                        
+                        </div>
+ <div class="col-md-2" style="padding-left:0px">
+                            <input type="number" style="padding-top:3px" class="form-control" min="1" placeholder="รหัส" data-ng-model="my_new_evidence.evidence_real_code"><span class="normal">  </span>
+</div>
+                    </div>
+
+        
+
+                       <div class="row">
+                        <div class="col-md-4">
+                            <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">ชื่อหลักฐาน:   </span></h3>
+                        </div>
+                        <div class="col-md-8">
+                                   <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="รายชื่อหลักฐานพื้นฐาน" data-ng-model="$parent.primary_choosen">
+                               
+
+
+                            </select>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">ไฟล์หลักฐาน:  </span></h3>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="file" class="form-control"  data-ng-model="my_new_evidence_file" file-upload>
+                        </div>
+
+                    </div>
+
+                </form>
+
+                    <div class="topicHeader" style="margin-left:20px;">
+                        <input type="checkbox" data-ng-model="my_temp_secret_new" > &nbsp;หลักฐานนี้เป็นความลับ (ระบบจะไม่เผยแพร่หลักฐานต่อบุคคลภายนอก)</input>
+                    </div>
+                  
+                    <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button class="btn btn-success  " ng-disabled="upload_evidence_form.$invalide || new_evidence_still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                        </div>
+                    </div>
                 </div>
 
-
-
-       <div id="fix_evidence" data-nq-modal="" data-qo-size="sm" data-qo-independent="true" data-qo-effect="flip-x">
+       <div id="fix_evidence" data-nq-modal="" data-qo-size="sm" data-qo-independent="true" data-ng-controller="change_evidence_file_controller" data-qo-effect="flip-x">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal"> แก้ไขหลักฐาน</span></h1>
                     </div>
 
-                  <!--   <div class="row">
-                        <div class="col-md-4">
-                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">ชื่อหลักฐาน:   </span></h3>
-                        </div>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" placeholder="ชื่อหลักฐานเดิม"><span class="normal">  </span>
-
-                        </div>
-                    </div> -->
                     <div class="row">
                      
                             <h3 style="margin-top:5px;margin-left:15px;" ><span class="topicHeader">อัพโหลดไฟล์ใหม่:  </span></h3>
                   
                      
 
-                    </div>  <div class="row">
- <input type="file" style="margin-left:10px;margin-right:10px;" class="form-control fix_evidence_file" placeholder="Password">
+                    </div> 
+                     <div class="row">
+ <input type="file" style="margin-left:10px;margin-right:10px;" data-ng-model="files" class="form-control fix_evidence_file" file-upload >
                 </div>
 
                     <div class="topicHeader" style="margin-left:10px;margin-top:10px;">
-                        <input type="checkbox"> &nbsp;หลักฐานนี้เป็นความลับ</input>
+                        <input type="checkbox" ng-model="my_temp_secret" /> &nbsp;หลักฐานนี้เป็นความลับ
                     </div>
                   
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                            <button class="btn btn-success  " ng-disabled="files.length ==0" ng-click="save_to_server(this)" >ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
                 </div>
 
 
 
-                <div id="upload_evidence" data-nq-modal="" data-qo-size="md" data-qo-independent="true">
+                <div id="upload_evidence" data-nq-modal="" data-ng-controller="add_new_evidence_controller" data-qo-size="md" data-qo-independent="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal"> เพิ่มหลักฐาน</span></h1>
+                    </div>
+
+
+                     <form name="upload_evidence_form" novalidate>
+ <div class="row">
+                        <div class="col-md-4" > 
+                            <h3 style="margin-left:20px;margin-top:2px;"><span class="topicHeader">รหัสหลักฐาน:  </span></h3>
+                        </div>
+                        <div class="col-md-1" style="padding-right:0px">
+                        <span class="topicHeader" >{{manage_evidence_indicator_num}} -  </span>
+                        
+                        </div>
+ <div class="col-md-2" style="padding-left:0px">
+                            <input type="number" style="padding-top:3px" class="form-control" min="1" placeholder="รหัส" data-ng-model="my_new_evidence.evidence_real_code"><span class="normal">  </span>
+</div>
                     </div>
 
                     <div class="row">
@@ -4413,7 +4502,7 @@ glyphicon glyphicon-bell"></i> </span>
                             <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">ชื่อหลักฐาน:   </span></h3>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" placeholder="ชื่อหลักฐาน"><span class="normal">  </span>
+                            <input type="text" data-ng-model="my_new_evidence.evidence_name" class="form-control" placeholder="ชื่อหลักฐาน"><span class="normal">  </span>
 
                         </div>
                     </div>
@@ -4422,20 +4511,20 @@ glyphicon glyphicon-bell"></i> </span>
                             <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">ไฟล์หลักฐาน:  </span></h3>
                         </div>
                         <div class="col-md-8">
-                            <input type="file" class="form-control" placeholder="Password">
+                            <input type="file" class="form-control"  data-ng-model="my_new_evidence_file" file-upload>
                         </div>
 
                     </div>
 
-                
+                </form>
 
                     <div class="topicHeader" style="margin-left:20px;">
-                        <input type="checkbox"> &nbsp;หลักฐานนี้เป็นความลับ (ระบบจะไม่เผยแพร่หลักฐานต่อบุคคลภายนอก)</input>
+                        <input type="checkbox" data-ng-model="my_temp_secret_new" > &nbsp;หลักฐานนี้เป็นความลับ (ระบบจะไม่เผยแพร่หลักฐานต่อบุคคลภายนอก)</input>
                     </div>
                   
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="upload_evidence_form.$invalide || new_evidence_still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                         </div>
                     </div>
@@ -4443,7 +4532,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-                <div id="import_evidence" data-nq-modal="" data-qo-size="md" data-qo-independent="true">
+                <div id="import_evidence" data-ng-controller="import_evidence_controller"data-nq-modal="" data-qo-size="md" data-qo-independent="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal"> นำเข้าหลักฐานที่มีอยู่</span></h1>
@@ -4455,27 +4544,15 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                         <div class="col-md-10" >
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            </select>
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+            </select>
 
                         </div>
-                          <div class="col-md-2" style="padding-left:0px">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="ปี" data-ng-model="staticSelectModel">
-                                <option>2557</option>
-                                <option>2556</option>
-                                <option>2555</option>
-                                <option>2554</option>
-                                <option>2553</option>
-                                <option>2552</option>
-                                <option>2551</option>
-
-
-                            </select>
+                        <div class="col-md-2" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_all_evidences_in_curri_and_year()"  data-qo-placeholder="ปี" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+</select>   
                         </div>
+
                     </div>
                   <!--   <div class="row">
                       
@@ -4490,11 +4567,8 @@ glyphicon glyphicon-bell"></i> </span>
                     </div> -->
                     <div class="row">
                         <div class="col-md-11">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หลักฐานที่พบในหลักสูตรและปีการศึกษาดังกล่าว" data-ng-model="staticSelectModel">
-                                <option>คำอธิบายรายวิชาแต่ละวิชาในหลักสูตร</option>
-                                <option>มาตรฐานคุณวุฒิระดับอุดมศึกษาแห่งชาติ</option>
-                                <option>มาตรฐานคุณวุฒิระดับปริญญาตรี สาขาคอมพิวเตอร์</option>
-                                <option>เอกลักษณ์,อัตลักษณ์พร้อมตัวบ่งชี้ของสถาบัน</option>
+                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-options="evidence.evidence_name for evidence in all_evidences" data-qo-placeholder="หลักฐานที่พบในหลักสูตรและปีการศึกษาดังกล่าว" data-ng-model="$parent.evidence_we_want">
+                             
 
 
                             </select>
@@ -4502,7 +4576,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                         </div>
                         <div class="col-md-1" style="padding-left:0px" >
-                        <a href="" class="hvr-buzz topicHeader">  <i style="font-size:25px;margin-top:3px"class="glyphicon glyphicon-search" ></i>   </a>
+                        <a href="" class="hvr-buzz topicHeader" ng-click="watch_preview()">  <i style="font-size:25px;margin-top:3px"class="glyphicon glyphicon-search" ></i>   </a>
 </div>
                     </div>
 
@@ -4513,8 +4587,8 @@ glyphicon glyphicon-bell"></i> </span>
           
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                            <button class="btn btn-success  " ng-disabled="choose_not_complete " ng-click="$hide()">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
                 </div>

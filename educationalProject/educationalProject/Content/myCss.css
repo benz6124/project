@@ -955,13 +955,13 @@ input.form-control.fix_evidence_file{
 
 .manage_evidence_table input[type='text']{
     font-family:  "FreesiaUPC";
-  font-size: 22px !important;
+  font-size: 19px !important;
   vertical-align: middle !important;
 }
 
 .manage_evidence_table input[type='number']{
     font-family:  "FreesiaUPC";
-  font-size: 22px !important;
+  font-size: 19px !important;
   vertical-align: middle !important;
 }
 
