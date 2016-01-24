@@ -3467,24 +3467,28 @@ $('.profile_pic').mouseover(function(){
 </div>
 
 <br />
-    <div class="container-fluid"  >
+
+                        <div ng-show="choose_not_complete">
+                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                        </div>
+    <div class="container-fluid" ng-hide="choose_not_complete" >
                         <div class="clearfix">
 
 
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
                                  data-qo-selectable="true">
               
-                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="300px" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="350px" data-qo-min-height="350px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
                                       
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
                           
-                                                <th class="primary_evidence_admin">ชื่อหลักฐาน</th>
+                                                <th style="width:420px">ชื่อหลักฐาน</th>
 
                                             
                                       
-                                                <th class="number_indicator">ลบ</th>
+                                                <th style="width:40px">ลบ</th>
                                               
                                             
                                             </tr>
@@ -3499,7 +3503,7 @@ $('.profile_pic').mouseover(function(){
  -->
 
 
-                                                <td class="primary_evidence_admin left_column" ><span class="topicHeader" ng-hide="primary_evidence.just_create">{{primary_evidence.evidence_name}}</span>
+                                                <td class=" left_column" ><span class="topicHeader" ng-hide="primary_evidence.just_create">{{primary_evidence.evidence_name}}</span>
 
                                                 <span class="topicHeader" ng-show="primary_evidence.just_create"> <input class="form-control"  type="text" ng-model="primary_evidence.evidence_name " required/></span>
 
@@ -3521,7 +3525,7 @@ $('.profile_pic').mouseover(function(){
 glyphicon glyphicon-bell"></i> </span>
                                     </a></td> -->
                                     
-   <td class="number_indicator"> <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="remove_primary_evidence($index)">
+   <td > <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="remove_primary_evidence($index)">
                                         <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td>
 
@@ -3538,7 +3542,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                                     </table>
 
-                                         <button type="button" style="margin-top:5px;margin-left:360px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_primary_evidence()"style="color:green;font-size:30px"></i> </span></button>
+                                         <button type="button" style="margin-top:5px;margin-left:370px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_primary_evidence()"style="color:green;font-size:30px"></i> </span></button>
          </div>         </div>        
 
           </div>         </div>
@@ -4111,7 +4115,7 @@ glyphicon glyphicon-bell"></i> </span>
  <div class="custom-footer">
      
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="validate_year_to_create()  || manage_indicators_form.$invalid || choose_not_complete || manage_indicators_form.$pristine  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="still_not_choose_complete() || validate_year_to_create()  || manage_indicators_form.$invalid || choose_not_complete || manage_indicators_form.$pristine  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div> 
@@ -4197,7 +4201,7 @@ glyphicon glyphicon-bell"></i> </span>
 
  <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="evaluate_by_me_form.$invalid || choose_not_complete" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="still_not_choose_complete_sub() || evaluate_by_me_form.$invalid || choose_not_complete" ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div> 

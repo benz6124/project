@@ -107,7 +107,7 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$loading
         // console.log(year.aca_year);
 
         $http.post(
-             '/api/indicator',
+             '/api/indicator/querybycurriculumacademic',
              JSON.stringify(year),
              {
                  headers: {
@@ -898,7 +898,7 @@ $scope.indicator_choosen = {};
         console.log($scope.year_choosen);
 $scope.indicator_choosen = {};
         $http.post(
-             '/api/indicator',
+             '/api/indicator/querybycurriculumacademic',
              JSON.stringify($scope.year_choosen),
              {
                  headers: {
@@ -1008,7 +1008,7 @@ $scope.indicator_choosen = {};
         console.log($scope.year_choosen);
 
         $http.post(
-             '/api/indicator',
+             '/api/indicator/querybycurriculumacademic',
              JSON.stringify($scope.year_choosen),
              {
                  headers: {
@@ -1364,18 +1364,26 @@ $scope.init = function(){
 $rootScope.manage_indicators_year_to_create = "";
     $scope.year_to_create = "";
 
-      $http.get('/api/curriculumacademic').success(function (data) {
+      $http.get('/api/curriculumacademic/getmaxacayear').success(function (data) {
             console.log("max_year_curri_have");
              $scope.max_year_curri_have = data;
              console.log(data);
            });
-
+   $http.get('/api/indicator').success(function (data) {
+            console.log("all_indicator_years");
+console.log(data);
+            $scope.all_indicator_years = data;
+          });
 
  }
 
+   $http.get('/api/indicator').success(function (data) {
+            console.log("all_indicator_years");
+console.log(data);
+            $scope.all_indicator_years = data;
+          });
 
-
-     $http.get('/api/curriculumacademic').success(function (data) {
+     $http.get('/api/curriculumacademic/getmaxacayear').success(function (data) {
             console.log("max_year_curri_have");
              $scope.max_year_curri_have = data;
              console.log(data);
@@ -1396,11 +1404,7 @@ $rootScope.manage_indicators_year_to_create = "";
 
       }
 
-        $http.get('/api/indicator').success(function (data) {
-            console.log("all_indicator_years");
-console.log(data);
-            $scope.all_indicator_years = data;
-          });
+     
 
         // $scope.tell_root_to_change = function(){
         //     console.log("tell");
@@ -1446,7 +1450,28 @@ if( $scope.validate_year_to_create() != true){
 
 
 
-    
+        
+
+              $scope.still_not_choose_complete =function(){
+
+
+if($scope.choose_not_complete==false){
+var index;
+for (index =0;index<  $rootScope.manage_indicators_and_sub_result.length ; index++){
+     if( $rootScope.manage_indicators_and_sub_result[index].indicator_name_t == "" || $rootScope.manage_indicators_and_sub_result[index].indicator_name_e == "" ||$rootScope.manage_indicators_and_sub_result[index].indicator_num == "" ){
+          return true;
+
+              }
+
+}
+          
+
+       }
+
+        return false;
+      }
+
+
       $scope.add_indicator = function(){
         // $scope.new_indicator = {"sub_indicator_list":[]
         // ,"aca_year":$scope.year_choosen
@@ -1470,7 +1495,7 @@ if( $scope.validate_year_to_create() != true){
 $scope.choose_not_complete = false;
 console.log($rootScope.manage_indicators_and_subs_year_choosen);
           $http.post(
-             '/api/indicatorsubindicator',
+             '/api/indicator/querybyacademicyear',
              JSON.stringify($rootScope.manage_indicators_and_subs_year_choosen),
              {
                  headers: {
@@ -1520,7 +1545,7 @@ if ($rootScope.manage_indicators_and_sub_result.length == 0){
 
 
         $http.put(
-             '/api/indicatorsubindicator/saveindicator',
+             '/api/indicatorsubIndicator/saveindicator',
              JSON.stringify($rootScope.manage_indicators_and_sub_result),
              {
                  headers: {
@@ -1596,7 +1621,7 @@ $scope.init =function() {
         console.log($scope.year_choosen);
         $scope.indicator_choosen = {};
         $http.post(
-             '/api/indicator',
+             '/api/indicator/querybycurriculumacademic',
              JSON.stringify($scope.year_choosen),
              {
                  headers: {
@@ -1632,6 +1657,30 @@ app.controller('manage_sub_indicators_controller', function($scope, $alert,$http
     //         $scope.save_indicator = $rootScope.manage_indicators_indicator_choosen;
     //     });
     // });
+
+
+             $scope.still_not_choose_complete_sub =function(){
+
+
+
+var index;
+if(angular.isUndefined($rootScope.manage_indicators_indicator_choosen.sub_indicator_list)){
+    $rootScope.manage_indicators_indicator_choosen.sub_indicator_list = [];
+}
+for (index =0;index<  $rootScope.manage_indicators_indicator_choosen.sub_indicator_list.length ; index++){
+     if( $rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].sub_indicator_name == "" || $rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].sub_indicator_num == ""){
+          return true;
+
+              }
+
+}
+          
+
+     
+
+        return false;
+      }
+
 
     $scope.recover_indicator = function(){
         // console.log("backup is");
@@ -1689,8 +1738,15 @@ console.log($rootScope.manage_indicators_indicator_choosen);
         $rootScope.manage_indicators_indicator_choosen.aca_year = $rootScope.manage_indicators_year_to_create;
         console.log("save_to_server");
         console.log($rootScope.manage_indicators_indicator_choosen);
+
+        if($rootScope.manage_indicators_indicator_choosen.sub_indicator_list.length==0){
+              $rootScope.manage_indicators_indicator_choosen.sub_indicator_list.push({
+            "aca_year":$rootScope.manage_indicators_and_subs_year_choosen
+            ,"indicator_num":$rootScope.manage_indicators_indicator_choosen.indicator_num,
+            "sub_indicator_num":"","sub_indicator_name":""});
+        }
         $http.put(
-             '/api/indicatorsubindicator/savesubindicator',
+             '/api/indicatorsubIndicator/savesubindicator',
              JSON.stringify($rootScope.manage_indicators_indicator_choosen),
              {
                  headers: {
@@ -1721,16 +1777,18 @@ console.log($rootScope.manage_indicators_indicator_choosen);
 
 app.controller('manage_primary_evidences_admin_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 
-
-$scope.corresponding_aca_years = [2551,2553,2555,2558];
+      $http.get('/api/curriculumacademic/getdistinctacayear').success(function (data) {
+            
+           $scope.corresponding_aca_years =data;
+          });
+// $scope.corresponding_aca_years = [2551,2553,2555,2558];
  $scope.choose_not_complete = true;
         $scope.year_choosen = {};
               $scope.curri_choosen = {};
                $scope.indicator_choosen= {};
      
                  $scope.corresponding_indicators = {};
-                 $scope.result = [{"evidence_name":'my_god'},{"evidence_name":'my_god2'},{"evidence_name":'my_god3'},{"evidence_name":'my_god4'}];
-
+               
 $scope.init =function() {
      $scope.choose_not_complete = true;
         $scope.year_choosen = {};
@@ -1779,7 +1837,7 @@ $scope.add_primary_evidence = function(){
         console.log($scope.year_choosen);
 $scope.indicator_choosen = {};
         $http.post(
-             '/api/indicator',
+             '/api/indicator/querybyacademicyear',
              JSON.stringify($scope.year_choosen),
              {
                  headers: {
@@ -1788,7 +1846,7 @@ $scope.indicator_choosen = {};
              }
          ).success(function (data) {
               $scope.corresponding_indicators = data;
-               $scope.choose_not_complete = false;
+               $scope.choose_not_complete = true;
 
          });
 
@@ -1799,23 +1857,57 @@ $scope.indicator_choosen = {};
           console.log("find_primary_evidences");
 
 
-        // $http.post(
-        //      '/api/indicator',
-        //      JSON.stringify($scope.year_choosen),
-        //      {
-        //          headers: {
-        //              'Content-Type': 'application/json'
-        //          }
-        //      }
-        //  ).success(function (data) {
-        //       $scope.result = data;
+        $http.post(
+             '/api/primaryevidence/adminget',
+             JSON.stringify($scope.indicator_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+              $scope.result = data;
+            $scope.choose_not_complete = false;
 
 
-
-        //  });
+         });
 
     
 
+    }
+
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+      $scope.save_to_server = function(my_modal){
+        console.log("save_to_server");
+        console.log($scope.result);
+
+        if ($scope.result.length == 0){
+             $scope.result.push({'primary_evidence_num':-1,'aca_year':$scope.year_choosen,'indicator_num':$scope.indicator_choosen.indicator_num});
+        }
+        $http.put(
+             '/api/primaryevidence/adminsave',
+             JSON.stringify($scope.result),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+               $scope.close_modal(my_modal);
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
     }
 
 
@@ -2001,7 +2093,7 @@ if(angular.isUndefined(teacher_id_to_send)){
         console.log($scope.year_choosen);
 $scope.indicator_choosen = {};
         $http.post(
-             '/api/indicator',
+             '/api/indicator/querybycurriculumacademic',
              JSON.stringify($scope.year_choosen),
              {
                  headers: {

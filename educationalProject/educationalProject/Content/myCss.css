@@ -951,6 +951,8 @@ input.form-control{
 input.form-control.fix_evidence_file{
    width: 93%;
 }
+
+
 .manage_evidence_table input[type='text']{
     font-family:  "FreesiaUPC";
   font-size: 22px !important;
@@ -962,3 +964,8 @@ input.form-control.fix_evidence_file{
   font-size: 22px !important;
   vertical-align: middle !important;
 }
+
+div#manage_primary_evidences_admin input.form-control{
+   width: 99%;
+}
+
