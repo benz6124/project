@@ -311,20 +311,27 @@ namespace educationalProject.Models.Wrappers
 
 
 
-
-            foreach (Primary_evidence item in list)
+            if (list.First().primary_evidence_num != -1)
             {
-                if(item.primary_evidence_num == 0)
+                foreach (Primary_evidence item in list)
                 {
-                    insertintoprimaryevidencecmd += string.Format("insert into {0} values ({1},{2},'{3}','{4}') ",
-                        FieldName.TABLE_NAME, item.aca_year, item.indicator_num, 0, item.evidence_name);
-                }
-                else
-                {
-                    //Delete before insert!
-                    deletefromprievi_and_condition += string.Format("and {0} != {1} ",FieldName.PRIMARY_EVIDENCE_NUM,item.primary_evidence_num);
+                    if (item.primary_evidence_num == 0)
+                    {
+                        insertintoprimaryevidencecmd += string.Format("insert into {0} values ({1},{2},'{3}','{4}') ",
+                            FieldName.TABLE_NAME, item.aca_year, item.indicator_num, 0, item.evidence_name);
+                    }
+                    else
+                    {
+                        //Delete before insert!
+                        deletefromprievi_and_condition += string.Format("and {0} != {1} ", FieldName.PRIMARY_EVIDENCE_NUM, item.primary_evidence_num);
+                    }
                 }
             }
+            else
+            {
+                deletefromprievi_and_condition += "and 1=1";
+            }
+
             if (deletefromprievi_and_condition != "")
             {
                 deletewhereclause = string.Format("{0} = {1} and {2} = {3} and {4} = '0' and (1=1 {5})",
