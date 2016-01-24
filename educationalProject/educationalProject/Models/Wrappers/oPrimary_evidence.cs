@@ -286,13 +286,31 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             string insertintoprimaryevidencecmd = "";
-            string deletefromprievi_and_clause = "";
+            string deletefromprievi_and_condition = "";
             string deletefromprimaryevidencecmd = "";
-            /*string insertintoprievistatuscmd = "";
-            string updateprievistatuscmd = "";
-            string deletefromprimaryevidencecmd = "";
-            string deletefromprievistatuscmd = "";
-            string insertintoexclusiveprimaryevicmd = "";*/
+            string deletewhereclause = "";
+
+
+            string temp1tablename = "#temp1";
+            string temp2tablename = "#temp2";
+
+            string createtabletemp1 = "";
+
+            //Insert row which curriculum has assign teacher of the to-be delete primary evidence into main table
+            string insertintotemp1 = "";
+            string createtabletemp2 = "";
+            string insertintotemp2 = "";
+            string updatetemp2 = "";
+
+            /*Insert into use the combine result from both table and insert in back to databaseeee*/
+            string insertintoprimaryevidencestatusfromdeleted = "";
+            string updateevidence = "";
+            string droptemptable = "";
+
+
+
+
+
 
             foreach (Primary_evidence item in list)
             {
@@ -304,31 +322,82 @@ namespace educationalProject.Models.Wrappers
                 else
                 {
                     //Delete before insert!
-                    deletefromprievi_and_clause += string.Format("and {0} != {1} ",FieldName.PRIMARY_EVIDENCE_NUM,item.primary_evidence_num);
+                    deletefromprievi_and_condition += string.Format("and {0} != {1} ",FieldName.PRIMARY_EVIDENCE_NUM,item.primary_evidence_num);
                 }
             }
-            if (deletefromprievi_and_clause != "")
+            if (deletefromprievi_and_condition != "")
             {
-                deletefromprimaryevidencecmd = string.Format("delete from {0} where {1} = {2} " +
-                    "and {3} = {4} and {5} = '0' and (1=1 {6})", FieldName.TABLE_NAME, FieldName.ACA_YEAR, list.First().aca_year,
-                    FieldName.INDICATOR_NUM, list.First().indicator_num, FieldName.CURRI_ID, deletefromprievi_and_clause);
+                deletewhereclause = string.Format("{0} = {1} and {2} = {3} and {4} = '0' and (1=1 {5})",
+                    FieldName.ACA_YEAR, list.First().aca_year,
+                    FieldName.INDICATOR_NUM, list.First().indicator_num, FieldName.CURRI_ID, deletefromprievi_and_condition);
+                deletefromprimaryevidencecmd = string.Format("delete from {0} where {1} ", FieldName.TABLE_NAME,deletewhereclause);
+
+                //Make statement for insert in primary_evidence,primary_evidence status and update evidence of to-be delete admin 's primary_evidence
+                createtabletemp1 = string.Format(
+            "CREATE TABLE {0} ( " +
+            "[row_num] INT IDENTITY(1, 1) NOT NULL," +
+            "[{1}] INT NOT NULL," +
+            "PRIMARY KEY ([row_num])) ", temp1tablename, FieldName.PRIMARY_EVIDENCE_NUM);
+
+                //Insert row which curriculum has assign teacher of the to-be delete primary evidence into main table
+                insertintotemp1 = string.Format("insert into {0} " +
+                                                "select * from (INSERT INTO {1}({2}, {3}, {4}, {5}) " +
+                                                "OUTPUT Inserted.{6} ", temp1tablename, FieldName.TABLE_NAME,
+                                                FieldName.ACA_YEAR, FieldName.INDICATOR_NUM, FieldName.CURRI_ID, FieldName.EVIDENCE_NAME, FieldName.PRIMARY_EVIDENCE_NUM)
+                                                +
+                                         string.Format("select t2.{0}, t2.{1}, t1.{2}, t2.{3} " +
+                                         "from(select * from {4} as p1 where p1.{5} in " +
+                                         "(select p2.{6} from {7} as p2 where {8})) as t1 " + /* {22222} is deletewhereclause*/
+                                         "inner join {7} as t2 on t2.{6} = t1.{5}) as outputresult ",
+                                         FieldName.ACA_YEAR, FieldName.INDICATOR_NUM, FieldName.CURRI_ID, FieldName.EVIDENCE_NAME,
+                                         Primary_evidence_status.FieldName.TABLE_NAME, Primary_evidence_status.FieldName.PRIMARY_EVIDENCE_NUM,
+                                         FieldName.PRIMARY_EVIDENCE_NUM, FieldName.TABLE_NAME, deletewhereclause);
+                createtabletemp2 = string.Format("CREATE TABLE {0} (" +
+                                                        "[row_num] INT IDENTITY(1, 1) NOT NULL," +
+                                                        "[{1}] INT NOT NULL," +
+                                                        "[{2}] VARCHAR(4) NOT NULL," +
+                                                        "[{3}] VARCHAR(5) NOT NULL," +
+                                                        "[{4}] CHAR NOT NULL," +
+                                                        "PRIMARY KEY([row_num])) ", temp2tablename,
+                                                        FieldName.PRIMARY_EVIDENCE_NUM, FieldName.CURRI_ID,
+                                                        Primary_evidence_status.FieldName.TEACHER_ID,
+                                                        Primary_evidence_status.FieldName.STATUS);
+                insertintotemp2 = string.Format("insert into {0} " +
+                                                       "select t1.{1}, t1.{2}, t1.{3}, t1.{4} from " +
+                                                       "(select * from {5} as p1 where p1.{1} in " +
+                                                       "(select p2.{6} from {7} as p2 where {8})) as t1 " +
+                                                       "inner join {7} as t2 on t2.{6} = t1.{1} ",
+                                                       temp2tablename, Primary_evidence_status.FieldName.PRIMARY_EVIDENCE_NUM, Primary_evidence_status.FieldName.CURRI_ID,
+                                                       Primary_evidence_status.FieldName.TEACHER_ID, Primary_evidence_status.FieldName.STATUS,
+                                                       Primary_evidence_status.FieldName.TABLE_NAME, FieldName.PRIMARY_EVIDENCE_NUM,
+                                                       FieldName.TABLE_NAME, deletewhereclause);
+                updatetemp2 = string.Format("UPDATE {0} SET {1} = '0' where {1} = '4' " +
+                                                   "UPDATE {0} SET {1} = '1' where {1} = '5' ",
+                                                   temp2tablename, Primary_evidence_status.FieldName.STATUS);
+
+                /*Insert into use the combine result from both table and insert in back to databaseeee*/
+                insertintoprimaryevidencestatusfromdeleted = string.Format("insert into {0} " +
+                                      "select {1}.{2},{3},{4},{5} from {1} inner join {6} on {1}.row_num = {6}.row_num ",
+                                      Primary_evidence_status.FieldName.TABLE_NAME, temp1tablename, FieldName.PRIMARY_EVIDENCE_NUM,
+                                      Primary_evidence_status.FieldName.CURRI_ID, Primary_evidence_status.FieldName.TEACHER_ID,
+                                      Primary_evidence_status.FieldName.STATUS, temp2tablename);
+                updateevidence = string.Format("update {0} set {1} = temp3.new_primary_evidence_num " +
+                                      "from {0} as evi inner join " +
+                                      "(select {2}.{3} as new_primary_evidence_num,{4}.{3} as old_primary_evidence_num,{5},{6},{7} from {2} inner join {4} on {2}.row_num = {4}.row_num) as temp3 " +
+                                      "on evi.{1} = temp3.old_primary_evidence_num and evi.{5} COLLATE DATABASE_DEFAULT = temp3.{5} ",
+                                      Evidence.FieldName.TABLE_NAME, Evidence.FieldName.PRIMARY_EVIDENCE_NUM,
+                                      temp1tablename, FieldName.PRIMARY_EVIDENCE_NUM, temp2tablename, Primary_evidence_status.FieldName.CURRI_ID,
+                                      Primary_evidence_status.FieldName.TEACHER_ID, Primary_evidence_status.FieldName.STATUS);
+                droptemptable = string.Format("DROP TABLE {0} DROP TABLE {1} ", temp2tablename, temp1tablename);
             }
-            return null;
-            /*
-            d.iCommand.CommandText = String.Format("BEGIN {0} {1} {2} {3} {4} {5} END", insertintoprimaryevidencecmd,
-                insertintoprievistatuscmd, updateprievistatuscmd, deletefromprimaryevidencecmd, deletefromprievistatuscmd,
-                insertintoexclusiveprimaryevicmd);
+            
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} END", createtabletemp1, insertintotemp1, createtabletemp2,
+                insertintotemp2, updatetemp2, insertintoprimaryevidencestatusfromdeleted,
+                updateevidence, droptemptable, deletefromprimaryevidencecmd, insertintoprimaryevidencecmd);
             try
             {
                 int rowAffected = d.iCommand.ExecuteNonQuery();
-                if (rowAffected > 0)
-                {
-                    return null;
-                }
-                else
-                {
-                    return "No primary_evidence data are updated.";
-                }
+                return null;
             }
             catch (Exception ex)
             {
@@ -339,7 +408,7 @@ namespace educationalProject.Models.Wrappers
             {
                 //Whether it success or not it must close connection in order to end block
                 d.SQLDisconnect();
-            }*/
+            }
         }
     }
 }

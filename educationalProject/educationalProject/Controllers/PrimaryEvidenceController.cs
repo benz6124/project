@@ -43,13 +43,11 @@ namespace educationalProject.Controllers
         [ActionName("adminsave")]
         public IHttpActionResult PutToSavePrimaryEvidenceDetailByAdmin(List<Primary_evidence> list)
         {
-            /*object result = datacontext.UpdateDetail(list);
+            object result = datacontext.UpdateDetail(list);
             if (result == null)
                 return Ok();
             else
                 return InternalServerError(new Exception(result.ToString()));
-                */
-            return Ok();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace educationalProject.Models
 {
     public class Evidence
     {
-        protected struct FieldName
+        internal struct FieldName
         {
             public static readonly string EVIDENCE_CODE = "EVIDENCE_CODE";
             public static readonly string FILE_NAME = "FILE_NAME";
