@@ -1509,7 +1509,7 @@ for (index =0;index<  $rootScope.manage_indicators_and_sub_result.length ; index
 $scope.choose_not_complete = false;
 console.log($rootScope.manage_indicators_and_subs_year_choosen);
           $http.post(
-             '/api/indicator/querybyacademicyear',
+             '/api/indicatorsubindicator',
              JSON.stringify($rootScope.manage_indicators_and_subs_year_choosen),
              {
                  headers: {
