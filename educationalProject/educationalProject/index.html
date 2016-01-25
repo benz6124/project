@@ -3530,7 +3530,7 @@ $('.profile_pic').mouseover(function(){
 glyphicon glyphicon-bell"></i> </span>
                                     </a></td> -->
                                     
-   <td > <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="remove_evidence($index)">
+   <td > <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="remove_primary_evidence($index)">
                                         <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td>
 
@@ -3591,7 +3591,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-                           <div class="container-fluid"  >
+                           <div class="container-fluid" ng-hide="choose_not_complete" >
 
                         <div class="clearfix">
      <div class="panel-heading clearfix">
@@ -3605,7 +3605,7 @@ glyphicon glyphicon-bell"></i> </span>
                             <div class="panel panel-default"  data-nq-pageable=""
                                  data-qo-selectable="true">
                           
-                                        <button type="button" style="margin-top:12px;margin-bottom:0px;margin-left:265px"class="btn btn-xs btn-success  hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#upload_evidence" data-ng-click="choose_to_add_new_file()"><i class="fic glyphicon glyphicon-plus-sign"></i> อัพโหลดหลักฐานใหม่</button>
+                                        <button type="button" style="margin-top:12px;margin-bottom:0px;margin-left:285px"class="btn btn-xs btn-success  hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#upload_evidence" data-ng-click="choose_to_add_new_file()"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มหลักฐานใหม่</button>
 
 
   &nbsp; &nbsp;
@@ -4386,7 +4386,7 @@ glyphicon glyphicon-bell"></i> </span>
                 <div id="upload_primary_evidence" data-nq-modal="" data-ng-controller="add_new_primary_controller" data-qo-size="md" data-qo-independent="true">
                     <div class="custom-header">
 
-                        <h1 class="headerModalH1"><span class="headerModal"> เพิ่มหลักฐาน</span></h1>
+                        <h1 class="headerModalH1"><span class="headerModal"> อัพโหลดหลักฐานพื้นฐาน</span></h1>
                     </div>
 
 
@@ -4479,7 +4479,7 @@ glyphicon glyphicon-bell"></i> </span>
                 <div id="upload_evidence" data-nq-modal="" data-ng-controller="add_new_evidence_controller" data-qo-size="md" data-qo-independent="true">
                     <div class="custom-header">
 
-                        <h1 class="headerModalH1"><span class="headerModal"> เพิ่มหลักฐาน</span></h1>
+                        <h1 class="headerModalH1"><span class="headerModal">เพิ่มหลักฐานใหม่</span></h1>
                     </div>
 
 
@@ -6864,6 +6864,11 @@ glyphicon glyphicon-bell"></i> </span>
                 </div>
 
 
+
+<div id="create_survey" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_survey_controller">
+
+
+</div>
  <div id="manage_survey" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_survey_controller">
 
                     <div class="custom-header">
@@ -6885,14 +6890,20 @@ glyphicon glyphicon-bell"></i> </span>
 
                     </div>
 <br />
-  <div class="container-fluid" >
+  <div class="container-fluid" ng-hide="choose_not_complete">
                         <div class="clearfix">
 
 
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
                                  data-qo-selectable="true">
               
-                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="350px" data-qo-min-height="350px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+
+              
+                                <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+
+                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="flip-x" data-nq-toggle-modal="#create_survey" data-ng-click="choose_to_add_new_file()"><i class="fic glyphicon glyphicon-plus-sign"></i>สร้างแบบสอบถาม</button>
+
+
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
                                       
                                         <thead class="nq-fix-table-scroll">
@@ -6914,7 +6925,7 @@ glyphicon glyphicon-bell"></i> </span>
                                         <form name="manage_survey_form" novalidate>
                                           
 
-                                            <tr >
+                                            <tr  ng-repeat="survey in result">
                                            
 
                                                 <td>dadadafafafafafafafafafd</td>
@@ -6936,11 +6947,11 @@ glyphicon glyphicon-bell"></i> </span>
   
                                     
    <td > <a style="margin-right:10px"href=""  class="hvr-pulse">
-                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-hand-up"></i> </span>
+                                        <span class="topic"><i style="color:#204d74;margin0"class="glyphicon glyphicon-hand-up"></i> </span>
                                     </a></td> 
 
                                        <td > <a style="margin-right:10px"href=""  class="hvr-pulse" >
-                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-stats"></i> </span>
+                                        <span class="topic"><i style="color:#4cae4c"class="glyphicon glyphicon-stats"></i> </span>
                                     </a></td> 
 
                                           <td > <a style="margin-right:10px"href=""  class="hvr-pulse" >
@@ -6954,7 +6965,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                                     </table>
 
-                                         <button type="button" style="margin-top:5px;margin-left:520px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_primary_evidence()"style="color:green;font-size:30px"></i> </span></button>
+                                     <!--     <button type="button" style="margin-top:5px;margin-left:520px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_primary_evidence()"style="color:green;font-size:30px"></i> </span></button> -->
          </div>         </div>        
 
           </div>         </div>

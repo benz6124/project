@@ -1941,6 +1941,12 @@ $scope.init =function() {
                        $scope.personnel_choose = {};
 }
 
+
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+    
        $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
@@ -2189,9 +2195,9 @@ for (index =0;index< $scope.result.length ; index++){
 
 
 $scope.add_primary_evidence = function(){
+    console.log($scope.year_choosen.aca_year);
 
-
-         $scope.result.push({ "evidence_name":"","just_create":true,
+         $scope.result.push({ "evidence_name":"","just_create":true,"curri_id":"0","aca_year":$scope.year_choosen,"indicator_num":$scope.indicator_choosen.indicator_num
 });
       }
 
@@ -2253,7 +2259,7 @@ $scope.indicator_choosen = {};
         console.log($scope.result);
 
         if ($scope.result.length == 0){
-             $scope.result.push({'primary_evidence_num':-1,'aca_year':$scope.year_choosen,'indicator_num':$scope.indicator_choosen.indicator_num});
+             $scope.result.push({'primary_evidence_num':-1,'aca_year':$scope.year_choosen,"curri_id":"0",'indicator_num':$scope.indicator_choosen.indicator_num,"evidence_name":""});
         }
         $http.put(
              '/api/primaryevidence/adminsave',
