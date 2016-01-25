@@ -80,13 +80,13 @@ namespace educationalProject.Models.Wrappers
                             curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString()
                         });
                     }
-                    res.Close();
                     data.Dispose();
                 }
                 else
                 {
                     //Reserved for return error string
                 }
+                res.Close();
             }
             catch (Exception ex)
             {
@@ -307,10 +307,6 @@ namespace educationalProject.Models.Wrappers
             string updateevidence = "";
             string droptemptable = "";
 
-
-
-
-
             if (list.First().primary_evidence_num != -1)
             {
                 foreach (Primary_evidence item in list)
@@ -416,6 +412,60 @@ namespace educationalProject.Models.Wrappers
                 //Whether it success or not it must close connection in order to end block
                 d.SQLDisconnect();
             }
+        }
+
+        public object SelectOnlyNameAndId(Evidence evidata)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+            List<Primary_evidence_name_id_only> result = new List<Primary_evidence_name_id_only>();
+            d.iCommand.CommandText = string.Format("select p1.{0},{1}.{2} from " +
+                   "( select * from {3} where {4} = '{5}' and {6} = '{7}' and ({8} = '0' or {8} = '4') " +
+                   "and {0} IN " +
+                   "(select {14} from {1} where {9} = {10} and {11} = {12} and " +
+                   "({13} = '0' OR {13} = '{5}'))) as p1 INNER JOIN {1} on p1.{0} = {1}.{14}",
+                   Primary_evidence_status.FieldName.PRIMARY_EVIDENCE_NUM,FieldName.TABLE_NAME,FieldName.EVIDENCE_NAME,
+                   Primary_evidence_status.FieldName.TABLE_NAME, Primary_evidence_status.FieldName.CURRI_ID,
+                   evidata.curri_id, Primary_evidence_status.FieldName.TEACHER_ID,evidata.teacher_id,
+                   Primary_evidence_status.FieldName.STATUS,FieldName.ACA_YEAR,evidata.aca_year,
+                   FieldName.INDICATOR_NUM,evidata.indicator_num,FieldName.CURRI_ID,
+                   FieldName.PRIMARY_EVIDENCE_NUM
+                );
+            try
+            {
+                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                if (res.HasRows)
+                {
+                    DataTable data = new DataTable();
+                    data.Load(res);
+                    foreach (DataRow item in data.Rows)
+                    {
+                        result.Add(new Primary_evidence_name_id_only
+                        {
+                            primary_evidence_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]),
+                            evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString()
+                        });
+                    }
+                    data.Dispose();
+                }
+                else
+                {
+                    //Reserved for return error string
+                }
+                res.Close();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return result;
         }
     }
 }

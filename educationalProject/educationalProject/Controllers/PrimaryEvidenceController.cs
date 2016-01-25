@@ -49,5 +49,15 @@ namespace educationalProject.Controllers
             else
                 return InternalServerError(new Exception(result.ToString()));
         }
+
+        [ActionName("getOnlyNameAndId")]
+        public IHttpActionResult PostToQueryOnlyNameAndId(oEvidence data)
+        {
+            object result = datacontext.SelectOnlyNameAndId(data);
+            if (result == null)
+                return Ok();
+            else
+                return InternalServerError(new Exception(result.ToString()));
+        }
     }
 }

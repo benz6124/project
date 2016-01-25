@@ -14,11 +14,6 @@ namespace educationalProject.Controllers
     {
         private oAun_book datacontext = new oAun_book();
 
-        public IHttpActionResult Get()
-        {
-            object result = datacontext.SelectFileDownloadLink(string.Format("curri_id = '55' and aca_year = 2560"));
-            return Ok(datacontext.file_name);
-        }
         public IHttpActionResult PostToQueryDownloadLinkByCurriculumAcademic(oCurriculum_academic data)
         {
             if (data.curri_id == null) return BadRequest();
@@ -38,7 +33,7 @@ namespace educationalProject.Controllers
                 return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType,Request);
             }
 
-            //string savepath = HttpContext.Current.Server.MapPath("D:\\download\\aunbook\\");
+            //string savepath = HttpContext.Current.Server.MapPath("~/download/aunbook");
             string savepath = "D:\\download\\aunbook\\";
             var result = new MultipartFormDataStreamProvider(savepath);
 

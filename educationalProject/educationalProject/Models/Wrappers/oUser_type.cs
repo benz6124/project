@@ -30,13 +30,13 @@ namespace educationalProject.Models.Wrappers
                             user_type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString()
                         });
                     }
-                    res.Close();
                     data.Dispose();
                 }
                 else
                 {
                     //Reserved for return error string
                 }
+                res.Close();
             }
             catch (Exception ex)
             {
@@ -72,13 +72,13 @@ namespace educationalProject.Models.Wrappers
                             user_type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString()
                         });
                     }
-                    res.Close();
                     data.Dispose();
                 }
                 else
                 {
                     //Reserved for return error string
                 }
+                res.Close();
             }
             catch (Exception ex)
             {
