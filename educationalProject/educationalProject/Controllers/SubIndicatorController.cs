@@ -13,7 +13,7 @@ namespace educationalProject.Controllers
         //Retrieve sub_indicator by indicator data
         public IHttpActionResult PostByIndicator(oIndicator data)
         {
-            object result = datacontext.SelectWhere(string.Format("aca_year = {0} and indicator_num = {1}", data.aca_year, data.indicator_num));
+            object result = datacontext.SelectByIndicatorWithKeepAcaYearSource(data);
             return Ok(result);
         }
     }

@@ -212,6 +212,7 @@
     <Compile Include="Models\ViewModels\Evidence_with_t_name.cs" />
     <Compile Include="Models\ViewModels\Indicator_sub_indicator_list.cs" />
     <Compile Include="Models\ViewModels\Primary_evidence_detail.cs" />
+    <Compile Include="Models\ViewModels\Primary_evidence_name_id_only.cs" />
     <Compile Include="Models\ViewModels\Teacher_educational.cs" />
     <Compile Include="Models\ViewModels\Teacher_with_t_name.cs" />
     <Compile Include="Models\ViewModels\vOthers_evaluation_assessor.cs" />

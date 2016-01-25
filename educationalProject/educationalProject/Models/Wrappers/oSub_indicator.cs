@@ -59,7 +59,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oSub_indicator> result = new List<oSub_indicator>();
-            d.iCommand.CommandText = String.Format("select * from {0} where {1}",FieldName.TABLE_NAME,wherecond);
+            d.iCommand.CommandText = string.Format("select * from {0} where {1}",FieldName.TABLE_NAME,wherecond);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -97,7 +97,51 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
-
+        public object SelectByIndicatorWithKeepAcaYearSource(oIndicator inddata)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+            List<oSub_indicator> result = new List<oSub_indicator>();
+            d.iCommand.CommandText = string.Format("select * from {0} where {1} = (select max(j.{1}) from {0} as j where j.{1} <= {2}) and {3} = {4}", 
+                FieldName.TABLE_NAME, FieldName.ACA_YEAR,inddata.aca_year,FieldName.INDICATOR_NUM,inddata.indicator_num);
+            try
+            {
+                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                if (res.HasRows)
+                {
+                    DataTable data = new DataTable();
+                    data.Load(res);
+                    foreach (DataRow item in data.Rows)
+                    {
+                        result.Add(new oSub_indicator
+                        {
+                            aca_year = inddata.aca_year,
+                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
+                            sub_indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.SUB_INDICATOR_NUM].Ordinal]),
+                            sub_indicator_name = item.ItemArray[data.Columns[FieldName.SUB_INDICATOR_NAME].Ordinal].ToString()
+                        });
+                    }
+                    data.Dispose();
+                }
+                else
+                {
+                    //Reserved for return error string
+                }
+                res.Close();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return result;
+        }
         public object Delete(string wherecond)
         {
             DBConnector d = new DBConnector();
