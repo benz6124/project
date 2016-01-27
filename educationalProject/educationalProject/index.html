@@ -6877,9 +6877,75 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-<div id="create_survey" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_survey_controller">
+<div id="create_survey" data-nq-modal="" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_survey_controller">
+       <div class="custom-header">
+                        <h1 class="headerModalH1">สร้างแบบสอบถาม</h1>
+                    </div>
 
 
+
+ <div class="container-fluid" ng-hide="choose_not_complete" >
+   <div class="clearfix">
+
+                                     
+  <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่อแบบสอบถาม   </span></h3>
+                            </div>
+                            <div class="col-md-9">
+                                <input  type="text" class="form-control" placeholder="" ng-model="my_survey_name" required><span class="normal">  </span>
+
+                            </div>
+                        </div>
+
+  <div class="row">
+  <div class="col-md-3" >
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">กลุ่มเป้าหมาย   </span></h3>
+                            </div>
+ <div class="col-md-9" style="padding-right:22px;">
+    <select style="margin-right:10px;"data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกกลุ่มเป้าหมาย" data-ng-model="$parent.my_target">
+                                                <option>นักศึกษา</option>
+                                                <option>ศิษย์เก่า</option>
+                                                <option>อาจารย์</option>
+                                                <option>กรรมการหลักสูตร</option>
+                                                <option>เจ้าหน้าที่</option>
+                                                <option>บริษัทภายนอก</option>
+
+
+                                            </select>
+</div>
+
+</div>
+
+<h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชุดคำถาม    </span></h3>
+
+      <div class="panel panel-default"  data-nq-pageable=""
+                                 data-qo-selectable="true" style="background-color:#E4E4E4">
+ <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="250px"  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+       <div ng-repeat="question in questions"  >
+                                        <div class="row" >
+                                        <div class="col-md-10" style="margin-left:22px;padding-right:0px">
+                                          <input  class="form-control" type="text"  ng-model="question.detail" />
+                                        </div>
+                                        <div class="col-md-1" style="padding-left:0px">
+                                          <button type="button" ng-click="remove_question($index)"class="btn" style="background-color:transparent;color:#d9534f;border:none" ><span class="glyphicon glyphicon-minus-sign"></span></button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                         <button type="button" style="margin-top:5px;margin-left:235px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_question()"style="color:green;font-size:30px"></i> </span></button>
+
+
+                               </div>
+                               </div>
+                               </div>
+                               </div>  
+
+           <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button ng-disabled="still_not_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                        </div>
+                    </div>
 </div>
  <div id="manage_survey" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_survey_controller">
 
@@ -6913,7 +6979,7 @@ glyphicon glyphicon-bell"></i> </span>
               
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
-                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="flip-x" data-nq-toggle-modal="#create_survey" data-ng-click="choose_to_add_new_file()"><i class="fic glyphicon glyphicon-plus-sign"></i>สร้างแบบสอบถาม</button>
+                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="flip-x" data-nq-toggle-modal="#create_survey" data-ng-click="choose_to_add_new_file()"><i class="fic glyphicon glyphicon-plus-sign"></i> สร้างแบบสอบถาม</button>
 
 
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
@@ -6958,11 +7024,11 @@ glyphicon glyphicon-bell"></i> </span>
                                                 </td>-->
   
                                     
-   <td > <a style="margin-right:10px"href=""  class="hvr-pulse">
+   <td > <a style="margin-right:10px"href=""  class="hvr-pulse" data-nq-toggle-modal="#do_survey">
                                         <span class="topic"><i style="color:#204d74;margin0"class="glyphicon glyphicon-hand-up"></i> </span>
                                     </a></td> 
 
-                                       <td > <a style="margin-right:10px"href=""  class="hvr-pulse" >
+                                       <td > <a style="margin-right:10px"href="" data-nq-toggle-modal="#result_survey" class="hvr-pulse" >
                                         <span class="topic"><i style="color:#4cae4c"class="glyphicon glyphicon-stats"></i> </span>
                                     </a></td> 
 
@@ -7220,9 +7286,10 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
 
                 </div>
-                <div id="do_survey" data-nq-modal="" data-qo-independent="true" data-qo-size="lg">
+
+                        <div id="result_survey" data-nq-modal="" data-qo-independent="true" data-qo-size="lg">
                     <div class="custom-header">
-                        <h1 class="headerModalH1"> ตอบแบบสอบถาม</h1>
+                        <h1 class="headerModalH1"> ชื่อแบบสอบถาม</h1>
                     </div>
 
                     <div class="container-fluid">
@@ -7231,19 +7298,143 @@ glyphicon glyphicon-bell"></i> </span>
 
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
                                  data-qo-selectable="true">
-                                <div class="panel-heading clearfix">
-                                    <!-- <h1 class="panel-title pull-left"></i> รายงานการประชุม </h1> -->
-                                    <!--   <div class="pull-left" style="padding-left:15px;">
-                                         <button type="button" class="btn btn-xs btn-primary plusgreen hvr-buzz"data-nq-show-insert="" data-template-id="insertMinutes"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลห้องปฏิบัติการ</button>
-                                     </div> -->
-
-                                </div>
+                         
 
                                 <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="350px" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
 
                                     <!--          <div  data-qo-min-height="200px" data-nq-scroll="" data-qo-max-height="350px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden;"> -->
-                                    <table class="table table-bordered table-hover bg-white table_modal">
+                                    <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
+                                        <!--nq-fix-table-scroll class would fix thead always visible at top of the table if you put the table into a scrollable container-->
+                                        <thead class="nq-fix-table-scroll">
+                                            <tr>
+                                                <!--nq-column-sort directive would bind sorting handler to the element-->
+                                                
+                                                <th class="col-xs-4">หัวข้อการประเมิน</th>
+                                                <th class="col-xs-1">1</th>
+                                                <th class="col-xs-1">2</th>
+                                                <th class="col-xs-1">3</th>
+                                                <th class="col-xs-1">4</th>
+                                                <th class="col-xs-1">5</th>
+                                                <th class="col-xs-1">6</th>
+                                                <th class="col-xs-1">7</th>
+                                                <th class="col-xs-1">รวม</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="flattened">
+                                            <!--pageable-repeat is required sub directive-->
+                                            <tr>
+                                
+                                                <td class="left_column">ท่านคิดว่าสื่อการเรียนการสอนในปัจจุบันเพียงพอ</td>
+
+
+                                                <td>8</td>
+                                                <td>5</td>
+                                                <td>1 </td>
+                                                <td>5 </td>
+                                                <td>2 </td>
+                                                <td>3 </td>
+                                                <td>4 </td>
+<td>8</td>
+                                            </tr>
+
+
+                                            <tr>
+                                              
+                                                <td class="left_column">ท่านคิดว่าสื่อการเรียนที่มีอยู่มีคุณภาพ</td>
+
+                                   <td>8</td>
+                                                <td>5</td>
+                                                <td>1 </td>
+                                                <td>5 </td>
+                                                <td>2 </td>
+                                                <td>3 </td>
+                                                <td>4 </td>
+<td>8</td>
+                                            </tr>
+
+                                            <tr>
+                                               
+                                                <td class="left_column">เมื่อเกิดการชำรุดของอุปกรณ์ การซ่อมแซมมีความรวดเร็ว</td>
+
+                                   <td>8</td>
+                                                <td>5</td>
+                                                <td>1 </td>
+                                                <td>5 </td>
+                                                <td>2 </td>
+                                                <td>3 </td>
+                                                <td>4 </td>
+<td>8</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                
+                                                <td class="left_column">ท่านคิดว่าสื่อการเรียนการสอนมีมีผลต่อคุณภาพการเรียน</td>
+
+
+                                                                                <td>8</td>
+                                                <td>5</td>
+                                                <td>1 </td>
+                                                <td>5 </td>
+                                                <td>2 </td>
+                                                <td>3 </td>
+                                                <td>4 </td>
+<td>8</td>
+
+                                            </tr>
+
+
+
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <br />
+                   <!--  <div class="row">
+                        <div class="col-md-4">
+                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">ข้อเสนอแนะเพิ่มเติม:   </span></h3>
+                        </div>
+                        <div class="col-md-8">
+                            <textarea name="message" rows="3" cols="70"></textarea>
+                        </div>
+                    </div> -->
+                   <div class="custom-footer">
+                                  <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
+
+                                  </div>
+
+                </div>
+
+
+                <div id="do_survey" data-nq-modal="" data-qo-independent="true" data-qo-size="lg">
+                    <div class="custom-header">
+                        <h1 class="headerModalH1"> ชื่อแบบสอบถาม</h1>
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="clearfix">
+
+
+                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
+                                 data-qo-selectable="true">
+                         
+
+                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="350px" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+
+
+                                    <!--          <div  data-qo-min-height="200px" data-nq-scroll="" data-qo-max-height="350px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden;"> -->
+                                    <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
                                         <!--nq-fix-table-scroll class would fix thead always visible at top of the table if you put the table into a scrollable container-->
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
