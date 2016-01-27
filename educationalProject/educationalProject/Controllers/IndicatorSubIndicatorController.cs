@@ -37,10 +37,10 @@ namespace educationalProject.Controllers
         public IHttpActionResult PutForUpdateSubIndicator(oIndicator_sub_indicator_list data)
         {
             object result;
-            if (data.sub_indicator_list.Count == 1 && data.sub_indicator_list.First().sub_indicator_name == "" && data.sub_indicator_list.First().sub_indicator_num == 0)
+            if (data.sub_indicator_list.Count == 0)
             {
                 oSub_indicator sub_indicatorcontext = new oSub_indicator();
-                result = sub_indicatorcontext.Delete(string.Format("aca_year = {0} and indicator_num = {1}", data.sub_indicator_list.First().aca_year,data.indicator_num));
+                result = sub_indicatorcontext.Delete(string.Format("aca_year = {0} and indicator_num = {1}", data.aca_year,data.indicator_num));
             }
             else
                 result = datacontext.UpdateOnlySubIndicatorList(data.sub_indicator_list);
