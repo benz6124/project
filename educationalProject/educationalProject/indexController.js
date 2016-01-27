@@ -1637,7 +1637,7 @@ $rootScope.only_object_want_to_change.file_name = $scope.files[0].name;
 console.log($rootScope.only_object_want_to_change);
         $http({
             method: 'PUT',
-            url: "/api/updateevidencefile",
+            url: "/api/evidence/updateevidencefile",
 
             headers: { 'Content-Type': undefined },
 
@@ -1738,7 +1738,7 @@ console.log($scope.my_new_evidence);
 
         $http({
             method: 'PUT',
-            url: "/api/newevidence",
+            url: "/api/evidence/newevidence",
 
             headers: { 'Content-Type': undefined },
 
@@ -1843,7 +1843,7 @@ console.log($scope.my_new_evidence);
 
         $http({
             method: 'PUT',
-            url: "/api/newprimaryevidence",
+            url: "/api/evidence/newprimaryevidence",
 
             headers: { 'Content-Type': undefined },
 
@@ -2011,7 +2011,7 @@ $scope.choose_not_complete =true;
 
 
         $http.put(
-             '/api/updateevidence',
+             '/api/evidence/updateevidence',
              JSON.stringify($rootScope.manage_evidences_world_evidences),
              {
                  headers: {
@@ -2019,9 +2019,10 @@ $scope.choose_not_complete =true;
                  }
              }
          ).success(function (data) {
+              $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-               $scope.close_modal(my_modal);
+             
          })
     .error(function(data, status, headers, config) {
                   if(status==500){
@@ -2764,7 +2765,7 @@ $scope.init =function() {
         console.log($scope.year_choosen);
 
         $http.post(
-             '/api/getbycurriculumacademic',
+             '/api/evidence/getbycurriculumacademic',
              JSON.stringify($scope.year_choosen),
              {
                  headers: {
@@ -2797,7 +2798,7 @@ $scope.evidence_we_want.evidence_real_code = $scope.code_we_want;
 
         $scope.evidence_we_want = 
         $http.put(
-             '/api/newevidencefromothers',
+             '/api/evidence/newevidencefromothers',
              JSON.stringify($scope.evidence_we_want),
              {
                  headers: {
