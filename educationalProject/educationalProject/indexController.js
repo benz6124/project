@@ -1644,31 +1644,31 @@ $rootScope.only_object_want_to_change.file_name = $scope.files[0].name;
             formData.append("file" , $scope.files[0]);
         console.log("save to sserver");
 console.log($rootScope.only_object_want_to_change);
-        // $http({
-        //     method: 'PUT',
-        //     url: "/Api/aunbook",
+        $http({
+            method: 'PUT',
+            url: "/api/updateevidencefile",
 
-        //     headers: { 'Content-Type': undefined },
+            headers: { 'Content-Type': undefined },
 
 
-        //     data:formData,
-        //     transformRequest: angular.indentity 
+            data:formData,
+            transformRequest: angular.indentity 
 
-        // }).
-        // success(function (data, status, headers, config) {
+        }).
+        success(function (data, status, headers, config) {
     
-           //  $rootScope.manage_evidences_world_evidences = data;
+            $rootScope.manage_evidences_world_evidences = data;
 
-        //         $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-        //                  placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
 
-        //         $scope.close_modal(my_modal);
+                $scope.close_modal(my_modal);
            
-        // }).
-        // error(function (data, status, headers, config) {
-        //     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
-        //                  placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-        // });
+        }).
+        error(function (data, status, headers, config) {
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        });
     }
 });
 
@@ -1736,7 +1736,7 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
 $scope.my_new_evidence.file_name = $scope.my_new_evidence_file[0].name;
 $scope.my_new_evidence.curri_id =   $rootScope.manage_evidence_curri_id_now;
 $scope.my_new_evidence.aca_year = $rootScope.manage_evidence_year_now;
-
+$scope.my_new_evidence.indicator_num = $rootScope.manage_evidence_indicator_num;
 
 
     
@@ -1745,31 +1745,31 @@ $scope.my_new_evidence.aca_year = $rootScope.manage_evidence_year_now;
              console.log("save to sserver");
 console.log($scope.my_new_evidence);
 
-        // $http({
-        //     method: 'PUT',
-        //     url: "/Api/aunbook",
+        $http({
+            method: 'PUT',
+            url: "/api/newevidence",
 
-        //     headers: { 'Content-Type': undefined },
+            headers: { 'Content-Type': undefined },
 
 
-        //     data:formData,
-        //     transformRequest: angular.indentity 
+            data:formData,
+            transformRequest: angular.indentity 
 
-        // }).
-        // success(function (data, status, headers, config) {
+        }).
+        success(function (data, status, headers, config) {
     
-             
-//               $rootScope.manage_evidences_world_evidences = data;
-        //         $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-        //                  placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+                
+              $rootScope.manage_evidences_world_evidences = data;
+                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
 
-        //         $scope.close_modal(my_modal);
+                $scope.close_modal(my_modal);
            
-        // }).
-        // error(function (data, status, headers, config) {
-        //     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
-        //                  placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-        // });
+        }).
+        error(function (data, status, headers, config) {
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        });
     }
 });
 
@@ -1842,7 +1842,7 @@ $scope.my_new_evidence.file_name = $scope.my_new_evidence_file[0].name;
 $scope.my_new_evidence.curri_id =   $rootScope.manage_evidence_curri_id_now;
 $scope.my_new_evidence.aca_year = $rootScope.manage_evidence_year_now;
 
-
+$scope.my_new_evidence.indicator_num = $rootScope.manage_evidence_indicator_num;
 
     
     formData.append("model", angular.toJson($scope.my_new_evidence));
@@ -1850,31 +1850,31 @@ $scope.my_new_evidence.aca_year = $rootScope.manage_evidence_year_now;
              console.log("save to sserver");
 console.log($scope.my_new_evidence);
 
-        // $http({
-        //     method: 'PUT',
-        //     url: "/Api/aunbook",
+        $http({
+            method: 'PUT',
+            url: "/api/newprimaryevidence",
 
-        //     headers: { 'Content-Type': undefined },
+            headers: { 'Content-Type': undefined },
 
 
-        //     data:formData,
-        //     transformRequest: angular.indentity 
+            data:formData,
+            transformRequest: angular.indentity 
 
-        // }).
-        // success(function (data, status, headers, config) {
+        }).
+        success(function (data, status, headers, config) {
     
              
-//               $rootScope.manage_evidences_world_evidences = data;
-        //         $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-        //                  placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+              $rootScope.manage_evidences_world_evidences = data;
+                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
 
-        //         $scope.close_modal(my_modal);
+                $scope.close_modal(my_modal);
            
-        // }).
-        // error(function (data, status, headers, config) {
-        //     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
-        //                  placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-        // });
+        }).
+        error(function (data, status, headers, config) {
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        });
     }
 });
 
@@ -1930,6 +1930,12 @@ $scope.choose_to_add_new_primary_file = function(){
     $rootScope.manage_evidence_indicator_num = $scope.indicator_choosen.indicator_num;
     $rootScope.manage_evidence_curri_id_now = $scope.curri_choosen.curri_id;
     $rootScope.manage_evidence_year_now = $scope.year_choosen.aca_year;
+}
+
+
+
+$scope.go_to_import = function(){
+    $rootScope.manage_evidence_indicator_num = $scope.indicator_choosen.indicator_num;
 }
 $scope.init =function() {
      $scope.choose_not_complete = true;
@@ -2001,7 +2007,40 @@ $scope.choose_not_complete =true;
 
     }
 
+    $scope.save_to_server = function(this_modal){
+        
+        if($rootScope.manage_evidences_world_evidences.length ==0){
+            $rootScope.manage_evidences_world_evidences.curri_id = $scope.curri_choosen.curri_id;
+            $rootScope.manage_evidences_world_evidences.aca_year = $scope.year_choosen.aca_year;
+            $rootScope.manage_evidences_world_evidences.indicator_num = $scope.indicator_choosen.indicator_num;
+            $rootScope.manage_evidences_world_evidences.evidence_code = 0;
+        }
+        console.log("save_to_server");
+        console.log($rootScope.manage_evidences_world_evidences);
 
+
+        $http.put(
+             '/api/updateevidence',
+             JSON.stringify($rootScope.manage_evidences_world_evidences),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+               $scope.close_modal(my_modal);
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    }
 });
 
 app.controller('manage_sub_indicators_controller', function($scope, $alert,$http,$rootScope){
@@ -2678,16 +2717,21 @@ app.controller('import_evidence_controller', function($scope, $http,$alert,$load
               $scope.curri_choosen = {};
                 $scope.evidence_we_want = {};
                     $scope.result = {};
-
+$scope.code_we_want = "";
 
    $scope.watch_file = function(path) { 
         window.open(path, '_blank', "width=800, left=230,top=0,height=700");  
     }
 
 
-   $scope.choose_evidence_already = function(){
-    $scope.choose_not_complete = false;
-   }
+$scope.still_not_write_code = function() {
+    if($scope.code_we_want == ""){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 $scope.watch_preview = function(){
     if($scope.choose_not_complete == false){
         $scope.watch_file($scope.evidence_we_want.file_name);
@@ -2701,9 +2745,11 @@ $scope.watch_preview = function(){
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.evidence_we_want = {}
+              $scope.curri_choosen = {};
+                $scope.evidence_we_want = {};
                     $scope.result = {};
+                    $scope.code_we_want = {};
+
                 }
   
   
@@ -2727,7 +2773,7 @@ $scope.init =function() {
         console.log($scope.year_choosen);
 
         $http.post(
-             '/api/studentstatusother',
+             '/api/getbycurriculumacademic',
              JSON.stringify($scope.year_choosen),
              {
                  headers: {
@@ -2735,7 +2781,9 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
-            
+            console.log("find_all_evidences_in_curri_and_year");
+                console.log(data);
+
               $scope.all_evidences = data;
              $scope.choose_not_complete = true;
        
@@ -2748,17 +2796,25 @@ $scope.init =function() {
         my_modal.$hide();
     }
     $scope.save_to_server = function(my_modal){
-        console.log("save_to_server");
-        console.log($scope.result);
+
+   
+$scope.evidence_we_want.curri_id =   $rootScope.manage_evidence_curri_id_now;
+$scope.evidence_we_want.aca_year = $rootScope.manage_evidence_year_now;
+
+$scope.evidence_we_want.indicator_num = $rootScope.manage_evidence_indicator_num;
+$scope.evidence_we_want.evidence_real_code = $scope.code_we_want;
+
+        $scope.evidence_we_want = 
         $http.put(
-             '/api/studentstatusother',
-             JSON.stringify($scope.result),
+             '/api/newevidencefromothers',
+             JSON.stringify($scope.evidence_we_want),
              {
                  headers: {
                      'Content-Type': 'application/json'
                  }
              }
          ).success(function (data) {
+             $rootScope.manage_evidences_world_evidences = data;
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
                $scope.close_modal(my_modal);

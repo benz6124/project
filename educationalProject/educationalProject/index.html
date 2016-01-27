@@ -3613,7 +3613,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                                         &nbsp; &nbsp;
-                                        <button type="button"  style="margin-top:12px;margin-bottom:0px;" class="btn btn-xs btn-info hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#import_evidence"><i class="fic glyphicon glyphicon-plus-sign"></i> นำเข้าหลักฐานที่มีอยู่</button>
+                                        <button type="button"  style="margin-top:12px;margin-bottom:0px;" class="btn btn-xs btn-info hvr-buzz" data-ng-click="go_to_import()"data-effect="flip-x" data-nq-toggle-modal="#import_evidence"><i class="fic glyphicon glyphicon-plus-sign"></i> นำเข้าหลักฐานที่มีอยู่</button>
 
 
                               
@@ -4580,6 +4580,18 @@ glyphicon glyphicon-bell"></i> </span>
 </div>
                     </div>
 
+ <div class="row">
+                        <div class="col-md-4" > 
+                            <h3 style="margin-left:30px;margin-top:15px;"><span class="topicHeader"><b>รหัสหลักฐาน:</b>  </span></h3>
+                        </div>
+                        <div class="col-md-1" style="padding-right:0px;margin-top:14px;">
+                        <span class="topicHeader" >{{manage_evidence_indicator_num}} -  </span>
+                        
+                        </div>
+ <div class="col-md-2" style="padding-left:0px">
+                            <input type="number" style="padding-top:3px;margin-top:14px;" class="form-control" min="1" placeholder="รหัส" data-ng-model="code_we_want"><span class="normal">  </span>
+</div>
+                    </div>
 
        <!--              <h3 style="margin-top:0px" class="myColorBold"> นำเข้าไปยัง:</h3> -->
 
@@ -4587,7 +4599,7 @@ glyphicon glyphicon-bell"></i> </span>
           
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="choose_not_complete " ng-click="$hide()">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="choose_not_complete || still_not_write_code()" ng-click="$hide()">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
