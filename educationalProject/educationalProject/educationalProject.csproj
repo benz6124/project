@@ -197,6 +197,11 @@
     <Compile Include="Models\President_curriculum.cs" />
     <Compile Include="Models\Primary_evidence.cs" />
     <Compile Include="Models\Primary_evidence_status.cs" />
+    <Compile Include="Models\Questionare_privilege.cs" />
+    <Compile Include="Models\Questionare_question_obj.cs" />
+    <Compile Include="Models\Questionare_result_obj.cs" />
+    <Compile Include="Models\Questionare_result_sub.cs" />
+    <Compile Include="Models\Questionare_set.cs" />
     <Compile Include="Models\Research.cs" />
     <Compile Include="Models\Section_save.cs" />
     <Compile Include="Models\Self_evaluation.cs" />
