@@ -112,6 +112,7 @@ namespace educationalProject.Controllers
                 datacontext.aca_year = Convert.ToInt32(datareceive["aca_year"]);
                 datacontext.curri_id = datareceive["curri_id"].ToString();
                 datacontext.evidence_real_code = Convert.ToInt32(datareceive["evidence_real_code"]);
+                datacontext.evidence_name = datareceive["evidence_name"].ToString();
                 datacontext.indicator_num = Convert.ToInt32(datareceive["indicator_num"]);
                 datacontext.secret = datareceive["secret"].ToString()[0];
                 datacontext.teacher_id = datareceive["teacher_id"].ToString();

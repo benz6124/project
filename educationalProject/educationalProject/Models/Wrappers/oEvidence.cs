@@ -15,7 +15,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oEvidence> result = new List<oEvidence>();
-            d.iCommand.CommandText = String.Format("select * from {0}", FieldName.TABLE_NAME);
+            d.iCommand.CommandText =  string.Format("select * from {0}", FieldName.TABLE_NAME);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -176,10 +176,11 @@ namespace educationalProject.Models.Wrappers
                 return "Cannot connect to database.";
             List<Evidence_with_t_name> result = new List<Evidence_with_t_name>();
             d.iCommand.CommandText = string.Format("select e.*,{7}.{10},{7}.{11} from (select * from {0} " +
-                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join {7} on e.{8} = {7}.{9}",
+                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join {7} on e.{8} = {7}.{9} order by e.{12}",
                 FieldName.TABLE_NAME, FieldName.INDICATOR_NUM, inddata.indicator_num, FieldName.CURRI_ID,
                 curri_id, FieldName.ACA_YEAR, inddata.aca_year,Teacher.FieldName.TABLE_NAME,
-                FieldName.TEACHER_ID,Teacher.FieldName.TEACHER_ID,Teacher.FieldName.T_PRENAME,Teacher.FieldName.T_NAME
+                FieldName.TEACHER_ID,Teacher.FieldName.TEACHER_ID,Teacher.FieldName.T_PRENAME,Teacher.FieldName.T_NAME,
+                FieldName.EVIDENCE_REAL_CODE
                 );
             try
             {
@@ -303,10 +304,11 @@ namespace educationalProject.Models.Wrappers
                 teacher_id, curri_id, indicator_num, evidence_real_code, file_name, evidence_name, secret, aca_year) +
                 //Select part
                 string.Format("select e.*,{7}.{10},{7}.{11} from (select * from {0} " +
-                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join {7} on e.{8} = {7}.{9}",
+                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join {7} on e.{8} = {7}.{9} order by e.{12}",
                 FieldName.TABLE_NAME, FieldName.INDICATOR_NUM, indicator_num, FieldName.CURRI_ID,
                 curri_id, FieldName.ACA_YEAR, aca_year, Teacher.FieldName.TABLE_NAME,
-                FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME
+                FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
+                FieldName.EVIDENCE_REAL_CODE
                 );
 
             try
@@ -368,7 +370,7 @@ namespace educationalProject.Models.Wrappers
                 string.Format("INSERT INTO {0}({1},{2},{3},{4},{5},{6},{7},{8},{9}) VALUES " +
                       "({18}, '{10}', '{11}', {12}, {13}, '{14}', '{15}', '{16}', {17}) ",
                 FieldName.TABLE_NAME, FieldName.PRIMARY_EVIDENCE_NUM, FieldName.TEACHER_ID, FieldName.CURRI_ID, FieldName.INDICATOR_NUM, FieldName.EVIDENCE_REAL_CODE, FieldName.FILE_NAME, FieldName.EVIDENCE_NAME, FieldName.SECRET, FieldName.ACA_YEAR,
-                teacher_id, curri_id, indicator_num, evidence_real_code, file_name, "", secret, aca_year, primary_evidence_num) +
+                teacher_id, curri_id, indicator_num, evidence_real_code, file_name, evidence_name, secret, aca_year, primary_evidence_num) +
                 //Update primary_evidence_status part
                 string.Format("update {0} set {1} = '1' where {1} = '0' and {2} = {3} and {4} = '{5}' " +
                               "update {0} set {1} = '5' where {1} = '4' and {2} = {3} and {4} = '{5}' ",
@@ -377,10 +379,11 @@ namespace educationalProject.Models.Wrappers
                         Primary_evidence_status.FieldName.CURRI_ID, curri_id) +
                 //Select part
                 string.Format("select e.*,{7}.{10},{7}.{11} from (select * from {0} " +
-                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join {7} on e.{8} = {7}.{9}",
+                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join {7} on e.{8} = {7}.{9} order by e.{12}",
                 FieldName.TABLE_NAME, FieldName.INDICATOR_NUM, indicator_num, FieldName.CURRI_ID,
                 curri_id, FieldName.ACA_YEAR, aca_year, Teacher.FieldName.TABLE_NAME,
-                FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME
+                FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
+                FieldName.EVIDENCE_REAL_CODE
                 );
 
             try
