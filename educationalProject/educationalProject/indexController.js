@@ -1711,6 +1711,11 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
      $scope.my_new_evidence.secret = false;
       $scope.my_new_evidence.evidence_name = "";
         $scope.my_new_evidence.teacher_id = "00007";
+        var index;
+  $rootScope.my_evidence_real_code_we_have_now = [];
+             for(index=0;index<$rootScope.manage_evidences_world_evidences.length;index++){
+                $rootScope.my_evidence_real_code_we_have_now.push($rootScope.manage_evidences_world_evidences[index].evidence_real_code);
+             }
 
 }
 
@@ -1787,6 +1792,8 @@ console.log($scope.my_new_evidence);
     
                 
               $rootScope.manage_evidences_world_evidences = data;
+              console.log("update manage_evidences_world_evidences");
+              console.log( $rootScope.manage_evidences_world_evidences);
                $scope.close_modal(my_modal);
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
@@ -1812,7 +1819,7 @@ app.controller('add_new_primary_controller', function($scope, $alert,$http,$root
  $scope.my_temp_secret_new = false;
   $scope.my_new_evidence.teacher_id = "00007";
 
-
+$scope.primary_choosen = {};
 $scope.my_new_evidence.primary_choosen = {};
 
     $scope.init =function() {
@@ -1824,8 +1831,14 @@ $scope.my_new_evidence.primary_choosen = {};
      $scope.my_new_evidence.secret = false;
       $scope.my_new_evidence.evidence_name = "";
         $scope.my_new_evidence.teacher_id = "00007";
-       
+       $scope.primary_choosen = {};
 $scope.my_new_evidence.primary_choosen = {};
+
+  var index;
+  $rootScope.my_evidence_real_code_we_have_now = [];
+             for(index=0;index<$rootScope.manage_evidences_world_evidences.length;index++){
+                $rootScope.my_evidence_real_code_we_have_now.push($rootScope.manage_evidences_world_evidences[index].evidence_real_code);
+             }
 
 }
 
@@ -1874,14 +1887,18 @@ $scope.my_new_evidence.primary_choosen = {};
 
 
       var formData = new FormData();
-$scope.my_new_evidence.file_name = $scope.my_new_evidence_file[0].name;
-$scope.my_new_evidence.curri_id =   $rootScope.manage_evidence_curri_id_now;
-$scope.my_new_evidence.aca_year = $rootScope.manage_evidence_year_now;
+// $scope.my_new_evidence.file_name = $scope.my_new_evidence_file[0].name;
+// $scope.my_new_evidence.curri_id =   $rootScope.manage_evidence_curri_id_now;
+// $scope.my_new_evidence.aca_year = $rootScope.manage_evidence_year_now;
 
-$scope.my_new_evidence.indicator_num = $rootScope.manage_evidence_indicator_num;
+// $scope.my_new_evidence.indicator_num = $rootScope.manage_evidence_indicator_num;
+$scope.primary_choosen.file_name = $scope.my_new_evidence_file[0].name;
+$scope.primary_choosen.curri_id =   $rootScope.manage_evidence_curri_id_now;
+    $scope.primary_choosen.aca_year = $rootScope.manage_evidence_year_now;
+    $scope.primary_choosen.indicator_num = $rootScope.manage_evidence_indicator_num;
+$scope.primary_choosen.secret = $scope.my_new_evidence.secret;
 
-    
-    formData.append("model", angular.toJson($scope.my_new_evidence));
+    formData.append("model", angular.toJson( $scope.primary_choosen));
     formData.append("file" , $scope.my_new_evidence_file[0]);
              console.log("save to sserver");
 console.log($scope.my_new_evidence);
@@ -1901,10 +1918,11 @@ console.log($scope.my_new_evidence);
     
              
               $rootScope.manage_evidences_world_evidences = data;
+               $scope.close_modal(my_modal);
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
 
-                $scope.close_modal(my_modal);
+               
            
         }).
         error(function (data, status, headers, config) {
@@ -2086,7 +2104,8 @@ $scope.init =function() {
               console.log("manage_evidences_world_evidences");
               console.log($rootScope.manage_evidences_world_evidences);
             $scope.choose_not_complete =false;
-              var index;
+             var index;
+  $rootScope.my_evidence_real_code_we_have_now = [];
              for(index=0;index<$rootScope.manage_evidences_world_evidences.length;index++){
                 $rootScope.my_evidence_real_code_we_have_now.push($rootScope.manage_evidences_world_evidences[index].evidence_real_code);
              }
@@ -2880,6 +2899,12 @@ $scope.init =function() {
                     $scope.code_we_want = {};
 $scope.evidence_we_want = {};
 $scope.all_evidences ={};
+
+ var index;
+  $rootScope.my_evidence_real_code_we_have_now = [];
+             for(index=0;index<$rootScope.manage_evidences_world_evidences.length;index++){
+                $rootScope.my_evidence_real_code_we_have_now.push($rootScope.manage_evidences_world_evidences[index].evidence_real_code);
+             }
                 }
   
   
