@@ -1897,7 +1897,7 @@ $scope.primary_choosen.curri_id =   $rootScope.manage_evidence_curri_id_now;
     $scope.primary_choosen.aca_year = $rootScope.manage_evidence_year_now;
     $scope.primary_choosen.indicator_num = $rootScope.manage_evidence_indicator_num;
 $scope.primary_choosen.secret = $scope.my_new_evidence.secret;
-
+$scope.primary_choosen.evidence_real_code =   $scope.my_new_evidence.evidence_real_code;
 $scope.primary_choosen.teacher_id = "00007";
 
 
