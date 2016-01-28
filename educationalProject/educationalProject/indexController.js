@@ -1699,6 +1699,7 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
    $scope.my_new_evidence_file = [];
  $scope.my_temp_secret_new = false;
   $scope.my_new_evidence.teacher_id = "00007";
+  
     $scope.init =function() {
          $scope.my_temp_secret_new = false;
    $scope.my_new_evidence = {};

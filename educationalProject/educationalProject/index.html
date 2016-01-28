@@ -4411,11 +4411,9 @@ glyphicon glyphicon-bell"></i> </span>
                             <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">ชื่อหลักฐาน:   </span></h3>
                         </div>
                         <div class="col-md-8">
-                                   <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-options="evidence.evidence_name for evidence in my_all_primary_evidences_responsible"data-qo-placeholder="รายชื่อหลักฐานพื้นฐาน" data-ng-model="$parent.primary_choosen">
-                               
-
-
-                            </select>
+                                 
+                             <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="evidence.evidence_name for evidence in my_all_primary_evidences_responsible" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร"  data-ng-model="$parent.primary_choosen" data-qo-disable-clear="true">
+            </select>
 
                         </div>
                     </div>
