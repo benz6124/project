@@ -297,8 +297,8 @@ namespace educationalProject.Models.Wrappers
 
             d.iCommand.CommandText =
                 //Insert part    
-                string.Format("INSERT INTO {0}({1},{2},{3},{4},{5},{6},{7},{8}) VALUES " +
-                      "(null, '{9}', '{10}', {11}, {12}, '{13}', '{14}', '{15}', {16}) ",
+                string.Format("INSERT INTO {0}({1},{2},{3},{4},{5},{6},{7},{8},{9}) VALUES " +
+                      "(null, '{10}', '{11}', {12}, {13}, '{14}', '{15}', '{16}', {17}) ",
                 FieldName.TABLE_NAME, FieldName.PRIMARY_EVIDENCE_NUM,FieldName.TEACHER_ID,FieldName.CURRI_ID,FieldName.INDICATOR_NUM,FieldName.EVIDENCE_REAL_CODE,FieldName.FILE_NAME, FieldName.EVIDENCE_NAME,FieldName.SECRET,FieldName.ACA_YEAR,
                 teacher_id, curri_id, indicator_num, evidence_real_code, file_name, evidence_name, secret, aca_year) +
                 //Select part
@@ -365,8 +365,8 @@ namespace educationalProject.Models.Wrappers
 
             d.iCommand.CommandText =
                 //Insert part    
-                string.Format("INSERT INTO {0}({1},{2},{3},{4},{5},{6},{7},{8}) VALUES " +
-                      "({17}, '{9}', '{10}', {11}, {12}, '{13}', '{14}', '{15}', {16}) ",
+                string.Format("INSERT INTO {0}({1},{2},{3},{4},{5},{6},{7},{8},{9}) VALUES " +
+                      "({18}, '{10}', '{11}', {12}, {13}, '{14}', '{15}', '{16}', {17}) ",
                 FieldName.TABLE_NAME, FieldName.PRIMARY_EVIDENCE_NUM, FieldName.TEACHER_ID, FieldName.CURRI_ID, FieldName.INDICATOR_NUM, FieldName.EVIDENCE_REAL_CODE, FieldName.FILE_NAME, FieldName.EVIDENCE_NAME, FieldName.SECRET, FieldName.ACA_YEAR,
                 teacher_id, curri_id, indicator_num, evidence_real_code, file_name, "", secret, aca_year, primary_evidence_num) +
                 //Update primary_evidence_status part

@@ -50,12 +50,12 @@ namespace educationalProject.Controllers
                 return InternalServerError(new Exception(result.ToString()));
         }
 
-        [ActionName("getOnlyNameAndId")]
-        public IHttpActionResult PostToQueryOnlyNameAndId(oEvidence data)
+        [ActionName("getonlynameandid")]
+        public IHttpActionResult PostToQueryOnlyNameAndId(JObject data)
         {
-            object result = datacontext.SelectOnlyNameAndId(data);
-            if (result == null)
-                return Ok();
+            object result = datacontext.SelectOnlyNameAndId(data["curri_id"].ToString(),Convert.ToInt32(data["aca_year"]), data["teacher_id"].ToString(), Convert.ToInt32(data["indicator_num"]));
+            if (result.GetType().ToString() != "System.String")
+                return Ok(result);
             else
                 return InternalServerError(new Exception(result.ToString()));
         }

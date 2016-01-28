@@ -414,7 +414,7 @@ namespace educationalProject.Models.Wrappers
             }
         }
 
-        public object SelectOnlyNameAndId(Evidence evidata)
+        public object SelectOnlyNameAndId(string p_curri_id,int p_aca_year,string p_teacher_id,int p_indicator_num)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -427,9 +427,9 @@ namespace educationalProject.Models.Wrappers
                    "({13} = '0' OR {13} = '{5}'))) as p1 INNER JOIN {1} on p1.{0} = {1}.{14}",
                    Primary_evidence_status.FieldName.PRIMARY_EVIDENCE_NUM,FieldName.TABLE_NAME,FieldName.EVIDENCE_NAME,
                    Primary_evidence_status.FieldName.TABLE_NAME, Primary_evidence_status.FieldName.CURRI_ID,
-                   evidata.curri_id, Primary_evidence_status.FieldName.TEACHER_ID,evidata.teacher_id,
-                   Primary_evidence_status.FieldName.STATUS,FieldName.ACA_YEAR,evidata.aca_year,
-                   FieldName.INDICATOR_NUM,evidata.indicator_num,FieldName.CURRI_ID,
+                   p_curri_id, Primary_evidence_status.FieldName.TEACHER_ID,p_teacher_id,
+                   Primary_evidence_status.FieldName.STATUS,FieldName.ACA_YEAR,p_aca_year,
+                   FieldName.INDICATOR_NUM,p_indicator_num,FieldName.CURRI_ID,
                    FieldName.PRIMARY_EVIDENCE_NUM
                 );
             try

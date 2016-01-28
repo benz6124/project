@@ -67,7 +67,7 @@ namespace educationalProject.Controllers
                 datacontext.evidence_real_code = Convert.ToInt32(datareceive["evidence_real_code"]);
                 datacontext.evidence_name = datareceive["evidence_name"].ToString();
                 datacontext.indicator_num = Convert.ToInt32(datareceive["indicator_num"]);
-                datacontext.secret = Convert.ToChar(datareceive["secret"]);
+                datacontext.secret = datareceive["secret"].ToString()[0];
                 datacontext.teacher_id = datareceive["teacher_id"].ToString();
 
                 //evidence_real_code evidence_name secret teacher_id
@@ -113,7 +113,7 @@ namespace educationalProject.Controllers
                 datacontext.curri_id = datareceive["curri_id"].ToString();
                 datacontext.evidence_real_code = Convert.ToInt32(datareceive["evidence_real_code"]);
                 datacontext.indicator_num = Convert.ToInt32(datareceive["indicator_num"]);
-                datacontext.secret = Convert.ToChar(datareceive["secret"]);
+                datacontext.secret = datareceive["secret"].ToString()[0];
                 datacontext.teacher_id = datareceive["teacher_id"].ToString();
                 datacontext.primary_evidence_num = Convert.ToInt32(datareceive["primary_evidence_num"]);
 
@@ -200,7 +200,7 @@ namespace educationalProject.Controllers
                 datacontext.evidence_real_code = Convert.ToInt32(datareceive["evidence_real_code"]);
                 datacontext.evidence_name = datareceive["evidence_name"].ToString();
                 datacontext.indicator_num = Convert.ToInt32(datareceive["indicator_num"]);
-                datacontext.secret = Convert.ToChar(datareceive["secret"]);
+                datacontext.secret = datareceive["secret"].ToString()[0];
                 datacontext.teacher_id = datareceive["teacher_id"].ToString();
                 datacontext.evidence_code = Convert.ToInt32(datareceive["evidence_code"]);
 
