@@ -4411,7 +4411,7 @@ glyphicon glyphicon-bell"></i> </span>
                             <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">ชื่อหลักฐาน:   </span></h3>
                         </div>
                         <div class="col-md-8">
-                                   <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="รายชื่อหลักฐานพื้นฐาน" data-ng-model="$parent.primary_choosen">
+                                   <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-options="evidence.evidence_name for evidence in my_all_primary_evidences_responsible"data-qo-placeholder="รายชื่อหลักฐานพื้นฐาน" data-ng-model="$parent.primary_choosen">
                                
 
 
@@ -4444,6 +4444,15 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
                 </div>
+
+
+
+
+
+
+
+
+
 
        <div id="fix_evidence" data-nq-modal="" data-qo-size="sm" data-qo-independent="true" data-ng-controller="change_evidence_file_controller" data-qo-effect="flip-x">
                     <div class="custom-header">
@@ -4532,7 +4541,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-                <div id="import_evidence" data-ng-controller="import_evidence_controller"data-nq-modal="" data-qo-size="md" data-qo-independent="true">
+                <div id="import_evidence" data-ng-controller="import_evidence_controller"data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal"> นำเข้าหลักฐานที่มีอยู่</span></h1>
@@ -4543,13 +4552,13 @@ glyphicon glyphicon-bell"></i> </span>
                     <div class="row">
 
 
-                        <div class="col-md-10" >
+                        <div class="col-md-8" >
                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             </select>
 
                         </div>
-                        <div class="col-md-2" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_all_evidences_in_curri_and_year()"  data-qo-placeholder="ปี" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                        <div class="col-md-4" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_all_evidences_in_curri_and_year()"  data-qo-placeholder="ปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 </select>   
                         </div>
 
@@ -4565,13 +4574,15 @@ glyphicon glyphicon-bell"></i> </span>
                             <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">หลักฐานที่พบ:  </span></h3>
                         </div>
                     </div> -->
+
+
                     <div class="row">
                         <div class="col-md-11">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-options="evidence.evidence_name for evidence in all_evidences" data-qo-placeholder="หลักฐานที่พบในหลักสูตรและปีการศึกษาดังกล่าว" data-ng-model="$parent.evidence_we_want">
-                             
+                        
 
 
-                            </select>
+                                 <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="evidence.evidence_name for evidence in all_evidences" data-qo-effect="flip-x"data-qo-placeholder="หลักฐานที่พบในหลักสูตรและปีการศึกษาดังกล่าว" data-ng-model="$parent.evidence_we_want" data-qo-disable-clear="true" >
+</select>   
 
 
                         </div>
