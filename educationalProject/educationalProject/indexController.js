@@ -1876,7 +1876,7 @@ $scope.my_new_evidence.primary_choosen = {};
         my_modal.$hide();
     }
 
-    $scope.save_to_server =function(){
+    $scope.save_to_server =function(my_modal){
         if($scope.my_temp_secret_new  == false){
             $scope.my_new_evidence.secret = "0";
         }
@@ -1897,6 +1897,9 @@ $scope.primary_choosen.curri_id =   $rootScope.manage_evidence_curri_id_now;
     $scope.primary_choosen.aca_year = $rootScope.manage_evidence_year_now;
     $scope.primary_choosen.indicator_num = $rootScope.manage_evidence_indicator_num;
 $scope.primary_choosen.secret = $scope.my_new_evidence.secret;
+
+$scope.primary_choosen.teacher_id = "00007";
+
 
     formData.append("model", angular.toJson( $scope.primary_choosen));
     formData.append("file" , $scope.my_new_evidence_file[0]);
@@ -2958,8 +2961,9 @@ $scope.evidence_we_want.aca_year = $rootScope.manage_evidence_year_now;
 
 $scope.evidence_we_want.indicator_num = $rootScope.manage_evidence_indicator_num;
 $scope.evidence_we_want.evidence_real_code = $scope.code_we_want;
+$scope.evidence_we_want.teacher_id = "00007";
 
-        $scope.evidence_we_want = 
+        
         $http.put(
              '/api/evidence/newevidencefromothers',
              JSON.stringify($scope.evidence_we_want),
