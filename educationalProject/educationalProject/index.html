@@ -3646,7 +3646,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                                                
 
-                                                 <span  style="padding-left:0px;font-size:19px" >{{indicator_choosen.indicator_num}}-      <input class="form-control" type="number"style=" display: inline-block;margin-top:2px;margin-bottom:2px;width:50px;padding-top:2px;padding-left:13px;padding-right:2px;padding-bottom:5px"  ng-model="evidence.evidence_real_code" required/></span>
+                                                 <span  style="padding-left:0px;font-size:19px" >{{indicator_choosen.indicator_num}}-      <input class="form-control" type="number"style=" display: inline-block;margin-top:2px;margin-bottom:2px;width:50px;padding-top:2px;padding-left:4px;padding-right:2px;padding-bottom:5px"  ng-model="evidence.evidence_real_code" required/></span>
 
           </td>
 
@@ -3683,7 +3683,7 @@ glyphicon glyphicon-eye-open"></i> </span></a></td>
 glyphicon glyphicon-wrench"></i> </span></a></td>  
 
 
-   <td > <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="remove_primary_evidence($index)">
+   <td > <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="remove_evidence($index)">
                                         <span class="topicHeader"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td>
 
@@ -4404,7 +4404,7 @@ glyphicon glyphicon-bell"></i> </span>
 </div>
                     </div>
 
-        
+    
 
                        <div class="row">
                         <div class="col-md-4">
@@ -4412,7 +4412,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                         <div class="col-md-8">
                                  
-                             <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="evidence.evidence_name for evidence in my_all_primary_evidences_responsible" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร"  data-ng-model="$parent.primary_choosen" data-qo-disable-clear="true">
+                             <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="evidence.evidence_name for evidence in my_all_primary_evidences_responsible" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักฐาน"  data-ng-model="$parent.my_new_evidence.primary_choosen" data-qo-disable-clear="true">
             </select>
 
                         </div>
@@ -4437,7 +4437,7 @@ glyphicon glyphicon-bell"></i> </span>
                   
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="upload_evidence_form.$invalide || new_evidence_still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="new_evidence_still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                         </div>
                     </div>
@@ -4483,7 +4483,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-                <div id="upload_evidence" data-nq-modal="" data-ng-controller="add_new_evidence_controller" data-qo-size="md" data-qo-independent="true">
+                <div id="upload_evidence" data-nq-modal=""  data-ng-controller="add_new_evidence_controller" data-qo-size="md" data-qo-independent="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal">เพิ่มหลักฐานใหม่</span></h1>
@@ -4608,7 +4608,7 @@ glyphicon glyphicon-bell"></i> </span>
           
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="choose_not_complete || still_not_write_code()" ng-click="$hide()">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-click ="save_to_server(this)"ng-disabled="choose_not_complete || still_not_write_code()" ng-click="$hide()">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>

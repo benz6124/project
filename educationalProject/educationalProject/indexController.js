@@ -1700,6 +1700,8 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
  $scope.my_temp_secret_new = false;
   $scope.my_new_evidence.teacher_id = "00007";
   
+
+
     $scope.init =function() {
          $scope.my_temp_secret_new = false;
    $scope.my_new_evidence = {};
@@ -1747,7 +1749,7 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
         my_modal.$hide();
     }
 
-    $scope.save_to_server =function(){
+    $scope.save_to_server =function(my_modal){
         if($scope.my_temp_secret_new  == false){
             $scope.my_new_evidence.secret = "0";
         }
@@ -1785,10 +1787,11 @@ console.log($scope.my_new_evidence);
     
                 
               $rootScope.manage_evidences_world_evidences = data;
+               $scope.close_modal(my_modal);
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
 
-                $scope.close_modal(my_modal);
+               
            
         }).
         error(function (data, status, headers, config) {
@@ -1808,9 +1811,9 @@ app.controller('add_new_primary_controller', function($scope, $alert,$http,$root
    $scope.my_new_evidence_file = [];
  $scope.my_temp_secret_new = false;
   $scope.my_new_evidence.teacher_id = "00007";
-$scope.primary_choosen = {}
 
 
+$scope.my_new_evidence.primary_choosen = {};
 
     $scope.init =function() {
          $scope.my_temp_secret_new = false;
@@ -1821,8 +1824,8 @@ $scope.primary_choosen = {}
      $scope.my_new_evidence.secret = false;
       $scope.my_new_evidence.evidence_name = "";
         $scope.my_new_evidence.teacher_id = "00007";
-        $scope.primary_choosen = {}
-
+       
+$scope.my_new_evidence.primary_choosen = {};
 
 }
 
@@ -1841,7 +1844,7 @@ $scope.primary_choosen = {}
 
 
     $scope.new_evidence_still_not_complete =  function(){
-        if (!$scope.my_new_evidence.primary_choosen || !$scope.my_new_evidence.evidence_real_code || !$scope.my_new_evidence.evidence_name || $scope.my_new_evidence_file.length ==0){
+        if (!$scope.my_new_evidence.primary_choosen || !$scope.my_new_evidence.evidence_real_code ||  $scope.my_new_evidence_file.length ==0){
 
                 return true;
         }
@@ -1923,11 +1926,55 @@ app.controller('manage_evidences_controller', function($scope, $alert,$http,$roo
 $rootScope.my_evidence_real_code_we_have_now =[];
 
 $rootScope.my_all_primary_evidences_responsible = [];
-   $scope.remove_evidence = function(index_evidence_to_remove) { 
-      $rootScope.manage_evidences_world_evidences.splice(index_evidence_to_remove, 1);     
 
+
+   $scope.remove_evidence = function(index_evidence_to_remove) {
+    console.log("remove_evidence");
+   console.log($rootScope.manage_evidences_world_evidences[index_evidence_to_remove].primary_evidence_num) ;
+
+    if( ! $rootScope.manage_evidences_world_evidences[index_evidence_to_remove].primary_evidence_num || $rootScope.manage_evidences_world_evidences[index_evidence_to_remove].primary_evidence_num <=0){
+            $rootScope.manage_evidences_world_evidences.splice(index_evidence_to_remove, 1);
+    }
+else{
+   
+
+          $alert({title:'เกิดข้อผิดพลาด', content:'ไม่สามารถลบหลักฐานพื้นฐานได้',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});  
+    }
+}
+
+
+$scope.still_not_choose_complete = function(){
+
+     if(!$rootScope.manage_evidences_world_evidences){
+        return true;
     }
 
+    // if($rootScope.manage_evidences_world_evidences.length ==0){
+    //     return true;
+    // }
+
+  var index;
+  $scope.all_evidence_real_code = [];
+  for(index = 0; index<$rootScope.manage_evidences_world_evidences.length ;index++){
+    if(!$rootScope.manage_evidences_world_evidences[index].evidence_real_code ){
+        return true;
+    }
+    else if($rootScope.manage_evidences_world_evidences[index].evidence_real_code <= 0){
+        return true;
+    }
+    else{
+        if( $scope.all_evidence_real_code.indexOf($rootScope.manage_evidences_world_evidences[index].evidence_real_code)!=-1){
+            return true;
+        }
+        $scope.all_evidence_real_code.push($rootScope.manage_evidences_world_evidences[index].evidence_real_code);
+    }
+  }
+
+
+
+
+}
     $scope.watch_file = function(path) { 
         window.open(path, '_blank', "width=800, left=230,top=0,height=700");  
     }
@@ -1970,7 +2017,7 @@ $scope.choose_to_add_new_primary_file = function(){
     $scope.send_this.curri_id = $scope.curri_choosen.curri_id;
     $scope.send_this.aca_year = $scope.year_choosen.aca_year;
     $scope.send_this.indicator_num  = $scope.indicator_choosen.indicator_num;
-    $scope.send_this.teacher_id = "00009";
+    $scope.send_this.teacher_id = "00007";
 
     $http.post(
              '/api/primaryevidence/getOnlyNameAndId',
@@ -2036,6 +2083,8 @@ $scope.init =function() {
              }
          ).success(function (data) {
               $rootScope.manage_evidences_world_evidences = data;
+              console.log("manage_evidences_world_evidences");
+              console.log($rootScope.manage_evidences_world_evidences);
             $scope.choose_not_complete =false;
               var index;
              for(index=0;index<$rootScope.manage_evidences_world_evidences.length;index++){
@@ -2069,7 +2118,11 @@ $scope.choose_not_complete =true;
 
     }
 
-    $scope.save_to_server = function(this_modal){
+    //   $scope.remove_evidence = function(index_evidence_to_remove) { 
+    //   $rootScope.manage_evidences_world_evidences.splice(index_evidence_to_remove, 1);     
+
+    // }
+    $scope.save_to_server = function(my_modal){
         
         if($rootScope.manage_evidences_world_evidences.length ==0){
             $rootScope.manage_evidences_world_evidences.curri_id = $scope.curri_choosen.curri_id;
@@ -2892,9 +2945,10 @@ $scope.evidence_we_want.evidence_real_code = $scope.code_we_want;
              }
          ).success(function (data) {
              $rootScope.manage_evidences_world_evidences = data;
+              $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-               $scope.close_modal(my_modal);
+              
          })
     .error(function(data, status, headers, config) {
                   if(status==500){
