@@ -14,7 +14,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oStudent_count> result = new List<oStudent_count>();
-            d.iCommand.CommandText = String.Format("select * from {0}", FieldName.TABLE_NAME);
+            d.iCommand.CommandText = string.Format("select * from {0}", FieldName.TABLE_NAME);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();

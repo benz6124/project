@@ -14,7 +14,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oCurriculum_academic> result = new List<oCurriculum_academic>();
-            d.iCommand.CommandText = String.Format("select * from {0}",FieldName.TABLE_NAME);
+            d.iCommand.CommandText = string.Format("select * from {0}",FieldName.TABLE_NAME);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -56,7 +56,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oCurriculum_academic> result = new List<oCurriculum_academic>();
-            d.iCommand.CommandText = String.Format("select MAX({1})+1 from {0}", FieldName.TABLE_NAME,FieldName.ACA_YEAR);
+            d.iCommand.CommandText = string.Format("select MAX({1})+1 from {0}", FieldName.TABLE_NAME,FieldName.ACA_YEAR);
             try
             {
                 object res = d.iCommand.ExecuteScalar();
@@ -88,7 +88,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oCurriculum_academic> result = new List<oCurriculum_academic>();
-            d.iCommand.CommandText = String.Format("select * from {0} where {1}",FieldName.TABLE_NAME,wherecond);
+            d.iCommand.CommandText = string.Format("select * from {0} where {1}",FieldName.TABLE_NAME,wherecond);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -131,7 +131,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
 
-            d.iCommand.CommandText = String.Format("insert into {0} values ('{1}',{2})",
+            d.iCommand.CommandText = string.Format("insert into {0} values ('{1}',{2})",
                 FieldName.TABLE_NAME, curri_id, aca_year);
             try
             {

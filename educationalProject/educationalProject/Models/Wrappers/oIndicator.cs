@@ -59,7 +59,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oIndicator> result = new List<oIndicator>();
-            d.iCommand.CommandText = String.Format("select * from {0} where {1}",FieldName.TABLE_NAME,wherecond);
+            d.iCommand.CommandText = string.Format("select * from {0} where {1}",FieldName.TABLE_NAME,wherecond);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -105,7 +105,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oIndicator> result = new List<oIndicator>();
-            d.iCommand.CommandText = String.Format("select * from {0} where {1} order by {2} {3}", 
+            d.iCommand.CommandText = string.Format("select * from {0} where {1} order by {2} {3}", 
                 FieldName.TABLE_NAME,wherecond,orderbycol,((dir != null)?direction[dir.Value]:""));
             try
             {
@@ -152,7 +152,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oIndicator> result = new List<oIndicator>();
-            d.iCommand.CommandText = String.Format("select * from {0} where {1} order by {2} {3}",
+            d.iCommand.CommandText = string.Format("select * from {0} where {1} order by {2} {3}",
                 FieldName.TABLE_NAME, wherecond, orderbycol, ((dir != null) ? direction[dir.Value] : ""));
             try
             {

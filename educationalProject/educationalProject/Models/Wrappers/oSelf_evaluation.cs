@@ -34,7 +34,7 @@ namespace educationalProject.Models.Wrappers
                                FieldName.TABLE_NAME, FieldName.INDICATOR_NUM, indicator_num, FieldName.CURRI_ID, curri_id,
                                FieldName.ACA_YEAR,aca_year);
 
-            d.iCommand.CommandText = String.Format("IF NOT EXISTS ({0}) " +
+            d.iCommand.CommandText = string.Format("IF NOT EXISTS ({0}) " +
                                        "BEGIN " +
                                        "{1} " +
                                        "END " +

@@ -15,7 +15,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            d.iCommand.CommandText = String.Format("select {0}.*,{1},{2} from {3} INNER JOIN {4} on {5}.{6}={7}.{8}",
+            d.iCommand.CommandText = string.Format("select {0}.*,{1},{2} from {3} INNER JOIN {4} on {5}.{6}={7}.{8}",
                 Self_evaluation.FieldName.TABLE_NAME, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
                 Self_evaluation.FieldName.TABLE_NAME,
                 Teacher.FieldName.TABLE_NAME, Self_evaluation.FieldName.TABLE_NAME,
@@ -57,7 +57,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                     return "";
                 }
 
-                d.iCommand.CommandText = String.Format("select {0}.*,{1},{2} from {3} INNER JOIN {4} on {5}.{6}={7}.{8}",
+                d.iCommand.CommandText = string.Format("select {0}.*,{1},{2} from {3} INNER JOIN {4} on {5}.{6}={7}.{8}",
                 Others_evaluation.FieldName.TABLE_NAME, Assessor.FieldName.T_PRENAME, Assessor.FieldName.T_NAME,
                 Others_evaluation.FieldName.TABLE_NAME,
                 Assessor.FieldName.TABLE_NAME, Others_evaluation.FieldName.TABLE_NAME,
@@ -119,7 +119,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            d.iCommand.CommandText = String.Format(
+            d.iCommand.CommandText = string.Format(
                 "select self_eval_result.*, {0}, {1} from " +
                 "(select * from " +
                 "(select * from {2} as s1 where s1.{3} = {4} and s1.{5} = '{6}' and s1.{7} = {8} and " +
@@ -169,7 +169,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                     return "";
                 }
                 res.Close();
-                d.iCommand.CommandText = String.Format(
+                d.iCommand.CommandText = string.Format(
                 "select others_eval_result.*, {0}, {1} from " +
                 "(select * from " +
                 "(select * from {2} as o1 where o1.{3} = {4} and o1.{5} = '{6}' and o1.{7} = {8} and " +

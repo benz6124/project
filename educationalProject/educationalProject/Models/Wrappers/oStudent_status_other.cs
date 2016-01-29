@@ -116,7 +116,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
 
-            d.iCommand.CommandText = String.Format("IF NOT EXISTS (select * from {0} where {1}='{2}' and {3} = {4}) "+
+            d.iCommand.CommandText = string.Format("IF NOT EXISTS (select * from {0} where {1}='{2}' and {3} = {4}) "+
                                        "BEGIN "+
                                        "INSERT INTO {0} VALUES " +
                                        "('{2}', {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}) " +

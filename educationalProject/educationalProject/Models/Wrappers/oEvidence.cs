@@ -68,7 +68,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oEvidence> result = new List<oEvidence>();
-            d.iCommand.CommandText = String.Format("select * from {0} where {1}", FieldName.TABLE_NAME, wherecond);
+            d.iCommand.CommandText = string.Format("select * from {0} where {1}", FieldName.TABLE_NAME, wherecond);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -120,7 +120,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oEvidence> result = new List<oEvidence>();
-            d.iCommand.CommandText = String.Format("select * from {0} " + 
+            d.iCommand.CommandText = string.Format("select * from {0} " + 
                 "where {1} = {2} and {3} = '{4}' and {5} = {6}", 
                 FieldName.TABLE_NAME,FieldName.INDICATOR_NUM,inddata.indicator_num,FieldName.CURRI_ID,
                 curri_id,FieldName.ACA_YEAR,inddata.aca_year);

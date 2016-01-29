@@ -15,7 +15,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<Teacher_with_t_name> result = new List<Teacher_with_t_name>();
-            d.iCommand.CommandText = String.Format("select * from {0} where exists(select * from {1} where {0}.{2} = {1}.{3} and {4}='{5}')", 
+            d.iCommand.CommandText = string.Format("select * from {0} where exists(select * from {1} where {0}.{2} = {1}.{3} and {4}='{5}')", 
                 FieldName.TABLE_NAME, Curriculum_teacher_staff.FieldName.TABLE_NAME,FieldName.TEACHER_ID,Curriculum_teacher_staff.FieldName.PERSONNEL_ID,Curriculum_teacher_staff.FieldName.CURRI_ID,curri_id);
             try
             {

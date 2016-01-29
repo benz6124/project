@@ -13,7 +13,7 @@ namespace educationalProject.Models.Wrappers
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            d.iCommand.CommandText = String.Format("select * from {0}", FieldName.TABLE_NAME);
+            d.iCommand.CommandText = string.Format("select * from {0}", FieldName.TABLE_NAME);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -62,7 +62,7 @@ namespace educationalProject.Models.Wrappers
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            d.iCommand.CommandText = String.Format("select * from {0} where {1}", FieldName.TABLE_NAME, wherecond);
+            d.iCommand.CommandText = string.Format("select * from {0} where {1}", FieldName.TABLE_NAME, wherecond);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -111,7 +111,7 @@ namespace educationalProject.Models.Wrappers
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            d.iCommand.CommandText = String.Format("update {0} set {1}='{2}',{3}='{4}',{5}='{6}',{7}='{8}' where {9}={10} and {11}={12} and {13}='{14}' and {15}={16}",
+            d.iCommand.CommandText = string.Format("update {0} set {1}='{2}',{3}='{4}',{5}='{6}',{7}='{8}' where {9}={10} and {11}={12} and {13}='{14}' and {15}={16}",
                 FieldName.TABLE_NAME, FieldName.TIME, time, FieldName.DATE, date, FieldName.TEACHER_ID, teacher_id, FieldName.DETAIL, detail, FieldName.INDICATOR_NUM, indicator_num, FieldName.SUB_INDICATOR_NUM, sub_indicator_num, FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year);
             try
             {
@@ -142,7 +142,7 @@ namespace educationalProject.Models.Wrappers
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            d.iCommand.CommandText = String.Format("insert into {0} values ({1},{2},{3},'{4}','{5}','{6}','{7}','{8}')",
+            d.iCommand.CommandText = string.Format("insert into {0} values ({1},{2},{3},'{4}','{5}','{6}','{7}','{8}')",
                 FieldName.TABLE_NAME,aca_year,indicator_num,sub_indicator_num,teacher_id, detail, date, time, curri_id);
             try
             {

@@ -65,7 +65,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oCu_curriculum> result = new List<oCu_curriculum>();
-            d.iCommand.CommandText = String.Format("select * from {0} where {1}",FieldName.TABLE_NAME,wherecond);
+            d.iCommand.CommandText = string.Format("select * from {0} where {1}",FieldName.TABLE_NAME,wherecond);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -116,7 +116,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             
-            d.iCommand.CommandText = String.Format("insert into {0} values ((select MAX({1})+1 FROM {0}),'{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}')",
+            d.iCommand.CommandText = string.Format("insert into {0} values ((select MAX({1})+1 FROM {0}),'{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}')",
                 FieldName.TABLE_NAME, FieldName.CURRI_ID, year, curr_tname, curr_ename, degree_t_full, degree_t_bf, degree_e_full, degree_e_bf, level, period);
             try
             {

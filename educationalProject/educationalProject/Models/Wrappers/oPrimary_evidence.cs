@@ -253,7 +253,7 @@ namespace educationalProject.Models.Wrappers
                 }
             }
 
-            d.iCommand.CommandText = String.Format("BEGIN {0} {1} {2} {3} {4} {5} END", insertintoprimaryevidencecmd,
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} {5} END", insertintoprimaryevidencecmd,
                 insertintoprievistatuscmd, updateprievistatuscmd, deletefromprimaryevidencecmd, deletefromprievistatuscmd,
                 insertintoexclusiveprimaryevicmd);
             try
