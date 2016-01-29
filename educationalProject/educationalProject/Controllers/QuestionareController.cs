@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using educationalProject.Models.Wrappers;
+using educationalProject.Models.ViewModels;
 namespace educationalProject.Controllers
 {
     public class QuestionareController : ApiController
@@ -21,9 +22,13 @@ namespace educationalProject.Controllers
             return Ok();
         }
 
-        public IHttpActionResult Delete()
+        public IHttpActionResult Delete(List<Questionare_set_detail> list)
         {
-            return Ok();
+            object result = datacontext.Delete(list);
+            if (result == null)
+                return Ok();
+            else
+                return InternalServerError(new Exception(result.ToString()));
         }
     }
 }

@@ -163,7 +163,8 @@ namespace educationalProject.Controllers
                 {
                     foreach (string file_name_to_delete in strlist)
                     {
-                        File.Delete(string.Format("{0}{1}", delpath, file_name_to_delete));
+                        if (File.Exists(string.Format("{0}{1}", delpath, file_name_to_delete)))
+                            File.Delete(string.Format("{0}{1}", delpath, file_name_to_delete));
                     }
                 }
                 catch (Exception e)
@@ -222,7 +223,8 @@ namespace educationalProject.Controllers
                     string delpath = "D:/";
                     //delete file that targeted (it has set via datacontext's file_name property  
                     if(datacontext.file_name != "")
-                    File.Delete(string.Format("{0}{1}", delpath, datacontext.file_name));
+                        if (File.Exists(string.Format("{0}{1}", delpath, datacontext.file_name)))
+                            File.Delete(string.Format("{0}{1}", delpath, datacontext.file_name));
                     return Ok(resultfromdb);
                 }
                 else

@@ -237,5 +237,36 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
+        public object Delete(List<Questionare_set_detail> list)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+            string deleteprecmd = string.Format("DELETE FROM {0} WHERE {1} = '{2}' and {3} = {4}",
+                FieldName.TABLE_NAME,FieldName.CURRI_ID,list.First().curri_id,FieldName.ACA_YEAR, list.First().aca_year);
+            string excludecond = "1=1 ";
+            foreach(Questionare_set_detail item in list)
+            {
+                excludecond += string.Format("and {0} != {1} ", FieldName.QUESTIONARE_SET_ID, item.questionare_set_id);
+            }
+
+            d.iCommand.CommandText = string.Format("{0} and ({1})", deleteprecmd, excludecond);
+            try
+            {
+                int rowAffected = d.iCommand.ExecuteNonQuery();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+        }
+
     }
 }

@@ -99,5 +99,44 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
+
+
+        public object InsertQuestionAnswer(Questionare_question_form qdata)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+
+            string insertintoquestionareresobj = string.Format("insert into {0} values ",Questionare_result_obj.FieldName.TABLE_NAME);
+            
+            foreach(Questionare_question_answer item in qdata.question_list)
+            {
+                insertintoquestionareresobj += string.Format("({0},{1})", item.questionare_question_id, item.answer);
+                if (item != qdata.question_list.Last())
+                    insertintoquestionareresobj += ",";
+            }
+
+            string insertintoquestionareressub = string.Format("insert into {0} values ({1},'{2}')",
+                Questionare_result_sub.FieldName.TABLE_NAME, qdata.question_list.First().questionare_set_id,
+                qdata.suggestion);
+
+
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} END", insertintoquestionareresobj, insertintoquestionareressub);
+            try
+            {
+                int rowAffected = d.iCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return null;
+        }
     }
 }
