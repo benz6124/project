@@ -2877,11 +2877,13 @@ $scope.init =function() {
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
+         $scope.nothing_change = true;
         $scope.indicator_choosen= {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
 
             $scope.corresponding_aca_years = data;
+
 
           });
 
@@ -2953,6 +2955,7 @@ $scope.init =function() {
         console.log( $scope.corresponding_aca_years.aca_year);
         $rootScope.manage_survey_curri_id_now = $scope.curri_choosen.curri_id;
         $rootScope.manage_survey_aca_year_now = $scope.year_choosen.aca_year;
+
     }
 
     $scope.find_information = function(){
@@ -2969,7 +2972,7 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
-            
+             $scope.nothing_change = true;
               $scope.result = data;
              $scope.choose_not_complete = false;
              
@@ -3181,9 +3184,13 @@ $scope.init =function() {
                     $scope.my_target = [];
                     $scope.questions =[];
                     $scope.my_survey_name ="";
+
                 $http.get('/api/usertype').success(function (data) {
-                
+                console.log("/api/usertype");
+                console.log(data);
                 $scope.all_usertype = data;
+
+
               });
             
 }
@@ -3196,8 +3203,10 @@ $scope.init =function() {
                     $scope.my_target = [];
                     $scope.questions =[];
                     $scope.my_survey_name ="";
+
                 $http.get('/api/usertype').success(function (data) {
-                
+                     console.log("/api/usertype");
+                console.log(data);
                 $scope.all_usertype = data;
               });
 
@@ -3303,7 +3312,7 @@ $scope.init =function() {
                     $scope.result = {};
                    $scope.new_research = {};
   $scope.new_research.name = "";
-  $scope.new_research.research_owner =[];
+  $scope.new_research.researcher =[];
   $scope.new_research.year_publish = "";
   $scope.new_research.file = "";
 }
@@ -3314,7 +3323,7 @@ $scope.init =function() {
                     $scope.result = {};
   $scope.new_research = {};
   $scope.new_research.name = "";
-  $scope.new_research.research_owner =[];
+  $scope.new_research.researcher =[];
   $scope.new_research.year_publish = "";
   $scope.new_research.file = "";
 
@@ -3330,13 +3339,19 @@ $scope.init =function() {
 
      $scope.still_not_complete = function(){
 
-        if(! $scope.new_research.name || $scope.new_research.research_owner.length ==0 || !$scope.new_research.year_publish || !$scope.new_research.file ){
+        if(! $scope.new_research.name || $scope.new_research.researcher.length ==0 || !$scope.new_research.year_publish || !$scope.new_research.file ){
             return true;
         }
         else{
-            if($scope.new_research.year_publish <= 0){
+            if(angular.isNumber($scope.new_research.year_publish)==false){
                 return true;
+
+
             }
+
+             if($scope.new_research.year_publish <= 0){
+                    return true;
+                }
              return false;
         }
 
@@ -3348,6 +3363,205 @@ $scope.init =function() {
         $scope.init();
         my_modal.$hide();
     }
+
+    $scope.save_to_server = function(my_modal) {
+ $scope.new_research.curri_id = $rootScope.manage_reseach_my_curri_id_now;
+ $scope.new_research.file_name = $scope.new_research.file.name;
+
+ console.log("save_to_server");
+ console.log($scope.new_research);
+      var formData = new FormData();
+
+    formData.append("model", angular.toJson( $scope.new_research));
+
+     
+        
+            formData.append("file", $scope.new_research.file );
+    
+
+        $http({
+            method: 'POST',
+            url: "/api/research/newresearch",
+
+            headers: { 'Content-Type': undefined },
+
+
+            data:formData,
+            transformRequest: angular.indentity 
+
+        }).
+        success(function (data, status, headers, config) {
+    
+                $rootScope.manage_research_my_research_now =data;
+                $scope.close_modal(my_modal);
+                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+              
+           
+        }).
+        error(function (data, status, headers, config) {
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        });
+    }
+
+
+});
+
+app.controller('fix_research_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+                               $scope.new_file = [];
+                               $scope.disabled_search = false;
+
+
+}
+
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+                     $scope.new_file = [];
+                        $scope.disabled_search = false;
+
+    $scope.still_not_complete = function(){
+
+        if(!$rootScope.manage_research_fix_this_research){
+            return true;
+        }
+        if(!$rootScope.manage_research_fix_this_research.name || !$rootScope.manage_research_fix_this_research.year_publish ){
+            return true;
+        }
+
+        if (angular.isNumber($rootScope.manage_research_fix_this_research.year_publish) == false){
+            return true;
+        }
+
+        if($rootScope.manage_research_fix_this_research.year_publish <=0){
+            return true;
+        }
+
+        if($rootScope.manage_research_fix_this_research.researcher.length == 0){
+            return true;
+        }
+
+        if($scope.disabled_search==true ){
+            if($scope.new_file.length == 0){
+                return true;
+            }
+            return false;
+        }
+        else{
+            return false;
+        }
+    }
+
+    $scope.watch_file = function(research_path){
+        if( $scope.disabled_search == false){
+            window.open(research_path, '_blank', "width=800, left=230,top=0,height=700"); 
+        }
+         
+    }
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+    $scope.set_disabled_search = function(){
+        console.log("disabled_search");
+        console.log($scope.disabled_search);
+        $scope.disabled_search = true;
+    }
+
+
+  $scope.save_to_server = function(my_modal){
+        if($scope.disabled_search){
+            $rootScope.manage_research_fix_this_research.file_name = $scope.new_file[0].name;
+      
+
+          var formData = new FormData();
+
+        formData.append("model", angular.toJson($rootScope.manage_research_fix_this_research));
+
+        formData.append("file" , $scope.new_file[0]);
+
+            $http({
+                method: 'PUT',
+                url: "/api/research",
+
+                headers: { 'Content-Type': undefined },
+
+
+                data:formData,
+                transformRequest: angular.indentity 
+
+            }).
+            success(function (data, status, headers, config) {
+                     $rootScope.manage_research_my_research_now = data;
+                  $scope.close_modal(my_modal);
+                
+
+                    $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                             placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+                   
+            }).
+            error(function (data, status, headers, config) {
+                $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                             placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+            });
+        }
+
+        else{
+
+
+                   $http.put(
+             '/api/research',
+             JSON.stringify($rootScope.manage_research_fix_this_research),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+             $rootScope.manage_research_my_research_now = data;
+                  $scope.close_modal(my_modal);
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+             
+             })
+        .error(function(data, status, headers, config) {
+                      if(status==500){
+                        
+         $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                             placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+         }
+
+      }); 
+
+
+        }
+            
+     
+    }
+
+         $scope.$on("fileSelected", function (event, args) {
+        $scope.$apply(function () {            
+             $scope.new_file = [];
+            //add the file object to the scope's files collection
+            $scope.new_file.push(args.file);
+            // $rootScope.manage_research_fix_this_research.file_name = $scope.new_file[0].name;
+         
+
+        });
+    });
+
 });
 app.controller('manage_research_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
@@ -3355,7 +3569,8 @@ $scope.init =function() {
          $scope.year_choosen = {};
               $scope.curri_choosen = {}
                 $scope.indicator_choosen= {};
-                    $scope.result = {};
+         $scope.nothing_change = true;
+                $rootScope.manage_research_my_research_now = {};
 }
 
 
@@ -3365,28 +3580,57 @@ $scope.init =function() {
               $scope.curri_choosen = {}
                 $scope.indicator_choosen= {};
                     $scope.result = {};
-  
-        $scope.sendCurriAndGetYears = function () {
-        $scope.choose_not_complete =true;
-        $scope.year_choosen = {}
-        $scope.indicator_choosen= {};
-      
-              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
-
-            $scope.corresponding_aca_years = data;
-
-          });
-
+  $scope.nothing_change = true;
+    $scope.download_research = function(path_research){
+        $scope.download_file(path_research);
     }
 
+    $scope.download_file = function(path) { 
+        window.open(path, '_blank', "");  
+    }
+
+    $scope.go_to_fix_research = function(this_research){
+        console.log("go_to_fix_research");
+        $rootScope.manage_research_fix_this_research = angular.copy(this_research);
+        console.log( $rootScope.manage_research_fix_this_research);
+          $scope.who_in_this_curri();
+            console.log( $rootScope.manage_research_all_teachers_in_curri);
+    }   
+
+    $scope.go_to_create_research =function(){
+            $rootScope.manage_reseach_my_curri_id_now = $scope.curri_choosen.curri_id;
+           $scope.who_in_this_curri();
+            console.log( $rootScope.manage_research_all_teachers_in_curri);
+    }
+
+    $scope.who_in_this_curri = function(){
+console.log("who_in_this_curri");
+        $http.post(
+             '/api/teacher/getname',
+             JSON.stringify($scope.curri_choosen.curri_id),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            $rootScope.manage_research_all_teachers_in_curri = data;
+         });
+    }
+    $scope.remove_research = function(index_research_to_remove){
+
+         $rootScope.manage_research_my_research_now.splice(index_research_to_remove, 1);    
+           $scope.nothing_change = false;
+
+    }
     $scope.find_information = function(){
 
-          console.log("find_information");
-        console.log($scope.year_choosen);
+      
+        console.log($scope.curri_choosen.curri_id);
 
         $http.post(
-             '/api/studentstatusother',
-             JSON.stringify($scope.year_choosen),
+             '/api/research/getresearch',
+             JSON.stringify($scope.curri_choosen.curri_id),
              {
                  headers: {
                      'Content-Type': 'application/json'
@@ -3394,12 +3638,16 @@ $scope.init =function() {
              }
          ).success(function (data) {
             
-              $scope.result = data;
+              $rootScope.manage_research_my_research_now = data;
              $scope.choose_not_complete = false;
-             
+               $scope.nothing_change = true;
             
     
          });
+
+//  $rootScope.manage_research_my_research_now  =[{"researcher":[{"teacher_id":"00009","t_name":"รศ.ดร.ศุภมิตร จิตตะยโศธร"}],"research_id":1,"name":"An Extended NIAM Conceptual Schema Model for Object Databases","curri_id":"21","file_name":"download/research/file1.pdf","year_publish":2002},{"researcher":[{"teacher_id":"00009","t_name":"รศ.ดร.ศุภมิตร จิตตะยโศธร"}],"research_id":2,"name":"A temporal object relational SQL language with attribute timestamping in a temporal transparency environment","curri_id":"21","file_name":"download/research/file2.pdf","year_publish":2008},{"researcher":[{"teacher_id":"00007","t_name":"อาจารย์บัณฑิต พัสยา"},{"teacher_id":"00009","t_name":"รศ.ดร.ศุภมิตร จิตตะยโศธร"}],"research_id":3,"name":"A temporal object oriented conceptual schema model","curri_id":"21","file_name":"download/research/file3.pdf","year_publish":2001},{"researcher":[{"teacher_id":"00009","t_name":"รศ.ดร.ศุภมิตร จิตตะยโศธร"}],"research_id":4,"name":"The design and implementation of an ORM-based information warehouse","curri_id":"21","file_name":"download/research/file4.pdf","year_publish":2006},{"researcher":[{"teacher_id":"00007","t_name":"อาจารย์บัณฑิต พัสยา"}],"research_id":5,"name":"Feature Extraction from Retinal Fundus Image for Early Detection of Diabetic Retinopathy","curri_id":"21","file_name":"download/research/file5.pdf","year_publish":2013},{"researcher":[{"teacher_id":"00003","t_name":"รศ.ดร.อรฉัตร จิตต์โสภักตร์"}],"research_id":6,"name":"An Improvement of PDLZW implementation with a Modified WSC Updating Technique on FPGA","curri_id":"21","file_name":"download/research/file6.pdf","year_publish":2009},{"researcher":[{"teacher_id":"00003","t_name":"รศ.ดร.อรฉัตร จิตต์โสภักตร์"},{"teacher_id":"00013","t_name":"ดร.อำนาจ ขาวเน"}],"research_id":7,"name":"A Study of using L1-norm with Image Watermarking on SVD Domain","curri_id":"21","file_name":"download/research/file7.pdf","year_publish":2007},{"researcher":[{"teacher_id":"00006","t_name":"รศ.ดร.บุญธีร์ เครือตราชู"}],"research_id":8,"name":"Static task scheduling and grain packing in parallel-processing systems","curri_id":"21","file_name":"download/research/file8.pdf","year_publish":1986}]
+// ;
+// $scope.choose_not_complete = false;
 
     }
     $scope.close_modal = function(my_modal){
@@ -3408,10 +3656,16 @@ $scope.init =function() {
     }
     $scope.save_to_server = function(my_modal){
         console.log("save_to_server");
-        console.log($scope.result);
-        $http.put(
-             '/api/studentstatusother',
-             JSON.stringify($scope.result),
+        console.log($rootScope.manage_research_my_research_now);
+
+        if($rootScope.manage_research_my_research_now.length == 0 ){
+            $scope.to_sent  = {};
+            $scope.to_sent.research_id = -1;
+            $scope.to_sent.curri_id = $scope.curri_choosen.curri_id ;
+        }
+        $http.delete(
+             '/api/research',
+             JSON.stringify($rootScope.manage_research_my_research_now),
              {
                  headers: {
                      'Content-Type': 'application/json'
