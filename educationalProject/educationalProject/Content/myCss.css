@@ -38,7 +38,7 @@ td.download > a:hover{
   color:#6F002B;
 }
 td,.normal{
-  font-size:18px !important;
+  font-size:18px ;
 }
 
 
@@ -548,6 +548,15 @@ table.table_modal .evaluate_topic{
   
 }
 
+.btn-success{
+  background-color:   #739900;
+  border: #4cae4c;
+}
+
+button.btn-success:hover{
+  background-color:#3e8e3e;
+}
+
 table.table_modal th{
   font-size: 23px !important;
   text-align: center;
@@ -557,7 +566,7 @@ table.table_modal th{
 
 table.table_modal td,table.table_modal td div{
   font-family:  "FreesiaUPC" !important;
-  font-size: 20px !important;
+  font-size: 20px ;
   text-align: center;
   vertical-align: middle;
 }
@@ -630,7 +639,7 @@ color:white;
 
   font-family:  "FreesiaUPC";
   font-weight: normal !important;;
-  font-size: 33px;
+  font-size: 34px;
   padding:0px !important; 
      margin-top:3px;
      padding-top: 0px !important;

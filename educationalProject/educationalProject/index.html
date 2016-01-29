@@ -2892,15 +2892,12 @@ $('.profile_pic').mouseover(function(){
           <div class="row">
 
 
-                        <div class="col-md-8" >
+                      
                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             </select>
 
-                        </div>
-                        <div class="col-md-4" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
-</select>   
-                        </div>
+                     
+                      
 
                     </div>
 <br />
@@ -7291,11 +7288,11 @@ glyphicon glyphicon-bell"></i> </span>
                                                 </td>-->
   
                                     
-   <td > <a href="" style="margin-top:7px" class="hvr-pulse" data-nq-toggle-modal="#do_survey" data-ng-click="go_to_answer(survey)">
+   <td > <a href="" style="margin-top:7px" class="hvr-pulse" data-nq-toggle-modal="#do_survey" data-effect="from-left" data-ng-click="go_to_answer(survey)">
                                         <span class="topic"><i style="color:#204d74;margin0"class="glyphicon glyphicon-hand-up"></i> </span>
                                     </a></td> 
 
-                                       <td > <a href=""  style="margin-top:7px"data-nq-toggle-modal="#result_survey" data-ng-click="go_to_result(survey)" class="hvr-pulse" >
+                                       <td > <a href=""  style="margin-top:7px"data-nq-toggle-modal="#result_survey" data-effect="from-left" data-ng-click="go_to_result(survey)" class="hvr-pulse" >
                                         <span class="topic"><i style="color:#4cae4c"class="glyphicon glyphicon-stats"></i> </span>
                                     </a></td> 
 
@@ -7554,9 +7551,9 @@ glyphicon glyphicon-bell"></i> </span>
 
                 </div>
 
-                        <div id="result_survey" data-nq-modal="" data-qo-independent="true" data-qo-size="lg" data-ng-controller="result_survey_controller">
+                        <div id="result_survey" data-nq-modal="" data-qo-independent="true" data-qo-screen-mode="true" data-ng-controller="result_survey_controller" >
                     <div class="custom-header">
-                        <h1 class="headerModaltemp">{{manage_survey_questionare_of_result.name}}</h1>
+                        <h2 class="headerModaltemp">{{manage_survey_questionare_of_result.name}}</h2>
                     </div>
 
                     <div class="container-fluid">
@@ -7577,31 +7574,31 @@ glyphicon glyphicon-bell"></i> </span>
                                             <tr>
                                                 <!--nq-column-sort directive would bind sorting handler to the element-->
                                                 
-                                                <th class="col-xs-4">หัวข้อการประเมิน</th>
-                                                <th class="col-xs-1">7</th>
-                                                <th class="col-xs-1">6</th>
-                                                <th class="col-xs-1">5</th>
-                                                <th class="col-xs-1">4</th>
-                                                <th class="col-xs-1">3</th>
-                                                <th class="col-xs-1">2</th>
-                                                <th class="col-xs-1">1</th>
-                                                <th class="col-xs-1">รวม</th>
+                                                <th style="width:700px">หัวข้อการประเมิน</th>
+                                                <th  style="width:70px">7</th>
+                                                <th style="width:70px">6</th>
+                                                <th style="width:70px">5</th>
+                                                <th style="width:70px">4</th>
+                                                <th style="width:70px">3</th>
+                                                <th style="width:70px">2</th>
+                                                <th style="width:70px">1</th>
+                                                <th style="width:70px">รวม</th>
                                             </tr>
                                         </thead>
                                         <tbody class="flattened">
                                             <!--pageable-repeat is required sub directive-->
                                             <tr ng-repeat="result in manage_survey_result.main_result_list">
                                 
-                                                <td class="left_column">{{result.name}}</td>
+                                                <td class="left_column" style="font-size:21px;margin-left:10px">{{result.name}}</td>
 
 
-                                                <td>{{result.answer[6]}}</td>
-                                                <td>{{result.answer[5]}}</td>
-                                                <td>{{result.answer[4]}} </td>
-                                                <td>{{result.answer[3]}} </td>
-                                                <td>{{result.answer[2]}} </td>
-                                                <td>{{result.answer[1]}} </td>
-                                                <td>{{result.answer[0]}} </td>
+                                                <td style="font-size:21px;">{{result.answer[6]}}</td>
+                                                <td style="font-size:21px;">{{result.answer[5]}}</td>
+                                                <td style="font-size:21px;">{{result.answer[4]}} </td>
+                                                <td style="font-size:21px;">{{result.answer[3]}} </td>
+                                                <td style="font-size:21px;">{{result.answer[2]}} </td>
+                                                <td style="font-size:21px;">{{result.answer[1]}} </td>
+                                                <td style="font-size:21px;">{{result.answer[0]}} </td>
    <td>{{result.answer[0]+result.answer[1]+result.answer[2]+result.answer[3]+result.answer[4]+result.answer[5]+result.answer[6]}} </td>
                                             </tr>
 
@@ -7641,9 +7638,9 @@ glyphicon glyphicon-bell"></i> </span>
                 </div>
 
 
-                <div id="do_survey" data-nq-modal="" data-qo-independent="true" data-qo-size="lg" data-ng-controller="answer_survey_controller">
+                <div id="do_survey" data-nq-modal="" data-qo-independent="true" data-qo-screen-mode="true" data-ng-controller="answer_survey_controller">
                     <div class="custom-header">
-                        <h3 class="headerModaltemp">{{manage_survey_questionare_to_answer.name}}</h3>
+                        <h2 class="headerModaltemp">{{manage_survey_questionare_to_answer.name}}</h2>
                     </div>
 
                     <div class="container-fluid">
@@ -7663,31 +7660,31 @@ glyphicon glyphicon-bell"></i> </span>
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
                                                 <!--nq-column-sort directive would bind sorting handler to the element-->
-                                                <th class="col-xs-1">ข้อที่</th>
-                                                <th class="col-xs-4">หัวข้อการประเมิน</th>
-                                                <th class="col-xs-1">1</th>
-                                                <th class="col-xs-1">2</th>
-                                                <th class="col-xs-1">3</th>
-                                                <th class="col-xs-1">4</th>
-                                                <th class="col-xs-1">5</th>
-                                                <th class="col-xs-1">6</th>
-                                                <th class="col-xs-1">7</th>
+                                                <th style="width:70px">ข้อที่</th>
+                                                <th style="width:700px">หัวข้อการประเมิน</th>
+                                                <th style="width:70px">1</th>
+                                                <th style="width:70px">2</th>
+                                                <th style="width:70px">3</th>
+                                                <th style="width:70px">4</th>
+                                                <th style="width:70px">5</th>
+                                                <th style="width:70px">6</th>
+                                                <th style="width:70px">7</th>
                                             </tr>
                                         </thead>
                                         <tbody class="flattened">
                                             <!--pageable-repeat is required sub directive-->
                                             <tr ng-repeat="question in manage_survey_questionare_set">
-                                                <td>{{$index+1}}</td>
-                                                <td class="left_column">{{question.detail}}</td>
+                                                <td style="font-size:21px">{{$index+1}}</td>
+                                                <td class="left_column" style="font-size:21px">{{question.detail}}</td>
 
 
-                                                <td><input type="radio" value="7" ng-model="question.answer"> </td>
-                                                <td><input type="radio" value="6" ng-model="question.answer" > </td>
-                                                <td><input type="radio" value="5" ng-model="question.answer"> </td>
-                                                <td><input type="radio" value="4" ng-model="question.answer"> </td>
-                                                <td><input type="radio" value="3" ng-model="question.answer"> </td>
-                                                <td><input type="radio" value="2" ng-model="question.answer"> </td>
-                                                <td><input type="radio" value="1" ng-model="question.answer"> </td>
+                                                <td style="font-size:21px"><input type="radio" value="7" ng-model="question.answer"> </td>
+                                                <td style="font-size:21px"><input type="radio" value="6" ng-model="question.answer" > </td>
+                                                <td style="font-size:21px"><input type="radio" value="5" ng-model="question.answer"> </td>
+                                                <td style="font-size:21px"><input type="radio" value="4" ng-model="question.answer"> </td>
+                                                <td style="font-size:21px"><input type="radio" value="3" ng-model="question.answer"> </td>
+                                                <td style="font-size:21px"><input type="radio" value="2" ng-model="question.answer"> </td>
+                                                <td style="font-size:21px"><input type="radio" value="1" ng-model="question.answer"> </td>
 
                                             </tr>
 
@@ -7722,7 +7719,7 @@ glyphicon glyphicon-bell"></i> </span>
                
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-success "  ng-disabled="still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal()">ยกเลิก</button>
                         </div>
                     </div>
