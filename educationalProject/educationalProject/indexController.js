@@ -3133,3 +3133,144 @@ $scope.choose_not_complete =false;
   }); 
     }
 });
+
+
+app.controller('create_research_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+                   $scope.new_research = {};
+  $scope.new_research.name = "";
+  $scope.new_research.research_owner =[];
+  $scope.new_research.year_publish = "";
+  $scope.new_research.file = "";
+}
+  $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+  $scope.new_research = {};
+  $scope.new_research.name = "";
+  $scope.new_research.research_owner =[];
+  $scope.new_research.year_publish = "";
+  $scope.new_research.file = "";
+
+
+     $scope.$on("fileSelected", function (event, args) {
+        $scope.$apply(function () {            
+            $scope.new_research.file = [];
+            //add the file object to the scope's files collection
+            $scope.new_research.file.push(args.file);
+        });
+    });
+
+
+     $scope.still_not_complete = function(){
+
+        if(! $scope.new_research.name || $scope.new_research.research_owner.length ==0 || !$scope.new_research.year_publish || !$scope.new_research.file ){
+            return true;
+        }
+        else{
+            if($scope.new_research.year_publish <= 0){
+                return true;
+            }
+             return false;
+        }
+
+
+       
+     }
+    
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+});
+app.controller('manage_research_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+}
+
+
+  
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+  
+        $scope.sendCurriAndGetYears = function () {
+        $scope.choose_not_complete =true;
+        $scope.year_choosen = {}
+        $scope.indicator_choosen= {};
+      
+              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
+
+            $scope.corresponding_aca_years = data;
+
+          });
+
+    }
+
+    $scope.find_information = function(){
+
+          console.log("find_information");
+        console.log($scope.year_choosen);
+
+        $http.post(
+             '/api/studentstatusother',
+             JSON.stringify($scope.year_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            
+              $scope.result = data;
+             $scope.choose_not_complete = false;
+             
+            
+    
+         });
+
+    }
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+    $scope.save_to_server = function(my_modal){
+        console.log("save_to_server");
+        console.log($scope.result);
+        $http.put(
+             '/api/studentstatusother',
+             JSON.stringify($scope.result),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+               $scope.close_modal(my_modal);
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    }
+});
+

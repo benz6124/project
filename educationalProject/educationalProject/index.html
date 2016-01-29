@@ -323,8 +323,13 @@ $('.profile_pic').mouseover(function(){
                                 </li>
 
                                 <li>
-                                    <a href="" data-nq-toggle-modal="#create_research" data-screenMode="true" data-effect="slide-left" data-placement="right">
+                                    <a href="" data-nq-toggle-modal="#manage_research" data-screenMode="true" data-effect="slide-left" data-placement="right">
                                         <span class="topic"> งานวิจัย</span>
+                                    </a>
+                                </li>
+   <li>
+                                    <a href="" data-nq-toggle-modal="#create_research" data-screenMode="true" data-effect="slide-left" data-placement="right">
+                                        <span class="topic"> งานวิจัยเก่า</span>
                                     </a>
                                 </li>
 
@@ -2808,6 +2813,183 @@ $('.profile_pic').mouseover(function(){
                     <h1><span class="glyphicon glyphicon-th-list"></span><span class="headerModal" style="color:#6F002B"> สร้างอัลบั้มรูปภาพ</span></h1>
                 </div>
 
+<div id="fix_research" data-nq-modal="" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_research_controller">
+       <div class="custom-header">
+                        <h1 class="headerModalH1">แก้ไขข้อมูลงานวิจัย</h1>
+                    </div>
+
+
+
+
+                                     
+  <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่องานวิจัย   </span></h3>
+                            </div>
+                            <div class="col-md-9">
+                                <input  type="text" class="form-control" placeholder="" ng-model="new_research.name" required><span class="normal">  </span>
+
+                            </div>
+                        </div>
+
+  <div class="row">
+  <div class="col-md-3" >
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ผู้วิจัย   </span></h3>
+                            </div>
+ <div class="col-md-9" style="padding-right:22px;">
+    <select style="margin-right:10px;"data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกกลุ่มเป้าหมาย" data-ng-model="$parent.new_research.research_owner">
+                                    
+
+
+
+                                            </select>
+</div>
+
+</div>
+
+                                     
+  <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ปีที่ตีพิมพ์   </span></h3>
+                            </div>
+                            <div class="col-md-9">
+                                <input  type="number" class="form-control" placeholder="" ng-model="new_research.year_publish" required><span class="normal">  </span>
+
+                            </div>
+                        </div>
+
+   <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-left:10px;margin-top:5px;"><span class="topicNewHeader">ไฟล์งานวิจัย:  </span></h3>
+                            </div>
+                            <div class="col-md-8">
+                              
+                                <input type="file" name="upload_file_input" class="form-control" placeholder="ไฟล์งานวิจัย" file-upload  data-ng-model="new_research.file" required/>
+                            </div>
+     <div class="col-md-1" style="padding-left:0px" >
+                        <a href="" class="hvr-buzz topicHeader" ng-click="watch_preview()">  <i style="font-size:25px;margin-top:3px"class="glyphicon glyphicon-search" ></i>   </a>
+</div>
+                        </div>
+
+           <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button ng-disabled="still_not_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                        </div>
+                    </div>
+</div>
+
+
+
+
+
+ <div id="manage_research" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_research_controller">
+
+                    <div class="custom-header">
+                        <h1 class="headerModalH1">ส่วนจัดการงานวิจัย</h1>
+                    </div>
+
+          <div class="row">
+
+
+                        <div class="col-md-8" >
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+            </select>
+
+                        </div>
+                        <div class="col-md-4" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+</select>   
+                        </div>
+
+                    </div>
+<br />
+  <div class="container-fluid" >
+                        <div class="clearfix">
+
+
+                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
+                                 data-qo-selectable="true">
+              
+
+              
+                                <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+
+                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="flip-x" data-nq-toggle-modal="#create_new_research" data-ng-click="choose_to_add_new_file()"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลงานวิจัย</button>
+
+
+  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
+                                      
+                                        <thead class="nq-fix-table-scroll">
+                                            <tr>
+                          
+                                                <th style="width:300px">ชื่องานวิจัย</th>
+
+                                                <th style="width:90px">เจ้าของงานวิจัย</th>
+                                             <!--    <th style="width:80px">วันที่สร้าง</th>
+                                                <th style="width:80px">ผู้สร้าง</th> -->
+                                                <th style="width:30px">ดาวน์โหลด</th>
+                                                <th style="width:30px">แก้ไข</th>
+                                                <th style="width:30px">ลบ</th>
+                                              
+                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody class="flattened">
+                                        <form name="manage_survey_form" novalidate>
+                                          
+
+                                            <tr  ng-repeat="survey in result">
+                                           
+
+                                                <td>dadadafafafafafafafafafd</td>
+                                                 <td>dadwdadadad</td>
+                                             
+                                               <!--  <td>adad</td>
+                                                <td>dadad</td>
+                                                    <td>dawd</td>
+                                                <td>d</td>
+                                                <td>da</td>
+                                                  <td>a</td> -->
+                                             <!--    <td class=" left_column" ><span class="topicHeader" ng-hide="primary_evidence.just_create">{{primary_evidence.evidence_name}}</span>
+
+                                                <span class="topicHeader" ng-show="primary_evidence.just_create"> <input class="form-control"  type="text" ng-model="primary_evidence.evidence_name " required/></span>
+
+
+                                                </td>-->
+     <td > <a style="margin-right:10px"href="" data-nq-toggle-modal="" class="hvr-pulse" >
+                                        <span class="topic"><i style="color:#4cae4c"class="glyphicon glyphicon-download-alt"></i> </span>
+                                    </a></td> 
+                                    
+   <td > <a style="margin-right:10px"href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_research">
+                                        <span class="topic"><i style="color:#eea236;margin0"class="glyphicon glyphicon-wrench"></i> </span>
+                                    </a></td> 
+
+                                    
+
+                                          <td > <a style="margin-right:10px"href=""  class="hvr-pulse" >
+                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                    </a></td> 
+
+                                            </tr>
+
+                                            </form>
+                                        </tbody>
+
+                                    </table>
+
+                                     <!--     <button type="button" style="margin-top:5px;margin-left:520px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_primary_evidence()"style="color:green;font-size:30px"></i> </span></button> -->
+         </div>         </div>        
+
+          </div>         </div>
+     <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button ng-disabled="manage_survey_form.$invalid" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                        </div>
+                    </div>
+   </div>
+
                 <div id="create_research" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
                     <div class="custom-header">
 
@@ -4005,7 +4187,7 @@ glyphicon glyphicon-bell"></i> </span>
 </div>
                             <div class="col-md-6">
                              
-                                <input type="file" style="margin-right:20px;" name="upload_file_input" class="form-control" placeholder="ไฟล์เล่มรายงาน" data-ng-model="files" ng-disabled="choose_not_complete" required="required" file-upload   multiple/>
+                                <input type="file" style="margin-right:20px;" name="upload_file_input" class="form-control" placeholder="ไฟล์สนับสนุนการประเมิน" data-ng-model="files" ng-disabled="choose_not_complete" required="required" file-upload   multiple/>
                             </div>
 
                         </div>
@@ -6891,6 +7073,73 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
 
                 </div>
+<div id="create_new_research" data-nq-modal="" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_research_controller">
+       <div class="custom-header">
+                        <h1 class="headerModalH1">เพิ่มข้อมูลงานวิจัย</h1>
+                    </div>
+
+
+
+
+                                     
+  <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่องานวิจัย   </span></h3>
+                            </div>
+                            <div class="col-md-9">
+                                <input  type="text" class="form-control" placeholder="" ng-model="new_research.name" required><span class="normal">  </span>
+
+                            </div>
+                        </div>
+
+  <div class="row">
+  <div class="col-md-3" >
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ผู้วิจัย   </span></h3>
+                            </div>
+ <div class="col-md-9" style="padding-right:22px;">
+    <select style="margin-right:10px;"data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกกลุ่มเป้าหมาย" data-ng-model="$parent.new_research.research_owner">
+                                    
+    <option>คน1</option>
+                                                <option>คน2</option>
+                                                <option>คน3</option>
+                                                <option>คน4</option>
+
+
+                                            </select>
+</div>
+
+</div>
+
+                                     
+  <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ปีที่ตีพิมพ์   </span></h3>
+                            </div>
+                            <div class="col-md-9">
+                                <input  type="number" class="form-control" placeholder="" ng-model="new_research.year_publish" required><span class="normal">  </span>
+
+                            </div>
+                        </div>
+
+   <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-left:10px;margin-top:5px;"><span class="topicNewHeader">ไฟล์งานวิจัย:  </span></h3>
+                            </div>
+                            <div class="col-md-9">
+                              
+                                <input type="file" name="upload_file_input" class="form-control" placeholder="ไฟล์งานวิจัย" file-upload  data-ng-model="new_research.file" required/>
+                            </div>
+
+                        </div>
+
+           <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button ng-disabled="still_not_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                        </div>
+                    </div>
+</div>
+
 
 
 
