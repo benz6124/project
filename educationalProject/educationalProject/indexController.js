@@ -2060,6 +2060,9 @@ $scope.choose_to_add_new_primary_file = function(){
 
 $scope.go_to_import = function(){
     $rootScope.manage_evidence_indicator_num = $scope.indicator_choosen.indicator_num;
+        $rootScope.manage_evidence_curri_id_now = $scope.curri_choosen.curri_id;
+    $rootScope.manage_evidence_year_now = $scope.year_choosen.aca_year;
+
 }
 $scope.init =function() {
      $scope.choose_not_complete = true;
@@ -2860,7 +2863,7 @@ app.controller('import_evidence_controller', function($scope, $http,$alert,$load
  $scope.choose_not_complete = true;
          $scope.year_choosen = {};
               $scope.curri_choosen = {};
-                $scope.evidence_we_want = {};
+                $scope.evidence_we_want = "";
                     $scope.result = {};
 $scope.code_we_want = "";
 $scope.evidence_we_want = {};
@@ -2876,10 +2879,18 @@ $scope.all_evidences ={};
        
 
 $scope.still_not_write_code = function() {
-    if(!$scope.code_we_want || $rootScope.my_evidence_real_code_we_have_now.indexOf($scope.code_we_want) != -1){
-        return true;
+    console.log("still_not_write_code");
+    if(!$scope.evidence_we_want || !$scope.code_we_want ){
+          console.log("if1-true");
+         return true;
     }
     else{
+        console.log($scope.code_we_want);
+       if( $rootScope.my_evidence_real_code_we_have_now.indexOf($scope.code_we_want) != -1){
+             console.log("if2-true");
+            return true;
+        }
+           console.log("false");
         return false;
     }
 }
@@ -2897,11 +2908,12 @@ $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
               $scope.curri_choosen = {};
-                $scope.evidence_we_want = {};
+                $scope.evidence_we_want = "";
                     $scope.result = {};
-                    $scope.code_we_want = {};
-$scope.evidence_we_want = {};
+                    $scope.code_we_want = "";
+
 $scope.all_evidences ={};
+
 
  var index;
   $rootScope.my_evidence_real_code_we_have_now = [];
