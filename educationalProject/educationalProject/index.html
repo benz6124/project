@@ -3712,7 +3712,7 @@ $('.profile_pic').mouseover(function(){
 glyphicon glyphicon-bell"></i> </span>
                                     </a></td> -->
                                     
-   <td > <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="remove_primary_evidence($index)">
+   <td > <a href=""  class="hvr-pulse" data-ng-click="remove_primary_evidence($index)">
                                         <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td>
 
@@ -3854,18 +3854,18 @@ glyphicon glyphicon-bell"></i> </span>
         
                                                 </td> -->
 
-   <td > <a style="margin-right:10px"href=""  class="hvr-pulse" ng-click="watch_file(evidence.file_name)">
+   <td > <a style="margin-left:1.5px;margin-top:3.5px"href=""  class="hvr-pulse" ng-click="watch_file(evidence.file_name)">
                                         <span class="topicHeader"><i class="
 glyphicon glyphicon-eye-open"></i> </span></a></td>
 
 
 
-                 <td > <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="choose_to_change_file(evidence)" >
+                 <td > <a style="margin-left:1.5px;margin-top:3.5px"href=""  class="hvr-pulse" data-ng-click="choose_to_change_file(evidence)" >
                                         <span class="topicHeader"><i style="color:#eea236" data-nq-toggle-modal="#fix_evidence" class="
 glyphicon glyphicon-wrench"></i> </span></a></td>  
 
 
-   <td > <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="remove_evidence($index)">
+   <td > <a style="margin-left:1.5px;margin-top:3.5px"href=""  class="hvr-pulse" data-ng-click="remove_evidence($index)">
                                         <span class="topicHeader"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td>
 
@@ -3954,13 +3954,13 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
 
                                               <!--      <span class="topicHeader" style="margin-right:15px"><i  ng-class="{already_send: primary_evidence.status == '1' || primary_evidence.status == '5' , not_send: primary_evidence.status == '0' || primary_evidence.status == '4'}" class="glyphicon glyphicon-exclamation-sign" ></i></span>  -->
 
-<span class="topicHeader" style="margin-right:15px"  ng-show="primary_evidence.status == '1' || primary_evidence.status == '5'"  data-nq-tooltip="" data-qs-title="หลักฐานถูกอัพโหลดเรียบร้อยแล้ว"><i class="glyphicon glyphicon-ok-sign already_send" ></i></span> 
+<span class="topicHeader"  ng-show="primary_evidence.status == '1' || primary_evidence.status == '5'"  data-nq-tooltip="" data-qs-title="หลักฐานถูกอัพโหลดเรียบร้อยแล้ว"><i class="glyphicon glyphicon-ok-sign already_send" ></i></span> 
 
 
-<span class="topicHeader" style="margin-right:15px" ng-show="(primary_evidence.status == '2' && primary_evidence.by_pass!='1' )|| primary_evidence.status == '6'" data-nq-tooltip="" data-qs-title="ยังไม่มีการแต่งตั้งผู้รับผิดชอบ" > <i  class="glyphicon glyphicon-question-sign" ></i></span> 
+<span class="topicHeader"  ng-show="(primary_evidence.status == '2' && primary_evidence.by_pass!='1' )|| primary_evidence.status == '6'" data-nq-tooltip="" data-qs-title="ยังไม่มีการแต่งตั้งผู้รับผิดชอบ" > <i  class="glyphicon glyphicon-question-sign" ></i></span> 
 
 
-<span class="topicHeader" style="margin-right:15px" data-nq-tooltip="" data-qs-title="หลักฐานยังไม่ถูกอัพโหลด"  ng-show="primary_evidence.status == '0' || primary_evidence.status == '4' || primary_evidence.by_pass == '1'"><i  class="glyphicon glyphicon-remove-sign not_send" ></i></span> 
+<span class="topicHeader"  data-nq-tooltip="" data-qs-title="หลักฐานยังไม่ถูกอัพโหลด"  ng-show="primary_evidence.status == '0' || primary_evidence.status == '4' || primary_evidence.by_pass == '1'"><i  class="glyphicon glyphicon-remove-sign not_send" ></i></span> 
 
 
 
@@ -3988,12 +3988,12 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
 
    <td class="number_indicator"> 
 
-   <a style="margin-right:10px"href="" data-nq-tooltip="" data-qs-title="ส่งอีเมล์แจ้งเตือนผู้รับผิดชอบทันที" ng-show="primary_evidence.by_pass == '1' "ng-hide="primary_evidence.status == '2' || primary_evidence.status == '6' ||primary_evidence.status == '1' || primary_evidence.status == '5' " class="hvr-pulse" data-ng-click="send_email(primary_evidence.teacher_id)">
+   <ahref="" data-nq-tooltip="" data-qs-title="ส่งอีเมล์แจ้งเตือนผู้รับผิดชอบทันที" ng-show="primary_evidence.by_pass == '1' "ng-hide="primary_evidence.status == '2' || primary_evidence.status == '6' ||primary_evidence.status == '1' || primary_evidence.status == '5' " class="hvr-pulse" data-ng-click="send_email(primary_evidence.teacher_id)">
                                         <span class="topic"><i style="color:#eea236"class="
 glyphicon glyphicon-bell"></i> </span>
                                     </a></td>
                                     
-   <td class="noti"> <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="remove_primary_evidence($index)">
+   <td class="noti"> <a href=""  class="hvr-pulse" data-ng-click="remove_primary_evidence($index)">
                                         <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td>
 
@@ -4292,11 +4292,11 @@ glyphicon glyphicon-bell"></i> </span>
                                                 </td>
                                                  <td class="topic_indicator left_column"><input class="form-control"size="64" type="text" ng-model="indicator.indicator_name_e " required/></td>
 
-                                     <td class="number_indicator"> <button style="margin-right:10px;background-color:transparent;border:none"href="" data-ng-click="choose_indicator(indicator)" class="hvr-pulse" data-nq-toggle-modal="#manage_sub_indicators" ng-disabled="validate_year_to_create()" data-effect="slide-left">
+                                     <td class="number_indicator"> <button style="background-color:transparent;border:none"href="" data-ng-click="choose_indicator(indicator)" class="hvr-pulse" data-nq-toggle-modal="#manage_sub_indicators" ng-disabled="validate_year_to_create()" data-effect="slide-left">
                                         <span class="topic"><i class="glyphicon glyphicon-zoom-in"></i> </span>
                                     </button></td>
 
-                                       <td class="number_indicator"> <a style="margin-right:10px"href="" data-ng-click="remove_indicator($index)" class="hvr-pulse">
+                                       <td class="number_indicator"> <a href="" data-ng-click="remove_indicator($index)" class="hvr-pulse">
                                         <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td>
 
@@ -7150,7 +7150,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
- <div class="container-fluid" ng-hide="choose_not_complete" >
+ <div class="container-fluid"  >
    <div class="clearfix">
 
                                      
@@ -7169,13 +7169,8 @@ glyphicon glyphicon-bell"></i> </span>
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">กลุ่มเป้าหมาย   </span></h3>
                             </div>
  <div class="col-md-9" style="padding-right:22px;">
-    <select style="margin-right:10px;"data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกกลุ่มเป้าหมาย" data-ng-model="$parent.my_target">
-                                                <option>นักศึกษา</option>
-                                                <option>ศิษย์เก่า</option>
-                                                <option>อาจารย์</option>
-                                                <option>กรรมการหลักสูตร</option>
-                                                <option>เจ้าหน้าที่</option>
-                                                <option>บริษัทภายนอก</option>
+    <select style="margin-right:10px;"data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-options ="user.user_type for user in all_usertype" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกกลุ่มเป้าหมาย" data-ng-model="$parent.my_target">
+                                    
 
 
                                             </select>
@@ -7234,7 +7229,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                     </div>
 <br />
-  <div class="container-fluid" ng-hide="choose_not_complete">
+  <div class="container-fluid" ng-hide="choose_not_complete" >
                         <div class="clearfix">
 
 
@@ -7245,7 +7240,7 @@ glyphicon glyphicon-bell"></i> </span>
               
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
-                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="flip-x" data-nq-toggle-modal="#create_survey" data-ng-click="choose_to_add_new_file()"><i class="fic glyphicon glyphicon-plus-sign"></i> สร้างแบบสอบถาม</button>
+                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="flip-x" data-nq-toggle-modal="#create_survey" data-ng-click="go_to_create_survey()"><i class="fic glyphicon glyphicon-plus-sign"></i> สร้างแบบสอบถาม</button>
 
 
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
@@ -7255,11 +7250,11 @@ glyphicon glyphicon-bell"></i> </span>
                           
                                                 <th style="width:300px">ชื่อแบบสอบถาม</th>
 
-                                                <th style="width:90px">กลุ่มเป้าหมาย</th>
-                                                <th style="width:80px">วันที่สร้าง</th>
-                                                <th style="width:80px">ผู้สร้าง</th>
+                                                <th style="width:100px">กลุ่มเป้าหมาย</th>
+                                                <th style="width:50px">วันที่สร้าง</th>
+                                                <th style="width:140px">ผู้สร้าง</th>
                                                 <th style="width:30px">ตอบ</th>
-                                                <th style="width:30px">ผลสำรวจ</th>
+                                                <th style="width:30px">ผล</th>
                                                 <th style="width:30px">ลบ</th>
                                               
                                             
@@ -7271,11 +7266,17 @@ glyphicon glyphicon-bell"></i> </span>
 
                                             <tr  ng-repeat="survey in result">
                                            
+ <td class="left_column" style=" padding-left: 10px ;"><span style="font-size:19px;">{{survey.name}}</span> </td>
+                                        
+        <td  >
 
-                                                <td>dadadafafafafafafafafafd</td>
-                                                 <td>dadwdadadad</td>
-                                                  <td>23/8/1993</td>
-                                                   <td>mememememe</td>
+
+<span ng-repeat="each_target in survey.target" style="padding-left:0px;font-size:19px">{{each_target}}<br/></span>
+
+
+  </td>
+                      <td ><span style="font-size:19px">{{survey.date}}</span> </td>              
+                                                              <td ><span style="font-size:19px">{{survey.t_name}}</span> </td>
                                                <!--  <td>adad</td>
                                                 <td>dadad</td>
                                                     <td>dawd</td>
@@ -7290,15 +7291,15 @@ glyphicon glyphicon-bell"></i> </span>
                                                 </td>-->
   
                                     
-   <td > <a style="margin-right:10px"href=""  class="hvr-pulse" data-nq-toggle-modal="#do_survey">
+   <td > <a href="" style="margin-top:7px" class="hvr-pulse" data-nq-toggle-modal="#do_survey" data-ng-click="go_to_answer(survey)">
                                         <span class="topic"><i style="color:#204d74;margin0"class="glyphicon glyphicon-hand-up"></i> </span>
                                     </a></td> 
 
-                                       <td > <a style="margin-right:10px"href="" data-nq-toggle-modal="#result_survey" class="hvr-pulse" >
+                                       <td > <a href=""  style="margin-top:7px"data-nq-toggle-modal="#result_survey" data-ng-click="go_to_result(survey)" class="hvr-pulse" >
                                         <span class="topic"><i style="color:#4cae4c"class="glyphicon glyphicon-stats"></i> </span>
                                     </a></td> 
 
-                                          <td > <a style="margin-right:10px"href=""  class="hvr-pulse" >
+                                          <td > <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_qestionare($index)" >
                                         <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td> 
 
@@ -7315,7 +7316,7 @@ glyphicon glyphicon-bell"></i> </span>
           </div>         </div>
      <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="manage_survey_form.$invalid" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
@@ -7553,9 +7554,9 @@ glyphicon glyphicon-bell"></i> </span>
 
                 </div>
 
-                        <div id="result_survey" data-nq-modal="" data-qo-independent="true" data-qo-size="lg">
+                        <div id="result_survey" data-nq-modal="" data-qo-independent="true" data-qo-size="lg" data-ng-controller="result_survey_controller">
                     <div class="custom-header">
-                        <h1 class="headerModalH1"> ชื่อแบบสอบถาม</h1>
+                        <h1 class="headerModaltemp">{{manage_survey_questionare_of_result.name}}</h1>
                     </div>
 
                     <div class="container-fluid">
@@ -7577,86 +7578,37 @@ glyphicon glyphicon-bell"></i> </span>
                                                 <!--nq-column-sort directive would bind sorting handler to the element-->
                                                 
                                                 <th class="col-xs-4">หัวข้อการประเมิน</th>
-                                                <th class="col-xs-1">1</th>
-                                                <th class="col-xs-1">2</th>
-                                                <th class="col-xs-1">3</th>
-                                                <th class="col-xs-1">4</th>
-                                                <th class="col-xs-1">5</th>
-                                                <th class="col-xs-1">6</th>
                                                 <th class="col-xs-1">7</th>
+                                                <th class="col-xs-1">6</th>
+                                                <th class="col-xs-1">5</th>
+                                                <th class="col-xs-1">4</th>
+                                                <th class="col-xs-1">3</th>
+                                                <th class="col-xs-1">2</th>
+                                                <th class="col-xs-1">1</th>
                                                 <th class="col-xs-1">รวม</th>
                                             </tr>
                                         </thead>
                                         <tbody class="flattened">
                                             <!--pageable-repeat is required sub directive-->
-                                            <tr>
+                                            <tr ng-repeat="result in manage_survey_result.main_result_list">
                                 
-                                                <td class="left_column">ท่านคิดว่าสื่อการเรียนการสอนในปัจจุบันเพียงพอ</td>
+                                                <td class="left_column">{{result.name}}</td>
 
 
-                                                <td>8</td>
-                                                <td>5</td>
-                                                <td>1 </td>
-                                                <td>5 </td>
-                                                <td>2 </td>
-                                                <td>3 </td>
-                                                <td>4 </td>
-<td>8</td>
+                                                <td>{{result.answer[6]}}</td>
+                                                <td>{{result.answer[5]}}</td>
+                                                <td>{{result.answer[4]}} </td>
+                                                <td>{{result.answer[3]}} </td>
+                                                <td>{{result.answer[2]}} </td>
+                                                <td>{{result.answer[1]}} </td>
+                                                <td>{{result.answer[0]}} </td>
+   <td>{{result.answer[0]+result.answer[1]+result.answer[2]+result.answer[3]+result.answer[4]+result.answer[5]+result.answer[6]}} </td>
                                             </tr>
-
-
-                                            <tr>
-                                              
-                                                <td class="left_column">ท่านคิดว่าสื่อการเรียนที่มีอยู่มีคุณภาพ</td>
-
-                                   <td>8</td>
-                                                <td>5</td>
-                                                <td>1 </td>
-                                                <td>5 </td>
-                                                <td>2 </td>
-                                                <td>3 </td>
-                                                <td>4 </td>
-<td>8</td>
-                                            </tr>
-
-                                            <tr>
-                                               
-                                                <td class="left_column">เมื่อเกิดการชำรุดของอุปกรณ์ การซ่อมแซมมีความรวดเร็ว</td>
-
-                                   <td>8</td>
-                                                <td>5</td>
-                                                <td>1 </td>
-                                                <td>5 </td>
-                                                <td>2 </td>
-                                                <td>3 </td>
-                                                <td>4 </td>
-<td>8</td>
-
-                                            </tr>
-
-                                            <tr>
-                                                
-                                                <td class="left_column">ท่านคิดว่าสื่อการเรียนการสอนมีมีผลต่อคุณภาพการเรียน</td>
-
-
-                                                                                <td>8</td>
-                                                <td>5</td>
-                                                <td>1 </td>
-                                                <td>5 </td>
-                                                <td>2 </td>
-                                                <td>3 </td>
-                                                <td>4 </td>
-<td>8</td>
-
-                                            </tr>
-
-
-
 
                                         </tbody>
 
                                     </table>
-
+                               
                                 </div>
 
 
@@ -7666,7 +7618,13 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
 
                     </div>
-                    <br />
+                
+                            <h3 style="margin-left:20px;margin-top:15px;margin-bottom:5px;font-weight:bold"><span class="topicHeader">ข้อเสนอแนะเพิ่มเติม:  </span></h3>
+                       
+                                    <ul style="margin-top:0px;">
+                                    <li ng-repeat="sug in manage_survey_result.suggestion" class="topicHeader" style="color:#6F002B;margin-left:40px" >{{sug}}</li>
+
+                                    </ul>
                    <!--  <div class="row">
                         <div class="col-md-4">
                             <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">ข้อเสนอแนะเพิ่มเติม:   </span></h3>
@@ -7676,16 +7634,16 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div> -->
                    <div class="custom-footer">
-                                  <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
+                                  <button style="margin-top:4px" class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
 
                                   </div>
 
                 </div>
 
 
-                <div id="do_survey" data-nq-modal="" data-qo-independent="true" data-qo-size="lg">
+                <div id="do_survey" data-nq-modal="" data-qo-independent="true" data-qo-size="lg" data-ng-controller="answer_survey_controller">
                     <div class="custom-header">
-                        <h1 class="headerModalH1"> ชื่อแบบสอบถาม</h1>
+                        <h3 class="headerModaltemp">{{manage_survey_questionare_to_answer.name}}</h3>
                     </div>
 
                     <div class="container-fluid">
@@ -7718,64 +7676,18 @@ glyphicon glyphicon-bell"></i> </span>
                                         </thead>
                                         <tbody class="flattened">
                                             <!--pageable-repeat is required sub directive-->
-                                            <tr>
-                                                <td>1</td>
-                                                <td class="left_column">ท่านคิดว่าสื่อการเรียนการสอนในปัจจุบันเพียงพอ</td>
+                                            <tr ng-repeat="question in manage_survey_questionare_set">
+                                                <td>{{$index+1}}</td>
+                                                <td class="left_column">{{question.detail}}</td>
 
 
-                                                <td><input type="radio" name="num51"> </td>
-                                                <td><input type="radio" name="num51"> </td>
-                                                <td><input type="radio" name="num51"> </td>
-                                                <td><input type="radio" name="num51"> </td>
-                                                <td><input type="radio" name="num51"> </td>
-                                                <td><input type="radio" name="num51"> </td>
-                                                <td><input type="radio" name="num51"> </td>
-
-                                            </tr>
-
-
-                                            <tr>
-                                                <td>2</td>
-                                                <td class="left_column">ท่านคิดว่าสื่อการเรียนที่มีอยู่มีคุณภาพ</td>
-
-
-                                                <td><input type="radio" name="num52"> </td>
-                                                <td><input type="radio" name="num52"> </td>
-                                                <td><input type="radio" name="num52"> </td>
-                                                <td><input type="radio" name="num52"> </td>
-                                                <td><input type="radio" name="num52"> </td>
-                                                <td><input type="radio" name="num52"> </td>
-                                                <td><input type="radio" name="num52"> </td>
-
-                                            </tr>
-
-                                            <tr>
-                                                <td>3</td>
-                                                <td class="left_column">เมื่อเกิดการชำรุดของอุปกรณ์ การซ่อมแซมมีความรวดเร็ว</td>
-
-
-                                                <td><input type="radio" name="num53"> </td>
-                                                <td><input type="radio" name="num53"> </td>
-                                                <td><input type="radio" name="num53"> </td>
-                                                <td><input type="radio" name="num53"> </td>
-                                                <td><input type="radio" name="num53"> </td>
-                                                <td><input type="radio" name="num53"> </td>
-                                                <td><input type="radio" name="num53"> </td>
-
-                                            </tr>
-
-                                            <tr>
-                                                <td>4</td>
-                                                <td class="left_column">ท่านคิดว่าสื่อการเรียนการสอนมีมีผลต่อคุณภาพการเรียน</td>
-
-
-                                                <td><input type="radio" name="num54"> </td>
-                                                <td><input type="radio" name="num54"> </td>
-                                                <td><input type="radio" name="num54"> </td>
-                                                <td><input type="radio" name="num54"> </td>
-                                                <td><input type="radio" name="num54"> </td>
-                                                <td><input type="radio" name="num54"> </td>
-                                                <td><input type="radio" name="num54"> </td>
+                                                <td><input type="radio" value="7" ng-model="question.answer"> </td>
+                                                <td><input type="radio" value="6" ng-model="question.answer" > </td>
+                                                <td><input type="radio" value="5" ng-model="question.answer"> </td>
+                                                <td><input type="radio" value="4" ng-model="question.answer"> </td>
+                                                <td><input type="radio" value="3" ng-model="question.answer"> </td>
+                                                <td><input type="radio" value="2" ng-model="question.answer"> </td>
+                                                <td><input type="radio" value="1" ng-model="question.answer"> </td>
 
                                             </tr>
 
@@ -7788,8 +7700,6 @@ glyphicon glyphicon-bell"></i> </span>
 
                                 </div>
 
-                                <!--           <div data-nq-pageable-template=""    data-qo-max-height="350px"data-on-change="panelTitle= 'สร้างรายงานการประชุม'"  style="overflow:hidden; overflow-y:auto;" data-nq-scroll="" ng-submit="$hide()" >
-                                -->
 
 
 
@@ -7802,17 +7712,18 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
                     <br />
                     <div class="row">
-                        <div class="col-md-4">
-                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">ข้อเสนอแนะเพิ่มเติม:   </span></h3>
+                        <div class="col-md-3">
+                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicNewHeader">ข้อเสนอแนะเพิ่มเติม:   </span></h3>
                         </div>
                         <div class="col-md-8">
-                            <textarea name="message" rows="3" cols="70"></textarea>
+                            <textarea name="message" rows="3" cols="101" ng-model="suggestion"></textarea>
                         </div>
                     </div>
+               
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                            <button class="btn btn-success  " ng-disabled="still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal()">ยกเลิก</button>
                         </div>
                     </div>
 

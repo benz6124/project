@@ -623,6 +623,19 @@ color:white;
      padding-top: 0px !important;
 
 }
+
+.headerModaltemp{
+text-align:center;
+color:white;
+
+  font-family:  "FreesiaUPC";
+  font-weight: normal !important;;
+  font-size: 33px;
+  padding:0px !important; 
+     margin-top:3px;
+     padding-top: 0px !important;
+
+}
 .modal-header{
   height:50px!important;
     padding-top: 3px !important;
@@ -826,6 +839,18 @@ table.evaluation th{
 
 }
 
+ul.non_bullet {
+list-style-position:outside;
+ list-style-type: none;
+
+}
+
+table.evaluate_aun th{
+  vertical-align:middle !important;
+
+}
+
+
 .alertPopSuccess{
     font-size: 18px !important;
       color: #fff;
@@ -851,11 +876,11 @@ table.evidence td.larger:hover{
 }
 
 table.evaluate_aun td{
-   padding:0px !important; 
-     margin:0px !important;
-     padding-left: 10px !important;
-     padding-top: 5px!important;
-     padding-bottom: 5px!important;
+
+     padding-left: 5px ;
+      padding-right: 5px ;
+     padding-top: 1px!important;
+     padding-bottom: 1px !important;
      vertical-align: middle !important;
       background-color: #F4F4F4  ;
 }

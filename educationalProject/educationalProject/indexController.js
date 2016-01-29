@@ -2770,9 +2770,92 @@ $scope.dont_show_me =function(my_obj){
 });
 
 
+app.controller('result_survey_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+                    $scope.suggestion = "";
+}
+  
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+ $scope.suggestion = "";
+
+
+});
+
+
+app.controller('answer_survey_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+                    $scope.suggestion = "";
+}
+  
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+ $scope.suggestion = "";
 
 
 
+ $scope.still_not_complete=function(){
+    if(! $scope.suggestion){
+        return true;
+    }
+
+    var index;
+    for(index =0 ;index<$rootScope.manage_survey_questionare_set.length ;index++){
+        if (!$rootScope.manage_survey_questionare_set[index].answer){
+            return true;
+        }
+    }
+ }
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+  $scope.save_to_server = function(my_modal){
+
+        $rootScope.manage_survey_questionare_set.push({"suggestion":$scope.suggestion}) ;
+        $http.put(
+             '/api/questionareanswer',
+             JSON.stringify( $rootScope.manage_survey_questionare_set),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            $scope.close_modal(my_modal);
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+               
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    }
+
+
+
+});
 
 
 app.controller('manage_survey_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
@@ -2782,6 +2865,7 @@ $scope.init =function() {
               $scope.curri_choosen = {}
                 $scope.indicator_choosen= {};
                     $scope.result = {};
+                    $scope.nothing_change = true;
 }
   
      $scope.choose_not_complete = true;
@@ -2789,7 +2873,7 @@ $scope.init =function() {
               $scope.curri_choosen = {}
                 $scope.indicator_choosen= {};
                     $scope.result = {};
-  
+  $scope.nothing_change = true;
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
@@ -2804,13 +2888,80 @@ $scope.init =function() {
 
     }
 
+    $scope.go_to_answer = function(this_survey){
+
+           $http.post(
+             '/api/questionareanswer',
+             JSON.stringify(this_survey.questionare_set_id),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+             $rootScope.manage_survey_questionare_set = data;
+         });
+
+
+
+        $rootScope.manage_survey_questionare_to_answer = this_survey;
+//         $rootScope.manage_survey_questionare_set = [{"answer":"","aquestionare_set_id":1,"questionare_question_id":1,"detail":"ความน่าสนใจของเนื้อหารายวิชา"},{"answer":"","questionare_set_id":1,"questionare_question_id":2,"detail":"อาจารย์ผู้สอน สอนสบายๆ"},{"answer":"","questionare_set_id":1,"questionare_question_id":3,"detail":"งานที่มอบหมาย มีความเหมาะสมต่อภาระของนักศึกษา"},{"answer":"","questionare_set_id":1,"questionare_question_id":4,"detail":"ระยะเวลาที่สอนต่อครั้งมีความเหมาสม"},{"answer":"","questionare_set_id":1,"questionare_question_id":5,"detail":"ความยากของข้อสอบ Final"}]
+
+// ;
+
+
+
+    }
+
+       $scope.go_to_result = function(this_survey){
+
+          $http.post(
+             '/api/questionareresult',
+             JSON.stringify(this_survey.questionare_set_id),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            $rootScope.manage_survey_result = data;
+         });
+
+
+        $rootScope.manage_survey_questionare_of_result = this_survey;
+//         $rootScope.manage_survey_result= {"suggestion":["อยากให้ลดปริมาณงานน้อยๆ ลง","เพิ่มคะแนนเก็บเยอะๆค่ะ","อยากให้อาจารย์สอนแล้วเลิกเร็วแบบนี้ไปตลอด","คิดไม่ออก","ไม่มีความคิดเห็น"],
+// "main_result_list":[{"name":"ความน่าสนใจของเนื้อหารายวิชา","answer":[11,0,0,0,2,0,3]},
+// {"name":"อาจารย์ผู้สอน สอนสบายๆ","answer":[10,2,0,0,0,1,3]},
+// {"name":"งานที่มอบหมาย มีความเหมาะสมต่อภาระของนักศึกษา","answer":[10,0,3,0,0,0,3]},
+// {"name":"ระยะเวลาที่สอนต่อครั้งมีความเหมาสม","answer":[11,0,0,1,0,1,3]},
+// {"name":"ความยากของข้อสอบ Final","answer":[10,2,0,0,0,1,3]}]};
+
+
+
+
+
+
+    }
+
+    $scope.remove_qestionare = function(index_to_remove){
+        $scope.nothing_change = false;
+        $scope.result.splice(index_to_remove, 1);   
+    }
+    $scope.go_to_create_survey = function(){
+        console.log("corresponding_aca_years");
+          console.log( $scope.corresponding_aca_years);
+        console.log( $scope.corresponding_aca_years.aca_year);
+        $rootScope.manage_survey_curri_id_now = $scope.curri_choosen.curri_id;
+        $rootScope.manage_survey_aca_year_now = $scope.year_choosen.aca_year;
+    }
+
     $scope.find_information = function(){
 
           console.log("find_information");
         console.log($scope.year_choosen);
 
         $http.post(
-             '/api/studentstatusother',
+             '/api/questionare/getquestionareset',
              JSON.stringify($scope.year_choosen),
              {
                  headers: {
@@ -2825,6 +2976,8 @@ $scope.init =function() {
             
     
          });
+// $scope.result=[{"target":["นักศึกษา"],"t_name":"อาจารย์บัณฑิต พัสยา","questionare_set_id":1,"name":"ความคิดเห็นต่อเนื้อหารายวิชา 01076573 Information Storage and Retrieval","curri_id":"21","aca_year":2558,"date":"20/11/2558","personnel_id":"00007"},{"target":["นักศึกษา"],"t_name":"อาจารย์วิบูลย์ พร้อมพานิชย์","questionare_set_id":3,"name":"ความคิดเห็นต่อการเรียนการสอนวิชา 01076234 Computer programming 1","curri_id":"21","aca_year":2558,"date":"30/11/2558","personnel_id":"00001"},{"target":["นักศึกษา","บริษัท","ศิษย์เก่า","อาจารย์"],"t_name":"รศ.ดร.ศุภมิตร จิตตะยโศธร","questionare_set_id":4,"name":"แบบสำรวจความต้องการในการจัดสัมมนาเกี่ยวกับเรื่องฐานข้อมูลเชิงเวลาแบบไม่แน่นอน","curri_id":"21","aca_year":2558,"date":"01/01/2559","personnel_id":"00009"},{"target":["เจ้าหน้าที่","นักศึกษา","บริษัท","ศิษย์เก่า","อาจารย์"],"t_name":"รศ.ดร.เกียรติกูล เจียรนัยธนะกิจ","questionare_set_id":5,"name":"แบบสำรวจสภาพการใช้งานของสุขภัณฑ์ในภาควิชา","curri_id":"21","aca_year":2558,"date":"02/12/2558","personnel_id":"00002"},{"target":["นักศึกษา","อาจารย์"],"t_name":"ผศ.ดร.ชุติเมษฏ์ ศรีนิลทา","questionare_set_id":6,"name":"แบบสำรวจความต้องการในการจัดให้มีกิจกรรมปัจฉิมนิเทศของภาค","curri_id":"21","aca_year":2558,"date":"22/12/2558","personnel_id":"00004"}];
+//  $scope.choose_not_complete = false;
 
     }
     $scope.close_modal = function(my_modal){
@@ -2832,10 +2985,20 @@ $scope.init =function() {
         my_modal.$hide();
     }
     $scope.save_to_server = function(my_modal){
+
+
+        if($scope.result.length == 0){
+            $scope.to_sent  = {};
+            $scope.to_sent.curri_id  = $scope.curri_choosen.curri_id;
+            $scope.to_sent.aca_year = $scope.year_choosen.aca_year;
+            $scope.to_sent.questionare_set_id = 0;
+
+        }
+
         console.log("save_to_server");
         console.log($scope.result);
-        $http.put(
-             '/api/studentstatusother',
+        $http.delete(
+             '/api/questionare',
              JSON.stringify($scope.result),
              {
                  headers: {
@@ -2843,9 +3006,10 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
+            $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-               $scope.close_modal(my_modal);
+               
          })
     .error(function(data, status, headers, config) {
                   if(status==500){
@@ -3017,10 +3181,27 @@ $scope.init =function() {
                     $scope.my_target = [];
                     $scope.questions =[];
                     $scope.my_survey_name ="";
+                $http.get('/api/usertype').success(function (data) {
+                
+                $scope.all_usertype = data;
+              });
+            
 }
   
-$scope.questions =[];
-     $scope.my_target = [];
+    $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+                    $scope.my_target = [];
+                    $scope.questions =[];
+                    $scope.my_survey_name ="";
+                $http.get('/api/usertype').success(function (data) {
+                
+                $scope.all_usertype = data;
+              });
+
+
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
@@ -3050,7 +3231,7 @@ $scope.questions =[];
                 
                 var index;
                 for(index = 0;index < $scope.questions.length ; index++){
-                    if($scope.questions[index].detail == ""){
+                    if(!$scope.questions[index].detail ){
                         return true;
                     }
                 }
@@ -3060,7 +3241,7 @@ $scope.questions =[];
 }
    $scope.add_question = function(){
       
-       $scope.questions.push({'detail':""});
+       $scope.questions.push({detail:""});
      }
 
      $scope.remove_question = function(question_index){
@@ -3069,59 +3250,37 @@ $scope.questions =[];
      }
 
 
-    $scope.find_information = function(){
-$scope.choose_not_complete =false;
-        //   console.log("find_information");
-        // console.log($scope.year_choosen);
-
-        // $http.post(
-        //      '/api/studentstatusother',
-        //      JSON.stringify($scope.year_choosen),
-        //      {
-        //          headers: {
-        //              'Content-Type': 'application/json'
-        //          }
-        //      }
-        //  ).success(function (data) {
-            
-        //       $scope.result = data;
-        //      $scope.choose_not_complete = false;
-             
-        //       var value;
-        //       var key;
-        //      if ($scope.result.num_admis_f==-1){
-             
-        //         angular.forEach($scope.result, function(value, key) {
-                 
-                  
-        //           if(key !="year" && key != "curri_id"){
-                   
-        //             $scope.result[key] = "";
-        //           }
-        //         });
-        //      }
-        //  });
-
-    }
+  
     $scope.close_modal = function(my_modal){
         $scope.init();
         my_modal.$hide();
     }
+
     $scope.save_to_server = function(my_modal){
+        $scope.my_new_survey = {};
+        $scope.my_new_survey.curri_id =  $rootScope.manage_survey_curri_id_now;
+        $scope.my_new_survey.aca_year = $rootScope.manage_survey_aca_year_now;
+        $scope.my_new_survey.personnel_id = "00007";
+        $scope.my_new_survey.my_target  = $scope.my_target;
+        $scope.my_new_survey.my_questions  =$scope.questions;
+        $scope.my_new_survey.name  = $scope.my_survey_name;
+
+
         console.log("save_to_server");
-        console.log($scope.result);
+        console.log($scope.my_new_survey);
         $http.put(
-             '/api/studentstatusother',
-             JSON.stringify($scope.result),
+             '/api/questionare',
+             JSON.stringify($scope.my_new_survey),
              {
                  headers: {
                      'Content-Type': 'application/json'
                  }
              }
          ).success(function (data) {
+              $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-               $scope.close_modal(my_modal);
+             
          })
     .error(function(data, status, headers, config) {
                   if(status==500){
