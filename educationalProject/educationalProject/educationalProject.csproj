@@ -169,6 +169,9 @@
     <Compile Include="Controllers\NewStudentCountController.cs" />
     <Compile Include="Controllers\PresidentCurriculumController.cs" />
     <Compile Include="Controllers\PrimaryEvidenceController.cs" />
+    <Compile Include="Controllers\QuestionareAnswerController.cs" />
+    <Compile Include="Controllers\QuestionareController.cs" />
+    <Compile Include="Controllers\QuestionareResultController.cs" />
     <Compile Include="Controllers\SectionSaveController.cs" />
     <Compile Include="Controllers\SelfEvaluationController.cs" />
     <Compile Include="Controllers\StudentCountController.cs" />
@@ -218,7 +221,11 @@
     <Compile Include="Models\ViewModels\Indicator_sub_indicator_list.cs" />
     <Compile Include="Models\ViewModels\Primary_evidence_detail.cs" />
     <Compile Include="Models\ViewModels\Primary_evidence_name_id_only.cs" />
+    <Compile Include="Models\ViewModels\Questionare_question_answer.cs" />
+    <Compile Include="Models\ViewModels\Questionare_question_form.cs" />
     <Compile Include="Models\ViewModels\Questionare_set_detail.cs" />
+    <Compile Include="Models\ViewModels\Questionare_set_main_result.cs" />
+    <Compile Include="Models\ViewModels\Questionare_set_sub_result.cs" />
     <Compile Include="Models\ViewModels\Teacher_educational.cs" />
     <Compile Include="Models\ViewModels\Teacher_with_t_name.cs" />
     <Compile Include="Models\ViewModels\vOthers_evaluation_assessor.cs" />
@@ -236,6 +243,7 @@
     <Compile Include="Models\Wrappers\oNew_student_count.cs" />
     <Compile Include="Models\Wrappers\oPresident_curriculum.cs" />
     <Compile Include="Models\Wrappers\oPrimary_evidence.cs" />
+    <Compile Include="Models\Wrappers\oQuestionare_question_obj.cs" />
     <Compile Include="Models\Wrappers\oQuestionare_set.cs" />
     <Compile Include="Models\Wrappers\oResearch.cs" />
     <Compile Include="Models\Wrappers\oSection_save.cs" />

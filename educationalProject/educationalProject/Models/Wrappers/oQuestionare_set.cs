@@ -120,5 +120,122 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
+
+        public object SelectWithResult(int qid)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+            Questionare_set_sub_result result = new Questionare_set_sub_result();
+            result.main_result_list = new List<Questionare_set_main_result>();
+            string temp1tablename = "#temp1";
+            string createtabletemp1 = string.Format("create table {0} (" +
+                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
+                                      "[{1}] INT NOT NULL," +
+                                      "[{2}] INT NOT NULL," +
+                                      "[{3}] VARCHAR(2000) NOT NULL," +
+                                      "[{4}] VARCHAR(5000) NOT NULL," +
+                                      "[count] INT NOT NULL," +
+                                      "PRIMARY KEY([row_num])) " +
+                                      "ALTER TABLE {0} " +
+                                      "ALTER COLUMN {4} VARCHAR(5000) COLLATE DATABASE_DEFAULT " +
+                                      "ALTER TABLE {0} " +
+                                      "ALTER COLUMN {3} VARCHAR(2000) COLLATE DATABASE_DEFAULT ",
+                                      temp1tablename,FieldName.QUESTIONARE_SET_ID,Questionare_question_obj.FieldName.QUESTIONARE_QUESTION_ID,
+                                      Questionare_question_obj.FieldName.DETAIL,Questionare_result_obj.FieldName.ANSWER);
+            string insertintotemp1_1 = string.Format("insert into {0} " +
+                                       "select {1}, {2}, {3}, 0, 0 from " +
+                                       "{4} where {1} = {5} ",
+                                       temp1tablename, Questionare_question_obj.FieldName.QUESTIONARE_SET_ID,
+                                       Questionare_question_obj.FieldName.QUESTIONARE_QUESTION_ID,
+                                       Questionare_question_obj.FieldName.DETAIL,
+                                       Questionare_question_obj.FieldName.TABLE_NAME, qid);
+
+            string insertintotemp1_2 = string.Format("insert into {0} " +
+                                       "select {1}, {2}, '{3}', {4}, count(*) from " +
+                                       //Below select will query answer for each choice
+                                       "(select {5}.{2}, {1},{4} from " +
+                                       "{5}, {6} where " +
+                                       "{7} = {8} and {5}.{2} = {6}.{9}) " +
+                                       "as ansresult " +
+
+                                       "group by {1}, {2}, {4} " +
+                                       "order by {1}, {2}, {4} ",
+                                       temp1tablename,FieldName.QUESTIONARE_SET_ID,Questionare_question_obj.FieldName.QUESTIONARE_QUESTION_ID,
+                                       "",Questionare_result_obj.FieldName.ANSWER,
+                                       Questionare_question_obj.FieldName.TABLE_NAME,Questionare_result_obj.FieldName.TABLE_NAME,
+                                       Questionare_question_obj.FieldName.QUESTIONARE_SET_ID,qid,
+                                       Questionare_result_obj.FieldName.QUESTIONARE_QUESTION_ID);
+
+            string insertintotemp1_3 = string.Format("insert into {0} " +
+                                       "select 0, 0, 0, {1}, 0 from {2} where {3} = {4} ",
+                                       temp1tablename, Questionare_result_sub.FieldName.SUGGESTION, Questionare_result_sub.FieldName.TABLE_NAME,
+                                       Questionare_result_sub.FieldName.QUESTIONARE_SET_ID, qid);
+
+            string selectcmd = string.Format("select {0}, {1}, {2}, {3}, count from {4} "
+                               ,Questionare_question_obj.FieldName.QUESTIONARE_SET_ID,
+                               Questionare_question_obj.FieldName.QUESTIONARE_QUESTION_ID,
+                               Questionare_question_obj.FieldName.DETAIL,
+                               Questionare_result_obj.FieldName.ANSWER,
+                               temp1tablename);
+
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} END", createtabletemp1, insertintotemp1_1, insertintotemp1_2, insertintotemp1_3, selectcmd);
+    
+            try
+            {
+                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                if (res.HasRows)
+                {
+                    DataTable data = new DataTable();
+                    data.Load(res);
+                    int questionare_question_id = -1;
+                    int mainresultind = -1;
+                    foreach (DataRow item in data.Rows)
+                    {
+                        int readqqid = Convert.ToInt32(item.ItemArray[data.Columns[Questionare_question_obj.FieldName.QUESTIONARE_QUESTION_ID].Ordinal]);
+
+                        if (readqqid == 0)
+                        {
+                            result.suggestion.Add(item.ItemArray[data.Columns[Questionare_result_obj.FieldName.ANSWER].Ordinal].ToString());
+                        }
+                        //Read top row (count = 0)
+                        else if (Convert.ToInt32(item.ItemArray[data.Columns["count"].Ordinal]) == 0)
+                        {
+                            result.main_result_list.Add(new Questionare_set_main_result(
+                                item.ItemArray[data.Columns[Questionare_question_obj.FieldName.DETAIL].Ordinal].ToString()));
+                        }
+                        else
+                        {
+                            if (questionare_question_id != readqqid)
+                            {
+                                questionare_question_id = readqqid;
+                                mainresultind++;
+                            }
+                            result.main_result_list[mainresultind].
+                                answer[Convert.ToInt32(item.ItemArray[data.Columns[Questionare_result_obj.FieldName.ANSWER].Ordinal])-1] =
+                                Convert.ToInt32(item.ItemArray[data.Columns["count"].Ordinal]);
+                        }
+                    }
+                    data.Dispose();
+                }
+                else
+                {
+                    //Reserved for return error string
+                }
+                res.Close();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return result;
+        }
+
     }
 }
