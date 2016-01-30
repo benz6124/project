@@ -19,9 +19,14 @@ namespace educationalProject.Controllers
         }
 
         [ActionName("add")]
-        public IHttpActionResult PutForAddQuestionare(JObject data)
+        public IHttpActionResult PutForAddQuestionare(Questionare_set_detail_full data)
         {
-            return Ok();
+            data.date = DateTime.Now.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
+            object result = datacontext.InsertNewQuestionareWithSelect(data);
+            if (result.GetType().ToString() != "System.String")
+                return Ok(result);
+            else
+                return InternalServerError(new Exception(result.ToString()));
         }
 
         [ActionName("delete")]

@@ -272,7 +272,7 @@ namespace educationalProject.Models.Wrappers
             string insertintotemp1 = string.Format("INSERT INTO {0} " +
                                      "select * from " +
                                      "(insert into {1} output inserted.{2} values " +
-                                     "('{3}','{4}','{5}',{6}) as outputinsert ",
+                                     "('{3}','{4}','{5}',{6})) as outputinsert ",
                                      temp1tablename, FieldName.TABLE_NAME, FieldName.LAB_NUM,
                                      ldata.name, ldata.room, ldata.curri_id, ldata.aca_year);
 

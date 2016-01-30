@@ -128,11 +128,15 @@ namespace educationalProject.Controllers
 
                 if (resultfromdb.GetType().ToString() != "System.String")
                 {
-                    //string delpath = HttpContext.Current.Server.MapPath("~/");
-                    string delpath = "D:/";
-                    //Check whether file exists!
-                    if (File.Exists(string.Format("{0}{1}", delpath, datacontext.file_name)))
-                        File.Delete(string.Format("{0}{1}", delpath, datacontext.file_name));
+                    //If the update has edited file : DELETE OLD FILE
+                    if (result.FileData.Count != 0)
+                    {
+                        //string delpath = HttpContext.Current.Server.MapPath("~/");
+                        string delpath = "D:/";
+                        //Check whether file exists!
+                        if (File.Exists(string.Format("{0}{1}", delpath, datacontext.file_name)))
+                            File.Delete(string.Format("{0}{1}", delpath, datacontext.file_name));
+                    }
                     return Ok(resultfromdb);
                 }
                 else
