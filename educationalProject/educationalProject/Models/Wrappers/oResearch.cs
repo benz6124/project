@@ -9,6 +9,18 @@ namespace educationalProject.Models.Wrappers
 {
     public class oResearch : Research
     {
+        private string getSelectByCurriculumCommand()
+        {
+            return string.Format("select r.*,{0}.{1},{0}.{2} from " +
+                "(select {3}.{4},{3}.{5},{3}.{6}," +
+                "{3}.{7}, {3}.{8},{9} from {3}, {10} where " +
+                "{5} = '{11}' and {3}.{4} = {10}.{12}) as r,{0} where r.{9} = {0}.{13}",
+                Teacher.FieldName.TABLE_NAME, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
+                FieldName.TABLE_NAME, FieldName.RESEARCH_ID, FieldName.CURRI_ID, FieldName.FILE_NAME,
+                FieldName.NAME, FieldName.YEAR_PUBLISH, Research_owner.FieldName.TEACHER_ID,
+                Research_owner.FieldName.TABLE_NAME, curri_id, Research_owner.FieldName.RESEARCH_ID,
+                Teacher.FieldName.TEACHER_ID);
+        }
         public object Select()
         {
             DBConnector d = new DBConnector();
@@ -103,15 +115,8 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<Research_detail> result = new List<Research_detail>();
-            d.iCommand.CommandText = string.Format("select r.*,{0}.{1},{0}.{2} from " +
-                "(select {3}.{4},{3}.{5},{3}.{6}," +
-                "{3}.{7}, {3}.{8},{9} from {3}, {10} where " +
-                "{5} = '{11}' and {3}.{4} = {10}.{12}) as r,{0} where r.{9} = {0}.{13}",
-                Teacher.FieldName.TABLE_NAME,Teacher.FieldName.T_PRENAME,Teacher.FieldName.T_NAME,
-                FieldName.TABLE_NAME,FieldName.RESEARCH_ID,FieldName.CURRI_ID,FieldName.FILE_NAME,
-                FieldName.NAME,FieldName.YEAR_PUBLISH,Research_owner.FieldName.TEACHER_ID,
-                Research_owner.FieldName.TABLE_NAME,curri_id_data,Research_owner.FieldName.RESEARCH_ID,
-                Teacher.FieldName.TEACHER_ID);
+            curri_id = curri_id_data;
+            d.iCommand.CommandText = getSelectByCurriculumCommand();
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -250,15 +255,9 @@ namespace educationalProject.Models.Wrappers
                                         "select {1},{2} from {3},{4} where {2} is not null ",
                                         Research_owner.FieldName.TABLE_NAME, FieldName.RESEARCH_ID, Research_owner.FieldName.TEACHER_ID,
                                         temp1tablename, temp2tablename);
-            string selectcmd = string.Format("select r.*,{0}.{1},{0}.{2} from " +
-                "(select {3}.{4},{3}.{5},{3}.{6}," +
-                "{3}.{7}, {3}.{8},{9} from {3}, {10} where " +
-                "{5} = '{11}' and {3}.{4} = {10}.{12}) as r,{0} where r.{9} = {0}.{13}",
-                Teacher.FieldName.TABLE_NAME, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
-                FieldName.TABLE_NAME, FieldName.RESEARCH_ID, FieldName.CURRI_ID, FieldName.FILE_NAME,
-                FieldName.NAME, FieldName.YEAR_PUBLISH, Research_owner.FieldName.TEACHER_ID,
-                Research_owner.FieldName.TABLE_NAME, rdata.curri_id, Research_owner.FieldName.RESEARCH_ID,
-                Teacher.FieldName.TEACHER_ID);
+
+            curri_id = rdata.curri_id;
+            string selectcmd = getSelectByCurriculumCommand();
 
             d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} {5} END", createtabletemp1, createtabletemp2,
                 insertintotemp1, insertintotemp2, insertintoresowner, selectcmd);

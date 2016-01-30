@@ -98,6 +98,7 @@ namespace educationalProject.Controllers
                 data.curri_id = datareceive["curri_id"].ToString();
                 data.name = datareceive["name"].ToString();
                 data.year_publish = Convert.ToInt32(datareceive["year_publish"]);
+                data.research_id = Convert.ToInt32(datareceive["research_id"]);
                 JArray tlist = (JArray)datareceive["researcher"];
 
                 foreach (JObject item in tlist)
