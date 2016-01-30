@@ -20,12 +20,7 @@ namespace educationalProject.Controllers
             return Ok(datacontext.SelectByCurriculumAcademic());
         }
 
-        public IHttpActionResult Get()
-        {
-            datacontext.aca_year = 2558;
-            datacontext.curri_id = "21";
-            return Ok(datacontext.SelectByCurriculumAcademic());
-        }
+
 
         [ActionName("newlablist")]
         public IHttpActionResult PostForNewLabList(Lab_list_detail data)
@@ -37,6 +32,7 @@ namespace educationalProject.Controllers
                 return InternalServerError(new Exception(result.ToString()));
         }
 
+        [ActionName("edit")]
         public IHttpActionResult Put(Lab_list_detail data)
         {
             object result = datacontext.UpdateLabListWithSelect(data);
@@ -46,7 +42,8 @@ namespace educationalProject.Controllers
                 return InternalServerError(new Exception(result.ToString()));
         }
 
-        public IHttpActionResult Delete(List<Lab_list_detail> list)
+        [ActionName("delete")]
+        public IHttpActionResult PutForDeleteLab(List<Lab_list_detail> list)
         {
             object result = datacontext.Delete(list);
             if (result == null)

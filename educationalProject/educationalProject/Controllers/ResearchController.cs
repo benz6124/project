@@ -77,6 +77,7 @@ namespace educationalProject.Controllers
             }
         }
 
+        [ActionName("edit")]
         public async Task<IHttpActionResult> PutResearch()
         {
             if (!Request.Content.IsMimeMultipartContent())
@@ -144,7 +145,8 @@ namespace educationalProject.Controllers
             }
         }
 
-        public IHttpActionResult DeleteResearch(List<Research_detail> list)
+        [ActionName("delete")]
+        public IHttpActionResult PutForDeleteResearch(List<Research_detail> list)
         {
             object result = datacontext.Delete(list);
             if (result.GetType().ToString() != "System.String")

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using educationalProject.Models.Wrappers;
 using educationalProject.Models.ViewModels;
+using Newtonsoft.Json.Linq;
 namespace educationalProject.Controllers
 {
     public class QuestionareController : ApiController
@@ -17,12 +18,14 @@ namespace educationalProject.Controllers
             return Ok(datacontext.SelectWithDetail(data));
         }
 
-        public IHttpActionResult Put()
+        [ActionName("add")]
+        public IHttpActionResult PutForAddQuestionare(JObject data)
         {
             return Ok();
         }
 
-        public IHttpActionResult Delete(List<Questionare_set_detail> list)
+        [ActionName("delete")]
+        public IHttpActionResult PutForDeleteQuestionare(List<Questionare_set_detail> list)
         {
             object result = datacontext.Delete(list);
             if (result == null)
