@@ -219,12 +219,15 @@ namespace educationalProject.Controllers
 
                 if (resultfromdb.GetType().ToString() != "System.String")
                 {
-                    //string delpath = HttpContext.Current.Server.MapPath("~/");
-                    string delpath = "D:/";
-                    //delete file that targeted (it has set via datacontext's file_name property  
-                    if(datacontext.file_name != "")
-                        if (File.Exists(string.Format("{0}{1}", delpath, datacontext.file_name)))
-                            File.Delete(string.Format("{0}{1}", delpath, datacontext.file_name));
+                    if (datacontext.file_name[0] == '0')
+                    {
+                        //string delpath = HttpContext.Current.Server.MapPath("~/");
+                        string delpath = "D:/";
+                        //delete file that targeted (it has set via datacontext's file_name property  
+                        if (datacontext.file_name != "")
+                            if (File.Exists(string.Format("{0}{1}", delpath, datacontext.file_name.Substring(1))))
+                                File.Delete(string.Format("{0}{1}", delpath, datacontext.file_name.Substring(1)));
+                    }
                     return Ok(resultfromdb);
                 }
                 else

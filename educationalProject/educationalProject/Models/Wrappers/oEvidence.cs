@@ -534,7 +534,8 @@ namespace educationalProject.Models.Wrappers
             string temp1tablename = "#temp1";
             string createtabletemp1 = "";
             string insertintotemp1 = "";
-            string selectcmd = "";
+            string mainselectcmd = "";
+            string updatetemp1forcountfilecmd = "";
 
                 updatecmd += string.Format("update {0} set {1} = '{2}',{3} = '{4}',{7} = '{8}' output Deleted.{3} where {5} = {6} ",
                     FieldName.TABLE_NAME, FieldName.SECRET, secret, FieldName.FILE_NAME,
@@ -542,27 +543,42 @@ namespace educationalProject.Models.Wrappers
 
             createtabletemp1 = string.Format("create table {0} (" +
                           "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                          "[{1}] VARCHAR(255) NOT NULL," +
+                          "[{1}] VARCHAR(300) NOT NULL," +
                           "PRIMARY KEY([row_num])) " +
                           /*Alter column in temp table to make table accept Thai data*/
                           "ALTER TABLE {0} " +
-                          "ALTER COLUMN {1} VARCHAR(255) COLLATE DATABASE_DEFAULT ",
+                          "ALTER COLUMN {1} VARCHAR(300) COLLATE DATABASE_DEFAULT ",
                           temp1tablename, FieldName.FILE_NAME);
 
             insertintotemp1 = string.Format("insert into {0}({1}) " +
                                      "select * from ({2}) " +
                                      "as outputupdate ", temp1tablename, FieldName.FILE_NAME, updatecmd);
 
-            selectcmd = string.Format("select {0}.{1},evires.* from {0},(select * from {2}) as evires ",
-                                temp1tablename, FieldName.FILE_NAME, FieldName.TABLE_NAME);
+            updatetemp1forcountfilecmd = string.Format("update {0} set {1} = " +
+                                         "(select cast(c as varchar(20)) + {1} from {0}," +
+                                         "(select count(*) as c from {2} where {1} in " +
+                                         "(select {1} from {0})) as count_file_op) where row_num = 1 ",
+                                         temp1tablename, FieldName.FILE_NAME, FieldName.TABLE_NAME);
 
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} END", createtabletemp1, insertintotemp1, selectcmd);
+
+            string selectfromevidencecmd = string.Format("select e.*,{7}.{10},{7}.{11} from (select * from {0} " +
+                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join {7} on e.{8} = {7}.{9} order by e.{12}",
+                FieldName.TABLE_NAME, FieldName.INDICATOR_NUM, indicator_num, FieldName.CURRI_ID,
+                curri_id, FieldName.ACA_YEAR, aca_year, Teacher.FieldName.TABLE_NAME,
+                FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
+                FieldName.EVIDENCE_REAL_CODE
+                );
+
+            mainselectcmd = string.Format("select {0}.{1},evires.* from {0},({2}) as evires ",
+                                temp1tablename, FieldName.FILE_NAME, selectfromevidencecmd);
+
+
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} END", createtabletemp1, insertintotemp1, updatetemp1forcountfilecmd, mainselectcmd);
             
 
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
-                file_name = "";
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -586,8 +602,6 @@ namespace educationalProject.Models.Wrappers
                             indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
                             t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                         });
-                        if (item.ItemArray[7].ToString() == file_name)
-                            file_name = "";
                     }
                     data.Dispose();
                 }
@@ -612,3 +626,4 @@ namespace educationalProject.Models.Wrappers
 
     }
 }
+ 
