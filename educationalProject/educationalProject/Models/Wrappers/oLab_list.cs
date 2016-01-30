@@ -11,8 +11,8 @@ namespace educationalProject.Models.Wrappers
     {
         private string getSelectByCurriculumAcademicCommand()
         {
-            string temp1tablename = "#temp1";
-            string createtabletemp1 = string.Format("create table {0} (" +
+            string temp4tablename = "#temp4";
+            string createtabletemp4 = string.Format("create table {0} (" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
                                       "[{1}] VARCHAR(5) NOT NULL," +
                                       "[{2}] VARCHAR(16) NULL," +
@@ -27,14 +27,14 @@ namespace educationalProject.Models.Wrappers
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN {3} VARCHAR(60) COLLATE DATABASE_DEFAULT ",
-                                      temp1tablename, Lab_officer.FieldName.OFFICER,
+                                      temp4tablename, Lab_officer.FieldName.OFFICER,
                                       Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME);
 
-            string insertintotemp1 = string.Format("insert into {0} " +
+            string insertintotemp4 = string.Format("insert into {0} " +
                                      "select {1}, {2}, {3} from {4} " +
                                      "insert into {0} " +
                                      "select {5}, {6}, {7} from {8} ",
-                                     temp1tablename, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME,
+                                     temp4tablename, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME,
                                      Teacher.FieldName.T_NAME, Teacher.FieldName.TABLE_NAME,
                                      Staff.FieldName.STAFF_ID, Staff.FieldName.T_PRENAME, Staff.FieldName.T_NAME,
                                      Staff.FieldName.TABLE_NAME);
@@ -43,13 +43,13 @@ namespace educationalProject.Models.Wrappers
                                "{0}, {4}," +
                                "(select {1}, {2}, {3} from {5}) as pdata " +
                                "where {0}.{6} = {4}.{7} and {4}.{1} = pdata.{1} " +
-                               "and {8} = '{9}' and {10} = {11} order by {6}, pdata.{1}",
+                               "and {8} = '{9}' and {10} = {11} order by {12}, pdata.{1}",
                                FieldName.TABLE_NAME, Lab_officer.FieldName.OFFICER,
                                Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, Lab_officer.FieldName.TABLE_NAME,
-                               temp1tablename, FieldName.LAB_NUM, Lab_officer.FieldName.LAB_NUM,
-                               FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year);
+                               temp4tablename, FieldName.LAB_NUM, Lab_officer.FieldName.LAB_NUM,
+                               FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year,FieldName.NAME);
 
-            return string.Format("BEGIN {0} {1} {2} END", createtabletemp1, insertintotemp1, selectcmd);
+            return string.Format("BEGIN {0} {1} {2} END", createtabletemp4, insertintotemp4, selectcmd);
         }
         public object SelectByCurriculumAcademic()
         {
@@ -172,7 +172,7 @@ namespace educationalProject.Models.Wrappers
 
             foreach (Personnel_with_t_name p in ldata.officer)
             {
-                if(p.GetType().ToString() == "Teacher_with_t_name")
+                if(p.GetTypeName() == "Teacher_with_t_name")
                     insertintolabofficer += string.Format("({0},'{1}')", ldata.lab_num, ((Teacher_with_t_name)p).teacher_id);
                 else
                     insertintolabofficer += string.Format("({0},'{1}')", ldata.lab_num, ((Staff_with_t_name)p).staff_id);
@@ -280,7 +280,7 @@ namespace educationalProject.Models.Wrappers
 
             foreach (Personnel_with_t_name p in ldata.officer)
             {
-                if (p.GetType().ToString() == "Teacher_with_t_name")
+                if (p.GetTypeName() == "Teacher_with_t_name")
                     insertintotemp2 += string.Format(",('{0}')", ((Teacher_with_t_name)p).teacher_id);
                 else
                     insertintotemp2 += string.Format(",('{0}')", ((Staff_with_t_name)p).staff_id);

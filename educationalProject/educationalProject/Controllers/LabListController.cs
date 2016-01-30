@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using educationalProject.Models.ViewModels;
 using educationalProject.Models.Wrappers;
+using Newtonsoft.Json.Linq;
 namespace educationalProject.Controllers
 {
     public class LabListController : ApiController
@@ -23,9 +24,34 @@ namespace educationalProject.Controllers
 
 
         [ActionName("newlablist")]
-        public IHttpActionResult PostForNewLabList(Lab_list_detail data)
+        public IHttpActionResult PostForNewLabList(JObject data)
         {
-            object result = datacontext.InsertNewLabListWithSelect(data);
+            Lab_list_detail detail = new Lab_list_detail
+            {
+                aca_year = Convert.ToInt32(data["aca_year"]),
+                curri_id = data["curri_id"].ToString(),
+                name = data["name"].ToString(),
+                room = data["room"].ToString()
+            };
+            JArray officer_data = (JArray)data["officer"];
+            foreach(JObject item in officer_data)
+            {
+                if (item["teacher_id"] != null)
+                {
+                    detail.officer.Add(new Teacher_with_t_name
+                    {
+                        teacher_id = item["teacher_id"].ToString()
+                    });
+                }
+                else
+                {
+                    detail.officer.Add(new Staff_with_t_name
+                    {
+                        staff_id = item["staff_id"].ToString()
+                    });
+                }
+            }
+            object result = datacontext.InsertNewLabListWithSelect(detail);
             if (result.GetType().ToString() != "System.String")
                 return Ok(result);
             else
@@ -33,9 +59,35 @@ namespace educationalProject.Controllers
         }
 
         [ActionName("edit")]
-        public IHttpActionResult Put(Lab_list_detail data)
+        public IHttpActionResult Put(JObject data)
         {
-            object result = datacontext.UpdateLabListWithSelect(data);
+            Lab_list_detail detail = new Lab_list_detail
+            {
+                aca_year = Convert.ToInt32(data["aca_year"]),
+                curri_id = data["curri_id"].ToString(),
+                name = data["name"].ToString(),
+                room = data["room"].ToString(),
+                lab_num = Convert.ToInt32(data["lab_num"]),
+            };
+            JArray officer_data = (JArray)data["officer"];
+            foreach (JObject item in officer_data)
+            {
+                if (item["teacher_id"] != null)
+                {
+                    detail.officer.Add(new Teacher_with_t_name
+                    {
+                        teacher_id = item["teacher_id"].ToString()
+                    });
+                }
+                else
+                {
+                    detail.officer.Add(new Staff_with_t_name
+                    {
+                        staff_id = item["staff_id"].ToString()
+                    });
+                }
+            }
+            object result = datacontext.UpdateLabListWithSelect(detail);
             if (result.GetType().ToString() != "System.String")
                 return Ok(result);
             else

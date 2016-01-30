@@ -18,5 +18,10 @@ namespace educationalProject.Models.ViewModels
         {
             return _personnel_id;
         }
+
+        public virtual string GetTypeName()
+        {
+            return "Personnel_with_t_name";
+        }
     }
 }

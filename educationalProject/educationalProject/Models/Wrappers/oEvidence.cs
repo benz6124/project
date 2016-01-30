@@ -457,13 +457,6 @@ namespace educationalProject.Models.Wrappers
                     delete_and_condition += string.Format("and {0} != {1} ", FieldName.EVIDENCE_CODE, item.evidence_code);
                 }
             }
-            else
-            {
-                delete_and_condition += "and 1=1";
-            }
-            //Case delete all?
-            if(delete_and_condition != "")
-            {
                 deletewhereclause = string.Format("{0} = '{1}' and {2} = {3} and {4} = {5} and (1 = 1 {6})",
                                     FieldName.CURRI_ID, list.First().curri_id,
                                     FieldName.ACA_YEAR, list.First().aca_year, FieldName.INDICATOR_NUM, list.First().indicator_num,
@@ -485,7 +478,7 @@ namespace educationalProject.Models.Wrappers
                 //Query to-be delete file name from db
                 getfilenamefromtemp1 = string.Format("select {1} from {0} where {1} not in (select {1} from {2}) ", 
                     temp1tablename, FieldName.FILE_NAME,FieldName.TABLE_NAME);
-            }
+            
             d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} END", updatecmd, createtabletemp1, insertintotemp1, getfilenamefromtemp1);
             List<string> strlist = new List<string>();
             try
@@ -562,15 +555,14 @@ namespace educationalProject.Models.Wrappers
 
 
             string selectfromevidencecmd = string.Format("select e.*,{7}.{10},{7}.{11} from (select * from {0} " +
-                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join {7} on e.{8} = {7}.{9} order by e.{12}",
+                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join {7} on e.{8} = {7}.{9}",
                 FieldName.TABLE_NAME, FieldName.INDICATOR_NUM, indicator_num, FieldName.CURRI_ID,
                 curri_id, FieldName.ACA_YEAR, aca_year, Teacher.FieldName.TABLE_NAME,
-                FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
-                FieldName.EVIDENCE_REAL_CODE
+                FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME
                 );
 
-            mainselectcmd = string.Format("select {0}.{1},evires.* from {0},({2}) as evires ",
-                                temp1tablename, FieldName.FILE_NAME, selectfromevidencecmd);
+            mainselectcmd = string.Format("select {0}.{1},evires.* from {0},({2}) as evires order by evires.{3}",
+                                temp1tablename, FieldName.FILE_NAME, selectfromevidencecmd, FieldName.EVIDENCE_REAL_CODE);
 
 
             d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} END", createtabletemp1, insertintotemp1, updatetemp1forcountfilecmd, mainselectcmd);

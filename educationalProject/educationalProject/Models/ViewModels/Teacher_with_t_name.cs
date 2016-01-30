@@ -10,6 +10,11 @@ namespace educationalProject.Models.ViewModels
         //private string _teacher_id;
        // private string _t_name;
         public string teacher_id { get { return GetPersonnelId(); } set { SetPersonnelId(value); } }
-    //    public string t_name { get { return _t_name; } set { _t_name = value; } }
+        //    public string t_name { get { return _t_name; } set { _t_name = value; } }
+
+        public override string GetTypeName()
+        {
+            return "Teacher_with_t_name";
+        }
     }
 }
