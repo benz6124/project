@@ -2991,17 +2991,19 @@ $scope.init =function() {
 
 
         if($scope.result.length == 0){
+            console.log("legnth = 0")
             $scope.to_sent  = {};
             $scope.to_sent.curri_id  = $scope.curri_choosen.curri_id;
             $scope.to_sent.aca_year = $scope.year_choosen.aca_year;
             $scope.to_sent.questionare_set_id = 0;
+            $scope.result.push($scope.to_sent);
 
         }
 
         console.log("save_to_server");
         console.log($scope.result);
-        $http.delete(
-             '/api/questionare',
+        $http.put(
+             '/api/questionare/delete',
              JSON.stringify($scope.result),
              {
                  headers: {
@@ -3278,7 +3280,7 @@ $scope.init =function() {
         console.log("save_to_server");
         console.log($scope.my_new_survey);
         $http.put(
-             '/api/questionare',
+             '/api/questionare/add',
              JSON.stringify($scope.my_new_survey),
              {
                  headers: {
@@ -3376,7 +3378,7 @@ $scope.init =function() {
 
      
         
-            formData.append("file", $scope.new_research.file );
+            formData.append("file", $scope.new_research.file[0] );
     
 
         $http({
@@ -3480,19 +3482,22 @@ $scope.init =function() {
 
 
   $scope.save_to_server = function(my_modal){
-        if($scope.disabled_search){
-            $rootScope.manage_research_fix_this_research.file_name = $scope.new_file[0].name;
+        console.log("save_to_server");
+           
       
 
           var formData = new FormData();
 
         formData.append("model", angular.toJson($rootScope.manage_research_fix_this_research));
 
-        formData.append("file" , $scope.new_file[0]);
 
+            if($scope.disabled_search == true){
+                 $rootScope.manage_research_fix_this_research.file_name = $scope.new_file[0].name;
+        formData.append("file" , $scope.new_file[0]);
+ }
             $http({
                 method: 'PUT',
-                url: "/api/research",
+                url: "/api/research/edit",
 
                 headers: { 'Content-Type': undefined },
 
@@ -3515,38 +3520,8 @@ $scope.init =function() {
                 $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
                              placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
             });
-        }
+       
 
-        else{
-
-
-                   $http.put(
-             '/api/research',
-             JSON.stringify($rootScope.manage_research_fix_this_research),
-             {
-                 headers: {
-                     'Content-Type': 'application/json'
-                 }
-             }
-         ).success(function (data) {
-             $rootScope.manage_research_my_research_now = data;
-                  $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-
-             
-             })
-        .error(function(data, status, headers, config) {
-                      if(status==500){
-                        
-         $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
-                             placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-         }
-
-      }); 
-
-
-        }
             
      
     }
@@ -3663,8 +3638,8 @@ console.log("who_in_this_curri");
             $scope.to_sent.research_id = -1;
             $scope.to_sent.curri_id = $scope.curri_choosen.curri_id ;
         }
-        $http.delete(
-             '/api/research',
+        $http.put(
+             '/api/research/delete',
              JSON.stringify($rootScope.manage_research_my_research_now),
              {
                  headers: {
