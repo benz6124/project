@@ -166,6 +166,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndicatorController.cs" />
     <Compile Include="Controllers\IndicatorSubIndicatorController.cs" />
+    <Compile Include="Controllers\LabListController.cs" />
     <Compile Include="Controllers\NewStudentCountController.cs" />
     <Compile Include="Controllers\PresidentCurriculumController.cs" />
     <Compile Include="Controllers\PrimaryEvidenceController.cs" />
@@ -196,6 +197,8 @@
     <Compile Include="Models\Exclusive_curriculum_evidence.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Indicator.cs" />
+    <Compile Include="Models\Lab_list.cs" />
+    <Compile Include="Models\Lab_officer.cs" />
     <Compile Include="Models\New_student_count.cs" />
     <Compile Include="Models\Others_evaluation.cs" />
     <Compile Include="Models\President_curriculum.cs" />
@@ -221,6 +224,8 @@
     <Compile Include="Models\ViewModels\Evaluation_overall_result.cs" />
     <Compile Include="Models\ViewModels\Evidence_with_t_name.cs" />
     <Compile Include="Models\ViewModels\Indicator_sub_indicator_list.cs" />
+    <Compile Include="Models\ViewModels\Lab_list_detail.cs" />
+    <Compile Include="Models\ViewModels\Personnel_with_t_name.cs" />
     <Compile Include="Models\ViewModels\Primary_evidence_detail.cs" />
     <Compile Include="Models\ViewModels\Primary_evidence_name_id_only.cs" />
     <Compile Include="Models\ViewModels\Questionare_question_answer.cs" />
@@ -229,6 +234,7 @@
     <Compile Include="Models\ViewModels\Questionare_set_main_result.cs" />
     <Compile Include="Models\ViewModels\Questionare_set_sub_result.cs" />
     <Compile Include="Models\ViewModels\Research_detail.cs" />
+    <Compile Include="Models\ViewModels\Staff_with_t_name.cs" />
     <Compile Include="Models\ViewModels\Teacher_educational.cs" />
     <Compile Include="Models\ViewModels\Teacher_with_t_name.cs" />
     <Compile Include="Models\ViewModels\vOthers_evaluation_assessor.cs" />
@@ -243,6 +249,7 @@
     <Compile Include="Models\Wrappers\oCu_Curriculum.cs" />
     <Compile Include="Models\Wrappers\oEvidence.cs" />
     <Compile Include="Models\Wrappers\oIndicator.cs" />
+    <Compile Include="Models\Wrappers\oLab_list.cs" />
     <Compile Include="Models\Wrappers\oNew_student_count.cs" />
     <Compile Include="Models\Wrappers\oPresident_curriculum.cs" />
     <Compile Include="Models\Wrappers\oPrimary_evidence.cs" />

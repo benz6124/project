@@ -286,6 +286,6 @@ D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.Cookies.xml
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Owin.Security.OAuth.xml
 D:\4D\project\educationalProject\educationalProject\bin\System.Web.Http.Owin.xml
-D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
 D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb
+D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
