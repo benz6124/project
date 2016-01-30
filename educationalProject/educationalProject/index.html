@@ -2836,8 +2836,13 @@ $('.profile_pic').mouseover(function(){
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">เจ้าหน้าที่/อาจารย์ที่ปรึกษา   </span></h3>
                             </div>
  <div class="col-md-9" style="padding-right:22px;">
-           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_lab_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา"  data-ng-model="manage_lab_fix_this_lab.officer" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
+           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.teacher_id as each_teacher.t_name for each_teacher in manage_lab_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา" data-ng-model="$parent.manage_lab_fix_this_lab_init" data-ng-init="manage_lab_fix_this_lab_init" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
 </select>    
+
+
+        
+
+
 </div>
 
 </div>
@@ -2996,13 +3001,20 @@ $('.profile_pic').mouseover(function(){
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ผู้วิจัย   </span></h3>
                             </div>
  <div class="col-md-9" style="padding-right:22px;">
-           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_researcher.t_name for each_researcher in manage_research_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้วิจัย"  data-ng-model="manage_research_fix_this_research.researcher" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
+           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.teacher_id as each_teacher.t_name for each_teacher in manage_research_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้วิจัย"  data-ng-model="$parent.manage_lab_research_this_research_init" data-ng-init="manage_lab_research_this_research_init"  data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
 </select>    
-</div>
+
+
+
+
+
+
 
 </div>
 
-                                     
+</div>
+
+                                 
   <div class="row">
                             <div class="col-md-3">
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ปีที่ตีพิมพ์   </span></h3>
@@ -3103,7 +3115,7 @@ $('.profile_pic').mouseover(function(){
 
                                             <tr  ng-repeat="lab in manage_lab_my_world_wide_labs">
                                            
- <td style=" padding-left: 10px ;"><span style="font-size:19px;">{{lab.name}}</span> </td>
+ <td style=" padding-left: 10px ;"><span style="font-size:21px;">{{lab.name}}</span> </td>
                                         
         <td  >
 
