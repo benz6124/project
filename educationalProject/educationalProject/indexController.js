@@ -2866,6 +2866,7 @@ $scope.init =function() {
                 $scope.indicator_choosen= {};
                     $scope.result = {};
                     $scope.nothing_change = true;
+                      $rootScope.manage_survey_my_world_wide_surveys = [];
 }
   
      $scope.choose_not_complete = true;
@@ -2874,6 +2875,8 @@ $scope.init =function() {
                 $scope.indicator_choosen= {};
                     $scope.result = {};
   $scope.nothing_change = true;
+
+  $rootScope.manage_survey_my_world_wide_surveys = [];
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
@@ -2947,7 +2950,7 @@ $scope.init =function() {
 
     $scope.remove_qestionare = function(index_to_remove){
         $scope.nothing_change = false;
-        $scope.result.splice(index_to_remove, 1);   
+        $rootScope.manage_survey_my_world_wide_surveys.splice(index_to_remove, 1);   
     }
     $scope.go_to_create_survey = function(){
         console.log("corresponding_aca_years");
@@ -2973,7 +2976,8 @@ $scope.init =function() {
              }
          ).success(function (data) {
              $scope.nothing_change = true;
-              $scope.result = data;
+               $rootScope.manage_survey_my_world_wide_surveys = data;
+         
              $scope.choose_not_complete = false;
              
             
@@ -2990,21 +2994,21 @@ $scope.init =function() {
     $scope.save_to_server = function(my_modal){
 
 
-        if($scope.result.length == 0){
+        if($rootScope.manage_survey_my_world_wide_surveys.length == 0){
             console.log("legnth = 0")
             $scope.to_sent  = {};
             $scope.to_sent.curri_id  = $scope.curri_choosen.curri_id;
             $scope.to_sent.aca_year = $scope.year_choosen.aca_year;
             $scope.to_sent.questionare_set_id = 0;
-            $scope.result.push($scope.to_sent);
+            $rootScope.manage_survey_my_world_wide_surveys.push($scope.to_sent);
 
         }
 
         console.log("save_to_server");
-        console.log($scope.result);
+        console.log($rootScope.manage_survey_my_world_wide_surveys);
         $http.put(
              '/api/questionare/delete',
-             JSON.stringify($scope.result),
+             JSON.stringify($rootScope.manage_survey_my_world_wide_surveys),
              {
                  headers: {
                      'Content-Type': 'application/json'
@@ -3288,6 +3292,7 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
+            $rootScope.manage_survey_my_world_wide_surveys =data;
               $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
@@ -3637,6 +3642,8 @@ console.log("who_in_this_curri");
             $scope.to_sent  = {};
             $scope.to_sent.research_id = -1;
             $scope.to_sent.curri_id = $scope.curri_choosen.curri_id ;
+            $rootScope.manage_research_my_research_now.push($scope.to_sent);
+
         }
         $http.put(
              '/api/research/delete',
