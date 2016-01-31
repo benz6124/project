@@ -1,4 +1,27 @@
 ﻿'use strict';
+app.controller('GalleryCtrl', function ($scope, Lightbox) {
+
+  $scope.images = [
+    {
+      'url': '/myImages/mark.jpg',
+      'caption': 'Optional caption',
+      'thumbUrl': 'thumb1.jpg' // used only for this example
+    },
+    {
+      'url': '/myImages/derek.jpg',
+      'thumbUrl': 'thumb2.jpg'
+    },
+    {
+      'url': '/myImages/lexie.jpg',
+      'thumbUrl': 'thumb3.png'
+    }
+  ];
+
+  $scope.openLightboxModal = function (index) {
+    Lightbox.openModal($scope.images, index);
+  };
+});
+
 
 app.controller('choice_index_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
 
@@ -4084,3 +4107,16 @@ $scope.init =function() {
     }
 });
 
+
+
+
+
+app.controller('manage_minutes_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+
+$scope.obj = {};
+
+
+$scope.di = function(){
+  console.log($scope.obj.flow.files);  
+}
+});

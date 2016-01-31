@@ -43,7 +43,7 @@ td,.normal{
 
 
 button{
-  vertical-align: middle !important;
+  vertical-align: middle ;
   text-align: center !important;
   font-size:20px !important;
   text-align: center;
@@ -614,8 +614,15 @@ button.plusgreen:hover{
 .modal-backdrop
 {
     opacity:0.8 !important;
+ /*      height: 100% !important;
+   z-index: -1 !important;*/
+}
+/*
+.modal-dialog{
+  z-index: 0 !important;
 }
 
+*/
 .custom-body{
   overflow:hidden !important;
 }
@@ -1013,4 +1020,38 @@ div#manage_primary_evidences_admin input.form-control{
 a.highlight_evidence:hover{
   color:#6F002B;
    cursor: pointer;
+}
+
+.lightbox-nav a{
+  font-size: 21px ;
+  color:#6F002B;
+}
+
+.lightbox-nav button{
+    font-size: 41px !important;
+}
+
+.gallery-box {
+    width: 200px;
+    padding: 5px;
+    margin: 7px;
+    float: left;
+    min-height: 200px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+
+.thumbnail {
+    line-height: 20px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    word-break: normal;
+}
+
+.gallery-box a{
+  font-size: 18px;
+}
+
+.gallery-box span.title{
+  font-size: 17px;
 }

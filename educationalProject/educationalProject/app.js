@@ -3,5 +3,9 @@
         'ngAnimate',
         'ngQuantum',
         'ngDialog'
+        // ,'ngRoute'
+        ,'ui.bootstrap'
+        ,'bootstrapLightbox'
+        ,'flow'
    
 ]);
