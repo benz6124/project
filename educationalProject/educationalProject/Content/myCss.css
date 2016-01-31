@@ -880,9 +880,7 @@ table.evaluate_aun th{
   background-color: white;
 }
 
-table.evidence td.larger:hover{
-  cursor: pointer;
-}
+
 
 table.evaluate_aun td{
 
@@ -1010,3 +1008,9 @@ div#manage_primary_evidences_admin input.form-control{
    width: 99%;
 }
 
+
+
+a.highlight_evidence:hover{
+  color:#6F002B;
+   cursor: pointer;
+}

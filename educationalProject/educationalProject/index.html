@@ -448,28 +448,28 @@ $('.profile_pic').mouseover(function(){
         <div class="row" >
     
            
-            <div class="col-sm-6" style="margin-left:85px">
+            <div class="col-sm-6" style="margin-left:90px">
 
                  <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             </select>
             </div>
 
-            <div class="col-sm-2">
+            <div class="col-sm-3">
 
-        <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="chooseYear(year_choosen)" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" data-ng-click="check_curri()">
+        <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="sendYearAndGetIndicators(year_choosen)" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" data-ng-click="check_curri()">
 </select>    
 
 
             </div>
 
-            <div class="col-sm-1">
+           <!--  <div class="col-sm-1">
                <button type="button" class="btn hvr-wobble-vertical" style="background-color:#000000; color:white;" ng-click="sendYearAndGetIndicators(year_choosen)" >  <span class="glyphicon glyphicon-ok-sign"></span> ยืนยัน </button>
 
-            </div>
+            </div> -->
 
             <div class="col-sm-1">
 
-                <button class="btn hvr-wobble-vertical" type="button" style="background-color:#6F002B;margin-bottom:10px;margin-left:0px; color:white;" ng-click="download_aun_book()">
+                <button class="btn hvr-wobble-vertical" type="button" style="background-color:#739900;margin-bottom:10px;margin-left:0px; color:white;" ng-click="download_aun_book()">
                     <span class="glyphicon glyphicon-download-alt"></span> ดาวน์โหลดเล่ม 
                 </button>
 
@@ -556,7 +556,7 @@ $('.profile_pic').mouseover(function(){
 </div> -->
 
 <br/>
-   <h3 class="headerPanel wow flipInX"data-wow-delay="3s" data-wow-duration="2s" style="text-align:left">หลักฐานสนับสนุนการประเมิน</h3>
+   <h3 class="headerPanel wow flipInX"data-wow-delay="2s" data-wow-duration="2s" style="text-align:left">หลักฐานสนับสนุนการประเมิน</h3>
               <table class="table table-bordered table-hover table_modal evidence wow bounceInLeft" data-wow-delay="2s" data-wow-duration="3s">
 
                         <tr>
@@ -567,7 +567,13 @@ $('.profile_pic').mouseover(function(){
 
                         <tr ng-repeat="evidence in corresponding_evidences">
                             <td class="code">{{indicator_choosen.indicator_num}}-{{evidence.evidence_real_code}}</td>
-                            <td class="larger" ng-click="watch_file(evidence.file_name)"><a href="" class=" hvr-grow">{{evidence.evidence_name}}</a></td>
+                            <td class="larger" >
+
+                            <a href="" class="highlight_evidence" ng-click="watch_file(evidence)" ng-show="evidence.secret==0">{{evidence.evidence_name}}</a>
+                             <span   ng-show="evidence.secret==1">{{evidence.evidence_name}}</span>
+
+
+                            </td>
                             <td class="download"><a href="" ng-click="download_file(evidence.file_name)" ng-hide="evidence.secret==1"class=" hvr-wobble-vertical"><span class="glyphicon glyphicon-download-alt " /></a></td>
                         </tr>
                  <!--        <tr>
@@ -4005,7 +4011,7 @@ glyphicon glyphicon-bell"></i> </span>
        <div class="custom-footer">
 
           <div class="topicHeader pull-right">
-              <button class="btn btn-success  " ng-disabled="choose_not_complete ||  still_not_choose_complete() ||manage_primary_evidence_admin_form.$pristined" ng-click="save_to_server(this)">    ยืนยัน</button>
+              <button class="btn btn-success  " ng-disabled="choose_not_complete ||  still_not_choose_complete() || nothing_change" ng-click="save_to_server(this)">    ยืนยัน</button>
               <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
           </div>
       </div>   
@@ -4040,6 +4046,8 @@ glyphicon glyphicon-bell"></i> </span>
 </div>
 
 
+<!--  <input type="text" data-qo-format="DD/MM/YYYY" ng-model="commonDatepicker" data-qo-model-type="string"class="form-control" data-nq-datepicker="" placeholder="datepicker" /><span id="iconId" class="input-group-addon"><i class="fic fu-calendar"></i></span>
+ {{commonDatepicker}} -->
 
                            <div class="container-fluid" ng-hide="choose_not_complete" >
 
@@ -4096,7 +4104,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                                                
 
-                                                 <span  style="padding-left:0px;font-size:19px" >{{indicator_choosen.indicator_num}}-      <input class="form-control" type="number"style=" display: inline-block;margin-top:2px;margin-bottom:2px;width:50px;padding-top:2px;padding-left:4px;padding-right:2px;padding-bottom:5px"  ng-model="evidence.evidence_real_code" required/></span>
+                                                 <span  style="padding-left:0px;font-size:19px" >{{indicator_choosen.indicator_num}}-      <input class="form-control" type="number"style=" display: inline-block;margin-top:2px;margin-bottom:2px;width:50px;padding-top:2px;padding-left:4px;padding-right:2px;padding-bottom:5px"  ng-model="evidence.evidence_real_code" data-ng-change="something_change()" required/></span>
 
           </td>
 
@@ -4105,7 +4113,7 @@ glyphicon glyphicon-bell"></i> </span>
      </td>
  -->
 
-                                                <td class=" left_column"><input class="form-control"size="64" type="text" ng-model="evidence.evidence_name" style="margin-top:2px;margin-bottom:2px"  required/>
+                                                <td class=" left_column"><input class="form-control"size="64" type="text" ng-model="evidence.evidence_name" style="margin-top:2px;margin-bottom:2px"  data-ng-change="something_change()" required/>
                                                 </td>
 
        <td ><span style="margin-right:15px;font-size:19px">{{evidence.t_name}}</span> </td>
@@ -4157,7 +4165,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
   <div class="custom-footer">
 
           <div class="topicHeader pull-right">
-              <button class="btn btn-success  " ng-disabled="choose_not_complete ||  still_not_choose_complete() ||manage_evidences_form.$pristined" ng-click="save_to_server(this)">    ยืนยัน</button>
+              <button class="btn btn-success  " ng-disabled="nothing_change || choose_not_complete ||  still_not_choose_complete()" ng-click="save_to_server(this)">    ยืนยัน</button>
               <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
           </div>
       </div>   
@@ -4166,7 +4174,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
 
  <div id="manage_primary_evidences_president" data-ng-controller="manage_primary_evidences_president_controller" data-ng-init="init()"data-nq-modal=""  data-qo-screen-mode ="true" data-qo-independent="true">
       <div class="custom-header">
-          <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการหลักฐานพื้นฐาน</span></h1>
+          <h1 class="headerModalH1"><span class="headerModal">{{still_not_choose_complete()}} ส่วนจัดการหล{{choose_not_complete}}ักฐานพื้นฐาน {{nothing_change}}</span></h1>
       </div>
 
    <div class="row">
@@ -4287,7 +4295,7 @@ glyphicon glyphicon-bell"></i> </span>
         <div class="custom-footer">
 
           <div class="topicHeader pull-right">
-              <button class="btn btn-success  " ng-disabled="choose_not_complete ||  still_not_choose_complete() ||manage_primary_evidence_form.$pristined" ng-click="save_to_server(this)">    ยืนยัน</button>
+              <button class="btn btn-success  " ng-disabled="choose_not_complete ||  still_not_choose_complete() || nothing_change" ng-click="save_to_server(this)">    ยืนยัน</button>
               <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
           </div>
       </div>   
@@ -4349,7 +4357,7 @@ glyphicon glyphicon-bell"></i> </span>
 </div>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="choose_not_complete" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="choose_not_complete || still_same_president()" ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>   
@@ -4552,13 +4560,13 @@ glyphicon glyphicon-bell"></i> </span>
 
                                             <tr data-ng-repeat="indicator in manage_indicators_and_sub_result">
                                            
-                                                 <td class="number_indicator"><input style="margin-right:10px" type="number" ng-model="indicator.indicator_num " required/></td>
+                                                 <td class="number_indicator"><input data-ng-change="something_change()" style="margin-right:10px" type="number" ng-model="indicator.indicator_num " required/></td>
 
 
 
-                                                <td class="topic_indicator left_column"><input class="form-control"size="64" type="text" ng-model="indicator.indicator_name_t " required/>
+                                                <td class="topic_indicator left_column"><input data-ng-change="something_change()" class="form-control"size="64" type="text" ng-model="indicator.indicator_name_t " required/>
                                                 </td>
-                                                 <td class="topic_indicator left_column"><input class="form-control"size="64" type="text" ng-model="indicator.indicator_name_e " required/></td>
+                                                 <td class="topic_indicator left_column"><input data-ng-change="something_change()" class="form-control"size="64" type="text" ng-model="indicator.indicator_name_e " required/></td>
 
                                      <td class="number_indicator"> <button style="background-color:transparent;border:none"href="" data-ng-click="choose_indicator(indicator)" class="hvr-pulse" data-nq-toggle-modal="#manage_sub_indicators" ng-disabled="validate_year_to_create()" data-effect="slide-left">
                                         <span class="topic"><i class="glyphicon glyphicon-zoom-in"></i> </span>
@@ -4583,7 +4591,7 @@ glyphicon glyphicon-bell"></i> </span>
  <div class="custom-footer">
      
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="still_not_choose_complete() || validate_year_to_create()  || manage_indicators_form.$invalid || choose_not_complete || manage_indicators_form.$pristine  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="still_not_choose_complete() || validate_year_to_create()  || manage_indicators_form.$invalid || choose_not_complete || nothing_change  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div> 
