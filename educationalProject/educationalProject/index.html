@@ -1223,6 +1223,124 @@ $('.profile_pic').mouseover(function(){
 
 
 
+
+
+<div id="create_minute" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_minute_controller">
+       <div class="custom-header">
+                        <h1 class="headerModalH1">เพิ่มข้อมูลรายงานการประชุม</h1>
+                    </div>
+
+
+ 
+
+                                     
+  <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">หัวข้อการประชุม   </span></h3>
+                            </div>
+                            <div class="col-md-9">
+                                <input  type="text" class="form-control" placeholder="" ng-model="my_new_minute.topic_name" required><span class="normal">  </span>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">วันที่ประชุม   </span></h3>
+                            </div>
+                            <div class="col-md-9">
+                           
+  <div class="input-group" style="margin-right:9px">
+
+  <input type="text" data-qo-format="DD/MM/YYYY" ng-model="my_new_minute.date" data-qo-model-type="string"class="form-control" data-nq-datepicker="" placeholder="กรุณาเลือกวันที่ประชุม" data-qo-icon-id="#iconId" />
+
+
+      
+              <span id="iconId" class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+                            </div>
+                        </div>
+ 
+  <div class="row">
+  <div class="col-md-3" >
+
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ผู้เข้าร่วมประชุม   </span></h3>
+                            </div>
+ <div class="col-md-9" style="padding-right:22px;">
+           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_minutes_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้เข้าร่วมประชุม"  data-ng-model="my_new_minute.attendee" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
+</select>    
+</div>
+
+</div>
+
+                               
+ 
+    <ul ng-show="my_new_minute.attendee.length!=0">
+                           <span class="topicHeader"> <li style="color:#6F002B;margin-left:10px" ng-repeat="each in my_new_minute.attendee">{{each.t_name}}</li></span>
+                        </ul>
+
+
+<div class="row">
+                            <div class="col-md-3">
+                               <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ไฟล์รายงานการประชุม   </span></h3>
+                            </div>
+                            <div class="col-md-9">
+                              
+                                <input type="file" name="upload_file_input" class="form-control" placeholder="ไฟล์รายงานการประชุม" file-upload  data-ng-model="my_file" required/>
+                            </div>
+
+                        </div>
+
+                        
+  <div class="col-md-3" style="padding-left:0px">
+                               <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ภาพบรรยากาศการประชุม   </span></h3>
+                            </div>
+
+                        
+
+
+ 
+<div flow-init
+    flow-files-submitted="show_my_pictures()"
+     flow-name="my_pictures.flow"
+     flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]">
+  <div class="drop" flow-drop ng-class="dropClass">
+    <span class="btn btn-primary"style="margin-left:7px;font-size:18px" flow-btn><i class="glyphicon glyphicon-picture"></i> อัพโหลดรูปภาพ</span>
+   
+  
+
+  </div>
+
+  <br/>
+
+  <div style="margin-left:20px;margin-top:3px;">
+
+
+    <div ng-repeat="file in $flow.files" class="gallery-box">
+      <span class="title">{{file.name}}</span>
+      <div class="thumbnail" ng-show="$flow.files.length"  >
+        <img flow-img="file" />
+      </div>
+      
+      <div class="btn-group">
+        <a class="btn btn-xs btn-danger" ng-click="file.cancel()">
+          ลบรูปภาพ
+        </a>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+  </div>
+
+
+           <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button ng-disabled="still_not_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                        </div>
+                    </div>
+</div>
+
 <div id="create_lab" data-nq-modal="" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_lab_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">เพิ่มข้อมูลห้องปฏิบัติการ</h1>
@@ -1957,27 +2075,24 @@ $('.profile_pic').mouseover(function(){
                 </div>
 
 
-                <div id="minute_attendees" data-nq-modal="" data-qo-size="sm" data-qo-independent="true">
-                    <div class="custom-header">
+
+
+                <div id="minute_attendees" data-nq-modal="" data-qo-size="sm" data-qo-independent="true" >
+                    <div class="custom-header" >
                         <h1 class="headerModalH1">ผู้เข้าร่วมประชุม</h1>
                     </div>
 
-                    <h3>ดร. ชมพูนุท จินจาคาม</h3>
-                    <h3>ผศ. ดร. อรัญญา วลัยรัชต์</h3>
-                    <h3>รศ. ดร. เกียรติกูล เจียรนัยธนะกิจ</h3>
-                    <h3>ผศ. ดร. ชุติเมษฏ์ ศรีนิลทา</h3>
-                    <h3>ดร. อรทัย สังข์เพ็ชร</h3>
-                    <h3>ดร. อักฤทธิ์ สังข์เพ็ชร</h3>
-
+                     <h3 ng-repeat="each_attendee in manage_minutes_see_this_attendee" style="margin-top:3px;"><span class="topicHeader">{{each_attendee.t_name}} </span></h3>
+                  
                     <div class="custom-footer" style="background-color:#6F002B;">
-                        <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
+                        <button class="btn btn-default hvr-skew-forward" style="margin-top:3px" ng-click="$hide()">ปิดหน้าต่าง</button>
                     </div>
                 </div>
                 
 
-                <div id="manage_minutes" data-nq-modal="" data-qo-size="lg" ng-controller="manage_minutes_controller" data-qo-independent="true">
+                <div id="manage_minutes" data-nq-modal="" data-qo-screen-mode="true" ng-controller="manage_minutes_controller" data-qo-independent="true">
 
-<h3>
+<!-- <h3>
 
 <div flow-init
      flow-files-submitted="di()"
@@ -2010,9 +2125,120 @@ $('.profile_pic').mouseover(function(){
     <div class="clear"></div>
   </div>
 
-</div>
+</div> -->
 
 
+
+                    <div class="custom-header">
+                        <h1 class="headerModalH1">ส่วนการจัดการรายงานการประชุม</h1>
+                    </div>
+
+          <div class="row">
+
+
+                        <div class="col-md-8" >
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+            </select>
+
+                        </div>
+                        <div class="col-md-4" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+</select>   
+                        </div>
+
+                    </div>
+<br />
+  <div class="container-fluid"  ng-hide="choose_not_complete">
+                        <div class="clearfix">
+
+
+                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
+                                 data-qo-selectable="true">
+              
+
+              
+                                <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+
+                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="flip-x" data-nq-toggle-modal="#create_minute" data-ng-click="go_to_create_minute()"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลรายงานการประชุม</button>
+
+
+  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
+                                      
+                                        <thead class="nq-fix-table-scroll">
+                                            <tr>
+                          
+                                                <th style="width:150px">หัวข้อการประชุม</th>
+
+                                                <th style="width:70px">วันที่ประชุม</th>
+
+                                                <th style="width:77px">ผู้เข้าร่วม</th>
+                                                  <th style="width:83px">ภาพการประชุม</th>
+
+                                               <th style="width:20px">ดาวน์โหลด</th>
+
+                                                <th style="width:20px">แก้ไข</th>
+                                       
+                                                <th style="width:53px">ลบ</th>
+                                              
+                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody class="flattened">
+                                        <form name="manage_survey_form" novalidate>
+                                          
+
+                                            <tr  ng-repeat="minute in manage_minutes_my_world_wide_minutes">
+                                           
+ <td class="left_column"style=" padding-left: 10px ;"><span style="font-size:19px;">{{minute.topic_name}}</span> </td>
+                                        
+        <td  >
+
+
+<span style="padding-left:0px;font-size:19px">{{minute.date}}</span>  </td>
+
+               <!--       <td  >
+
+
+<span ng-repeat="each_officer in lab.officer" style="padding-left:0px;font-size:19px">{{each_officer.t_name}}<br/></span>
+
+
+  </td>       -->
+
+
+          <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#minute_attendees" data-ng-click="go_to_see_attendee(minute)" >
+                                        <span class="topic"><i style="color:#484848"class="glyphicon glyphicon-user"></i> </span>
+                                    </a></td> 
+  
+                                   <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse"  data-nq-toggle-modal="#" data-ng-click="go_to_fix_lab(lab)">
+                                        <span class="topic"><i style="color:#e6005c"class="glyphicon glyphicon-picture"></i> </span>
+                                    </a></td> 
+
+
+                                          <td > <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="download_file(minute.file_name)" >
+                                        <span class="topic"><i style="color:#00802b"class="glyphicon glyphicon-download-alt"></i> </span>
+                                    </a></td> 
+    <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_lab" data-ng-click="go_to_fix_lab(lab)">
+                                        <span class="topic"><i style="color:#eea236;"class="glyphicon glyphicon-wrench"></i> </span>
+                                    </a></td> 
+                                          <td > <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_minute($index)" >
+                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                    </a></td> 
+                                            </tr>
+
+                                            </form>
+                                        </tbody>
+
+                                    </table>
+
+         </div>         </div>        
+
+          </div>         </div>
+     <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="create_minutes" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">

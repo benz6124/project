@@ -4109,14 +4109,288 @@ $scope.init =function() {
 
 
 
+// app.controller('manage_minutes_minute_attendees_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 
+// });
+
+
+app.controller('create_minute_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+                   $scope.my_new_minute = {};
+
+  $scope.my_new_minute.date = "";
+  $scope.my_new_minute.attendee =[];
+  $scope.my_new_minute.topic_name = "";
+  $scope.my_file.file = [];
+  $scope.my_pictures = {};
+}
+
+  $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+                   $scope.my_new_minute = {};
+
+  $scope.my_new_minute.date = "";
+  $scope.my_new_minute.attendee =[];
+  $scope.my_new_minute.topic_name = "";
+  $scope.my_file = [];
+$scope.my_pictures = {};
+     $scope.$on("fileSelected", function (event, args) {
+
+        $scope.$apply(function () {            
+            $scope.my_file = [];
+            //add the file object to the scope's files collection
+            $scope.my_file.push(args.file);
+        });
+    });
+
+     $scope.still_not_complete = function(){
+        if(!$scope.my_pictures.flow){
+            return true;
+        }
+        if( $scope.my_pictures.flow.files.length ==0 ||! $scope.my_new_minute.topic_name || $scope.my_file.length ==0 || !$scope.my_new_minute.date || $scope.my_new_minute.attendee.length ==0 ){
+            return true;
+        }
+        else{
+      
+             return false;
+        }
+
+
+       
+     }
+    
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+$scope.show_my_pictures=function(){
+    console.log("show");
+    console.log();
+}
+    $scope.save_to_server = function(my_modal) {
+ $scope.my_new_minute.curri_id = $rootScope.manage_minutes_curri_id;
+ $scope.my_new_minute.aca_year = $rootScope.manage_minutes_aca_year;
+ $scope.my_new_minute.file_name =  $scope.my_file[0].name;
+  $scope.my_new_minute.pictures =  [];
+      var formData = new FormData();
+
+
+  
+        var index = 0;
+        for (index = 0 ;index< $scope.my_pictures.flow.files.length;index++){
+            
+              $scope.my_new_minute.pictures.push($scope.my_pictures.flow.files[index].file.name)
+            formData.append("picture"+(index+1), $scope.my_pictures.flow.files[index].file );
+        }
+        formData.append("model", angular.toJson( $scope.my_new_minute));
+
+      formData.append("file", $scope.my_file[0] );
+
+        $http({
+            method: 'POST',
+            url: "/api/minutes/add",
+
+            headers: { 'Content-Type': undefined },
+
+
+            data:formData,
+            transformRequest: angular.indentity 
+
+        }).
+        success(function (data, status, headers, config) {
+        
+                $rootScope.manage_minutes_my_world_wide_minutes =data;
+                $scope.close_modal(my_modal);
+                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+              
+           
+        }).
+        error(function (data, status, headers, config) {
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        });
+    }
+
+
+});
 
 app.controller('manage_minutes_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 
-$scope.obj = {};
-
-
-$scope.di = function(){
-  console.log($scope.obj.flow.files);  
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+                    $scope.nothing_change = true;
+                      $rootScope.manage_minutes_my_world_wide_minutes = [];
 }
+  
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+  $scope.nothing_change = true;
+
+ $rootScope.manage_minutes_my_world_wide_minutes = [];
+        $scope.sendCurriAndGetYears = function () {
+        $scope.choose_not_complete =true;
+       
+         $scope.nothing_change = true;
+        $scope.indicator_choosen= {};
+      
+              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
+ $scope.year_choosen = {};
+            $scope.corresponding_aca_years = data;
+
+
+          });
+
+
+    }
+    $scope.go_to_see_attendee = function(this_minute){
+        $rootScope.manage_minutes_see_this_attendee = this_minute.attendee;
+    }
+    $scope.go_to_create_minute =function(){
+           $http.post(
+             '/api/teacher/getname',
+             JSON.stringify($scope.curri_choosen.curri_id),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            $rootScope.manage_minutes_all_teachers_in_curri = data;
+              
+        $rootScope.manage_minutes_curri_id = $scope.curri_choosen.curri_id;
+        $rootScope.manage_minutes_aca_year = $scope.year_choosen.aca_year;
+
+});
+
+    }
+    $scope.go_to_fix_lab = function(lab_to_fix){
+     
+       
+      
+              $http.post(
+             '/api/teacher/getname',
+             JSON.stringify($scope.curri_choosen.curri_id),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+        
+            $rootScope.manage_lab_all_teachers_in_curri = data;
+ 
+             $rootScope.manage_lab_fix_this_lab = angular.copy(lab_to_fix);
+             $rootScope.manage_lab_fix_this_lab_init = [];
+             var index;
+             for(index = 0; index<$rootScope.manage_lab_fix_this_lab.officer.length;index++ ){
+                $rootScope.manage_lab_fix_this_lab_init.push($rootScope.manage_lab_fix_this_lab.officer[index].teacher_id);
+             }
+             
+    
+         });
+      
+        
+    }
+
+
+
+
+    $scope.remove_minute = function(index_to_remove){
+        $scope.nothing_change = false;
+        $rootScope.manage_minutes_my_world_wide_minutes.splice(index_to_remove, 1);   
+    }
+
+
+
+    $scope.find_information = function(){
+
+          console.log("find_information");
+        console.log($scope.year_choosen);
+
+        $http.post(
+             '/api/minutes/getminutes',
+             JSON.stringify($scope.year_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            console.log("fint information");
+            console.log($rootScope.manage_minutes_my_world_wide_minutes);
+             $scope.nothing_change = true;
+               $rootScope.manage_minutes_my_world_wide_minutes = data;
+         
+             $scope.choose_not_complete = false;
+             
+            
+    
+         });
+
+    }
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+    $scope.download_file = function(path) { 
+        window.open(path, '_blank', "");  
+    }
+
+    $scope.save_to_server = function(my_modal){
+
+
+        if($rootScope.manage_minutes_my_world_wide_minutes.length == 0){
+       
+            $scope.to_sent  = {};
+            $scope.to_sent.curri_id  = $scope.curri_choosen.curri_id;
+            $scope.to_sent.aca_year = $scope.year_choosen.aca_year;
+   
+            $rootScope.manage_minutes_my_world_wide_minutes.push($scope.to_sent);
+
+        }
+
+        console.log("save_to_server");
+        console.log($rootScope.manage_minutes_my_world_wide_minutes);
+        $http.put(
+             '/api/minutes/delete',
+             JSON.stringify($rootScope.manage_minutes_my_world_wide_minutes),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            $scope.close_modal(my_modal);
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+               
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    }
 });

@@ -1046,6 +1046,8 @@ a.highlight_evidence:hover{
     margin-bottom: 5px;
     overflow: hidden;
     word-break: normal;
+     max-height: 170px;
+     min-height: 170px;
 }
 
 .gallery-box a{
