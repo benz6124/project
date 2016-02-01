@@ -6956,25 +6956,16 @@ var selectApp = angular.module('ngQuantum.select', [
                               })
                               var selected = []
                               $filter('filter')($select.optionData, function (opt) {
-                                        console.log(selected);
-                                console.log(opt);
-
-                                console.log(opt.value);
+                                       
                                   opt.selected && selected.push(opt.value);
                               
                               })
                               $timeout(function () {
                                 console.log("timeOut");
                                 console.log(selected);
-                                if(selected.length >=3 ){
-                                    var newobj = {};
-                                    newobj.t_name = "mdmdm";
-
-                                    controller.$setViewValue(selected);
-                                }
-                                else{
+                               
                                       controller.$setViewValue(selected);
-                                }
+                                
                                 
                                    console.log("here2");
                               }, 0)
@@ -7237,8 +7228,7 @@ var selectApp = angular.module('ngQuantum.select', [
                       else {
 
                           if (options.multiple && angular.isArray(controller.$modelValue)) {
-                            console.log("render controller");
-                            console.log($select);
+                         
                               selected = controller.$modelValue.map(function (value) {
                                   index = $select.$getIndex(value);
                                   if (angular.isDefined(index)) {
@@ -7273,15 +7263,11 @@ var selectApp = angular.module('ngQuantum.select', [
                                     num_count = num_count +1;
 
                                 }
-                                if(num_count == 3){
-                                    break;
-                                }
+                               
                             }
-                            // console.log("ka")
-                            // console.log(selected);
-                            // console.log(options);
-                            if(num_count==3){
-                                element.html(first_man.label+' และ อื่นๆ')
+                     
+                            if(num_count>= 3){
+                                element.html(first_man.label+' และอีก '+num_count+" รายการ")
                             }
                             else{
                                 element.html(selected)

@@ -28663,7 +28663,7 @@ var selectDirective = function() {
   };
 
   function selectPreLink(scope, element, attr, ctrls) {
-    console.log("heyy");
+ 
 
       // if ngModel is not defined, we don't need to do anything
       var ngModelCtrl = ctrls[1];
@@ -28694,7 +28694,7 @@ var selectDirective = function() {
       // we have to add an extra watch since ngModel doesn't work well with arrays - it
       // doesn't trigger rendering if only an item in the array changes.
       if (attr.multiple) {
-        console.log("ma nee leaw");
+     
 
         // Read value now needs to check each option to see if it is selected
         selectCtrl.readValue = function readMultipleValue() {

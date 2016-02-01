@@ -1476,7 +1476,7 @@ console.log(data);
         $scope.validate_year_to_create = function(){
             // console.log("this is value");
             // console.log($scope.year_to_create);
-            return   angular.isUndefined($scope.year_to_create) || $scope.year_to_create <= $scope.max_year_curri_have || $scope.year_to_create == "";
+            return   angular.isUndefined($scope.year_to_create) || $scope.year_to_create < $scope.max_year_curri_have || $scope.year_to_create == "";
         }
       $scope.choose_indicator = function(in_indi){
 if( $scope.validate_year_to_create() != true){
@@ -1516,7 +1516,7 @@ if( $scope.validate_year_to_create() != true){
               $scope.still_not_choose_complete =function(){
 
 
-                  if(angular.isUndefined($rootScope.manage_indicators_and_sub_result)){
+                  if(!$rootScope.manage_indicators_and_sub_result){
                 return true;
             }
 
@@ -2277,7 +2277,7 @@ app.controller('manage_sub_indicators_controller', function($scope, $alert,$http
 
              $scope.still_not_choose_complete_sub =function(){
 
-            if(angular.isUndefined($rootScope.manage_indicators_indicator_choosen)){
+            if(!$rootScope.manage_indicators_indicator_choosen){
                 return true;
             }
 
@@ -2296,8 +2296,8 @@ app.controller('manage_sub_indicators_controller', function($scope, $alert,$http
             $scope.my_num_indicators = [];
             for (index =0;index<  $rootScope.manage_indicators_indicator_choosen.sub_indicator_list.length ; index++){
 
-                    if($scope.my_num_indicators.indexOf($rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].indicator_num) == -1) {
-                        $scope.my_num_indicators.push($rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].indicator_num);
+                    if($scope.my_num_indicators.indexOf($rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].sub_indicator_num) == -1) {
+                        $scope.my_num_indicators.push($rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].sub_indicator_num);
                     }
                     else {
 
@@ -2987,7 +2987,7 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
-            $rootScope.manage_research_all_teachers_in_curri = data;
+            $rootScope.manage_lab_all_teachers_in_curri = data;
               
         $rootScope.manage_lab_curri_id = $scope.curri_choosen.curri_id;
         $rootScope.manage_lab_aca_year = $scope.year_choosen.aca_year;
@@ -4199,9 +4199,19 @@ $scope.my_pictures = {};
     }
 
 $scope.show_my_pictures=function(){
+
      $scope.show_gallery = true;
+     var index;
+     for(index=0;index<$scope.my_pictures.flow.files.length;index++){
+        if ($scope.my_pictures.flow.files[index].size > 2000000){
+            console.log("remove file");
+            $scope.my_pictures.flow.files.splice(index,1);
+        }
+    
+     }
+    
     console.log("show");
-    console.log();
+
 }
     $scope.save_to_server = function(my_modal) {
  $scope.my_new_minute.curri_id = $rootScope.manage_minutes_curri_id;
