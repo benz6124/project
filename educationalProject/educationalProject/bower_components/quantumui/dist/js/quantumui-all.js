@@ -6945,22 +6945,42 @@ var selectApp = angular.module('ngQuantum.select', [
                   };
                   $select.select = function (item) {
                       if (options.multiple) {
+                    
                           if (!item.selected && options.maxLength && (controller.$modelValue && controller.$modelValue.length == options.maxLength))
                               return
                           else {
                               scope.$apply(function () {
                                   item.selected = isTagsInput ? true : item.selected ? false : true;
                                   item.filtered = isTagsInput && item.selected;
+                             
                               })
                               var selected = []
                               $filter('filter')($select.optionData, function (opt) {
+                                        console.log(selected);
+                                console.log(opt);
+
+                                console.log(opt.value);
                                   opt.selected && selected.push(opt.value);
+                              
                               })
                               $timeout(function () {
-                                  controller.$setViewValue(selected);
+                                console.log("timeOut");
+                                console.log(selected);
+                                if(selected.length >=3 ){
+                                    var newobj = {};
+                                    newobj.t_name = "mdmdm";
+
+                                    controller.$setViewValue(selected);
+                                }
+                                else{
+                                      controller.$setViewValue(selected);
+                                }
+                                
+                                   console.log("here2");
                               }, 0)
                           }
                       } else {
+                       
                           if (!scope.fistChanged) {
                               $filter('filter')($select.optionData, function (itm, key) {
                                   if (itm.selected) {;
@@ -7215,11 +7235,15 @@ var selectApp = angular.module('ngQuantum.select', [
                               renderSelected();
                       }
                       else {
+
                           if (options.multiple && angular.isArray(controller.$modelValue)) {
+                            console.log("render controller");
+                            console.log($select);
                               selected = controller.$modelValue.map(function (value) {
                                   index = $select.$getIndex(value);
                                   if (angular.isDefined(index)) {
                                       $select.optionData[index].selected = true
+
                                       return $select.optionData[index].label
                                   }
                                   return false
@@ -7234,8 +7258,35 @@ var selectApp = angular.module('ngQuantum.select', [
                               else
                                   selected = false;
                           }
+
+
                           if (selected) {
-                              element.html(selected)
+
+                            var num_count =0;
+                            var first_man = {};
+                            var index;
+                            for(index=0;index<$select.optionData.length;index++){
+                                if($select.optionData[index].selected == true){
+                                    if(num_count==0){
+                                        first_man = $select.optionData[index];
+                                    }
+                                    num_count = num_count +1;
+
+                                }
+                                if(num_count == 3){
+                                    break;
+                                }
+                            }
+                            // console.log("ka")
+                            // console.log(selected);
+                            // console.log(options);
+                            if(num_count==3){
+                                element.html(first_man.label+' และ อื่นๆ')
+                            }
+                            else{
+                                element.html(selected)
+                            }
+                              
                               if (!options.disableClear && !options.multiple) {
                                   var clrIcon = angular.element(clearIcon)
                                   clrIcon.one('click', function (evt) {
@@ -7256,6 +7307,7 @@ var selectApp = angular.module('ngQuantum.select', [
                       }
                   }
                   function renderSelected() {
+
                       var current = element.find('li')
                       angular.forEach(current, function (elm, key) {
                           if (key < current.length - 1)

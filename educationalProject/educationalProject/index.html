@@ -469,13 +469,13 @@ $('.profile_pic').mouseover(function(){
             <div class="col-sm-6" style="margin-left:90px">
 
                  <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
-            </select>
+            <option style="display:none" value=""></option></select>
             </div>
 
             <div class="col-sm-3">
 
         <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="sendYearAndGetIndicators(year_choosen)" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" data-ng-click="check_curri()">
-</select>    
+<option style="display:none" value=""></option></select>    
 
 
             </div>
@@ -707,7 +707,7 @@ $('.profile_pic').mouseover(function(){
                              
 
                                       <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="prepare_to_watch_support_text()"data-ng-model="$parent.$parent.select_year_support_text " data-qo-disable-clear="true"  required>
-</select>    
+<option style="display:none" value=""></option></select>    
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -744,7 +744,7 @@ $('.profile_pic').mouseover(function(){
 
                             <div class="col-md-8">
                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
-            </select>
+            <option style="display:none" value=""></option></select>
 
                         
                         </div>
@@ -752,7 +752,7 @@ $('.profile_pic').mouseover(function(){
                          
 
                                      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" name="choose_year_select"  required>
-</select>    
+<option style="display:none" value=""></option></select>    
                            </div>
                         </div>
 
@@ -802,7 +802,7 @@ $('.profile_pic').mouseover(function(){
                             <div class="col-md-10">
                                 <div class="topicHeader">
                                    <select data-qo-disable-clear="true" name = "choose_curri" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true"  >
-                                  </select>
+                                  <option style="display:none" value=""></option></select>
                                 </div>
                             </div>
 
@@ -920,7 +920,7 @@ $('.profile_pic').mouseover(function(){
                               <option  value="2">ปริญญาโท</option>
                               <option value="3">ปริญญาเอก</option>
                              
-                            </select>
+                            <option style="display:none" value=""></option></select>
                                </div> 
                         </div> 
 
@@ -971,7 +971,7 @@ $('.profile_pic').mouseover(function(){
 
 
 
-                                    </select>
+                                    <option style="display:none" value=""></option></select>
                                 </div>
                             </div>
 
@@ -1045,7 +1045,7 @@ $('.profile_pic').mouseover(function(){
                                         <option>2551</option>
 
 
-                                    </select>
+                                    <option style="display:none" value=""></option></select>
                                 </div>
                             </div>
                         </div>
@@ -1066,7 +1066,7 @@ $('.profile_pic').mouseover(function(){
                                         <option>เอกสารประชาสัมพันธ์หลักสูตร</option> -->
 
 
-                                    </select>
+                                    <option style="display:none" value=""></option></select>
 
 
                                     <!--   <a href="" data-toggle="modal" data-target=".pop-up-1">
@@ -1136,7 +1136,7 @@ $('.profile_pic').mouseover(function(){
                             </div>
  <div class="col-md-9" style="padding-right:22px;">
            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.teacher_id as each_teacher.t_name for each_teacher in manage_lab_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา" data-ng-model="$parent.manage_lab_fix_this_lab_init" data-ng-init="manage_lab_fix_this_lab_init" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
-</select>    
+<option style="display:none" value=""></option></select>    
 
 
         
@@ -1194,7 +1194,7 @@ $('.profile_pic').mouseover(function(){
                             </div>
  <div class="col-md-9" style="padding-right:22px;">
            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_lab_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา"  data-ng-model="manage_lab_fix_this_lab.officer" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
-</select>    
+<option style="display:none" value=""></option></select>    
 </div>
 
 </div>
@@ -1270,7 +1270,7 @@ $('.profile_pic').mouseover(function(){
                             </div>
  <div class="col-md-9" style="padding-right: 24px;">
            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_minutes_all_teachers_in_curri track by each_teacher" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้เข้าร่วมประชุม"  data-ng-model="my_new_minute.attendee" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
-</select>    
+<option style="display:none" value=""></option></select>    
 </div>
 
 </div>
@@ -1371,7 +1371,7 @@ $('.profile_pic').mouseover(function(){
                             </div>
  <div class="col-md-9" style="padding-right:22px;">
            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_lab_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา"  data-ng-model="my_new_lab.officer" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
-</select>    
+<option style="display:none" value=""></option></select>    
 </div>
 
 </div>
@@ -1423,7 +1423,7 @@ $('.profile_pic').mouseover(function(){
                             </div>
  <div class="col-md-9" style="padding-right:22px;">
            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.teacher_id as each_teacher.t_name for each_teacher in manage_research_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้วิจัย"  data-ng-model="$parent.manage_lab_research_this_research_init" data-ng-init="manage_lab_research_this_research_init"  data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
-</select>    
+<option style="display:none" value=""></option></select>    
 
 
 
@@ -1489,12 +1489,12 @@ $('.profile_pic').mouseover(function(){
 
                         <div class="col-md-8" >
                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
-            </select>
+            <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-4" >
                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
                         </div>
 
                     </div>
@@ -1590,7 +1590,7 @@ $('.profile_pic').mouseover(function(){
 
                       
                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
-            </select>
+            <option style="display:none" value=""></option></select>
 
                      
                       
@@ -1694,7 +1694,7 @@ $('.profile_pic').mouseover(function(){
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            </select>
+                            <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-3">
@@ -1708,7 +1708,7 @@ $('.profile_pic').mouseover(function(){
                                 <option>2551</option>
 
 
-                            </select>
+                            <option style="display:none" value=""></option></select>
                         </div>
 
                         <div class="col-md-1">
@@ -1910,7 +1910,7 @@ $('.profile_pic').mouseover(function(){
                                                 <option> รศ. กฤตวัน ศิริบูรณ์</option>
 
 
-                                            </select>
+                                            <option style="display:none" value=""></option></select>
 
 
                                         </div>
@@ -1964,12 +1964,12 @@ $('.profile_pic').mouseover(function(){
 
                         <div class="col-md-8" >
                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
-            </select>
+            <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-4" >
                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
                         </div>
 <!-- 
                         <div class="col-md-1">
@@ -2142,12 +2142,12 @@ $('.profile_pic').mouseover(function(){
 
                         <div class="col-md-8" >
                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
-            </select>
+            <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-4" >
                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
                         </div>
 
                     </div>
@@ -2258,7 +2258,7 @@ $('.profile_pic').mouseover(function(){
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            </select>
+                            <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-3">
@@ -2272,7 +2272,7 @@ $('.profile_pic').mouseover(function(){
                                 <option>2551</option>
 
 
-                            </select>
+                            <option style="display:none" value=""></option></select>
                         </div>
 
                         <div class="col-md-1">
@@ -2455,7 +2455,7 @@ $('.profile_pic').mouseover(function(){
                                                 <option> รศ. กฤตวัน ศิริบูรณ์</option>
 
 
-                                            </select>
+                                            <option style="display:none" value=""></option></select>
 
 
                                         </div>
@@ -2483,12 +2483,12 @@ $('.profile_pic').mouseover(function(){
 
          <div class="col-md-5" style="margin-left:72px" >
                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in corresponding_aca_years track by year" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
                         </div>
 
   <div class="col-md-5" >
  <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators track by indicator" data-qo-effect="flip-x" data-ng-change="find_primary_evidences()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
   </div>
 </div>
 
@@ -2541,7 +2541,7 @@ $('.profile_pic').mouseover(function(){
                                             <!--      <td class="assign_man left_column">
 
                                                        <select data-qo-disable-clear="true" data-qo-button-class="mySelect_teacher" data-qo-speed="fastest" data-nq-select="" data-ng-options="teacher.teacher_id as teacher.t_name for teacher in all_teachers" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกผู้รับผิดชอบ"  data-ng-init="primary_evidence.teacher_id" data-ng-model="primary_evidence.teacher_id" data-qo-disable-clear="true" required>
-            </select>
+            <option style="display:none" value=""></option></select>
 
         
                                                 </td> -->
@@ -2596,17 +2596,17 @@ glyphicon glyphicon-bell"></i> </span>
                         <div class="col-md-6" >
                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
                         
-            </select>
+            <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-2" >
                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
                         </div>
 
   <div class="col-md-4" >
  <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
   </div>
 
 </div>
@@ -2748,17 +2748,17 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
 
                         <div class="col-md-6" >
                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
-            </select>
+            <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-2" >
                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
                         </div>
 
   <div class="col-md-4" >
  <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
   </div>
 
 
@@ -2822,7 +2822,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                                  <td class="assign_man" ><!-- {{primary_evidence.teacher_id}} -->
 <span ng-hide="just_show_responsible(primary_evidence.status)">
                                                        <select data-qo-disable-clear="true" data-qo-button-class="mySelect_teacher" data-qo-speed="fastest" data-nq-select="" data-ng-options="teacher.teacher_id as teacher.t_name for teacher in all_teachers" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกผู้รับผิดชอบ" data-ng-change="choose_teacher(primary_evidence)" data-ng-init="primary_evidence.teacher_id" data-ng-model="primary_evidence.teacher_id" data-qo-disable-clear="true"  >
-            </select></span>
+            <option style="display:none" value=""></option></select></span>
 
 <span class="topicHeader"  ng-show="just_show_responsible(primary_evidence.status)">{{name_of_teacher_id(primary_evidence.teacher_id)}}</span>
         
@@ -2881,7 +2881,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                             <div class="col-md-8">
                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
-            </select>
+            <option style="display:none" value=""></option></select>
 
                         
                         </div>
@@ -2889,7 +2889,7 @@ glyphicon glyphicon-bell"></i> </span>
                          
 
                                      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" name="choose_year_select"  required>
-</select>    
+<option style="display:none" value=""></option></select>    
                            </div>
                         </div>
 
@@ -2901,12 +2901,12 @@ glyphicon glyphicon-bell"></i> </span>
     <div class="row">
    <div class="col-md-6" style="margin-left:200px;margin-top:15px">
       <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="result.t_prename+''+result.t_name for result in results" data-qo-effect="flip-x" data-qo-placeholder="ประธานหลักสูตรคนปัจจุบัน"   data-ng-init="$parent.personnel_choose" data-ng-model="$parent.personnel_choose" data-qo-disable-clear="true">
-            </select>
+            <option style="display:none" value=""></option></select>
 
           
 
    <!--        <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="result.evaluation_score for result in corresponding_results" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร"  data-ng-init="$parent.mock_result" data-ng-model="$parent.mock_result" data-qo-disable-clear="true"> -->
-    </select>
+    <option style="display:none" value=""></option></select>
    </div>
 </div>
       <img src="{{personnel_choose.file_name_pic}}" class="img-circle" width="240" style="float:right;margin-top:10px;margin-right:70px" />
@@ -2941,17 +2941,17 @@ glyphicon glyphicon-bell"></i> </span>
 
                           <div class="col-md-6" >
                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
-            </select>
+            <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-2" >
                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
                         </div>
   <div class="col-md-4">
 
       <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
 
 
                         </div>
@@ -3082,7 +3082,7 @@ glyphicon glyphicon-bell"></i> </span>
 <div class="col-md-6" style="margin-bottom:15px;margin-left:45px">
 
                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in all_indicator_years" data-qo-effect="flip-x" data-ng-change="get_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษาที่ต้องการดึงเทมเพลท" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
 
 
 
@@ -3101,7 +3101,7 @@ glyphicon glyphicon-bell"></i> </span>
 </div>
 
                            <!--    <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in all_indicator_years" data-qo-effect="flip-x" data-ng-change="get_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษาที่ต้องการดึงเทมเพลท" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
-</select>    -->
+<option style="display:none" value=""></option></select>    -->
 
 
 
@@ -3278,17 +3278,17 @@ glyphicon glyphicon-bell"></i> </span>
 
                           <div class="col-md-6" >
                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
-            </select>
+            <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-2" >
                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
                         </div>
   <div class="col-md-4">
 
       <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
 
 
                         </div>
@@ -3306,7 +3306,7 @@ glyphicon glyphicon-bell"></i> </span>
               
                                 <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
   <!--     <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="result.evaluation_score for result in corresponding_results" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร"  data-ng-init="$parent.mock_result" data-ng-model="$parent.mock_result" data-qo-disable-clear="true">
-            </select> -->
+            <option style="display:none" value=""></option></select> -->
                                     <table class="table table-bordered table-hover bg-white table_modal evaluate_aun">
                                       
                                         <thead class="nq-fix-table-scroll">
@@ -3400,7 +3400,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <option>เอกลักษณ์,อัตลักษณ์พร้อมตัวบ่งชี้ของสถาบัน</option>
 
 
-                            </select>
+                            <option style="display:none" value=""></option></select>
 
                         </div>
                     </div>
@@ -3459,7 +3459,7 @@ glyphicon glyphicon-bell"></i> </span>
                         <div class="col-md-8">
                                  
                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="evidence.evidence_name for evidence in my_all_primary_evidences_responsible" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักฐาน"  data-ng-model="$parent.primary_choosen" data-qo-disable-clear="true">
-            </select>
+            <option style="display:none" value=""></option></select>
 
                         </div>
                     </div>
@@ -3598,12 +3598,12 @@ glyphicon glyphicon-bell"></i> </span>
 
                         <div class="col-md-8" >
                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
-            </select>
+            <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-4" >
                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_all_evidences_in_curri_and_year()"  data-qo-placeholder="ปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
                         </div>
 
                     </div>
@@ -3626,7 +3626,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                                  <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="evidence.evidence_name for evidence in all_evidences" data-qo-effect="flip-x"data-qo-placeholder="หลักฐานที่พบในหลักสูตรและปีการศึกษาดังกล่าว" data-ng-model="$parent.evidence_we_want" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
 
 
                         </div>
@@ -3677,7 +3677,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            </select>
+                            <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-3">
@@ -3691,7 +3691,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <option>2551</option>
 
 
-                            </select>
+                            <option style="display:none" value=""></option></select>
                         </div>
                     </div>
                     <div style="background-color:#484848">
@@ -3732,7 +3732,7 @@ glyphicon glyphicon-bell"></i> </span>
                                     <option>2551</option>
 
 
-                                </select>
+                                <option style="display:none" value=""></option></select>
                             </div>
                         </div>
                     </div>
@@ -3753,7 +3753,7 @@ glyphicon glyphicon-bell"></i> </span>
                                     <option>เอกสารประชาสัมพันธ์หลักสูตร</option> -->
 
 
-                                </select>
+                                <option style="display:none" value=""></option></select>
                             </div>
 
                         </div>
@@ -3780,12 +3780,12 @@ glyphicon glyphicon-bell"></i> </span>
 
                         <div class="col-md-8" >
                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
-            </select>
+            <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-4" >
                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
                         </div>
 
                     </div>
@@ -3938,7 +3938,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            </select>
+                            <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-2">
@@ -3952,7 +3952,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <option>2551</option>
 
 
-                            </select>
+                            <option style="display:none" value=""></option></select>
                         </div>
   <div class="col-md-2">
                             <select data-qo-disable-clear="true" data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อหลัก" data-ng-model="staticSelectModel">
@@ -3972,7 +3972,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <option>AUN 14</option>
                                 <option>AUN 15</option>
 
-                            </select>
+                            <option style="display:none" value=""></option></select>
 
 
                         </div>
@@ -4005,7 +4005,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <option>AUN 14</option>
                                 <option>AUN 15</option>
 
-                            </select>
+                            <option style="display:none" value=""></option></select>
 
 
                         </div>
@@ -4409,7 +4409,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <option> รศ. กฤตวัน ศิริบูรณ์</option>
 
 
-                            </select>
+                            <option style="display:none" value=""></option></select>
                         </div>
 
                     </div>
@@ -4439,7 +4439,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            </select>
+                            <option style="display:none" value=""></option></select>
 
                         </div>
                         <!--             <div class="col-md-3">
@@ -4452,7 +4452,7 @@ glyphicon glyphicon-bell"></i> </span>
                                                  <option>2551</option>
 
 
-                                             </select>
+                                             <option style="display:none" value=""></option></select>
                         </div> -->
 
                         <div class="col-md-1">
@@ -4629,7 +4629,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            </select>
+                            <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-3">
@@ -4643,7 +4643,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <option>2551</option>
 
 
-                            </select>
+                            <option style="display:none" value=""></option></select>
                         </div>
 
                         <div class="col-md-1">
@@ -4894,7 +4894,7 @@ glyphicon glyphicon-bell"></i> </span>
                                                 <option> รศ. กฤตวัน ศิริบูรณ์</option>
 
 
-                                            </select>
+                                            <option style="display:none" value=""></option></select>
 
 
                                         </div>
@@ -4923,12 +4923,12 @@ glyphicon glyphicon-bell"></i> </span>
 
                         <div class="col-md-8" >
                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
-            </select>
+            <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-4" >
                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
                         </div>
 
                     </div>
@@ -5133,7 +5133,7 @@ glyphicon glyphicon-bell"></i> </span>
                                     <option>ศ.</option>
 
 
-                                </select>
+                                <option style="display:none" value=""></option></select>
 
                             </div>
                         </div>
@@ -5193,7 +5193,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-                                </select>
+                                <option style="display:none" value=""></option></select>
                             </div>
                         </div>
 
@@ -5387,7 +5387,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            </select>
+                            <option style="display:none" value=""></option></select>
 
                         </div>
                         <!--   <div class="col-md-3">
@@ -5400,7 +5400,7 @@ glyphicon glyphicon-bell"></i> </span>
                                                  <option>2551</option>
 
 
-                                             </select>
+                                             <option style="display:none" value=""></option></select>
                         </div> -->
 
                         <div class="col-md-1">
@@ -5633,7 +5633,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                 </div>
 
-                <div id="watch_gallery" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
+            <!--     <div id="watch_gallery" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal"> ดูอัลบั้มรูปภาพ</span></h1>
@@ -5690,8 +5690,8 @@ glyphicon glyphicon-bell"></i> </span>
                         <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
 
                     </div>
-                </div>
-                <div id="manage_gallery" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
+                </div> -->
+          <!--       <div id="manage_gallery" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal"> อัลบั้มรูปภาพ</span></h1>
@@ -5705,7 +5705,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            </select>
+                            <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-3">
@@ -5720,7 +5720,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <option>2551</option>
 
 
-                            </select>
+                            <option style="display:none" value=""></option></select>
                         </div>
 
                         <div class="col-md-1">
@@ -5734,8 +5734,7 @@ glyphicon glyphicon-bell"></i> </span>
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
                                  data-qo-selectable="true">
                                 <div class="panel-heading clearfix">
-                                    <!-- <h1 class="panel-title pull-left"></i> รายงานการประชุม </h1> -->
-
+                                   
 
                                     <div class="pull-left" style="padding-left:15px;">
                                         <button type="button" class="btn btn-xs btn-primary plusgreen hvr-buzz" data-nq-show-insert="" data-template-id="insertMinutes"><i class="fic glyphicon glyphicon-plus-sign"></i> สร้างอัลบั้มรูปภาพ</button>
@@ -5746,12 +5745,11 @@ glyphicon glyphicon-bell"></i> </span>
                                 <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="350px" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
 
-                                    <!--          <div  data-qo-min-height="200px" data-nq-scroll="" data-qo-max-height="350px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden;"> -->
                                     <table class="table table-bordered table-hover bg-white table_modal">
-                                        <!--nq-fix-table-scroll class would fix thead always visible at top of the table if you put the table into a scrollable container-->
+                                    
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
-                                                <!--nq-column-sort directive would bind sorting handler to the element-->
+                                               
                                                 <th class="col-xs-4">ชื่ออัลบั้ม</th>
                                                 <th class="col-xs-1 ">วันที่สร้าง</th>
                                                 <th class="col-xs-5">Preview</th>
@@ -5763,7 +5761,7 @@ glyphicon glyphicon-bell"></i> </span>
                                             </tr>
                                         </thead>
                                         <tbody class="flattened">
-                                            <!--pageable-repeat is required sub directive-->
+                                            
                                             <tr>
                                                 <td>รูปการสัมมนาภาควิชา ณ เกาะช้าง</td>
                                                 <td>10/10/2558</td>
@@ -5812,9 +5810,7 @@ glyphicon glyphicon-bell"></i> </span>
                                     </table>
                                 </div>
 
-                                <!--           <div data-nq-pageable-template=""    data-qo-max-height="350px"data-on-change="panelTitle= 'สร้างรายงานการประชุม'"  style="overflow:hidden; overflow-y:auto;" data-nq-scroll="" ng-submit="$hide()" >
-                                -->
-
+                            
                                 <div data-nq-pageable-template="" ng-form="" data-on-change="panelTitle= 'สร้างอัลบั้มรูปภาพ'" ng-submit="$hide()" style="max-height:100%; overflow:hidden; overflow-y:auto;">
 
                                     <div class="row">
@@ -5851,8 +5847,8 @@ glyphicon glyphicon-bell"></i> </span>
                         <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
 
                     </div>
-                </div>
-                <div id="watch_album" data-nq-modal="" data-qo-independent="true">
+                </div> -->
+       <!--          <div id="watch_album" data-nq-modal="" data-qo-independent="true">
                     <div class="custom-header">
                         <h1><span class="glyphicon glyphicon-th-list"></span><span class="headerModal" style="color:#6F002B"> ดูอัลบั้มรูปภาพ</span></h1>
                     </div>
@@ -5872,7 +5868,7 @@ glyphicon glyphicon-bell"></i> </span>
                                     <option>หลักสูตรวิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                     <option>หลักสูตรวิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
                                     <option>หลักสูตรวิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                                </select>
+                                <option style="display:none" value=""></option></select>
                             </div>
                         </div>
 
@@ -5895,21 +5891,12 @@ glyphicon glyphicon-bell"></i> </span>
                                     <option>2551</option>
 
 
-                                </select>
+                                <option style="display:none" value=""></option></select>
                             </div>
                         </div>
 
                     </div>
-                    <!-- <div class="dropdown">
-                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Dropdown</button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="">Action</a></li>
-                        <li><a href="">Another action</a></li>
-                        <li><a href="">Something else here</a></li>
-                        <li><a href="">Separated link</a></li>
-                      </ul>
-                    </div> -->
+                   
                     <div class="gall" id="fruity">
                         <a class="fancybox " href="1_b.jpg" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet"><img src="1_s.jpg" class="img-thumbnail" alt="" /></a>
 
@@ -5928,7 +5915,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
 
-                </div>
+                </div> -->
 <div id="create_new_research" data-nq-modal="" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_research_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">เพิ่มข้อมูลงานวิจัย</h1>
@@ -5956,7 +5943,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_researcher.t_name for each_researcher in manage_research_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้วิจัย"  data-ng-model="$parent.new_research.researcher" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
-</select>    
+<option style="display:none" value=""></option></select>    
 
 </div>
 
@@ -6027,7 +6014,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                                                  <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="user.user_type for user in all_usertype" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกกลุ่มเป้าหมาย"  data-ng-model="$parent.my_target" data-qo-disable-clear="true"  data-qo-max-length ="0"  data-qo-multiple="true">
-</select>    
+<option style="display:none" value=""></option></select>    
 
 </div>
 
@@ -6066,7 +6053,7 @@ glyphicon glyphicon-bell"></i> </span>
  <div id="manage_survey" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_survey_controller">
 
                     <div class="custom-header">
-                        <h1 class="headerModalH1">ส่วนการจัดการแบบสอบถาม</h1>
+                        <h1 class="headerModalH1">{{year_choosen}}ส่วนการจัดการแบบสอบถาม</h1>
                     </div>
 
           <div class="row">
@@ -6074,12 +6061,12 @@ glyphicon glyphicon-bell"></i> </span>
 
                         <div class="col-md-8" >
                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
-            </select>
+            <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-4" >
                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
-</select>   
+<option style="display:none" value=""></option></select>   
                         </div>
 
                     </div>
@@ -6193,7 +6180,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
                                 <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            </select>
+                            <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-3">
@@ -6207,7 +6194,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <option>2551</option>
 
 
-                            </select>
+                            <option style="display:none" value=""></option></select>
                         </div>
 
                         <div class="col-md-1">
@@ -6369,7 +6356,7 @@ glyphicon glyphicon-bell"></i> </span>
                                                 <option>บริษัทภายนอก</option>
 
 
-                                            </select>
+                                            <option style="display:none" value=""></option></select>
 
 
                                         </div>
