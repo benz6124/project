@@ -1238,7 +1238,9 @@ $('.profile_pic').mouseover(function(){
                             <div class="col-md-3">
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">หัวข้อการประชุม   </span></h3>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-9" style="
+    padding-right: 8px;
+">
                                 <input  type="text" class="form-control" placeholder="" ng-model="my_new_minute.topic_name" required><span class="normal">  </span>
 
                             </div>
@@ -1266,8 +1268,8 @@ $('.profile_pic').mouseover(function(){
 
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ผู้เข้าร่วมประชุม   </span></h3>
                             </div>
- <div class="col-md-9" style="padding-right:22px;">
-           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_minutes_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้เข้าร่วมประชุม"  data-ng-model="my_new_minute.attendee" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
+ <div class="col-md-9" style="padding-right: 24px;">
+           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_minutes_all_teachers_in_curri track by each_teacher" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้เข้าร่วมประชุม"  data-ng-model="my_new_minute.attendee" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
 </select>    
 </div>
 
@@ -1284,7 +1286,9 @@ $('.profile_pic').mouseover(function(){
                             <div class="col-md-3">
                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ไฟล์รายงานการประชุม   </span></h3>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-9" style="
+    padding-right: 6px;
+">
                               
                                 <input type="file" name="upload_file_input" class="form-control" placeholder="ไฟล์รายงานการประชุม" file-upload  data-ng-model="my_file" required/>
                             </div>
@@ -1302,8 +1306,8 @@ $('.profile_pic').mouseover(function(){
  
 <div flow-init
     flow-files-submitted="show_my_pictures()"
-     flow-name="my_pictures.flow"
-     flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]">
+     flow-name="$parent.my_pictures.flow"
+     flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]" >
   <div class="drop" flow-drop ng-class="dropClass">
     <span class="btn btn-primary"style="margin-left:7px;font-size:18px" flow-btn><i class="glyphicon glyphicon-picture"></i> อัพโหลดรูปภาพ</span>
    
@@ -1313,7 +1317,7 @@ $('.profile_pic').mouseover(function(){
 
   <br/>
 
-  <div style="margin-left:20px;margin-top:3px;">
+  <div style="margin-left:20px;margin-top:3px;" ng-show="show_gallery">
 
 
     <div ng-repeat="file in $flow.files" class="gallery-box">
@@ -2478,12 +2482,12 @@ $('.profile_pic').mouseover(function(){
 <div class="row">
 
          <div class="col-md-5" style="margin-left:72px" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in corresponding_aca_years track by year" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 </select>   
                         </div>
 
   <div class="col-md-5" >
- <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="find_primary_evidences()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+ <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators track by indicator" data-qo-effect="flip-x" data-ng-change="find_primary_evidences()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
 </select>   
   </div>
 </div>
@@ -2582,7 +2586,7 @@ glyphicon glyphicon-bell"></i> </span>
 
  <div id="manage_evidences" data-ng-controller="manage_evidences_controller" data-ng-init="init()"data-nq-modal=""  data-qo-screen-mode ="true" data-qo-independent="true">
       <div class="custom-header">
-          <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการหลักฐาน</span></h1>
+          <h1 class="headerModalH1"><span class="headerModal">ส่วนจัดการหลักฐาน</span></h1>
       </div>
 
 
@@ -2591,6 +2595,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                         <div class="col-md-6" >
                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                        
             </select>
 
                         </div>
@@ -2609,13 +2614,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 <!--  <input type="text" data-qo-format="DD/MM/YYYY" ng-model="commonDatepicker" data-qo-model-type="string"class="form-control" data-nq-datepicker="" placeholder="datepicker" /><span id="iconId" class="input-group-addon"><i class="fic fu-calendar"></i></span>
  {{commonDatepicker}} -->
-<ul class="gallery gallery1" ng-controller="GalleryCtrl">
-  <li ng-repeat="image in images">
-    <a ng-click="openLightboxModal($index)">
-      <img ng-src="{{image.thumbUrl}}" class="img-thumbnail">
-    </a>
-  </li>
-</ul>
+
                            <div class="container-fluid" ng-hide="choose_not_complete" >
 
                         <div class="clearfix">
@@ -6027,7 +6026,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-                                                 <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="user.user_type for user in all_usertype" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกกลุ่มเป้าหมาย"  data-ng-model="$parent.my_target" data-qo-disable-clear="true"  data-qo-multiple="true">
+                                                 <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="user.user_type for user in all_usertype" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกกลุ่มเป้าหมาย"  data-ng-model="$parent.my_target" data-qo-disable-clear="true"  data-qo-max-length ="0"  data-qo-multiple="true">
 </select>    
 
 </div>

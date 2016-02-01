@@ -1157,6 +1157,11 @@ app.controller('upload_aun_controller', function($scope, $alert,$http,request_ye
            $scope.year_choosen = {};
               $scope.curri_choosen = {}
   $scope.files = [];
+   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
   
 }
 
@@ -1762,6 +1767,12 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
              for(index=0;index<$rootScope.manage_evidences_world_evidences.length;index++){
                 $rootScope.my_evidence_real_code_we_have_now.push($rootScope.manage_evidences_world_evidences[index].evidence_real_code);
              }
+
+              angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
 
 }
 
@@ -2407,7 +2418,7 @@ app.controller('manage_primary_evidences_admin_controller', function($scope, $ht
         $scope.year_choosen = {};
               $scope.curri_choosen = {};
                $scope.indicator_choosen= {};
-     
+        $scope.go_request = false;
                  $scope.corresponding_indicators = {};
                  $scope.nothing_change = true;
 $scope.init =function() {
@@ -2418,6 +2429,7 @@ $scope.init =function() {
 
                  $scope.corresponding_indicators = {};
                  $scope.nothing_change = true;
+                   $scope.go_request = false;
 }
 
       $scope.still_not_choose_complete =function(){
@@ -2472,6 +2484,7 @@ $scope.indicator_choosen = {};
               $scope.corresponding_indicators = data;
                $scope.choose_not_complete = true;
                $scope.nothing_change = true;
+                 $scope.go_request = true;
 
          });
 
@@ -2481,7 +2494,7 @@ $scope.indicator_choosen = {};
 
           console.log("find_primary_evidences");
 
-
+if($scope.go_request == true){
         $http.post(
              '/api/primaryevidence/adminget',
              JSON.stringify($scope.indicator_choosen),
@@ -2498,7 +2511,7 @@ $scope.indicator_choosen = {};
 
          });
 
-    
+    }
 
     }
 
@@ -3552,6 +3565,12 @@ $scope.init =function() {
   $scope.new_research.researcher =[];
   $scope.new_research.year_publish = "";
   $scope.new_research.file = "";
+
+   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
 }
   $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -4126,10 +4145,17 @@ $scope.init =function() {
   $scope.my_new_minute.date = "";
   $scope.my_new_minute.attendee =[];
   $scope.my_new_minute.topic_name = "";
-  $scope.my_file.file = [];
+  $scope.my_file = [];
   $scope.my_pictures = {};
-}
+  $scope.show_gallery = false;
 
+   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+}
+ $scope.show_gallery = false;
   $scope.choose_not_complete = true;
          $scope.year_choosen = {};
               $scope.curri_choosen = {}
@@ -4173,6 +4199,7 @@ $scope.my_pictures = {};
     }
 
 $scope.show_my_pictures=function(){
+     $scope.show_gallery = true;
     console.log("show");
     console.log();
 }
