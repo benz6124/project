@@ -85,17 +85,17 @@ namespace educationalProject.Models.Wrappers
                         }
                             if(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString()[0] != 'k')
                             {
-                                curr.officer.Add(new Teacher_with_t_name
+                                curr.officer.Add(new Personnel_with_t_name
                                 {
-                                    teacher_id = item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString(),
+                                    personnel_id = item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString(),
                                     t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                                 });
                             }
                             else
                             {
-                                curr.officer.Add(new Staff_with_t_name
+                                curr.officer.Add(new Personnel_with_t_name
                                 {
-                                    staff_id = item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString(),
+                                    personnel_id = item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString(),
                                     t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                                 });
                             }
@@ -172,10 +172,7 @@ namespace educationalProject.Models.Wrappers
 
             foreach (Personnel_with_t_name p in ldata.officer)
             {
-                if(p.GetTypeName() == "Teacher_with_t_name")
-                    insertintolabofficer += string.Format("({0},'{1}')", ldata.lab_num, ((Teacher_with_t_name)p).teacher_id);
-                else
-                    insertintolabofficer += string.Format("({0},'{1}')", ldata.lab_num, ((Staff_with_t_name)p).staff_id);
+                    insertintolabofficer += string.Format("({0},'{1}')", ldata.lab_num, p.personnel_id);
                 if (p != ldata.officer.Last())
                     insertintolabofficer += ",";
             }
@@ -212,17 +209,17 @@ namespace educationalProject.Models.Wrappers
                         }
                         if (item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString()[0] != 'k')
                         {
-                            curr.officer.Add(new Teacher_with_t_name
+                            curr.officer.Add(new Personnel_with_t_name
                             {
-                                teacher_id = item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString(),
+                                personnel_id = item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString(),
                                 t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                             });
                         }
                         else
                         {
-                            curr.officer.Add(new Staff_with_t_name
+                            curr.officer.Add(new Personnel_with_t_name
                             {
-                                staff_id = item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString(),
+                                personnel_id = item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString(),
                                 t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                             });
                         }
@@ -280,10 +277,7 @@ namespace educationalProject.Models.Wrappers
 
             foreach (Personnel_with_t_name p in ldata.officer)
             {
-                if (p.GetTypeName() == "Teacher_with_t_name")
-                    insertintotemp2 += string.Format(",('{0}')", ((Teacher_with_t_name)p).teacher_id);
-                else
-                    insertintotemp2 += string.Format(",('{0}')", ((Staff_with_t_name)p).staff_id);
+                    insertintotemp2 += string.Format(",('{0}')", p.personnel_id);
             }
 
             string insertintolabofficer = string.Format(" INSERT INTO {0} " +
@@ -325,17 +319,17 @@ namespace educationalProject.Models.Wrappers
                         }
                         if (item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString()[0] != 'k')
                         {
-                            curr.officer.Add(new Teacher_with_t_name
+                            curr.officer.Add(new Personnel_with_t_name
                             {
-                                teacher_id = item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString(),
+                                personnel_id = item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString(),
                                 t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                             });
                         }
                         else
                         {
-                            curr.officer.Add(new Staff_with_t_name
+                            curr.officer.Add(new Personnel_with_t_name
                             {
-                                staff_id = item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString(),
+                                personnel_id = item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString(),
                                 t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                             });
                         }

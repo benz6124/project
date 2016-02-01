@@ -10,6 +10,7 @@ namespace educationalProject.Models.ViewModels
         private string _personnel_id;
         private string _t_name;
         public string t_name { get { return _t_name; } set { _t_name = value; } }
+        public string personnel_id { get { return _personnel_id; } set { _personnel_id = value; } }
         public void SetPersonnelId(string pid)
         {
             _personnel_id = pid;

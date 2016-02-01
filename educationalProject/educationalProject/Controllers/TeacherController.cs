@@ -15,5 +15,15 @@ namespace educationalProject.Controllers
         {
             return Ok(datacontext.SelectTeacherIdAndTName(curri_id));
         }
+
+        [ActionName("getteacherfull")]
+        public IHttpActionResult PostToQueryTeacherWithEducational([FromBody]string curri_id)
+        {
+            oCurriculum_academic data = new oCurriculum_academic
+            {
+                curri_id = curri_id
+            };
+            return Ok(datacontext.SelectPresidentCurriAndAllTeacherInCurri(data));
+        }
     }
 }

@@ -5,13 +5,11 @@ using System.Web;
 
 namespace educationalProject.Models.ViewModels
 {
-    public class Staff_with_t_name : Personnel_with_t_name
+    public class Staff_with_t_name
     {
-        public string staff_id { get { return GetPersonnelId(); } set { SetPersonnelId(value); } }
-
-        public override string GetTypeName()
-        {
-            return "Staff_with_t_name";
-        }
+        private string _staff_id;
+        private string _t_name;
+        public string staff_id { get { return _staff_id; } set { _staff_id = value; } }
+        public string t_name { get { return _t_name; } set { _t_name = value; } }
     }
 }

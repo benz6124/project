@@ -12,7 +12,12 @@ namespace educationalProject.Controllers
     public class LabListController : ApiController
     {
         private oLab_list datacontext = new oLab_list();
-
+        public IHttpActionResult Get()
+        {
+            datacontext.aca_year = 2558;
+            datacontext.curri_id = "21";
+            return Ok(datacontext.SelectByCurriculumAcademic());
+        }
         [ActionName("getlablist")]
         public IHttpActionResult PostForQueryLabList(oCurriculum_academic data)
         {
@@ -34,22 +39,13 @@ namespace educationalProject.Controllers
                 room = data["room"].ToString()
             };
             JArray officer_data = (JArray)data["officer"];
-            foreach(JObject item in officer_data)
+        
+            foreach (JObject item in officer_data)
             {
-                if (item["teacher_id"] != null)
+                detail.officer.Add(new Personnel_with_t_name
                 {
-                    detail.officer.Add(new Teacher_with_t_name
-                    {
-                        teacher_id = item["teacher_id"].ToString()
-                    });
-                }
-                else
-                {
-                    detail.officer.Add(new Staff_with_t_name
-                    {
-                        staff_id = item["staff_id"].ToString()
-                    });
-                }
+                    personnel_id = item["personnel_id"].ToString()
+                });
             }
             object result = datacontext.InsertNewLabListWithSelect(detail);
             if (result.GetType().ToString() != "System.String")
@@ -70,23 +66,15 @@ namespace educationalProject.Controllers
                 lab_num = Convert.ToInt32(data["lab_num"]),
             };
             JArray officer_data = (JArray)data["officer"];
+
             foreach (JObject item in officer_data)
             {
-                if (item["teacher_id"] != null)
+                detail.officer.Add(new Personnel_with_t_name
                 {
-                    detail.officer.Add(new Teacher_with_t_name
-                    {
-                        teacher_id = item["teacher_id"].ToString()
-                    });
-                }
-                else
-                {
-                    detail.officer.Add(new Staff_with_t_name
-                    {
-                        staff_id = item["staff_id"].ToString()
-                    });
-                }
+                    personnel_id = item["personnel_id"].ToString()
+                });
             }
+
             object result = datacontext.UpdateLabListWithSelect(detail);
             if (result.GetType().ToString() != "System.String")
                 return Ok(result);
