@@ -1,8 +1,8 @@
 .lightbox-nav {
   position: relative;
-  margin-bottom: 12px; /* the font-size of .btn-xs */
+  margin-bottom: 7px; /* the font-size of .btn-xs */
   height: 22px;
-  text-align: center;
+ 
   font-size: 0; /* prevent the otherwise inherited font-size and line-height from adding extra space to the bottom of this div */
 }
 
@@ -13,10 +13,13 @@
 .lightbox-nav .close {
   /* absolutely position this in order to center the nav buttons */
   position: absolute;
-  top: 0;
+  top: -8px;
   right: 0;
 }
 
+.next_sign {
+  right:0;
+}
 .lightbox-image-container {
   position: relative;
   text-align: center; /* center the image */

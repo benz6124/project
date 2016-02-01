@@ -2088,6 +2088,33 @@ $('.profile_pic').mouseover(function(){
                     </div>
                 </div>
                 
+                <div id="manage_minutes_show_images" data-nq-modal="" data-ng-controller="manage_minutes_show_images_controller"data-qo-screen-mode="true"  data-qo-independent="true">
+
+                    <div class="custom-header">
+                        <h1 class="headerModalH1">{{manage_minutes_show_images_of_this_minute.topic_name}}</h1>
+                    </div>
+<div style="margin-left:20px" class="show_lightbox">
+  <div ng-repeat="pic in manage_minutes_show_images_of_this_minute.pictures" class="gallery-box">
+
+      <div class="thumbnail"   >
+        <img src="{{pic}}" ng-click="openLightboxModal($index)" />
+      </div>
+      
+ 
+    </div>
+    <div class="clear"></div>
+  
+    
+ 
+    </div>
+<div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                         
+                           <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
+                        </div>
+                    </div>
+                </div>
+
 
                 <div id="manage_minutes" data-nq-modal="" data-qo-screen-mode="true" ng-controller="manage_minutes_controller" data-qo-independent="true">
 
@@ -2208,7 +2235,7 @@ $('.profile_pic').mouseover(function(){
                                         <span class="topic"><i style="color:#484848"class="glyphicon glyphicon-user"></i> </span>
                                     </a></td> 
   
-                                   <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse"  data-nq-toggle-modal="#" data-ng-click="go_to_fix_lab(lab)">
+                                   <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse"  data-nq-toggle-modal="#manage_minutes_show_images" data-ng-click="show_picture_minute(minute)">
                                         <span class="topic"><i style="color:#e6005c"class="glyphicon glyphicon-picture"></i> </span>
                                     </a></td> 
 
@@ -2216,7 +2243,7 @@ $('.profile_pic').mouseover(function(){
                                           <td > <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="download_file(minute.file_name)" >
                                         <span class="topic"><i style="color:#00802b"class="glyphicon glyphicon-download-alt"></i> </span>
                                     </a></td> 
-    <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_lab" data-ng-click="go_to_fix_lab(lab)">
+    <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="" data-ng-click="">
                                         <span class="topic"><i style="color:#eea236;"class="glyphicon glyphicon-wrench"></i> </span>
                                     </a></td> 
                                           <td > <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_minute($index)" >
@@ -3229,30 +3256,10 @@ glyphicon glyphicon-bell"></i> </span>
 
          </div>         </div>         </div>         </div>
 
-<!-- <div class="row">
-<div class="col-md-6">
-    <h3 class="topicHeader"  style="margin-left:55px;margin-top:5px">ตัวบ่งชี้ที่ </h3>
-    </div>
-    <div class="col-md-3">
-     <span class="topicHeader"  style="margin-left:55px;margin-top:5px">ชื่อตัวบ่งชี้ </span>
-     </div>
-</div> -->
-<!-- <div class="row" ng-repeat="indicator in manage_indicators_and_sub_result">
-     <div class="col-md-6">
-{{indicator.indicator_num}}
-</div>
-     <div class="col-md-6">
-{{indicator.indicator_name_t}} 
-
-{{indicator.indicator_name_e}}
-
- 
-</div>
-</div> -->
 
  <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="still_not_choose_complete_sub()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="still_not_choose_complete_sub() || nothing_change" ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div> 
@@ -6537,7 +6544,7 @@ glyphicon glyphicon-bell"></i> </span>
 <link rel="stylesheet" href="/bower_components/angular-bootstrap/ui-bootstrap-csp.css">
 
 <link rel="stylesheet" href="/bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.css">
-<script src="/bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.min.js"></script>
+<script src="/bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js"></script>
 <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 
 <script type="text/javascript" src="http://arrow.scrolltotop.com/arrow13.js"></script>

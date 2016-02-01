@@ -2274,6 +2274,7 @@ app.controller('manage_sub_indicators_controller', function($scope, $alert,$http
     //     });
     // });
 
+    $scope.nothing_change = true;
 
              $scope.still_not_choose_complete_sub =function(){
 
@@ -2322,40 +2323,46 @@ app.controller('manage_sub_indicators_controller', function($scope, $alert,$http
 
        console.log("index");
        console.log($rootScope.manage_indicators_and_sub_save_indicator.save_index);
-console.log("backup");
-console.log($rootScope.manage_indicators_and_sub_save_indicator.save_content);
+    console.log("backup");
+    console.log($rootScope.manage_indicators_and_sub_save_indicator.save_content);
        $rootScope.manage_indicators_indicator_choosen = angular.copy($rootScope.manage_indicators_and_sub_save_indicator.save_content);
          $rootScope.manage_indicators_and_sub_result[$rootScope.manage_indicators_and_sub_save_indicator.save_index] =  angular.copy($rootScope.manage_indicators_indicator_choosen);
     
 
     console.log("manage_indicators_indicator_choosen");
-console.log($rootScope.manage_indicators_indicator_choosen);
+    console.log($rootScope.manage_indicators_indicator_choosen);
     console.log("all");
     console.log($rootScope.manage_indicators_and_sub_result);
-
+   $scope.nothing_change = true;
     }
 
         $scope.close_modal = function(my_modal){
-        $scope.init();
+
+        $scope.nothing_change = true;
         my_modal.$hide();
     }
      $scope.add_sub_indicator = function(){
-
 
          $rootScope.manage_indicators_indicator_choosen.sub_indicator_list.push({
             "aca_year":$rootScope.manage_indicators_and_subs_year_choosen
             ,"indicator_num":$rootScope.manage_indicators_indicator_choosen.indicator_num,
             "sub_indicator_num":"","sub_indicator_name":""});
+
+        $scope.nothing_change = false;
       }
 
 
       $scope.remove_sub_indicator = function(index_sub_indicator_to_remove) { 
+          $scope.nothing_change = false;
       $rootScope.manage_indicators_indicator_choosen.sub_indicator_list.splice(index_sub_indicator_to_remove, 1);     
       console.log($rootScope.manage_indicators_indicator_choosen);
     }
 
         $scope.close_modal = function(my_modal){
-       
+            console.log("close ka");
+        $rootScope.manage_indicators_indicator_choosen = angular.copy($rootScope.manage_indicators_and_sub_save_indicator.save_content);
+         $rootScope.manage_indicators_and_sub_result[$rootScope.manage_indicators_and_sub_save_indicator.save_index] =  angular.copy($rootScope.manage_indicators_indicator_choosen);
+      $scope.nothing_change = true;
         my_modal.$hide();
     }
 
@@ -4262,6 +4269,11 @@ $scope.show_my_pictures=function(){
 
 });
 
+app.controller('manage_minutes_show_images_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
+ $scope.openLightboxModal = function (index) {
+    Lightbox.openModal($rootScope.manage_minutes_show_images_of_this_minute.pictures, index);
+  };
+});
 app.controller('manage_minutes_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 
 $scope.init =function() {
@@ -4274,6 +4286,7 @@ $scope.init =function() {
                       $rootScope.manage_minutes_my_world_wide_minutes = [];
 }
   
+
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
               $scope.curri_choosen = {}
@@ -4282,6 +4295,10 @@ $scope.init =function() {
   $scope.nothing_change = true;
 
  $rootScope.manage_minutes_my_world_wide_minutes = [];
+
+ $scope.show_picture_minute = function(this_minute){
+    $rootScope.manage_minutes_show_images_of_this_minute = this_minute;
+ }
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
        

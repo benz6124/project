@@ -1057,3 +1057,7 @@ a.highlight_evidence:hover{
 .gallery-box span.title{
   font-size: 17px;
 }
+
+.show_lightbox img:hover{
+  cursor: pointer;
+}
