@@ -1137,7 +1137,7 @@ $('.profile_pic').mouseover(function(){
 
 
  <div class="col-md-9" style="padding-right:22px;">
-           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_personnel.personnel_id as each_personnel.t_name for each_personnel in manage_lab_all_personnels_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา" data-ng-model="$parent.manage_lab_fix_this_lab_init" data-ng-init="manage_lab_fix_this_lab_init" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
+           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_personnel.t_name for each_personnel in manage_lab_all_personnels_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา" data-ng-model="$root.manage_lab_fix_this_lab_init" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true" >
 <option style="display:none" value=""></option></select>    
 
 
@@ -1147,6 +1147,16 @@ $('.profile_pic').mouseover(function(){
 </div>
 
 </div>
+
+                    
+ 
+    <ul ng-show="manage_lab_fix_this_lab_init.length!=0">
+                           <span class="topicHeader"> <li style="color:#6F002B;margin-left:10px" ng-repeat="each in manage_lab_fix_this_lab_init">{{each.t_name}}</li></span>
+                        </ul>
+
+
+   
+   
 
                                      
   <div class="row">
@@ -1359,7 +1369,7 @@ $('.profile_pic').mouseover(function(){
                                      
   <div class="row">
                             <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">หัวข้อการประชุม   </span></h3>
+                                <h3 style="margin-top:3px;margin-left:10px;" data-ng-click="test2()"><span class="topicNewHeader">หัวข้อการประชุม   </span></h3>
                             </div>
                             <div class="col-md-9" style="
     padding-right: 8px;
@@ -1371,7 +1381,7 @@ $('.profile_pic').mouseover(function(){
 
                         <div class="row">
                             <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">วันที่ประชุม   </span></h3>
+                                <h3 style="margin-top:3px;margin-left:10px;" data-ng-click="test()"><span class="topicNewHeader">วันที่ประชุม   </span></h3>
                             </div>
                             <div class="col-md-9">
                            
@@ -1385,14 +1395,15 @@ $('.profile_pic').mouseover(function(){
             </div>
                             </div>
                         </div>
- 
+
+
   <div class="row">
   <div class="col-md-3" >
 
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ผู้เข้าร่วมประชุม   </span></h3>
                             </div>
- <div class="col-md-9" style="padding-right: 24px;">
-           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher   as each_teacher.t_name for each_teacher in manage_minutes_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้เข้าร่วมประชุม"  data-ng-model="manage_minutes_fix_this_minute.attendee" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
+ <div class="col-md-9" style="padding-right: 24px;" >
+           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_minutes_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้เข้าร่วมประชุม"   data-ng-model="$root.manage_minutes_fix_minute_select_attendee" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
 <option style="display:none" value=""></option></select>    
 </div>
 
@@ -1400,8 +1411,8 @@ $('.profile_pic').mouseover(function(){
 
                                
  
-    <ul ng-show="manage_minutes_fix_this_minute.attendee.length!=0">
-                           <span class="topicHeader"> <li style="color:#6F002B;margin-left:10px" ng-repeat="each in manage_minutes_fix_this_minute.attendee">{{each.t_name}}</li></span>
+    <ul ng-show="manage_minutes_fix_minute_select_attendee.length!=0">
+                           <span class="topicHeader"> <li style="color:#6F002B;margin-left:10px" ng-repeat="each in manage_minutes_fix_minute_select_attendee">{{each.t_name}}</li></span>
                         </ul>
 
 
@@ -1591,20 +1602,22 @@ $('.profile_pic').mouseover(function(){
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ผู้วิจัย   </span></h3>
                             </div>
  <div class="col-md-9" style="padding-right:22px;">
-           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.teacher_id as each_teacher.t_name for each_teacher in manage_research_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้วิจัย"  data-ng-model="$parent.manage_lab_research_this_research_init" data-ng-init="manage_lab_research_this_research_init"  data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
+           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_research_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้วิจัย"  data-ng-model="$root.manage_lab_research_this_research_init"  data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
 <option style="display:none" value=""></option></select>    
 
 
 
 
 
-
-
 </div>
 
 </div>
 
-                                 
+           <ul ng-show="manage_lab_research_this_research_init.length!=0">
+                           <span class="topicHeader"> <li style="color:#6F002B" ng-repeat="each in manage_lab_research_this_research_init">{{each.t_name}}</li></span>
+                        </ul>     
+
+
   <div class="row">
                             <div class="col-md-3">
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ปีที่ตีพิมพ์   </span></h3>

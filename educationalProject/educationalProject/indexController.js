@@ -3011,7 +3011,7 @@ $scope.init =function() {
         console.log("initial_my_selected");
         $scope.my_manage_lab = $rootScope.manage_lab_fix_this_lab.officer;
     }
-    $scope.go_to_fix_lab = function(lab_to_fix){
+      $scope.go_to_fix_lab = function(lab_to_fix){
      
        
       
@@ -3024,26 +3024,40 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
-        
-                  console.log(data);
-            console.log("go_to_fix_lab")
-            console.log(lab_to_fix);
+            console.log(data);
+            console.log("amry")
             $rootScope.manage_lab_all_personnels_in_curri = data;
  
              $rootScope.manage_lab_fix_this_lab = angular.copy(lab_to_fix);
              $rootScope.manage_lab_fix_this_lab_init = [];
+             // var index;
+             //      console.log($rootScope.manage_lab_fix_this_lab);
+             // for(index = 0; index<$rootScope.manage_lab_fix_this_lab.officer.length;index++ ){
+             //    $rootScope.manage_lab_fix_this_lab_init.push($rootScope.manage_lab_fix_this_lab.officer[index].personnel_id);
+             // }
+             //            console.log($rootScope.manage_lab_fix_this_lab_init);
+    
+
+
              var index;
-                  console.log($rootScope.manage_lab_fix_this_lab);
-             for(index = 0; index<$rootScope.manage_lab_fix_this_lab.officer.length;index++ ){
-                $rootScope.manage_lab_fix_this_lab_init.push($rootScope.manage_lab_fix_this_lab.officer[index].personnel_id);
-             }
-                        console.log($rootScope.manage_lab_fix_this_lab_init);
-    
-    
+             var inside_index;
+
+        for(index =0;index<$rootScope.manage_lab_fix_this_lab.officer.length;index++){
+            for(inside_index=0;inside_index<$rootScope.manage_lab_all_personnels_in_curri.length;inside_index++){
+                if($rootScope.manage_lab_all_personnels_in_curri[inside_index].personnel_id  == $rootScope.manage_lab_fix_this_lab.officer[index].personnel_id){
+                          $rootScope.manage_lab_fix_this_lab_init.push($rootScope.manage_lab_all_personnels_in_curri[inside_index]);
+                }
+          
+            }
+        }
+
          });
-      
+        console.log($rootScope.manage_lab_fix_this_lab_init);
         
     }
+
+
+
 
 
 
@@ -4026,13 +4040,13 @@ $scope.init =function() {
     
           $rootScope.manage_research_fix_this_research.researcher = [];
         var index;
-        for(index =0;index<$rootScope.manage_research_all_teachers_in_curri.length;index++){
-            if($scope.manage_lab_research_this_research_init.indexOf($rootScope.manage_research_all_teachers_in_curri[index].teacher_id) != -1){
-                $rootScope.manage_research_fix_this_research.researcher.push($rootScope.manage_research_all_teachers_in_curri[index]);
-            }
-        }
+        // for(index =0;index<$rootScope.manage_research_all_teachers_in_curri.length;index++){
+        //     if($scope.manage_lab_research_this_research_init.indexOf($rootScope.manage_research_all_teachers_in_curri[index].teacher_id) != -1){
+        //         $rootScope.manage_research_fix_this_research.researcher.push($rootScope.manage_research_all_teachers_in_curri[index]);
+        //     }
+        // }
 
-
+$rootScope.manage_research_fix_this_research.researcher = $rootScope.manage_lab_research_this_research_init;
 
           var formData = new FormData();
 
@@ -4138,18 +4152,15 @@ $scope.init =function() {
 
 
      $scope.save_to_server = function(my_modal){
-        console.log("$rootScope.manage_lab_fix_this_lab_init");
-        console.log($rootScope.manage_lab_fix_this_lab_init);
-        console.log("$scope.manage_lab_fix_this_lab_init");
-        console.log($scope.manage_lab_fix_this_lab_init);
-        $rootScope.manage_lab_fix_this_lab.officer = [];
-        var index;
-        for(index =0;index<$rootScope.manage_lab_all_personnels_in_curri.length;index++){
-            if($scope.manage_lab_fix_this_lab_init.indexOf($rootScope.manage_lab_all_personnels_in_curri[index].personnel_id) != -1){
-                $rootScope.manage_lab_fix_this_lab.officer.push($rootScope.manage_lab_all_personnels_in_curri[index]);
-            }
-        }
-        
+ 
+
+        // var index;
+        // for(index =0;index<$rootScope.manage_lab_all_personnels_in_curri.length;index++){
+        //     if($rootScope.manage_lab_fix_this_lab_init.indexOf($rootScope.manage_lab_all_personnels_in_curri[index].personnel_id) != -1){
+        //         $rootScope.manage_lab_fix_this_lab.officer.push($rootScope.manage_lab_all_personnels_in_curri[index]);
+        //     }
+        // }
+        $rootScope.manage_lab_fix_this_lab.officer = $rootScope.manage_lab_fix_this_lab_init;
       console.log("save_to_server lab_controller");
         console.log($rootScope.manage_lab_fix_this_lab);
         $http.put(
@@ -4300,20 +4311,39 @@ $scope.init =function() {
 
         console.log("go_to_fix_research");
         $rootScope.manage_research_fix_this_research = angular.copy(this_research);
-        console.log( $rootScope.manage_research_fix_this_research);
+        // console.log( $rootScope.manage_research_fix_this_research);
   
-            console.log( $rootScope.manage_research_all_teachers_in_curri);
+        //     console.log( $rootScope.manage_research_all_teachers_in_curri);
 
-            $rootScope.manage_lab_research_this_research_init = [];
-            console.log("$rootScope.manage_research_fix_this_research");
-            console.log($rootScope.manage_research_fix_this_research);
-             var index;
-             for(index = 0; index<$rootScope.manage_research_fix_this_research.researcher.length;index++ ){
-                $rootScope.manage_lab_research_this_research_init.push($rootScope.manage_research_fix_this_research.researcher[index].teacher_id);
-             }
+            // $rootScope.manage_lab_research_this_research_init = [];
+            // console.log("$rootScope.manage_research_fix_this_research");
+            // console.log($rootScope.manage_research_fix_this_research);
+            //  var index;
+            //  var 
+            //  for(index = 0; index<$rootScope.manage_research_fix_this_research.researcher.length;index++ ){
+            //     $rootScope.manage_lab_research_this_research_init.push($rootScope.manage_research_fix_this_research.researcher[index].teacher_id);
+            //  }
 
-             console.log("manage_lab_research_this_research_init");
-             console.log($rootScope.manage_lab_research_this_research_init);
+            //  console.log("manage_lab_research_this_research_init");
+            //  console.log($rootScope.manage_lab_research_this_research_init);
+
+
+
+
+                var index;
+        var inside_index;
+        $rootScope.manage_lab_research_this_research_init = [];
+
+        for(index =0;index<$rootScope.manage_research_fix_this_research.researcher.length;index++){
+            for(inside_index=0;inside_index<$rootScope.manage_research_all_teachers_in_curri.length;inside_index++){
+                if($rootScope.manage_research_all_teachers_in_curri[inside_index].teacher_id  == $rootScope.manage_research_fix_this_research.researcher[index].teacher_id){
+                          $rootScope.manage_lab_research_this_research_init.push($rootScope.manage_research_all_teachers_in_curri[inside_index]);
+                }
+          
+            }
+        }
+        console.log("manage_lab_research_this_research_init")
+        console.log(manage_lab_research_this_research_init);
          });
 
 
@@ -4812,6 +4842,16 @@ $scope.my_pictures = {};
         });
     });
 
+    $scope.test2 = function(){
+        console.log($scope.meme);
+        console.log($rootScope.manage_minutes_fix_this_minute.attendee);
+     }
+     $scope.test = function(){
+        console.log("test ka");
+     
+
+       
+     }
      $scope.return_just_name = function(full_name){
         var set = full_name.split('/');
         return set[set.length-1]
@@ -4893,7 +4933,12 @@ $scope.show_my_pictures=function(){
               $rootScope.manage_minutes_fix_this_minute.pictures.push($scope.my_pictures.flow.files[index].file.name)
             formData.append("picture"+(index+1), $scope.my_pictures.flow.files[index].file );
         }
-        formData.append("model", angular.toJson( $scope.manage_minutes_fix_this_minute));
+
+
+       $rootScope.manage_minutes_fix_this_minute.attendee =  $rootScope.manage_minutes_fix_minute_select_attendee;
+  
+       console.log($rootScope.manage_minutes_fix_this_minute);
+        formData.append("model", angular.toJson( $rootScope.manage_minutes_fix_this_minute));
 
    if($scope.disabled_search == true){
       $rootScope.manage_minutes_fix_this_minute.file_name = $scope.my_file[0].name;
@@ -4991,7 +5036,18 @@ $scope.init =function() {
         $rootScope.manage_minutes_curri_id = $scope.curri_choosen.curri_id;
         $rootScope.manage_minutes_aca_year = $scope.year_choosen.aca_year;
         $rootScope.manage_minutes_fix_this_minute = angular.copy(this_minute);
+                var index;
+        var inside_index;
+        $rootScope.manage_minutes_fix_minute_select_attendee = [];
 
+        for(index =0;index<$rootScope.manage_minutes_fix_this_minute.attendee.length;index++){
+            for(inside_index=0;inside_index<$rootScope.manage_minutes_all_teachers_in_curri.length;inside_index++){
+                if($rootScope.manage_minutes_all_teachers_in_curri[inside_index].teacher_id  == $rootScope.manage_minutes_fix_this_minute.attendee[index].teacher_id){
+                          $rootScope.manage_minutes_fix_minute_select_attendee.push($rootScope.manage_minutes_all_teachers_in_curri[inside_index]);
+                }
+          
+            }
+        }
 });
 
 
@@ -5018,40 +5074,7 @@ $scope.init =function() {
 });
 
     }
-    $scope.go_to_fix_lab = function(lab_to_fix){
-     
-       
-      
-              $http.post(
-             '/api/personnel/gettnameandid',
-             JSON.stringify($scope.curri_choosen.curri_id),
-             {
-                 headers: {
-                     'Content-Type': 'application/json'
-                 }
-             }
-         ).success(function (data) {
-            console.log(data);
-            console.log("go_to_fix_lab")
-            console.log(lab_to_fix);
-            $rootScope.manage_lab_all_personnels_in_curri = data;
  
-             $rootScope.manage_lab_fix_this_lab = angular.copy(lab_to_fix);
-             $rootScope.manage_lab_fix_this_lab_init = [];
-             var index;
-                  console.log($rootScope.manage_lab_fix_this_lab);
-             for(index = 0; index<$rootScope.manage_lab_fix_this_lab.officer.length;index++ ){
-                $rootScope.manage_lab_fix_this_lab_init.push($rootScope.manage_lab_fix_this_lab.officer[index].personnel_id);
-             }
-                        console.log($rootScope.manage_lab_fix_this_lab_init);
-    
-         });
-      
-        
-    }
-
-
-
 
     $scope.remove_minute = function(index_to_remove){
         $scope.nothing_change = false;
