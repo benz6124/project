@@ -235,6 +235,8 @@
     <Compile Include="Models\ViewModels\Indicator_sub_indicator_list.cs" />
     <Compile Include="Models\ViewModels\Lab_list_detail.cs" />
     <Compile Include="Models\ViewModels\Minutes_detail.cs" />
+    <Compile Include="Models\ViewModels\Personnel.cs" />
+    <Compile Include="Models\ViewModels\Personnel_educational.cs" />
     <Compile Include="Models\ViewModels\Personnel_with_t_name.cs" />
     <Compile Include="Models\ViewModels\Primary_evidence_detail.cs" />
     <Compile Include="Models\ViewModels\Primary_evidence_name_id_only.cs" />

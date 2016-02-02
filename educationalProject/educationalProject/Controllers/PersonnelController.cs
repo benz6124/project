@@ -16,5 +16,11 @@ namespace educationalProject.Controllers
         {
             return Ok(datacontext.SelectPersonnelIdAndTName(curri_id));
         }
+
+        [ActionName("getwitheducation")]
+        public IHttpActionResult PostToQueryPersonnelWithEducationHistory([FromBody]string curri_id)
+        {
+            return Ok(datacontext.selectWithFullDetail(curri_id));
+        }
     }
 }
