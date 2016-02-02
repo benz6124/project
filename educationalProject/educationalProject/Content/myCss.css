@@ -840,7 +840,7 @@ font-weight: bold;
 
 li.headerWeb{
  
-  font-size:40px;
+  font-size:41px;
  color:#D8D8D8  ;
   margin-top:18px;
     font-family: 'Quicksand' ;
@@ -1064,4 +1064,48 @@ a.highlight_evidence:hover{
 
 .show_lightbox img:hover{
   cursor: pointer;
+}
+
+.gallery-box-edit{
+      width: 255px;
+    padding: 5px;
+    margin: 7px;
+    float: left;
+    min-height: 255px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+
+}
+
+.thumbnail.edit{
+     line-height: 20px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    word-break: normal;
+     max-height: 220px;
+     min-height: 220px;
+}
+
+
+.gallery-box-edit span.title-edit{
+  font-size: 21px;
+}
+
+.gallery-box-edit a{
+ font-size: 21px;
+}
+
+
+input.form-control.title-edit{
+      width: 100%;
+
+}
+
+input.form-control.album-title{
+    width: 97%;
+}
+
+input.form-control.title{
+    width: 100%;
+    font-size: 19px;
 }

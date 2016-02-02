@@ -207,7 +207,7 @@ $('.profile_pic').mouseover(function(){
                 <ul class="nav navbar-nav navbar-left" >
 
                    <!--  <li><img src="/myImages/logo_kmitl.gif" width="100px" style="margin-left:80px" /></li> -->
-                    <li class="headerWeb" style="margin-left:75px"><span class="boldPlease">CUPT-QA</span> Online For Computer Engineering KMITL</li>
+                    <li class="headerWeb" style="margin-left:75px">CUPT-QA Online For Computer Engineering KMITL</li>
 
                 </ul>
 
@@ -319,8 +319,15 @@ $('.profile_pic').mouseover(function(){
 
 
                                 <li>
-                                    <a href="" data-nq-toggle-modal="#manage_gallery" data-effect="slide-left">
+                                    <a href="" data-nq-toggle-modal="#manage_album" data-effect="slide-left">
                                         <span class="topic"> อัลบั้มรูปภาพ</span>
+                                    </a>
+                                </li>
+                                
+
+                                   <li>
+                                    <a href="" data-nq-toggle-modal="#manage_gallery" data-effect="slide-left">
+                                        <span class="topic"> อัลบั้มรูปภาพเก่า</span>
                                     </a>
                                 </li>
                                 <li>
@@ -771,7 +778,7 @@ $('.profile_pic').mouseover(function(){
                             <div class="topicHeader pull-right">
 
 
-                                <button class="btn btn-success  " ng-disabled="file_not_already_upload() || choose_not_complete  " ng-click="save_to_server(this)">ยืนยัน</button>
+                                <button class="btn btn-success  " ng-disabled="please_wait || file_not_already_upload() || choose_not_complete  " ng-click="save_to_server(this)">ยืนยัน</button>
                                 <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                             </div>
                         </div>
@@ -1099,9 +1106,7 @@ $('.profile_pic').mouseover(function(){
 
                 </div>
 
-                <div id="create_album" data-nq-modal="" data-qo-independent="true">
-                    <h1><span class="glyphicon glyphicon-th-list"></span><span class="headerModal" style="color:#6F002B"> สร้างอัลบั้มรูปภาพ</span></h1>
-                </div>
+        
 
 
 
@@ -1337,7 +1342,7 @@ $('.profile_pic').mouseover(function(){
 
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="still_not_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
@@ -1504,7 +1509,7 @@ $('.profile_pic').mouseover(function(){
 
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="still_not_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
@@ -1635,7 +1640,7 @@ $('.profile_pic').mouseover(function(){
 
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="still_not_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
@@ -1648,7 +1653,10 @@ $('.profile_pic').mouseover(function(){
                         <h1 class="headerModalH1">ส่วนการจัดการห้องปฏิบัติการ</h1>
                     </div>
 
-          <div class="row">
+          <div class="row" style="
+    margin-left: 0px;
+    margin-right: 0px;
+">
 
 
                         <div class="col-md-8" >
@@ -1749,11 +1757,14 @@ $('.profile_pic').mouseover(function(){
                         <h1 class="headerModalH1">ส่วนจัดการงานวิจัย</h1>
                     </div>
 
-          <div class="row">
+          <div class="row" style="
+    margin-left: 14px;
+    margin-right: 16px;
+">
 
 
                       
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
             <option style="display:none" value=""></option></select>
 
                      
@@ -1843,278 +1854,107 @@ $('.profile_pic').mouseover(function(){
                     </div>
    </div>
 
-                <div id="create_research" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
+             
+ <div id="show_education_personnel" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="show_education_personnel_controller">
+
                     <div class="custom-header">
-
-                        <h1 class="headerModalH1"><span class="headerModal"> งานวิจัย</span></h1>
+                        <h1 class="headerModalH1">ข้อมูลบุคลากรทางการศึกษา</h1>
                     </div>
 
-                    <div class="row">
+          <div class="row" style="
+    margin-left: 0px;
+    margin-right: 0px;
+">
 
 
-                        <div class="col-md-7" style="margin-left:15px">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            <option style="display:none" value=""></option></select>
+                      
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+            <option style="display:none" value=""></option></select>
 
-                        </div>
-                        <div class="col-md-3">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
-                                <option>2557</option>
-                                <option>2556</option>
-                                <option>2555</option>
-                                <option>2554</option>
-                                <option>2553</option>
-                                <option>2552</option>
-                                <option>2551</option>
+                     
+                      
 
-
-                            <option style="display:none" value=""></option></select>
-                        </div>
-
-                        <div class="col-md-1">
-                            <button class="btn btn-primary hvr-rotate" style="margin-bottom:10px"><i class="glyphicon glyphicon-search"></i> ค้นหา</button>
-                        </div>
                     </div>
-
-
-                    <div class="container-fluid">
+<br />
+  <div class="container-fluid" ng-hide="choose_not_complete">
                         <div class="clearfix">
 
 
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
                                  data-qo-selectable="true">
-                                <div class="panel-heading clearfix">
-                                    <!-- <h1 class="panel-title pull-left"></i> รายงานการประชุม </h1> -->
+              
 
+              
+                                <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
-                                    <div class="pull-left" style="padding-left:15px;">
-                                        <button type="button" class="btn btn-xs btn-primary plusgreen hvr-buzz" data-nq-show-insert="" data-template-id="insertMinutes"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลงานวิจัย</button>
-                                    </div>
-
-                                </div>
-
-                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="350px" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
-
-
-                                    <!--          <div  data-qo-min-height="200px" data-nq-scroll="" data-qo-max-height="350px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden;"> -->
-                                    <table class="table table-bordered table-hover bg-white table_modal research">
-                                        <!--nq-fix-table-scroll class would fix thead always visible at top of the table if you put the table into a scrollable container-->
+                                
+  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
+                                      
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
-                                                <!--nq-column-sort directive would bind sorting handler to the element-->
-
-                                                <th class="col-xs-6 ">ชื่องานวิจัย</th>
-                                                <th class="col-xs-3">เจ้าของงานวิจัย</th>
-                                                <th class="col-xs-1">ดาวน์โหลด</th>
-                                                <th class="col-xs-1">แก้ไข</th>
-                                                <th class="col-xs-1">ลบ</th>
-
-
-
+                          
+                                                <th style="width:400px">ชื่องานวิจัย</th>
+ <th style="width:60px;padding-left: 0px;padding-right: 0px;">ปีที่ตีพิมพ์</th>
+                                                <th style="width:140px">เจ้าของงานวิจัย</th>
+                                             <!--    <th style="width:80px">วันที่สร้าง</th>
+                                                <th style="width:80px">ผู้สร้าง</th> -->
+                                                
+                                                <th style="width:30px;padding-left: 0px;padding-right: 0px;">ดาวน์โหลด</th>
+                                                <th style="width:30px">แก้ไข</th>
+                                                <th style="width:30px">ลบ</th>
+                                              
+                                            
                                             </tr>
                                         </thead>
                                         <tbody class="flattened">
-                                            <!--pageable-repeat is required sub directive-->
-                                            <tr>
-                                                <td>The example of research's name</td>
-                                                <td>รศ. ดร. เกียรติกูล เจียรนัยธนะกิจ</td>
+                                        <form name="manage_survey_form" novalidate>
+                                          
+
+                                            <tr  ng-repeat="research in manage_research_my_research_now">
+                          <td class="left_column" style=" padding-left: 10px ;"><span style="font-size:19px;">{{research.name}}</span> </td>
+                                              <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{research.year_publish}}</span> </td>
+                          <td  >
 
 
+<span ng-repeat="teacher in research.researcher" style="padding-left:0px;font-size:19px">{{teacher.t_name}}<br/></span>
 
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
 
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
+  </td>            
+                          
+                                             
+                       
+     <td > <a style="margin-top:7px" href="" data-ng-click="download_research(research.file_name)" class="hvr-pulse" >
+                                        <span class="topic"><i style="color:#4cae4c"class="glyphicon glyphicon-download-alt"></i> </span>
+                                    </a></td> 
+                                    
+   <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_research" data-ng-click="go_to_fix_research(research)">
+                                        <span class="topic"><i style="color:#eea236;margin0"class="glyphicon glyphicon-wrench"></i> </span>
+                                    </a></td> 
 
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
+                                    
+
+                                          <td > <a  style="margin-top:7px" data-ng-click="remove_research($index)" href=""  class="hvr-pulse" >
+                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                    </a></td> 
+
                                             </tr>
 
-                                            <tr>
-                                                <td>The example of research's name again</td>
-                                                <td>ผศ. ดร. ชุติเมษฏ์ ศรีนิลทา</td>
-
-
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>The example of research's name again3</td>
-                                                <td>
-                                                    <div>
-                                                        ดร. อรทัย สังข์เพ็ชร
-                                                    </div>
-                                                    <div>
-                                                        ดร. อักฤทธิ์ สังข์เพ็ชร
-                                                    </div>
-                                                </td>
-
-
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-
-
-
-                                            <tr>
-                                                <td>The example of research's name again4</td>
-                                                <td>
-                                                    <div>
-                                                        รศ. ดร. บุญธีร์ เครือตราชู
-                                                    </div>
-                                                    <div>
-                                                        รศ. กฤตวัน ศิริบูรณ์
-                                                    </div>
-                                                </td>
-
-
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                            </form>
                                         </tbody>
 
                                     </table>
-                                </div>
 
-                                <!--           <div data-nq-pageable-template=""    data-qo-max-height="350px"data-on-change="panelTitle= 'สร้างรายงานการประชุม'"  style="overflow:hidden; overflow-y:auto;" data-nq-scroll="" ng-submit="$hide()" >
-                                -->
+                                     <!--     <button type="button" style="margin-top:5px;margin-left:520px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_primary_evidence()"style="color:green;font-size:30px"></i> </span></button> -->
+         </div>         </div>        
 
-                                <div data-nq-pageable-template="" ng-form="" data-on-change="panelTitle= 'เพิ่มข้อมูลงานวิจัย'" ng-submit="$hide()" style="max-height:100%; overflow:hidden; overflow-y:auto;">
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h3 style="margin-left:20px;margin-top:5px"><span class="topicHeader">ชื่องานวิจัย:   </span></h3>
-                                        </div>
-                                        <div class="col-md-8" style="margin-top:5px">
-                                            <input type="text" class="form-control" placeholder=""><span class="normal">  </span>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">ผู้วิจัย:  </span></h3>
-                                        </div>
-
-                                        <div class="col-md-8">
-                                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกผู้วิจัย" data-ng-model="staticSelectModel">
-                                                <option> อ. วิบูลย์ พร้อมพานิชย์</option>
-                                                <option>ดร. ชมพูนุท จินจาคาม</option>
-                                                <option>ผศ. ดร. อรัญญา วลัยรัชต์</option>
-                                                <option>รศ. ดร. เกียรติกูล เจียรนัยธนะกิจ</option>
-                                                <option>ผศ. ดร. ชุติเมษฏ์ ศรีนิลทา</option>
-                                                <option>รศ. ดร. อรฉัตร จิตต์โสภักตร์</option>
-                                                <option>ดร. อรทัย สังข์เพ็ชร</option>
-                                                <option>ดร. อักฤทธิ์ สังข์เพ็ชร</option>
-                                                <option> รศ. ดร. บุญธีร์ เครือตราชู</option>
-                                                <option> รศ. กฤตวัน ศิริบูรณ์</option>
-
-
-                                            <option style="display:none" value=""></option></select>
-
-
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h3 style="margin-left:20px;margin-top:0px"><span class="topicHeader">ปีที่ตีพิมพ์:   </span></h3>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <input type="number" class="form-control"><span class="normal">  </span>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h3 style="margin-left:20px;margin-top:0px"><span class="topicHeader">ไฟล์งานวิจัย:   </span></h3>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input type="file" class="form-control" placeholder="ไฟล์งานวิจัย">
-
-                                        </div>
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-
+          </div>         </div>
+     <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button ng-disabled="choose_not_complete || nothing_change"  class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
-
                     </div>
-
-                    <div class="custom-footer" style="background-color:#6F002B;">
-                        <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
-
-                    </div>
-
-                </div>
+   </div>
 
 
                 <div id="stat_grad" data-nq-modal="" data-qo-size="lg" data-qo-independent="true" data-ng-controller="stat_graduated_controller" data-ng-init="init()" >
@@ -2123,7 +1963,10 @@ $('.profile_pic').mouseover(function(){
                     </div>
 
 
-                    <div class="row">
+                    <div class="row" style="
+    margin-left: 0px;
+    margin-right: 0px;
+">
 
 
                         <div class="col-md-8" >
@@ -2328,7 +2171,10 @@ $('.profile_pic').mouseover(function(){
                         <h1 class="headerModalH1">ส่วนการจัดการรายงานการประชุม</h1>
                     </div>
 
-          <div class="row">
+          <div class="row" style="
+    margin-left: 0px;
+    margin-right: 0px;
+">
 
 
                         <div class="col-md-8" >
@@ -2405,7 +2251,7 @@ $('.profile_pic').mouseover(function(){
                                     </a></td> 
   
                                    <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse"  data-nq-toggle-modal="#manage_minutes_show_images" data-ng-click="show_picture_minute(minute)">
-                                        <span class="topic"><i style="color:#e6005c"class="glyphicon glyphicon-picture"></i> </span>
+                                        <span class="topic"><i style="color:#2980b9"class="glyphicon glyphicon-picture"></i> </span>
                                     </a></td> 
 
 
@@ -2437,11 +2283,159 @@ $('.profile_pic').mouseover(function(){
                 </div>
 
              
+<div id="show_edit_album" data-ng-controller="show_edit_album_controller" data-ng-init="init()"data-nq-modal=""  data-qo-screen-mode="true" data-qo-independent="true">
+      <div class="custom-header">
+          <h1 class="headerModalH1"><span class="headerModal">{{manage_album_show_this_album.name}}</span></h1>
+      </div>
+
+  <div class="row">
+                            <div class="col-md-2">
+                                <h3 style="margin-top:3px;margin-left:26px;"><span class="topicNewHeader">ชื่ออัลบั้มรูปภาพ   </span></h3>
+                            </div>
+                            <div class="col-md-10">
+                                <input  type="text" class="form-control album-title" placeholder="" ng-model="manage_album_show_this_album.name" required><span class="normal">  </span>
+
+                            </div>
+                        </div>
+<div flow-init
+    flow-files-submitted="show_my_pictures()"
+     flow-name="$parent.my_pictures.flow"
+     flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]" >
+  <div class="drop" flow-drop ng-class="dropClass">
+    <span class="btn btn-primary"style="margin-left:25px;font-size:18px" flow-btn><i class="glyphicon glyphicon-picture"></i> อัพโหลดรูปภาพเพิ่ม</span><span class="topicHeader" style="margin-top:5px"> (รองรับไฟล์ .png,.jpg,.jpeg ขนาดไม่เกิน 2MB) </span>
+   
+
+  </div>
+
+
+
+  <div style="margin-left:18px;margin-top:3px;" >
+
+
+    <div ng-repeat="file in $flow.files" class="gallery-box-edit">
+      <input type="text" class="title-edit form-control" ng-model="file.caption" ></input>
+
+      <div class="thumbnail edit" ng-show="$flow.files.length"  >
+        <img flow-img="file" />
+      </div>
+      
+      <div class="btn-group">
+        <a class="btn btn-xs btn-danger" ng-click="file.cancel()" >
+          ลบรูปภาพ
+        </a>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+
+  </div>
+
+
+       <div style="margin-left:18px;margin-top:3px;" class="show_lightbox">
+
+
+
+    <div ng-repeat="pic in manage_album_show_this_album.pictures" class="gallery-box-edit">
+  
+        <input type="text" class="title-edit form-control" ng-model="pic.caption" ></input>
+      <div class="thumbnail edit"  >
+        <img src="{{pic.file_name}}" ng-click="openLightboxModal($index)" />
+      </div>
+      
+      <div class="btn-group">
+        <a class="btn btn-xs btn-danger" ng-click="remove_pic($index)" >
+          ลบรูปภาพ
+        </a>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+
+     <div class="custom-footer">
+
+          <div class="topicHeader pull-right">
+              <button class="btn btn-success  " ng-disabled="still_not_choose_complete() || please_wait" ng-click="save_to_server(this)">    ยืนยัน</button>
+              <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+          </div>
+      </div>   
+
+      </div>
+
+
+
+<div id="create_album" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_album_controller">
+       <div class="custom-header">
+                        <h1 class="headerModalH1">เพิ่มอัลบั้มรูปภาพ</h1>
+                    </div>
+
+
+ 
+
+                                     
+  <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่ออัลบั้มรูปภาพ   </span></h3>
+                            </div>
+                            <div class="col-md-9" style="
+    padding-right: 8px;
+">
+                                <input  type="text" class="form-control" placeholder="" ng-model="my_new_album.name" required><span class="normal">  </span>
+
+                            </div>
+                        </div>
+
+                      
+ 
+  
+
+ 
+<div flow-init
+
+     flow-name="$parent.my_pictures.flow"
+         flow-files-submitted="show_my_pictures()"
+     flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]" >
+  <div class="drop" flow-drop ng-class="dropClass">
+    <span class="btn btn-primary"style="margin-left:7px;font-size:18px" flow-btn><i class="glyphicon glyphicon-picture"></i> อัพโหลดรูปภาพ</span><span class="topicHeader" style="margin-top:"> (รองรับไฟล์ .png,.jpg,.jpeg ขนาดไม่เกิน 2MB) </span>
+   
+  
+
+  </div>
+
+  <br/>
+
+  <div style="margin-left:20px;margin-top:3px;" ng-show="show_gallery">
+
+
+    <div ng-repeat="file in $flow.files" class="gallery-box">
+      <input  class="form-control title" ng-model="file.caption"></span>
+      <div class="thumbnail" ng-show="$flow.files.length"  >
+        <img flow-img="file" />
+      </div>
+      
+      <div class="btn-group">
+        <a class="btn btn-xs btn-danger" ng-click="file.cancel()" >
+          ลบรูปภาพ
+        </a>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+  </div>
+
+
+           <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button ng-disabled="still_not_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                        </div>
+                    </div>
+</div>
+
  <div id="manage_primary_evidences_admin" data-ng-controller="manage_primary_evidences_admin_controller" data-ng-init="init()"data-nq-modal=""  data-qo-size ="lg" data-qo-independent="true">
       <div class="custom-header">
           <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการหลักฐานพื้นฐาน</span></h1>
       </div>
-<div class="row">
+<div class="row" >
 
          <div class="col-md-5" style="margin-left:72px" >
                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in corresponding_aca_years track by year" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
@@ -2552,7 +2546,10 @@ glyphicon glyphicon-bell"></i> </span>
       </div>
 
 
-   <div class="row">
+   <div class="row" style="
+    margin-left: 0px;
+    margin-right: 0px;
+">
 
 
                         <div class="col-md-6" >
@@ -2705,7 +2702,10 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
           <h1 class="headerModalH1"><span class="headerModal">ส่วนจัดการหลักฐานพื้นฐาน</span></h1>
       </div>
 
-   <div class="row">
+   <div class="row" style="
+    margin-left: 0px;
+    margin-right: 0px;
+">
 
 
                         <div class="col-md-6" >
@@ -2898,7 +2898,10 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
 
 
-                <div class="row">
+                <div class="row" style="
+    margin-left: 0px;
+    margin-right: 0px;
+">
 
 
                           <div class="col-md-6" >
@@ -3133,7 +3136,7 @@ glyphicon glyphicon-bell"></i> </span>
  <div class="custom-footer">
      
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="still_not_choose_complete() || validate_year_to_create()  || manage_indicators_form.$invalid || choose_not_complete  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="still_not_choose_complete() || validate_year_to_create()  || manage_indicators_form.$invalid || choose_not_complete || please_wait " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div> 
@@ -3215,7 +3218,10 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
 
 
-                <div class="row">
+                <div class="row" style="
+    margin-left: 0px;
+    margin-right: 0px;
+">
 
 
                           <div class="col-md-6" >
@@ -3425,7 +3431,7 @@ glyphicon glyphicon-bell"></i> </span>
                   
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="new_evidence_still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="new_evidence_still_not_complete() || please_wait" ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                         </div>
                     </div>
@@ -3519,7 +3525,7 @@ glyphicon glyphicon-bell"></i> </span>
                   
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="upload_evidence_form.$invalide || new_evidence_still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="upload_evidence_form.$invalide || new_evidence_still_not_complete() || please_wait" ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
                         </div>
                     </div>
@@ -3717,7 +3723,10 @@ glyphicon glyphicon-bell"></i> </span>
                     <div class="custom-header">
                         <h1 class="headerModalH1">สถิติการรับนักศึกษาใหม่</h1>
                     </div>
-                    <div class="row">
+                    <div class="row" style="
+    margin-left: 0px;
+    margin-right: 0px;
+">
 
 
                         <div class="col-md-8" >
@@ -4561,7 +4570,10 @@ glyphicon glyphicon-bell"></i> </span>
                         <h1 class="headerModalH1">สถิติจำนวนนักศึกษา</h1>
                     </div>
 
-                       <div class="row">
+                       <div class="row" style="
+    margin-left: 0px;
+    margin-right: 0px;
+">
 
 
                         <div class="col-md-8" >
@@ -5275,7 +5287,7 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
 
                 </div>
-
+<!-- 
             <!--     <div id="watch_gallery" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
                     <div class="custom-header">
 
@@ -5334,7 +5346,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                     </div>
                 </div> -->
-          <!--       <div id="manage_gallery" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
+                <div id="manage_gallery" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal"> อัลบั้มรูปภาพ</span></h1>
@@ -5490,8 +5502,8 @@ glyphicon glyphicon-bell"></i> </span>
                         <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
 
                     </div>
-                </div> -->
-       <!--          <div id="watch_album" data-nq-modal="" data-qo-independent="true">
+                </div>
+              <!--  <div id="watch_album" data-nq-modal="" data-qo-size="lg"data-qo-independent="true">
                     <div class="custom-header">
                         <h1><span class="glyphicon glyphicon-th-list"></span><span class="headerModal" style="color:#6F002B"> ดูอัลบั้มรูปภาพ</span></h1>
                     </div>
@@ -5558,7 +5570,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
 
-                </div> -->
+                </div>  -->
 <div id="create_new_research" data-nq-modal="" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_research_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">เพิ่มข้อมูลงานวิจัย</h1>
@@ -5616,7 +5628,7 @@ glyphicon glyphicon-bell"></i> </span>
 
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="still_not_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
@@ -5695,13 +5707,127 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
 </div>
+
+ <div id="manage_album" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_album_controller">
+
+                    <div class="custom-header">
+                        <h1 class="headerModalH1">ส่วนการจัดการอัลบั้มรูปภาพ</h1>
+                    </div>
+
+          <div class="row" style="
+    margin-left: 0px;
+    margin-right: 0px;
+">
+
+
+                        <div class="col-md-8" >
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+            <option style="display:none" value=""></option></select>
+
+                        </div>
+                        <div class="col-md-4" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+<option style="display:none" value=""></option></select>   
+                        </div>
+
+                    </div>
+<br />
+  <div class="container-fluid" ng-hide="choose_not_complete" >
+                        <div class="clearfix">
+
+
+                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
+                                 data-qo-selectable="true">
+              
+
+              
+                                <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+
+                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;" data-nq-toggle-modal="#create_album" data-effect="from-right" data-ng-click="go_to_create_survey()"><i class="fic glyphicon glyphicon-plus-sign"></i> สร้างอัลบั้มรูป</button>
+
+
+  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
+                                      
+                                        <thead class="nq-fix-table-scroll">
+                                            <tr>
+                          
+                                                <th style="width:135px">ชื่ออัลบั้ม</th>
+                                                <th style="width:115px">รูปตัวอย่าง</th>
+                                                    <th style="width:30px">ดู/แก้ไข</th>
+                                                <th style="width:50px">วันที่สร้าง</th>
+                                                <th style="width:70px">ผู้สร้าง</th>
+                                            
+                                                <th style="width:30px">ลบ</th>
+                                         
+                                              
+                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody class="flattened">
+                                        <form name="manage_survey_form" novalidate>
+                                          
+
+                                            <tr  ng-repeat="album in manage_album_my_world_wide_album">
+                                           
+ <td class="left_column" style=" padding-left: 10px ;"><span style="font-size:19px;">{{album.name}}</span> </td>
+                                        
+                                        
+ <td style="
+    padding-left: 0px;
+    padding-right: 0px;
+"><span style="font-size:19px;" class="show_lightbox">
+
+ <img ng-repeat ="pic in album.pictures" ng-click="openLightboxModal($index,album.pictures)" ng-if="$index<4" src="{{pic.file_name}}" class="img-rounded" style="margin-left:1px;margin-right:1px;margin-top:3px;margin-bottom:3px" height = "50px"  />
+
+ </span> </td>
+     
+
+     <td > <a href=""  style="margin-top:7px"data-nq-toggle-modal="#show_edit_album" data-effect="from-left" data-ng-click="go_to_show_album(album)" class="hvr-pulse" >
+                                        <span class="topic"><i style="color:#2980b9"class="glyphicon glyphicon-picture"></i> </span>
+                                    </a></td> 
+
+                      <td style="padding-left:0px;padding-right:0px"><span style="font-size:19px">{{album.date_created}}</span> </td>              
+                                                              <td ><span style="font-size:19px">{{album.t_name}}</span> </td>
+                                              
+                                    
+
+                                    
+
+                                          <td > <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_album($index)" >
+                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                    </a></td> 
+
+                                            </tr>
+
+                                            </form>
+                                        </tbody>
+
+                                    </table>
+
+                                     <!--     <button type="button" style="margin-top:5px;margin-left:520px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_primary_evidence()"style="color:green;font-size:30px"></i> </span></button> -->
+         </div>         </div>        
+
+          </div>         </div>
+     <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                        </div>
+                    </div>
+   </div>
+
+
+
  <div id="manage_survey" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_survey_controller">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">ส่วนการจัดการแบบสอบถาม</h1>
                     </div>
 
-          <div class="row">
+          <div class="row" style="
+    margin-left: 0px;
+    margin-right: 0px;
+">
 
 
                         <div class="col-md-8" >

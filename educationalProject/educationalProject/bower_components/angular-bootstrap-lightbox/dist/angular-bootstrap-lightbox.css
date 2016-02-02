@@ -28,12 +28,14 @@
 /* the caption overlays the top left corner of the image */
 .lightbox-image-caption {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   margin: 0.5em 0.9em; /* the left and right margins are offset by 0.4em for the span box-shadow */
   color: #000;
   font-size: 1.5em;
-  font-weight: bold;
+  font-weight: normal;
+  color:#6F002B;
+  font-size:23px;
   text-align: left;
   text-shadow: 0.1em 0.1em 0.2em rgba(255, 255, 255, 0.5);
 }

@@ -1162,9 +1162,9 @@ app.controller('upload_aun_controller', function($scope, $alert,$http,request_ye
     function(inputElem) {
       angular.element(inputElem).val(null);
     });
-  
+  $scope.please_wait = false;
 }
-
+  $scope.please_wait = false;
   $scope.find_information = function(){
 
       
@@ -1211,7 +1211,7 @@ app.controller('upload_aun_controller', function($scope, $alert,$http,request_ye
 
 
     $scope.save_to_server = function(my_modal) {
- 
+   $scope.please_wait = true;
       $scope.model  = {"file_name":$scope.files[0].name,"personnel_id":"00007","date":"","curri_id":$scope.curri_choosen.curri_id,"aca_year":$scope.year_choosen.aca_year}
 
       var formData = new FormData();
@@ -1414,7 +1414,7 @@ $scope.init = function(){
 
          $scope.choose_not_complete = true;
       $rootScope.manage_indicators_and_subs_year_choosen = 0;
-      
+      $scope.please_wait = false;
 $scope.nothing_change = true;
       $scope.curri_choosen = {};
 
@@ -1434,7 +1434,7 @@ console.log(data);
           });
 
  }
-
+$scope.please_wait = false;
 $scope.nothing_change = true;
    $http.get('/api/indicator').success(function (data) {
             console.log("all_indicator_years");
@@ -1701,7 +1701,7 @@ app.controller('change_evidence_file_controller', function($scope, $alert,$http,
         }
 
 
-
+$scope.please_wait = true;
 
 $rootScope.only_object_want_to_change.teacher_id = "00008";
       var formData = new FormData();
@@ -1751,9 +1751,10 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
  $scope.my_temp_secret_new = false;
   $scope.my_new_evidence.teacher_id = "00007";
   
-
+        $scope.please_wait = false;
 
     $scope.init =function() {
+                $scope.please_wait = false;
          $scope.my_temp_secret_new = false;
    $scope.my_new_evidence = {};
    $scope.my_new_evidence.evidence_real_code = "";
@@ -1812,6 +1813,7 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
     }
 
     $scope.save_to_server =function(my_modal){
+        $scope.please_wait = true;
         if($scope.my_temp_secret_new  == false){
             $scope.my_new_evidence.secret = "0";
         }
@@ -1878,8 +1880,9 @@ app.controller('add_new_primary_controller', function($scope, $alert,$http,$root
 
 $scope.primary_choosen = {};
 $scope.my_new_evidence.primary_choosen = {};
-
+        $scope.please_wait = false;
     $scope.init =function() {
+                $scope.please_wait = false;
          $scope.my_temp_secret_new = false;
    $scope.my_new_evidence = {};
    $scope.my_new_evidence.evidence_real_code = "";
@@ -1934,6 +1937,7 @@ $scope.my_new_evidence.primary_choosen = {};
     }
 
     $scope.save_to_server =function(my_modal){
+                $scope.please_wait = true;
         if($scope.my_temp_secret_new  == false){
             $scope.my_new_evidence.secret = "0";
         }
@@ -3292,6 +3296,266 @@ $scope.init =function() {
     }
 });
 
+app.controller('show_edit_album_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
+  $scope.openLightboxModal = function (index) {
+
+    Lightbox.openModal($rootScope.manage_album_show_this_album.pictures, index);
+  }
+
+  $scope.my_pictures = {};
+        $scope.please_wait = false;
+  $scope.close_modal = function(my_modal){
+            $scope.please_wait = false;
+        $scope.my_pictures.flow.files = [];
+        my_modal.$hide();
+    }
+
+
+  $scope.remove_pic = function(index_to_remove){
+        $rootScope.manage_album_show_this_album.pictures.splice(index_to_remove,1);
+  }
+
+  $scope.show_my_pictures=function(){
+
+
+     for(index=0;index<$scope.my_pictures.flow.files.length;index++){
+        if ($scope.my_pictures.flow.files[index].size > 2000000){
+            console.log("remove file");
+            $scope.my_pictures.flow.files.splice(index,1);
+        }
+    
+     }
+    
+
+
+}
+    $scope.still_not_choose_complete = function(){
+               if(!$scope.my_pictures.flow){
+            return true;
+        }
+
+        if(!$rootScope.manage_album_show_this_album){
+            return true;
+        }
+        if(!$rootScope.manage_album_show_this_album.name ){
+            return true;
+        }
+        else{
+                if($scope.my_pictures.flow.files.length ==0 && $rootScope.manage_album_show_this_album.pictures.length ==0){
+                    return true;
+                }
+
+          var index;
+          for(index = 0 ;index<$rootScope.manage_album_show_this_album.pictures.length ;index++){
+            if(!$rootScope.manage_album_show_this_album.pictures[index].caption){
+                return true;
+            }
+            
+          }
+
+            for(index = 0 ;index<$scope.my_pictures.flow.files.length ;index++){
+            if(!$scope.my_pictures.flow.files[index].caption){
+                return true;
+            }
+            
+          }
+            return false;
+        }
+
+
+return false; 
+    }
+   $scope.save_to_server = function(my_modal) {
+   $scope.please_wait = true;
+      var formData = new FormData();
+
+
+    console.log("this is all");
+    console.log($scope.my_pictures.flow.files);
+        var index = 0;
+        for (index = 0 ;index< $scope.my_pictures.flow.files.length;index++){
+            $scope.my_obj = {};
+            $scope.my_obj.gallery_id = 0;
+            $scope.my_obj.file_name = $scope.my_pictures.flow.files[index].file.name;
+            $scope.my_obj.caption = $scope.my_pictures.flow.files[index].caption;
+              $rootScope.manage_album_show_this_album.pictures.push($scope.my_obj);
+
+            formData.append("picture"+(index+1), $scope.my_pictures.flow.files[index].file );
+        }
+        formData.append("model", angular.toJson($rootScope.manage_album_show_this_album));
+        console.log("save")
+        console.log($rootScope.manage_album_show_this_album);
+   // if($scope.disabled_search == true){
+   //    $rootScope.manage_minutes_fix_this_minute.file_name = $scope.my_file[0].name;
+   //       formData.append("file", $scope.my_file[0] );
+   //  }
+     
+
+        $http({
+            method: 'PUT',
+            url: "/api/gallery/edit",
+
+            headers: { 'Content-Type': undefined },
+
+
+            data:formData,
+            transformRequest: angular.indentity 
+
+        }).
+        success(function (data, status, headers, config) {
+        
+                $rootScope.manage_album_my_world_wide_album =data;
+                $scope.close_modal(my_modal);
+                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+              
+           
+        }).
+        error(function (data, status, headers, config) {
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        });
+    }
+
+});
+
+app.controller('manage_album_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+                    $scope.nothing_change = true;
+                      $rootScope.manage_survey_my_world_wide_surveys = [];
+}
+  
+   $scope.openLightboxModal = function (index,this_album) {
+
+    Lightbox.openModal(this_album, index);
+  }
+
+  $scope.remove_album = function(index_to_del){
+    $scope.nothing_change= false;
+    $rootScope.manage_album_my_world_wide_album.splice(index_to_del,1)
+  }
+
+
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+  $scope.nothing_change = true;
+
+
+        $scope.sendCurriAndGetYears = function () {
+        $scope.choose_not_complete =true;
+        $scope.year_choosen = {}
+         $scope.nothing_change = true;
+        $scope.indicator_choosen= {};
+      
+              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
+
+            $scope.corresponding_aca_years = data;
+
+
+          });
+
+
+    }
+
+    $scope.go_to_show_album = function(this_album){
+
+
+        $rootScope.manage_album_curri_id = $scope.curri_choosen.curri_id;
+        $rootScope.manage_album_aca_year = $scope.year_choosen.aca_year;
+        $rootScope.manage_album_show_this_album = angular.copy(this_album);
+
+
+
+    }
+
+  $scope.go_to_create_album = function(){
+ $rootScope.manage_album_curri_id = $scope.curri_choosen.curri_id;
+        $rootScope.manage_album_aca_year = $scope.year_choosen.aca_year;
+    
+
+  }
+
+    $scope.find_information = function(){
+
+          console.log("find_information");
+        console.log($scope.year_choosen);
+
+        $http.post(
+             '/api/gallery/getgallery',
+             JSON.stringify($scope.year_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+             $scope.nothing_change = true;
+               $rootScope.manage_album_my_world_wide_album = data;
+         
+             $scope.choose_not_complete = false;
+             
+            
+    
+         });
+// $scope.result=[{"target":["นักศึกษา"],"t_name":"อาจารย์บัณฑิต พัสยา","questionare_set_id":1,"name":"ความคิดเห็นต่อเนื้อหารายวิชา 01076573 Information Storage and Retrieval","curri_id":"21","aca_year":2558,"date":"20/11/2558","personnel_id":"00007"},{"target":["นักศึกษา"],"t_name":"อาจารย์วิบูลย์ พร้อมพานิชย์","questionare_set_id":3,"name":"ความคิดเห็นต่อการเรียนการสอนวิชา 01076234 Computer programming 1","curri_id":"21","aca_year":2558,"date":"30/11/2558","personnel_id":"00001"},{"target":["นักศึกษา","บริษัท","ศิษย์เก่า","อาจารย์"],"t_name":"รศ.ดร.ศุภมิตร จิตตะยโศธร","questionare_set_id":4,"name":"แบบสำรวจความต้องการในการจัดสัมมนาเกี่ยวกับเรื่องฐานข้อมูลเชิงเวลาแบบไม่แน่นอน","curri_id":"21","aca_year":2558,"date":"01/01/2559","personnel_id":"00009"},{"target":["เจ้าหน้าที่","นักศึกษา","บริษัท","ศิษย์เก่า","อาจารย์"],"t_name":"รศ.ดร.เกียรติกูล เจียรนัยธนะกิจ","questionare_set_id":5,"name":"แบบสำรวจสภาพการใช้งานของสุขภัณฑ์ในภาควิชา","curri_id":"21","aca_year":2558,"date":"02/12/2558","personnel_id":"00002"},{"target":["นักศึกษา","อาจารย์"],"t_name":"ผศ.ดร.ชุติเมษฏ์ ศรีนิลทา","questionare_set_id":6,"name":"แบบสำรวจความต้องการในการจัดให้มีกิจกรรมปัจฉิมนิเทศของภาค","curri_id":"21","aca_year":2558,"date":"22/12/2558","personnel_id":"00004"}];
+//  $scope.choose_not_complete = false;
+
+    }
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+    $scope.save_to_server = function(my_modal){
+
+
+        if($rootScope.manage_album_my_world_wide_album.length == 0){
+            console.log("legnth = 0")
+            $scope.to_sent  = {};
+            $scope.to_sent.curri_id  = $scope.curri_choosen.curri_id;
+            $scope.to_sent.aca_year = $scope.year_choosen.aca_year;
+      
+            $rootScope.manage_album_my_world_wide_album.push($scope.to_sent);
+
+        }
+
+        console.log("save_to_server");
+        console.log($rootScope.manage_album_my_world_wide_album);
+        $http.put(
+             '/api/gallery/delete',
+             JSON.stringify($rootScope.manage_album_my_world_wide_album),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            $scope.close_modal(my_modal);
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+               
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    }
+});
+
+
+
 app.controller('import_evidence_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
  $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -3572,6 +3836,7 @@ $scope.init =function() {
 
 app.controller('create_research_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
+       $scope.please_wait = false;
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
               $scope.curri_choosen = {}
@@ -3588,6 +3853,7 @@ $scope.init =function() {
     function(inputElem) {
       angular.element(inputElem).val(null);
     });
+
 }
   $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -3600,7 +3866,7 @@ $scope.init =function() {
   $scope.new_research.year_publish = "";
   $scope.new_research.file = "";
 
-
+   $scope.please_wait = false;
      $scope.$on("fileSelected", function (event, args) {
         $scope.$apply(function () {            
             $scope.new_research.file = [];
@@ -3638,6 +3904,7 @@ $scope.init =function() {
     }
 
     $scope.save_to_server = function(my_modal) {
+           $scope.please_wait = true;
  $scope.new_research.curri_id = $rootScope.manage_reseach_my_curri_id_now;
  $scope.new_research.file_name = $scope.new_research.file.name;
 
@@ -3753,6 +4020,7 @@ $scope.init =function() {
 
 
   $scope.save_to_server = function(my_modal){
+       $scope.please_wait = true;
         console.log("save_to_server");
            
     
@@ -4145,6 +4413,60 @@ $scope.init =function() {
 
 
 
+app.controller('show_education_personnel_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+         $scope.nothing_change = true;
+                $rootScope.manage_research_my_research_now = {};
+}
+
+
+  
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+  $scope.nothing_change = true;
+    $scope.download_research = function(path_research){
+        $scope.download_file(path_research);
+    }
+
+    $scope.download_file = function(path) { 
+        window.open(path, '_blank', "");  
+    }
+
+
+    $scope.find_information = function(){
+
+      
+        console.log($scope.curri_choosen.curri_id);
+
+        $http.post(
+             '/api/research/getresearch',
+             JSON.stringify($scope.curri_choosen.curri_id),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            
+              $scope.result =data;
+             $scope.choose_not_complete = false;
+              
+            
+    
+         });
+
+}
+});
+
+
+
 // app.controller('manage_minutes_minute_attendees_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 
 // });
@@ -4158,6 +4480,7 @@ $scope.init =function() {
                 $scope.indicator_choosen= {};
                     $scope.result = {};
                    $scope.my_new_minute = {};
+                      $scope.please_wait = false;
       
 $scope.my_pictures.flow.files = [];
 console.log("inside init");  
@@ -4177,6 +4500,7 @@ console.log("inside init");
  $scope.show_gallery = false;
   $scope.choose_not_complete = true;
          $scope.year_choosen = {};
+            $scope.please_wait = false;
               $scope.curri_choosen = {}
                 $scope.indicator_choosen= {};
                     $scope.result = {};
@@ -4243,6 +4567,7 @@ $scope.show_my_pictures=function(){
 
 }
     $scope.save_to_server = function(my_modal) {
+           $scope.please_wait = true;
  $scope.my_new_minute.curri_id = $rootScope.manage_minutes_curri_id;
  $scope.my_new_minute.aca_year = $rootScope.manage_minutes_aca_year;
  $scope.my_new_minute.file_name =  $scope.my_file[0].name;
@@ -4290,6 +4615,155 @@ $scope.show_my_pictures=function(){
 
 
 });
+
+
+
+app.controller('create_album_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+$scope.init =function() {
+   $scope.please_wait = false;
+      
+             
+                   $scope.my_new_album = {};
+      $scope.my_new_album.name = "";
+$scope.my_pictures.flow.files = [];
+
+ 
+
+
+   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+}
+ $scope.show_gallery = false;
+
+
+                $scope.please_wait = false;
+              
+     $scope.my_new_album = {};
+      $scope.my_new_album.name = "";
+$scope.my_pictures = {};
+         $scope.my_pictures.flow={}; 
+         console.log("outside init");         
+$scope.my_pictures.flow.files = [];
+     $scope.$on("fileSelected", function (event, args) {
+
+        $scope.$apply(function () {            
+            $scope.my_file = [];
+            //add the file object to the scope's files collection
+            $scope.my_file.push(args.file);
+        });
+    });
+
+
+// $scope.check_everything = function(this_thing){
+//     console.log('check_everything');
+//    console.log(this_thing);
+//    console.log($scope.my_pictures.flow);
+// }
+     $scope.still_not_complete = function(){
+        if(!$scope.my_pictures.flow){
+            return true;
+        }
+        if( $scope.my_pictures.flow.files.length ==0 ||! $scope.my_new_album.name ){
+            return true;
+        }
+
+        else{
+            var index;
+            for(index=0;index<$scope.my_pictures.flow.files.length;index++){
+                if(!$scope.my_pictures.flow.files[index].caption){
+                    return true;
+                }
+      
+            }
+                   return false;
+        }
+
+
+       
+     }
+    
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+$scope.show_my_pictures=function(){
+
+     $scope.show_gallery = true;
+     var index;
+
+     for(index=0;index<$scope.my_pictures.flow.files.length;index++){
+        if ($scope.my_pictures.flow.files[index].size > 2000000){
+            console.log("remove file");
+            $scope.my_pictures.flow.files.splice(index,1);
+        }
+    
+     }
+    
+    console.log("show");
+
+}
+    $scope.save_to_server = function(my_modal) {
+           $scope.please_wait = true;
+ $scope.my_new_album.curri_id =    $rootScope.manage_album_curri_id ;
+ $scope.my_new_album.aca_year =    $rootScope.manage_album_aca_year;
+ $scope.my_new_album.personnel_id =   "00001";
+
+
+
+  $scope.my_new_album.pictures =  [];
+
+      var formData = new FormData();
+
+
+
+        var index = 0;
+        for (index = 0 ;index< $scope.my_pictures.flow.files.length;index++){
+            $scope.my_obj = {};
+            $scope.my_obj.caption = $scope.my_pictures.flow.files[index].caption;
+            $scope.my_obj.file_name = $scope.my_pictures.flow.files[index].file.name;
+            $scope.my_obj.gallery_id = 0;
+
+              $scope.my_new_album.pictures.push($scope.my_obj);
+            formData.append("picture"+(index+1), $scope.my_pictures.flow.files[index].file );
+        }
+        formData.append("model", angular.toJson( $scope.my_new_album));
+        console.log("send");
+        console.log($scope.my_new_album);
+
+        $http({
+            method: 'POST',
+            url: "/api/gallery/add",
+
+            headers: { 'Content-Type': undefined },
+
+
+            data:formData,
+            transformRequest: angular.indentity 
+
+        }).
+        success(function (data, status, headers, config) {
+        
+                $rootScope.manage_album_my_world_wide_album =data;
+                $scope.close_modal(my_modal);
+                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+              
+           
+        }).
+        error(function (data, status, headers, config) {
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        });
+    }
+
+
+});
+
 app.controller('fix_minute_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
  
 $scope.init =function() {
@@ -4302,9 +4776,10 @@ $scope.init =function() {
 
   $scope.my_new_minute.date = "";
   $scope.my_new_minute.attendee =[];
+     $scope.please_wait = false;
   $scope.my_new_minute.topic_name = "";
   $scope.my_file = [];
-  $scope.my_pictures = {};
+ $scope.my_pictures.flow.files = [];
   $scope.show_gallery = false;
  $scope.disabled_search = false;
    angular.forEach(
@@ -4313,6 +4788,7 @@ $scope.init =function() {
       angular.element(inputElem).val(null);
     });
 }
+   $scope.please_wait = false;
  $scope.show_gallery = false;
   $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -4406,7 +4882,7 @@ $scope.show_my_pictures=function(){
 
 }
     $scope.save_to_server = function(my_modal) {
-
+   $scope.please_wait = true;
       var formData = new FormData();
 
 
