@@ -152,7 +152,11 @@ namespace educationalProject.Models.Wrappers
                         }
                         else
                         {
-                            result.First(m => m.minutes_id == minutes_id).pictures.Add(item.ItemArray[data.Columns[Minutes_pic.FieldName.FILE_NAME].Ordinal].ToString());
+                            result.First(m => m.minutes_id == minutes_id).pictures.Add(new Minutes_pic
+                            {
+                                file_name = item.ItemArray[data.Columns[Minutes_pic.FieldName.FILE_NAME].Ordinal].ToString(),
+                                minutes_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.MINUTES_ID].Ordinal])
+                            });
                         }
                     }
                     data.Dispose();
@@ -304,9 +308,9 @@ namespace educationalProject.Models.Wrappers
 
             string insertintotemp3 = string.Format("INSERT INTO {0} VALUES (null)", temp3tablename);
 
-            foreach (string fname in mdata.pictures)
+            foreach (Minutes_pic m in mdata.pictures)
             {
-                insertintotemp3 += string.Format(",('{0}')", fname);
+                insertintotemp3 += string.Format(",('{0}')", m.file_name);
             }
 
             string insertintominutesattendee = string.Format(" INSERT INTO {0} " +
@@ -374,7 +378,11 @@ namespace educationalProject.Models.Wrappers
                         }
                         else
                         {
-                            result.First(m => m.minutes_id == minutes_id).pictures.Add(item.ItemArray[data.Columns[Minutes_pic.FieldName.FILE_NAME].Ordinal].ToString());
+                            result.First(m => m.minutes_id == minutes_id).pictures.Add( new Minutes_pic
+                            {
+                                file_name = item.ItemArray[data.Columns[Minutes_pic.FieldName.FILE_NAME].Ordinal].ToString(),
+                                minutes_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.MINUTES_ID].Ordinal])
+                            });
                         }
                     }
                     data.Dispose();
@@ -415,15 +423,28 @@ namespace educationalProject.Models.Wrappers
                                      "ALTER COLUMN {1} VARCHAR(255) COLLATE DATABASE_DEFAULT ",
                                      temp1tablename, FieldName.FILE_NAME);
 
-            string insertintotemp1_1 = string.Format("INSERT INTO {0} " +
-                                     "select * from " +
-                                     "(update {1} set {2} = '{3}', {4} = '{5}', {6} = '{7}',{8} = '{9}' " +
-                                     "OUTPUT deleted.{8} where {10} = {11}) as outputupdate ",
-                                     temp1tablename, FieldName.TABLE_NAME, FieldName.TEACHER_ID, mdata.teacher_id,
-                                     FieldName.DATE, mdata.date, FieldName.TOPIC_NAME, mdata.topic_name,
-                                     FieldName.FILE_NAME, mdata.file_name, FieldName.MINUTES_ID, mdata.minutes_id);
+            string insertintotemp1_1;
+            //TOEDIT --UPDATE MINUTES TABLE (2 CASE WITH FILE_NAME UPDATES)
+            if (mdata.file_name != "")
+            {
+                insertintotemp1_1 = string.Format("INSERT INTO {0} " +
+                                         "select * from " +
+                                         "(update {1} set {2} = '{3}', {4} = '{5}', {6} = '{7}',{8} = '{9}' " +
+                                         "OUTPUT deleted.{8} where {10} = {11}) as outputupdate ",
+                                         temp1tablename, FieldName.TABLE_NAME, FieldName.TEACHER_ID, mdata.teacher_id,
+                                         FieldName.DATE, mdata.date, FieldName.TOPIC_NAME, mdata.topic_name,
+                                         FieldName.FILE_NAME, mdata.file_name, FieldName.MINUTES_ID, mdata.minutes_id);
+            }
+            else
+            {
+                insertintotemp1_1 = string.Format("update {0} set {1} = '{2}', {3} = '{4}', {5} = '{6}' " +
+                         "where {7} = {8} ",
+                         FieldName.TABLE_NAME, FieldName.TEACHER_ID, mdata.teacher_id,
+                         FieldName.DATE, mdata.date, FieldName.TOPIC_NAME, mdata.topic_name,
+                         FieldName.MINUTES_ID, mdata.minutes_id);
+            }
 
-
+            //OK UPDATE ATTENDEE
             string deletefromminutesattendee = string.Format("DELETE FROM {0} where {1} = {2} ",
                 Minutes_attendee.FieldName.TABLE_NAME, Minutes_attendee.FieldName.MINUTES_ID, mdata.minutes_id);
 
@@ -437,22 +458,40 @@ namespace educationalProject.Models.Wrappers
                     insertintominutesattendee += ",";
             }
 
+
+            string insertintominutespiccmd = string.Format("insert into {0} values ", Minutes_pic.FieldName.TABLE_NAME);
+            string deletefromminutespicturecmd = string.Format("delete from {0} output deleted.{1} where {2} = {3} ",
+                                          Minutes_pic.FieldName.TABLE_NAME, Minutes_pic.FieldName.FILE_NAME, Minutes_pic.FieldName.MINUTES_ID,
+                                          mdata.minutes_id);
+
+            string excludecond = "1=1 ";
+            int len = insertintominutespiccmd.Length;
+
+            foreach (Minutes_pic m in mdata.pictures)
+            {
+                if (m.minutes_id != 0)
+                {
+                    //Gen delete cond
+                    excludecond += string.Format("and {0} != '{1}' ", Minutes_pic.FieldName.FILE_NAME, m.file_name);
+                }
+                else
+                {
+                    if (insertintominutespiccmd.Length <= len)
+                        insertintominutespiccmd += string.Format("({0},'{1}')", mdata.minutes_id, m.file_name);
+                    else
+                        insertintominutespiccmd += string.Format(",({0},'{1}')", mdata.minutes_id, m.file_name);
+                }
+            }
+            if (insertintominutespiccmd.Length <= len)
+                insertintominutespiccmd = "";
+
+            deletefromminutespicturecmd += string.Format("and ({0}) ", excludecond);
+
             string insertintotemp1_2 = string.Format("INSERT INTO {0} " +
                                      "select * from " +
-                                     "(delete from {1} output deleted.{2} where {3} = {4}) " +
+                                     "({1}) " +
                                      "as outputdelete ",
-                                     temp1tablename, Minutes_pic.FieldName.TABLE_NAME, Minutes_pic.FieldName.FILE_NAME,
-                                     Minutes_pic.FieldName.MINUTES_ID, mdata.minutes_id);
-
-            string insertintominutespic = string.Format("INSERT INTO {0} values ",
-                Minutes_pic.FieldName.TABLE_NAME);
-
-            foreach (string fname in mdata.pictures)
-            {
-                insertintominutespic += string.Format("({0},'{1}')", mdata.minutes_id, fname);
-                if (fname != mdata.pictures.Last())
-                    insertintominutespic += ",";
-            }
+                                     temp1tablename, deletefromminutespicturecmd);
 
             curri_id = mdata.curri_id;
             aca_year = mdata.aca_year;
@@ -461,7 +500,7 @@ namespace educationalProject.Models.Wrappers
 
             d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} {5} {6} END", createtabletemp1,
                 insertintotemp1_1, deletefromminutesattendee, insertintominutesattendee,
-                insertintotemp1_2, insertintominutespic, selectcmd);
+                insertintotemp1_2, insertintominutespiccmd, selectcmd);
 
             try
             {
@@ -510,13 +549,20 @@ namespace educationalProject.Models.Wrappers
                         }
                         else if(minutes_id != -1 && minutes_id != -2)
                         {
-                            result.First(m => m.minutes_id == minutes_id).pictures.Add(item.ItemArray[data.Columns[Minutes_pic.FieldName.FILE_NAME].Ordinal].ToString());
+                            result.First(m => m.minutes_id == minutes_id).pictures.Add(new Minutes_pic
+                            {
+                                file_name = item.ItemArray[data.Columns[Minutes_pic.FieldName.FILE_NAME].Ordinal].ToString(),
+                                minutes_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.MINUTES_ID].Ordinal])
+                            });
                         }
 
                         //Add file_name to delete into dummy obj : minute_id == 1 || minutes_id == -2
                         else
                         {
-                            dummyfordeleteminutes.pictures.Add(item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString());
+                            dummyfordeleteminutes.pictures.Add(new Minutes_pic
+                            {
+                                file_name = item.ItemArray[data.Columns[Minutes_pic.FieldName.FILE_NAME].Ordinal].ToString()
+                            });
                         }
                     }
                     data.Dispose();

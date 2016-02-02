@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using educationalProject.Models;
 using educationalProject.Models.Wrappers;
 using educationalProject.Models.ViewModels;
 namespace educationalProject.Controllers
@@ -56,8 +57,7 @@ namespace educationalProject.Controllers
                 data.aca_year = Convert.ToInt32(datareceive["aca_year"]);
                 data.topic_name = datareceive["topic_name"].ToString();
                 data.teacher_id = datareceive["teacher_id"].ToString();
-                data.date = datareceive["date"].ToString();
-                //data.date = DateTime.Now.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
+                data.date = Convert.ToDateTime(datareceive["date"].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
 
                 JArray tlist = (JArray)datareceive["attendee"];
 
@@ -74,7 +74,7 @@ namespace educationalProject.Controllers
                 FileInfo fileInfo = new FileInfo(file.LocalFileName);
                 string newfilename = string.Format("{0}.{1}", fileInfo.Name.Substring(9), file.Headers.ContentDisposition.FileName.Split('.').LastOrDefault().Split('\"').FirstOrDefault());
                 data.file_name = "download/minutes/" + newfilename;
-                File.Move(string.Format("{0}/{1}", savepathmain, fileInfo.Name), string.Format("{0}/{1}", savepathmain, newfilename));
+                File.Move(string.Format("{0}/{1}", temppath, fileInfo.Name), string.Format("{0}/{1}", savepathmain, newfilename));
                 ////-----------------
 
 
@@ -86,8 +86,8 @@ namespace educationalProject.Controllers
                         MultipartFileData file1 = result.FileData[fileind++];
                         FileInfo fileInfo1 = new FileInfo(file1.LocalFileName);
                         string newfilename1 = string.Format("{0}.{1}", fileInfo1.Name.Substring(9), file1.Headers.ContentDisposition.FileName.Split('.').LastOrDefault().Split('\"').FirstOrDefault());
-                        data.pictures.Add("myImages/minutes/" + newfilename1);
-                        File.Move(string.Format("{0}/{1}", savepathsub, fileInfo1.Name), string.Format("{0}/{1}", savepathsub, newfilename1));
+                        data.pictures.Add(new Minutes_pic { file_name = "myImages/minutes/" + newfilename1 });
+                        File.Move(string.Format("{0}/{1}", temppath, fileInfo1.Name), string.Format("{0}/{1}", savepathsub, newfilename1));
                     }
                 }
                 
@@ -130,5 +130,115 @@ namespace educationalProject.Controllers
             }
             return Ok();
         }
+
+        [ActionName("edit")]
+        public async Task<IHttpActionResult> PutForEditMinutes()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
+            }
+
+            //string savepathmain = HttpContext.Current.Server.MapPath("~/download/minutes");
+            string savepathmain = "D:\\download\\minutes\\";
+
+            //string savepathsub = HttpContext.Current.Server.MapPath("~/myImages/minutes");
+            string savepathsub = "D:\\myImages\\minutes\\";
+
+            //string temppath = HttpContext.Current.Server.MapPath("~/temp");
+            string temppath = "D:\\temp\\";
+            var result = new MultipartFormDataStreamProvider(temppath);
+            Minutes_detail data = new Minutes_detail();
+            try
+            {
+                await Request.Content.ReadAsMultipartAsync(result);
+
+                //READ JSON DATA PART
+                JObject datareceive = JObject.Parse(result.FormData.GetValues(result.FormData.AllKeys[0])[0]);
+                data.curri_id = datareceive["curri_id"].ToString();
+                data.aca_year = Convert.ToInt32(datareceive["aca_year"]);
+                data.topic_name = datareceive["topic_name"].ToString();
+                data.teacher_id = datareceive["teacher_id"].ToString();
+                data.date = Convert.ToDateTime(datareceive["date"].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
+                data.minutes_id = Convert.ToInt32(datareceive["minutes_id"]);
+
+                JArray tlist = (JArray)datareceive["attendee"];
+
+                foreach (JObject item in tlist)
+                {
+                    data.attendee.Add(new Teacher_with_t_name
+                    {
+                        teacher_id = item["teacher_id"].ToString()
+                    });
+                }
+
+                int fileind;
+
+                if (datareceive["file_name"].ToString() != "")
+                {
+                    //main minutes file (if exists)
+                    MultipartFileData file = result.FileData[0];
+                    FileInfo fileInfo = new FileInfo(file.LocalFileName);
+                    string newfilename = string.Format("{0}.{1}", fileInfo.Name.Substring(9), file.Headers.ContentDisposition.FileName.Split('.').LastOrDefault().Split('\"').FirstOrDefault());
+                    data.file_name = "download/minutes/" + newfilename;
+                    File.Move(string.Format("{0}/{1}", temppath, fileInfo.Name), string.Format("{0}/{1}", savepathmain, newfilename));
+                    fileind = 1;
+                }
+                else {
+                    fileind = 0;
+                    data.file_name = "";
+                }
+                ////----------------
+
+
+                tlist = (JArray)datareceive["pictures"];
+                    foreach (JObject item in tlist)
+                    {
+                        if (Convert.ToInt32(item["minutes_id"]) == 0)
+                        {
+                            MultipartFileData file1 = result.FileData[fileind++];
+                            FileInfo fileInfo1 = new FileInfo(file1.LocalFileName);
+                            string newfilename1 = string.Format("{0}.{1}", fileInfo1.Name.Substring(9), file1.Headers.ContentDisposition.FileName.Split('.').LastOrDefault().Split('\"').FirstOrDefault());
+                            data.pictures.Add(new Minutes_pic { minutes_id = 0, file_name = "myImages/minutes/" + newfilename1 });
+                            File.Move(string.Format("{0}/{1}", temppath, fileInfo1.Name), string.Format("{0}/{1}", savepathsub, newfilename1));
+                        }
+                        else
+                        {
+                            data.pictures.Add(new Minutes_pic {
+                                minutes_id = Convert.ToInt32(item["minutes_id"]),
+                                file_name = item["file_name"].ToString()
+                            });
+                        }
+                    }
+               
+                object resultfromdb = datacontext.UpdateMinutesWithSelect(data);
+
+                if (resultfromdb.GetType().ToString() != "System.String")
+                {
+                    //string delpath = HttpContext.Current.Server.MapPath("~/");
+                    string delpath = "D:/";
+                    List<Minutes_pic> picture_delete_list = ((List<Minutes_detail>)resultfromdb).Last().pictures;
+                    //try catch foreach delete every file that targeted in strlist
+
+                    foreach (Minutes_pic picture_to_delete in picture_delete_list)
+                    {
+                        if (File.Exists(string.Format("{0}{1}", delpath, picture_to_delete.file_name)))
+                            File.Delete(string.Format("{0}{1}", delpath, picture_to_delete.file_name));
+                    }
+
+                    ((List<Minutes_detail>)resultfromdb).Remove(((List<Minutes_detail>)resultfromdb).Last());
+                    return Ok(resultfromdb);
+                }
+                else
+                    return InternalServerError(new Exception(result.ToString()));
+
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+        }
+
+
     }
 }
