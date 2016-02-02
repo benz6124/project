@@ -550,7 +550,11 @@ table.table_modal .evaluate_topic{
 
 .btn-success{
   background-color:   #739900;
-  border: #4cae4c;
+  border-color:  #6e8000;
+}
+
+.btn-success:hover{
+  background-color: #5e8000 !important;
 }
 
 button.btn-success:hover{

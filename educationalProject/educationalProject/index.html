@@ -1129,8 +1129,10 @@ $('.profile_pic').mouseover(function(){
 
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">เจ้าหน้าที่/อาจารย์ที่ปรึกษา   </span></h3>
                             </div>
+
+
  <div class="col-md-9" style="padding-right:22px;">
-           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.teacher_id as each_teacher.t_name for each_teacher in manage_lab_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา" data-ng-model="$parent.manage_lab_fix_this_lab_init" data-ng-init="manage_lab_fix_this_lab_init" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
+           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_personnel.personnel_id as each_personnel.t_name for each_personnel in manage_lab_all_personnels_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา" data-ng-model="$parent.manage_lab_fix_this_lab_init" data-ng-init="manage_lab_fix_this_lab_init" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
 <option style="display:none" value=""></option></select>    
 
 
@@ -1188,7 +1190,7 @@ $('.profile_pic').mouseover(function(){
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">เจ้าหน้าที่/อาจารย์ที่ปรึกษา   </span></h3>
                             </div>
  <div class="col-md-9" style="padding-right:22px;">
-           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_lab_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา"  data-ng-model="manage_lab_fix_this_lab.officer" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
+           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_personnel.t_name for each_personnel in manage_lab_all_personnels_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา"  data-ng-model="manage_lab_fix_this_lab.officer" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
 <option style="display:none" value=""></option></select>    
 </div>
 
@@ -1300,8 +1302,9 @@ $('.profile_pic').mouseover(function(){
 
  
 <div flow-init
-    flow-files-submitted="show_my_pictures()"
+
      flow-name="$parent.my_pictures.flow"
+         flow-files-submitted="show_my_pictures()"
      flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]" >
   <div class="drop" flow-drop ng-class="dropClass">
     <span class="btn btn-primary"style="margin-left:7px;font-size:18px" flow-btn><i class="glyphicon glyphicon-picture"></i> อัพโหลดรูปภาพ</span><span class="topicHeader" style="margin-top:"> (รองรับไฟล์ .png,.jpg,.jpeg ขนาดไม่เกิน 2MB) </span>
@@ -1340,6 +1343,172 @@ $('.profile_pic').mouseover(function(){
                     </div>
 </div>
 
+<div id="fix_minute" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="fix_minute_controller">
+       <div class="custom-header">
+                        <h1 class="headerModalH1">แก้ไขข้อมูลรายงานการประชุม</h1>
+                    </div>
+
+
+ 
+
+                                     
+  <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">หัวข้อการประชุม   </span></h3>
+                            </div>
+                            <div class="col-md-9" style="
+    padding-right: 8px;
+">
+                                <input  type="text" class="form-control" placeholder="" ng-model="manage_minutes_fix_this_minute.topic_name" required><span class="normal">  </span>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">วันที่ประชุม   </span></h3>
+                            </div>
+                            <div class="col-md-9">
+                           
+  <div class="input-group" style="margin-right:9px">
+
+  <input type="text" data-qo-format="DD/MM/YYYY" ng-model="manage_minutes_fix_this_minute.date" data-qo-model-type="string"class="form-control" data-nq-datepicker="" placeholder="กรุณาเลือกวันที่ประชุม" data-qo-icon-id="#iconId" />
+
+
+      
+              <span id="iconId" class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+                            </div>
+                        </div>
+ 
+  <div class="row">
+  <div class="col-md-3" >
+
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ผู้เข้าร่วมประชุม   </span></h3>
+                            </div>
+ <div class="col-md-9" style="padding-right: 24px;">
+           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher   as each_teacher.t_name for each_teacher in manage_minutes_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้เข้าร่วมประชุม"  data-ng-model="manage_minutes_fix_this_minute.attendee" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
+<option style="display:none" value=""></option></select>    
+</div>
+
+</div>
+
+                               
+ 
+    <ul ng-show="manage_minutes_fix_this_minute.attendee.length!=0">
+                           <span class="topicHeader"> <li style="color:#6F002B;margin-left:10px" ng-repeat="each in manage_minutes_fix_this_minute.attendee">{{each.t_name}}</li></span>
+                        </ul>
+
+
+<!-- <div class="row">
+                            <div class="col-md-3">
+                               <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ไฟล์รายงานการประชุม   </span></h3>
+                            </div>
+                            <div class="col-md-9" style="
+    padding-right: 6px;
+">
+                              
+                                <input type="file" name="upload_file_input" class="form-control" placeholder="ไฟล์รายงานการประชุม" file-upload  data-ng-model="my_file" required/>
+                            </div>
+
+                        </div> -->
+
+                          <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-left:10px;margin-top:5px;"><span class="topicNewHeader">ไฟล์รายงานการประชุม:  </span></h3>
+                            </div>
+                            <div class="col-md-8"  ng-hide="disabled_search" style="margin-bottom:5px">
+                              
+                             
+
+
+  <span class="btn btn-danger  "ng-click="watch_file()"  style="font-size:18px;"><i style="margin-top:3px" class="glyphicon glyphicon-search" ></i>  ดูไฟล์รายงานการประชุมเดิม</span>
+                          <span  class="topicHeader" style="margin-left: 20px;margin-right: 20px;">หรือ</span>
+
+
+    <span class="btn btn-success  " ng-click="set_disabled_search()" style="font-size:18px;"><i style="margin-top:3px"class="glyphicon glyphicon-plus-sign"></i> อัพโหลดไฟล์ใหม่</span>
+
+                            </div>
+
+  
+
+    <div class="col-md-9" ng-show="disabled_search" style="
+    padding-right: 6px;
+">
+                              
+                                <input type="file" name="upload_file_input" class="form-control" placeholder="ไฟล์รายงานการประชุม" file-upload  data-ng-model="my_file" required/>
+                            </div>
+
+                        </div>
+
+  <div class="col-md-3" style="padding-left:0px">
+                               <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ภาพบรรยากาศการประชุม   </span></h3>
+                            </div>
+
+                        
+
+
+ 
+<div flow-init
+    flow-files-submitted="show_my_pictures()"
+     flow-name="$parent.my_pictures.flow"
+     flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]" >
+  <div class="drop" flow-drop ng-class="dropClass">
+    <span class="btn btn-primary"style="margin-left:7px;font-size:18px" flow-btn><i class="glyphicon glyphicon-picture"></i> อัพโหลดรูปภาพเพิ่ม</span><span class="topicHeader" style="margin-top:"> (รองรับไฟล์ .png,.jpg,.jpeg ขนาดไม่เกิน 2MB) </span>
+   
+  
+
+  </div>
+
+  <br/>
+
+  <div style="margin-left:20px;margin-top:3px;" ng-show="show_gallery">
+
+
+    <div ng-repeat="file in $flow.files" class="gallery-box">
+      <span class="title">{{file.name}}</span>
+      <div class="thumbnail" ng-show="$flow.files.length"  >
+        <img flow-img="file" />
+      </div>
+      
+      <div class="btn-group">
+        <a class="btn btn-xs btn-danger" ng-click="file.cancel()" >
+          ลบรูปภาพ
+        </a>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+
+  </div>
+  <div style="margin-left:20px;margin-top:3px;" ng-show="manage_minutes_fix_this_minute.pictures.length">
+
+
+    <div ng-repeat="file in manage_minutes_fix_this_minute.pictures" class="gallery-box">
+      <span class="title">{{return_just_name(file)}}</span>
+      <div class="thumbnail" ng-show="manage_minutes_fix_this_minute.pictures.length"  >
+        <img src="{{file}}" />
+      </div>
+      
+      <div class="btn-group">
+        <a class="btn btn-xs btn-danger" ng-click="delete_picture($index)" >
+          ลบรูปภาพ
+        </a>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+
+
+
+
+           <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button ng-disabled="still_not_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                        </div>
+                    </div>
+</div>
 <div id="create_lab" data-nq-modal="" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_lab_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">เพิ่มข้อมูลห้องปฏิบัติการ</h1>
@@ -1365,7 +1534,7 @@ $('.profile_pic').mouseover(function(){
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">เจ้าหน้าที่/อาจารย์ที่ปรึกษา   </span></h3>
                             </div>
  <div class="col-md-9" style="padding-right:22px;">
-           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_lab_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา"  data-ng-model="my_new_lab.officer" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
+           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_lab_all_personnels_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา"  data-ng-model="my_new_lab.officer" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
 <option style="display:none" value=""></option></select>    
 </div>
 
@@ -1549,7 +1718,7 @@ $('.profile_pic').mouseover(function(){
   </td>
          
   
-                                   <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_lab" data-ng-click="go_to_fix_lab(lab)">
+                                   <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse"  data-ng-click="go_to_fix_lab(lab)" data-nq-toggle-modal="#fix_lab">
                                         <span class="topic"><i style="color:#eea236;margin0"class="glyphicon glyphicon-wrench"></i> </span>
                                     </a></td> 
                                           <td > <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_lab($index)" >
@@ -2243,7 +2412,7 @@ $('.profile_pic').mouseover(function(){
                                           <td > <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="download_file(minute.file_name)" >
                                         <span class="topic"><i style="color:#00802b"class="glyphicon glyphicon-download-alt"></i> </span>
                                     </a></td> 
-    <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="" data-ng-click="">
+    <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_minute" data-ng-click="go_to_fix_minute(minute)">
                                         <span class="topic"><i style="color:#eea236;"class="glyphicon glyphicon-wrench"></i> </span>
                                     </a></td> 
                                           <td > <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_minute($index)" >
@@ -2267,236 +2436,7 @@ $('.profile_pic').mouseover(function(){
                     </div>
                 </div>
 
-                <div id="create_minutes" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
-                    <div class="custom-header">
-                        <h1 class="headerModalH1">รายงานการประชุม</h1>
-                    </div>
-                    <div class="row">
-
-
-                        <div class="col-md-7" style="margin-left:15px">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            <option style="display:none" value=""></option></select>
-
-                        </div>
-                        <div class="col-md-3">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
-                                <option>2557</option>
-                                <option>2556</option>
-                                <option>2555</option>
-                                <option>2554</option>
-                                <option>2553</option>
-                                <option>2552</option>
-                                <option>2551</option>
-
-
-                            <option style="display:none" value=""></option></select>
-                        </div>
-
-                        <div class="col-md-1">
-                            <button class="btn btn-primary hvr-rotate" style="margin-bottom:10px"><i class="glyphicon glyphicon-search"></i> ค้นหา</button>
-                        </div>
-                    </div>
-                    <div class="container-fluid">
-                        <div class="clearfix">
-
-                            <div class="panel panel-default" data-nq-pageable="minutes" data-qo-alias="contactsTable" data-qo-pageable-model="contacts"
-                                 data-qo-selectable="true" data-on-refresh="tableScroller.refresh();">
-                                <div class="panel-heading clearfix">
-                                    <!-- <h1 class="panel-title pull-left"></i> รายงานการประชุม </h1> -->
-
-
-                                    <div class="pull-left" style="padding-left:15px;">
-                                        <button type="button" class="btn btn-xs btn-primary plusgreen hvr-buzz" data-nq-show-insert="" data-template-id="insertMinutes"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มรายงานการประชุม</button>
-                                    </div>
-                                </div>
-                                <div class="panel-body table-responsive" data-bar-model="tableScroller" style="overflow:hidden;">
-                                    <table class="table table-bordered table-hover bg-white table_modal">
-                                        <!--nq-fix-table-scroll class would fix thead always visible at top of the table if you put the table into a scrollable container-->
-                                        <thead class="nq-fix-table-scroll">
-                                            <tr>
-                                                <!--nq-column-sort directive would bind sorting handler to the element-->
-                                                <th class="col-xs-6">ชื่อรายงานการประชุม</th>
-                                                <th class="col-xs-2">ผู้เข้าร่วม</th>
-                                                <th class="col-xs-1">วันที่ประชุม</th>
-
-                                                <th class="col-xs-1">ผู้เขียน</th>
-                                                <th class="col-xs-1">ดาวน์โหลด</th>
-                                                <th class="col-xs-1">แก้ไข</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody class="flattened">
-                                            <!--pageable-repeat is required sub directive-->
-                                            <tr>
-                                                <td class="left_column">รายงานการประชุมเรื่องงบประมาณภาค</td>
-                                                <td><a href="" data-nq-toggle-modal="#minute_attendees" class="glyphicon glyphicon-eye-open" /></td>
-
-                                                <td>11/10/2558</td>
-                                                <td>P'Fluke</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td class="left_column">รายงานการประชุมประจำเดือน</td>
-                                                <td><a href="" data-nq-toggle-modal="#minute_attendees" class="glyphicon glyphicon-eye-open" /></td>
-                                                <td>1/9/2558</td>
-                                                <td>Wiboon</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-
-                                            <tr>
-                                                <td class="left_column">รายงานการประชุมสามัญ</td>
-                                                <td><a href="" data-nq-toggle-modal="#minute_attendees" class="glyphicon glyphicon-eye-open" /></td>
-                                                <td>20/8/2558</td>
-                                                <td>P'Kung</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td class="left_column">รายงานการประชุมด่วนเรื่องอุทกภัย</td>
-                                                <td><a href="" data-nq-toggle-modal="#minute_attendees" class="glyphicon glyphicon-eye-open" /></td>
-                                                <td>13/6/2558</td>
-                                                <td>P'Fluke</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td class="left_column">รายงานการประชุมด่วนเรื่องอุปกรณ์ห้องปฏิบัติการ</td>
-                                                <td><a href="" data-nq-toggle-modal="#minute_attendees" class="glyphicon glyphicon-eye-open" /></td>
-                                                <td>8/5/2558</td>
-                                                <td>P'Kung</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-
-                                    </table>
-                                </div>
-
-                                <div data-nq-pageable-template="" data-on-change="panelTitle= 'เพิ่มรายงานการประชุม'" style=" overflow:hidden;overflow-y:auto;" ng-submit="$hide()">
-
-
-
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h3 style="margin-left:20px;margin-top:5px"><span class="topicHeader">ชื่อรายงาน:   </span></h3>
-                                        </div>
-                                        <div class="col-md-8" style="margin-top:5px">
-                                            <input type="text" class="form-control" placeholder=""><span class="normal">  </span>
-
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h3 style="margin-left:20px;margin-top:0px"><span class="topicHeader">วันที่ประชุม:   </span></h3>
-                                        </div>
-                                        <div class="col-sm-4" ng-init="changeValue = 5">
-                                            <input type="text" ng-model="commonDatepicker" class="form-control"
-                                                   data-nq-datepicker="" placeholder="datepicker" />
-
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h3 style="margin-left:20px;margin-top:0px"><span class="topicHeader">ไฟล์รายงานการประชุม:  </span></h3>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <input type="file" class="form-control" placeholder="Password">
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">ผู้เข้าร่วมประชุม:  </span></h3>
-                                        </div>
-
-                                        <div class="col-md-8">
-                                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกผู้เข้าร่วมประชุม" data-ng-model="staticSelectModel">
-                                                <option> อ. วิบูลย์ พร้อมพานิชย์</option>
-                                                <option>ดร. ชมพูนุท จินจาคาม</option>
-                                                <option>ผศ. ดร. อรัญญา วลัยรัชต์</option>
-                                                <option>รศ. ดร. เกียรติกูล เจียรนัยธนะกิจ</option>
-                                                <option>ผศ. ดร. ชุติเมษฏ์ ศรีนิลทา</option>
-                                                <option>รศ. ดร. อรฉัตร จิตต์โสภักตร์</option>
-                                                <option>ดร. อรทัย สังข์เพ็ชร</option>
-                                                <option>ดร. อักฤทธิ์ สังข์เพ็ชร</option>
-                                                <option> รศ. ดร. บุญธีร์ เครือตราชู</option>
-                                                <option> รศ. กฤตวัน ศิริบูรณ์</option>
-
-
-                                            <option style="display:none" value=""></option></select>
-
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="custom-footer" style="background-color:#6F002B;">
-                        <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
-                    </div>
-                </div>
-
+             
  <div id="manage_primary_evidences_admin" data-ng-controller="manage_primary_evidences_admin_controller" data-ng-init="init()"data-nq-modal=""  data-qo-size ="lg" data-qo-independent="true">
       <div class="custom-header">
           <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการหลักฐานพื้นฐาน</span></h1>

@@ -2986,7 +2986,7 @@ $scope.init =function() {
 
     $scope.go_to_create_lab =function(){
            $http.post(
-             '/api/teacher/getname',
+             '/api/personnel/gettnameandid',
              JSON.stringify($scope.curri_choosen.curri_id),
              {
                  headers: {
@@ -2994,7 +2994,7 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
-            $rootScope.manage_lab_all_teachers_in_curri = data;
+            $rootScope.manage_lab_all_personnels_in_curri = data;
               
         $rootScope.manage_lab_curri_id = $scope.curri_choosen.curri_id;
         $rootScope.manage_lab_aca_year = $scope.year_choosen.aca_year;
@@ -3002,12 +3002,17 @@ $scope.init =function() {
 });
 
     }
+
+    $scope.initial_my_selected = function(){
+        console.log("initial_my_selected");
+        $scope.my_manage_lab = $rootScope.manage_lab_fix_this_lab.officer;
+    }
     $scope.go_to_fix_lab = function(lab_to_fix){
      
        
       
               $http.post(
-             '/api/teacher/getname',
+             '/api/personnel/gettnameandid',
              JSON.stringify($scope.curri_choosen.curri_id),
              {
                  headers: {
@@ -3016,15 +3021,20 @@ $scope.init =function() {
              }
          ).success(function (data) {
         
-            $rootScope.manage_lab_all_teachers_in_curri = data;
+                  console.log(data);
+            console.log("go_to_fix_lab")
+            console.log(lab_to_fix);
+            $rootScope.manage_lab_all_personnels_in_curri = data;
  
              $rootScope.manage_lab_fix_this_lab = angular.copy(lab_to_fix);
              $rootScope.manage_lab_fix_this_lab_init = [];
              var index;
+                  console.log($rootScope.manage_lab_fix_this_lab);
              for(index = 0; index<$rootScope.manage_lab_fix_this_lab.officer.length;index++ ){
-                $rootScope.manage_lab_fix_this_lab_init.push($rootScope.manage_lab_fix_this_lab.officer[index].teacher_id);
+                $rootScope.manage_lab_fix_this_lab_init.push($rootScope.manage_lab_fix_this_lab.officer[index].personnel_id);
              }
-             
+                        console.log($rootScope.manage_lab_fix_this_lab_init);
+    
     
          });
       
@@ -3866,9 +3876,9 @@ $scope.init =function() {
         console.log($scope.manage_lab_fix_this_lab_init);
         $rootScope.manage_lab_fix_this_lab.officer = [];
         var index;
-        for(index =0;index<$rootScope.manage_lab_all_teachers_in_curri.length;index++){
-            if($scope.manage_lab_fix_this_lab_init.indexOf($rootScope.manage_lab_all_teachers_in_curri[index].teacher_id) != -1){
-                $rootScope.manage_lab_fix_this_lab.officer.push($rootScope.manage_lab_all_teachers_in_curri[index]);
+        for(index =0;index<$rootScope.manage_lab_all_personnels_in_curri.length;index++){
+            if($scope.manage_lab_fix_this_lab_init.indexOf($rootScope.manage_lab_all_personnels_in_curri[index].personnel_id) != -1){
+                $rootScope.manage_lab_fix_this_lab.officer.push($rootScope.manage_lab_all_personnels_in_curri[index]);
             }
         }
         
@@ -4148,12 +4158,14 @@ $scope.init =function() {
                 $scope.indicator_choosen= {};
                     $scope.result = {};
                    $scope.my_new_minute = {};
-
+      
+$scope.my_pictures.flow.files = [];
+console.log("inside init");  
   $scope.my_new_minute.date = "";
   $scope.my_new_minute.attendee =[];
   $scope.my_new_minute.topic_name = "";
   $scope.my_file = [];
-  $scope.my_pictures = {};
+ 
   $scope.show_gallery = false;
 
    angular.forEach(
@@ -4175,6 +4187,9 @@ $scope.init =function() {
   $scope.my_new_minute.topic_name = "";
   $scope.my_file = [];
 $scope.my_pictures = {};
+         $scope.my_pictures.flow={}; 
+         console.log("outside init");         
+$scope.my_pictures.flow.files = [];
      $scope.$on("fileSelected", function (event, args) {
 
         $scope.$apply(function () {            
@@ -4184,6 +4199,12 @@ $scope.my_pictures = {};
         });
     });
 
+
+// $scope.check_everything = function(this_thing){
+//     console.log('check_everything');
+//    console.log(this_thing);
+//    console.log($scope.my_pictures.flow);
+// }
      $scope.still_not_complete = function(){
         if(!$scope.my_pictures.flow){
             return true;
@@ -4209,6 +4230,7 @@ $scope.show_my_pictures=function(){
 
      $scope.show_gallery = true;
      var index;
+
      for(index=0;index<$scope.my_pictures.flow.files.length;index++){
         if ($scope.my_pictures.flow.files[index].size > 2000000){
             console.log("remove file");
@@ -4268,7 +4290,169 @@ $scope.show_my_pictures=function(){
 
 
 });
+app.controller('fix_minute_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
+ 
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+                   $scope.my_new_minute = {};
 
+  $scope.my_new_minute.date = "";
+  $scope.my_new_minute.attendee =[];
+  $scope.my_new_minute.topic_name = "";
+  $scope.my_file = [];
+  $scope.my_pictures = {};
+  $scope.show_gallery = false;
+ $scope.disabled_search = false;
+   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+}
+ $scope.show_gallery = false;
+  $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+                   $scope.my_new_minute = {};
+
+  $scope.my_new_minute.date = "";
+  $scope.my_new_minute.attendee =[];
+  $scope.my_new_minute.topic_name = "";
+  $scope.my_file = [];
+$scope.my_pictures = {};
+ $scope.disabled_search = false;
+     $scope.$on("fileSelected", function (event, args) {
+
+        $scope.$apply(function () {            
+            $scope.my_file = [];
+            //add the file object to the scope's files collection
+            $scope.my_file.push(args.file);
+        });
+    });
+
+     $scope.return_just_name = function(full_name){
+        var set = full_name.split('/');
+        return set[set.length-1]
+     }
+    $scope.set_disabled_search = function(){
+        console.log("disabled_search");
+        console.log($scope.disabled_search);
+        $scope.disabled_search = true;
+    }
+
+    $scope.watch_file = function() { 
+    
+                window.open($rootScope.manage_minutes_fix_this_minute.file_name, '_blank', "width=800, left=230,top=0,height=700");  
+      
+       
+      
+    }
+     $scope.still_not_complete = function(){
+        if(!$scope.my_pictures.flow){
+            return true;
+        }
+
+        if(!$rootScope.manage_minutes_fix_this_minute){
+            return true;
+        }
+        if(!$rootScope.manage_minutes_fix_this_minute.topic_name || !$rootScope.manage_minutes_fix_this_minute.date || $rootScope.manage_minutes_fix_this_minute.attendee.length ==0 ){
+            return true;
+        }
+        else{
+                if($scope.my_pictures.flow.files.length ==0 && $rootScope.manage_minutes_fix_this_minute.pictures.length ==0){
+                    return true;
+                }
+
+            if($scope.disabled_search == true){
+                if($scope.my_file.length ==0){
+                    return true;
+                }
+                
+            }
+              return false;
+        }
+
+
+return false;       
+     }
+    
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+    $scope.delete_picture = function(index_pic){
+        $rootScope.manage_minutes_fix_this_minute.pictures.splice(index_pic,1);
+    }
+$scope.show_my_pictures=function(){
+
+     $scope.show_gallery = true;
+     var index;
+     for(index=0;index<$scope.my_pictures.flow.files.length;index++){
+        if ($scope.my_pictures.flow.files[index].size > 2000000){
+            console.log("remove file");
+            $scope.my_pictures.flow.files.splice(index,1);
+
+        }
+    
+     }
+    
+    console.log("show");
+
+}
+    $scope.save_to_server = function(my_modal) {
+
+      var formData = new FormData();
+
+
+  
+        var index = 0;
+        for (index = 0 ;index< $scope.my_pictures.flow.files.length;index++){
+            
+              $rootScope.manage_minutes_fix_this_minute.pictures.push($scope.my_pictures.flow.files[index].file.name)
+            formData.append("picture"+(index+1), $scope.my_pictures.flow.files[index].file );
+        }
+        formData.append("model", angular.toJson( $scope.manage_minutes_fix_this_minute));
+
+   if($scope.disabled_search == true){
+      $rootScope.manage_minutes_fix_this_minute.file_name = $scope.my_file[0].name;
+         formData.append("file", $scope.my_file[0] );
+    }
+     
+
+        $http({
+            method: 'PUT',
+            url: "/api/minutes/edit",
+
+            headers: { 'Content-Type': undefined },
+
+
+            data:formData,
+            transformRequest: angular.indentity 
+
+        }).
+        success(function (data, status, headers, config) {
+        
+                $rootScope.manage_minutes_my_world_wide_minutes =data;
+                $scope.close_modal(my_modal);
+                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+              
+           
+        }).
+        error(function (data, status, headers, config) {
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        });
+    }
+
+ });
 app.controller('manage_minutes_show_images_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
  $scope.openLightboxModal = function (index) {
     Lightbox.openModal($rootScope.manage_minutes_show_images_of_this_minute.pictures, index);
@@ -4314,6 +4498,29 @@ $scope.init =function() {
 
 
     }
+
+    $scope.go_to_fix_minute = function(this_minute){
+
+               $http.post(
+             '/api/teacher/getname',
+             JSON.stringify($scope.curri_choosen.curri_id),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            $rootScope.manage_minutes_all_teachers_in_curri = data;
+              
+        $rootScope.manage_minutes_curri_id = $scope.curri_choosen.curri_id;
+        $rootScope.manage_minutes_aca_year = $scope.year_choosen.aca_year;
+        $rootScope.manage_minutes_fix_this_minute = angular.copy(this_minute);
+
+});
+
+
+       
+    }
     $scope.go_to_see_attendee = function(this_minute){
         $rootScope.manage_minutes_see_this_attendee = this_minute.attendee;
     }
@@ -4340,7 +4547,7 @@ $scope.init =function() {
        
       
               $http.post(
-             '/api/teacher/getname',
+             '/api/personnel/gettnameandid',
              JSON.stringify($scope.curri_choosen.curri_id),
              {
                  headers: {
@@ -4348,16 +4555,19 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
-        
-            $rootScope.manage_lab_all_teachers_in_curri = data;
+            console.log(data);
+            console.log("go_to_fix_lab")
+            console.log(lab_to_fix);
+            $rootScope.manage_lab_all_personnels_in_curri = data;
  
              $rootScope.manage_lab_fix_this_lab = angular.copy(lab_to_fix);
              $rootScope.manage_lab_fix_this_lab_init = [];
              var index;
+                  console.log($rootScope.manage_lab_fix_this_lab);
              for(index = 0; index<$rootScope.manage_lab_fix_this_lab.officer.length;index++ ){
-                $rootScope.manage_lab_fix_this_lab_init.push($rootScope.manage_lab_fix_this_lab.officer[index].teacher_id);
+                $rootScope.manage_lab_fix_this_lab_init.push($rootScope.manage_lab_fix_this_lab.officer[index].personnel_id);
              }
-             
+                        console.log($rootScope.manage_lab_fix_this_lab_init);
     
          });
       

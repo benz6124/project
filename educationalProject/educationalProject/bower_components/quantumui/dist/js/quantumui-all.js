@@ -6961,13 +6961,11 @@ var selectApp = angular.module('ngQuantum.select', [
                               
                               })
                               $timeout(function () {
-                                console.log("timeOut");
-                                console.log(selected);
+                               
                                
                                       controller.$setViewValue(selected);
                                 
                                 
-                                   console.log("here2");
                               }, 0)
                           }
                       } else {
@@ -7267,7 +7265,7 @@ var selectApp = angular.module('ngQuantum.select', [
                             }
                      
                             if(num_count>= 3){
-                                element.html(first_man.label+' และอีก '+num_count+" รายการ")
+                                element.html(first_man.label+' และอีก '+(num_count-1)+" รายการ")
                             }
                             else{
                                 element.html(selected)
