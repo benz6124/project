@@ -5,6 +5,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.IO;
+using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using educationalProject.Models.Wrappers;
 using educationalProject.Models.ViewModels;
 namespace educationalProject.Controllers
@@ -27,9 +29,80 @@ namespace educationalProject.Controllers
         }
 
         [ActionName("add")]
-        public IHttpActionResult PostForAddNewMinutes()
+        public async Task<IHttpActionResult> PostForAddNewMinutes()
         {
-            return Ok();
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
+            }
+
+            //string savepathmain = HttpContext.Current.Server.MapPath("~/download/minutes");
+            string savepathmain = "D:\\download\\minutes\\";
+
+            //string savepathsub = HttpContext.Current.Server.MapPath("~/myImages/minutes");
+            string savepathsub = "D:\\myImages\\minutes\\";
+
+            //string temppath = HttpContext.Current.Server.MapPath("~/temp");
+            string temppath = "D:\\temp\\";
+            var result = new MultipartFormDataStreamProvider(temppath);
+            Minutes_detail data = new Minutes_detail();
+            try
+            {
+                await Request.Content.ReadAsMultipartAsync(result);
+
+                //READ JSON DATA PART
+                JObject datareceive = JObject.Parse(result.FormData.GetValues(result.FormData.AllKeys[0])[0]);
+                data.curri_id = datareceive["curri_id"].ToString();
+                data.aca_year = Convert.ToInt32(datareceive["aca_year"]);
+                data.topic_name = datareceive["topic_name"].ToString();
+                data.teacher_id = datareceive["teacher_id"].ToString();
+                data.date = datareceive["date"].ToString();
+                //data.date = DateTime.Now.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
+
+                JArray tlist = (JArray)datareceive["attendee"];
+
+                foreach (JObject item in tlist)
+                {
+                    data.attendee.Add(new Teacher_with_t_name
+                    {
+                        teacher_id = item["teacher_id"].ToString()
+                    });
+                }
+
+                //main minutes file
+                MultipartFileData file = result.FileData[0];
+                FileInfo fileInfo = new FileInfo(file.LocalFileName);
+                string newfilename = string.Format("{0}.{1}", fileInfo.Name.Substring(9), file.Headers.ContentDisposition.FileName.Split('.').LastOrDefault().Split('\"').FirstOrDefault());
+                data.file_name = "download/minutes/" + newfilename;
+                File.Move(string.Format("{0}/{1}", savepathmain, fileInfo.Name), string.Format("{0}/{1}", savepathmain, newfilename));
+                ////-----------------
+
+
+                tlist = (JArray)datareceive["pictures"];
+                if (result.FileData.Count > 1) {
+                    int fileind = 1;
+                    foreach (JObject item in tlist)
+                    {
+                        MultipartFileData file1 = result.FileData[fileind++];
+                        FileInfo fileInfo1 = new FileInfo(file1.LocalFileName);
+                        string newfilename1 = string.Format("{0}.{1}", fileInfo1.Name.Substring(9), file1.Headers.ContentDisposition.FileName.Split('.').LastOrDefault().Split('\"').FirstOrDefault());
+                        data.pictures.Add("myImages/minutes/" + newfilename1);
+                        File.Move(string.Format("{0}/{1}", savepathsub, fileInfo1.Name), string.Format("{0}/{1}", savepathsub, newfilename1));
+                    }
+                }
+                
+                object resultfromdb = datacontext.InsertNewMinutesWithSelect(data);
+
+                if (resultfromdb.GetType().ToString() != "System.String")
+                    return Ok(resultfromdb);
+                else
+                    return InternalServerError(new Exception(result.ToString()));
+
+            }
+            catch (System.Exception e)
+            {
+                return InternalServerError(e);
+            }
         }
 
         [ActionName("delete")]

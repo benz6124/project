@@ -12,12 +12,7 @@ namespace educationalProject.Controllers
     public class LabListController : ApiController
     {
         private oLab_list datacontext = new oLab_list();
-        public IHttpActionResult Get()
-        {
-            datacontext.aca_year = 2558;
-            datacontext.curri_id = "21";
-            return Ok(datacontext.SelectByCurriculumAcademic());
-        }
+
         [ActionName("getlablist")]
         public IHttpActionResult PostForQueryLabList(oCurriculum_academic data)
         {

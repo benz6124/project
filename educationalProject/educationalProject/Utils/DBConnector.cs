@@ -10,7 +10,7 @@ namespace educationalProject.Utils
         {
             try
             {
-                string con = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=educational;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                string con = System.Configuration.ConfigurationManager.ConnectionStrings["projectdbconnection"].ConnectionString;
                 iCommand = new System.Data.SqlClient.SqlCommand("", new System.Data.SqlClient.SqlConnection(con));
                 iAdapter = new System.Data.SqlClient.SqlDataAdapter();
                 iCommand.Connection.Open();
