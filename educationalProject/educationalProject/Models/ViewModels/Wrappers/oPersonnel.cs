@@ -10,6 +10,73 @@ namespace educationalProject.Models.ViewModels.Wrappers
     {
         private static readonly string PERSONNEL_ID = "PERSONNEL_ID";
         private static readonly string USER_TYPE_NUM = "USER_TYPE_NUM";
+
+        public static string GetSelectWithCurriculumCommand(string curri_id)
+        {
+            string temp1tablename = "#temp1";
+
+            string createtabletemp1 = string.Format("create table {0} (" +
+                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
+                                      "[user_type_num] INT NOT NULL," +
+                                      "[{1}] VARCHAR(5) NOT NULL," +
+                                      "[{2}] VARCHAR(16) NULL," +
+                                      "[{3}] VARCHAR(60) NULL," +
+
+                                      "[{4}] VARCHAR(4) NULL," +
+
+                                      "[{5}] VARCHAR(255) NULL," +
+
+                                      "[{6}] VARCHAR(40) NULL," +
+                                      "PRIMARY KEY([row_num])) " +
+
+                                      "ALTER TABLE {0} " +
+                                      "ALTER COLUMN {1} VARCHAR(5) COLLATE DATABASE_DEFAULT " +
+
+                                      "ALTER TABLE {0} " +
+                                      "ALTER COLUMN {2} VARCHAR(16) COLLATE DATABASE_DEFAULT " +
+
+                                      "ALTER TABLE {0} " +
+                                      "ALTER COLUMN {3} VARCHAR(60) COLLATE DATABASE_DEFAULT " +
+
+                                      "ALTER TABLE {0} " +
+                                      "ALTER COLUMN {4} VARCHAR(4) COLLATE DATABASE_DEFAULT " +
+
+                                      "ALTER TABLE {0} " +
+                                      "ALTER COLUMN {5} VARCHAR(255) COLLATE DATABASE_DEFAULT " +
+
+                                      "ALTER TABLE {0} " +
+                                      "ALTER COLUMN {6} VARCHAR(40) COLLATE DATABASE_DEFAULT ",
+                                      temp1tablename, PERSONNEL_ID,
+                                      Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, FieldName.CURRI_ID,
+                                      FieldName.FILE_NAME_PIC, FieldName.USER_TYPE);
+
+            string insertintotemp1_1 = string.Format("INSERT INTO {0} " +
+                                       "select 1,{1},{2},{3},{4},{5},{6} from {7},{8} where " +
+                                       "{1} = {9} and {10} = '{11}' ",
+                                       temp1tablename, Teacher.FieldName.TEACHER_ID,
+                                       Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, FieldName.CURRI_ID,
+                                      FieldName.FILE_NAME_PIC, FieldName.USER_TYPE, Teacher.FieldName.TABLE_NAME,
+                                      Curriculum_teacher_staff.FieldName.TABLE_NAME, Curriculum_teacher_staff.FieldName.PERSONNEL_ID,
+                                      Curriculum_teacher_staff.FieldName.CURRI_ID, curri_id);
+
+
+            string insertintotemp1_2 = string.Format("INSERT INTO {0} " +
+                                       "select 2,{1},{2},{3},{4},{5},{6} from {7},{8} where " +
+                                       "{1} = {9} and {10} = '{11}' ",
+                                       temp1tablename, Staff.FieldName.STAFF_ID,
+                                       Staff.FieldName.T_PRENAME, Staff.FieldName.T_NAME, FieldName.CURRI_ID,
+                                      FieldName.FILE_NAME_PIC, FieldName.USER_TYPE, Staff.FieldName.TABLE_NAME,
+                                      Curriculum_teacher_staff.FieldName.TABLE_NAME, Curriculum_teacher_staff.FieldName.PERSONNEL_ID,
+                                      Curriculum_teacher_staff.FieldName.CURRI_ID, curri_id);
+
+            string selectcmd = string.Format("select user_type_num,{0},{1},{2},{3},{4},{5} from {6} ", PERSONNEL_ID,
+                                      Staff.FieldName.T_PRENAME, Staff.FieldName.T_NAME, FieldName.CURRI_ID,
+                                      FieldName.FILE_NAME_PIC, FieldName.USER_TYPE, temp1tablename);
+
+
+            return string.Format("BEGIN {0} {1} {2} {3} END", createtabletemp1,
+                insertintotemp1_1, insertintotemp1_2, selectcmd);
+        }
         public object SelectPersonnelIdAndTName(string curri_id)
         {
             DBConnector d = new DBConnector();
@@ -376,5 +443,65 @@ namespace educationalProject.Models.ViewModels.Wrappers
             }
             return result;
         }
+
+        public object SelectPersonnelWithCurriculum()
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+            List<Curriculum_teacher_staff_with_brief_detail> result = new List<Curriculum_teacher_staff_with_brief_detail>();
+
+            d.iCommand.CommandText = GetSelectWithCurriculumCommand(curri_id);
+            try
+            {
+                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                if (res.HasRows)
+                {
+                    DataTable data = new DataTable();
+                    data.Load(res);
+                    foreach (DataRow item in data.Rows)
+                    {
+                        if (Convert.ToInt32(item.ItemArray[data.Columns["user_type_num"].Ordinal]) == 1)
+                            result.Add(new Curriculum_teacher_staff_with_brief_detail
+                            {
+                                personnel_id = item.ItemArray[data.Columns[PERSONNEL_ID].Ordinal].ToString(),
+                                t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) +
+                                         item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
+                                curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
+                                file_name_pic = item.ItemArray[data.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString(),
+                                type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString()
+                            });
+                        else
+                            result.Add(new Curriculum_teacher_staff_with_brief_detail
+                            {
+                                personnel_id = item.ItemArray[data.Columns[PERSONNEL_ID].Ordinal].ToString(),
+                                t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString() +
+                                     item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
+                                curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
+                                file_name_pic = item.ItemArray[data.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString(),
+                                type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString()
+                            });
+                    }
+                    data.Dispose();
+                }
+                else
+                {
+                    //Reserved for return error string
+                }
+                res.Close();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return result;
+        }
+
     }
 }

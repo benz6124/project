@@ -22,5 +22,13 @@ namespace educationalProject.Controllers
         {
             return Ok(datacontext.selectWithFullDetail(curri_id));
         }
+
+                   
+        [ActionName("getonlynameandpfname")]
+        public IHttpActionResult PostToQueryTNamePFNameAndId([FromBody]string curri_id)
+        {
+            datacontext.curri_id = curri_id;
+            return Ok(datacontext.SelectPersonnelWithCurriculum());
+        }
     }
 }

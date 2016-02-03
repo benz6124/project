@@ -171,6 +171,7 @@
     <Compile Include="Controllers\MinutesController.cs" />
     <Compile Include="Controllers\NewStudentCountController.cs" />
     <Compile Include="Controllers\PersonnelController.cs" />
+    <Compile Include="Controllers\PersonnelCurriculumController.cs" />
     <Compile Include="Controllers\PresidentCurriculumController.cs" />
     <Compile Include="Controllers\PrimaryEvidenceController.cs" />
     <Compile Include="Controllers\QuestionareAnswerController.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="Models\Technical_interested.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\User_type.cs" />
+    <Compile Include="Models\ViewModels\Curriculum_teacher_staff_with_brief_detail.cs" />
     <Compile Include="Models\ViewModels\Evaluation_overall_result.cs" />
     <Compile Include="Models\ViewModels\Evidence_with_t_name.cs" />
     <Compile Include="Models\ViewModels\Gallery_detail.cs" />
@@ -260,6 +262,7 @@
     <Compile Include="Models\ViewModels\Wrappers\oTeacher_educational.cs" />
     <Compile Include="Models\Wrappers\oAun_book.cs" />
     <Compile Include="Models\Wrappers\oCurriculum_academic.cs" />
+    <Compile Include="Models\Wrappers\oCurriculum_teacher_staff.cs" />
     <Compile Include="Models\Wrappers\oCu_Curriculum.cs" />
     <Compile Include="Models\Wrappers\oEvidence.cs" />
     <Compile Include="Models\Wrappers\oGallery.cs" />
