@@ -1501,9 +1501,9 @@ $('.profile_pic').mouseover(function(){
 
 
     <div ng-repeat="file in manage_minutes_fix_this_minute.pictures" class="gallery-box">
-      <span class="title">{{return_just_name(file)}}</span>
+      <span class="title">{{return_just_name(file.file_name)}}</span>
       <div class="thumbnail" ng-show="manage_minutes_fix_this_minute.pictures.length"  >
-        <img src="{{file}}" />
+        <img src="{{file.file_name}}" />
       </div>
       
       <div class="btn-group">
@@ -2122,7 +2122,7 @@ $('.profile_pic').mouseover(function(){
   <div ng-repeat="pic in manage_minutes_show_images_of_this_minute.pictures" class="gallery-box">
 
       <div class="thumbnail"   >
-        <img src="{{pic}}" ng-click="openLightboxModal($index)" />
+        <img src="{{pic.file_name}}" ng-click="openLightboxModal($index)" />
       </div>
       
  

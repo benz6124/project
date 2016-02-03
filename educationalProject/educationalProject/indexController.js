@@ -4600,7 +4600,8 @@ $scope.show_my_pictures=function(){
            $scope.please_wait = true;
  $scope.my_new_minute.curri_id = $rootScope.manage_minutes_curri_id;
  $scope.my_new_minute.aca_year = $rootScope.manage_minutes_aca_year;
- $scope.my_new_minute.file_name =  $scope.my_file[0].name;
+ $scope.my_new_minute.teacher_id =  "00001";
+  $scope.my_new_minute.file_name =  $scope.my_file[0].name;
   $scope.my_new_minute.pictures =  [];
       var formData = new FormData();
 
@@ -4608,8 +4609,10 @@ $scope.show_my_pictures=function(){
   
         var index = 0;
         for (index = 0 ;index< $scope.my_pictures.flow.files.length;index++){
-            
-              $scope.my_new_minute.pictures.push($scope.my_pictures.flow.files[index].file.name)
+                $scope.my_obj = {};
+                $scope.my_obj.minutes_id = 0;
+                $scope.my_obj.file_name = $scope.my_pictures.flow.files[index].file.name;
+              $scope.my_new_minute.pictures.push($scope.my_obj);
             formData.append("picture"+(index+1), $scope.my_pictures.flow.files[index].file );
         }
         formData.append("model", angular.toJson( $scope.my_new_minute));
@@ -4929,8 +4932,10 @@ $scope.show_my_pictures=function(){
   
         var index = 0;
         for (index = 0 ;index< $scope.my_pictures.flow.files.length;index++){
-            
-              $rootScope.manage_minutes_fix_this_minute.pictures.push($scope.my_pictures.flow.files[index].file.name)
+        $scope.my_obj = {};
+        $scope.my_obj.minutes_id = 0;
+        $scope.my_obj.file_name = $scope.my_pictures.flow.files[index].file.name;
+            $rootScope.manage_minutes_fix_this_minute.pictures.push($scope.my_obj);
             formData.append("picture"+(index+1), $scope.my_pictures.flow.files[index].file );
         }
 
@@ -4938,13 +4943,16 @@ $scope.show_my_pictures=function(){
        $rootScope.manage_minutes_fix_this_minute.attendee =  $rootScope.manage_minutes_fix_minute_select_attendee;
   
        console.log($rootScope.manage_minutes_fix_this_minute);
-        formData.append("model", angular.toJson( $rootScope.manage_minutes_fix_this_minute));
+      
 
    if($scope.disabled_search == true){
       $rootScope.manage_minutes_fix_this_minute.file_name = $scope.my_file[0].name;
          formData.append("file", $scope.my_file[0] );
     }
-     
+    else{
+          $rootScope.manage_minutes_fix_this_minute.file_name = "";
+    }
+       formData.append("model", angular.toJson( $rootScope.manage_minutes_fix_this_minute));
 
         $http({
             method: 'PUT',
