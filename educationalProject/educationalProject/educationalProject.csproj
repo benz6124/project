@@ -161,12 +161,12 @@
     <Compile Include="Controllers\EvaluationResultController.cs" />
     <Compile Include="Controllers\EvidenceController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndicatorController.cs" />
     <Compile Include="Controllers\IndicatorSubIndicatorController.cs" />
     <Compile Include="Controllers\LabListController.cs" />
     <Compile Include="Controllers\MinutesController.cs" />
     <Compile Include="Controllers\NewStudentCountController.cs" />
+    <Compile Include="Controllers\OthersEvaluationController.cs" />
     <Compile Include="Controllers\PersonnelController.cs" />
     <Compile Include="Controllers\PersonnelCurriculumController.cs" />
     <Compile Include="Controllers\PresidentCurriculumController.cs" />
@@ -181,6 +181,7 @@
     <Compile Include="Controllers\StudentStatusOtherController.cs" />
     <Compile Include="Controllers\SubIndicatorController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\UserTypeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -190,6 +191,7 @@
     <Compile Include="Models\Assessor.cs" />
     <Compile Include="Models\Aun_book.cs" />
     <Compile Include="Models\Committee.cs" />
+    <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Curriculum_academic.cs" />
     <Compile Include="Models\Curriculum_teacher_staff.cs" />
     <Compile Include="Models\Cu_curriculum.cs" />
@@ -220,6 +222,7 @@
     <Compile Include="Models\Section_save.cs" />
     <Compile Include="Models\Self_evaluation.cs" />
     <Compile Include="Models\Staff.cs" />
+    <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Student_count.cs" />
     <Compile Include="Models\Student_status_other.cs" />
     <Compile Include="Models\Sub_indicator.cs" />
@@ -257,7 +260,9 @@
     <Compile Include="Models\ViewModels\Wrappers\oPersonnel.cs" />
     <Compile Include="Models\ViewModels\Wrappers\oSelf_evaluation_sub_indicator_name.cs" />
     <Compile Include="Models\ViewModels\Wrappers\oTeacher_educational.cs" />
+    <Compile Include="Models\Wrappers\oAssessor.cs" />
     <Compile Include="Models\Wrappers\oAun_book.cs" />
+    <Compile Include="Models\Wrappers\oCompany.cs" />
     <Compile Include="Models\Wrappers\oCurriculum_academic.cs" />
     <Compile Include="Models\Wrappers\oCurriculum_teacher_staff.cs" />
     <Compile Include="Models\Wrappers\oCu_Curriculum.cs" />
@@ -320,7 +325,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\DB\" />
+    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
