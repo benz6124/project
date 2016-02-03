@@ -687,7 +687,7 @@ $('.profile_pic').mouseover(function(){
 
 </div>
 
-     <div id="another_aca" data-nq-modal="" data-qo-independent="true" data-qo-effect="flip-x">
+     <div id="another_aca" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-qo-effect="flip-x">
 
 
                         <div class="custom-header">
@@ -724,7 +724,7 @@ $('.profile_pic').mouseover(function(){
    </div>       
    <!--  -->
 
-                    <div id="upload_aun" data-nq-modal="" data-ng-controller="upload_aun_controller" data-qo-size="lg" data-qo-independent="true" data-ng-init="init()">
+                    <div id="upload_aun" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="upload_aun_controller" data-qo-size="lg" data-qo-independent="true" data-ng-init="init()">
 
 
 <!--     <input type="file" file-upload multiple/>
@@ -783,7 +783,7 @@ $('.profile_pic').mouseover(function(){
 
 
 
-                    <div id="add_aca_year" data-nq-modal="" data-qo-independent="true" data-ng-controller="add_aca_year" data-ng-init="init()">
+                    <div id="add_aca_year" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-ng-controller="add_aca_year" data-ng-init="init()">
                         <div class="custom-header">
                             <h1 class="headerModalH1"> เพิ่มปีการศึกษา </h1>
                         </div>
@@ -831,7 +831,7 @@ $('.profile_pic').mouseover(function(){
                     </div>
 
 <!-- create_curriculum controller -->
-                    <div id="create_curri" data-nq-modal="" data-qo-independent="true" data-ng-controller="create_curriculum" data-ng-init="init()">
+                    <div id="create_curri" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-ng-controller="create_curriculum" data-ng-init="init()">
                         <div class="custom-header">
                             <h1 class="headerModalH1">สร้างหลักสูตร</h1>
                         </div>
@@ -946,7 +946,7 @@ $('.profile_pic').mouseover(function(){
 
 
 
-                    <div id="create_user" data-nq-modal="" data-qo-independent="true">
+                    <div id="create_user" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-ng-controller="create_user_controller">
 
 
                         <div class="custom-header">
@@ -954,40 +954,52 @@ $('.profile_pic').mouseover(function(){
                         </div>
 
                         <div class="row">
-                            <div class="col-md-4">
-                                <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">ประเภทของบัญชี:   </span></h3>
+                            <div class="col-md-3">
+                                <h3 style="margin-left:10px;margin-top:3px;"><span class="topicHeader">ประเภทของบัญชี:   </span></h3>
                             </div>
 
-                            <div class="col-md-8">
+                            <div class="col-md-9" style="padding-left:0px;margin-top:0px;padding-right:20px">
                                 <div class="topicHeader">
-                                    <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-nq-select="" data-qo-disable-clear="true" data-qo-placeholder="กรุณาเลือกประเภทของบัญชี" data-ng-model="staticSelectModel">
-                                        <option>อาจารย์</option>
-                                        <option>นักศึกษา</option>
-                                        <option>บริษัทภายนอก</option>
-                                        <option>เจ้าหน้าที่</option>
-                                        <option>ผู้ที่เข้ามาประเมิน</option>
-
-
-
-                                    <option style="display:none" value=""></option></select>
+                                     <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="user.user_type for user in all_usertype" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกประเภทของบุคลากร"  data-ng-model="$parent.my_type" data-qo-disable-clear="true"  >
+<option style="display:none" value=""></option></select>    
                                 </div>
                             </div>
 
 
                         </div>
+
+
                         <div class="row">
-                            <div class="col-md-4">
-                                <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">ไฟล์รายชื่อ:  </span></h3>
+                            <div class="col-md-3">
+                                <h3 style="margin-left:10px;margin-top:3px;"><span class="topicHeader">ไฟล์รายชื่อ:  </span></h3>
                             </div>
-                            <div class="col-md-8">
-                                <input type="file" class="form-control" placeholder="ไฟล์รายชื่อ">
+                            <div class="col-md-9" style="
+    padding-left: 0px;
+    padding-right: 20px;
+">
+                                   <input type="file" name="upload_file_input" class="form-control full" placeholder="ไฟล์รายชื่อ" file-upload  data-ng-model="files" required/>
                             </div>
 
                         </div>
+
+  <div class="row" style="margin-left:10px;margin-top:0px;margin-right:5px;" >
+    <select  data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curri_id as curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตรที่ต้องการโยงบุคลากร" data-qo-max-length ="0"  data-qo-multiple="true" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
+            <option style="display:none" value=""></option></select>
+</div>
+
+
+     
+
+
+<!-- <ul ng-show="curri_choosen.length!=0">
+                           <span class="topicHeader"> <li style="color:#6F002B;margin-left:10px" ng-repeat="each in curri_choosen">{{each.curr_tname}}</li></span>
+                        </ul> -->
+
+
                         <div class="custom-footer">
                             <div class="topicHeader pull-right">
-                                <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
-                                <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                                <button class="btn btn-success  " ng-disabled="please_wait || still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                                <button class="btn btn-default " ng-click="$close_modal(this)">ยกเลิก</button>
                             </div>
                         </div>
 
@@ -1021,7 +1033,7 @@ $('.profile_pic').mouseover(function(){
                 
             
                     <br />
-                    <div id="gallery_survey" data-nq-modal="" data-qo-independent="true">
+                    <div id="gallery_survey" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true">
                         <div class="custom-header">
                             <h1><span class="headerModal" style="color:#6F002B">แทรกอัลบั้มรูปภาพ</span></h1>
                         </div>
@@ -1106,7 +1118,7 @@ $('.profile_pic').mouseover(function(){
 
 
 
-<div id="fix_lab" data-nq-modal="" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="fix_lab_controller">
+<div id="fix_lab" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="fix_lab_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">แก้ไขข้อมูลห้องปฏิบัติการ</h1>
                     </div>
@@ -1176,7 +1188,7 @@ $('.profile_pic').mouseover(function(){
 </div>
 
 
-<div id="fix_lab" data-nq-modal="" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="fix_lab_controller">
+<div id="fix_lab" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="fix_lab_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">แก้ไขข้อมูลห้องปฏิบัติการ</h1>
                     </div>
@@ -1233,7 +1245,7 @@ $('.profile_pic').mouseover(function(){
 
 
 
-<div id="create_minute" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_minute_controller">
+<div id="create_minute" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_minute_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">เพิ่มข้อมูลรายงานการประชุม</h1>
                     </div>
@@ -1354,7 +1366,7 @@ $('.profile_pic').mouseover(function(){
                     </div>
 </div>
 
-<div id="fix_minute" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="fix_minute_controller">
+<div id="fix_minute" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="fix_minute_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">แก้ไขข้อมูลรายงานการประชุม</h1>
                     </div>
@@ -1521,7 +1533,7 @@ $('.profile_pic').mouseover(function(){
                         </div>
                     </div>
 </div>
-<div id="create_lab" data-nq-modal="" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_lab_controller">
+<div id="create_lab" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_lab_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">เพิ่มข้อมูลห้องปฏิบัติการ</h1>
                     </div>
@@ -1573,7 +1585,7 @@ $('.profile_pic').mouseover(function(){
                     </div>
 </div>
 
-<div id="fix_research" data-nq-modal="" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="fix_research_controller">
+<div id="fix_research" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="fix_research_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">แก้ไขข้อมูลงานวิจัย</h1>
                     </div>
@@ -1656,7 +1668,7 @@ $('.profile_pic').mouseover(function(){
 </div>
 
 
-<div id="manage_lab" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_lab_controller">
+<div id="manage_lab" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_lab_controller">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">ส่วนการจัดการห้องปฏิบัติการ</h1>
@@ -1760,7 +1772,7 @@ $('.profile_pic').mouseover(function(){
                     </div>
    </div>
 
- <div id="manage_research" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_research_controller">
+ <div id="manage_research" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_research_controller">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">ส่วนจัดการงานวิจัย</h1>
@@ -1864,7 +1876,7 @@ $('.profile_pic').mouseover(function(){
    </div>
 
              
- <div id="show_education_personnel" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="show_education_personnel_controller">
+ <div id="show_education_personnel" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="show_education_personnel_controller">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">ข้อมูลบุคลากรทางการศึกษา</h1>
@@ -1962,7 +1974,7 @@ $('.profile_pic').mouseover(function(){
    </div>
 
 
-                <div id="stat_grad" data-nq-modal="" data-qo-size="lg" data-qo-independent="true" data-ng-controller="stat_graduated_controller" data-ng-init="init()" >
+                <div id="stat_grad" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="lg" data-qo-independent="true" data-ng-controller="stat_graduated_controller" data-ng-init="init()" >
                     <div class="custom-header">
                         <h1 class="headerModalH1">สถิติการจบการศึกษา</h1>
                     </div>
@@ -2093,7 +2105,7 @@ $('.profile_pic').mouseover(function(){
 
 
 
-                <div id="minute_attendees" data-nq-modal="" data-qo-size="sm" data-qo-independent="true" >
+                <div id="minute_attendees" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="sm" data-qo-independent="true" >
                     <div class="custom-header" >
                         <h1 class="headerModalH1">ผู้เข้าร่วมประชุม</h1>
                     </div>
@@ -2105,7 +2117,7 @@ $('.profile_pic').mouseover(function(){
                     </div>
                 </div>
                 
-                <div id="manage_minutes_show_images" data-nq-modal="" data-ng-controller="manage_minutes_show_images_controller"data-qo-screen-mode="true"  data-qo-independent="true">
+                <div id="manage_minutes_show_images" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="manage_minutes_show_images_controller"data-qo-screen-mode="true"  data-qo-independent="true">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">{{manage_minutes_show_images_of_this_minute.topic_name}}</h1>
@@ -2133,7 +2145,7 @@ $('.profile_pic').mouseover(function(){
                 </div>
 
 
-                <div id="manage_minutes" data-nq-modal="" data-qo-screen-mode="true" ng-controller="manage_minutes_controller" data-qo-independent="true">
+                <div id="manage_minutes" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" ng-controller="manage_minutes_controller" data-qo-independent="true">
 
 <!-- <h3>
 
@@ -2205,7 +2217,7 @@ $('.profile_pic').mouseover(function(){
               
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
-                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="flip-x" data-nq-toggle-modal="#create_minute" data-ng-click="go_to_create_minute()"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลรายงานการประชุม</button>
+                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="from-right" data-nq-toggle-modal="#create_minute" data-ng-click="go_to_create_minute()"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลรายงานการประชุม</button>
 
 
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
@@ -2288,7 +2300,7 @@ $('.profile_pic').mouseover(function(){
                 </div>
 
              
-<div id="show_edit_album" data-ng-controller="show_edit_album_controller" data-ng-init="init()"data-nq-modal=""  data-qo-screen-mode="true" data-qo-independent="true">
+<div id="show_edit_album" data-ng-controller="show_edit_album_controller" data-ng-init="init()"data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode="true" data-qo-independent="true">
       <div class="custom-header">
           <h1 class="headerModalH1"><span class="headerModal">{{manage_album_show_this_album.name}}</span></h1>
       </div>
@@ -2368,7 +2380,7 @@ $('.profile_pic').mouseover(function(){
 
 
 
-<div id="create_album" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_album_controller">
+<div id="create_album" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_album_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">เพิ่มอัลบั้มรูปภาพ</h1>
                     </div>
@@ -2436,7 +2448,7 @@ $('.profile_pic').mouseover(function(){
                     </div>
 </div>
 
- <div id="manage_primary_evidences_admin" data-ng-controller="manage_primary_evidences_admin_controller" data-ng-init="init()"data-nq-modal=""  data-qo-size ="lg" data-qo-independent="true">
+ <div id="manage_primary_evidences_admin" data-ng-controller="manage_primary_evidences_admin_controller" data-ng-init="init()"data-nq-modal="" data-qo-fire-emit = "true"  data-qo-size ="lg" data-qo-independent="true">
       <div class="custom-header">
           <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการหลักฐานพื้นฐาน</span></h1>
       </div>
@@ -2545,7 +2557,7 @@ glyphicon glyphicon-bell"></i> </span>
     </div>
 
 
- <div id="manage_evidences" data-ng-controller="manage_evidences_controller" data-ng-init="init()"data-nq-modal=""  data-qo-screen-mode ="true" data-qo-independent="true">
+ <div id="manage_evidences" data-ng-controller="manage_evidences_controller" data-ng-init="init()"data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode ="true" data-qo-independent="true">
       <div class="custom-header">
           <h1 class="headerModalH1"><span class="headerModal">ส่วนจัดการหลักฐาน</span></h1>
       </div>
@@ -2702,7 +2714,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
       </div>
 
 
- <div id="manage_primary_evidences_president" data-ng-controller="manage_primary_evidences_president_controller" data-ng-init="init()"data-nq-modal=""  data-qo-screen-mode ="true" data-qo-independent="true">
+ <div id="manage_primary_evidences_president" data-ng-controller="manage_primary_evidences_president_controller" data-ng-init="init()"data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode ="true" data-qo-independent="true">
       <div class="custom-header">
           <h1 class="headerModalH1"><span class="headerModal">ส่วนจัดการหลักฐานพื้นฐาน</span></h1>
       </div>
@@ -2838,7 +2850,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-     <div id="manage_president" data-nq-modal=""  data-ng-controller="manage_president_controller" data-ng-init="init()" data-qo-size="lg" data-qo-independent="true">
+     <div id="manage_president" data-nq-modal="" data-qo-fire-emit = "true"  data-ng-controller="manage_president_controller" data-ng-init="init()" data-qo-size="lg" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการประธานหลักสูตร</span></h1>
                     </div>
@@ -2897,7 +2909,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 </div>
 
-              <div id="evaluate_other" data-nq-modal="" data-ng-controller="evaluate_by_other_controller" data-ng-init = "init()"data-qo-screen-mode="true" data-qo-independent="true">
+              <div id="evaluate_other" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="evaluate_by_other_controller" data-ng-init = "init()"data-qo-screen-mode="true" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>
                     </div>
@@ -3037,7 +3049,7 @@ glyphicon glyphicon-bell"></i> </span>
                 </div>
 
 
-  <div id="manage_indicators" data-ng-controller="manage_indicators_controller" data-nq-modal=""  data-qo-screen-mode="true"  data-qo-independent="true">
+  <div id="manage_indicators" data-ng-controller="manage_indicators_controller" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode="true"  data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการตัวบ่งชี้</span></h1>
 
@@ -3149,7 +3161,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-  <div id="manage_sub_indicators" data-ng-controller="manage_sub_indicators_controller" data-nq-modal=""  data-qo-screen-mode="true"  data-ng-init ="init()" data-qo-independent="true">
+  <div id="manage_sub_indicators" data-ng-controller="manage_sub_indicators_controller" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode="true"  data-ng-init ="init()" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการตัวบ่งชี้ย่อย</span></h1>
                     </div>
@@ -3217,7 +3229,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-                <div id="evaluate_me" data-nq-modal="" data-ng-controller="evaluate_by_me_controller" data-ng-init = "init()"data-qo-screen-mode="true" data-qo-independent="true">
+                <div id="evaluate_me" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="evaluate_by_me_controller" data-ng-init = "init()"data-qo-screen-mode="true" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตรตนเอง</span></h1>
                     </div>
@@ -3319,7 +3331,7 @@ glyphicon glyphicon-bell"></i> </span>
                 </div>
 
  <!-- 
-       <div id="upload_primary_evidence" data-nq-modal="" data-ng-controller="add_new_primary_controller" data-qo-size="md" data-qo-independent="true">
+       <div id="upload_primary_evidence" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="add_new_primary_controller" data-qo-size="md" data-qo-independent="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal"> เพิ่มหลักฐานพื้นฐาน</span></h1>
@@ -3382,7 +3394,7 @@ glyphicon glyphicon-bell"></i> </span>
                 </div> -->
 
 
-                <div id="upload_primary_evidence" data-nq-modal="" data-ng-controller="add_new_primary_controller" data-qo-size="md" data-qo-independent="true">
+                <div id="upload_primary_evidence" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="add_new_primary_controller" data-qo-size="md" data-qo-independent="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal"> อัพโหลดหลักฐานพื้นฐาน</span></h1>
@@ -3451,7 +3463,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-       <div id="fix_evidence" data-nq-modal="" data-qo-size="sm" data-qo-independent="true" data-ng-controller="change_evidence_file_controller" data-qo-effect="flip-x">
+       <div id="fix_evidence" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="sm" data-qo-independent="true" data-ng-controller="change_evidence_file_controller" data-qo-effect="flip-x">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal"> แก้ไขหลักฐาน</span></h1>
@@ -3482,7 +3494,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-                <div id="upload_evidence" data-nq-modal=""  data-ng-controller="add_new_evidence_controller" data-qo-size="md" data-qo-independent="true">
+                <div id="upload_evidence" data-nq-modal="" data-qo-fire-emit = "true"  data-ng-controller="add_new_evidence_controller" data-qo-size="md" data-qo-independent="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal">เพิ่มหลักฐานใหม่</span></h1>
@@ -3538,7 +3550,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-                <div id="import_evidence" data-ng-controller="import_evidence_controller"data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
+                <div id="import_evidence" data-ng-controller="import_evidence_controller"data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="lg" data-qo-independent="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal"> นำเข้าหลักฐานที่มีอยู่</span></h1>
@@ -3614,7 +3626,7 @@ glyphicon glyphicon-bell"></i> </span>
                 </div>
 
 
-                <div id="insert_evidence" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
+                <div id="insert_evidence" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="lg" data-qo-independent="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal"> เพิ่มหลักฐาน</span></h1>
@@ -3724,7 +3736,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                 </div>
 
-                <div id="new_students" data-nq-modal="" data-qo-size="lg" data-qo-independent="true" data-ng-controller="stat_new_student_controller" data-ng-init = "init()">
+                <div id="new_students" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="lg" data-qo-independent="true" data-ng-controller="stat_new_student_controller" data-ng-init = "init()">
                     <div class="custom-header">
                         <h1 class="headerModalH1">สถิติการรับนักศึกษาใหม่</h1>
                     </div>
@@ -3878,7 +3890,7 @@ glyphicon glyphicon-bell"></i> </span>
                 </div>
 
 
-                <div id="mwdadawdad" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
+                <div id="mwdadawdad" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="lg" data-qo-independent="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal"> จัดการหลักฐาน</span></h1>
@@ -4343,7 +4355,7 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
                 </div>
 
-                <div id="import_to_curri" data-nq-modal="" data-qo-independent="true">
+                <div id="import_to_curri" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true">
 
                     <div class="custom-header">
 
@@ -4378,7 +4390,7 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
                 </div>
 
-                <div id="import_export_to_curri" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
+                <div id="import_export_to_curri" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="lg" data-qo-independent="true">
 
                     <div class="custom-header">
 
@@ -4570,7 +4582,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                
-                <div id="student_amount" data-nq-modal="" data-qo-size="lg" data-qo-independent="true" data-ng-controller="stat_student_controller" data-ng-init = "init()">
+                <div id="student_amount" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="lg" data-qo-independent="true" data-ng-controller="stat_student_controller" data-ng-init = "init()">
                     <div class="custom-header">
                         <h1 class="headerModalH1">สถิติจำนวนนักศึกษา</h1>
                     </div>
@@ -4689,7 +4701,7 @@ glyphicon glyphicon-bell"></i> </span>
                 </div>
 
 
-                <div id="change_password" data-nq-modal="" data-qo-independent="true">
+                <div id="change_password" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal">เปลี่ยนรหัสผ่าน</span></h1>
@@ -4736,7 +4748,7 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
                 </div>
 
-                <div id="manage_profile" data-nq-modal="" data-qo-independent="true" data-qo-size="lg">
+                <div id="manage_profile" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-qo-size="lg">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal">ส่วนจัดการผู้ใช้งาน</span></h1>
@@ -5032,7 +5044,7 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
                 </div>
 
-                <div id="teacher_role" data-nq-modal="" data-qo-independent="true" data-qo-screen-mode="true">
+                <div id="teacher_role" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-qo-screen-mode="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal">ส่วนการจัดการบุคลากรทางการศึกษา</span></h1>
@@ -5295,7 +5307,7 @@ glyphicon glyphicon-bell"></i> </span>
                 </div>
 
               
-<div id="create_new_research" data-nq-modal="" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_research_controller">
+<div id="create_new_research" data-nq-modal="" data-qo-fire-emit = "true" data-qo-fire-emit = "true" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_research_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">เพิ่มข้อมูลงานวิจัย</h1>
                     </div>
@@ -5361,7 +5373,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-<div id="create_survey" data-nq-modal="" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_survey_controller">
+<div id="create_survey" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_survey_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">สร้างแบบสอบถาม</h1>
                     </div>
@@ -5432,7 +5444,7 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
 </div>
 
- <div id="manage_album" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_album_controller">
+ <div id="manage_album" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_album_controller">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">ส่วนการจัดการอัลบั้มรูปภาพ</h1>
@@ -5542,7 +5554,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
- <div id="manage_survey" data-nq-modal="" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_survey_controller">
+ <div id="manage_survey" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_survey_controller">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">ส่วนการจัดการแบบสอบถาม</h1>
@@ -5660,7 +5672,7 @@ glyphicon glyphicon-bell"></i> </span>
    </div>
 
 
-                <div id="manage_surveysss" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
+                <div id="manage_surveysss" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="lg" data-qo-independent="true">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">แบบสอบถาม</h1>
@@ -5891,7 +5903,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                 </div>
 
-                        <div id="result_survey" data-nq-modal="" data-qo-independent="true" data-qo-screen-mode="true" data-ng-controller="result_survey_controller" >
+                        <div id="result_survey" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-qo-screen-mode="true" data-ng-controller="result_survey_controller" >
                     <div class="custom-header">
                         <h2 class="headerModaltemp">{{manage_survey_questionare_of_result.name}}</h2>
                     </div>
@@ -5978,7 +5990,7 @@ glyphicon glyphicon-bell"></i> </span>
                 </div>
 
 
-                <div id="do_survey" data-nq-modal="" data-qo-independent="true" data-qo-screen-mode="true" data-ng-controller="answer_survey_controller">
+                <div id="do_survey" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-qo-screen-mode="true" data-ng-controller="answer_survey_controller">
                     <div class="custom-header">
                         <h2 class="headerModaltemp">{{manage_survey_questionare_to_answer.name}}</h2>
                     </div>

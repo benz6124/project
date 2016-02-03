@@ -830,6 +830,15 @@ table.evaluation{
     border-color: #d43f3a;
 }
 
+.alertPopFileSize{
+  font-size: 18px !important;
+
+    color: #fff;
+    background-color: #ff6600;
+    border-color: #e65c00;
+}
+
+
 
 
 li.headerWeb span.boldPlease{
@@ -1096,7 +1105,7 @@ a.highlight_evidence:hover{
 }
 
 
-input.form-control.title-edit{
+input.form-control.title-edit,input.form-control.full{
       width: 100%;
 
 }

@@ -566,7 +566,17 @@ app.controller('create_curriculum', function($scope, $http,$alert,$loading,$time
     }
  $scope.new_curri = {}
 
- 
+     $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+    
+
     $scope.close_modal = function(my_modal){
         $scope.init();
         my_modal.$hide();
@@ -1017,8 +1027,34 @@ $scope.indicator_choosen = {};
 
   $scope.$on("fileSelected", function (event, args) {
         $scope.$apply(function () {            
-            //add the file object to the scope's files collection
-            $scope.files.push(args.file);
+           
+
+ if(args.file.size > 25000000){
+                   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                $alert({title:'เกิดข้อผิดพลาด', content:'ไฟล์ที่เลือกมีขนาดมากกว่า 25 MB',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+            }
+            else        if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
+        || extension[extension.length-1] == 'bat' || extension[extension.length-1] == 'BAT'  || extension[extension.length-1] == 'ini' || extension[extension.length-1] == 'INIT' ){
+        
+                     angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                 
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+       }
+            else{
+                   $scope.files.push(args.file);
+            }
+
+         
         });
     });
  $scope.file_not_already_upload = function(){
@@ -1093,7 +1129,7 @@ $scope.indicator_choosen = {};
     }
 
  $scope.save_to_server = function(my_modal) {
-
+          $scope.please_wait = true;
       var formData = new FormData();
 
     formData.append("model", angular.toJson($scope.corresponding_results));
@@ -1121,6 +1157,7 @@ $scope.indicator_choosen = {};
                   $scope.init ();
         }).
         error(function (data, status, headers, config) {
+              $scope.please_wait = false;
                $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
@@ -1196,10 +1233,42 @@ app.controller('upload_aun_controller', function($scope, $alert,$http,request_ye
 
 
     //listen for the file selected event
-    $scope.$on("fileSelected", function (event, args) {
-        $scope.$apply(function () {            
+   $scope.$on("fileSelected", function (event, args) {
+
+     
+        var extension = args.file.name.split('.');
+
+   
+
+        console.log(args.file);
+        $scope.$apply(function () {    
+                $scope.files =[];    
             //add the file object to the scope's files collection
-            $scope.files.push(args.file);
+            if(args.file.size > 25000000){
+                   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                 $alert({title:'เกิดข้อผิดพลาด', content:'ไฟล์ที่เลือกมีขนาดมากกว่า 25 MB',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+            }
+            else        if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
+        || extension[extension.length-1] == 'bat' || extension[extension.length-1] == 'BAT'  || extension[extension.length-1] == 'ini' || extension[extension.length-1] == 'INIT' ){
+        
+                     angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+       }
+            else{
+                     $scope.files.push(args.file);
+            }
+       
         });
     });
     
@@ -1245,6 +1314,7 @@ app.controller('upload_aun_controller', function($scope, $alert,$http,request_ye
            
         }).
         error(function (data, status, headers, config) {
+                      $scope.please_wait = false;
             $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
@@ -1670,18 +1740,55 @@ app.controller('change_evidence_file_controller', function($scope, $alert,$http,
        $scope.my_temp_secret = false;
              
       $scope.files = [];
-      
+         angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
     }
    $scope.files = [];
 
-    
+       angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
        $scope.my_temp_secret = false;
     
-    $scope.$on("fileSelected", function (event, args) {
+   $scope.$on("fileSelected", function (event, args) {
+
+     
+        var extension = args.file.name.split('.');
+
+
         $scope.$apply(function () {    
-            $scope.files =[];        
+                $scope.files =[];    
             //add the file object to the scope's files collection
-            $scope.files.push(args.file);
+            if(args.file.size > 25000000){
+                   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                $alert({title:'เกิดข้อผิดพลาด', content:'ไฟล์ที่เลือกมีขนาดมากกว่า 25 MB',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+            }
+            else        if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
+        || extension[extension.length-1] == 'bat' || extension[extension.length-1] == 'BAT'  || extension[extension.length-1] == 'ini' || extension[extension.length-1] == 'INIT' ){
+        
+                     angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                 
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+       }
+            else{
+                     $scope.files.push(args.file);
+            }
+       
         });
     });
 
@@ -1735,6 +1842,7 @@ console.log($rootScope.only_object_want_to_change);
            
         }).
         error(function (data, status, headers, config) {
+                      $scope.please_wait = false;
             $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
@@ -1777,13 +1885,41 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
 
 }
 
-    $scope.$on("fileSelected", function (event, args) {
+   $scope.$on("fileSelected", function (event, args) {
+
+     
+        var extension = args.file.name.split('.');
+
         $scope.$apply(function () {            
             $scope.my_new_evidence_file = [];
-            //add the file object to the scope's files collection
-            $scope.my_new_evidence_file.push(args.file);
-            console.log("fileSelected");
-            console.log($scope.my_new_evidence_file);
+         
+                if(args.file.size > 25000000){
+                   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                $alert({title:'เกิดข้อผิดพลาด', content:'ไฟล์ที่เลือกมีขนาดมากกว่า 25 MB',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+            }
+            else        if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
+        || extension[extension.length-1] == 'bat' || extension[extension.length-1] == 'BAT'  || extension[extension.length-1] == 'ini' || extension[extension.length-1] == 'INIT' ){
+        
+                     angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                 
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+       }
+            else{
+                   $scope.my_new_evidence_file.push(args.file);
+            }
+
+         
+      
         });
     });
 
@@ -1861,6 +1997,7 @@ console.log($scope.my_new_evidence);
            
         }).
         error(function (data, status, headers, config) {
+                      $scope.please_wait = false;
             $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
@@ -1902,13 +2039,42 @@ $scope.my_new_evidence.primary_choosen = {};
 
 }
 
-    $scope.$on("fileSelected", function (event, args) {
+   $scope.$on("fileSelected", function (event, args) {
+
+     
+        var extension = args.file.name.split('.');
+
         $scope.$apply(function () {            
             $scope.my_new_evidence_file = [];
-            //add the file object to the scope's files collection
-            $scope.my_new_evidence_file.push(args.file);
-            console.log("fileSelected");
-            console.log($scope.my_new_evidence_file);
+            
+
+                if(args.file.size > 25000000){
+                   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                $alert({title:'เกิดข้อผิดพลาด', content:'ไฟล์ที่เลือกมีขนาดมากกว่า 25 MB',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+            }
+            else        if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
+        || extension[extension.length-1] == 'bat' || extension[extension.length-1] == 'BAT'  || extension[extension.length-1] == 'ini' || extension[extension.length-1] == 'INIT' ){
+        
+                     angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                 
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+       }
+
+            else{
+                $scope.my_new_evidence_file.push(args.file);
+            }
+            
+        
         });
     });
 
@@ -1990,6 +2156,7 @@ console.log($scope.my_new_evidence);
            
         }).
         error(function (data, status, headers, config) {
+                      $scope.please_wait = false;
             $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
@@ -3730,6 +3897,142 @@ $scope.evidence_we_want.teacher_id = "00007";
 
 
 
+app.controller('create_user_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+   $scope.curri_choosen = [];
+   $scope.my_type = {};
+      $scope.files = [];
+$scope.choose_not_complete = true;
+        $scope.please_wait = false;
+    $http.get('/api/usertype').success(function (data) {
+           
+                $scope.all_usertype = data;
+
+
+              });
+angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+    
+
+   $scope.init =function() {
+   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+       $scope.files = [];
+   $scope.curri_choosen = [];
+      $scope.my_type = {};
+               $scope.please_wait = false;
+$scope.choose_not_complete = true;
+          $http.get('/api/usertype').success(function (data) {
+              
+                $scope.all_usertype = data;
+
+
+              });
+   }
+
+   $scope.still_not_complete = function(){
+        if($scope.files.length == 0 ||  !$scope.my_type){
+            return true;
+        }
+   }
+  $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+
+$scope.save_to_server = function(my_modal) {
+          $scope.please_wait = true;
+      var formData = new FormData();
+$scope.my_new_user = {};
+$scope.my_new_user.curri = $scope.curri_choosen;
+$scope.my_new_user.type = $scope.my_type;
+
+    formData.append("model", angular.toJson($scope.my_new_user));
+
+      
+        
+            formData.append("file" , $scope.files[0]);
+     
+
+        $http({
+            method: 'PUT',
+            url: "/api/users/createnewusers",
+
+            headers: { 'Content-Type': undefined },
+
+
+            data:formData,
+            transformRequest: angular.indentity 
+
+        }).
+        success(function (data, status, headers, config) {
+
+                  $scope.init ();
+                  my_modal.$hide();
+              $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+        }).
+        error(function (data, status, headers, config) {
+              $scope.please_wait = false;
+               $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        });
+}
+
+   $scope.$on("fileSelected", function (event, args) {
+
+     
+        var extension = args.file.name.split('.');
+
+        $scope.$apply(function () {            
+            $scope.files = [];
+            //add the file object to the scope's files collection
+
+                if(args.file.size > 25000000){
+                   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                $alert({title:'เกิดข้อผิดพลาด', content:'ไฟล์ที่เลือกมีขนาดมากกว่า 25 MB',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+            }
+            else        if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
+        || extension[extension.length-1] == 'bat' || extension[extension.length-1] == 'BAT'  || extension[extension.length-1] == 'ini' || extension[extension.length-1] == 'INIT' ){
+        
+                     angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                 
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+       }
+
+            else{
+                 $scope.files.push(args.file);
+            }
+           
+        });
+    });
+});
 
 app.controller('create_survey_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
@@ -3752,6 +4055,16 @@ $scope.init =function() {
             
 }
   
+      $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+    
     $scope.choose_not_complete = true;
          $scope.year_choosen = {};
               $scope.curri_choosen = {}
@@ -3882,6 +4195,18 @@ $scope.init =function() {
     });
 
 }
+
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+    
+
   $scope.choose_not_complete = true;
          $scope.year_choosen = {};
               $scope.curri_choosen = {}
@@ -3894,14 +4219,52 @@ $scope.init =function() {
   $scope.new_research.file = "";
 
    $scope.please_wait = false;
-     $scope.$on("fileSelected", function (event, args) {
+    $scope.$on("fileSelected", function (event, args) {
+
+     
+        var extension = args.file.name.split('.');
+
         $scope.$apply(function () {            
             $scope.new_research.file = [];
-            //add the file object to the scope's files collection
-            $scope.new_research.file.push(args.file);
+            
+
+                if(args.file.size > 25000000){
+                   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                $alert({title:'เกิดข้อผิดพลาด', content:'ไฟล์ที่เลือกมีขนาดมากกว่า 25 MB',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+            }
+            else        if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
+        || extension[extension.length-1] == 'bat' || extension[extension.length-1] == 'BAT'  || extension[extension.length-1] == 'ini' || extension[extension.length-1] == 'INIT' ){
+        
+                     angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                 
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+       }
+            else{
+                 $scope.new_research.file.push(args.file);
+            }
+           
         });
     });
 
+
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
 
      $scope.still_not_complete = function(){
 
@@ -3968,6 +4331,7 @@ $scope.init =function() {
            
         }).
         error(function (data, status, headers, config) {
+                      $scope.please_wait = false;
             $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
@@ -4101,11 +4465,43 @@ $rootScope.manage_research_fix_this_research.researcher = $rootScope.manage_lab_
      
     }
 
-         $scope.$on("fileSelected", function (event, args) {
+        $scope.$on("fileSelected", function (event, args) {
+
+     
+        var extension = args.file.name.split('.');
+
         $scope.$apply(function () {            
              $scope.new_file = [];
             //add the file object to the scope's files collection
-            $scope.new_file.push(args.file);
+
+             if(args.file.size > 25000000){
+                   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                $alert({title:'เกิดข้อผิดพลาด', content:'ไฟล์ที่เลือกมีขนาดมากกว่า 25 MB',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+            }
+            else        if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
+        || extension[extension.length-1] == 'bat' || extension[extension.length-1] == 'BAT'  || extension[extension.length-1] == 'ini' || extension[extension.length-1] == 'INIT' ){
+        
+                     angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                 
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+       }
+            else{
+                  $scope.new_file.push(args.file);
+
+            }
+          
+
+
             // $rootScope.manage_research_fix_this_research.file_name = $scope.new_file[0].name;
          
 
@@ -4222,6 +4618,14 @@ $scope.init =function() {
     $scope.my_new_lab.room = "";
     $scope.my_new_lab.officer = [];
               
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
 
     $scope.still_not_complete = function(){
 
@@ -4553,6 +4957,17 @@ console.log("inside init");
       angular.element(inputElem).val(null);
     });
 }
+
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+
  $scope.show_gallery = false;
   $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -4570,12 +4985,41 @@ $scope.my_pictures = {};
          $scope.my_pictures.flow={}; 
          console.log("outside init");         
 $scope.my_pictures.flow.files = [];
-     $scope.$on("fileSelected", function (event, args) {
+    $scope.$on("fileSelected", function (event, args) {
+
+     
+        var extension = args.file.name.split('.');
+
 
         $scope.$apply(function () {            
             $scope.my_file = [];
             //add the file object to the scope's files collection
-            $scope.my_file.push(args.file);
+
+             if(args.file.size > 25000000){
+                   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                $alert({title:'เกิดข้อผิดพลาด', content:'ไฟล์ที่เลือกมีขนาดมากกว่า 25 MB',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+            }
+            else        if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
+        || extension[extension.length-1] == 'bat' || extension[extension.length-1] == 'BAT'  || extension[extension.length-1] == 'ini' || extension[extension.length-1] == 'INIT' ){
+        
+                     angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                 
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+       }
+            else{
+                $scope.my_file.push(args.file);
+            }
+            
         });
     });
 
@@ -4677,6 +5121,7 @@ $scope.show_my_pictures=function(){
            
         }).
         error(function (data, status, headers, config) {
+              $scope.please_wait = false;
             $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
@@ -4705,6 +5150,8 @@ $scope.my_pictures.flow.files = [];
       angular.element(inputElem).val(null);
     });
 }
+
+
  $scope.show_gallery = false;
 
 
@@ -4716,12 +5163,42 @@ $scope.my_pictures = {};
          $scope.my_pictures.flow={}; 
          console.log("outside init");         
 $scope.my_pictures.flow.files = [];
-     $scope.$on("fileSelected", function (event, args) {
+    $scope.$on("fileSelected", function (event, args) {
+
+     
+        var extension = args.file.name.split('.');
+
 
         $scope.$apply(function () {            
             $scope.my_file = [];
-            //add the file object to the scope's files collection
-            $scope.my_file.push(args.file);
+            
+
+             if(args.file.size > 25000000){
+                   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                $alert({title:'เกิดข้อผิดพลาด', content:'ไฟล์ที่เลือกมีขนาดมากกว่า 25 MB',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+            }
+            else        if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
+        || extension[extension.length-1] == 'bat' || extension[extension.length-1] == 'BAT'  || extension[extension.length-1] == 'ini' || extension[extension.length-1] == 'INIT' ){
+        
+                     angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                 
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+       }
+
+            else{
+                 $scope.my_file.push(args.file);
+            }
+           
         });
     });
 
@@ -4731,6 +5208,18 @@ $scope.my_pictures.flow.files = [];
 //    console.log(this_thing);
 //    console.log($scope.my_pictures.flow);
 // }
+
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+    
+
      $scope.still_not_complete = function(){
         if(!$scope.my_pictures.flow){
             return true;
@@ -4833,6 +5322,7 @@ var index;
            
         }).
         error(function (data, status, headers, config) {
+              $scope.please_wait = false;
             $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
@@ -4880,12 +5370,42 @@ $scope.init =function() {
   $scope.my_file = [];
 $scope.my_pictures = {};
  $scope.disabled_search = false;
-     $scope.$on("fileSelected", function (event, args) {
+    $scope.$on("fileSelected", function (event, args) {
+
+     
+        var extension = args.file.name.split('.');
+
 
         $scope.$apply(function () {            
             $scope.my_file = [];
-            //add the file object to the scope's files collection
-            $scope.my_file.push(args.file);
+            
+
+             if(args.file.size > 25000000){
+                   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                $alert({title:'เกิดข้อผิดพลาด', content:'ไฟล์ที่เลือกมีขนาดมากกว่า 25 MB',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+            }
+            else        if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
+        || extension[extension.length-1] == 'bat' || extension[extension.length-1] == 'BAT'  || extension[extension.length-1] == 'ini' || extension[extension.length-1] == 'INIT' ){
+        
+                     angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                 
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+       }
+
+            else{
+                  $scope.my_file.push(args.file);
+            }
+          
         });
     });
 
@@ -5033,6 +5553,7 @@ $scope.show_my_pictures=function(){
            
         }).
         error(function (data, status, headers, config) {
+              $scope.please_wait = false;
             $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
