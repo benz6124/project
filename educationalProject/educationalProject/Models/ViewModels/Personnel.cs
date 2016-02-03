@@ -23,6 +23,7 @@ namespace educationalProject.Models.ViewModels
             public static readonly string ADDR = "ADDR";
             public static readonly string FILE_NAME_PIC = "FILE_NAME_PIC";
             public static readonly string TIMESTAMP = "TIMESTAMP";
+            public static readonly string ROOM = "ROOM";
             //----------------------
             public static readonly string CURRI_ID = "CURRI_ID";
         }
@@ -41,6 +42,7 @@ namespace educationalProject.Models.ViewModels
         private string _addr;
         private string _file_name_pic;
         private string _timestamp;
+        private string _room;
         private string _curri_id;
 
         public string personnel_id { get { return _personnel_id; } set { _personnel_id = value; } }
@@ -58,5 +60,6 @@ namespace educationalProject.Models.ViewModels
         public string file_name_pic { get { return _file_name_pic; } set { _file_name_pic = value; } }
         public string curri_id { get { return _curri_id; } set { _curri_id = value; } }
         public string timestamp { get { return _timestamp; } set { _timestamp = value; } }
+        public string room { get { return _room; } set { _room = value; } }
     }
 }

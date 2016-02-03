@@ -57,7 +57,8 @@ namespace educationalProject.Controllers
                 data.aca_year = Convert.ToInt32(datareceive["aca_year"]);
                 data.topic_name = datareceive["topic_name"].ToString();
                 data.teacher_id = datareceive["teacher_id"].ToString();
-                data.date = Convert.ToDateTime(datareceive["date"].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
+                data.date = Convert.ToDateTime(datareceive["date"].ToString(), new System.Globalization.CultureInfo("fr-FR")).GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
+
 
                 JArray tlist = (JArray)datareceive["attendee"];
 
@@ -70,7 +71,7 @@ namespace educationalProject.Controllers
                 }
 
                 //main minutes file
-                MultipartFileData file = result.FileData[0];
+                MultipartFileData file = result.FileData.Last();
                 FileInfo fileInfo = new FileInfo(file.LocalFileName);
                 string newfilename = string.Format("{0}.{1}", fileInfo.Name.Substring(9), file.Headers.ContentDisposition.FileName.Split('.').LastOrDefault().Split('\"').FirstOrDefault());
                 data.file_name = "download/minutes/" + newfilename;
@@ -80,7 +81,7 @@ namespace educationalProject.Controllers
 
                 tlist = (JArray)datareceive["pictures"];
                 if (result.FileData.Count > 1) {
-                    int fileind = 1;
+                    int fileind = 0;
                     foreach (JObject item in tlist)
                     {
                         MultipartFileData file1 = result.FileData[fileind++];
@@ -159,7 +160,7 @@ namespace educationalProject.Controllers
                 data.aca_year = Convert.ToInt32(datareceive["aca_year"]);
                 data.topic_name = datareceive["topic_name"].ToString();
                 data.teacher_id = datareceive["teacher_id"].ToString();
-                data.date = Convert.ToDateTime(datareceive["date"].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
+                data.date = Convert.ToDateTime(datareceive["date"].ToString(), new System.Globalization.CultureInfo("fr-FR")).GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
                 data.minutes_id = Convert.ToInt32(datareceive["minutes_id"]);
 
                 JArray tlist = (JArray)datareceive["attendee"];
@@ -177,19 +178,17 @@ namespace educationalProject.Controllers
                 if (datareceive["file_name"].ToString() != "")
                 {
                     //main minutes file (if exists)
-                    MultipartFileData file = result.FileData[0];
+                    MultipartFileData file = result.FileData.Last();
                     FileInfo fileInfo = new FileInfo(file.LocalFileName);
                     string newfilename = string.Format("{0}.{1}", fileInfo.Name.Substring(9), file.Headers.ContentDisposition.FileName.Split('.').LastOrDefault().Split('\"').FirstOrDefault());
                     data.file_name = "download/minutes/" + newfilename;
                     File.Move(string.Format("{0}/{1}", temppath, fileInfo.Name), string.Format("{0}/{1}", savepathmain, newfilename));
-                    fileind = 1;
                 }
                 else {
-                    fileind = 0;
                     data.file_name = "";
                 }
-                ////----------------
-
+                ////---------------
+                fileind = 0;
 
                 tlist = (JArray)datareceive["pictures"];
                     foreach (JObject item in tlist)

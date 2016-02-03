@@ -133,6 +133,9 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                       "[{12}] VARCHAR(80) NULL," +
                                       "[{13}] VARCHAR(255) NULL," +
                                       "[{14}] DATETIME2 NULL," +
+
+                                      "[{22}] VARCHAR(40) NULL," +
+
                                       "[{15}] VARCHAR(4) NULL," +
                                       "[{16}] CHAR NULL," +
                                       "[{17}] VARCHAR(100) NULL," +
@@ -195,7 +198,10 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                       "ALTER COLUMN {18} VARCHAR(200) COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {20} VARCHAR(200) COLLATE DATABASE_DEFAULT ",
+                                      "ALTER COLUMN {20} VARCHAR(200) COLLATE DATABASE_DEFAULT " +
+
+                                      "ALTER TABLE {0} " +
+                                      "ALTER COLUMN {22} VARCHAR(40) COLLATE DATABASE_DEFAULT " ,
              
                                       temp1tablename,FieldName.PERSONNEL_ID,FieldName.USER_TYPE,FieldName.USERNAME,
                                       FieldName.T_PRENAME,FieldName.T_NAME,FieldName.E_PRENAME,FieldName.E_NAME,
@@ -204,13 +210,13 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                       Curriculum_teacher_staff.FieldName.CURRI_ID,Educational_teacher_staff.FieldName.DEGREE,
                                       Educational_teacher_staff.FieldName.PRE_MAJOR, Educational_teacher_staff.FieldName.MAJOR,
                                       Educational_teacher_staff.FieldName.GRAD_YEAR,
-                                      Educational_teacher_staff.FieldName.COLLEGE,USER_TYPE_NUM);
+                                      Educational_teacher_staff.FieldName.COLLEGE,USER_TYPE_NUM,FieldName.ROOM);
 
 
 
             string insertintotemp1_1 = string.Format("INSERT INTO {0} " +
                                        "select {1},{2},1,{3},{4},{5},{6},{7},{8},{9},{10}," +
-                                       "{11}, {12}, {13}, {14}, {15}, {16}.{17}, {18}, {19}, {20}, {21} " + 
+                                       "{11}, {12}, {13}, {14},{27}, {15}, {16}.{17}, {18}, {19}, {20}, {21} " + 
                                        "from {22}, {23}, {16} where " +
                                        "{1} = {23}.{24} and {15} = '{25}' and {16}.{26} = {1} ",
                                        temp1tablename,Teacher.FieldName.TEACHER_ID,Teacher.FieldName.USER_TYPE, Teacher.FieldName.USERNAME,
@@ -222,13 +228,13 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                        Educational_teacher_staff.FieldName.MAJOR, Educational_teacher_staff.FieldName.GRAD_YEAR,
                                        Educational_teacher_staff.FieldName.COLLEGE,Teacher.FieldName.TABLE_NAME,
                                        Curriculum_teacher_staff.FieldName.TABLE_NAME, Curriculum_teacher_staff.FieldName.PERSONNEL_ID,
-                                       curri_id_data,Educational_teacher_staff.FieldName.PERSONNEL_ID
+                                       curri_id_data,Educational_teacher_staff.FieldName.PERSONNEL_ID,FieldName.ROOM
                                        );
 
 
             string insertintotemp1_2 = string.Format("INSERT INTO {0} " +
                                        "select {1},{2},1,{3},{4},{5},{6},{7},{8},{9},{10}," +
-                                       "{11}, {12}, {13}, {14}, {15}, null, null, null, null, null " +
+                                       "{11}, {12}, {13}, {14},{23}, {15}, null, null, null, null, null " +
                                        "from {16}, {17} where " +
                                        "{1} = {17}.{18} and {19} = '{20}' and not exists " +
                                        "(select * from {21} where {1} = {22}) ",
@@ -239,11 +245,11 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                        Teacher.FieldName.TIMESTAMP, FieldName.CURRI_ID,Teacher.FieldName.TABLE_NAME,
                                        Curriculum_teacher_staff.FieldName.TABLE_NAME, Curriculum_teacher_staff.FieldName.PERSONNEL_ID,
                                        Curriculum_teacher_staff.FieldName.CURRI_ID,curri_id_data,Educational_teacher_staff.FieldName.TABLE_NAME,
-                                       Educational_teacher_staff.FieldName.PERSONNEL_ID);
+                                       Educational_teacher_staff.FieldName.PERSONNEL_ID,FieldName.ROOM);
 
             string insertintotemp1_3 = string.Format("INSERT INTO {0} " +
                            "select {1},{2},2,{3},{4},{5},{6},{7},{8},{9},{10}," +
-                           "{11}, {12}, {13}, {14}, {15}, {16}.{17}, {18}, {19}, {20}, {21} " +
+                           "{11}, {12}, {13}, {14},{27}, {15}, {16}.{17}, {18}, {19}, {20}, {21} " +
                            "from {22}, {23}, {16} where " +
                            "{1} = {23}.{24} and {15} = '{25}' and {16}.{26} = {1} ",
                            temp1tablename, Staff.FieldName.STAFF_ID, Staff.FieldName.USER_TYPE, Staff.FieldName.USERNAME,
@@ -255,13 +261,13 @@ namespace educationalProject.Models.ViewModels.Wrappers
                            Educational_teacher_staff.FieldName.MAJOR, Educational_teacher_staff.FieldName.GRAD_YEAR,
                            Educational_teacher_staff.FieldName.COLLEGE, Staff.FieldName.TABLE_NAME,
                            Curriculum_teacher_staff.FieldName.TABLE_NAME, Curriculum_teacher_staff.FieldName.PERSONNEL_ID,
-                           curri_id_data, Educational_teacher_staff.FieldName.PERSONNEL_ID
+                           curri_id_data, Educational_teacher_staff.FieldName.PERSONNEL_ID,FieldName.ROOM
                            );
 
 
             string insertintotemp1_4 = string.Format("INSERT INTO {0} " +
                            "select {1},{2},2,{3},{4},{5},{6},{7},{8},{9},{10}," +
-                           "{11}, {12}, {13}, {14}, {15}, null, null, null, null, null " +
+                           "{11}, {12}, {13}, {14}, {23},{15}, null, null, null, null, null " +
                            "from {16}, {17} where " +
                            "{1} = {17}.{18} and {19} = '{20}' and not exists " +
                            "(select * from {21} where {1} = {22}) ",
@@ -272,7 +278,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                            Staff.FieldName.TIMESTAMP, FieldName.CURRI_ID, Staff.FieldName.TABLE_NAME,
                            Curriculum_teacher_staff.FieldName.TABLE_NAME, Curriculum_teacher_staff.FieldName.PERSONNEL_ID,
                            Curriculum_teacher_staff.FieldName.CURRI_ID, curri_id_data, Educational_teacher_staff.FieldName.TABLE_NAME,
-                           Educational_teacher_staff.FieldName.PERSONNEL_ID);
+                           Educational_teacher_staff.FieldName.PERSONNEL_ID,FieldName.ROOM);
 
             
             string selectcmd = string.Format("select * from {0} ",temp1tablename);
@@ -306,6 +312,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                     gender = Convert.ToChar(item.ItemArray[data.Columns[FieldName.GENDER].Ordinal]),
                                     tel = item.ItemArray[data.Columns[FieldName.TEL].Ordinal].ToString(),
                                     timestamp = item.ItemArray[data.Columns[FieldName.TIMESTAMP].Ordinal].ToString(),
+                                    room = item.ItemArray[data.Columns[FieldName.ROOM].Ordinal].ToString(),
                                     username = item.ItemArray[data.Columns[FieldName.USERNAME].Ordinal].ToString(),
                                     user_type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString(),
                                     t_prename = item.ItemArray[data.Columns[FieldName.T_PRENAME].Ordinal].ToString(),
@@ -326,6 +333,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                     gender = Convert.ToChar(item.ItemArray[data.Columns[FieldName.GENDER].Ordinal]),
                                     tel = item.ItemArray[data.Columns[FieldName.TEL].Ordinal].ToString(),
                                     timestamp = item.ItemArray[data.Columns[FieldName.TIMESTAMP].Ordinal].ToString(),
+                                    room = item.ItemArray[data.Columns[FieldName.ROOM].Ordinal].ToString(),
                                     username = item.ItemArray[data.Columns[FieldName.USERNAME].Ordinal].ToString(),
                                     user_type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString(),
                                     t_prename = item.ItemArray[data.Columns[FieldName.T_PRENAME].Ordinal].ToString(),
