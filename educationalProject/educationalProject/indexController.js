@@ -502,14 +502,41 @@ $scope.send_support_text_change_to_server = function(){
 });
 app.controller('add_aca_year', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
     $scope.init = function(){
-        $scope.curri_choosen = "none";
+        $scope.curri_choosen = {};
                $scope.new_curri_academic = {};
         $scope.new_curri_academic.aca_year = ""
- 
+ $scope.please_wait = false;
         $scope.error_leaw = false;
     
     }
-  $scope.curri_choosen = "none";
+
+       $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+    
+  $scope.still_not_complete = function(){
+    if(!$scope.new_curri_academic){
+        return true;
+    }
+
+    if(!  $scope.curri_choosen || !$scope.new_curri_academic.aca_year){
+        return true;
+    }
+    
+    if(angular.isNumber($scope.new_curri_academic.aca_year)==false || $scope.new_curri_academic.aca_year <= 0){
+           return true;
+    }
+
+    return false;
+  }
+
+    $scope.curri_choosen = {};
                $scope.new_curri_academic = {};
         $scope.new_curri_academic.aca_year = ""
  
@@ -520,6 +547,7 @@ app.controller('add_aca_year', function($scope, $http,$alert,$loading,$timeout,n
     }
 
     $scope.add_aca_year_to_server = function(my_modal){
+         $scope.please_wait = true;
         console.log("add_aca_year_to_server");
 if( $scope.curri_choosen!= "none" && $scope.new_curri_academic.aca_year != ""){
         $scope.new_curri_academic.curri_id = $scope.curri_choosen.curri_id;
@@ -533,6 +561,7 @@ if( $scope.curri_choosen!= "none" && $scope.new_curri_academic.aca_year != ""){
                  }
              }
          ).success(function (data) {
+
             console.log("success");
                  console.log(data);
             
@@ -545,7 +574,9 @@ if( $scope.curri_choosen!= "none" && $scope.new_curri_academic.aca_year != ""){
 
          })
          .error(function(data, status, headers, config) {
+ $scope.please_wait = false;
                   if(status==400){
+
      $alert({title:'เกิดข้อผิดพลาด', content:data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
      }
@@ -553,6 +584,7 @@ if( $scope.curri_choosen!= "none" && $scope.new_curri_academic.aca_year != ""){
   }); 
 
      }else{
+         $scope.please_wait = false;
        $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกหลักสูตรและปีการศึกษา',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
 
@@ -562,10 +594,23 @@ if( $scope.curri_choosen!= "none" && $scope.new_curri_academic.aca_year != ""){
 app.controller('create_curriculum', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
     $scope.init = function(){
         $scope.new_curri = {}
-
+ $scope.please_wait = false;
+  $scope.new_curri.level = {};
     }
- $scope.new_curri = {}
 
+       $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+    
+
+ $scope.new_curri = {}
+  $scope.new_curri.level = {};
      $scope.$on("modal.hide", function (event, args) {
      $scope.init();
       
@@ -582,11 +627,25 @@ app.controller('create_curriculum', function($scope, $http,$alert,$loading,$time
         my_modal.$hide();
     }
 
+$scope.still_not_complete = function(){
+    if(!$scope.new_curri){
+        return true;
+    }
+ if (!$scope.new_curri.curr_tname || !$scope.new_curri.curr_ename || !$scope.new_curri.degree_t_full ||  !$scope.new_curri.degree_t_bf || !$scope.new_curri.degree_e_full||  !$scope.new_curri.degree_e_bf ||  !$scope.new_curri.level || !$scope.new_curri.period ){
+    return true;
+ }
+
+ if($scope.new_curri.level != 1 && $scope.new_curri.level != 2 && $scope.new_curri.level != 3 ){
+    return true;
+ }
+
+ return false;
+}
 
     $scope.create_curri = function(my_modal){
           console.log($scope.new_curri);
-
-        if ($scope.new_curri.curr_tname && $scope.new_curri.curr_ename && $scope.new_curri.degree_t_full && $scope.new_curri.degree_t_bf && $scope.new_curri.degree_e_full && $scope.new_curri.degree_e_bf && $scope.new_curri.level && $scope.new_curri.period ){
+ $scope.please_wait = true;
+       
         // "year":"2546",
         // "curr_tname":"วิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546",
         // "curr_ename":"Curriculum for Bachelor of Engineering Program in Computer",
@@ -614,15 +673,17 @@ app.controller('create_curriculum', function($scope, $http,$alert,$loading,$time
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
                    my_modal.$hide();
                     $scope.new_curri = {};
+
          //เรียกฟังชั่นใน servce ให้อัพเดทค่า
 
 
          });
-    }
-    else{
-          $alert({title:'เกิดข้อผิดพลาด', content:'กรุณากรอกข้อมูลให้ครบถ้วน',alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-    }
+    
+    // else{
+    //      $scope.please_wait = false;
+    //       $alert({title:'เกิดข้อผิดพลาด', content:'กรุณากรอกข้อมูลให้ครบถ้วน',alertType:'danger',
+    //                      placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+    // }
 }
 });
 
@@ -634,6 +695,7 @@ $scope.init =function() {
               $scope.curri_choosen = {}
                 $scope.indicator_choosen= {};
                     $scope.result = {};
+
 }
   
         $scope.sendCurriAndGetYears = function () {
@@ -649,6 +711,17 @@ $scope.init =function() {
 
 
     }
+
+     $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+    
 
     $scope.find_information = function(){
 
@@ -725,6 +798,17 @@ $scope.init =function() {
                $scope.indicator_choosen= {};
                   $scope.result ={};
 }
+
+ $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+
    
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
@@ -833,6 +917,17 @@ $scope.init =function() {
 
     }
 
+
+     $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+
     $scope.find_information = function(){
 
           console.log("find_information");
@@ -923,7 +1018,19 @@ $scope.init =function() {
    $scope.year_choosen = {};
        $scope.curri_choosen = {};
 $scope.indicator_choosen = {};
+
 }
+
+   $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+
        $scope.close_modal = function(my_modal){
         $scope.init();
         my_modal.$hide();
@@ -1202,6 +1309,18 @@ app.controller('upload_aun_controller', function($scope, $alert,$http,request_ye
   $scope.please_wait = false;
 }
   $scope.please_wait = false;
+
+
+
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
   $scope.find_information = function(){
 
       
@@ -1504,6 +1623,19 @@ console.log(data);
           });
 
  }
+
+
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+
+
 $scope.please_wait = false;
 $scope.nothing_change = true;
    $http.get('/api/indicator').success(function (data) {
@@ -1885,6 +2017,15 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
 
 }
 
+
+ $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
    $scope.$on("fileSelected", function (event, args) {
 
      
@@ -2038,7 +2179,14 @@ $scope.my_new_evidence.primary_choosen = {};
              }
 
 }
+ $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
 
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
    $scope.$on("fileSelected", function (event, args) {
 
      
@@ -2184,6 +2332,16 @@ $scope.sub_date = function(this_date) {
     return res;
 }
 
+ $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+    
 
    $scope.remove_evidence = function(index_evidence_to_remove) {
     console.log("remove_evidence");
@@ -2507,11 +2665,20 @@ app.controller('manage_sub_indicators_controller', function($scope, $alert,$http
    $scope.nothing_change = true;
     }
 
-        $scope.close_modal = function(my_modal){
 
-        $scope.nothing_change = true;
-        my_modal.$hide();
-    }
+
+
+    $scope.$on("modal.hide", function (event, args) {
+    $scope.close_modal();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+                 $scope.close_modal();
+    });
+
+
+
      $scope.add_sub_indicator = function(){
 
          $rootScope.manage_indicators_indicator_choosen.sub_indicator_list.push({
@@ -2609,6 +2776,19 @@ $scope.init =function() {
                  $scope.nothing_change = true;
                    $scope.go_request = false;
 }
+
+
+
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+
 
       $scope.still_not_choose_complete =function(){
 
@@ -2744,6 +2924,17 @@ $scope.init =function() {
                  $scope.nothing_change = true;
             
 }
+
+
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
      $scope.choose_not_complete = true;
         $scope.year_choosen = {};
               $scope.curri_choosen = {};
@@ -3130,6 +3321,17 @@ $scope.init =function() {
                     $scope.nothing_change = true;
                       $rootScope.manage_lab_my_world_wide_labs = [];
 }
+
+
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
   
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -3314,7 +3516,14 @@ $scope.init =function() {
                     $scope.nothing_change = true;
                       $rootScope.manage_survey_my_world_wide_surveys = [];
 }
-  
+   $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
               $scope.curri_choosen = {}
@@ -3624,6 +3833,16 @@ $scope.init =function() {
                     $scope.nothing_change = true;
                       $rootScope.manage_survey_my_world_wide_surveys = [];
 }
+
+
+ $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
   
    $scope.openLightboxModal = function (index,this_album) {
 
@@ -3813,6 +4032,14 @@ $scope.all_evidences ={};
              }
                 }
   
+   $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
   
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
@@ -3822,7 +4049,7 @@ $scope.all_evidences ={};
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
 
             $scope.corresponding_aca_years = data;
-
+   $scope.evidence_we_want = {};
           });
 
 
@@ -4872,6 +5099,16 @@ $scope.init =function() {
 
 
   
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
               $scope.curri_choosen = {}

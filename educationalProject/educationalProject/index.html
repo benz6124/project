@@ -797,7 +797,9 @@ $('.profile_pic').mouseover(function(){
                                 <h3 style="margin-top:5px;"><span class="topicHeader">หลักสูตร:   </span></h3>
                             </div>
 
-                            <div class="col-md-10">
+                            <div class="col-md-10" style="
+    padding-right: 25px;
+">
                                 <div class="topicHeader">
                                    <select data-qo-disable-clear="true" name = "choose_curri" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true"  >
                                   <option style="display:none" value=""></option></select>
@@ -823,7 +825,7 @@ $('.profile_pic').mouseover(function(){
                     </form>
                         <div class="custom-footer">
                             <div class="topicHeader pull-right">
-                                <button class="btn btn-success  " ng-disabled="add_year_form.$invalid" ng-click="add_aca_year_to_server(this)">ยืนยัน</button>
+                                <button class="btn btn-success  " ng-disabled="still_not_complete() || please_wait" ng-click="add_aca_year_to_server(this)">ยืนยัน</button>
                                 <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                             </div>
                         </div>
@@ -912,7 +914,9 @@ $('.profile_pic').mouseover(function(){
                        <div class="col-md-4">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ระดับปริญญา </span></h3>
                             </div>
-                       <div class="col-md-8">
+                       <div class="col-md-8" style="
+    padding-right: 22px;
+">
                              <select ng-class="{ little_danger: create_curri_form.level.$untouched && create_curri_form.$dirty }" name="level" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา" data-ng-model="new_curri.level" data-qo-disable-clear="true" required>
                               <option value="1">ปริญญาตรี</option>
                               <option  value="2">ปริญญาโท</option>
@@ -938,7 +942,7 @@ $('.profile_pic').mouseover(function(){
                         <div class="custom-footer">
 
                             <div class="topicHeader pull-right">
-                                <button class="btn btn-success  hvr-wobble-vertical" ng-disabled="create_curri_form.$invalid" ng-click="create_curri(this)">ยืนยัน</button>
+                                <button class="btn btn-success  hvr-wobble-vertical" ng-disabled="still_not_complete() || please_wait" ng-click="create_curri(this)">ยืนยัน</button>
                                 <button class="btn btn-default hvr-wobble-vertical" ng-click="close_modal(this)">ยกเลิก</button>
                             </div>
                         </div>
