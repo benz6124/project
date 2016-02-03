@@ -4443,7 +4443,7 @@ $scope.init =function() {
 
 
 
-app.controller('show_education_personnel_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('show_education_personnel_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -4461,6 +4461,14 @@ $scope.init =function() {
                 $scope.indicator_choosen= {};
                     $scope.result = {};
   $scope.nothing_change = true;
+
+   $scope.openLightboxModal = function (pic) {
+    $scope.fake_array = [];
+    $scope.fake_array.push(pic.file_name_pic);
+    Lightbox.openModal($scope.fake_array, 0);
+  };
+
+
     $scope.download_research = function(path_research){
         $scope.download_file(path_research);
     }
@@ -4469,6 +4477,11 @@ $scope.init =function() {
         window.open(path, '_blank', "");  
     }
 
+    $scope.close_modal = function(my_modal){
+             $scope.choose_not_complete = true;
+        $scope.curri_choosen = {};
+        my_modal.$hide();
+    }
 
     $scope.find_information = function(){
 
@@ -4476,7 +4489,7 @@ $scope.init =function() {
         console.log($scope.curri_choosen.curri_id);
 
         $http.post(
-             '/api/research/getresearch',
+             '/api/personnel/getwitheducation',
              JSON.stringify($scope.curri_choosen.curri_id),
              {
                  headers: {
@@ -4484,7 +4497,7 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
-            
+            console.log(data);
               $scope.result =data;
              $scope.choose_not_complete = false;
               

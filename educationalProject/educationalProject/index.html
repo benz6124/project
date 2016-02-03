@@ -325,14 +325,10 @@ $('.profile_pic').mouseover(function(){
                                 </li>
                                 
 
-                                   <li>
-                                    <a href="" data-nq-toggle-modal="#manage_gallery" data-effect="slide-left">
-                                        <span class="topic"> อัลบั้มรูปภาพเก่า</span>
-                                    </a>
-                                </li>
+                                
                                 <li>
-                                    <a href="" data-nq-toggle-modal="#teacher_role" data-screenMode="true" data-effect="slide-left" data-placement="right">
-                                        <span class="topic"> ข้อมูลอาจารย์</span>
+                                    <a href="" data-nq-toggle-modal="#show_education_personnel" data-screenMode="true" data-effect="slide-left" data-placement="right">
+                                        <span class="topic"> ข้อมูลบุคลากร</span>
                                     </a>
                                 </li>
 
@@ -1905,16 +1901,16 @@ $('.profile_pic').mouseover(function(){
                                       
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
-                          
-                                                <th style="width:400px">ชื่องานวิจัย</th>
- <th style="width:60px;padding-left: 0px;padding-right: 0px;">ปีที่ตีพิมพ์</th>
-                                                <th style="width:140px">เจ้าของงานวิจัย</th>
-                                             <!--    <th style="width:80px">วันที่สร้าง</th>
-                                                <th style="width:80px">ผู้สร้าง</th> -->
-                                                
-                                                <th style="width:30px;padding-left: 0px;padding-right: 0px;">ดาวน์โหลด</th>
-                                                <th style="width:30px">แก้ไข</th>
-                                                <th style="width:30px">ลบ</th>
+                              <th style="width:40px;padding-left: 0px; padding-right: 0px;">รูป</th>
+                                                <th style="width:160px;padding-left: 0px; padding-right: 0px;">ชื่อ-นามสกุล</th>
+
+ <th style="width:60px;padding-left: 0px;padding-right: 0px;">ประวัติการศึกษา</th>
+                                           
+                                   <th style="width:40px;padding-left: 0px; padding-right: 0px;">ประเภท</th>
+                                   
+                                                <th style="width:30px;padding-left: 0px; padding-right: 0px;">ห้องพัก</th>
+                                                <th style="width:30px;padding-left: 0px; padding-right: 0px;">อีเมล์</th>
+                                                <th style="width:30px;padding-left: 0px; padding-right: 0px;">โทรศัพท์</th>
                                               
                                             
                                             </tr>
@@ -1923,32 +1919,30 @@ $('.profile_pic').mouseover(function(){
                                         <form name="manage_survey_form" novalidate>
                                           
 
-                                            <tr  ng-repeat="research in manage_research_my_research_now">
-                          <td class="left_column" style=" padding-left: 10px ;"><span style="font-size:19px;">{{research.name}}</span> </td>
-                                              <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{research.year_publish}}</span> </td>
-                          <td  >
+                                            <tr  ng-repeat="person in result">
+                                             <td  style=" padding-left: 0px; padding-right: 0px;" class="show_lightbox"><span style="font-size:19px;"><img src="{{person.file_name_pic}}" ng-click="openLightboxModal(person)"  width="70"></span> </td>
+
+                          <td ><span style="font-size:19px;">{{person.t_name}}</span> </td>
+
+                                <td  >
 
 
-<span ng-repeat="teacher in research.researcher" style="padding-left:0px;font-size:19px">{{teacher.t_name}}<br/></span>
+<span ng-repeat="each_edu in person.history" style="font-size:19px">{{each_edu.pre_major}} {{each_edu.major}} {{each_edu.college}}<br/></span>
 
 
   </td>            
+
+  <td style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{person.user_type}}</span> </td>
+
+                    
+<td  style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{person.room}}</span> </td>
+                                            
+      
+<td  style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; " >{{person.email}}</span> </td>
+
+                         <td  style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{person.tel}}</span> </td>
                           
                                              
-                       
-     <td > <a style="margin-top:7px" href="" data-ng-click="download_research(research.file_name)" class="hvr-pulse" >
-                                        <span class="topic"><i style="color:#4cae4c"class="glyphicon glyphicon-download-alt"></i> </span>
-                                    </a></td> 
-                                    
-   <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_research" data-ng-click="go_to_fix_research(research)">
-                                        <span class="topic"><i style="color:#eea236;margin0"class="glyphicon glyphicon-wrench"></i> </span>
-                                    </a></td> 
-
-                                    
-
-                                          <td > <a  style="margin-top:7px" data-ng-click="remove_research($index)" href=""  class="hvr-pulse" >
-                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
-                                    </a></td> 
 
                                             </tr>
 
@@ -1957,14 +1951,12 @@ $('.profile_pic').mouseover(function(){
 
                                     </table>
 
-                                     <!--     <button type="button" style="margin-top:5px;margin-left:520px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_primary_evidence()"style="color:green;font-size:30px"></i> </span></button> -->
          </div>         </div>        
 
           </div>         </div>
      <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="choose_not_complete || nothing_change"  class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                           <button class="btn btn-default hvr-skew-forward" ng-click="close_modal(this)">ปิดหน้าต่าง</button>
                         </div>
                     </div>
    </div>
@@ -5039,6 +5031,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
                 </div>
+
                 <div id="teacher_role" data-nq-modal="" data-qo-independent="true" data-qo-screen-mode="true">
                     <div class="custom-header">
 
@@ -5300,290 +5293,8 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
 
                 </div>
-<!-- 
-            <!--     <div id="watch_gallery" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
-                    <div class="custom-header">
 
-                        <h1 class="headerModalH1"><span class="headerModal"> ดูอัลบั้มรูปภาพ</span></h1>
-                    </div>
-
-                    <div class="gall" id="rayong">
-                        <a class="fancybox " href="/myImages/rayong/1_b.jpg" data-fancybox-group="rayong" title="รูปร้านอาหารของรีสอร์ท"><img src="/myImages/rayong/1_b.jpg" class="img-thumbnail" alt="" /></a>
-
-                        <a class="fancybox " href="/myImages/rayong/2_b.jpg" data-fancybox-group="rayong" title="รูปชายหาดยามเที่ยง"><img src="/myImages/rayong/2_b.jpg" class="img-thumbnail" alt="" /></a>
-
-                        <a class="fancybox" href="/myImages/rayong/3_b.jpg" data-fancybox-group="rayong" title="ชายหาดและต้นมะพร้าว"><img src="/myImages/rayong/3_b.jpg" class="img-thumbnail" alt="" /></a>
-
-                        <a class="fancybox " href="/myImages/rayong/4_b.jpg" data-fancybox-group="rayong" title="ร้านอาหารยามเช้า"><img src="/myImages/rayong/4_b.jpg" class="img-thumbnail" alt="" /></a>
-                        <a class="fancybox" href="/myImages/rayong/5_b.jpg" data-fancybox-group="rayong" title="ชายหาดยามเที่ยง"><img src="/myImages/rayong/5_b.jpg" class="img-thumbnail" alt="" /></a>
-                        <a class="fancybox" href="/myImages/rayong/6_b.jpg" data-fancybox-group="rayong" title="ชายหาดและโขดหิน"><img src="/myImages/rayong/6_b.jpg" class="img-thumbnail" alt="" /></a>
-                        <a class="fancybox" href="/myImages/rayong/7_b.jpg" data-fancybox-group="rayong" title="ต้นไม้ของรีสอร์ท"><img src="/myImages/rayong/7_b.jpg" class="img-thumbnail" alt="" /></a>
-                        <a class="fancybox" href="/myImages/rayong/8_b.jpg" data-fancybox-group="rayong" title="ช้างบนชายหาด"><img src="/myImages/rayong/8_b.jpg" class="img-thumbnail" alt="" /></a>
-                        <a class="fancybox" href="/myImages/rayong/9_b.jpg" data-fancybox-group="rayong" title="ชายหาดยามพระอาทิตย์ใกล้ตกดิน"><img src="/myImages/rayong/9_b.jpg" class="img-thumbnail" alt="" /></a>
-                        <a class="fancybox" href="/myImages/rayong/10_b.jpg" data-fancybox-group="rayong" title="ชายหาดยามเย็น"><img src="/myImages/rayong/10_b.jpg" class="img-thumbnail" alt="" /></a>
-                        <a class="fancybox" href="/myImages/rayong/11_b.jpg" data-fancybox-group="rayong" title="บ่อปลาของรีสอร์ท"><img src="/myImages/rayong/11_b.jpg" class="img-thumbnail" alt="" /></a>
-                        <a class="fancybox" href="/myImages/rayong/12_b.jpg" data-fancybox-group="rayong" title="ทางขึ้นใกล้ถึงน้ำตกคลองพลู"><img src="/myImages/rayong/12_b.jpg" class="img-thumbnail" alt="" /></a>
-
-                    </div>
-
-                    <div class="custom-footer" style="background-color:#6F002B;">
-                        <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
-
-                    </div>
-                </div>
-
-                <div id="watch_gallery2" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
-                    <div class="custom-header">
-
-                        <h1 class="headerModalH1"><span class="headerModal"> ดูอัลบั้มรูปภาพ</span></h1>
-                    </div>
-
-                    <div class="gall" id="dog">
-                        <a class="fancybox " href="/myImages/dog/1_c.jpg" data-fancybox-group="dog" title="แมวน้อย"><img src="/myImages/dog/1_c.jpg" class="img-thumbnail" alt="" /></a>
-
-                        <a class="fancybox " href="/myImages/dog/2_c.jpg" data-fancybox-group="dog" title="สุนัขกลางแจ้ง"><img src="/myImages/dog/2_c.jpg" class="img-thumbnail" alt="" /></a>
-
-                        <a class="fancybox" href="/myImages/dog/3_c.jpg" data-fancybox-group="dog" title="สุนัขดำ"><img src="/myImages/dog/3_c.jpg" class="img-thumbnail" alt="" /></a>
-
-                        <a class="fancybox " href="/myImages/dog/4_c.jpg" data-fancybox-group="dog" title="เดเด้"><img src="/myImages/dog/4_c.jpg" class="img-thumbnail" alt="" /></a>
-                        <a class="fancybox" href="/myImages/dog/5_c.jpg" data-fancybox-group="dog" title="ปีโป้ตอนเด็กมากๆ"><img src="/myImages/dog/5_c.jpg" class="img-thumbnail" alt="" /></a>
-                        <a class="fancybox" href="/myImages/dog/6_c.jpg" data-fancybox-group="dog" title="ปีโป้ตอนเด็ก"><img src="/myImages/dog/6_c.jpg" class="img-thumbnail" alt="" /></a>
-                        <a class="fancybox" href="/myImages/dog/7_c.jpg" data-fancybox-group="dog" title="บราวนี่"><img src="/myImages/dog/7_c.jpg" class="img-thumbnail" alt="" /></a>
-                        <a class="fancybox" href="/myImages/dog/8_c.jpg" data-fancybox-group="dog" title="ปีโป้ตอนโตเต็มวัย"><img src="/myImages/dog/8_c.jpg" class="img-thumbnail" alt="" /></a>
-                        <a class="fancybox" href="/myImages/dog/9_c.jpg" data-fancybox-group="dog" title="หวานเย็น"><img src="/myImages/dog/9_c.jpg" class="img-thumbnail" alt="" /></a>
-
-                    </div>
-
-                    <div class="custom-footer" style="background-color:#6F002B;">
-                        <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
-
-                    </div>
-                </div> -->
-                <div id="manage_gallery" data-nq-modal="" data-qo-size="lg" data-qo-independent="true">
-                    <div class="custom-header">
-
-                        <h1 class="headerModalH1"><span class="headerModal"> อัลบั้มรูปภาพ</span></h1>
-                    </div>
-                    <div class="row">
-
-
-                        <div class="col-md-7" style="margin-left:15px">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            <option style="display:none" value=""></option></select>
-
-                        </div>
-                        <div class="col-md-3">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
-
-                                <option>2557</option>
-                                <option>2556</option>
-                                <option>2555</option>
-                                <option>2554</option>
-                                <option>2553</option>
-                                <option>2552</option>
-                                <option>2551</option>
-
-
-                            <option style="display:none" value=""></option></select>
-                        </div>
-
-                        <div class="col-md-1">
-                            <button class="btn btn-primary hvr-rotate" style="margin-bottom:10px"><i class="glyphicon glyphicon-search"></i> ค้นหา</button>
-                        </div>
-                    </div>
-                    <div class="container-fluid">
-                        <div class="clearfix">
-
-
-                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
-                                 data-qo-selectable="true">
-                                <div class="panel-heading clearfix">
-                                   
-
-                                    <div class="pull-left" style="padding-left:15px;">
-                                        <button type="button" class="btn btn-xs btn-primary plusgreen hvr-buzz" data-nq-show-insert="" data-template-id="insertMinutes"><i class="fic glyphicon glyphicon-plus-sign"></i> สร้างอัลบั้มรูปภาพ</button>
-                                    </div>
-
-                                </div>
-
-                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="350px" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
-
-
-                                    <table class="table table-bordered table-hover bg-white table_modal">
-                                    
-                                        <thead class="nq-fix-table-scroll">
-                                            <tr>
-                                               
-                                                <th class="col-xs-4">ชื่ออัลบั้ม</th>
-                                                <th class="col-xs-1 ">วันที่สร้าง</th>
-                                                <th class="col-xs-5">Preview</th>
-                                                <th class="col-xs-1">ดู</th>
-                                                <th class="col-xs-1">ลบ</th>
-
-
-
-                                            </tr>
-                                        </thead>
-                                        <tbody class="flattened">
-                                            
-                                            <tr>
-                                                <td>รูปการสัมมนาภาควิชา ณ เกาะช้าง</td>
-                                                <td>10/10/2558</td>
-                                                <td>
-                                                    <img src="/myImages/rayong/1_b.jpg" class="img-rounded" width="55">
-                                                    <img src="/myImages/rayong/2_b.jpg" class="img-rounded" width="55">
-                                                    <img src="/myImages/rayong/3_b.jpg" class="img-rounded" width="55">
-                                                    <img src="/myImages/rayong/4_b.jpg" class="img-rounded" width="55">
-                                                    <img src="/myImages/rayong/5_b.jpg" class="img-rounded" width="55">
-
-                                                </td>
-                                                <td><a href="" data-nq-toggle-modal="#watch_gallery" class="glyphicon glyphicon-eye-open" /></td>
-
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-
-
-                                            </tr>
-                                            <tr></tr>
-                                            <tr>
-                                                <td>รูปกิจกรรมการเลี้ยงอาหารสุนัขจรจัดข้างตึก ECC</td>
-                                                <td>8/10/2558</td>
-                                                <td>
-                                                    <img src="/myImages/dog/1_c.jpg" class="img-rounded" width="55">
-                                                    <img src="/myImages/dog/2_c.jpg" class="img-rounded" width="55">
-                                                    <img src="/myImages/dog/6_c.jpg" class="img-rounded" width="55">
-                                                    <img src="/myImages/dog/7_c.jpg" class="img-rounded" width="55">
-                                                    <img src="/myImages/dog/8_c.jpg" class="img-rounded" width="55">
-
-                                                </td>
-                                                <td><a href="" data-nq-toggle-modal="#watch_gallery2" class="glyphicon glyphicon-eye-open" /></td>
-
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-
-                                    </table>
-                                </div>
-
-                            
-                                <div data-nq-pageable-template="" ng-form="" data-on-change="panelTitle= 'สร้างอัลบั้มรูปภาพ'" ng-submit="$hide()" style="max-height:100%; overflow:hidden; overflow-y:auto;">
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h3 style="margin-left:20px;margin-top:5px"><span class="topicHeader">ชื่ออัลบั้มรูป:   </span></h3>
-                                        </div>
-                                        <div class="col-md-8" style="margin-top:5px">
-                                            <input type="text" class="form-control" placeholder=""><span class="normal">  </span>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h3 style="margin-left:20px;margin-top:5px"><span class="topicHeader">เลือกรูปที่ต้องการ:   </span></h3>
-                                        </div>
-                                        <div class="col-md-8" style="margin-top:5px">
-                                            <input type="file" class="form-control" accept="image/*" multiple="multiple">
-
-                                        </div>
-                                    </div>
-
-
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="custom-footer" style="background-color:#6F002B;">
-                        <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
-
-                    </div>
-                </div>
-              <!--  <div id="watch_album" data-nq-modal="" data-qo-size="lg"data-qo-independent="true">
-                    <div class="custom-header">
-                        <h1><span class="glyphicon glyphicon-th-list"></span><span class="headerModal" style="color:#6F002B"> ดูอัลบั้มรูปภาพ</span></h1>
-                    </div>
-
-
-
-
-                    <div class="row">
-                        <div class="col-md-2">
-                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">หลักสูตร:   </span></h3>
-                        </div>
-
-                        <div class="col-md-10">
-                            <div class="topicHeader">
-                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีของการศึกษา" data-ng-model="staticSelectModel">
-                                    <option>หลักสูตรวิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
-                                    <option>หลักสูตรวิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
-                                    <option>หลักสูตรวิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
-                                    <option>หลักสูตรวิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                                <option style="display:none" value=""></option></select>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">ปีการศึกษา:   </span></h3>
-                        </div>
-
-                        <div class="col-md-8">
-                            <div class="topicHeader">
-                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" id="watch_gallery_year" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
-                                    <option>2557</option>
-                                    <option value="2556">2556</option>
-                                    <option>2555</option>
-                                    <option>2554</option>
-                                    <option>2553</option>
-                                    <option>2552</option>
-                                    <option>2551</option>
-
-
-                                <option style="display:none" value=""></option></select>
-                            </div>
-                        </div>
-
-                    </div>
-                   
-                    <div class="gall" id="fruity">
-                        <a class="fancybox " href="1_b.jpg" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet"><img src="1_s.jpg" class="img-thumbnail" alt="" /></a>
-
-                        <a class="fancybox " href="2_b.jpg" data-fancybox-group="gallery" title="Etiam quis mi eu elit temp"><img src="2_s.jpg" class="img-thumbnail" alt="" /></a>
-
-                        <a class="fancybox" href="3_b.jpg" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="3_s.jpg" class="img-thumbnail" alt="" /></a>
-
-                        <a class="fancybox " href="4_b.jpg" data-fancybox-group="gallery" title="Sed vel sapien vel sem uno"><img src="4_s.jpg" class="img-thumbnail" alt="" /></a>
-                        <a class="fancybox" href="5_b.jpg" data-fancybox-group="gallery" title="Sed vel sapien vel sem uno"><img src="5_s.jpg" class="img-thumbnail" alt="" /></a>
-                    </div>
-
-                    <div class="custom-footer">
-                        <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
-                        </div>
-                    </div>
-
-                </div>  -->
+              
 <div id="create_new_research" data-nq-modal="" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_research_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">เพิ่มข้อมูลงานวิจัย</h1>
