@@ -81,7 +81,6 @@ D:\4D\project\educationalProject\educationalProject\bin\roslyn\VBCSCompiler.exe.
 D:\4D\project\educationalProject\educationalProject\bin\educationalProject.dll.config
 D:\4D\project\educationalProject\educationalProject\bin\educationalProject.dll
 D:\4D\project\educationalProject\educationalProject\bin\educationalProject.pdb
-D:\4D\project\educationalProject\educationalProject\bin\Antlr3.Runtime.dll
 D:\4D\project\educationalProject\educationalProject\bin\EntityFramework.dll
 D:\4D\project\educationalProject\educationalProject\bin\EntityFramework.SqlServer.dll
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AspNet.Identity.Core.dll
@@ -117,7 +116,6 @@ D:\4D\project\educationalProject\educationalProject\bin\System.Web.Razor.xml
 D:\4D\project\educationalProject\educationalProject\bin\System.Web.WebPages.xml
 D:\4D\project\educationalProject\educationalProject\bin\System.Web.WebPages.Deployment.xml
 D:\4D\project\educationalProject\educationalProject\bin\System.Web.WebPages.Razor.xml
-D:\4D\project\educationalProject\educationalProject\bin\Antlr3.Runtime.pdb
 D:\4D\project\educationalProject\educationalProject\bin\EntityFramework.xml
 D:\4D\project\educationalProject\educationalProject\bin\EntityFramework.SqlServer.xml
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AspNet.Identity.Core.xml
@@ -265,3 +263,4 @@ C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\education
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb
+D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
