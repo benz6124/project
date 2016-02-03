@@ -3332,14 +3332,27 @@ app.controller('show_edit_album_controller', function($scope, $http,$alert,$load
   $scope.show_my_pictures=function(){
 
 
+       $scope.to_del = [];
+var index;
      for(index=0;index<$scope.my_pictures.flow.files.length;index++){
+        console.log("loop");
+        console.log($scope.my_pictures.flow.files[index].name);
+        console.log($scope.my_pictures.flow.files[index].size);
         if ($scope.my_pictures.flow.files[index].size > 2000000){
             console.log("remove file");
-            $scope.my_pictures.flow.files.splice(index,1);
+            console.log($scope.my_pictures.flow.files[index].name);
+             $scope.to_del.push($scope.my_pictures.flow.files[index]);
+
         }
     
      }
-    
+        
+     console.log(" $scope.to_del");
+     console.log( $scope.to_del);
+
+    for(index=0;index<$scope.to_del.length;index++){
+       $scope.my_pictures.flow.files.splice( $scope.my_pictures.flow.files.indexOf($scope.to_del[index]),1);
+    }
 
 
 }
@@ -4598,15 +4611,25 @@ $scope.show_my_pictures=function(){
      $scope.show_gallery = true;
      var index;
 
+        $scope.to_del = [];
+
      for(index=0;index<$scope.my_pictures.flow.files.length;index++){
+        console.log("loop");
+        console.log($scope.my_pictures.flow.files[index].name);
+        console.log($scope.my_pictures.flow.files[index].size);
         if ($scope.my_pictures.flow.files[index].size > 2000000){
             console.log("remove file");
-            $scope.my_pictures.flow.files.splice(index,1);
+            console.log($scope.my_pictures.flow.files[index].name);
+             $scope.to_del.push($scope.my_pictures.flow.files[index]);
+
         }
     
      }
     
-    console.log("show");
+
+    for(index=0;index<$scope.to_del.length;index++){
+       $scope.my_pictures.flow.files.splice( $scope.my_pictures.flow.files.indexOf($scope.to_del[index]),1);
+    }
 
 }
     $scope.save_to_server = function(my_modal) {
@@ -4737,19 +4760,27 @@ $scope.my_pictures.flow.files = [];
     }
 
 $scope.show_my_pictures=function(){
-
+var index;
      $scope.show_gallery = true;
-     var index;
+         $scope.to_del = [];
 
      for(index=0;index<$scope.my_pictures.flow.files.length;index++){
+        console.log("loop");
+        console.log($scope.my_pictures.flow.files[index].name);
+        console.log($scope.my_pictures.flow.files[index].size);
         if ($scope.my_pictures.flow.files[index].size > 2000000){
             console.log("remove file");
-            $scope.my_pictures.flow.files.splice(index,1);
+            console.log($scope.my_pictures.flow.files[index].name);
+             $scope.to_del.push($scope.my_pictures.flow.files[index]);
+
         }
     
      }
     
-    console.log("show");
+
+    for(index=0;index<$scope.to_del.length;index++){
+       $scope.my_pictures.flow.files.splice( $scope.my_pictures.flow.files.indexOf($scope.to_del[index]),1);
+    }
 
 }
     $scope.save_to_server = function(my_modal) {
@@ -4925,16 +4956,29 @@ $scope.show_my_pictures=function(){
 
      $scope.show_gallery = true;
      var index;
+     console.log("$scope.my_pictures.flow.files")
+     console.log($scope.my_pictures.flow.files);;
+     console.log($scope.my_pictures.flow.files.length)
+     $scope.to_del = [];
+
      for(index=0;index<$scope.my_pictures.flow.files.length;index++){
+        console.log("loop");
+        console.log($scope.my_pictures.flow.files[index].name);
+        console.log($scope.my_pictures.flow.files[index].size);
         if ($scope.my_pictures.flow.files[index].size > 2000000){
             console.log("remove file");
-            $scope.my_pictures.flow.files.splice(index,1);
+            console.log($scope.my_pictures.flow.files[index].name);
+             $scope.to_del.push($scope.my_pictures.flow.files[index]);
 
         }
     
      }
     
-    console.log("show");
+
+    for(index=0;index<$scope.to_del.length;index++){
+       $scope.my_pictures.flow.files.splice( $scope.my_pictures.flow.files.indexOf($scope.to_del[index]),1);
+    }
+  
 
 }
     $scope.save_to_server = function(my_modal) {
