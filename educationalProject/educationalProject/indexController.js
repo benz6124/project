@@ -1125,16 +1125,49 @@ app.controller('evaluate_by_other_controller', function($scope, $alert,$http,req
               $scope.curri_choosen = {}
   $scope.files = [];
      $scope.year_choosen = {};
-       
+       $scope.please_wait = false;
 $scope.indicator_choosen = {};
+
+
+   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
 }
 
 
-   
+   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+   $scope.still_not_complete = function(){
+    var index;
+    if(!$scope.corresponding_results){
+        return true;
+    }
+    for(index=0;index<$scope.corresponding_results.length;index++){
+        if (!$scope.corresponding_results[index].evaluation_score){
+            return true;
+        }
+    }
+
+    return false;
+   }
+
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
 
   $scope.$on("fileSelected", function (event, args) {
         $scope.$apply(function () {            
-           
+           var extension = args.file.name.split('.');
 
  if(args.file.size > 25000000){
                    angular.forEach(
@@ -1158,6 +1191,7 @@ $scope.indicator_choosen = {};
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
        }
             else{
+                $scope.files = [];
                    $scope.files.push(args.file);
             }
 
@@ -1176,8 +1210,11 @@ $scope.indicator_choosen = {};
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
 
             $scope.corresponding_aca_years = data;
-
+             $scope.choose_not_complete = true;
+             $scope.corresponding_indicators = {};
+                    $scope.please_wait = false;
           });
+
 
 
     }
@@ -1185,7 +1222,11 @@ $scope.indicator_choosen = {};
 $scope.clear_files = function(){
     $scope.files = [];
 }
-
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+ 
 
     $scope.find_indicators = function(){
 $scope.indicator_choosen = {};
@@ -1201,8 +1242,9 @@ $scope.indicator_choosen = {};
                  }
              }
          ).success(function (data) {
-     
+      $scope.choose_not_complete = true;
              $scope.corresponding_indicators = data;
+                    $scope.please_wait = false;
          });
 
     }
@@ -1211,7 +1253,7 @@ $scope.indicator_choosen = {};
         console.log($scope.indicator_choosen);
         $scope.indicator_choosen.curri_id = $scope.curri_choosen.curri_id ;
         $http.post(
-             '/api/selfevaluation',
+             '/api/othersevaluation',
              JSON.stringify($scope.indicator_choosen),
              {
                  headers: {
@@ -1221,7 +1263,7 @@ $scope.indicator_choosen = {};
          ).success(function (data) {
                    console.log("wait results");
             console.log(data);
- 
+        $scope.please_wait = false;
              $scope.corresponding_results = data;
              $scope.choose_not_complete = false;
      
@@ -1236,19 +1278,19 @@ $scope.indicator_choosen = {};
     }
 
  $scope.save_to_server = function(my_modal) {
+
           $scope.please_wait = true;
       var formData = new FormData();
 
     formData.append("model", angular.toJson($scope.corresponding_results));
+  formData.append("file", $scope.files[0]);
 
-        for (var i = 0; i < $scope.files.length; i++) {
-        
-            formData.append("file" + i, $scope.files[i]);
-        }
+  console.log("$scope.corresponding_results");
+  console.log($scope.corresponding_results);
 
         $http({
             method: 'PUT',
-            url: "/Api/aunbook",
+            url: "/api/othersevaluation",
 
             headers: { 'Content-Type': undefined },
 
@@ -1258,10 +1300,12 @@ $scope.indicator_choosen = {};
 
         }).
         success(function (data, status, headers, config) {
+              $scope.init ();
+                   my_modal.$hide();
               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-              my_modal.$hide();
-                  $scope.init ();
+         
+                
         }).
         error(function (data, status, headers, config) {
               $scope.please_wait = false;

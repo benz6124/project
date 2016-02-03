@@ -2989,7 +2989,7 @@ glyphicon glyphicon-bell"></i> </span>
                         <div class="col-md-8" style="
     padding-left: 0px;
 ">
-                            <textarea name="message" rows="2" cols="65"></textarea>
+                            <textarea name="message" rows="2" cols="65" data-ng-model="result.suggestion"></textarea>
                         </div>
                     </div></td>
 
@@ -3020,16 +3020,18 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div> -->
     <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <h3 style="margin-left:20px;margin-top:5px;color:#6F002B;font-weight:bold"><span class="topicHeader">ไฟล์สนับสนุนการประเมิน:  </span></h3>
 
                             </div>
- <div class="col-md-1">
+<!--  <div class="col-md-1">
                              <button class="btn btn-danger" style="paddle:0px;vertical-align:middle" ng-click="clear_files()">ล้างข้อมูล</button>
-</div>
-                            <div class="col-md-6">
+</div> -->
+                            <div class="col-md-9" style="
+    padding-left: 0px;
+">
                              
-                                <input type="file" style="margin-right:20px;" name="upload_file_input" class="form-control" placeholder="ไฟล์สนับสนุนการประเมิน" data-ng-model="files" ng-disabled="choose_not_complete" required="required" file-upload   multiple/>
+                                <input type="file"  name="upload_file_input" class="form-control" placeholder="ไฟล์สนับสนุนการประเมิน" data-ng-model="files" ng-disabled="choose_not_complete" required="required" file-upload   multiple/>
                             </div>
 
                         </div>
@@ -3046,7 +3048,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="evaluate_by_me_form.$invalid || choose_not_complete" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="choose_not_complete || still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div> 
