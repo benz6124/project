@@ -4957,6 +4957,266 @@ $scope.init =function() {
   
 
 });
+app.controller('import_to_curri_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+         $scope.nothing_change = true;
+                $rootScope.manage_research_my_research_now = {};
+                $scope.choose_people = [];
+             
+          
+}
+ $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+         $scope.nothing_change = true;
+                $rootScope.manage_research_my_research_now = {};
+                $scope.choose_people = [];
+
+
+  $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+    $scope.still_not_complete = function(){
+
+        if(!$scope.curri_choosen || !$scope.choose_people){
+          
+            return true;
+        }
+
+        if($scope.choose_people.length ==0){
+           
+            return true;
+        }
+
+        return false;
+    }
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+     $scope.find_information = function(){
+
+      
+        console.log($scope.curri_choosen.curri_id);
+
+        $http.post(
+             '/api/personnel/gettnameandid',
+             JSON.stringify($scope.curri_choosen.curri_id),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+          
+              $scope.result =data;
+             $scope.choose_not_complete = false;
+              
+            
+    
+         });
+
+}
+ $scope.save_to_server = function(my_modal){
+    console.log("save_to_server");
+     
+        $scope.to_sent = {};
+        $scope.to_sent.these_people = $scope.choose_people;
+        $scope.to_sent.curri_id = $rootScope.manage_bind_curri_id_now;
+           console.log($scope.to_sent);
+        $http.post(
+             '/api/personnelcurriculum',
+             JSON.stringify($scope.to_sent),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            $rootScope.manage_bind_all_people_in_curri = data;
+                   $scope.close_modal(my_modal);
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+        
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    }
+});
+app.controller('manage_bind_person_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+         $scope.nothing_change = true;
+           
+    $scope.result = {};
+
+}
+
+
+  $scope.go_to_import = function(){
+
+    var index;
+    $rootScope.manage_bind_curri_id_now = $scope.curri_choosen.curri_id;
+    $rootScope.all_curri_except_us = [];
+         for(index=0;index<$rootScope.all_curriculums.length;index++){
+                    if($scope.curri_choosen.curri_id != $rootScope.all_curriculums[index].curri_id){
+                        $rootScope.all_curri_except_us.push($rootScope.all_curriculums[index]);
+                    }
+
+
+                }
+
+
+  }
+
+
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                    $scope.result = {};
+  $scope.nothing_change = true;
+   
+
+        $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+    
+
+
+    $scope.remove_person = function(index_to_remove){
+
+         $rootScope.manage_bind_all_people_in_curri.splice(index_to_remove, 1);    
+           $scope.nothing_change = false;
+
+    }
+    $scope.find_information = function(){
+
+      
+        console.log($scope.curri_choosen.curri_id);
+
+        $http.post(
+             '/api/personnel/getonlynameandpfname',
+             JSON.stringify($scope.curri_choosen.curri_id),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            
+              $rootScope.manage_bind_all_people_in_curri = data;
+             $scope.choose_not_complete = false;
+               $scope.nothing_change = true;
+            
+    
+         });
+
+
+
+    }
+
+
+    $scope.delete_checked = function(){
+
+      
+        var index;
+
+              $scope.delete_these = [];
+ 
+        for(index=0;index < $rootScope.manage_bind_all_people_in_curri.length ; index++){
+            if($rootScope.manage_bind_all_people_in_curri[index].delete_me == true){
+               $scope.delete_these.push($rootScope.manage_bind_all_people_in_curri[index]);
+            }
+        }
+
+        if($scope.delete_these.length != 0){
+             for(index =0 ;index<  $scope.delete_these.length ; index++){
+            $rootScope.manage_bind_all_people_in_curri.splice($rootScope.manage_bind_all_people_in_curri.indexOf($scope.delete_these[index]),1);
+        }
+         $scope.nothing_change = false;
+        }
+        else{
+                $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกบุคลากรที่ต้องการนำออก',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+        }
+       
+    }
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+    $scope.save_to_server = function(my_modal){
+        console.log("save_to_server");
+        console.log($rootScope.manage_bind_all_people_in_curri);
+         $scope.to_sent  = {};
+        if($rootScope.manage_bind_all_people_in_curri.length == 0 ){
+           
+         
+            $scope.to_sent.curri_id = $scope.curri_choosen.curri_id ;
+
+
+        }
+        else{
+             $scope.to_sent.people = $rootScope.manage_bind_all_people_in_curri;
+             $scope.to_sent.curri_id = $scope.curri_choosen.curri_id ;
+        }
+
+
+    
+
+        $http.put(
+             '/api/personnelcurriculum',
+             JSON.stringify($scope.to_sent),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+             $scope.close_modal(my_modal);
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+              
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    }
+});
+
 
 app.controller('manage_research_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
@@ -4976,6 +5236,17 @@ $scope.init =function() {
                 $scope.indicator_choosen= {};
                     $scope.result = {};
   $scope.nothing_change = true;
+
+      $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+    
     $scope.download_research = function(path_research){
         $scope.download_file(path_research);
     }

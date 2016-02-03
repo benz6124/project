@@ -383,12 +383,15 @@ $('.profile_pic').mouseover(function(){
 
 
                         </li>
-                        <li>
-                            <a href="" data-nq-toggle-modal="#import_export_to_curri" data-effect="from-left" data-placement="right">
+
+                         <li>
+                            <a href="" data-nq-toggle-modal="#manage_bind_person" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-list-alt"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic">&nbsp;&nbsp;โยงบัญชีผู้ใช้งาน</span></span>
                             </a>
                         </li>
+
+                     
                         <li>
                             <a href="" data-nq-toggle-modal="#change_priviledge" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-cog"></i>
@@ -1022,19 +1025,7 @@ $('.profile_pic').mouseover(function(){
                     <br />
                     <br />
 
-                    <!-- <div style="margin-left:35px">
-                       <button class="btn editor" data-nq-toggle-modal="#insert_evidence" data-effect="sing" data-placement="bottom"><span class="glyphicon glyphicon-paperclip" /><span class="normal"> แทรกหลักฐาน</span></button>
-
-                       <button class="btn editor" data-nq-toggle-modal="#gallery_survey" data-effect="sing" data-placement="bottom"><span class="glyphicon glyphicon-picture" /><span class="normal"> แทรกอัลบั้มรูปภาพ </span></button>
-
-
-
-                       <button class="btn editor" ><span class="glyphicon glyphicon-list-alt" /><span class="normal"> แทรกแบบสำรวจ </span></button>
-                       <button class="btn editor" ><span class="glyphicon glyphicon-signal" /><span class="normal"> แทรกผลการสำรวจ </span></button>
-                    </div>  -->
-
-
-                
+      
             
                     <br />
                     <div id="gallery_survey" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true">
@@ -1083,24 +1074,7 @@ $('.profile_pic').mouseover(function(){
                                     <option style="display:none" value=""></option></select>
 
 
-                                    <!--   <a href="" data-toggle="modal" data-target=".pop-up-1">
-                                        <img src="http://i.imgur.com/YZ7AGyF.jpg" width="150" class="img-responsive img-rounded center-block" alt="">
-                                    </a> -->
-                                    <!--
-                                                                 <div class="modal fade pop-up-1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel-1" aria-hidden="true">
-                                                                     <div class="modal-dialog modal-lg">
-                                                                        <div class="modal-content">
-
-                                                                           <div class="modal-header">
-                                                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                                              <h4 class="modal-title" id="myLargeModalLabel-1">Mixer Board</h4>
-                                                                          </div>
-                                                                          <div class="modal-body">
-                                                                              <img src="http://i.imgur.com/YZ7AGyF.jpg.jpg" class="img-responsive img-rounded center-block" alt="">
-                                                                          </div>
-                                                                      </div>
-                                                                  </div>
-                                                              </div> -->
+                       
                                 </div>
 
                             </div>
@@ -1880,6 +1854,97 @@ $('.profile_pic').mouseover(function(){
    </div>
 
              
+<div id="manage_bind_person" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_bind_person_controller">
+
+                    <div class="custom-header">
+                        <h1 class="headerModalH1">ส่วนการโยงบัญชีผู้ใช้งาน</h1>
+                    </div>
+
+          <div class="row" style="
+    margin-left: 14px;
+    margin-right: 16px;
+">
+
+
+                      
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+            <option style="display:none" value=""></option></select>
+
+                     
+                      
+
+                    </div>
+<br />
+  <div class="container-fluid" ng-hide="choose_not_complete">
+                        <div class="clearfix">
+
+
+                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
+                                 data-qo-selectable="true">
+              
+
+              
+                                <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+
+                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="flip-x" data-nq-toggle-modal="#import_to_curri" data-ng-click="go_to_import()"><i class="fic glyphicon glyphicon-plus-sign"></i> นำเข้าบุคลากร</button>
+
+
+   <button type="button" class="btn btn-xs btn-danger  hvr-buzz"  style="margin-bottom:15px;margin-left:20px"data-effect="flip-x" data-ng-click="delete_checked()"><i class="fic glyphicon glyphicon-plus-sign"></i> นำออกจากหลักสูตร</button>
+  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
+                                      
+                                        <thead class="nq-fix-table-scroll">
+                                            <tr>
+                          
+                                                <th style="width:30px">เลือกนำออก</th>
+                                      <th style="width:80px;padding-left: 0px;padding-right: 0px;">รูปภาพ</th>
+                                                <th style="width:140px">ชื่อ-นามสกุล</th>
+            
+                                                <th style="width:30px;padding-left: 0px;padding-right: 0px;">ประเภทบุคลากร</th>
+                                                <th style="width:30px">นำออก</th>
+                                    
+                                              
+                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody class="flattened">
+                                        <form name="manage_survey_form" novalidate>
+                                          
+
+                                            <tr  ng-repeat="person in manage_bind_all_people_in_curri">
+                          <td><span style="font-size:19px;"><input type="checkbox" data-ng-model="person.delete_me"></span> </td>
+                                              <td  ><img src="{{person.file_name_pic}}" class="img-circle" width="70"></td>
+               <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{person.t_name}}</span> </td>
+                          
+
+
+                             <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{person.type}}</span> </td>
+                                     
+                       
+    
+                                    
+
+                                          <td > <a  style="margin-top:7px" data-ng-click="remove_person($index)" href=""  class="hvr-pulse" >
+                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                    </a></td> 
+
+                                            </tr>
+
+                                            </form>
+                                        </tbody>
+
+                                    </table>
+
+         </div>         </div>        
+
+          </div>         </div>
+     <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button ng-disabled="choose_not_complete || nothing_change"  class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                        </div>
+                    </div>
+   </div>
+
  <div id="show_education_personnel" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="show_education_personnel_controller">
 
                     <div class="custom-header">
@@ -1924,7 +1989,7 @@ $('.profile_pic').mouseover(function(){
                                            
                                    <th style="width:40px;padding-left: 0px; padding-right: 0px;">ประเภท</th>
                                    
-                                                <th style="width:30px;padding-left: 0px; padding-right: 0px;">ห้องพัก</th>
+                                                <th style="width:60px;padding-left: 0px; padding-right: 0px;">ห้องพัก</th>
                                                 <th style="width:30px;padding-left: 0px; padding-right: 0px;">อีเมล์</th>
                                                 <th style="width:30px;padding-left: 0px; padding-right: 0px;">โทรศัพท์</th>
                                               
@@ -3896,694 +3961,55 @@ glyphicon glyphicon-bell"></i> </span>
                 </div>
 
 
-                <div id="mwdadawdad" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="lg" data-qo-independent="true">
-                    <div class="custom-header">
+                
 
-                        <h1 class="headerModalH1"><span class="headerModal"> จัดการหลักฐาน</span></h1>
-                    </div>
-
-
-                    <div class="row">
-
-
-                        <div class="col-md-6" style="margin-left:15px">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            <option style="display:none" value=""></option></select>
-
-                        </div>
-                        <div class="col-md-2">
-                            <select data-qo-disable-clear="true" data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="ปีการศึกษา" data-ng-model="staticSelectModel">
-                                <option>2557</option>
-                                <option>2556</option>
-                                <option>2555</option>
-                                <option>2554</option>
-                                <option>2553</option>
-                                <option>2552</option>
-                                <option>2551</option>
-
-
-                            <option style="display:none" value=""></option></select>
-                        </div>
-  <div class="col-md-2">
-                            <select data-qo-disable-clear="true" data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อหลัก" data-ng-model="staticSelectModel">
-                                <option>AUN 1</option>
-                                <option>AUN 2</option>
-                                <option>AUN 3</option>
-                                <option>AUN 4</option>
-                                <option>AUN 5</option>
-                                <option>AUN 6</option>
-                                <option>AUN 7</option>
-                                <option>AUN 8</option>
-                                <option>AUN 9</option>
-                                <option>AUN 10</option>
-                                <option>AUN 11</option>
-                                <option>AUN 12</option>
-                                <option>AUN 13</option>
-                                <option>AUN 14</option>
-                                <option>AUN 15</option>
-
-                            <option style="display:none" value=""></option></select>
-
-
-                        </div>
-                        <div class="col-md-1">
-                            <button class="btn btn-primary hvr-rotate" style="margin-bottom:10px"><i class="glyphicon glyphicon-search"></i> ค้นหา</button>
-                        </div>
-                    </div>
-
-
-                 <!--    <div class="row">
-                        <div class="col-md-2" style="margin-left:15px;margin-top:5px">
-                            <h3 style="margin-top:0px;"><span class="topicHeader">หัวข้อหลัก:  </span></h3>
-                        </div>
-
-                        <div class="col-md-3">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="หัวข้อหลัก" data-ng-model="staticSelectModel">
-                                <option>AUN 1</option>
-                                <option>AUN 2</option>
-                                <option>AUN 3</option>
-                                <option>AUN 4</option>
-                                <option>AUN 5</option>
-                                <option>AUN 6</option>
-                                <option>AUN 7</option>
-                                <option>AUN 8</option>
-                                <option>AUN 9</option>
-                                <option>AUN 10</option>
-                                <option>AUN 11</option>
-                                <option>AUN 12</option>
-                                <option>AUN 13</option>
-                                <option>AUN 14</option>
-                                <option>AUN 15</option>
-
-                            <option style="display:none" value=""></option></select>
-
-
-                        </div>
-                      
-                    </div> -->
-
-
-
-
-                    <div class="container-fluid">
-                        <div class="clearfix">
-
-
-                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
-                                 data-qo-selectable="true">
-                                <div class="panel-heading clearfix">
-                                    <!-- <h1 class="panel-title pull-left"></i> รายงานการประชุม </h1> -->
-
-
-                                    <div class="pull-left" style="padding-left:15px;">
-                                        <button type="button" class="btn btn-xs btn-success  hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#upload_evidence"><i class="fic glyphicon glyphicon-plus-sign"></i> อัพโหลดหลักฐานใหม่</button>
-
-                                        &nbsp; &nbsp;
-                                        <button type="button" class="btn btn-xs btn-info hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#import_evidence"><i class="fic glyphicon glyphicon-plus-sign"></i> นำเข้าหลักฐานที่มีอยู่</button>
-
-
-                                    </div>
-
-                                </div>
-
-                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="350px" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
-
-
-                                    <!--          <div  data-qo-min-height="200px" data-nq-scroll="" data-qo-max-height="350px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden;"> -->
-                                    <table class="table table-bordered table-hover bg-white table_modal">
-                                        <!--nq-fix-table-scroll class would fix thead always visible at top of the table if you put the table into a scrollable container-->
-                                        <thead class="nq-fix-table-scroll">
-                                            <tr>
-                                                <!--nq-column-sort directive would bind sorting handler to the element-->
-                                                <th class="col-xs-1">รหัส</th>
-                                                <th class="col-xs-6 ">ชื่อหลักฐาน</th>
-                                                <th class="col-xs-2">ผู้อัพโหลด</th>
-                                                <th class="col-xs-1">ดาวน์โหลด</th>
-                                                <th class="col-xs-1">แก้ไข</th>
-                                                <th class="col-xs-1">ลบ</th>
-
-
-
-                                            </tr>
-                                        </thead>
-                                        <tbody class="flattened">
-                                            <!--pageable-repeat is required sub directive-->
-                                            <tr>
-                                                <td>1-01</td>
-                                                <td>หลักสูตรวิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์ (หลักสูตรปรับปรุง พ.ศ. 2554)</td>
-                                                <td>Wiboon</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1-02</td>
-                                                <td>ประกาศคณะกรรมการการอุดมศึกษาแห่งชาติ เรื่อง แนวทางการปฏิบัติตามกรอบมาตรฐานคุณวุฒิระดับอุดมศึกษาแห่งชาติ พ.ศ. 2552</td>
-                                                <td>Wiboon</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1-03</td>
-                                                <td>ประกาศคณะกรรมการการอุดมศึกษาแห่งชาติ เรื่อง มาตรฐานคุณวุฒิระดับปริญญาตรี สาขาคอมพิวเตอร์ พ.ศ. 2552</td>
-                                                <td>Wiboon</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1-04</td>
-                                                <td>อัตลักษณ์ เอกลักษณ์ ปรัชญา ปณิธาน วิสัยทัศน์ พันธกิจ ของสถาบันฯ และคณะวิศวกรรมศาสตร์</td>
-                                                <td>Wiboon</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1-05</td>
-                                                <td>บัณฑิตที่พึงประสงค์ของสถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง</td>
-                                                <td>Wiboon</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-
-                                            <tr>
-                                                <td>1-06</td>
-                                                <td>บัณฑิตที่พึงประสงค์ของคณะวิศวกรรมศาสตร์</td>
-                                                <td>Wiboon</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1-07</td>
-                                                <td>ผลสำรวจความคิดเห็นของศิษย์เก่าและผู้ประกอบการ</td>
-                                                <td>Wiboon</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1-08</td>
-                                                <td>ผลสำรวจความพึงพอใจคุณลักษณะของบัณฑิตที่พึงประสงค์ตามความต้องการของผู้ใช้บัณฑิต ปีการศึกษา 2554</td>
-                                                <td>Wiboon</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1-09</td>
-                                                <td>ผลสำรวจความพึงพอใจคุณลักษณะของบัณฑิตที่พึงประสงค์ตามความต้องการของผู้ใช้บัณฑิต ปีการศึกษา 2556</td>
-                                                <td>Wiboon</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1-10</td>
-                                                <td>รายงานความพึงพอใจของบัณฑิตต่อการดำเนินงานของสถาบัน และข้อเสนอแนะ</td>
-                                                <td>Wiboon</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1-11</td>
-                                                <td>รายงานภาวการณ์มีงานทำของบัณฑิต รุ่นปีการศึกษา 2556</td>
-                                                <td>Wiboon</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1-12</td>
-                                                <td>รายงานการประชุมทบทวนหลักสูตร</td>
-                                                <td>Wiboon</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1-13</td>
-                                                <td>หนังสือรับรองคุณวุฒิผู้สำเร็จการศึกษาตามหลักสูตรวิศวกรรมศาสตร์บัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์ ฉบับปี พ.ศ. 2554 จากสำนักงาน ก.พ.</td>
-                                                <td>Wiboon</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Download">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-download-alt"></i>
-                                                    </a>
-                                                </td>
-
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-
-                                    </table>
-                                </div>
-
-
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <div class="custom-footer" style="background-color:#6F002B;">
-                        <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
-                    </div>
-                </div>
-
-                <div id="import_to_curri" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true">
+                <div id="import_to_curri" data-nq-modal="" data-ng-controller="import_to_curri_controller"data-qo-fire-emit = "true" data-qo-independent="true">
 
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal"> นำเข้าบุคลากร</span></h1>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-10">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา" data-ng-model="staticSelectModel">
-                                <option> อ. วิบูลย์ พร้อมพานิชย์</option>
-                                <option>ดร. ชมพูนุท จินจาคาม</option>
-                                <option>ผศ. ดร. อรัญญา วลัยรัชต์</option>
-                                <option>รศ. ดร. เกียรติกูล เจียรนัยธนะกิจ</option>
-                                <option>ผศ. ดร. ชุติเมษฏ์ ศรีนิลทา</option>
-                                <option>รศ. ดร. อรฉัตร จิตต์โสภักตร์</option>
-                                <option>ดร. อรทัย สังข์เพ็ชร</option>
-                                <option>ดร. อักฤทธิ์ สังข์เพ็ชร</option>
-                                <option> รศ. ดร. บุญธีร์ เครือตราชู</option>
-                                <option> รศ. กฤตวัน ศิริบูรณ์</option>
+                    <div class="row" style="margin-left:0px;margin-right:0px">
+                      
+      
+                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in $root.all_curri_except_us" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+                                 
+            <option style="display:none" value=""></option>
 
-
-                            <option style="display:none" value=""></option></select>
-                        </div>
+            </select>
+                        
 
                     </div>
-                    <br /><br /><br /><br />
+                 
+
+                    <div class="row" style="margin-left:0px;margin-right:0px;margin-top:8px">
+                      
+                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="person.t_name for person in result" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกบุคลากร"  data-ng-model="$parent.choose_people"  data-qo-max-length ="0" data-qo-multiple="true"  data-qo-disable-clear="true" >
+                                 
+            <option style="display:none" value=""></option>
+
+            </select>
+                        
+
+                    </div>
+                    <div data-nq-scroll="" data-qo-max-height="180px" data-qo-bar-size="normal" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;margin-top:5px">
+                  <ul ng-show="choose_people.length!=0">
+                           <span class="topicHeader"> <li style="color:#6F002B;margin-left:10px" ng-repeat="each in choose_people">{{each.t_name}}</li></span>
+                        </ul>
+                        </div>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                            <button class="btn btn-success  " ng-disabled="still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
                 </div>
 
-                <div id="import_export_to_curri" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="lg" data-qo-independent="true">
-
-                    <div class="custom-header">
-
-                        <h1 class="headerModalH1"><span class="headerModal"> โยงบัญชีผู้ใช้งาน</span></h1>
-                    </div>
-
-
-                    <div class="row">
-
-
-                        <div class="col-md-10" style="margin-left:15px">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            <option style="display:none" value=""></option></select>
-
-                        </div>
-                        <!--             <div class="col-md-3">
-                                       <select data-qo-disable-clear="true" data-qo-button-class="mySelect"   name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel" >
-                                                 <option>2557</option><option>2556</option>
-                                                 <option>2555</option>
-                                                 <option>2554</option>
-                                                 <option>2553</option>
-                                                 <option>2552</option>
-                                                 <option>2551</option>
-
-
-                                             <option style="display:none" value=""></option></select>
-                        </div> -->
-
-                        <div class="col-md-1">
-                            <button class="btn btn-primary hvr-rotate" style="margin-bottom:10px"><i class="glyphicon glyphicon-search"></i> ค้นหา</button>
-                        </div>
-                    </div>
-
-                    <div class="container-fluid">
-                        <div class="clearfix">
-
-
-                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
-                                 data-qo-selectable="true">
-                                <div class="panel-heading clearfix">
-                                    <!-- <h1 class="panel-title pull-left"></i> รายงานการประชุม </h1> -->
-
-
-                                    <div class="pull-left" style="padding-left:15px;">
-                                        <button type="button" class="btn btn-xs btn-success plusgreen hvr-buzz" data-nq-toggle-modal="#import_to_curri"><i class="fic glyphicon glyphicon-plus-sign"></i> นำเข้าบุคลากร</button>
-
-                                        <button type="button" class="btn btn-xs btn-danger hvr-buzz" style="margin-left:10px"><i class="fic glyphicon glyphicon-minus-sign"></i> นำออกจากหลักสูตร</button>
-                                    </div>
-
-                                </div>
-
-                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="350px" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
-
-
-                                    <!--          <div  data-qo-min-height="200px" data-nq-scroll="" data-qo-max-height="350px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden;"> -->
-                                    <table class="table table-bordered table-hover bg-white table_modal">
-                                        <!--nq-fix-table-scroll class would fix thead always visible at top of the table if you put the table into a scrollable container-->
-                                        <thead class="nq-fix-table-scroll">
-                                            <tr>
-                                                <!--nq-column-sort directive would bind sorting handler to the element-->
-                                                <th class="col-xs-1">เลือก</th>
-                                                <th class="col-xs-1 ">รูปภาพ</th>
-                                                <th class="col-xs-2 ">ชื่อผู้ใช้</th>
-                                                <th class="col-xs-5">ชื่อ-นามสกุล</th>
-                                                <th class="col-xs-2">ประเภทบุคลากร</th>
-                                                <th class="col-xs-1">นำออก</th>
 
 
 
 
-                                            </tr>
-                                        </thead>
-                                        <tbody class="flattened">
-                                            <!--pageable-repeat is required sub directive-->
-
-                                            <tr>
-                                                <td><input type="checkbox"></td>
-                                                <td><img src="/myImages/profile_pic/ชมพูนุท.jpg" class="img-circle" width="50"></td>
-                                                <td>Chompoonuch</td>
-                                                <td>ดร. ชมพูนุท จินจาคาม</td>
-                                                <td>กรรมการหลักสูตร</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox"></td>
-                                                <td><img src="/myImages/profile_pic/รัตธิตา.jpg" class="img-circle" width="50"></td>
-                                                <td>P'Fluke</td>
-                                                <td>นางสาว รัตธิตา นิลจักร์</td>
-                                                <td>เจ้าหน้าที่</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-
-
-                                            <tr>
-                                                <td><input type="checkbox"></td>
-                                                <td><img src="/myImages/profile_pic/อวยพร.jpg" class="img-circle" width="50"></td>
-                                                <td>P'Kung</td>
-                                                <td>นางสาว อวยพร นิ่งน้อย</td>
-                                                <td>เจ้าหน้าที่</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-
-
-
-
-
-                                            <tr>
-                                                <td><input type="checkbox"></td>
-
-                                                <td><img src="/myImages/profile_pic/สรยุทธ.jpg" class="img-circle" width="50"></td>
-                                                <td>Sorayut</td>
-                                                <td>อ. สรยุทธ กลมกล่อม</td>
-                                                <td>อาจารย์</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td><input type="checkbox"></td>
-                                                <td><img src="/myImages/profile_pic/อรัญญา.jpg" class="img-circle" width="50"></td>
-                                                <td>Aranya</td>
-                                                <td>ผศ. ดร. อรัญญา วลัยรัชต์</td>
-                                                <td>อาจารย์</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td><input type="checkbox"></td>
-                                                <td><img src="/myImages/profile_pic/วิบูลย์.jpg" class="img-circle" width="50"></td>
-                                                <td>Wiboon</td>
-                                                <td>อ. วิบูลย์ พร้อมพานิชย์</td>
-                                                <td>กรรมการหลักสูตร</td>
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-
-                                        </tbody>
-
-                                    </table>
-                                </div>
-
-                                <!--           <div data-nq-pageable-template=""    data-qo-max-height="350px"data-on-change="panelTitle= 'สร้างรายงานการประชุม'"  style="overflow:hidden; overflow-y:auto;" data-nq-scroll="" ng-submit="$hide()" >
-                                -->
-
-
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="custom-footer" style="background-color:#6F002B;">
-                        <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
-                    </div>
-
-                </div>
 
 
 
@@ -5678,236 +5104,6 @@ glyphicon glyphicon-bell"></i> </span>
    </div>
 
 
-                <div id="manage_surveysss" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="lg" data-qo-independent="true">
-
-                    <div class="custom-header">
-                        <h1 class="headerModalH1">แบบสอบถาม</h1>
-                    </div>
-
-                    <div class="row">
-
-
-                        <div class="col-md-7" style="margin-left:15px">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            <option style="display:none" value=""></option></select>
-
-                        </div>
-                        <div class="col-md-3">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel">
-                                <option>2557</option>
-                                <option>2556</option>
-                                <option>2555</option>
-                                <option>2554</option>
-                                <option>2553</option>
-                                <option>2552</option>
-                                <option>2551</option>
-
-
-                            <option style="display:none" value=""></option></select>
-                        </div>
-
-                        <div class="col-md-1">
-                            <button class="btn btn-primary hvr-rotate" style="margin-bottom:10px"><i class="glyphicon glyphicon-search"></i> ค้นหา</button>
-                        </div>
-                    </div>
-
-                    <div class="container-fluid">
-                        <div class="clearfix">
-
-
-                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
-                                 data-qo-selectable="true">
-                                <div class="panel-heading clearfix">
-                                    <!-- <h1 class="panel-title pull-left"></i> รายงานการประชุม </h1> -->
-
-
-                                    <div class="pull-left" style="padding-left:15px;">
-                                        <button type="button" class="btn btn-xs btn-primary plusgreen hvr-buzz" data-nq-show-insert="" data-template-id="insertMinutes"><i class="fic glyphicon glyphicon-plus-sign"></i> สร้างแบบสอบถาม</button>
-                                    </div>
-
-                                </div>
-
-                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="350px" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
-
-
-                                    <!--          <div  data-qo-min-height="200px" data-nq-scroll="" data-qo-max-height="350px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden;"> -->
-                                    <table class="table table-bordered table-hover bg-white table_modal">
-                                        <!--nq-fix-table-scroll class would fix thead always visible at top of the table if you put the table into a scrollable container-->
-                                        <thead class="nq-fix-table-scroll">
-                                            <tr>
-                                                <!--nq-column-sort directive would bind sorting handler to the element-->
-                                                <th class="col-xs-6">ชื่อแบบสอบถาม</th>
-
-                                                <th class="col-xs-2">ผู้สร้าง</th>
-
-                                                <th class="col-xs-2">กลุ่มเป้าหมาย</th>
-                                                <th class="col-xs-1">วันที่</th>
-                                                <th class="col-xs-1">ตอบ</th>
-                                                <th class="col-xs-1">ลบ</th>
-
-
-
-
-                                            </tr>
-                                        </thead>
-                                        <tbody class="flattened">
-                                            <!--pageable-repeat is required sub directive-->
-                                            <tr>
-                                                <td>แบบสอบถามความพอใจต่อหลักสูตร</td>
-                                                <td>P'Fluke</td>
-                                                <td>ศิษย์เก่า</td>
-                                                <td>15/10/2558</td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Do" data-nq-toggle-modal="#do_survey">
-                                                        <i class="fic glyphicon glyphicon-hand-up"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>แบบสอบถามความพึงพอใจของสวัสดิการ</td>
-                                                <td>P'Fluke</td>
-                                                <td>อาจารย์</td>
-                                                <td>7/10/2558</td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Do">
-                                                        <i class="fic glyphicon glyphicon-hand-up"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>แบบสอบถามความพึงผู้พอใจต่อเจ้าหน้าที่ภาค</td>
-                                                <td>P'kung</td>
-                                                <td><div>นักศึกษา</div><div>อาจารย์</div></td>
-                                                <td>2/10/2558</td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Do">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-hand-up"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>แบบสอบถามความพึงพอใจต่อสื่อการเรียน</td>
-                                                <td>P'kung</td>
-                                                <td>นักศึกษา</td>
-                                                <td>17/9/2558</td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Do">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-hand-up"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-
-                                    </table>
-                                </div>
-
-                                <!--           <div data-nq-pageable-template=""    data-qo-max-height="350px"data-on-change="panelTitle= 'สร้างรายงานการประชุม'"  style="overflow:hidden; overflow-y:auto;" data-nq-scroll="" ng-submit="$hide()" >
-                                -->
-
-                                <div data-nq-pageable-template="" ng-form="" data-on-change="panelTitle= 'สร้างแบบสอบถาม'" ng-submit="$hide()" style="max-height:100%; overflow:hidden; overflow-y:auto;">
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h3 style="margin-left:20px;margin-top:5px"><span class="topicHeader">ชื่อแบบสอบถาม:   </span></h3>
-                                        </div>
-                                        <div class="col-md-8" style="margin-top:5px">
-                                            <input type="text" class="form-control" placeholder=""><span class="normal">  </span>
-
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">กลุ่มเป้าหมาย</span></h3>
-                                        </div>
-
-                                        <div class="col-md-8">
-                                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-max-length="false" data-qo-multiple="true" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกกลุ่มเป้าหมาย" data-ng-model="staticSelectModel">
-                                                <option>นักศึกษา</option>
-                                                <option>ศิษย์เก่า</option>
-                                                <option>อาจารย์</option>
-                                                <option>กรรมการหลักสูตร</option>
-                                                <option>เจ้าหน้าที่</option>
-                                                <option>บริษัทภายนอก</option>
-
-
-                                            <option style="display:none" value=""></option></select>
-
-
-                                        </div>
-
-                                    </div>
-                                    <div id="create_survey_inform">
-                                      <!--   <button type="button" id="button_create_survey_in" class="btn btn-default btn-lg" onclick="addQuestionInSurvey('create_survey_inform','button_create_survey_in','กรุณากรอกคำถาม');" style="margin-left:25px;border:none;color:green;border-radius:70px;">
-                                            <b>เพิ่มคำถาม</b>
-                                            <i class="glyphicon glyphicon-plus-sign"></i>
-                                        </button> -->
-                                        <br />
-                                        <div ng-repeat="question in questions">
-                                        <div class="row" ng-hide="question.hide">
-                                        <div >
-                                          <input  class="col-md-10" type="text" style="margin-left:35px;" ng-model="question.name" />
-                                        </div>
-                                        <div class="col-md-1">
-                                          <button type="button" ng-click="remove_question(question)"class="btn" style="background-color:transparent;color:red;border:none" ><span class="glyphicon glyphicon-minus-sign"></span></button>
-                                        </div>
-                                      </div>
-                                    </div>
-                                       <button type="button" class="btn btn-default btn-lg" ng-click="add_question()">เพิ่มคำถาม</button>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="custom-footer">
-                        <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
-                        </div>
-                    </div>
-
-                </div>
 
                         <div id="result_survey" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-qo-screen-mode="true" data-ng-controller="result_survey_controller" >
                     <div class="custom-header">
@@ -6084,260 +5280,6 @@ glyphicon glyphicon-bell"></i> </span>
 
                 </div>
 
-
-
-
-
-
-                <!-- <div class="tab-pane fade" id="sub12">
-                                    1.2 ka
-                                        <form>
-                                        <textarea name="editor2" class="editor" rows="10" cols="80">
-
-                                        </textarea>
-                                        <script>
-                                            CKEDITOR.replace( 'editor2' );
-                                        </script>
-                                        </form>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="sub13">
-                                        <form>
-                                        <textarea name="editor3" class="editor" rows="10" cols="80">
-
-                                        </textarea>
-                                        <script>
-                                            CKEDITOR.replace( 'editor3' );
-                                        </script>
-                                        </form>
-                                    </div>
-
-                                     <div class="tab-pane fade" id="sub14">
-                                        <form>
-                                        <textarea name="editor4" class="editor" rows="10" cols="80">
-
-                                        </textarea>
-                                        <script>
-                                            CKEDITOR.replace( 'editor4' );
-                                        </script>
-                                        </form>
-                                    </div>
-
-                            </div>
-
-                </div>
-
-                  <div id="menu12" class = "tab-pane fade">
-                      menu12
-                  </div>
-
-                    <div id="menu13" class = "tab-pane fade">
-
-                      menu13
-                  </div>
-                    <div id="menu2" class="tab-pane fade">
-                      <ul class="nav nav-tabs">
-
-                      <li><a data-toggle="tab" class="active" href="#menu2">2.1</a></li>
-                      <li><a data-toggle="tab" href="#menu2">2.2</a></li>
-                      <li><a data-toggle="tab" href="#menu2">2.3</a></li>
-                      </ul>
-
-                      <h3>Hello</h3>
-                      <p>Me again.</p>
-                    </div>
-
-
-                <div id="menu3" class="tab-pane fade">
-                      <ul class="nav nav-tabs">
-
-                      <li><a data-toggle="tab" class="active" href="#menu3">3.1</a></li>
-                      <li><a data-toggle="tab" href="#menu3">3.2</a></li>
-                      <li><a data-toggle="tab" href="#menu3">3.3</a></li>
-                      <li><a data-toggle="tab" href="#menu3">3.4</a></li>
-                      <li><a data-toggle="tab" href="#menu3">3.5</a></li>
-                      <li><a data-toggle="tab" href="#menu3">3.6</a></li>
-                      <li><a data-toggle="tab" href="#menu3">3.7</a></li>
-                      </ul>
-
-                      <h3>Hello</h3>
-                      <p>Me again.</p>
-                    </div>
-
-                <div id="menu4" class="tab-pane fade">
-                      <ul class="nav nav-tabs">
-
-                      <li><a data-toggle="tab" class="active" href="#menu4">4.1</a></li>
-                      <li><a data-toggle="tab" href="#menu4">4.2</a></li>
-                      <li><a data-toggle="tab" href="#menu4">4.3</a></li>
-                      <li><a data-toggle="tab" href="#menu4">4.4</a></li>
-                      </ul>
-
-                      <h3>Hello</h3>
-                      <p>Me again.</p>
-                    </div>
-                <div id="menu5" class="tab-pane fade">
-                      <ul class="nav nav-tabs">
-
-                      <li><a data-toggle="tab" class="active" href="#menu5">5.1</a></li>
-                      <li><a data-toggle="tab" href="#menu5">5.2</a></li>
-                      <li><a data-toggle="tab" href="#menu5">5.3</a></li>
-                      <li><a data-toggle="tab" href="#menu5">5.4</a></li>
-                       <li><a data-toggle="tab" href="#menu5">5.5</a></li>
-                        <li><a data-toggle="tab" href="#menu5">5.6</a></li>
-                         <li><a data-toggle="tab" href="#menu5">5.7</a></li>
-                      </ul>
-
-                      <h3>Hello</h3>
-                      <p>Me again.</p>
-                    </div>
-
-
-                    <div id="menu6" class="tab-pane fade">
-                      <ul class="nav nav-tabs">
-
-                      <li><a data-toggle="tab" class="active" href="#menu6">6.1</a></li>
-                      <li><a data-toggle="tab" href="#menu6">6.2</a></li>
-                      <li><a data-toggle="tab" href="#menu6">6.3</a></li>
-                      <li><a data-toggle="tab" href="#menu6">6.4</a></li>
-                       <li><a data-toggle="tab" href="#menu6">6.5</a></li>
-                        <li><a data-toggle="tab" href="#menu6">6.6</a></li>
-                         <li><a data-toggle="tab" href="#menu6">6.7</a></li>
-                          <li><a data-toggle="tab" href="#menu6">6.8</a></li>
-                           <li><a data-toggle="tab" href="#menu6">6.9</a></li>
-                            <li><a data-toggle="tab" href="#menu6">6.10</a></li>
-                      </ul>
-
-                      <h3>Hello</h3>
-                      <p>Me again.</p>
-                    </div>
-
-
-                    <div id="menu7" class="tab-pane fade">
-                      <ul class="nav nav-tabs">
-
-                      <li><a data-toggle="tab" class="active" href="#menu7">7.1</a></li>
-                      <li><a data-toggle="tab" href="#menu7">7.2</a></li>
-                      <li><a data-toggle="tab" href="#menu7">7.3</a></li>
-                      <li><a data-toggle="tab" href="#menu7">7.4</a></li>
-
-                      </ul>
-
-                      <h3>Hello</h3>
-                      <p>Me again.</p>
-                    </div>
-
-                    <div id="menu8" class="tab-pane fade">
-                      <ul class="nav nav-tabs">
-
-                      <li><a data-toggle="tab" class="active" href="#menu8">8.1</a></li>
-                      <li><a data-toggle="tab" href="#menu8">8.2</a></li>
-                      <li><a data-toggle="tab" href="#menu8">8.3</a></li>
-
-
-                      </ul>
-
-                      <h3>Hello</h3>
-                      <p>Me again.</p>
-                    </div>
-
-                     <div id="menu9" class="tab-pane fade">
-                      <ul class="nav nav-tabs">
-
-                      <li><a data-toggle="tab" class="active" href="#menu9">9.1</a></li>
-                      <li><a data-toggle="tab" href="#menu9">9.2</a></li>
-                      <li><a data-toggle="tab" href="#menu9">9.3</a></li>
-                   <li><a data-toggle="tab" href="#menu9">9.4</a></li>
-
-                      </ul>
-
-                      <h3>Hello</h3>
-                      <p>Me again.</p>
-                    </div>
-
-
-                    <div id="menu10" class="tab-pane fade">
-                      <ul class="nav nav-tabs">
-
-                      <li><a data-toggle="tab" class="active" href="#menu10">10.1</a></li>
-                      <li><a data-toggle="tab" href="#menu10">10.2</a></li>
-                      <li><a data-toggle="tab" href="#menu10">10.3</a></li>
-                   <li><a data-toggle="tab" href="#menu10">10.4</a></li>
-                   <li><a data-toggle="tab" href="#menu10">10.5</a></li>
-                      </ul>
-
-                      <h3>Hello</h3>
-                      <p>Me again.</p>
-                    </div>
-
-
-                      <div id="menu11" class="tab-pane fade">
-                      <ul class="nav nav-tabs">
-
-                      <li><a data-toggle="tab" class="active" href="#menu11">11.1</a></li>
-                      <li><a data-toggle="tab" href="#menu11">11.2</a></li>
-                      <li><a data-toggle="tab" href="#menu11">11.3</a></li>
-                   <li><a data-toggle="tab" href="#menu11">11.4</a></li>
-                   <li><a data-toggle="tab" href="#menu11">11.5</a></li>
-                      <li><a data-toggle="tab" href="#menu11">11.6</a></li>
-                         <li><a data-toggle="tab" href="#menu11">11.7</a></li>
-                      </ul>
-
-                      <h3>Hello</h3>
-                      <p>Me again.</p>
-                    </div>
-
-                       <div id="menu12" class="tab-pane fade">
-                      <ul class="nav nav-tabs">
-
-                      <li><a data-toggle="tab" class="active" href="#menu12">12.1</a></li>
-                      <li><a data-toggle="tab" href="#menu12">12.2</a></li>
-
-                      </ul>
-
-                      <h3>Hello</h3>
-                      <p>Me again.</p>
-                    </div>
-
-                      <div id="menu13" class="tab-pane fade">
-                      <ul class="nav nav-tabs">
-
-                      <li><a data-toggle="tab" class="active" href="#menu13">13.1</a></li>
-                      <li><a data-toggle="tab" href="#menu13">13.2</a></li>
-                    <li><a data-toggle="tab" href="#menu13">13.3</a></li>
-                      </ul>
-
-                      <h3>Hello</h3>
-                      <p>Me again.</p>
-                    </div>
-
-                     <div id="menu14" class="tab-pane fade">
-                      <ul class="nav nav-tabs">
-
-                      <li><a data-toggle="tab" class="active" href="#menu14">14.1</a></li>
-                      <li><a data-toggle="tab" href="#menu14">14.2</a></li>
-                    <li><a data-toggle="tab" href="#menu14">14.3</a></li>
-                    <li><a data-toggle="tab" href="#menu14">14.4</a></li>
-                      </ul>
-
-                      <h3>Hello</h3>
-                      <p>Me again.</p>
-                    </div>
-
-                    <div id="menu15" class="tab-pane fade">
-                      <ul class="nav nav-tabs">
-
-                      <li><a data-toggle="tab" class="active" href="#menu15">15.1</a></li>
-
-
-                      </ul>
-
-                      <h3>Hello</h3>
-                      <p>Me again.</p>
-                    </div>
-
-                </div> -->
-               
 
 
 
