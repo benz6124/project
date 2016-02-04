@@ -400,7 +400,7 @@ $('.profile_pic').mouseover(function(){
 
                             <ul class="dropdown">
                                 <li>
-                                    <a href="" data-nq-toggle-modal="#change_priviledge_type" data-effect="slide-left">
+                                    <a href="" data-nq-toggle-modal="#change_priviledge_by_type" data-effect="slide-left">
                                         <span class="topic">แก้ไขตามประเภทบุคลากร</span>
                                     </a>
                                 </li>
@@ -1855,6 +1855,110 @@ $('.profile_pic').mouseover(function(){
    </div>
 
              
+
+
+
+ <div id="change_priviledge_by_type" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_research_controller">
+
+                    <div class="custom-header">
+                        <h1 class="headerModalH1">แก้ไขระดับการเข้าถึงของบุคลากรแต่ละประเภท</h1>
+                    </div>
+
+          <div class="row" style="
+    margin-left: 14px;
+    margin-right: 16px;
+">
+
+
+                      
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+            <option style="display:none" value=""></option></select>
+
+                     
+                      
+
+                    </div>
+<br />
+  <div class="container-fluid" ng-hide="choose_not_complete">
+                        <div class="clearfix">
+
+
+                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
+                                 data-qo-selectable="true">
+              
+
+              
+                                <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+
+                          
+
+  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
+                                      
+                                        <thead class="nq-fix-table-scroll">
+                                            <tr>
+                          
+                                                  <th class="col-xs-1 " rowspan="2">ประเภทบุคลากร</th>
+                                    <th class="col-xs-3 " colspan="3"> 
+                                   
+
+                                          <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder=""  data-qo-button-class=" titile_priviledge " data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel" >
+                                            <option>สร้างบัญชี</option>
+                                            <option>สร้างหลักสูตร</option>
+                                             <option>เพิ่มปีการศึกษา</option>
+
+
+                                        </select>
+
+                                        </th>
+                  
+
+                                              
+                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody class="flattened">
+                                        <form name="manage_survey_form" novalidate>
+                                          
+
+                                            <tr  ng-repeat="research in manage_research_my_research_now">
+                          <td  ><span style="font-size:19px;">ประเภทททททบุคลลล</span> </td>
+                                           
+                                           <td style="
+    padding-left: 0px;
+    padding-right: 0px;
+">
+ 
+                                           <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder=""  data-qo-button-class=" pink_please " data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
+                                            <option>อนุญาติ</option>
+                                            <option>ไม่อนุญาติ</option>
+                                             
+
+                                        </select>
+                                           </td>
+
+
+                                    
+
+                                      
+
+                                            </tr>
+
+                                            </form>
+                                        </tbody>
+
+                                    </table>
+
+         </div>         </div>        
+
+          </div>         </div>
+     <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button ng-disabled="choose_not_complete || nothing_change"  class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                        </div>
+                    </div>
+   </div>
+
 <div id="manage_bind_person" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_bind_person_controller">
 
                     <div class="custom-header">
@@ -2782,6 +2886,10 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
           </div>
       </div>   
       </div>
+
+
+
+
 
 
  <div id="manage_primary_evidences_president" data-ng-controller="manage_primary_evidences_president_controller" data-ng-init="init()"data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode ="true" data-qo-independent="true">
