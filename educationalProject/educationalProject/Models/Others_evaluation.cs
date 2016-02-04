@@ -26,7 +26,7 @@ namespace educationalProject.Models
         private int _sub_indicator_num;
         private string _assessor_id;
         private int _evaluation_score;
-        private string _detail;
+        private string _suggestion;
         private string _date;
         private string _time;
         private string _curri_id;
@@ -38,7 +38,7 @@ namespace educationalProject.Models
         public int evaluation_score { get { return _evaluation_score; } set { _evaluation_score = value; } }
         public string date { get { return _date; } set { _date = value; } }
         public string time { get { return _time; } set { _time = value; } }
-        public string detail { get { return _detail; } set { _detail = value; } }
+        public string suggestion { get { return _suggestion; } set { _suggestion = value; } }
         public string curri_id { get { return _curri_id; } set { _curri_id = value; } }
         public int aca_year { get { return _aca_year; } set { _aca_year = value; } }
     }

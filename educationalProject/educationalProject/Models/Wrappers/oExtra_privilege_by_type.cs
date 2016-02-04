@@ -98,5 +98,43 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
+
+        public object InsertOrUpdate(Extra_privilege_by_type_list_with_privilege_choices edata)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+
+            string InsertOrUpdateCommand = "";
+            foreach(Extra_privilege_by_type e in edata.list)
+            {
+                InsertOrUpdateCommand += string.Format("IF NOT EXISTS(select * from {0} where {1} = '{2}' and {3} = '{4}' and {5} = '{6}') " +
+                                         "BEGIN " +
+                                         "INSERT INTO {0} values ('{2}','{4}','{6}','{7}') " +
+                                         "END " +
+                                         "ELSE " +
+                                         "BEGIN " +
+                                         "UPDATE {0} set {8} = '{7}' where {1} = '{2}' and {3} = '{4}' and {5} = '{6}' " +
+                                         "END ", FieldName.TABLE_NAME, FieldName.USER_TYPE, e.user_type, FieldName.CURRI_ID, e.curri_id,
+                                         FieldName.TITLE, e.title, e.privilege, FieldName.PRIVILEGE);
+            }
+
+            d.iCommand.CommandText = InsertOrUpdateCommand;
+            try
+            {
+                d.iCommand.ExecuteNonQuery(); 
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return null;
+        }
     }
 }

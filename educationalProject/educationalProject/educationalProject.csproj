@@ -198,10 +198,12 @@
     <Compile Include="Models\Curriculum_academic.cs" />
     <Compile Include="Models\Curriculum_teacher_staff.cs" />
     <Compile Include="Models\Cu_curriculum.cs" />
+    <Compile Include="Models\Default_privilege.cs" />
     <Compile Include="Models\Default_privilege_by_type.cs" />
     <Compile Include="Models\Educational_teacher_staff.cs" />
     <Compile Include="Models\Evidence.cs" />
     <Compile Include="Models\Exclusive_curriculum_evidence.cs" />
+    <Compile Include="Models\Extra_privilege.cs" />
     <Compile Include="Models\Extra_privilege_by_type.cs" />
     <Compile Include="Models\Gallery.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -245,6 +247,8 @@
     <Compile Include="Models\ViewModels\Indicator_sub_indicator_list.cs" />
     <Compile Include="Models\ViewModels\Lab_list_detail.cs" />
     <Compile Include="Models\ViewModels\Minutes_detail.cs" />
+    <Compile Include="Models\ViewModels\Others_evaluation_sub_indicator_name.cs" />
+    <Compile Include="Models\ViewModels\Others_evaluation_s_indic_name_list_with_file_name.cs" />
     <Compile Include="Models\ViewModels\Personnel.cs" />
     <Compile Include="Models\ViewModels\Personnel_educational.cs" />
     <Compile Include="Models\ViewModels\Personnel_with_t_name.cs" />
@@ -282,6 +286,7 @@
     <Compile Include="Models\Wrappers\oLab_list.cs" />
     <Compile Include="Models\Wrappers\oMinutes.cs" />
     <Compile Include="Models\Wrappers\oNew_student_count.cs" />
+    <Compile Include="Models\Wrappers\oOthers_evaluation.cs" />
     <Compile Include="Models\Wrappers\oPresident_curriculum.cs" />
     <Compile Include="Models\Wrappers\oPrimary_evidence.cs" />
     <Compile Include="Models\Wrappers\oQuestionare_question_obj.cs" />

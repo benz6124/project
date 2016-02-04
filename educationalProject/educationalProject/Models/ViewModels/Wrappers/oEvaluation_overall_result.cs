@@ -87,7 +87,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Assessor.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Assessor.FieldName.T_NAME].Ordinal].ToString(),
                             date = Convert.ToDateTime(item.ItemArray[data.Columns[Others_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
                             time = (timeofday.Hour > 9 ? "" : "0") + h + '.' + (timeofday.Minute > 9 ? "" : "0") + m,
-                            detail = item.ItemArray[data.Columns[Others_evaluation.FieldName.DETAIL].Ordinal].ToString(),
+                            suggestion = item.ItemArray[data.Columns[Others_evaluation.FieldName.DETAIL].Ordinal].ToString(),
                             others_evaluation_id = Convert.ToInt32(item.ItemArray[data.Columns[Others_evaluation.FieldName.OTHERS_EVALUATION_ID].Ordinal])
                         });
                     }
@@ -205,7 +205,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Assessor.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Assessor.FieldName.T_NAME].Ordinal].ToString(),
                             date = Convert.ToDateTime(item.ItemArray[data.Columns[Others_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
                             time = (timeofday.Hour > 9 ? "" : "0") + h + '.' + (timeofday.Minute > 9 ? "" : "0") + m,
-                            detail = item.ItemArray[data.Columns[Others_evaluation.FieldName.DETAIL].Ordinal].ToString(),
+                            suggestion = item.ItemArray[data.Columns[Others_evaluation.FieldName.DETAIL].Ordinal].ToString(),
                             others_evaluation_id = Convert.ToInt32(item.ItemArray[data.Columns[Others_evaluation.FieldName.OTHERS_EVALUATION_ID].Ordinal])
                         });
                     }

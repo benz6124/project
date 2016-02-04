@@ -90,5 +90,43 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
+
+        public object InsertOrUpdate(Default_privilege_by_type_list_with_privilege_choices ddata)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+
+            string InsertOrUpdateCommand = "";
+            foreach (Default_privilege_by_type ditem in ddata.list)
+            {
+                InsertOrUpdateCommand += string.Format("IF NOT EXISTS(select * from {0} where {1} = '{2}' and {3} = '{4}') " +
+                                         "BEGIN " +
+                                         "INSERT INTO {0} values ('{2}','{4}','{5}') " +
+                                         "END " +
+                                         "ELSE " +
+                                         "BEGIN " +
+                                         "UPDATE {0} set {6} = '{5}' where {1} = '{2}' and {3} = '{4}' " +
+                                         "END ", FieldName.TABLE_NAME, FieldName.USER_TYPE, ditem.user_type, 
+                                         FieldName.TITLE, ditem.title, ditem.privilege, FieldName.PRIVILEGE);
+            }
+
+            d.iCommand.CommandText = InsertOrUpdateCommand;
+            try
+            {
+                d.iCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return null;
+        }
     }
 }
