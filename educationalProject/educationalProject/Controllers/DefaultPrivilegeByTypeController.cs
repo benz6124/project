@@ -12,10 +12,9 @@ namespace educationalProject.Controllers
     {
         private oDefault_privilege_by_type datacontext = new oDefault_privilege_by_type();
 
-        public IHttpActionResult Post([FromBody]string title)
+        public IHttpActionResult Post(oDefault_privilege_by_type data)
         {
-            datacontext.title = title;
-            return Ok(datacontext.SelectByTitle());
+            return Ok(data.SelectByTitle());
         }
     }
 }
