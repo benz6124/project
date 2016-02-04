@@ -5468,7 +5468,7 @@ $scope.title_choosen = {};
       $scope.to_sent.title = $scope.title_choosen;
 
         $http.post(
-             '/api/extraprivilegebytype',
+             '/api/defaultprivilegebytype',
              JSON.stringify($scope.to_sent),
              {
                  headers: {
@@ -5497,7 +5497,7 @@ $scope.title_choosen = {};
     $scope.save_to_server = function(my_modal){
 
         $http.put(
-             '/api/extraprivilegebytype',
+             '/api/defaultprivilegebytype',
              JSON.stringify($scope.manage_privilege_admin_result),
              {
                  headers: {
