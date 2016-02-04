@@ -76,7 +76,7 @@ namespace educationalProject.Models.Wrappers
 
             string insertintotemp5_2 = string.Format("insert into {12} " +
                                        "select {1},0,{2},{3}," +
-                                       "'','0','',null,null,'','{4}',{5} " +
+                                       "'','0','',null,null,'','{4}',{6} " +
                                        "from {0} where " +
                                        "{2} = 1 and {5} = " +
                                        "(select max(s1.{5}) from {0} as s1 where s1.{5} <= {6}) " +
@@ -139,7 +139,7 @@ namespace educationalProject.Models.Wrappers
                                 curri_id = this.curri_id,
                                 others_evaluation_id = 0,
                                 aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                                assessor_id = "00001",
+                                assessor_id = "sayam",
                                 date = "",
                                 time = "",
                                 suggestion = "",
@@ -197,7 +197,7 @@ namespace educationalProject.Models.Wrappers
                                 "END " +
                                 "ELSE " +
                                 "BEGIN " +
-                                "UPDATE others set {14} = '{9}',{15} = '{10}',{16} = '{11}',{17} = '{12}',{18} = '{13}' where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8} " +
+                                "UPDATE {0} set {14} = '{9}',{15} = '{10}',{16} = '{11}',{17} = '{12}',{18} = '{13}' where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8} " +
                                 "END ", FieldName.TABLE_NAME, FieldName.CURRI_ID, o.curri_id, FieldName.ACA_YEAR, o.aca_year,
                                 FieldName.INDICATOR_NUM, o.indicator_num, FieldName.SUB_INDICATOR_NUM, o.sub_indicator_num,
                                 o.assessor_id, o.evaluation_score, o.suggestion, o.date, o.time,
@@ -217,7 +217,7 @@ namespace educationalProject.Models.Wrappers
 
                                 "INSERT INTO #TEMP5 " +
                                 "select * from " +
-                                "(UPDATE others set {14} = '{9}',{15} = '{10}',{16} = '{11}',{17} = '{12}',{18} = '{13}',{19} = '{20}' " +
+                                "(UPDATE {0} set {14} = '{9}',{15} = '{10}',{16} = '{11}',{17} = '{12}',{18} = '{13}',{19} = '{20}' " +
                                 "output deleted.{19} " +
                                 "where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8}) as outputupdate " +
                                 "END ", FieldName.TABLE_NAME, FieldName.CURRI_ID, minobj.curri_id, FieldName.ACA_YEAR, minobj.aca_year,
@@ -236,7 +236,7 @@ namespace educationalProject.Models.Wrappers
                                 "END " +
                                 "ELSE " +
                                 "BEGIN " +
-                                "UPDATE others set {14} = '{9}',{15} = '{10}',{16} = '{11}',{17} = '{12}',{18} = '{13}' where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8} " +
+                                "UPDATE {0} set {14} = '{9}',{15} = '{10}',{16} = '{11}',{17} = '{12}',{18} = '{13}' where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8} " +
                                 "END ", FieldName.TABLE_NAME, FieldName.CURRI_ID, o.curri_id, FieldName.ACA_YEAR, o.aca_year,
                                 FieldName.INDICATOR_NUM, o.indicator_num, FieldName.SUB_INDICATOR_NUM, o.sub_indicator_num,
                                 o.assessor_id, o.evaluation_score, o.suggestion, o.date, o.time,
