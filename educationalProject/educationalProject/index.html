@@ -495,6 +495,7 @@ $('.profile_pic').mouseover(function(){
             </div>
 
 
+
         </div>
 
 
@@ -3076,22 +3077,11 @@ glyphicon glyphicon-bell"></i> </span>
                                 </div>
 
 
-  <!-- <div class="row">
-                        <div class="col-md-4">
-                            <h3 style="margin-left:20px;margin-top:0px;color:#6F002B;font-weight:bold;"><span class="topicHeader">ข้อเสนอแนะเพิ่มเติม:   </span></h3>
-                        </div>
-                        <div class="col-md-8">
-                            <textarea name="message" rows="4" cols="97"></textarea>
-                        </div>
-                    </div> -->
-    <div class="row">
+<!--     <div class="row">
                             <div class="col-md-3">
                                 <h3 style="margin-left:20px;margin-top:5px;color:#6F002B;font-weight:bold"><span class="topicHeader">ไฟล์สนับสนุนการประเมิน:  </span></h3>
 
                             </div>
-<!--  <div class="col-md-1">
-                             <button class="btn btn-danger" style="paddle:0px;vertical-align:middle" ng-click="clear_files()">ล้างข้อมูล</button>
-</div> -->
                             <div class="col-md-9" style="
     padding-left: 0px;
 ">
@@ -3099,7 +3089,45 @@ glyphicon glyphicon-bell"></i> </span>
                                 <input type="file"  name="upload_file_input" class="form-control" placeholder="ไฟล์สนับสนุนการประเมิน" data-ng-model="files" ng-disabled="choose_not_complete" required="required" file-upload   multiple/>
                             </div>
 
+                        </div> -->
+
+
+<div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-left:20px;margin-top:5px;color:#6F002B;font-weight:bold"><span class="topicNewHeader">ไฟล์สนับสนุนการประเมิน:  </span></h3>
+                            </div>
+                            <div class="col-md-8"  ng-hide="disabled_search" style="margin-bottom:5px">
+                              
+                             
+
+
+  <span class="btn btn-danger  "ng-click="watch_file()"  style="font-size:18px;"><i style="margin-top:3px" class="glyphicon glyphicon-search" ></i>  ดูไฟล์ไฟล์สนับสนุนการประเมินเดิม</span>
+                          <span  class="topicHeader" style="margin-left: 20px;margin-right: 20px;">หรือ</span>
+
+
+    <span class="btn btn-success  " ng-click="set_disabled_search()" style="font-size:18px;"><i style="margin-top:3px"class="glyphicon glyphicon-plus-sign"></i> อัพโหลดไฟล์ใหม่</span>
+
+                            </div>
+
+  
+
+    <div class="col-md-8" ng-show="disabled_search" style="
+    padding-right: 6px;
+">
+                              
+                                <input type="file" name="upload_file_input" class="form-control full" placeholder="ไฟล์รายงานการประชุม" file-upload  data-ng-model="my_file"  required/>
+                                
+                            </div>
+
+<div class="col-md-1"style="margin-top:5px" ng-show="disabled_search" >
+
+<a href=""   data-ng-click="back_to_default()" class="hvr-pulse" >
+                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-remove"></i> </span>
+                                    </a>
+
                         </div>
+
+</div>
                     <div class="row">
                       <ul>
                            <span class="topicHeader"> <li style="color:#6F002B;margin-left:30px" ng-repeat="file in files">{{file.name}}</li></span>
@@ -5299,6 +5327,19 @@ glyphicon glyphicon-bell"></i> </span>
 
 <script type="text/javascript" src="http://arrow.scrolltotop.com/arrow13.js"></script>
 <noscript>Not seeing a <a href="http://www.scrolltotop.com/">Scroll to Top Button</a>? Go to our FAQ page for more info.</noscript>
+
+ <script type="text/ng-template" id="/alert/mycustomtemplate.html">
+          <div class="alert" ng-class="alertType">
+         
+               บันทึกข้อมูลสำเร็จบางส่วน
+          อีเมล์เหล่านี้มีอยู่แล้วในระบบ
+                {{ $root.manage_user_email_duplicate}}
+      
+              
+           
+          </div>
+        </script>
+
 
 </body>
 </html>

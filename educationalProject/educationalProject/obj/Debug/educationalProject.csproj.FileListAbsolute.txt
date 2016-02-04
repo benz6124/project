@@ -196,6 +196,7 @@ C:\Users\SiS_M7\Desktop\newProject\project\educationalProject\educationalProject
 C:\Users\SiS_M7\Desktop\newProject\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
 C:\Users\SiS_M7\Desktop\newProject\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 C:\Users\SiS_M7\Desktop\newProject\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb
+D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\ApplicationInsights.config
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\roslyn\csc.exe
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -212,7 +213,6 @@ C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\education
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\educationalProject.dll.config
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\educationalProject.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\educationalProject.pdb
-C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\Antlr3.Runtime.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\EntityFramework.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\EntityFramework.SqlServer.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\Microsoft.AspNet.Identity.Core.dll
@@ -248,7 +248,6 @@ C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\education
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\System.Web.WebPages.xml
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\System.Web.WebPages.Deployment.xml
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\System.Web.WebPages.Razor.xml
-C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\Antlr3.Runtime.pdb
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\EntityFramework.xml
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\EntityFramework.SqlServer.xml
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\Microsoft.AspNet.Identity.Core.xml
@@ -263,4 +262,3 @@ C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\education
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb
-D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache

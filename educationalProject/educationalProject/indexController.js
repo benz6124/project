@@ -1137,11 +1137,53 @@ $scope.indicator_choosen = {};
 }
 
 
+
+
    angular.forEach(
     angular.element("input[type='file']"),
     function(inputElem) {
       angular.element(inputElem).val(null);
     });
+
+
+      $scope.set_disabled_search = function(){
+        console.log("disabled_search");
+        console.log($scope.disabled_search);
+        $scope.disabled_search = true;
+    }
+
+    $scope.watch_file = function() { 
+    
+                window.open($scope.corresponding_results.file_name, '_blank', "width=800, left=230,top=0,height=700");  
+      
+       
+      
+    }
+
+     $scope.back_to_default = function(){
+
+        if(!$scope.corresponding_results.file_name){
+                    angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+
+            $scope.files = [];
+        }
+        else{
+
+               $scope.disabled_search = false;
+            angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+
+            $scope.files = [];
+        }
+      
+     }
    $scope.still_not_complete = function(){
     var index;
     if(!$scope.corresponding_results){
@@ -1162,7 +1204,13 @@ $scope.indicator_choosen = {};
     });
 
   $scope.$on("modal.show", function (event, args) {
+
+
+    
+
               $scope.init();
+
+
     });
 
   $scope.$on("fileSelected", function (event, args) {
@@ -1252,6 +1300,7 @@ $scope.indicator_choosen = {};
     $scope.get_results= function(){
         console.log($scope.indicator_choosen);
         $scope.indicator_choosen.curri_id = $scope.curri_choosen.curri_id ;
+          $scope.indicator_choosen.aca_year = $scope.year_choosen.aca_year ;
         $http.post(
              '/api/othersevaluation',
              JSON.stringify($scope.indicator_choosen),
@@ -1266,6 +1315,11 @@ $scope.indicator_choosen = {};
         $scope.please_wait = false;
              $scope.corresponding_results = data;
              $scope.choose_not_complete = false;
+
+                        if(!$scope.corresponding_results.file_name){
+            console.log("start disabled_search = true")
+              $scope.disabled_search = true;
+        }
      
          });
 
@@ -1281,12 +1335,23 @@ $scope.indicator_choosen = {};
 
           $scope.please_wait = true;
       var formData = new FormData();
+$scope.to_sent = {};
 
-    formData.append("model", angular.toJson($scope.corresponding_results));
+   
+
+if( !$scope.files[0]){
+    $scope.to_sent.evaluation_detail = $scope.corresponding_results;
+    $scope.to_sent.file_name = "";
+}else{
+     $scope.to_sent.evaluation_detail = $scope.corresponding_results;
+    $scope.to_sent.file_name = $scope.files[0].name;
+}
+
+
+ formData.append("model", angular.toJson($scope.to_sent));
   formData.append("file", $scope.files[0]);
-
-  console.log("$scope.corresponding_results");
-  console.log($scope.corresponding_results);
+  console.log("$scope.to_sent");
+  console.log($scope.to_sent);
 
         $http({
             method: 'PUT',
@@ -1314,27 +1379,7 @@ $scope.indicator_choosen = {};
         });
 }
 
-    // $scope.save_to_server = function(){
 
-    //     $http.put(
-    //          '/api/selfevaluation',
-    //          JSON.stringify($scope.corresponding_results),
-    //          {
-    //              headers: {
-    //                  'Content-Type': 'application/json'
-    //              }
-    //          }
-    //      ).success(function (data) {
-    //           $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-    //                      placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-
-    //           $scope.files=[];
-    //      })
-    //      .error(function (data, status, headers, config) {
-    //         $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
-    //                      placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-    //     });
-    // }
 });
 
 app.controller('upload_aun_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service) {
@@ -4241,7 +4286,7 @@ $scope.my_new_user.type = $scope.my_type;
      
 
         $http({
-            method: 'PUT',
+            method: 'POST',
             url: "/api/users/createnewusers",
 
             headers: { 'Content-Type': undefined },
@@ -4252,11 +4297,22 @@ $scope.my_new_user.type = $scope.my_type;
 
         }).
         success(function (data, status, headers, config) {
-
-                  $scope.init ();
+            if(!data){
+            $scope.init ();
                   my_modal.$hide();
-              $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+
+                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลสำเร็จ',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+            }
+            else{
+               
+                $rootScope.manage_user_email_duplicate  = data;
+                        $scope.init ();
+                  my_modal.$hide();
+              $alert({title:'ดำเนินการสำเร็จบางส่วน', template:'/alert/mycustomtemplate.html',alertType:'warning',duration:10000,
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+            }
+                
 
         }).
         error(function (data, status, headers, config) {
