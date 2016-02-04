@@ -170,5 +170,112 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
+
+        public object InsertOrUpdate(Others_evaluation_s_indic_name_list_with_file_name odata)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+            //Others_evaluation_s_indic_name_list_with_file_name result = new Others_evaluation_s_indic_name_list_with_file_name();
+
+            string temp5tablename = "#temp5";
+            string createtabletemp5 = string.Format("CREATE TABLE {0}(" +
+                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
+                                      "[{1}] VARCHAR(255) NULL," +
+                                      "PRIMARY KEY([row_num])) " +
+
+                                      "ALTER TABLE {0} " +
+                                      "ALTER COLUMN [{1}] VARCHAR(255) collate DATABASE_DEFAULT ",
+                                      temp5tablename, Evidence.FieldName.FILE_NAME);
+            string updatecmd = "";
+            if (odata.file_name == "")
+            {
+                foreach (Others_evaluation_sub_indicator_name o in odata.evaluation_detail)
+                    updatecmd += string.Format("if not exists (select * from {0} where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8}) " +
+                                "BEGIN " +
+                                "INSERT INTO {0} values ({6},{8},'{9}','{10}','{11}','{12}','{13}',null,'{2}',{4}) " +
+                                "END " +
+                                "ELSE " +
+                                "BEGIN " +
+                                "UPDATE others set {14} = '{9}',{15} = '{10}',{16} = '{11}',{17} = '{12}',{18} = '{13}' where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8} " +
+                                "END ", FieldName.TABLE_NAME, FieldName.CURRI_ID, o.curri_id, FieldName.ACA_YEAR, o.aca_year,
+                                FieldName.INDICATOR_NUM, o.indicator_num, FieldName.SUB_INDICATOR_NUM, o.sub_indicator_num,
+                                o.assessor_id, o.evaluation_score, o.suggestion, o.date, o.time,
+                                FieldName.ASSESSOR_ID, FieldName.EVALUATION_SCORE, FieldName.DETAIL, FieldName.DATE, FieldName.TIME);
+            }
+
+            
+            else
+            {
+                Others_evaluation_sub_indicator_name minobj = odata.evaluation_detail.Min();
+                    updatecmd += string.Format("if not exists (select * from {0} where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8}) " +
+                                "BEGIN " +
+                                "INSERT INTO {0} values ({6},{8},'{9}','{10}','{11}','{12}','{13}','{20}','{2}',{4}) " +
+                                "END " +
+                                "ELSE " +
+                                "BEGIN " +
+
+                                "INSERT INTO #TEMP5 " +
+                                "select * from " +
+                                "(UPDATE others set {14} = '{9}',{15} = '{10}',{16} = '{11}',{17} = '{12}',{18} = '{13}',{19} = '{20}' " +
+                                "output deleted.{19} " +
+                                "where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8}) as outputupdate " +
+                                "END ", FieldName.TABLE_NAME, FieldName.CURRI_ID, minobj.curri_id, FieldName.ACA_YEAR, minobj.aca_year,
+                                FieldName.INDICATOR_NUM, minobj.indicator_num, FieldName.SUB_INDICATOR_NUM, minobj.sub_indicator_num,
+                                minobj.assessor_id, minobj.evaluation_score, minobj.suggestion, minobj.date, minobj.time,
+                                FieldName.ASSESSOR_ID, FieldName.EVALUATION_SCORE, FieldName.DETAIL, FieldName.DATE, FieldName.TIME,
+                                Evidence.FieldName.FILE_NAME,odata.file_name);
+
+                foreach (Others_evaluation_sub_indicator_name o in odata.evaluation_detail)
+                {
+                    if(o != minobj)
+                    {
+                        updatecmd += string.Format("if not exists (select * from {0} where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8}) " +
+                                "BEGIN " +
+                                "INSERT INTO {0} values ({6},{8},'{9}','{10}','{11}','{12}','{13}',null,'{2}',{4}) " +
+                                "END " +
+                                "ELSE " +
+                                "BEGIN " +
+                                "UPDATE others set {14} = '{9}',{15} = '{10}',{16} = '{11}',{17} = '{12}',{18} = '{13}' where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8} " +
+                                "END ", FieldName.TABLE_NAME, FieldName.CURRI_ID, o.curri_id, FieldName.ACA_YEAR, o.aca_year,
+                                FieldName.INDICATOR_NUM, o.indicator_num, FieldName.SUB_INDICATOR_NUM, o.sub_indicator_num,
+                                o.assessor_id, o.evaluation_score, o.suggestion, o.date, o.time,
+                                FieldName.ASSESSOR_ID, FieldName.EVALUATION_SCORE, FieldName.DETAIL, FieldName.DATE, FieldName.TIME);
+                    }
+                }
+            }
+
+            string selectcmd = string.Format("select {1} from {0} ", temp5tablename, Evidence.FieldName.FILE_NAME);
+
+
+
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} END", createtabletemp5, updatecmd,
+                selectcmd);
+
+            try
+            {
+                object result = d.iCommand.ExecuteScalar();
+                if (result != null)
+                {
+                    //File name to delete from #temp5 table
+                    suggestion = result.ToString();
+                }
+                else
+                {
+                    suggestion = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return null;
+        }
     }
 }
