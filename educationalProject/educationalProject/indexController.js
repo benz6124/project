@@ -3057,6 +3057,9 @@ $scope.just_show_responsible = function(ask_status){
 }
 $scope.name_of_teacher_id = function(ask_id){
     var index;
+    if(!$scope.all_teachers){
+        return ;
+    }
     for(index=0;index<$scope.all_teachers.length;index++){
         if($scope.all_teachers[index].teacher_id == ask_id){
             return $scope.all_teachers[index].t_name;
@@ -5282,7 +5285,7 @@ $scope.init =function() {
               $scope.curri_choosen = {}
     $scope.not_choose_title_yet = true;
      
-   
+   $scope.manage_privilege_president_result={};
 $scope.title_choosen = {};
 
   $http.get('api/titleprivilege').success(function (data) {
@@ -5302,9 +5305,9 @@ $scope.title_choosen = {};
   
      $scope.choose_not_complete = true;
       
-              $scope.curri_choosen = {}
+              $scope.curri_choosen = {};
   
-                    $scope.result = {};
+                 $scope.manage_privilege_president_result = {};
   
 
       $scope.$on("modal.hide", function (event, args) {
@@ -5317,6 +5320,19 @@ $scope.title_choosen = {};
     });
 
     
+
+    $scope.still_not_complete = function(){
+        var index;
+        if(!$scope.manage_privilege_president_result){
+            return true;
+        }
+        for(index=0;index<$scope.manage_privilege_president_result.list.length;index++){
+            if(!$scope.manage_privilege_president_result.list[index].privilege ){
+                return true;
+            }
+        }
+        return false;
+    }
     $scope.choose_curri = function(){
 
           $scope.not_choose_title_yet = true;
@@ -5325,20 +5341,24 @@ $scope.title_choosen = {};
     }
 
       $scope.find_information = function(){
+  
 
-      
+      $scope.to_sent = {};
+      $scope.to_sent.curri_id = $scope.curri_choosen.curri_id;
+      $scope.to_sent.title = $scope.title_choosen;
 
         $http.post(
-             '/api/research/getresearch',
-             JSON.stringify($scope.curri_choosen.curri_id),
+             '/api/extraprivilegebytype',
+             JSON.stringify($scope.to_sent),
              {
                  headers: {
                      'Content-Type': 'application/json'
                  }
              }
          ).success(function (data) {
+
                    $scope.not_choose_title_yet = false;
-              $rootScope.manage_research_my_research_now = data;
+              $scope.manage_privilege_president_result = data;
              $scope.choose_not_complete = false;
                $scope.nothing_change = true;
             
@@ -5354,19 +5374,10 @@ $scope.title_choosen = {};
         my_modal.$hide();
     }
     $scope.save_to_server = function(my_modal){
-        console.log("save_to_server");
-        console.log($rootScope.manage_research_my_research_now);
 
-        if($rootScope.manage_research_my_research_now.length == 0 ){
-            $scope.to_sent  = {};
-            $scope.to_sent.research_id = -1;
-            $scope.to_sent.curri_id = $scope.curri_choosen.curri_id ;
-            $rootScope.manage_research_my_research_now.push($scope.to_sent);
-
-        }
         $http.put(
-             '/api/research/delete',
-             JSON.stringify($rootScope.manage_research_my_research_now),
+             '/api/extraprivilegebytype',
+             JSON.stringify($scope.manage_privilege_president_result),
              {
                  headers: {
                      'Content-Type': 'application/json'
@@ -5390,6 +5401,125 @@ $scope.title_choosen = {};
 });
 
 
+app.controller('change_priviledge_by_type_admin_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+$scope.init =function() {
+
+    $scope.not_choose_title_yet = true;
+     
+   $scope.manage_privilege_admin_result={};
+$scope.title_choosen = {};
+
+  $http.get('api/titleprivilege').success(function (data) {
+          
+             $scope.all_title = data;
+          
+           });
+}
+
+     $http.get('api/titleprivilege').success(function (data) {
+          
+             $scope.all_title = data;
+          
+           });
+    $scope.not_choose_title_yet = true;
+$scope.title_choosen = {};
+  
+  
+      
+  
+                 $scope.manage_privilege_admin_result = {};
+  
+
+      $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+    
+
+    $scope.still_not_complete = function(){
+        var index;
+        if(!$scope.manage_privilege_admin_result){
+            return true;
+        }
+        for(index=0;index<$scope.manage_privilege_admin_result.list.length;index++){
+            if(!$scope.manage_privilege_admin_result.list[index].privilege ){
+                return true;
+            }
+        }
+        return false;
+    }
+    $scope.choose_curri = function(){
+
+          $scope.not_choose_title_yet = true;
+      $scope.choose_not_complete = false;
+
+    }
+
+      $scope.find_information = function(){
+  
+
+      $scope.to_sent = {};
+   
+      $scope.to_sent.title = $scope.title_choosen;
+
+        $http.post(
+             '/api/extraprivilegebytype',
+             JSON.stringify($scope.to_sent),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+
+                   $scope.not_choose_title_yet = false;
+              $scope.manage_privilege_admin_result = data;
+           
+               $scope.nothing_change = true;
+               console.log('success ni');
+            
+    
+         });
+
+
+
+    }
+
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+    $scope.save_to_server = function(my_modal){
+
+        $http.put(
+             '/api/extraprivilegebytype',
+             JSON.stringify($scope.manage_privilege_admin_result),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+             $scope.close_modal(my_modal);
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+              
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    }
+});
 app.controller('manage_research_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;

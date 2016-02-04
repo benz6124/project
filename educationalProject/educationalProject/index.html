@@ -400,7 +400,7 @@ $('.profile_pic').mouseover(function(){
 
                             <ul class="dropdown">
                                 <li>
-                                    <a href="" data-nq-toggle-modal="#change_priviledge_by_type" data-effect="slide-left">
+                                    <a href="" data-nq-toggle-modal="#change_priviledge_by_type_president" data-effect="slide-left">
                                         <span class="topic">แก้ไขตามประเภทบุคลากร</span>
                                     </a>
                                 </li>
@@ -413,6 +413,30 @@ $('.profile_pic').mouseover(function(){
 
                             </ul>
                         </li>
+
+
+                          <li>
+                            <a href="" data-nq-toggle-modal="#change_priviledge" data-effect="from-left" data-placement="right">
+                                <i class="glyphicon glyphicon-cog"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic">&nbsp;&nbsp;แก้ไขระดับการเข้าถึง แอดมิน</span></span>
+                            </a>
+
+                            <ul class="dropdown">
+                                <li>
+                                    <a href="" data-nq-toggle-modal="#change_priviledge_by_type_admin" data-effect="slide-left">
+                                        <span class="topic">แก้ไขตามประเภทบุคลากร</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="" data-nq-toggle-modal="#change_priviledge_person" data-effect="slide-left">
+                                        <span class="topic">แก้ไขของแต่ละผู้ใช้</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
                         <li>
                             <a href="" data-nq-toggle-modal="#upload_aun" data-effect="from-left" data-placement="bottom">
                                 <i class="glyphicon glyphicon-book"></i>
@@ -1858,7 +1882,7 @@ $('.profile_pic').mouseover(function(){
 
 
 
- <div id="change_priviledge_by_type" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="change_priviledge_by_type_president_controller">
+ <div id="change_priviledge_by_type_president" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="change_priviledge_by_type_president_controller">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">แก้ไขระดับการเข้าถึงของบุคลากรแต่ละประเภท</h1>
@@ -1910,7 +1934,7 @@ $('.profile_pic').mouseover(function(){
                                         </select>
  -->
 
-    <select data-qo-disable-clear="true" data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.title_choosen" data-qo-disable-clear="true" >
+    <select data-qo-disable-clear="true" data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.$parent.title_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
 
                                         </th>
@@ -1923,20 +1947,16 @@ $('.profile_pic').mouseover(function(){
                                         <tbody class="flattened" ng-hide="not_choose_title_yet"> 
                                           
 
-                                            <tr  ng-repeat="research in manage_research_my_research_now">
-                          <td  ><span style="font-size:19px;">ประเภทททททบุคลลล</span> </td>
+                                            <tr  ng-repeat="each_type in manage_privilege_president_result.list">
+                          <td  ><span style="font-size:21px;">{{each_type.user_type}}</span> </td>
                                            
                                            <td style="
     padding-left: 0px;
     padding-right: 0px;
 ">
- 
-                                           <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder=""  data-qo-button-class=" pink_please " data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel">
-                                            <option>อนุญาติ</option>
-                                            <option>ไม่อนุญาติ</option>
-                                             
-
-                                        </select>
+    <select data-qo-disable-clear="true" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice for choice in manage_privilege_president_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.each_type.privilege" data-qo-disable-clear="true" >
+<option style="display:none" value=""></option></select>   
+                                         
                                            </td>
 
 
@@ -1956,7 +1976,87 @@ $('.profile_pic').mouseover(function(){
           </div>         </div>
      <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="choose_not_complete || nothing_change"  class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button ng-disabled="choose_not_complete || not_choose_title_yet || still_not_complete()"  class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                        </div>
+                    </div>
+   </div>
+
+
+
+
+ <div id="change_priviledge_by_type_admin" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="change_priviledge_by_type_admin_controller">
+
+                    <div class="custom-header">
+                        <h1 class="headerModalH1">แก้ไขระดับการเข้าถึงของบุคลากรแต่ละประเภท</h1>
+                    </div>
+
+  <div class="container-fluid" >
+                        <div class="clearfix">
+
+
+                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
+                                 data-qo-selectable="true">
+              
+
+              
+                                <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+
+                          
+
+  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
+                                      
+                                        <thead class="nq-fix-table-scroll">
+                                            <tr>
+                          
+                                                  <th class="col-xs-1 " rowspan="2">ประเภทบุคลากร</th>
+                                    <th class="col-xs-3 " colspan="3"> 
+                                   
+
+
+    <select data-qo-disable-clear="true" data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.$parent.title_choosen" data-qo-disable-clear="true" >
+<option style="display:none" value=""></option></select>   
+
+                                        </th>
+                  
+
+                                              
+                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody class="flattened" ng-hide="not_choose_title_yet"> 
+                                   
+
+                                            <tr  ng-repeat="each_type in manage_privilege_admin_result.list">
+                          <td  ><span style="font-size:21px;">{{each_type.user_type}}</span> </td>
+                                           
+                                           <td style="
+    padding-left: 0px;
+    padding-right: 0px;
+">
+    <select data-qo-disable-clear="true" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice for choice in manage_privilege_admin_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.each_type.privilege" data-qo-disable-clear="true" >
+<option style="display:none" value=""></option></select>   
+                                         
+                                           </td>
+
+
+                                    
+
+                                      
+
+                                            </tr>
+
+                                  
+                                        </tbody>
+
+                                    </table>
+
+         </div>         </div>        
+
+          </div>         </div>
+     <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button ng-disabled="not_choose_title_yet || still_not_complete()"  class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
