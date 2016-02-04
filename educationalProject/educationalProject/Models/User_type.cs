@@ -7,7 +7,7 @@ namespace educationalProject.Models
 {
     public class User_type
     {
-        protected struct FieldName
+        internal struct FieldName
         {
             public static readonly string USER_TYPE = "USER_TYPE";
             public static readonly string TABLE_NAME = "USER_TYPE";

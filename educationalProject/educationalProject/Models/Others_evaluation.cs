@@ -14,7 +14,7 @@ namespace educationalProject.Models
             public static readonly string SUB_INDICATOR_NUM = "SUB_INDICATOR_NUM";
             public static readonly string ASSESSOR_ID = "ASSESSOR_ID";
             public static readonly string EVALUATION_SCORE = "EVALUATION_SCORE";
-            public static readonly string DETAIL = "DETAIL";
+            public static readonly string DETAIL = "SUGGESTION";
             public static readonly string DATE = "DATE";
             public static readonly string TIME = "TIME";
             public static readonly string CURRI_ID = "CURRI_ID";

@@ -38,13 +38,13 @@ namespace educationalProject.Models.Wrappers
                             year = item.ItemArray[data.Columns[FieldName.YEAR].Ordinal].ToString()
                         });
                     }
-                    res.Close();
                     data.Dispose();
                 }
                 else
                 {
                     //Reserved for return error string
                 }
+                res.Close();
             }
             catch (Exception ex)
             {
