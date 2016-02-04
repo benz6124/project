@@ -3252,7 +3252,7 @@ glyphicon glyphicon-bell"></i> </span>
                                         <form name="evaluate_by_me_form" novalidate>
                                           
 
-                                            <tr data-ng-repeat="result in corresponding_results">
+                                            <tr data-ng-repeat="result in corresponding_results.evaluation_detail">
                                                 <td>{{result.indicator_num}}.{{result.sub_indicator_num}}</td>
                                                 <td class="left_column">{{result.sub_indicator_name}}
 
@@ -3288,19 +3288,6 @@ glyphicon glyphicon-bell"></i> </span>
                                 </div>
 
 
-<!--     <div class="row">
-                            <div class="col-md-3">
-                                <h3 style="margin-left:20px;margin-top:5px;color:#6F002B;font-weight:bold"><span class="topicHeader">ไฟล์สนับสนุนการประเมิน:  </span></h3>
-
-                            </div>
-                            <div class="col-md-9" style="
-    padding-left: 0px;
-">
-                             
-                                <input type="file"  name="upload_file_input" class="form-control" placeholder="ไฟล์สนับสนุนการประเมิน" data-ng-model="files" ng-disabled="choose_not_complete" required="required" file-upload   multiple/>
-                            </div>
-
-                        </div> -->
 
 
 <div class="row">
