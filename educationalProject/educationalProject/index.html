@@ -395,7 +395,7 @@ $('.profile_pic').mouseover(function(){
                         <li>
                             <a href="" data-nq-toggle-modal="#change_priviledge" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-cog"></i>
-                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic">&nbsp;&nbsp;แก้ไขระดับการเข้าถึง</span></span>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic">&nbsp;&nbsp;แก้ไขระดับการเข้าถึง ประธาน</span></span>
                             </a>
 
                             <ul class="dropdown">
@@ -1858,7 +1858,7 @@ $('.profile_pic').mouseover(function(){
 
 
 
- <div id="change_priviledge_by_type" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_research_controller">
+ <div id="change_priviledge_by_type" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="change_priviledge_by_type_president_controller">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">แก้ไขระดับการเข้าถึงของบุคลากรแต่ละประเภท</h1>
@@ -1871,7 +1871,7 @@ $('.profile_pic').mouseover(function(){
 
 
                       
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="choose_curri()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
             <option style="display:none" value=""></option></select>
 
                      
@@ -1901,13 +1901,17 @@ $('.profile_pic').mouseover(function(){
                                     <th class="col-xs-3 " colspan="3"> 
                                    
 
-                                          <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder=""  data-qo-button-class=" titile_priviledge " data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel" >
+                                       <!--    <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel" >
                                             <option>สร้างบัญชี</option>
                                             <option>สร้างหลักสูตร</option>
                                              <option>เพิ่มปีการศึกษา</option>
 
 
                                         </select>
+ -->
+
+    <select data-qo-disable-clear="true" data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.title_choosen" data-qo-disable-clear="true" >
+<option style="display:none" value=""></option></select>   
 
                                         </th>
                   
@@ -1916,8 +1920,7 @@ $('.profile_pic').mouseover(function(){
                                             
                                             </tr>
                                         </thead>
-                                        <tbody class="flattened">
-                                        <form name="manage_survey_form" novalidate>
+                                        <tbody class="flattened" ng-hide="not_choose_title_yet"> 
                                           
 
                                             <tr  ng-repeat="research in manage_research_my_research_now">
@@ -1943,7 +1946,7 @@ $('.profile_pic').mouseover(function(){
 
                                             </tr>
 
-                                            </form>
+                                  
                                         </tbody>
 
                                     </table>

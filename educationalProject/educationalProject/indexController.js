@@ -5274,6 +5274,122 @@ $scope.init =function() {
 });
 
 
+
+app.controller('change_priviledge_by_type_president_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+
+              $scope.curri_choosen = {}
+    $scope.not_choose_title_yet = true;
+     
+   
+$scope.title_choosen = {};
+
+  $http.get('api/titleprivilege').success(function (data) {
+          
+             $scope.all_title = data;
+          
+           });
+}
+
+     $http.get('api/titleprivilege').success(function (data) {
+          
+             $scope.all_title = data;
+          
+           });
+    $scope.not_choose_title_yet = true;
+$scope.title_choosen = {};
+  
+     $scope.choose_not_complete = true;
+      
+              $scope.curri_choosen = {}
+  
+                    $scope.result = {};
+  
+
+      $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+    
+    $scope.choose_curri = function(){
+
+          $scope.not_choose_title_yet = true;
+      $scope.choose_not_complete = false;
+
+    }
+
+      $scope.find_information = function(){
+
+      
+
+        $http.post(
+             '/api/research/getresearch',
+             JSON.stringify($scope.curri_choosen.curri_id),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+                   $scope.not_choose_title_yet = false;
+              $rootScope.manage_research_my_research_now = data;
+             $scope.choose_not_complete = false;
+               $scope.nothing_change = true;
+            
+    
+         });
+
+
+
+    }
+
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+    $scope.save_to_server = function(my_modal){
+        console.log("save_to_server");
+        console.log($rootScope.manage_research_my_research_now);
+
+        if($rootScope.manage_research_my_research_now.length == 0 ){
+            $scope.to_sent  = {};
+            $scope.to_sent.research_id = -1;
+            $scope.to_sent.curri_id = $scope.curri_choosen.curri_id ;
+            $rootScope.manage_research_my_research_now.push($scope.to_sent);
+
+        }
+        $http.put(
+             '/api/research/delete',
+             JSON.stringify($rootScope.manage_research_my_research_now),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+             $scope.close_modal(my_modal);
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+              
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    }
+});
+
+
 app.controller('manage_research_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;

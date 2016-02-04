@@ -1121,8 +1121,9 @@ input.form-control.title{
 
 
 .titile_priviledge{
-
- padding-top:4px;
+  color:#6F002B;
+font-size: 22px!important;
+ padding-top:2px;
 }
 
 .pink_please{
