@@ -1339,19 +1339,24 @@ $scope.to_sent = {};
 
    
 
-if( !$scope.files[0]){
-    $scope.to_sent.evaluation_detail = $scope.corresponding_results;
-    $scope.to_sent.file_name = "";
-}else{
-     $scope.to_sent.evaluation_detail = $scope.corresponding_results;
-    $scope.to_sent.file_name = $scope.files[0].name;
+// if( !$scope.files[0]){
+//     $scope.to_sent.evaluation_detail = $scope.corresponding_results;
+//     $scope.to_sent.file_name = "";
+// }else{
+//      $scope.to_sent.evaluation_detail = $scope.corresponding_results;
+//     $scope.to_sent.file_name = $scope.files[0].name;
+// }
+
+
+if( $scope.files.length != 0){
+      $scope.to_sent.file_name = $scope.files[0].name;
 }
 
 
- formData.append("model", angular.toJson($scope.to_sent));
+ formData.append("model", angular.toJson($scope.corresponding_results));
   formData.append("file", $scope.files[0]);
   console.log("$scope.to_sent");
-  console.log($scope.to_sent);
+  console.log($scope.corresponding_results);
 
         $http({
             method: 'PUT',
