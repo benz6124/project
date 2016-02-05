@@ -15,5 +15,14 @@ namespace educationalProject.Controllers
         {
             return Ok(data.SelectByCurriculumAndTitle());
         }
+
+        public IHttpActionResult Put(Extra_privilege_individual_list_with_privilege_choices data)
+        {
+            object result = datacontext.InsertOrUpdate(data);
+            if (result == null)
+                return Ok();
+            else
+                return InternalServerError(new Exception(result.ToString()));
+        }
     }
 }
