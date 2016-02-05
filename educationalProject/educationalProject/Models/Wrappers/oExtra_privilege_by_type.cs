@@ -20,19 +20,20 @@ namespace educationalProject.Models.Wrappers
             string createtabletemp5 = string.Format("CREATE TABLE {0}(" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
                                       "[{1}] VARCHAR(40) NULL," +
-                                      "[{2}] VARCHAR(4) NULL," +
+                                      "[{2}] {5} NULL," +
                                       "[{3}] VARCHAR(80) NULL," +
                                       "[{4}] VARCHAR(80) NULL," +
                                       "PRIMARY KEY([row_num])) " +
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN {1} VARCHAR(40) COLLATE DATABASE_DEFAULT " +
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {2} VARCHAR(4) COLLATE DATABASE_DEFAULT " +
+                                      "ALTER COLUMN {2} {5} COLLATE DATABASE_DEFAULT " +
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN {3} VARCHAR(80) COLLATE DATABASE_DEFAULT " +
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN {4} VARCHAR(80) COLLATE DATABASE_DEFAULT ",
-                                      temp5tablename, FieldName.USER_TYPE, FieldName.CURRI_ID, FieldName.TITLE, FieldName.PRIVILEGE);
+                                      temp5tablename, FieldName.USER_TYPE, FieldName.CURRI_ID, FieldName.TITLE, FieldName.PRIVILEGE,
+                                      DBFieldDataType.CURRI_ID_TYPE);
 
             string insertintotemp5_1 = string.Format("insert into {5} " +
                                        "select * from {0} where {1} = '{2}' and {3} = '{4}' ",

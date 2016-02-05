@@ -28,8 +28,8 @@ namespace educationalProject.Models.Wrappers
                                       "[{7}] VARCHAR(MAX) NULL," +
                                       "[{8}] DATE NULL," +
                                       "[{9}] TIME(0) NULL," +
-                                      "[{10}] VARCHAR(255) NULL," +
-                                      "[{11}] VARCHAR(4) NULL," +
+                                      "[{10}] {14} NULL," +
+                                      "[{11}] {13} NULL," +
                                       "[{12}] INT NULL," +
                                       "PRIMARY KEY([row_num])) " +
 
@@ -46,15 +46,15 @@ namespace educationalProject.Models.Wrappers
                                       "ALTER COLUMN [{7}] VARCHAR(MAX) collate DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN [{10}] VARCHAR(255) collate DATABASE_DEFAULT " +
+                                      "ALTER COLUMN [{10}] {14} collate DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN [{11}] VARCHAR(4) collate DATABASE_DEFAULT ",
+                                      "ALTER COLUMN [{11}] {13} collate DATABASE_DEFAULT ",
                                       temp5tablename, Sub_indicator.FieldName.SUB_INDICATOR_NAME,
                                       FieldName.OTHERS_EVALUATION_ID, FieldName.INDICATOR_NUM, FieldName.SUB_INDICATOR_NUM,
                                       FieldName.ASSESSOR_ID, FieldName.EVALUATION_SCORE, FieldName.DETAIL,
                                       FieldName.DATE, FieldName.TIME, Evidence.FieldName.FILE_NAME, FieldName.CURRI_ID,
-                                      FieldName.ACA_YEAR);
+                                      FieldName.ACA_YEAR,DBFieldDataType.CURRI_ID_TYPE,DBFieldDataType.FILE_NAME_TYPE);
 
             string insertintotemp5_1 = string.Format("insert into {13} " +
                                        "select {2}, {0}.* " +
@@ -181,12 +181,12 @@ namespace educationalProject.Models.Wrappers
             string temp5tablename = "#temp5";
             string createtabletemp5 = string.Format("CREATE TABLE {0}(" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                      "[{1}] VARCHAR(255) NULL," +
+                                      "[{1}] {2} NULL," +
                                       "PRIMARY KEY([row_num])) " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN [{1}] VARCHAR(255) collate DATABASE_DEFAULT ",
-                                      temp5tablename, Evidence.FieldName.FILE_NAME);
+                                      "ALTER COLUMN [{1}] {2} collate DATABASE_DEFAULT ",
+                                      temp5tablename, Evidence.FieldName.FILE_NAME,DBFieldDataType.FILE_NAME_TYPE);
             string updatecmd = "";
             if (odata.file_name == "")
             {

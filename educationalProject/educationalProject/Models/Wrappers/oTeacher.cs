@@ -17,7 +17,7 @@ namespace educationalProject.Models.Wrappers
                 return "Cannot connect to database.";
             List<Teacher_with_t_name> result = new List<Teacher_with_t_name>();
             d.iCommand.CommandText = string.Format("select * from {0} where exists(select * from {1} where {0}.{2} = {1}.{3} and {4}='{5}')", 
-                FieldName.TABLE_NAME, Curriculum_teacher_staff.FieldName.TABLE_NAME,FieldName.TEACHER_ID,Curriculum_teacher_staff.FieldName.PERSONNEL_ID,Curriculum_teacher_staff.FieldName.CURRI_ID,curri_id);
+                FieldName.TABLE_NAME, User_curriculum.FieldName.TABLE_NAME,FieldName.TEACHER_ID,User_curriculum.FieldName.USER_ID,User_curriculum.FieldName.CURRI_ID,curri_id);
             try  
             {  
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -34,13 +34,13 @@ namespace educationalProject.Models.Wrappers
                                      item.ItemArray[data.Columns[FieldName.T_NAME].Ordinal].ToString()
                         });
                     }
-                    res.Close();
                     data.Dispose();
                 }
                 else
                 {
                     //Reserved for return error string
                 }
+                res.Close();
             }
             catch (Exception ex)
             {
@@ -70,8 +70,8 @@ namespace educationalProject.Models.Wrappers
                  "inner join {11} on r2.{9} = {11}.{12}",
                  FieldName.TEACHER_ID, President_curriculum.FieldName.TABLE_NAME, President_curriculum.FieldName.CURRI_ID,
                  data.curri_id, President_curriculum.FieldName.ACA_YEAR, data.aca_year, FieldName.TABLE_NAME,
-                 Curriculum_teacher_staff.FieldName.TABLE_NAME, Curriculum_teacher_staff.FieldName.CURRI_ID, FieldName.TEACHER_ID,
-                 Curriculum_teacher_staff.FieldName.PERSONNEL_ID, Educational_teacher_staff.FieldName.TABLE_NAME,
+                 User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.CURRI_ID, FieldName.TEACHER_ID,
+                 User_curriculum.FieldName.USER_ID, Educational_teacher_staff.FieldName.TABLE_NAME,
                  Educational_teacher_staff.FieldName.PERSONNEL_ID);
             try
             {
@@ -127,8 +127,8 @@ namespace educationalProject.Models.Wrappers
                     d.iCommand.CommandText = string.Format("select * from {0} where " +
                                        "{1} IN(select {2} from {3} where {4} = '{5}') and " +
                                        "not exists(select * from {6} where {0}.{1} = {6}.{7})",
-                                       FieldName.TABLE_NAME, FieldName.TEACHER_ID, Curriculum_teacher_staff.FieldName.PERSONNEL_ID,
-                                       Curriculum_teacher_staff.FieldName.TABLE_NAME, Curriculum_teacher_staff.FieldName.CURRI_ID,
+                                       FieldName.TABLE_NAME, FieldName.TEACHER_ID, User_curriculum.FieldName.USER_ID,
+                                       User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.CURRI_ID,
                                        data.curri_id, Educational_teacher_staff.FieldName.TABLE_NAME, Educational_teacher_staff.FieldName.PERSONNEL_ID);
                     res = d.iCommand.ExecuteReader();
                     //read teacher data without eduhistory

@@ -7,18 +7,10 @@ namespace educationalProject.Models.ViewModels
 {
     public class Personnel_with_t_name
     {
-        private string _personnel_id;
+        private string _user_id;
         private string _t_name;
         public string t_name { get { return _t_name; } set { _t_name = value; } }
-        public string personnel_id { get { return _personnel_id; } set { _personnel_id = value; } }
-        public void SetPersonnelId(string pid)
-        {
-            _personnel_id = pid;
-        }
-        public string GetPersonnelId()
-        {
-            return _personnel_id;
-        }
+        public string user_id { get { return _user_id; } set { _user_id = value; } }
 
         public virtual string GetTypeName()
         {

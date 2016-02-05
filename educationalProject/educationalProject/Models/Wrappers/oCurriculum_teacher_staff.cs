@@ -7,9 +7,9 @@ using educationalProject.Utils;
 using educationalProject.Models.ViewModels;
 namespace educationalProject.Models.Wrappers
 {
-    public class oCurriculum_teacher_staff : Curriculum_teacher_staff
+    public class oCurriculum_teacher_staff : User_curriculum
     {
-        public object InsertNewCurriculumTeacherStaffWithSelect(List<Curriculum_teacher_staff> list)
+        public object InsertNewCurriculumTeacherStaffWithSelect(List<User_curriculum> list)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -18,12 +18,12 @@ namespace educationalProject.Models.Wrappers
 
             string insertcmd = string.Format("insert into {0} values ", FieldName.TABLE_NAME);
             int len = insertcmd.Length;
-            foreach (Curriculum_teacher_staff c in list)
+            foreach (User_curriculum c in list)
             {
                 if (insertcmd.Length <= len)
-                    insertcmd += string.Format("('{0}','{1}')", c.personnel_id, c.curri_id);
+                    insertcmd += string.Format("('{0}','{1}')", c.user_id, c.curri_id);
                 else
-                    insertcmd += string.Format(",('{0}','{1}')", c.personnel_id, c.curri_id);
+                    insertcmd += string.Format(",('{0}','{1}')", c.user_id, c.curri_id);
             }
 
             string selectcmd = ViewModels.Wrappers.oPersonnel.GetSelectWithCurriculumCommand(list.First().curri_id);
@@ -43,7 +43,7 @@ namespace educationalProject.Models.Wrappers
                         if (Convert.ToInt32(item.ItemArray[data.Columns["user_type_num"].Ordinal]) == 1)
                             result.Add(new Curriculum_teacher_staff_with_brief_detail
                             {
-                                personnel_id = item.ItemArray[data.Columns[Personnel.FieldName.PERSONNEL_ID].Ordinal].ToString(),
+                                user_id = item.ItemArray[data.Columns[Personnel.FieldName.USER_ID].Ordinal].ToString(),
                                 t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString()) +
                                          item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
@@ -53,7 +53,7 @@ namespace educationalProject.Models.Wrappers
                         else
                             result.Add(new Curriculum_teacher_staff_with_brief_detail
                             {
-                                personnel_id = item.ItemArray[data.Columns[Personnel.FieldName.PERSONNEL_ID].Ordinal].ToString(),
+                                user_id = item.ItemArray[data.Columns[Personnel.FieldName.USER_ID].Ordinal].ToString(),
                                 t_name = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString() +
                                      item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
@@ -85,7 +85,7 @@ namespace educationalProject.Models.Wrappers
 
 
 
-        public object Delete(List<Curriculum_teacher_staff> list)
+        public object Delete(List<User_curriculum> list)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -95,9 +95,9 @@ namespace educationalProject.Models.Wrappers
             string deletecmd = string.Format("delete from {0} where {1} = '{2}' ", FieldName.TABLE_NAME,
                 FieldName.CURRI_ID,list.First().curri_id);
             string excludecond = "";
-            foreach (Curriculum_teacher_staff c in list)
+            foreach (User_curriculum c in list)
             {
-                excludecond += string.Format("and {0} != '{1}' ", FieldName.PERSONNEL_ID, c.personnel_id);
+                excludecond += string.Format("and {0} != '{1}' ", FieldName.USER_ID, c.user_id);
             }
             deletecmd += excludecond;
 

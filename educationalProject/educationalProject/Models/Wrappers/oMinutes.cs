@@ -15,21 +15,21 @@ namespace educationalProject.Models.Wrappers
             string createtabletemp5 = string.Format("create table {0}(" +
                                       "[row_num] int identity(1, 1) not null," +
                                       "[{1}] int not null," +
-                                      "[t1_id] varchar(5) not null," +
+                                      "[t1_id] {7} not null," +
                                       "[t1_prename] varchar(16) not null," +
                                       "[t1_name] varchar(60) not null," +
-                                      "[{2}] varchar(4) not null," +
+                                      "[{2}] {8} not null," +
                                       "[{3}] int not null," +
                                       "[{4}] date null," +
                                       "[{5}] varchar(1000) not null," +
-                                      "[{6}] varchar(255) not null," +
-                                      "[t2_id] varchar(5) not null," +
+                                      "[{6}] {9} not null," +
+                                      "[t2_id] {7} not null," +
                                       "[t2_prename] varchar(16) not null," +
                                       "[t2_name] varchar(60) not null," +
                                       "PRIMARY KEY([row_num])) " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN t1_id varchar(5) COLLATE DATABASE_DEFAULT " +
+                                      "ALTER COLUMN t1_id {7} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN t1_prename varchar(16) COLLATE DATABASE_DEFAULT " +
@@ -38,16 +38,16 @@ namespace educationalProject.Models.Wrappers
                                       "ALTER COLUMN t1_name varchar(60) COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {2} varchar(4) COLLATE DATABASE_DEFAULT " +
+                                      "ALTER COLUMN {2} {8} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN {5} varchar(1000) COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {6} varchar(255) COLLATE DATABASE_DEFAULT " +
+                                      "ALTER COLUMN {6} {9} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN t2_id varchar(5) COLLATE DATABASE_DEFAULT " +
+                                      "ALTER COLUMN t2_id {7} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN t2_prename varchar(16) COLLATE DATABASE_DEFAULT " +
@@ -55,7 +55,8 @@ namespace educationalProject.Models.Wrappers
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN t2_name varchar(60) COLLATE DATABASE_DEFAULT ",
                                       temp5tablename, FieldName.MINUTES_ID, FieldName.CURRI_ID, FieldName.ACA_YEAR,
-                                      FieldName.DATE, FieldName.TOPIC_NAME, FieldName.FILE_NAME);
+                                      FieldName.DATE, FieldName.TOPIC_NAME, FieldName.FILE_NAME,DBFieldDataType.USER_ID_TYPE,
+                                      DBFieldDataType.CURRI_ID_TYPE,DBFieldDataType.FILE_NAME_TYPE);
 
             //retrieve normal row with attendee data
             string insertintotemp5_1 = string.Format("insert into {0} " +
@@ -200,11 +201,11 @@ namespace educationalProject.Models.Wrappers
             string temp1tablename = "#temp1";
             string createtabletemp1 = string.Format("create table {0} (" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                      "[{1}] VARCHAR(255) NOT NULL," +
+                                      "[{1}] {2} NOT NULL," +
                                       "PRIMARY KEY([row_num])) " +
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {1} VARCHAR(255) COLLATE DATABASE_DEFAULT ",
-                                      temp1tablename,FieldName.FILE_NAME);
+                                      "ALTER COLUMN {1} {2} COLLATE DATABASE_DEFAULT ",
+                                      temp1tablename,FieldName.FILE_NAME,DBFieldDataType.FILE_NAME_TYPE);
 
             string insertintotemp1_1 = string.Format("INSERT INTO {0} " +
                                        "SELECT {1} from {2} where ({3}) " + 
@@ -273,19 +274,20 @@ namespace educationalProject.Models.Wrappers
 
             string createtabletemp2 = string.Format("create table {0} (" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                      "[{1}] VARCHAR(5) NULL," +
+                                      "[{1}] {2} NULL," +
                                       "PRIMARY KEY ([row_num])) " +
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {1} VARCHAR(5) COLLATE DATABASE_DEFAULT "
-                                      , temp2tablename, Minutes_attendee.FieldName.TEACHER_ID);
+                                      "ALTER COLUMN {1} {2} COLLATE DATABASE_DEFAULT "
+                                      , temp2tablename, Minutes_attendee.FieldName.TEACHER_ID,DBFieldDataType.USER_ID_TYPE);
 
             string createtabletemp3 = string.Format("create table {0} (" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                      "[{1}] VARCHAR(255) NULL," +
+                                      "[{1}] {2} NULL," +
                                       "PRIMARY KEY ([row_num])) " +
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {1} VARCHAR(255) COLLATE DATABASE_DEFAULT "
-                                      , temp3tablename, Minutes_pic.FieldName.FILE_NAME);
+                                      "ALTER COLUMN {1} {2} COLLATE DATABASE_DEFAULT "
+                                      , temp3tablename, Minutes_pic.FieldName.FILE_NAME,
+                                      DBFieldDataType.FILE_NAME_TYPE);
 
 
             string insertintotemp1 = string.Format("INSERT INTO {0} " +
@@ -417,11 +419,11 @@ namespace educationalProject.Models.Wrappers
 
             string createtabletemp1 = string.Format("create table {0} (" +
                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                     "[{1}] VARCHAR(255) NOT NULL," +
+                                     "[{1}] {2} NOT NULL," +
                                      "PRIMARY KEY([row_num])) " +
                                      "ALTER TABLE {0} " +
-                                     "ALTER COLUMN {1} VARCHAR(255) COLLATE DATABASE_DEFAULT ",
-                                     temp1tablename, FieldName.FILE_NAME);
+                                     "ALTER COLUMN {1} {2} COLLATE DATABASE_DEFAULT ",
+                                     temp1tablename, FieldName.FILE_NAME,DBFieldDataType.FILE_NAME_TYPE);
 
             string insertintotemp1_1;
             //TOEDIT --UPDATE MINUTES TABLE (2 CASE WITH FILE_NAME UPDATES)

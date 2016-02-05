@@ -233,11 +233,12 @@ namespace educationalProject.Models.Wrappers
                                       "PRIMARY KEY ([row_num])) ", temp1tablename, FieldName.RESEARCH_ID);
             string createtabletemp2 = string.Format("create table {0} (" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                      "[{1}] VARCHAR(5) NULL," +
+                                      "[{1}] {2} NULL," +
                                       "PRIMARY KEY ([row_num])) " +
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {1} VARCHAR(5) COLLATE DATABASE_DEFAULT "
-                                      , temp2tablename, Research_owner.FieldName.TEACHER_ID);
+                                      "ALTER COLUMN {1} {2} COLLATE DATABASE_DEFAULT "
+                                      , temp2tablename, Research_owner.FieldName.TEACHER_ID,
+                                      DBFieldDataType.USER_ID_TYPE);
 
             string insertintotemp1 = string.Format("INSERT INTO {0} " +
                                      "select * from " +
@@ -324,11 +325,11 @@ namespace educationalProject.Models.Wrappers
 
             string createtabletemp1 = string.Format("create table {0} (" +
                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                     "[{1}] VARCHAR(255) NOT NULL," +
+                                     "[{1}] {2} NOT NULL," +
                                      "PRIMARY KEY([row_num])) " +
                                      "ALTER TABLE {0} " +
-                                     "ALTER COLUMN {1} VARCHAR(255) COLLATE DATABASE_DEFAULT ",
-                                     temp1tablename, FieldName.FILE_NAME);
+                                     "ALTER COLUMN {1} {2} COLLATE DATABASE_DEFAULT ",
+                                     temp1tablename, FieldName.FILE_NAME,DBFieldDataType.FILE_NAME_TYPE);
 
             string insertintotemp1 = string.Format("INSERT INTO {0} " +
                                      "select * from " +

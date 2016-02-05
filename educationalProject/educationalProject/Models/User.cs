@@ -7,7 +7,6 @@ namespace educationalProject.Models
 {
     public abstract class User
     {
-        
         private string _username;
         private string _password;
         private string _user_type;

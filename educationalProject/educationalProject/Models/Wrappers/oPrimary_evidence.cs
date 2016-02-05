@@ -358,13 +358,14 @@ namespace educationalProject.Models.Wrappers
                 createtabletemp2 = string.Format("CREATE TABLE {0} (" +
                                                         "[row_num] INT IDENTITY(1, 1) NOT NULL," +
                                                         "[{1}] INT NOT NULL," +
-                                                        "[{2}] VARCHAR(4) NOT NULL," +
-                                                        "[{3}] VARCHAR(5) NOT NULL," +
+                                                        "[{2}] {6} NOT NULL," +
+                                                        "[{3}] {5} NOT NULL," +
                                                         "[{4}] CHAR NOT NULL," +
                                                         "PRIMARY KEY([row_num])) ", temp2tablename,
                                                         FieldName.PRIMARY_EVIDENCE_NUM, FieldName.CURRI_ID,
                                                         Primary_evidence_status.FieldName.TEACHER_ID,
-                                                        Primary_evidence_status.FieldName.STATUS);
+                                                        Primary_evidence_status.FieldName.STATUS,DBFieldDataType.USER_ID_TYPE,
+                                                        DBFieldDataType.CURRI_ID_TYPE);
                 insertintotemp2 = string.Format("insert into {0} " +
                                                        "select t1.{1}, t1.{2}, t1.{3}, t1.{4} from " +
                                                        "(select * from {5} as p1 where p1.{1} in " +

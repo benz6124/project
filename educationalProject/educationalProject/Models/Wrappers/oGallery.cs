@@ -28,28 +28,28 @@ namespace educationalProject.Models.Wrappers
             string createtabletemp5 = string.Format("create table {0}(" +
                                       "[row_num] int identity(1,1) not null," +
                                       "[{1}] INT NULL," +
-                                      "[{2}] VARCHAR(5) NULL," +
+                                      "[{2}] {11} NULL," +
                                       "[{3}] VARCHAR(1000) NULL," +
                                       "[{4}] DATE NULL," +
-                                      "[{5}] VARCHAR(4) NULL," +
+                                      "[{5}] {12} NULL," +
                                       "[{6}] INT NULL," +
-                                      "[{7}] VARCHAR(255) NOT NULL," +
+                                      "[{7}] {13} NOT NULL," +
                                       "[{8}] VARCHAR(MAX) NULL," +
                                       "[{9}] varchar(16) null," +
                                       "[{10}] varchar(60) null," +
                                       "PRIMARY KEY ([row_num])) " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN [{2}] VARCHAR(5) COLLATE DATABASE_DEFAULT " +
+                                      "ALTER COLUMN [{2}] {11} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN [{3}] VARCHAR(1000) COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN [{5}] VARCHAR(4) COLLATE DATABASE_DEFAULT " +
+                                      "ALTER COLUMN [{5}] {12} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN [{7}] VARCHAR(255) COLLATE DATABASE_DEFAULT " +
+                                      "ALTER COLUMN [{7}] {13} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN [{8}] VARCHAR(MAX) COLLATE DATABASE_DEFAULT " +
@@ -62,7 +62,8 @@ namespace educationalProject.Models.Wrappers
                                       , temp5tablename, FieldName.GALLERY_ID, FieldName.PERSONNEL_ID, FieldName.NAME,
                                       FieldName.DATE_CREATED, FieldName.CURRI_ID, FieldName.ACA_YEAR,
                                       Picture.FieldName.FILE_NAME, Picture.FieldName.CAPTION,
-                                      Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME);
+                                      Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,DBFieldDataType.USER_ID_TYPE,
+                                      DBFieldDataType.CURRI_ID_TYPE,DBFieldDataType.FILE_NAME_TYPE);
 
             string insertintotemp5_1 = string.Format("insert into {16} " +
                                        "select {0}.*,{1}.{2},{1}.{15},{3},{4} " +
@@ -161,11 +162,11 @@ namespace educationalProject.Models.Wrappers
             string temp1tablename = "#temp1";
             string createtabletemp1 = string.Format("create table {0} (" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                      "[{1}] VARCHAR(255) NOT NULL," +
+                                      "[{1}] {2} NOT NULL," +
                                       "PRIMARY KEY([row_num])) " +
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {1} VARCHAR(255) COLLATE DATABASE_DEFAULT ",
-                                      temp1tablename, Picture.FieldName.FILE_NAME);
+                                      "ALTER COLUMN {1} {2} COLLATE DATABASE_DEFAULT ",
+                                      temp1tablename, Picture.FieldName.FILE_NAME,DBFieldDataType.FILE_NAME_TYPE);
 
             string insertintotemp1 = string.Format("INSERT INTO {0} " +
                                        "SELECT {1} from {2} where ({3}) " +
@@ -229,14 +230,15 @@ namespace educationalProject.Models.Wrappers
 
             string createtabletemp2 = string.Format("create table {0} (" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                      "[{1}] VARCHAR(255) NULL," +
+                                      "[{1}] {3} NULL," +
                                       "[{2}] VARCHAR(MAX) NULL," +
                                       "PRIMARY KEY ([row_num])) " +
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {1} VARCHAR(255) COLLATE DATABASE_DEFAULT " +
+                                      "ALTER COLUMN {1} {3} COLLATE DATABASE_DEFAULT " +
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN {2} VARCHAR(MAX) COLLATE DATABASE_DEFAULT "
-                                      , temp2tablename, Picture.FieldName.FILE_NAME,Picture.FieldName.CAPTION);
+                                      , temp2tablename, Picture.FieldName.FILE_NAME,Picture.FieldName.CAPTION,
+                                      DBFieldDataType.FILE_NAME_TYPE);
 
 
             string insertintotemp1 = string.Format("INSERT INTO {0} " +
@@ -340,11 +342,12 @@ namespace educationalProject.Models.Wrappers
             int len = insertintopicturecmd.Length;
             string createtabletemp1 = string.Format("create table {0} (" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                      "[{1}] VARCHAR(255) NULL," +
+                                      "[{1}] {2} NULL," +
                                       "PRIMARY KEY ([row_num])) " +
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {1} VARCHAR(255) COLLATE DATABASE_DEFAULT "
-                                      , temp1tablename, Picture.FieldName.FILE_NAME);
+                                      "ALTER COLUMN {1} {2} COLLATE DATABASE_DEFAULT "
+                                      , temp1tablename, Picture.FieldName.FILE_NAME,
+                                      DBFieldDataType.FILE_NAME_TYPE);
 
             string updategallerycmd = string.Format("update {0} set {1} = '{2}', {3} = '{4}' where {5} = {6} ",
                 FieldName.TABLE_NAME, FieldName.PERSONNEL_ID, gdata.personnel_id, FieldName.NAME, gdata.name,

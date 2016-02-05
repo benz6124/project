@@ -464,12 +464,12 @@ namespace educationalProject.Models.Wrappers
 
                 createtabletemp1 = string.Format("create table {0} (" +
                                           "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                          "[{1}] VARCHAR(255) NOT NULL," +
+                                          "[{1}] {2} NOT NULL," +
                                           "PRIMARY KEY([row_num])) " +
                                           /*Alter column in temp table to make table accept Thai data*/
                                           "ALTER TABLE {0} " +
-                                          "ALTER COLUMN {1} VARCHAR(255) COLLATE DATABASE_DEFAULT ",
-                                          temp1tablename, FieldName.FILE_NAME);
+                                          "ALTER COLUMN {1} {2} COLLATE DATABASE_DEFAULT ",
+                                          temp1tablename, FieldName.FILE_NAME,DBFieldDataType.FILE_NAME_TYPE);
 
                 insertintotemp1 = string.Format("insert into {0}({1}) " +
                                          "select * from (delete from {2} output Deleted.{1} where {3}) " +

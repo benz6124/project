@@ -39,7 +39,7 @@ namespace educationalProject.Controllers
             {
                 detail.officer.Add(new Personnel_with_t_name
                 {
-                    personnel_id = item["personnel_id"].ToString()
+                    user_id = item["user_id"].ToString()
                 });
             }
             object result = datacontext.InsertNewLabListWithSelect(detail);
@@ -66,7 +66,7 @@ namespace educationalProject.Controllers
             {
                 detail.officer.Add(new Personnel_with_t_name
                 {
-                    personnel_id = item["personnel_id"].ToString()
+                    user_id = item["user_id"].ToString()
                 });
             }
 

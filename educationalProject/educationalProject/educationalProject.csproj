@@ -196,7 +196,8 @@
     <Compile Include="Models\Committee.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Curriculum_academic.cs" />
-    <Compile Include="Models\Curriculum_teacher_staff.cs" />
+    <Compile Include="Models\DBFieldDataType.cs" />
+    <Compile Include="Models\User_curriculum.cs" />
     <Compile Include="Models\Cu_curriculum.cs" />
     <Compile Include="Models\Default_privilege.cs" />
     <Compile Include="Models\Default_privilege_by_type.cs" />
