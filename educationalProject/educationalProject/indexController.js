@@ -23,7 +23,7 @@ app.controller('GalleryCtrl', function ($scope, Lightbox) {
 });
 
 
-app.controller('choice_index_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
+app.controller('choice_index_controller', function($scope, $http,$alert,$cookies,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
 
     // 
 
@@ -5425,19 +5425,30 @@ app.controller('login_controller', function($scope, $http,$alert,$loading,$timeo
         username: '',
         password: ''
       };
-      $scope.login = function () {
+
+       $scope.close_modal = function(my_modal){
+     
+        my_modal.$hide();
+    }
+      $scope.login = function (my_modal) {
          var user = AuthService.login($scope.credentials);
          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
           $scope.setCurrentUser(user);
-
+  $scope.$parent.already_login = true;
         // AuthService.login($scope.credentials).then(function (user) {
         //   $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
         //   $scope.setCurrentUser(user);
         // }, function () {
         //   $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
         // });
+   my_modal.$hide();
+
       };
+
+
+   
 });
+
 
 app.controller('change_priviledge_person_president_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {

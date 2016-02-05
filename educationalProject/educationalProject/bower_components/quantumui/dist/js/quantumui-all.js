@@ -8,7 +8,7 @@
  * Copyright 2014-2015 Mehmet Otkun, quantumui.org
  */
 (function (window, angular, undefined) {
-    'use strict';
+    
     if (typeof jQuery != 'undefined')
         return
     var vdoc = window.document, elproto = window.Element.prototype;
@@ -919,7 +919,7 @@ window.addResizeEvent = function (callback) {
 };
 
 +function (window, angular, undefined) {
-    'use strict';
+    
     var  $$raf  =
         window.requestAnimationFrame ||
         window.webkitRequestAnimationFrame ||
@@ -1111,7 +1111,7 @@ angular.module('ngQuantum.services.color', ['ngQuantum.services.helpers'])
     }
     return color;
 }])
-'use strict';
+
 angular.module('ngQuantum.services.helpers', [])
         .factory('$helpers', ['$injector', '$window', function ($injector, $window) {
             var fn = {};
@@ -1317,7 +1317,7 @@ angular.module('ngQuantum.services.helpers', [])
             return fn;
         }
         ])
-'use strict';
+
 angular.module('ngQuantum.services.lazy', [])
 .provider('$lazyRequest', function () {
     var timeout = this.timeout = 2000;
@@ -1349,7 +1349,7 @@ angular.module('ngQuantum.services.lazy', [])
       }
     ];
 });
-'use strict';
+
 angular.module('ngQuantum.services.mouse', [])
         .provider('$mouseConfig', function () {
             this.adjustOldDeltas = true, // see shouldAdjustOldDeltas() below
@@ -1541,7 +1541,7 @@ angular.module('ngQuantum.services.mouse', [])
             }
             return mause;
         }])
-'use strict';
+
 angular.module('ngQuantum.services.parseOptions', [])
         .provider('$parseOptions', function () {
             var defaults = this.defaults = { regexp: /^\s*(.*?)(?:\s+as\s+(.*?))?(?:\s+group\s+by\s+(.*))?\s+for\s+(?:([\$\w][\$\w]*)|(?:\(\s*([\$\w][\$\w]*)\s*,\s*([\$\w][\$\w]*)\s*\)))\s+in\s+(.*?)(?:\s+track\s+by\s+(.*?))?$/ };
@@ -1637,7 +1637,7 @@ angular.module('ngQuantum.services.parseOptions', [])
               }
             ];
         });
-'use strict';
+
 angular.module('ngQuantum.services.placement', ['ngQuantum.services.helpers'])
         .factory('$placement', ['$helpers', function ($helpers) {
             var fn = {};
@@ -1818,7 +1818,7 @@ angular.module('ngQuantum.services.placement', ['ngQuantum.services.helpers'])
         ]);
 
 +function (window, angular, undefined) {
-    'use strict';
+    
     angular.module('ngQuantum.services', [
         'ngQuantum.services.lazy',
         'ngQuantum.services.mouse',
@@ -1830,7 +1830,7 @@ angular.module('ngQuantum.services.placement', ['ngQuantum.services.helpers'])
     ])
 
 }(window, window.angular);
-'use strict';
+
 angular.module('ngQuantum.services.templateHelper', []).factory('templateHelper', [
       '$http',
       '$q',
@@ -1873,10 +1873,10 @@ angular.module('ngQuantum.services.templateHelper', []).factory('templateHelper'
           return fn;
       }
     ]);
-+function(){'use strict';
++function(){
 angular.module('ngQuantum.alert', ['ngQuantum.popMaster', 'ngQuantum.services.helpers'])
     .run(['$templateCache', function ($templateCache) {
-        'use strict';
+        
         $templateCache.put('alert/alert.tpl.html',
           "<div class=\"alert alert-dismissable\" tabindex=\"-1\" ng-class=\"alertType\"><div class=\"alert-inner\"><div class=\"alert-bg\" ng-class=\"alertType\"></div><a role=\"button\" tabindex=\"0\" class=\"close\" ng-click=\"$hide()\"><i ng-class=\"$closeIcon\"></i></a> <strong class=\"alert-title\" ng-if=\"title\" ng-bind=\"title\"></strong><span  ng-if=\"title\" ng-bind-html=\"content\"></span><div ng-if=\"!title\" ng-bind-html=\"content\"></div></div></div>"
         );
@@ -2044,7 +2044,7 @@ angular.module('ngQuantum.alert', ['ngQuantum.popMaster', 'ngQuantum.services.he
         }]);
  }();
 (function (window, angular, undefined) {
-'use strict';
+
 var asideoptions = {
     effect: 'slide-left',
     speed: 'fastest',
@@ -2456,7 +2456,7 @@ var asideoptions = {
     }])
 })(window, window.angular);
 +function (window, angular, undefined) {
-'use strict';
+
     var nqButtonsApp = angular.module('ngQuantum.button', ['ngAnimate', 'ngQuantum.services.helpers'])
         .provider('$button', function () {
             var defaults = this.defaults = {
@@ -2551,10 +2551,10 @@ var asideoptions = {
         });
  }(window, window.angular);
 +function (window, angular, undefined) {
-'use strict';
+
     angular.module('ngQuantum.carousel', ['ngQuantum.services.helpers'])
     .run(['$templateCache', function ($templateCache) {
-        'use strict';
+        
         $templateCache.put('carousel/carousel.tpl.html',
                  '<div class="carousel" ng-style="{width:$outerWidth}">'
                    + '<ol class="carousel-indicators">'
@@ -2829,7 +2829,7 @@ var asideoptions = {
     }]);
 }(window, window.angular);
 +function (window, angular, undefined) {
-'use strict';
+
     angular.module('ngQuantum.collapse', [])
     .provider('$collapse', function () {
         var defaults = this.defaults = {
@@ -2978,10 +2978,10 @@ var asideoptions = {
         }]);
 }(window, window.angular);
 +function (window, angular, undefined) {
-'use strict';
+
     angular.module('ngQuantum.colorpicker', ['ngQuantum.popMaster'])
     .run(['$templateCache', function ($templateCache) {
-        'use strict';
+        
         $templateCache.put('colorpicker/colorpicker.tpl.html',
                     '<div class="popover colorpicker">'
                     + '<ul class="nav palettes-list clearfix">'
@@ -3338,12 +3338,12 @@ var asideoptions = {
 
 })(window.moment);
 +function (window, angular, undefined) {
-'use strict';
+
 angular.module('ngQuantum.datepicker', [
       'ngQuantum.popMaster'
     ])
     .run(['$templateCache', function ($templateCache) {
-        'use strict';
+        
         $templateCache.put('datepicker/datepicker.tpl.html',
           "<div tabindex=\"-1\" class=\"calendar-panel\" role=\"listbox\"><div tabindex=\"-1\" class=\"calendar-header\" role=\"listbox\"></div><div tabindex=\"-1\" class=\"calendar-body\" role=\"listbox\"></div><div tabindex=\"-1\" class=\"calendar-footer\" role=\"listbox\"></div></div>"
         );
@@ -4386,10 +4386,10 @@ angular.module('ngQuantum.datepicker', [
 }(window, window.angular);
 
 
-'use strict';
+
 angular.module('ngQuantum.dropdown', ['ngQuantum.popMaster'])
     .run(['$templateCache', function ($templateCache) {
-        'use strict';
+        
 
         $templateCache.put('dropdown/dropdown.tpl.html',
           "<ul tabindex=\"-1\" class=\"dropdown-menu\" role=\"menu\"><li role=\"presentation\" ng-class=\"{divider: item.divider}\" ng-repeat=\"item in content\"><a role=\"menuitem\" tabindex=\"-1\" ng-href=\"{{item.href}}\" ng-if=\"!item.divider && item.href\" ng-bind=\"item.text\"></a> <a role=\"menuitem\" tabindex=\"-1\" href=\"javascript:void(0)\" ng-if=\"!item.divider && item.click\" ng-click=\"$parent.$eval(item.click);$hide();\" ng-bind=\"item.text\"></a></li></ul>"
@@ -4546,7 +4546,7 @@ angular.module('ngQuantum.dropdown', ['ngQuantum.popMaster'])
       }
     ])
 
-'use strict';
+
 angular.module('ngQuantum.loading', ['ngQuantum.services.lazy'])
     .run(['$http', '$rootScope', '$timeout', function ($http, $rootScope, $timeout) {
         $rootScope.$watch(function () { return $http.pendingRequests.length }, function (newVal, oldVal) {
@@ -4677,7 +4677,7 @@ angular.module('ngQuantum.loading', ['ngQuantum.services.lazy'])
           }
         ];
     })
-'use strict';
+
 angular.module('ngQuantum.loadingButton', ['ngQuantum.services.helpers'])
     .provider('$loadingButton', function () {
         var defaults = this.defaults = {
@@ -4750,10 +4750,10 @@ angular.module('ngQuantum.loadingButton', ['ngQuantum.services.helpers'])
                 }
             }
         }]);
-'use strict';
+
 angular.module('ngQuantum.modal', ['ngQuantum.popMaster'])
     .run(['$templateCache', function ($templateCache) {
-        'use strict';
+        
         $templateCache.put('modal/modal.tpl.html',
           '<div class="modal" tabindex="-1" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header" ng-show="title"><h4 class="modal-title" ng-bind="title"></h4></div><div class="modal-body"  ng-bind="content"></div><div class="modal-footer"><button type="button" class="btn btn-default" ng-click="$hide()">{{closeText}}</button></div><button type="button" class="close" ng-click="$hide()" ng-bind-html="closeIcon">&nbsp;</button></div></div></div>'
         );
@@ -5069,7 +5069,7 @@ angular.module('ngQuantum.modal', ['ngQuantum.popMaster'])
         };
     })
 
-'use strict';
+
 angular.module('ngQuantum.modalBox', ['ngQuantum.modal'])
         .provider('$modalBox', function () {
             var defaults = this.defaults = {
@@ -5884,10 +5884,10 @@ angular.module('ngQuantum.modalBox', ['ngQuantum.modal'])
         }]);
     })
 }(window, window.angular);
-'use strict';
+
 angular.module('ngQuantum.popover', ['ngQuantum.popMaster'])
     .run(['$templateCache', function ($templateCache) {
-        'use strict';
+        
         $templateCache.put('popover/popover.tpl.html',
           "<div class=\"popover\"><h3 class=\"popover-title\" ng-bind=\"title\" ng-show=\"title\"></h3><div class=\"popover-content\" ng-bind-html=\"content\"></div></div>"
         );
@@ -6010,7 +6010,7 @@ angular.module('ngQuantum.popover', ['ngQuantum.popMaster'])
       }
         ]);
 
-'use strict';
+
 if (/chrome/.test(navigator.userAgent.toLowerCase()))
     angular.element('html').addClass('webkitscrollbar');
 angular.module('ngQuantum.scrollbar', ['ngQuantum.services.helpers', 'ngQuantum.services.mouse'])
@@ -6722,13 +6722,13 @@ angular.module('ngQuantum.scrollbar', ['ngQuantum.services.helpers', 'ngQuantum.
       }])
 
 +function (window, angular, undefined) {
-'use strict';
+
 var selectApp = angular.module('ngQuantum.select', [
       'ngQuantum.popMaster',
       'ngQuantum.scrollbar'
     ])
     .run(['$templateCache', function ($templateCache) {
-        'use strict';
+        
         $templateCache.put('select/select.tpl.html',
           '<div tabindex="-1" class="listbox-panel ng-cloak" role="listbox"><div class="scrollable" role=\"listbox\"><ul tabindex=\"-1\" class=\"listbox\"><li role=\"presentation\" tabindex=\"-1\" ng-repeat=\"match in $matches track by $index\"><span class=\"select-option option-label\"  role=\"option\" tabindex=\"-1\" ng-click=\"$select(match)\" ng-bind=\"match.label\"></span> </li></ul></div></div>'
         );
@@ -7701,7 +7701,7 @@ var selectApp = angular.module('ngQuantum.select', [
         };
     }]);
  }(window, window.angular);
-'use strict';
+
 angular.module('ngQuantum.slider', ['ngQuantum.services.mouse', 'ngQuantum.services.helpers'])
 .provider('$slider', function () {
     var defaults = this.defaults = {
@@ -8096,10 +8096,10 @@ angular.module('ngQuantum.slider', ['ngQuantum.services.mouse', 'ngQuantum.servi
         }
     };
 }])
-'use strict';
+
 angular.module('ngQuantum.switchButton', ['ngQuantum.services.helpers'])
     .run(['$templateCache', function ($templateCache) {
-        'use strict';
+        
         $templateCache.put('switch/switchbutton.tpl.html',
                     '<div class="btn-group btn-switch">'
                         + '<label class="btn" ng-class="$buttonTheme"><span ng-class="{visibleswitch:$checked}" ng-bind-html="$trueLabel"></span><span class="switch-bg" ng-class="{visibleswitch:!$checked}"></span><span class="switch-label" ng-class="{visibleswitch:!$checked}" ng-bind-html="$labelText"></span></label>'
@@ -8200,10 +8200,10 @@ angular.module('ngQuantum.switchButton', ['ngQuantum.services.helpers'])
             }
         };
     }])
-'use strict';
+
 angular.module('ngQuantum.tabset', ['ngQuantum.services.helpers'])
     .run(['$templateCache', function ($templateCache) {
-        'use strict';
+        
         $templateCache.put('tabs/tabset.tpl.html',
                  '<div class="tab-container {{theme}}">'
                    + '<ul class="nav {{navClasses}}" nav-placement="{{placement}}">'
@@ -8554,10 +8554,10 @@ angular.module('ngQuantum.tabset', ['ngQuantum.services.helpers'])
         }
     }]);
 
-'use strict';
+
 angular.module('ngQuantum.tooltip', ['ngQuantum.popMaster'])
     .run(['$templateCache', function ($templateCache) {
-        'use strict';
+        
 
         $templateCache.put('tooltip/tooltip.tpl.html',
           "<div class=\"tooltip in\" ng-show=\"title\"><div class=\"tooltip-arrow\"></div><div class=\"tooltip-inner\" ng-bind=\"title\"></div></div>"
@@ -8631,10 +8631,10 @@ angular.module('ngQuantum.tooltip', ['ngQuantum.popMaster'])
       }
     ]);
 
-'use strict';
+
 angular.module('ngQuantum.pageable.blocker', [])
 .run(['$templateCache', function ($templateCache) {
-    'use strict';
+    
     $templateCache.put('pageable/blocker.tpl.html',
              '<div class="pageable-spinner"></div>'
     );
@@ -8667,7 +8667,7 @@ angular.module('ngQuantum.pageable.blocker', [])
     };
 }]);
 (function (window, angular) {
-    'use strict';
+    
     var pApp = angular.module('ngQuantum.pageable.directives', ['ngQuantum.pageable.factory']);
     pApp.directive('nqPageable', ['$pageable', function ($pageable) {
         return {
@@ -8788,7 +8788,7 @@ angular.module('ngQuantum.pageable.blocker', [])
 })(window, angular, undefined);
 
 (function(window, angular){
-    'use strict';
+    
     var defaults,
     editApp = angular.module('ngQuantum.pageable.editing', ['ngQuantum.services.templateHelper'])
     .provider('$pageableTemplate', function () {
@@ -9098,10 +9098,10 @@ angular.module('ngQuantum.pageable.blocker', [])
     })
     
 })(window, window.angular)
-'use strict';
+
 angular.module('ngQuantum.pageable.editing')
 .run(['$templateCache', function ($templateCache) {
-    'use strict';
+    
     $templateCache.put('pageable/editing.panel.tpl.html',
              '<div class="panel pageable-edit-panel panel-stretch" ng-class="$panelClasses">'
                + '<div class="panel-heading">'
@@ -9122,7 +9122,7 @@ angular.module('ngQuantum.pageable.editing')
     );
 }])
 
-'use strict';
+
 angular.module('ngQuantum.pageable.factory', ['ngQuantum.services.helpers'])
 .provider('$pageable', function () {
     var defaults = this.defaults = {
@@ -9772,7 +9772,7 @@ angular.module('ngQuantum.pageable.factory', ['ngQuantum.services.helpers'])
         }
     ];
 });
-'use strict';
+
 angular.module('ngQuantum.pageable.pager', [])
 .directive('nqPager', ['$timeout', function ($timeout) {
     return {
@@ -9824,7 +9824,7 @@ angular.module('ngQuantum.pageable.pager', [])
         }
     };
 }])
-'use strict';
+
 angular.module('ngQuantum.pageable.pager')
 .run(['$templateCache', function ($templateCache) {
     $templateCache.put('pageable/pager.tpl.html',
@@ -9837,7 +9837,7 @@ angular.module('ngQuantum.pageable.pager')
 }])
 
 
-'use strict';
+
 angular.module('ngQuantum.pageable.pagesize', ['ngQuantum.services.templateHelper', 'ngQuantum.services.helpers'])
 .directive('nqPagingSizes', ['$helpers', '$parse', function ($helpers, $parse) {
     return {
@@ -9879,7 +9879,7 @@ angular.module('ngQuantum.pageable.pagesize', ['ngQuantum.services.templateHelpe
         }
     };
 }])
-'use strict';
+
 angular.module('ngQuantum.pageable.pagesize')
 .run(['$templateCache', function ($templateCache) {
     $templateCache.put('pageable/pagesize.select.tpl.html',
@@ -9899,7 +9899,7 @@ angular.module('ngQuantum.pageable.pagesize')
         + '<div>'
     );
 }])
-'use strict';
+
 angular.module('ngQuantum.pageable.pagination', [])
 .directive('nqPagination', ['$timeout', function ($timeout) {
     return {
@@ -9966,7 +9966,7 @@ angular.module('ngQuantum.pageable.pagination', [])
         }
     };
 }])
-'use strict';
+
 angular.module('ngQuantum.pageable.pagination')
 .run(['$templateCache', function ($templateCache) {
     $templateCache.put('pageable/pagination.tpl.html',
@@ -9981,7 +9981,7 @@ angular.module('ngQuantum.pageable.pagination')
     );
 }])
 
-'use strict';
+
 angular.module('ngQuantum.pageable.results', [])
 .directive('nqPageableResults', function () {
     return {
@@ -10012,7 +10012,7 @@ angular.module('ngQuantum.pageable.results', [])
         }
     };
 })
-'use strict';
+
 angular.module('ngQuantum.pageable.results')
 .run(['$templateCache', function ($templateCache) {
     $templateCache.put('pageable/pageableResults.tpl.html',
@@ -10025,7 +10025,7 @@ angular.module('ngQuantum.pageable.results')
     + '</div>'
    );
 }])
-'use strict';
+
 angular.module('ngQuantum.pageable.scroll', ['ngQuantum.scrollbar'])
 .directive('nqFixTableScroll', ['$compile', function ($compile) {
     return {
@@ -10091,7 +10091,7 @@ angular.module('ngQuantum.pageable.scroll', ['ngQuantum.scrollbar'])
         }
     };
 }]);
-'use strict';
+
 angular.module('ngQuantum.pageable.search', [])
 .directive('nqTableSearch', [function () {
     return {
@@ -10139,7 +10139,7 @@ angular.module('ngQuantum.pageable.search', [])
     };
 }])
 
-'use strict';
+
 angular.module('ngQuantum.pageable.search')
 .run(['$templateCache', function ($templateCache) {
     $templateCache.put('pageable/tablesearch.tpl.html',
@@ -10156,7 +10156,7 @@ angular.module('ngQuantum.pageable.search')
         + '</form>'
     );
 }])
-'use strict';
+
 angular.module('ngQuantum.pageable.sorting', [])
 .directive('nqColumnSort', [function () {
     return {
@@ -10199,7 +10199,7 @@ angular.module('ngQuantum.pageable.sorting', [])
         }
     };
 }])
-'use strict';
+
 angular.module('ngQuantum.pageable.zeroresult', [])
 .directive('nqZeroResult', [function () {
     return {
@@ -10234,10 +10234,10 @@ angular.module('ngQuantum.pageable.zeroresult', [])
         }
     };
 }])
-'use strict';
+
 angular.module('ngQuantum.pageable.zeroresult')
 .run(['$templateCache', function ($templateCache) {
-    'use strict';
+    
     $templateCache.put('pageable/zeroresult.tpl.html',
              '<div class="zero-result-inner">'
                + '<h1 class="zero-title" nq-bind="$zeroTitle || \'No result found.\'"></h1>'
@@ -10246,7 +10246,7 @@ angular.module('ngQuantum.pageable.zeroresult')
     );
 }])
 
-'use strict';
+
 angular.module('ngQuantum.pageable', [
     'ngQuantum.pageable.factory',
     'ngQuantum.pageable.directives',
@@ -10262,7 +10262,7 @@ angular.module('ngQuantum.pageable', [
     'ngQuantum.pageable.scroll'
 ])
    
-'use strict';
+
 angular.module('ngQuantum', [
   'ngQuantum.directives',
   'ngQuantum.tooltip',

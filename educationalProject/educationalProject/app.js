@@ -9,6 +9,7 @@
         ,'bootstrapLightbox'
         ,'flow'
         ,'ui.router'
+        ,'ngCookies'
        
    
 ]);
@@ -16,10 +17,13 @@
 
 
  app.config(function($stateProvider){
+
 $stateProvider.state('protected-route', {
   url: '/',
   resolve: {
+
     auth: function resolveAuthentication(AuthResolver) { 
+
       return AuthResolver.resolve();
     }
   }
@@ -45,9 +49,9 @@ app.constant('USER_ROLES', {
   guest: 'guest'
 })
 
-app.factory('AuthService', function ($http, Session) {
+app.factory('AuthService', function ($http, Session,$cookies) {
   var authService = {};
- console.log('in authserv')
+
   authService.login = function (credentials) {
     // return $http
     //   .post('/login', credentials)
@@ -56,9 +60,11 @@ app.factory('AuthService', function ($http, Session) {
     //                    res.data.user.role);
     //     return res.data.user;
     //   });
+ $cookies.putObject("mymy", credentials);
+   	
 
 return {
-'username': 'meme',
+'username': credentials.username,
 'user_type':'admin',
 'information':{'t_name':'fafa', 'email':'blahblah'},
 'privilege':{'21':{'สร้างหลักสูตร':'อนุญาต' , 'อัลบั้ม':'ดูเท่านั้น'} }
@@ -95,11 +101,28 @@ app.service('Session', function () {
 
 app.controller('main_controller', function ($scope,
                                                USER_ROLES,
-                                               AuthService) {
-  $scope.currentUser = null;
+                                               AuthService,$cookies) {
+
+
+  $scope.currentUser = $cookies.getObject("mymy");
   $scope.userRoles = USER_ROLES;
   $scope.isAuthorized = AuthService.isAuthorized;
- 
+  if(!$scope.currentUser){
+  $scope.already_login = false;
+  }
+  else{
+  	console.log('$scope.already_login = false;')
+  	  $scope.already_login = true;
+  	    	console.log('$scope.already_login = true;')
+  	
+  }
+    $scope.logout = function(){
+        console.log("log out")
+        $cookies.remove('mymy');
+         $scope.currentUser ={};
+          $scope.already_login = false;
+    }
+
   $scope.setCurrentUser = function (user) {
 
     $scope.currentUser = user;

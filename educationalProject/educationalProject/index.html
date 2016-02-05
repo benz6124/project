@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
     <meta name="viewport" content="width=device-width" />
     <title>KMITL CUPT-QA ONLINE</title>
 
@@ -61,137 +61,7 @@
     <link href="/bower_components/quantumui/dist/css/quantumui.css" rel="stylesheet" />
     <script type="text/javascript" src="/bower_components/dropdowns-enhancement/dropdowns-enhancement.js"></script>
 
-
-    <script>
-$(document).ready(function(){
-
-  $('[data-toggle="tooltip"]').tooltip();
-
-
-});
-
-$('.profile_pic').mouseover(function(){
-    if ($(this).hasClass('selected')) return;
-    $('.selected').removeClass('selected');
-    $(this).addClass('selected');
-
-});
-
-
-    });
-    </script>
-    <script src="/bower_components/wow/dist/wow.min.js"></script>
-    <script>
-              wow = new WOW(
-                      {
-                      boxClass:     'wow',      // default
-                      animateClass: 'animated', // default
-                      offset:       20,          // default
-                      mobile:       true,       // default
-                      live:         true        // default
-                    }
-                    )
-                    wow.init();
-    </script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-      /*
-       *  Simple image gallery. Uses default settings
-       */
-   $('.fancybox').fancybox({
-            openEffect : 'elastic',
-        closeEffect : 'elastic',
-      autoResize : true,
-        nextClick : true,
-    width       : 800,
-    height      : 450,
-    aspectRatio : true,
-
-
-        helpers : {
-          title : {
-            type : 'inside'
-          },
-          thumbs : {
-            width  : 50,
-            height : 50
-          }
-        }
-      });
-
-    });
-    </script>
-
-    <script type="text/javascript">
-
-      var inputNum = 0;
-      function deleteQuestion(surveyName,nameButton){
-
-        // var survey = document.getElementById(surveyName);
-        // var divToDel = document.getElementById(nameButton);
-
-        surveyName.removeChild(nameButton);
-      }
-
-      function sum(name){
-        // var my_input1 = document.getElementById('my_input1').value;
-        // var my_input2 = document.getElementById('my_input2').value;
-        var num1 = document.getElementById(name+"1").value;
-        var num2 = document.getElementById(name+"2").value;
-        var result = document.getElementById(name+"_sum");
-
-        var sum = parseInt(num1) + parseInt(num2);
-
-        result.value = sum
-        // alert(num1.value)
-
-      }
-
-      function addQuestionInSurvey(surveyName,addButtonId,placeholderName){
-        var survey = document.getElementById(surveyName);
-        var button = document.getElementById(addButtonId);
-
-        var newRow = document.createElement("div");
-        newRow.setAttribute("class","row");
-        var nameButton = "button"+inputNum.toString()
-        newRow.setAttribute("id",nameButton);
-
-          var newDiv = document.createElement("div");
-          var newDiv2 = document.createElement("div");
-          newDiv.setAttribute("class","col-md-10");
-          newDiv2.setAttribute("class","col-md-2");
-          var delButton = document.createElement("button")
-          delButton.setAttribute("class","btn btn-default btn-md hvr-pulse")
-
-          delButton.setAttribute("onclick",'deleteQuestion('+surveyName+','+nameButton+')');
-          delButton.style.marginLeft = "0px"
-
-          delButton.style.backgroundColor = " transparent"
-          delButton.style.border = " none"
-          var newSpan = document.createElement("span");
-          newSpan.setAttribute("class","glyphicon glyphicon-minus-sign");
-          newSpan.style.color ="red";
-          delButton.appendChild(newSpan);
-
-          var inputBox = document.createElement("input");
-          inputBox.setAttribute("type","text");
-          inputBox.style.marginLeft = "30px"
-          inputBox.setAttribute("class","form-control");
-          inputBox.setAttribute("placeholder",placeholderName);
-        newDiv2.appendChild(delButton);
-
-
-          newDiv.appendChild(inputBox);
-
-          newRow.appendChild(newDiv);
-          newRow.appendChild(newDiv2);
-
-          survey.insertBefore(newRow,button);
-          inputNum = inputNum +1;
-
-
-      }
-    </script>
+   
 </head>
 <body data-ng-controller="main_controller">
 
@@ -221,7 +91,11 @@ $('.profile_pic').mouseover(function(){
                             <li class="bull"><a href="">ออกจากระบบ</a></li>
 
                         </ul> -->
-<a href="" data-nq-toggle-modal="#login_form">เข้าสู่ระบบ</a>
+
+                      
+<a href="" ng-hide = "already_login" data-nq-toggle-modal="#login_form">เข้าสู่ระบบ</a>
+<a href="" ng-show = "already_login" ng-click="logout()">ออกจากระบบ</a>
+
 
                     </li>
 
@@ -2017,7 +1891,7 @@ $('.profile_pic').mouseover(function(){
 
                      <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click="login()">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-click="login(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
@@ -5644,7 +5518,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-
+<script src="/bower_components/angular-cookies/angular-cookies.min.js"></script>
         
                   <script type="text/javascript" src="app.js"></script>
 <script type="text/javascript" src="indexController.js"></script> 
