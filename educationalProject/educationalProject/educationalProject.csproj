@@ -282,9 +282,6 @@
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="indexController.js" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Views\Home\test.cshtml" />
     <Content Include="testAng.html" />
     <Content Include="testtest.html" />
@@ -308,7 +305,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

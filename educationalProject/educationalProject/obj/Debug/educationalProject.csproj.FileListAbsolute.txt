@@ -197,7 +197,6 @@ C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\education
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb
-D:\4D\project\educationalProject\educationalProject\bin\ApplicationInsights.config
 D:\4D\project\educationalProject\educationalProject\bin\roslyn\csc.exe
 D:\4D\project\educationalProject\educationalProject\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 D:\4D\project\educationalProject\educationalProject\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -240,3 +239,4 @@ D:\4D\project\educationalProject\educationalProject\bin\System.Web.WebPages.Razo
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AspNet.Identity.Core.xml
 D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb
+D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
