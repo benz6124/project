@@ -5425,13 +5425,17 @@ app.controller('login_controller', function($scope, $http,$alert,$loading,$timeo
         username: '',
         password: ''
       };
-      $scope.login = function (credentials) {
-        AuthService.login(credentials).then(function (user) {
-          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+      $scope.login = function () {
+         var user = AuthService.login($scope.credentials);
+         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
           $scope.setCurrentUser(user);
-        }, function () {
-          $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-        });
+
+        // AuthService.login($scope.credentials).then(function (user) {
+        //   $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+        //   $scope.setCurrentUser(user);
+        // }, function () {
+        //   $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+        // });
       };
 });
 
