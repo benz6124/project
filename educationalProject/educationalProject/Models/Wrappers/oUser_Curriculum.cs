@@ -7,14 +7,14 @@ using educationalProject.Utils;
 using educationalProject.Models.ViewModels;
 namespace educationalProject.Models.Wrappers
 {
-    public class oCurriculum_teacher_staff : User_curriculum
+    public class oUser_curriculum : User_curriculum
     {
         public object InsertNewCurriculumTeacherStaffWithSelect(List<User_curriculum> list)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            List<Curriculum_teacher_staff_with_brief_detail> result = new List<Curriculum_teacher_staff_with_brief_detail>();
+            List<User_curriculum_with_brief_detail> result = new List<User_curriculum_with_brief_detail>();
 
             string insertcmd = string.Format("insert into {0} values ", FieldName.TABLE_NAME);
             int len = insertcmd.Length;
@@ -41,7 +41,7 @@ namespace educationalProject.Models.Wrappers
                     foreach (DataRow item in data.Rows)
                     {
                         if (Convert.ToInt32(item.ItemArray[data.Columns["user_type_num"].Ordinal]) == 1)
-                            result.Add(new Curriculum_teacher_staff_with_brief_detail
+                            result.Add(new User_curriculum_with_brief_detail
                             {
                                 user_id = item.ItemArray[data.Columns[Personnel.FieldName.USER_ID].Ordinal].ToString(),
                                 t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString()) +
@@ -51,7 +51,7 @@ namespace educationalProject.Models.Wrappers
                                 type = item.ItemArray[data.Columns[Personnel.FieldName.USER_TYPE].Ordinal].ToString()
                             });
                         else
-                            result.Add(new Curriculum_teacher_staff_with_brief_detail
+                            result.Add(new User_curriculum_with_brief_detail
                             {
                                 user_id = item.ItemArray[data.Columns[Personnel.FieldName.USER_ID].Ordinal].ToString(),
                                 t_name = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString() +

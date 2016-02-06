@@ -452,7 +452,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            List<Curriculum_teacher_staff_with_brief_detail> result = new List<Curriculum_teacher_staff_with_brief_detail>();
+            List<User_curriculum_with_brief_detail> result = new List<User_curriculum_with_brief_detail>();
 
             d.iCommand.CommandText = GetSelectWithCurriculumCommand(curri_id);
             try
@@ -465,7 +465,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                     foreach (DataRow item in data.Rows)
                     {
                         if (Convert.ToInt32(item.ItemArray[data.Columns["user_type_num"].Ordinal]) == 1)
-                            result.Add(new Curriculum_teacher_staff_with_brief_detail
+                            result.Add(new User_curriculum_with_brief_detail
                             {
                                 user_id = item.ItemArray[data.Columns[USER_ID].Ordinal].ToString(),
                                 t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) +
@@ -475,7 +475,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                 type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString()
                             });
                         else
-                            result.Add(new Curriculum_teacher_staff_with_brief_detail
+                            result.Add(new User_curriculum_with_brief_detail
                             {
                                 user_id = item.ItemArray[data.Columns[USER_ID].Ordinal].ToString(),
                                 t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString() +

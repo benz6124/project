@@ -5,7 +5,7 @@ using System.Web;
 
 namespace educationalProject.Models.ViewModels
 {
-    public class Curriculum_teacher_staff_with_brief_detail : User_curriculum
+    public class User_curriculum_with_brief_detail : User_curriculum
     {
         private string _t_name;
         private string _type;

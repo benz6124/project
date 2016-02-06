@@ -12,7 +12,7 @@ namespace educationalProject.Controllers
 {
     public class PersonnelCurriculumController : ApiController
     {
-        oCurriculum_teacher_staff datacontext = new oCurriculum_teacher_staff();
+        oUser_curriculum datacontext = new oUser_curriculum();
         public IHttpActionResult Post(JObject data)
         {
             List<User_curriculum> list = new List<User_curriculum>();
