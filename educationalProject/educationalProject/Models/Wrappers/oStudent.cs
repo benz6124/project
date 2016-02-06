@@ -7,7 +7,7 @@ using educationalProject.Models.ViewModels;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
 {
-    public class oAssessor : Assessor
+    public class oStudent : Student
     {
         public object Insert(List<UsernamePassword> list, List<string> target_curri_id_list)
         {
@@ -55,20 +55,20 @@ namespace educationalProject.Models.Wrappers
                                    "NOT EXISTS(select * from {9} where {4} = '{2}') " +
                                    "begin " +
                                    "insert into {0} values('{2}', '{10}') " +
-                                   "insert into {3} ({11},{12}, {13}, {4}, {14}) values ('{2}', '{10}', '{15}', '{2}', '{16}') " +
+                                   "insert into {3} ({11}, {12}, {13}, {14}, {4}, {15}) values ('{2}', '{10}', '{2}', '{16}', '{2}', '{17}') " +
                                    insertintousercurri + " " +
                                    "end " +
                                    "else " +
                                    "begin " +
-                                   "insert into {17} values ('{2}') " +
+                                   "insert into {18} values ('{2}') " +
                                    "end ",
                                    User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_ID, item.username,
                                    /*Main table index 3 must SWAP!*/ FieldName.TABLE_NAME,
-                                   FieldName.EMAIL, Student.FieldName.TABLE_NAME,
+                                   FieldName.EMAIL, Teacher.FieldName.TABLE_NAME,
                                    Alumni.ExtraFieldName.TABLE_NAME, Staff.FieldName.TABLE_NAME,
-                                   Company.FieldName.TABLE_NAME, Teacher.FieldName.TABLE_NAME,
-                                   /*******10*/ "ผู้ประเมินจากภายนอก",
-                                   /*******11 ID*/FieldName.USERNAME, FieldName.USER_TYPE,
+                                   Company.FieldName.TABLE_NAME, Assessor.FieldName.TABLE_NAME,
+                                   /*******10*/ "นักศึกษา",
+                                   /*******11 ID*/FieldName.STUDENT_ID, FieldName.USER_TYPE, FieldName.USERNAME,
                                    FieldName.PASSWORD, FieldName.TIMESTAMP, item.password, ts, temp5tablename);
 
             }
