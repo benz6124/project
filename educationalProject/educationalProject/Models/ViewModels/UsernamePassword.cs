@@ -7,7 +7,7 @@ namespace educationalProject.Models.ViewModels
 {
     public class UsernamePassword
     {
-        private static PasswordHasher hasher = new PasswordHasher();
+        private static volatile PasswordHasher hasher = new PasswordHasher();
         private string _username;
         private string _password;
         public string username { get { return _username; } set { _username = value; } }
@@ -17,6 +17,10 @@ namespace educationalProject.Models.ViewModels
             _username = username;
             _password = hasher.HashPassword(password);
         }
-
+        public bool isMatchPassword(string providedpassword)
+        {
+            PasswordVerificationResult res = hasher.VerifyHashedPassword(password, providedpassword);
+            return  res == PasswordVerificationResult.Success || res == PasswordVerificationResult.SuccessRehashNeeded;
+        }
     }
 }

@@ -7,10 +7,11 @@ using System.Security.Cryptography;
 using System.Web.Http;
 using System.Threading.Tasks;
 using System.IO;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json.Linq;
 using educationalProject.Models.ViewModels;
 using educationalProject.Models.Wrappers;
-
+using educationalProject.Models.ViewModels.Wrappers;
 namespace educationalProject.Controllers
 {
     public class UsersController : ApiController
@@ -21,7 +22,6 @@ namespace educationalProject.Controllers
         private oAlumni alumnicontext = new oAlumni();
         private oAssessor assessorcontext = new oAssessor();
         private oCompany companycontext = new oCompany();
-
         [ActionName("createnewusers")]
         public async Task<IHttpActionResult> PostForCreateNewUsers()
         {
@@ -121,6 +121,34 @@ namespace educationalProject.Controllers
             catch (Exception e)
             {
                 return InternalServerError(e);
+            }
+        }
+
+        [ActionName("login")]
+        public IHttpActionResult PostForLogin(UsernamePassword data)
+        {
+            oUsers context = new oUsers();
+            object result = context.SelectUser(data.username);
+
+            //Check whether preferred user is exists?
+            if (result.GetType().ToString() != "System.String")
+            {
+                User_information_with_privilege_information u = (User_information_with_privilege_information)result;
+                string oldpassword = data.password;
+                data.password = u.information.GetPassword();
+                if (data.isMatchPassword(oldpassword))
+                {
+                    //continue to retrieve privilege data and return
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
+                }
+            }
+            else
+            {
+                return InternalServerError(new Exception(result.ToString()));
             }
         }
     }
