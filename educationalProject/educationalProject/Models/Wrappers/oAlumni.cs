@@ -67,7 +67,7 @@ namespace educationalProject.Models.Wrappers
                                    FieldName.EMAIL, Student.FieldName.TABLE_NAME,
                                    Teacher.FieldName.TABLE_NAME, Staff.FieldName.TABLE_NAME,
                                    Company.FieldName.TABLE_NAME, Assessor.FieldName.TABLE_NAME,
-                                   /*******10*/ "อาจารย์",
+                                   /*******10*/ "ศิษย์เก่า",
                                    /*******11 ID*/FieldName.STUDENT_ID, FieldName.USER_TYPE, FieldName.USERNAME,
                                    FieldName.PASSWORD, FieldName.TIMESTAMP, item.password, ts, temp5tablename);
 
