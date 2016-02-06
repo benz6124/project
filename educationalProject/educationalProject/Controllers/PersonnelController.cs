@@ -14,7 +14,13 @@ namespace educationalProject.Controllers
         [ActionName("gettnameandid")]
         public IHttpActionResult PostToQueryTNameAndId([FromBody]string curri_id)
         {
-            return Ok(datacontext.SelectPersonnelIdAndTName(curri_id));
+            return Ok(datacontext.SelectPersonnelIdAndTName(curri_id,0));
+        }
+
+        [ActionName("getalltnameandid")]
+        public IHttpActionResult PostToQueryTNameAndIdOfAllPersonnel([FromBody]string curri_id)
+        {
+            return Ok(datacontext.SelectPersonnelIdAndTName(curri_id, 1));
         }
 
         [ActionName("getwitheducation")]
