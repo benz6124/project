@@ -55,9 +55,23 @@ namespace educationalProject.Controllers
                 datacontext.file_name = "download/aunbook/"+ newfilename;
                 File.Move(string.Format("{0}/{1}", savepath, fileInfo.Name), string.Format("{0}/{1}", savepath , newfilename));
 
+                string oldfilename = datacontext.file_name;
+
                 object resultfromdb = datacontext.InsertOrUpdate();
+
                 if (resultfromdb == null)
+                {
+                    //string delpath = HttpContext.Current.Server.MapPath("~/");
+                    string delpath = "D:/";
+                    //Check whether file name property chenge? (Changes mean there is to-be delete file)
+                    if (datacontext.file_name != oldfilename)
+                    {
+                        //Check whether file exists!
+                        if (File.Exists(string.Format("{0}{1}", delpath, datacontext.file_name)))
+                            File.Delete(string.Format("{0}{1}", delpath, datacontext.file_name));
+                    }
                     return Ok();
+                }
                 else
                     return InternalServerError(new Exception(result.ToString()));
             }

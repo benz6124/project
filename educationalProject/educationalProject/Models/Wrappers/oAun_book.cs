@@ -97,21 +97,18 @@ namespace educationalProject.Models.Wrappers
                                        "END " +
                                        "ELSE " +
                                        "BEGIN " +
-                                       "UPDATE {0} SET {8} = '{5}',{9} = '{6}',{10} = '{7}' where {1} = '{2}' and {3} = {4} " +
+                                       "UPDATE {0} SET {8} = '{5}',{9} = '{6}',{10} = '{7}' OUTPUT deleted.{8} where {1} = '{2}' and {3} = {4} " +
                                        "END",
                     FieldName.TABLE_NAME, FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year, file_name, personnel_id, date, 
                     FieldName.FILE_NAME, FieldName.PERSONNEL_ID, FieldName.DATE);
             try
             {
-                int rowAffected = d.iCommand.ExecuteNonQuery();
-                if (rowAffected == 1)
+                object filenameres = d.iCommand.ExecuteScalar();
+                if (filenameres != null)
                 {
-                    return null;
+                    file_name = filenameres.ToString();
                 }
-                else
-                {
-                    return "No aun_book are inserted or updated.";
-                }
+                return null;
             }
             catch (Exception ex)
             {
