@@ -139,7 +139,11 @@ namespace educationalProject.Controllers
                 if (data.isMatchPassword(oldpassword))
                 {
                     //continue to retrieve privilege data and return
-                    return Ok();
+                    result = context.SelectUserPrivilege(ref u);
+                    if(result == null)
+                        return Ok(u);
+                    else
+                        return InternalServerError(new Exception(result.ToString()));
                 }
                 else
                 {
