@@ -23,7 +23,7 @@ namespace educationalProject.Models.Wrappers
                                       "[{2}] INT NULL," +
                                       "[{3}] INT NULL," +
                                       "[{4}] INT NULL," +
-                                      "[{5}] VARCHAR(20) NULL," +
+                                      "[{5}] {15} NULL," +
                                       "[{6}] CHAR NULL," +
                                       "[{7}] VARCHAR(MAX) NULL," +
                                       "[{8}] DATE NULL," +
@@ -37,7 +37,7 @@ namespace educationalProject.Models.Wrappers
                                       "ALTER COLUMN [{1}] VARCHAR(200) collate DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN [{5}] VARCHAR(20) collate DATABASE_DEFAULT " +
+                                      "ALTER COLUMN [{5}] {15} collate DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN [{6}] CHAR collate DATABASE_DEFAULT " +
@@ -54,7 +54,8 @@ namespace educationalProject.Models.Wrappers
                                       FieldName.OTHERS_EVALUATION_ID, FieldName.INDICATOR_NUM, FieldName.SUB_INDICATOR_NUM,
                                       FieldName.ASSESSOR_ID, FieldName.EVALUATION_SCORE, FieldName.DETAIL,
                                       FieldName.DATE, FieldName.TIME, Evidence.FieldName.FILE_NAME, FieldName.CURRI_ID,
-                                      FieldName.ACA_YEAR,DBFieldDataType.CURRI_ID_TYPE,DBFieldDataType.FILE_NAME_TYPE);
+                                      FieldName.ACA_YEAR,DBFieldDataType.CURRI_ID_TYPE,DBFieldDataType.FILE_NAME_TYPE,
+                                      DBFieldDataType.USERNAME_TYPE);
 
             string insertintotemp5_1 = string.Format("insert into {13} " +
                                        "select {2}, {0}.* " +

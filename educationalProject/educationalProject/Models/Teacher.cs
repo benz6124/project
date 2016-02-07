@@ -31,7 +31,6 @@ namespace educationalProject.Models
             public static readonly string PERSON_ID = "PERSON_ID";
             public static readonly string STATUS = "STATUS";
             public static readonly string ALIVE = "ALIVE";
-            public static readonly string IS_ADMIN = "IS_ADMIN";
             public static readonly string TABLE_NAME = "TEACHER";
         }
         private string _teacher_id;
@@ -41,7 +40,6 @@ namespace educationalProject.Models
         private string _person_id;
         private string _status;
         private int _alive;
-        private char _is_admin;
         public string teacher_id { get { return _teacher_id; } set { _teacher_id = value; } }
         public char degree { get { return _degree; } set { _degree = value; } }
         public char position { get { return _position; } set { _position = value; } }
@@ -49,6 +47,5 @@ namespace educationalProject.Models
         public string person_id { get { return _person_id; } set { _person_id = value; } }
         public string status { get { return _status; } set { _status = value; } }
         public int alive { get { return _alive; } set { _alive = value; } }
-        public char is_admin { get { return _is_admin; } set { _is_admin = value; } }
     }
 }

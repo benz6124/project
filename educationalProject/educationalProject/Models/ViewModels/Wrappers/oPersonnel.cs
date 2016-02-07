@@ -268,7 +268,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                       "[{1}] {23} NOT NULL," +
                                       "[{2}] VARCHAR(40) NULL," +
                                       "[{21}] INT NULL," +
-                                      "[{3}] VARCHAR(20) NULL," +
+                                      "[{3}] {26} NULL," +
                                       "[{4}] VARCHAR(16) NULL," +
                                       "[{5}] VARCHAR(60) NULL," +
                                       "[{6}] VARCHAR(16) NULL," +
@@ -298,7 +298,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                       "ALTER COLUMN {2} VARCHAR(40) COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {3} VARCHAR(20) COLLATE DATABASE_DEFAULT " +
+                                      "ALTER COLUMN {3} {26} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN {4} VARCHAR(16) COLLATE DATABASE_DEFAULT " +
@@ -359,7 +359,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                       Educational_teacher_staff.FieldName.GRAD_YEAR,
                                       Educational_teacher_staff.FieldName.COLLEGE,USER_TYPE_NUM,FieldName.ROOM,
                                       DBFieldDataType.USER_ID_TYPE,DBFieldDataType.FILE_NAME_TYPE,
-                                      DBFieldDataType.CURRI_ID_TYPE);
+                                      DBFieldDataType.CURRI_ID_TYPE,DBFieldDataType.USERNAME_TYPE);
 
 
 

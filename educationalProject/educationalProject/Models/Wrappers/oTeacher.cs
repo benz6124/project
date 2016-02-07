@@ -96,7 +96,7 @@ namespace educationalProject.Models.Wrappers
                                 e_name = item.ItemArray[tabledata.Columns[FieldName.E_NAME].Ordinal].ToString(),
                                 email = item.ItemArray[tabledata.Columns[FieldName.EMAIL].Ordinal].ToString(),
                                 gender = Convert.ToChar(item.ItemArray[tabledata.Columns[FieldName.GENDER].Ordinal]),
-                                degree = Convert.ToChar(item.ItemArray[18]),
+                                degree = Convert.ToChar(item.ItemArray[17]),
                                 teacher_id = item.ItemArray[1].ToString(),
                                 tel = item.ItemArray[tabledata.Columns[FieldName.TEL].Ordinal].ToString(),
                                 e_prename = item.ItemArray[tabledata.Columns[FieldName.E_PRENAME].Ordinal].ToString(),
@@ -106,7 +106,7 @@ namespace educationalProject.Models.Wrappers
                                 user_type = item.ItemArray[tabledata.Columns[FieldName.USER_TYPE].Ordinal].ToString(),
                                 file_name_pic = item.ItemArray[tabledata.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString(),
                                 position = Convert.ToChar(item.ItemArray[tabledata.Columns[FieldName.POSITION].Ordinal]),
-                                is_admin = Convert.ToChar(item.ItemArray[tabledata.Columns[FieldName.IS_ADMIN].Ordinal]),
+                                
                                 
                             };
                             teacher_id = t.teacher_id;
@@ -115,10 +115,10 @@ namespace educationalProject.Models.Wrappers
                         t.history.Add(new Educational_teacher_staff
                         {
                             college = item.ItemArray[tabledata.Columns[Educational_teacher_staff.FieldName.COLLEGE].Ordinal].ToString(),
-                            degree = Convert.ToChar(item.ItemArray[27]),
+                            degree = Convert.ToChar(item.ItemArray[26]),
                             grad_year = Convert.ToInt32(item.ItemArray[tabledata.Columns[Educational_teacher_staff.FieldName.GRAD_YEAR].Ordinal]),
                             major = item.ItemArray[tabledata.Columns[Educational_teacher_staff.FieldName.MAJOR].Ordinal].ToString(),
-                            personnel_id = item.ItemArray[26].ToString(),
+                            personnel_id = item.ItemArray[25].ToString(),
                             pre_major = item.ItemArray[tabledata.Columns[Educational_teacher_staff.FieldName.PRE_MAJOR].Ordinal].ToString(),
                         });
                     }
@@ -155,8 +155,7 @@ namespace educationalProject.Models.Wrappers
                                 status = item.ItemArray[tabledata.Columns[FieldName.STATUS].Ordinal].ToString(),
                                 user_type = item.ItemArray[tabledata.Columns[FieldName.USER_TYPE].Ordinal].ToString(),
                                 file_name_pic = item.ItemArray[tabledata.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString(),
-                                position = Convert.ToChar(item.ItemArray[tabledata.Columns[FieldName.POSITION].Ordinal]),
-                                is_admin = Convert.ToChar(item.ItemArray[tabledata.Columns[FieldName.IS_ADMIN].Ordinal]),
+                                position = Convert.ToChar(item.ItemArray[tabledata.Columns[FieldName.POSITION].Ordinal])
                             });
                         }
                         res.Close();
