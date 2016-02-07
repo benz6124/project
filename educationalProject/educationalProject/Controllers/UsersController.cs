@@ -7,7 +7,6 @@ using System.Security.Cryptography;
 using System.Web.Http;
 using System.Threading.Tasks;
 using System.IO;
-using Microsoft.AspNet.Identity;
 using Newtonsoft.Json.Linq;
 using educationalProject.Models.ViewModels;
 using educationalProject.Models.Wrappers;
@@ -126,8 +125,11 @@ namespace educationalProject.Controllers
         }
 
         [ActionName("login")]
-        public IHttpActionResult PostForLogin(UsernamePassword data)
+        public IHttpActionResult PostForLogin(JObject usrpwdata)
         {
+            UsernamePassword data = new UsernamePassword();
+            data.username = usrpwdata["username"].ToString();
+            data.password = usrpwdata["password"].ToString();
             oUsers context = new oUsers();
             data.username = data.username.ToLower();
             object result = context.SelectUser(data.username);

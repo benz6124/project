@@ -12,10 +12,16 @@ namespace educationalProject.Models.ViewModels
         private string _password;
         public string username { get { return _username; } set { _username = value; } }
         public string password { get { return _password; } set { _password = value; } }
-        public UsernamePassword(string username,string password)
+        public UsernamePassword(string username, string password)
         {
             _username = username;
             _password = hasher.HashPassword(password);
+
+        }
+
+        public UsernamePassword()
+        {
+
         }
         public bool isMatchPassword(string providedpassword)
         {
