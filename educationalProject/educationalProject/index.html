@@ -321,6 +321,13 @@
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการประธานหลักสูตร</span></span>
                             </a>
                         </li>
+<li>
+                            <a href="" data-nq-toggle-modal="#manage_admin_who" data-effect="from-left" data-placement="bottom">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการแอดมิน</span></span>
+                            </a>
+                        </li>
+
 
                           <li>
                             <a href="" data-nq-toggle-modal="#manage_indicators" data-effect="from-left" data-placement="right">
@@ -3198,6 +3205,57 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>   
 
 </div>
+
+
+
+<div id="manage_admin_who" data-nq-modal="" data-qo-fire-emit = "true"  data-ng-controller="manage_admin_who_controller" data-qo-size="md" data-qo-independent="true">
+                    <div class="custom-header">
+                        <h1 class="headerModalH1"><span class="headerModal" style="
+    margin-left: 15px;
+    margin-top: 5px;
+">ส่วนจัดการผู้ควบคุมระบบ</span></h1>
+                    </div>
+
+          <button type="button" ng-hide="add_admin_mode" class="btn btn-xs btn-success  hvr-buzz"  style="text-align:center;"data-effect="flip-x"  data-ng-click="add_admin()"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มผู้ควบคุมระบบ</button>  
+                  
+                    <div class="row" ng-show="add_admin_mode">
+                       <h3 style="margin-left: 15px;margin-top: 10px;margin-bottom:0px"><span class="topicNewHeader">กรุณากรอกอีเมล์ของผู้ควบคุมระบบท่านใหม่:   </span></h3>
+</div>
+
+                  <div class="row" ng-show="add_admin_mode">
+                  <div class="col-md-10" style="
+    padding-right: 0px;
+    margin-top: 3px;
+">
+                  <input type="text" class="form-control" ng-model="email_new_admin" data-qo-placeholder="กรุณากรอกอีเมล์ของผู้ควบคุมระบบคนใหม่" ng-show="add_admin_mode" />
+                   </div>
+            <div class="col-md-2" style="
+    padding-left: 10px;
+">
+
+                      <button type="button" class="btn btn-xs btn-success  hvr-buzz" data-effect="flip-x"  data-ng-click="confirm_add_admin()"><i class="fic glyphicon glyphicon-plus-sign" ></i> ยืนยัน</button>  
+          
+                  </div>
+</div>
+  <div class="row" >
+                       <h3 style="margin-left: 15px;margin-top: 0px;margin-bottom: 0px;"><span class="topicNewHeader">รายชื่อผู้ควบคุมระบบปัจจุบัน:   </span></h3>
+</div>
+                      <ul>
+
+            <li ng-repeat="admin in all_admins" style="font-size:21px;margin-left:70px">{{admin.t_name}}</li>
+          </ul>
+
+
+
+                    <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button class="btn btn-success  " ng-disabled="still_same_president()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                        </div>
+                    </div>   
+
+</div>
+
 
               <div id="evaluate_other" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="evaluate_by_other_controller" data-ng-init = "init()"data-qo-screen-mode="true" data-qo-independent="true">
                     <div class="custom-header">

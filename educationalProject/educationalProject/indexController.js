@@ -1553,12 +1553,6 @@ $scope.init =function() {
                 $scope.my_president ={};
                 $scope.personnel_choose = {};
                 $scope.current_president= {};
-// $scope.results =[
-
-// {"history":[{"personnel_id":"00001","degree":"1","major":"ce","pre_major":"วศ.บ.","grad_year":2558,"college":"sdsd"},{"personnel_id":"00001","degree":"2","major":"ce1","pre_major":"วศ.บ.","grad_year":2559,"college":"sdsds"}],
-// "teacher_id":"00001","degree":"1","position":"1","personnel_type":"1","person_id":"1","status":"normal","alive":49,"is_admin":"1","username":"kpwiboon","password":"1111111","user_type":"teacher","t_prename":"mr.","t_name":"wiboonth","e_prename":"mr.","e_name":"wiboon","citizen_id":"12448","gender":"m","email":"kpwiboon","tel":"000000","addr":"sd","file_name_pic":"บัณฑิต.jpg","timestamp":"2016-01-22T00:00:00+07:00"},
-
-// {"history":[{"personnel_id":"00002","degree":"1","major":"ce22222","pre_major":"วศ.บ.","grad_year":2558,"college":"sdsd"},{"personnel_id":"00002","degree":"2","major":"ce0000","pre_major":"วศ.บ.","grad_year":2560,"college":"sdsds"}],"teacher_id":"00002","degree":"2","position":"1","personnel_type":"1","person_id":"1","status":"normal","alive":50,"is_admin":"0","username":"kwakaarad","password":"10111","user_type":"teacher","t_prename":"mr.","t_name":"akaaradth","e_prename":"mr.","e_name":"akaara","citizen_id":"1248","gender":"m","email":"kwakkarad","tel":"000000","addr":"sd","file_name_pic":"อรทัย.jpg","timestamp":"2016-01-22T00:00:00+07:00"}];
 
 
   $scope.sendCurriAndGetYears = function () {
@@ -1650,37 +1644,95 @@ $scope.init =function() {
   }); 
     }
 });
- // $scope.save = function() {
+ 
 
- //      $scope.model  = {"file_name":"","personnel_id":"00007","date":"","curri_id":curri_choosen.curri_id,"aca_year":year_choosen.aca_year}
 
- //      var formData = new FormData();
 
- //    formData.append("model", angular.toJson($scope.model));
+app.controller('manage_admin_who_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service) {
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+        $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                $scope.results={};
+                $scope.my_president ={};
+                       $scope.personnel_choose = {};
+                       $scope.current_president = {};
+                       $scope.find_information();
+                       $scope.email_new_admin = "";
+                       $scope.add_admin_mode = false;
 
- //        for (var i = 0; i < $scope.files.length; i++) {
+
+
+
+   $http.get('/api/admin').success(function (data) {
+  
+             $scope.all_admins = data;
+           
+           });
+
+
+}
+        $scope.choose_not_complete = true;
+        $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+                $scope.indicator_choosen= {};
+                $scope.results={};
+                $scope.my_president ={};
+                $scope.personnel_choose = {};
+                $scope.current_president= {};
+         
+   $scope.add_admin_mode = false;
+$scope.email_new_admin = "";
+
+ 
+
+   $http.get('/api/admin').success(function (data) {
+  
+             $scope.all_admins = data;
+           
+           });
+
+
+   $scope.add_admin = function(){
+   $scope.add_admin_mode = true;
+
+
+   }
+   $scope.confirm_add_admin = function(){
+
+               
+    $scope.to_sent = {};
+    $scope.to_sent.email = $scope.email_new_admin;
+    $scope.to_sent.user_id = '00001';
+        $http.post(
+             '/api/admin',
+             JSON.stringify(),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            console.log(data);
+                 $scope.add_admin_mode = false;
+             $alert({title:'ดำเนินการสำเร็จ', content:'เพิ่มข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
         
- //            formData.append("file" + i, $scope.files[i]);
- //        }
+    });
 
- //        $http({
- //            method: 'POST',
- //            url: "/Api/aunbook",
+    }
 
- //            headers: { 'Content-Type': undefined },
+    
 
 
- //            data:formData,
- //            transformRequest: angular.indentity 
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
 
- //        }).
- //        success(function (data, status, headers, config) {
- //            alert("success!");
- //        }).
- //        error(function (data, status, headers, config) {
- //            alert("failed!");
- //        });
 
+});
 
 app.controller('manage_indicators_controller', function($scope, $alert,$http,$rootScope){
   
