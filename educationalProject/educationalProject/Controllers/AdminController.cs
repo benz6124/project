@@ -9,9 +9,10 @@ namespace educationalProject.Controllers
 {
     public class AdminController : ApiController
     {
+        private oAdmin datacontext = new oAdmin();
         public IHttpActionResult Get()
         {
-            return Ok();
+            return Ok(datacontext.Select());
         }
     }
 }

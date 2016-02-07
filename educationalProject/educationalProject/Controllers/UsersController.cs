@@ -73,7 +73,8 @@ namespace educationalProject.Controllers
                         password += chars[num[j]];
                     }
                     //=========================
-                    userlist.Add(new UsernamePassword(str, password));
+                    string strlower = str.ToLower();
+                    userlist.Add(new UsernamePassword(strlower, password));
                 }
 
                 //3.Delete temp email file
@@ -128,6 +129,7 @@ namespace educationalProject.Controllers
         public IHttpActionResult PostForLogin(UsernamePassword data)
         {
             oUsers context = new oUsers();
+            data.username = data.username.ToLower();
             object result = context.SelectUser(data.username);
 
             //Check whether preferred user is exists?
