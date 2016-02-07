@@ -12,6 +12,7 @@ namespace educationalProject.Models
             public static readonly string TEACHER_ID = "TEACHER_ID";
             public static readonly string CURRI_ID = "CURRI_ID";
             public static readonly string DATE_PROMOTED = "DATE_PROMOTED";
+            public static readonly string ACA_YEAR = "ACA_YEAR";
             public static readonly string TABLE_NAME = "COMMITTEE";
         }
         private string _teacher_id;
