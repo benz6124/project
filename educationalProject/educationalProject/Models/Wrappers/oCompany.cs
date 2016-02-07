@@ -47,12 +47,13 @@ namespace educationalProject.Models.Wrappers
                 string ts = DateTime.Now.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[93];
 
                 insertcmd += string.Format("IF NOT EXISTS(select * from {0} where {1} = '{2}') and " +
-                                   "NOT EXISTS(select * from {3} where {4} = '{2}') and " +
-                                   "NOT EXISTS(select * from {5} where {4} = '{2}') and " +
-                                   "NOT EXISTS(select * from {6} where {4} = '{2}') and " +
-                                   "NOT EXISTS(select * from {7} where {4} = '{2}') and " +
-                                   "NOT EXISTS(select * from {8} where {4} = '{2}') and " +
-                                   "NOT EXISTS(select * from {9} where {4} = '{2}') " +
+                                   "NOT EXISTS(select * from {3} where {4} = '{2}' or {13} = '{2}') and " +
+                                   "NOT EXISTS(select * from {5} where {4} = '{2}' or {13} = '{2}') and " +
+                                   "NOT EXISTS(select * from {6} where {4} = '{2}' or {13} = '{2}') and " +
+                                   "NOT EXISTS(select * from {7} where {4} = '{2}' or {13} = '{2}') and " +
+                                   "NOT EXISTS(select * from {8} where {4} = '{2}' or {13} = '{2}') and " +
+                                   "NOT EXISTS(select * from {9} where {4} = '{2}' or {13} = '{2}') and " +
+                                   "NOT EXISTS(select * from {18} where {4} = '{2}' or {13} = '{2}') " +
                                    "begin " +
                                    "insert into {0} values('{2}', '{10}') " +
                                    "insert into {3} ({11},{12}, {13}, {4}, {14}) values ('{2}', '{10}', '{15}', '{2}', '{16}') " +
@@ -69,7 +70,8 @@ namespace educationalProject.Models.Wrappers
                                    Assessor.FieldName.TABLE_NAME, Teacher.FieldName.TABLE_NAME,
                                    /*******10*/ "บริษัท",
                                    /*******11 ID*/FieldName.USERNAME, FieldName.USER_TYPE,
-                                   FieldName.PASSWORD, FieldName.TIMESTAMP, item.password, ts, temp5tablename);
+                                   FieldName.PASSWORD, FieldName.TIMESTAMP, item.password, ts, temp5tablename,
+                                   Admin.FieldName.TABLE_NAME);
 
             }
 
