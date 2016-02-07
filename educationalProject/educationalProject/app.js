@@ -60,15 +60,32 @@ app.factory('AuthService', function ($http, Session,$cookies) {
     //                    res.data.user.role);
     //     return res.data.user;
     //   });
- $cookies.putObject("mymy", credentials);
+
+
+//  $cookies.putObject("mymy", credentials);
    	
 
-return {
-'username': credentials.username,
-'user_type':'admin',
-'information':{'t_name':'fafa', 'email':'blahblah'},
-'privilege':{'21':{'สร้างหลักสูตร':'อนุญาต' , 'อัลบั้ม':'ดูเท่านั้น'} }
-}
+// return {
+// 'username': credentials.username,
+// 'user_type':'admin',
+// 'information':{'t_name':'fafa', 'email':'blahblah'},
+// 'privilege':{'21':{'สร้างหลักสูตร':'อนุญาต' , 'อัลบั้ม':'ดูเท่านั้น'} }
+// }
+
+
+
+return $http
+      .post('/api/users/login', credentials)
+      .then(function (res) {
+        console.log('')
+        console.log(res.data)
+        // Session.create(res.data.id, res.data.user.id,
+        //                res.data.user.role);
+        // // $cookies.putObject("mymy", credentials);
+        // return res.data.user;
+      });
+
+
   };
  
   authService.isAuthenticated = function () {

@@ -1688,7 +1688,8 @@ $scope.email_new_admin = "";
  
 
    $http.get('/api/admin').success(function (data) {
-  
+           console.log('/api/admin');
+            console.log(data);
              $scope.all_admins = data;
            
            });
