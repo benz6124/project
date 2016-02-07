@@ -321,13 +321,22 @@
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการประธานหลักสูตร</span></span>
                             </a>
                         </li>
+
+
+                        
 <li>
-                            <a href="" data-nq-toggle-modal="#manage_admin_who" data-effect="from-left" data-placement="bottom">
+                            <a href="" data-nq-toggle-modal="#manage_admin_who" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการแอดมิน</span></span>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;แต่งตั้งผู้ควบคุมระบบ</span></span>
                             </a>
                         </li>
 
+<li>
+                            <a href="" data-nq-toggle-modal="#manage_committee_who" data-effect="from-left" data-placement="right">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;แต่งตั้งกรรมการหลักสูตร</span></span>
+                            </a>
+                        </li>
 
                           <li>
                             <a href="" data-nq-toggle-modal="#manage_indicators" data-effect="from-left" data-placement="right">
@@ -3205,56 +3214,238 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>   
 
 </div>
+   
 
 
+<div id="manage_admin_add_admin" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-placement="left"  data-ng-controller="manage_admin_add_admin_controller" data-qo-size="md" data-qo-independent="true">
 
-<div id="manage_admin_who" data-nq-modal="" data-qo-fire-emit = "true"  data-ng-controller="manage_admin_who_controller" data-qo-size="md" data-qo-independent="true">
                     <div class="custom-header">
-                        <h1 class="headerModalH1"><span class="headerModal" style="
-    margin-left: 15px;
-    margin-top: 5px;
-">ส่วนจัดการผู้ควบคุมระบบ</span></h1>
+                        <h1 class="headerModalH1">ข้อมูลผู้ควบคุมระบบคนใหม่</h1>
                     </div>
 
-          <button type="button" ng-hide="add_admin_mode" class="btn btn-xs btn-success  hvr-buzz"  style="text-align:center;"data-effect="flip-x"  data-ng-click="add_admin()"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มผู้ควบคุมระบบ</button>  
-                  
-                    <div class="row" ng-show="add_admin_mode">
-                       <h3 style="margin-left: 15px;margin-top: 10px;margin-bottom:0px"><span class="topicNewHeader">กรุณากรอกอีเมล์ของผู้ควบคุมระบบท่านใหม่:   </span></h3>
-</div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-left:15px;margin-top:5px;"><span class="topicNewHeader">ชื่อ-นามสกุล:  </span></h3>
+                            </div>
+                            <div class="col-md-9">
+                              
+                                <input type="text" data-ng-model='new_admin.t_name' class="form-control" required/>
+                            </div>
 
-                  <div class="row" ng-show="add_admin_mode">
-                  <div class="col-md-10" style="
-    padding-right: 0px;
-    margin-top: 3px;
-">
-                  <input type="text" class="form-control" ng-model="email_new_admin" data-qo-placeholder="กรุณากรอกอีเมล์ของผู้ควบคุมระบบคนใหม่" ng-show="add_admin_mode" />
-                   </div>
-            <div class="col-md-2" style="
-    padding-left: 10px;
-">
+                        </div>
 
-                      <button type="button" class="btn btn-xs btn-success  hvr-buzz" data-effect="flip-x"  data-ng-click="confirm_add_admin()"><i class="fic glyphicon glyphicon-plus-sign" ></i> ยืนยัน</button>  
-          
-                  </div>
-</div>
-  <div class="row" >
-                       <h3 style="margin-left: 15px;margin-top: 0px;margin-bottom: 0px;"><span class="topicNewHeader">รายชื่อผู้ควบคุมระบบปัจจุบัน:   </span></h3>
-</div>
-                      <ul>
+                          <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-left:15px;margin-top:5px;"><span class="topicNewHeader">อีเมล์:  </span></h3>
+                            </div>
+                            <div class="col-md-9">
+                              
+                                <input type="text" data-ng-model='new_admin.email' class="form-control"required/>
+                            </div>
 
-            <li ng-repeat="admin in all_admins" style="font-size:21px;margin-left:70px">{{admin.t_name}}</li>
-          </ul>
+                        </div>
 
-
-
-                    <div class="custom-footer">
-                        <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="still_same_president()" ng-click="save_to_server(this)">ยืนยัน</button>
+     <div class="custom-footer">
+                           <div class="topicHeader pull-right">
+                            <button ng-disabled="still_not_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
-                    </div>   
+                    </div>
 
 </div>
+<div id="manage_admin_who" data-nq-modal="" data-qo-fire-emit = "true"  data-ng-controller="manage_admin_who_controller" data-qo-screen-mode="true" data-qo-independent="true">
+
+
+                    <div class="custom-header">
+                        <h1 class="headerModalH1">แต่งตั้งผู้ควบคุมระบบ</h1>
+                    </div>
+
+        
+  <div class="container-fluid" >
+                        <div class="clearfix">
+
+
+                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
+                                 data-qo-selectable="true">
+              
+
+              
+                                <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+
+                                   <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="from-right" data-nq-toggle-modal ="#manage_admin_add_admin" data-ng-click="add_admin()"><i class="fic glyphicon glyphicon-plus-sign"></i> แต่งตั้งผู้ควบคุมระบบ</button>
+
+  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
+                                      
+                                        <thead class="nq-fix-table-scroll">
+                                            <tr>
+                              <th style="width:40px;padding-left: 0px; padding-right: 0px;">รูป</th>
+                                                <th style="width:160px;padding-left: 0px; padding-right: 0px;">ชื่อ-นามสกุล</th>
+ <th style="width:60px;padding-left: 0px;padding-right: 0px;">อีเมล์</th>
+ <th style="width:60px;padding-left: 0px;padding-right: 0px;">ผู้แต่งตั้ง</th>
+                                           
+                                   <th style="width:40px;padding-left: 0px; padding-right: 0px;">วันที่สร้างบัญชี</th>
+                                   
+                                               
+                                              
+                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody class="flattened">
+                                       
+                                          
+
+                                            <tr  ng-repeat="admin in all_admins">
+                                             <td  style=" padding-left: 0px; padding-right: 0px;" class="show_lightbox"><span style="font-size:19px;"><img src="{{admin.file_name_pic}}" ng-click="openLightboxModal(admin.file_name_pic)"  width="70"></span> </td>
+
+                          <td ><span style="font-size:19px;">{{admin.t_name}}</span> </td>
+
+     
+                          <td ><span style="font-size:19px;">{{admin.email}}</span> </td>
+  <td style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{admin.creator_name}}</span> </td>
+
+                    
+<td  style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{admin.timestamp}}</span> </td>
+                                            
+      
+                                             
+
+                                            </tr>
+
+                                 
+                                        </tbody>
+
+                                    </table>
+
+         </div>         </div>        
+
+          </div>         </div>
+     <div class="custom-footer">
+                             <div class="topicHeader pull-right">
+                             <button class="btn btn-default hvr-skew-forward" ng-click="close_modal(this)">ปิดหน้าต่าง</button>
+                        </div>
+                    </div>
+   </div>
+
+        <div id="add_committee" data-nq-modal="" data-ng-controller="add_committee_controller" data-qo-fire-emit = "true" data-qo-independent="true">
+
+                    <div class="custom-header">
+
+                        <h1 class="headerModalH1"><span class="headerModal"> แต่งตั้งกรรมการหลักสูตร</span></h1>
+                    </div>
+
+                  
+                 
+
+                    <div class="row" style="margin-left:0px;margin-right:0px;margin-top:8px">
+                      
+                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="person.t_name for person in people_in_curri" data-qo-effect="from-left" data-qo-placeholder="กรุณาเลือกบุคลากร"  data-ng-model="$parent.choose_people"  data-qo-max-length ="0" data-qo-multiple="true"  data-qo-disable-clear="true" >
+                                 
+            <option style="display:none" value=""></option>
+
+            </select>
+                        
+
+                    </div>
+                    <div data-nq-scroll="" data-qo-max-height="180px" data-qo-bar-size="normal" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;margin-top:5px">
+                  <ul ng-show="choose_people.length!=0">
+                           <span class="topicHeader"> <li style="color:#6F002B;margin-left:10px" ng-repeat="each in choose_people">{{each.t_name}}</li></span>
+                        </ul>
+                        </div>
+                    <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button class="btn btn-success  " ng-disabled="still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+ <div id="manage_committee_who" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_committee_who_controller">
+
+                    <div class="custom-header">
+                        <h1 class="headerModalH1">แต่งตั้งกรรมการหลักสูตร</h1>
+                    </div>
+
+          <div class="row" style="
+    margin-left: 14px;
+    margin-right: 16px;
+">
+
+
+                      
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+            <option style="display:none" value=""></option></select>
+
+                     
+                      
+
+                    </div>
+<br />
+
+  <div class="container-fluid" ng-hide="choose_not_complete">
+                        <div class="clearfix">
+
+
+                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
+                                 data-qo-selectable="true">
+              
+
+              
+                                <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+
+                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="from-left" data-nq-toggle-modal="#add_committee" data-ng-click="go_to_add_committee()"><i class="fic glyphicon glyphicon-plus-sign"></i> แต่งตั้งกรรมการหลักสูตร</button>
+
+
+  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
+                                      
+                                        <thead class="nq-fix-table-scroll">
+                                            <tr>
+                          
+                                                <th style="width:70px">รูป</th>
+                                                <th style="width:400px">ชื่อ-นามสกุล</th>
+                      <th style="width:60px;padding-left: 0px;padding-right: 0px;">อีเมล์</th>
+                                                <th style="width:140px">วันที่แต่งตั้ง</th>
+                
+                                                <th style="width:30px">ลบ</th>
+                                              
+                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody class="flattened">
+                                     
+                                          
+
+                                            <tr  ng-repeat="committee in manage_committee_who_all_committees">
+                                             <td  ><img src="{{committee.file_name_pic}}" class="img-circle" width="70"> </td>
+                          <td class="left_column" style=" padding-left: 10px ;"><span style="font-size:19px;">{{committee.t_name}}</span> </td>
+                                              <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{committee.email}}</span> </td>
+          <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{committee.date_promoted}}</span> </td>
+                          
+                                             
+        
+
+                                          <td > <a  style="margin-top:7px" data-ng-click="remove_committee($index)" href=""  class="hvr-pulse" >
+                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                    </a></td> 
+
+                                            </tr>
+
+                                           
+                                        </tbody>
+
+                                    </table>
+
+         </div>         </div>        
+
+          </div>         </div>
+     <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button ng-disabled="choose_not_complete || nothing_change"  class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                        </div>
+                    </div>
+   </div>
 
 
               <div id="evaluate_other" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="evaluate_by_other_controller" data-ng-init = "init()"data-qo-screen-mode="true" data-qo-independent="true">

@@ -1648,7 +1648,79 @@ $scope.init =function() {
 
 
 
-app.controller('manage_admin_who_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service) {
+app.controller('manage_admin_add_admin_controller', function($scope, $rootScope,$alert,$http,request_years_from_curri_choosen_service) {
+$scope.init =function() {
+    $scope.new_admin = {};
+    $scope.new_admin.t_name = "";
+    $scope.new_admin.email = "";
+}
+ $scope.new_admin = {};
+    $scope.new_admin.t_name = "";
+    $scope.new_admin.email = "";
+
+
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+      $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+    $scope.still_not_complete = function(){
+        if (!$scope.new_admin){
+            return true;
+        }
+
+            if (!$scope.new_admin.t_name || !$scope.new_admin.email){
+            return true;
+        }
+
+        return false;
+    }
+
+       $scope.save_to_server = function(){
+
+               
+    $scope.to_sent = {};
+    $scope.to_sent.t_name = $scope.new_admin.t_name;
+    $scope.to_sent.email = $scope.new_admin.email;
+    $scope.to_sent.user_id = '00001';
+        $http.post(
+             '/api/admin',
+             JSON.stringify(  $scope.to_sent),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+
+
+            console.log(data);
+           $http.get('/api/admin').success(function (data) {
+  
+             $rootScope.all_admins = data;
+           
+           });
+
+             $alert({title:'ดำเนินการสำเร็จ', content:'เพิ่มข้อมูลเรียบร้อย ตรวจสอบอีเมล์เพื่อรับรหัสผ่าน',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+        
+    });
+
+    }
+
+});
+
+app.controller('manage_admin_who_controller', function($scope, $rootScope,$alert,$http,request_years_from_curri_choosen_service,Lightbox) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
         $scope.year_choosen = {};
@@ -1658,7 +1730,7 @@ $scope.init =function() {
                 $scope.my_president ={};
                        $scope.personnel_choose = {};
                        $scope.current_president = {};
-                       $scope.find_information();
+                  
                        $scope.email_new_admin = "";
                        $scope.add_admin_mode = false;
 
@@ -1667,7 +1739,7 @@ $scope.init =function() {
 
    $http.get('/api/admin').success(function (data) {
   
-             $scope.all_admins = data;
+             $rootScope.all_admins = data;
            
            });
 
@@ -1690,42 +1762,34 @@ $scope.email_new_admin = "";
    $http.get('/api/admin').success(function (data) {
            console.log('/api/admin');
             console.log(data);
-             $scope.all_admins = data;
+             $rootScope.all_admins = data;
            
            });
 
+
+ $scope.openLightboxModal = function (to_open) {
+    $scope.fake_array = [];
+    $scope.fake_array.push(to_open);
+    Lightbox.openModal( $scope.fake_array, 0);
+  };
 
    $scope.add_admin = function(){
    $scope.add_admin_mode = true;
 
 
    }
-   $scope.confirm_add_admin = function(){
 
-               
-    $scope.to_sent = {};
-    $scope.to_sent.email = $scope.email_new_admin;
-    $scope.to_sent.user_id = '00001';
-        $http.post(
-             '/api/admin',
-             JSON.stringify(),
-             {
-                 headers: {
-                     'Content-Type': 'application/json'
-                 }
-             }
-         ).success(function (data) {
-            console.log(data);
-                 $scope.add_admin_mode = false;
-             $alert({title:'ดำเนินการสำเร็จ', content:'เพิ่มข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-        
-    });
-
-    }
 
     
 
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
 
     $scope.close_modal = function(my_modal){
         $scope.init();
@@ -5928,6 +5992,218 @@ $scope.init =function() {
     }
 });
 
+app.controller('add_committee_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+$scope.init =function() {
+
+              
+                $scope.choose_people = [];
+$scope.choose_people ={};
+
+
+   $http.post(
+             '/api/committee/getnoncommittee',
+             JSON.stringify({'curri_id':$rootScope.manage_committee_who_curri_id_now,'these_people':$rootScope.manage_committee_who_all_committees}),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            $scope.people_in_curri = data;
+    
+         });
+          
+}
+
+    
+            
+      
+                $scope.choose_people = [];
+$scope.choose_people ={};
+
+   $http.post(
+             '/api/committee/getnoncommittee',
+             JSON.stringify({'curri_id':$rootScope.manage_committee_who_curri_id_now,'these_people':$rootScope.manage_committee_who_all_committees}),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            $scope.people_in_curri = data;
+    
+         });
+
+
+  $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+    $scope.still_not_complete = function(){
+
+        if(!$scope.choose_people){
+          
+            return true;
+        }
+
+        if($scope.choose_people.length ==0){
+           
+            return true;
+        }
+
+        return false;
+    }
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+
+              $scope.init();
+    });
+
+    
+ $scope.save_to_server = function(my_modal){
+    console.log("save_to_server");
+     
+        $scope.to_sent = {};
+        $scope.to_sent.these_people = $scope.choose_people;
+        $scope.to_sent.curri_id = $rootScope.manage_committee_who_curri_id_now;
+
+           console.log($scope.to_sent);
+        $http.post(
+             '/api/committee/new',
+             JSON.stringify($scope.to_sent),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            $rootScope.manage_committee_who_all_committees = data;
+                   $scope.close_modal(my_modal);
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+        
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    }
+});
+
+app.controller('manage_committee_who_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+$scope.init =function() {
+     $scope.choose_not_complete = true;
+   
+              $scope.curri_choosen = {}
+             
+         $scope.nothing_change = true;
+          
+}
+
+
+  
+     $scope.choose_not_complete = true;
+   
+              $scope.curri_choosen = {}
+             
+                    $scope.result = {};
+  $scope.nothing_change = true;
+
+      $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+
+    $scope.go_to_add_committee =function(){
+          $rootScope.manage_committee_who_curri_id_now = $scope.curri_choosen.curri_id;
+          
+
+
+    }
+
+
+
+    $scope.remove_committee = function(index_committee_to_remove){
+
+         $rootScope.manage_committee_who_all_committees.splice(index_committee_to_remove, 1);    
+           $scope.nothing_change = false;
+
+    }
+    $scope.find_information = function(){
+
+      
+        console.log($scope.curri_choosen.curri_id);
+
+        $http.post(
+             '/api/committee/getcommittee',
+             JSON.stringify($scope.curri_choosen.curri_id),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            
+              $rootScope.manage_committee_who_all_committees = data;
+             $scope.choose_not_complete = false;
+               $scope.nothing_change = true;
+            
+    
+         });
+
+    }
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+    $scope.save_to_server = function(my_modal){
+        console.log("save_to_server");
+
+        $scope.to_sent = {};
+    
+       
+         
+            $scope.to_sent.curri_id = $scope.curri_choosen.curri_id ;
+            $scope.to_sent.these_people =     $rootScope.manage_committee_who_all_committee;
+     
+        $http.put(
+             '/api/committee/',
+             JSON.stringify($scope.to_sent),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+             $scope.close_modal(my_modal);
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+              
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+    }
+});
 
 
 app.controller('show_education_personnel_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
