@@ -27,10 +27,12 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                 "else if exists(select * from {6} where {1} = '{2}') " +
                                     "select * from {6} where {1} = '{2}' " +
                                 "else if exists(select * from {7} where {1} = '{2}') " +
-                                    "select * from {7} where {1} = '{2}' " ,
+                                    "select * from {7} where {1} = '{2}' " +
+                                "else if exists(select * from {8} where {1} = '{2}') " +
+                                    "select * from {8} where {1} = '{2}' " ,
                                Teacher.FieldName.TABLE_NAME, Teacher.FieldName.USERNAME, preferredusername,
                                Staff.FieldName.TABLE_NAME,Student.FieldName.TABLE_NAME,Alumni.FieldName.TABLE_NAME,
-                               Company.FieldName.TABLE_NAME,Assessor.FieldName.TABLE_NAME);
+                               Company.FieldName.TABLE_NAME,Assessor.FieldName.TABLE_NAME,Admin.FieldName.TABLE_NAME);
 
             d.iCommand.CommandText = selectcmd;
             try

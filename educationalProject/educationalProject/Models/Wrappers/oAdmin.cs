@@ -7,15 +7,11 @@ using educationalProject.Models.ViewModels;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
 {
+    
     public class oAdmin : Admin
     {
-        public object Select()
+        private string getselectcmd()
         {
-            DBConnector d = new DBConnector();
-            if (!d.SQLConnect())
-                return "Cannot connect to database.";
-            List<Admin_with_creator> result = new List<Admin_with_creator>();
-
             string temp5tablename = "#temp5";
 
             string createtabletemp5 = string.Format("CREATE TABLE {0}( " +
@@ -100,8 +96,19 @@ namespace educationalProject.Models.Wrappers
 
             string selectcmd = string.Format("select * from {0} order by {1} ", temp5tablename, FieldName.TIMESTAMP);
 
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} END ", createtabletemp5, insertintotemp5_1,
+            return string.Format("BEGIN {0} {1} {2} {3} END ", createtabletemp5, insertintotemp5_1,
                 insertintotemp5_2, selectcmd);
+        }
+        public object Select()
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+            List<Admin_with_creator> result = new List<Admin_with_creator>();
+
+
+
+            d.iCommand.CommandText = getselectcmd();
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -142,6 +149,102 @@ namespace educationalProject.Models.Wrappers
                 d.SQLDisconnect();
             }
             return result;
+        }
+
+        public object InsertWithSelect()
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+            /*List<string> result = new List<string>();
+
+            string temp5tablename = "#temp5";
+
+            string createtabletemp5 = string.Format("CREATE TABLE {0}(" +
+                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
+                                      "[{1}] VARCHAR(60) NULL," +
+                                      "PRIMARY KEY ([row_num])) " +
+                                      "ALTER TABLE {0} " +
+                                      "ALTER COLUMN {1} VARCHAR(60) COLLATE DATABASE_DEFAULT ",
+                                      temp5tablename, FieldName.EMAIL);*/
+
+            string insertcmd = "";
+            //string insertintousercurri;
+            //foreach (UsernamePassword item in list)
+            //{
+                /*insertintousercurri = string.Format("insert into {0} values ", User_curriculum.FieldName.TABLE_NAME);
+                int len = insertintousercurri.Length;
+
+                foreach (string curriitem in target_curri_id_list)
+                {
+                    if (insertintousercurri.Length <= len)
+                        insertintousercurri += string.Format("('{0}', '{1}')", item.username, curriitem);
+                    else
+                        insertintousercurri += string.Format(",('{0}', '{1}')", item.username, curriitem);
+                }
+                //since no value to be insert in user_curriculum so we make this var as empty string
+                if (insertintousercurri.Length <= len)
+                    insertintousercurri = "";*/
+
+                string ts = DateTime.Now.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[93];
+
+                insertcmd += string.Format("IF NOT EXISTS(select * from {0} where {1} = '{2}') and " +
+                                   "NOT EXISTS(select * from {3} where {4} = '{2}' or {12} = '{2}') and " +
+                                   "NOT EXISTS(select * from {5} where {4} = '{2}' or {12} = '{2}') and " +
+                                   "NOT EXISTS(select * from {6} where {4} = '{2}' or {12} = '{2}') and " +
+                                   "NOT EXISTS(select * from {7} where {4} = '{2}' or {12} = '{2}') and " +
+                                   "NOT EXISTS(select * from {8} where {4} = '{2}' or {12} = '{2}') and " +
+                                   "NOT EXISTS(select * from {9} where {4} = '{2}' or {12} = '{2}') and " +
+                                   "NOT EXISTS(select * from {10} where {4} = '{2}' or {12} = '{2}') " +
+                                   "begin " +
+                                   "insert into {0} values('{2}', '{11}') " +
+                                   "insert into {3} ({12},{13}, {14},{18}, {4}, {15}) values ('{2}', '{11}', '{16}',{19}, '{2}', '{17}') " +
+                                   //insertintousercurri + " " +
+                                   "end " +
+                                   "else " +
+                                   "return ",
+                                   //"insert into {17} values ('{2}') " +
+                                   //"end ",
+                                   User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_ID, /**/username,
+                                   /*Main table index 3 must SWAP!*/ FieldName.TABLE_NAME,
+                                   FieldName.EMAIL, Student.FieldName.TABLE_NAME,
+                                   Alumni.ExtraFieldName.TABLE_NAME, Staff.FieldName.TABLE_NAME,
+                                   Company.FieldName.TABLE_NAME, Teacher.FieldName.TABLE_NAME,
+                                   Assessor.FieldName.TABLE_NAME,
+                                   /*******11*/ "ผู้ดูแลระบบ",
+                                   /*******12 ID*/FieldName.USERNAME, FieldName.USER_TYPE,
+                                   FieldName.PASSWORD, FieldName.TIMESTAMP, /**/password, ts,FieldName.ADMIN_CREATOR_ID,admin_creator_id);
+
+            //}
+
+            //string selectcmd = string.Format("select {1} from {0} ", temp5tablename, FieldName.EMAIL);
+
+
+
+            d.iCommand.CommandText = insertcmd;
+           // d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} END ", createtabletemp5, insertcmd, selectcmd);
+            try
+            {
+                int rowaffected = d.iCommand.ExecuteNonQuery();
+                if(rowaffected > 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    return "มีผู้ใช้งานอีเมล์นี้แล้วในระบบ";
+                }
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
         }
     }
 }
