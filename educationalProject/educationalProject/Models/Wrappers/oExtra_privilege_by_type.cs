@@ -18,41 +18,61 @@ namespace educationalProject.Models.Wrappers
 
             string temp5tablename = "#temp5";
             string createtabletemp5 = string.Format("CREATE TABLE {0}(" +
-                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
+                                      "[row_num] int identity(1, 1) not null," +
                                       "[{1}] VARCHAR(40) NULL," +
-                                      "[{2}] {5} NULL," +
-                                      "[{3}] VARCHAR(80) NULL," +
-                                      "[{4}] VARCHAR(80) NULL," +
+                                      "[{2}] {7} NULL," +
+                                      "[{3}] INT NULL," +
+                                      "[{4}] INT null," +
+                                      "[{5}] varchar(80) null," +
+                                      "[{6}] varchar(80) null," +
                                       "PRIMARY KEY([row_num])) " +
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {1} VARCHAR(40) COLLATE DATABASE_DEFAULT " +
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {2} {5} COLLATE DATABASE_DEFAULT " +
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {3} VARCHAR(80) COLLATE DATABASE_DEFAULT " +
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {4} VARCHAR(80) COLLATE DATABASE_DEFAULT ",
-                                      temp5tablename, FieldName.USER_TYPE, FieldName.CURRI_ID, FieldName.TITLE, FieldName.PRIVILEGE,
+
+                                      "alter table {0} " +
+                                      "alter column {1} varchar(40) collate database_default " +
+
+                                      "alter table {0} " +
+                                      "alter column {2} {7} collate database_default " +
+
+                                      "alter table {0} " +
+                                      "alter column {5} varchar(80) collate database_default " +
+
+                                      "alter table {0} " +
+                                      "alter column {6} varchar(80) collate database_default ",
+                                      temp5tablename, FieldName.USER_TYPE, FieldName.CURRI_ID, FieldName.TITLE_CODE,
+                                      FieldName.TITLE_PRIVILEGE_CODE, Title.FieldName.NAME, Title_privilege.FieldName.PRIVILEGE,
                                       DBFieldDataType.CURRI_ID_TYPE);
 
-            string insertintotemp5_1 = string.Format("insert into {5} " +
-                                       "select * from {0} where {1} = '{2}' and {3} = '{4}' ",
-                                       FieldName.TABLE_NAME, FieldName.CURRI_ID, curri_id, FieldName.TITLE, title,temp5tablename);
+            string insertintotemp5_1 = string.Format("insert into {11} " +
+                                       "select {0}.*, {1}, {2} from {0}, ({3}) as tp " +
+                                       "where {4} = '{5}' and {0}.{6} = {7} " +
+                                       "and {0}.{6} = tp.{8} and {0}.{9} = tp.{10} ",
+                                       FieldName.TABLE_NAME, Title.FieldName.NAME, Title_privilege.FieldName.PRIVILEGE,
+                                       oTitle_privilege.getSelectTitlePrivilegeCommand(), FieldName.CURRI_ID, curri_id,
+                                       FieldName.TITLE_CODE, title_code, Title.FieldName.TITLE_CODE,
+                                       FieldName.TITLE_PRIVILEGE_CODE, Title_privilege.FieldName.TITLE_PRIVILEGE_CODE,
+                                       temp5tablename);
 
-            string insertintotemp5_2 = string.Format("insert into {9} " +
-                                       "select {3}.{0},'{1}','{2}',defaultres.{14} " +
-                                       "from {3}, (select * from {11} where {12} = '{2}' ) as defaultres where not exists " +
-                                       "(select * from {4} where {3}.{5} = {4}.{6} and {7} = '{1}' and {8} = '{2}') and {3}.{5} = defaultres.{13} ",
-                                       FieldName.USER_TYPE, curri_id, title, User_type.FieldName.TABLE_NAME, FieldName.TABLE_NAME,
-                                       User_type.FieldName.USER_TYPE, FieldName.USER_TYPE, FieldName.CURRI_ID, FieldName.TITLE,
-                                       temp5tablename,Default_privilege_by_type.FieldName.PRIVILEGE,
-                                       Default_privilege_by_type.FieldName.TABLE_NAME,Default_privilege_by_type.FieldName.TITLE,
-                                       Default_privilege_by_type.FieldName.USER_TYPE, Default_privilege_by_type.FieldName.PRIVILEGE);
+            string insertintotemp5_2 = string.Format("insert into {17} " +
+                                       "select {0}.*,'{1}',{2}.{3},{2}.{4},{5},{6} from {0},{2},({7}) as tp " +
+                                       "where not exists (select * from {8} where {0}.{9} = {8}.{10} and {11} = '{1}' and {12} = {13}) " +
+                                       "and {0}.{9} != 'ผู้ดูแลระบบ' and {0}.{9} = {2}.{14} and {2}.{3} = {13} " +
+                                       "and {2}.{3} = tp.{15} and {2}.{4} = tp.{16} ",
+                                       User_type.FieldName.TABLE_NAME, curri_id,
+                                       Default_privilege_by_type.FieldName.TABLE_NAME,
+                                       Default_privilege_by_type.FieldName.TITLE_CODE,
+                                       Default_privilege_by_type.FieldName.TITLE_PRIVILEGE_CODE,
+                                       Title.FieldName.NAME, Title_privilege.FieldName.PRIVILEGE,
+                                       oTitle_privilege.getSelectTitlePrivilegeCommand(),
+                                       FieldName.TABLE_NAME, User_type.FieldName.USER_TYPE,
+                                       FieldName.USER_TYPE, FieldName.CURRI_ID,
+                                       FieldName.TITLE_CODE, title_code,
+                                       Default_privilege_by_type.FieldName.USER_TYPE,
+                                       Title.FieldName.TITLE_CODE, Title_privilege.FieldName.TITLE_PRIVILEGE_CODE, temp5tablename);
 
-            string insertintotemp5_3 = string.Format("insert into {0} " +
-                                       "select null,null,null,{1} from {2} where {3} = '{4}' ",
-                                       temp5tablename, Title_privilege.FieldName.PRIVILEGE, Title_privilege.FieldName.TABLE_NAME,
-                                       Title_privilege.FieldName.TITLE, title);
+            string insertintotemp5_3 = string.Format("select null,null,{0},{1},null,{2} from {3} where {0} = {4} ",
+                                    FieldName.TITLE_CODE, FieldName.TITLE_PRIVILEGE_CODE, Title_privilege.FieldName.PRIVILEGE,
+                                    Title_privilege.FieldName.TABLE_NAME, title_code);
+
             string selcmd = string.Format("select * from {0} order by {1} ", temp5tablename,FieldName.USER_TYPE);
 
             d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} END", createtabletemp5,insertintotemp5_1,
@@ -68,16 +88,23 @@ namespace educationalProject.Models.Wrappers
                     {
                         if (item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString() != "" &&
                             item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString() != "" &&
-                            item.ItemArray[data.Columns[FieldName.TITLE].Ordinal].ToString() != "")
-                            result.list.Add(new Extra_privilege_by_type
+                            item.ItemArray[data.Columns[Title.FieldName.NAME].Ordinal].ToString() != "")
+                            result.list.Add(new Extra_privilege_by_type_with_name
                             {
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                                privilege = item.ItemArray[data.Columns[FieldName.PRIVILEGE].Ordinal].ToString(),
-                                title = item.ItemArray[data.Columns[FieldName.TITLE].Ordinal].ToString(),
-                                user_type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString()
+                                privilege = item.ItemArray[data.Columns[Title_privilege.FieldName.PRIVILEGE].Ordinal].ToString(),
+                                name = item.ItemArray[data.Columns[Title.FieldName.NAME].Ordinal].ToString(),
+                                user_type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString(),
+                                title_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_CODE].Ordinal]),
+                                title_privilege_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_PRIVILEGE_CODE].Ordinal])
                             });
                         else
-                            result.choices.Add(item.ItemArray[data.Columns[FieldName.PRIVILEGE].Ordinal].ToString());
+                            result.choices.Add(new Title_privilege
+                            {
+                                title_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_CODE].Ordinal]),
+                                title_privilege_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_PRIVILEGE_CODE].Ordinal]),
+                                privilege = item.ItemArray[data.Columns[Title_privilege.FieldName.PRIVILEGE].Ordinal].ToString()
+                            });
                     }
                     data.Dispose();
                 }
@@ -109,15 +136,15 @@ namespace educationalProject.Models.Wrappers
             string InsertOrUpdateCommand = "";
             foreach(Extra_privilege_by_type e in edata.list)
             {
-                InsertOrUpdateCommand += string.Format("IF NOT EXISTS(select * from {0} where {1} = '{2}' and {3} = '{4}' and {5} = '{6}') " +
+                InsertOrUpdateCommand += string.Format("IF NOT EXISTS(select * from {0} where {1} = '{2}' and {3} = '{4}' and {5} = {6}) " +
                                          "BEGIN " +
-                                         "INSERT INTO {0} values ('{2}','{4}','{6}','{7}') " +
+                                         "INSERT INTO {0} values ('{2}','{4}',{6},{7}) " +
                                          "END " +
                                          "ELSE " +
                                          "BEGIN " +
                                          "UPDATE {0} set {8} = '{7}' where {1} = '{2}' and {3} = '{4}' and {5} = '{6}' " +
                                          "END ", FieldName.TABLE_NAME, FieldName.USER_TYPE, e.user_type, FieldName.CURRI_ID, e.curri_id,
-                                         FieldName.TITLE, e.title, e.privilege, FieldName.PRIVILEGE);
+                                         FieldName.TITLE_CODE, e.title_code, e.title_privilege_code, FieldName.TITLE_PRIVILEGE_CODE);
             }
 
             d.iCommand.CommandText = InsertOrUpdateCommand;

@@ -124,7 +124,7 @@
     <Compile Include="Controllers\StudentStatusOtherController.cs" />
     <Compile Include="Controllers\SubIndicatorController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
-    <Compile Include="Controllers\TitlePrivilegeController.cs" />
+    <Compile Include="Controllers\TitleController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\UserTypeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -138,6 +138,7 @@
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Curriculum_academic.cs" />
     <Compile Include="Models\DBFieldDataType.cs" />
+    <Compile Include="Models\Title.cs" />
     <Compile Include="Models\User_curriculum.cs" />
     <Compile Include="Models\Cu_curriculum.cs" />
     <Compile Include="Models\Default_privilege_by_type.cs" />
@@ -181,6 +182,8 @@
     <Compile Include="Models\User_type.cs" />
     <Compile Include="Models\ViewModels\Admin_with_creator.cs" />
     <Compile Include="Models\ViewModels\Committee_with_detail.cs" />
+    <Compile Include="Models\ViewModels\Default_privilege_by_type_with_name.cs" />
+    <Compile Include="Models\ViewModels\Extra_privilege_by_type_with_name.cs" />
     <Compile Include="Models\ViewModels\User_curriculum_with_brief_detail.cs" />
     <Compile Include="Models\ViewModels\Default_privilege_by_type_list_with_privilege_choices.cs" />
     <Compile Include="Models\ViewModels\Evaluation_overall_result.cs" />
@@ -229,6 +232,7 @@
     <Compile Include="Models\Wrappers\oCommittee.cs" />
     <Compile Include="Models\Wrappers\oCompany.cs" />
     <Compile Include="Models\Wrappers\oCurriculum_academic.cs" />
+    <Compile Include="Models\Wrappers\oTitle.cs" />
     <Compile Include="Models\Wrappers\oUser_curriculum.cs" />
     <Compile Include="Models\Wrappers\oCu_Curriculum.cs" />
     <Compile Include="Models\Wrappers\oDefault_privilege_by_type.cs" />

@@ -7,12 +7,12 @@ using System.Web.Http;
 using educationalProject.Models.Wrappers;
 namespace educationalProject.Controllers
 {
-    public class TitlePrivilegeController : ApiController
+    public class TitleController : ApiController
     {
-        private oTitle_privilege datacontext = new oTitle_privilege();
+        private oTitle datacontext = new oTitle();
         public IHttpActionResult Get()
         {
-            return Ok(datacontext.SelectDistinctTitle());
+            return Ok(datacontext.Select());
         }
     }
 }
