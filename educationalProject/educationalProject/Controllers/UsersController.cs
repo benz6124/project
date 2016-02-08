@@ -152,7 +152,7 @@ namespace educationalProject.Controllers
                             return InternalServerError(new Exception(result.ToString()));
                     }
                     //admin login!
-                    return Ok();
+                    return Ok(u);
                 }
                 else
                 {
