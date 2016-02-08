@@ -38,7 +38,21 @@ namespace educationalProject.Controllers
             else
                 return InternalServerError(new Exception(resultfromdb.ToString()));
         }
+        
+        [ActionName("getnoncommittee")]
+        public IHttpActionResult PostForQueryNonCommittee(JObject data)
+        {
+            List<string> list = new List<string>();
+            JArray p_list = (JArray)data["these_people"];
+            foreach (JObject p in p_list)
+            {
+                list.Add(p["teacher_id"].ToString());
+            }
+            datacontext.curri_id = data["curri_id"].ToString();
+            datacontext.aca_year = Convert.ToInt32(data["aca_year"]);
 
+            return Ok(datacontext.SelectNonCommitteeWithBriefDetail(list));
+        }
         public IHttpActionResult Put(JObject data)
         {
             List<string> list = new List<string>();
