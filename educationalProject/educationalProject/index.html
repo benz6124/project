@@ -83,22 +83,24 @@
 
                 <ul class="nav navbar-nav navbar-right">
 
-                    <li >
-            <!--             <img src="/myImages/derek.jpg" style="margin-right:35px;margin-top:2px;margin-bottom:0px" class="img-circle profile_pic wow flipInY hvr-bob" data-wow-duration="2s" width="96" />
+                    <li ng-show = "already_login" >
+                        <img src="{{currentUser.information.file_name_pic}}" style="margin-right:35px;margin-top:2px;margin-bottom:0px" class="img-circle profile_pic wow flipInY hvr-bob" data-wow-duration="2s" width="96" />
                         <ul class="dropdownImg">
-                            <li class="profile_name"><i class="glyphicon glyphicon-user" style="font-size:23px;"> </i> Wiboon</li>
+                            <li class="profile_name"><i class="glyphicon glyphicon-user" style="font-size:23px;"> </i> {{currentUser.username}}</li>
                             <li class="bull"><a href="" data-placement="right" data-nq-toggle-modal="#manage_profile">แก้ไขข้อมูล</a></li>
-                            <li class="bull"><a href="">ออกจากระบบ</a></li>
+                            <li class="bull"><a href="" ng-click="logout()">ออกจากระบบ</a></li>
 
-                        </ul> -->
+                        </ul>
 
                       
-<a href="" ng-hide = "already_login" data-nq-toggle-modal="#login_form">เข้าสู่ระบบ</a>
-<a href="" ng-show = "already_login" ng-click="logout()">ออกจากระบบ</a>
+<!-- 
+<a href="" >ออกจากระบบ</a> -->
 
 
                     </li>
-
+                     <li ng-hide = "already_login" >
+                    <a href="" ng-hide = "already_login" data-nq-toggle-modal="#login_form">เข้าสู่ระบบ</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -3338,7 +3340,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                     <div class="row" style="margin-left:0px;margin-right:0px;margin-top:8px">
                       
-                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="person.t_name for person in people_in_curri" data-qo-effect="from-left" data-qo-placeholder="กรุณาเลือกบุคลากร"  data-ng-model="$parent.choose_people"  data-qo-max-length ="0" data-qo-multiple="true"  data-qo-disable-clear="true" >
+                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="person.t_name for person in people_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกบุคลากร"  data-ng-model="$parent.choose_people"  data-qo-max-length ="0" data-qo-multiple="true"  data-qo-disable-clear="true" >
                                  
             <option style="display:none" value=""></option>
 
@@ -3367,18 +3369,21 @@ glyphicon glyphicon-bell"></i> </span>
                         <h1 class="headerModalH1">แต่งตั้งกรรมการหลักสูตร</h1>
                     </div>
 
-          <div class="row" style="
-    margin-left: 14px;
-    margin-right: 16px;
+       <div class="row" style="
+    margin-left: 0px;
+    margin-right: 0px;
 ">
 
 
-                      
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+                        <div class="col-md-8" >
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
-                     
-                      
+                        </div>
+                        <div class="col-md-4" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+<option style="display:none" value=""></option></select>   
+                        </div>
 
                     </div>
 <br />
@@ -4677,7 +4682,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">ชื่อผู้ใช้งาน:   </span></h3>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="ชื่อผู้ใช้งาน" value="Wiboon"><span class="normal">  </span>
+                                <input type="text" class="form-control" placeholder="ชื่อผู้ใช้งาน" ng-model="currentUser.username"><span class="normal">  </span>
 
                             </div>
                         </div>

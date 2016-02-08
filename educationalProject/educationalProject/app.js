@@ -1,4 +1,4 @@
-﻿var app = angular.module('myProject', [
+var app = angular.module('myProject', [
 	
         'ngSanitize',
         'ngAnimate',
@@ -74,16 +74,40 @@ app.factory('AuthService', function ($http, Session,$cookies) {
 
 
 
-return $http
-      .post('/api/users/login', credentials)
-      .then(function (res) {
-        console.log('')
-        console.log(res.data)
-        // Session.create(res.data.id, res.data.user.id,
-        //                res.data.user.role);
-        // // $cookies.putObject("mymy", credentials);
-        // return res.data.user;
-      });
+// return $http
+//       .post('/api/users/login', credentials)
+//       .then(function (res) {
+//         console.log('')
+//         console.log(res.data)
+//         // Session.create(res.data.id, res.data.user.id,
+//         //                res.data.user.role);
+//         // // $cookies.putObject("mymy", credentials);
+//         // return res.data.user;
+//       });
+return {
+
+  "user_id":"00001","username":"wiboon","user_type":"อาจารย์","information":{"t_prename":"นาย","t_name":"วิบูลย์ พร้อมพานิชย์","e_prename":"Mr.","e_name":"Wiboon Prompanich","citizen_id":"1234567890123","gender":"M","email":"kpwiboon@kmitl.ac.th","tel":"0818685657","addr":"กรุงเทพ","file_name_pic":"myimages/profile_pic/วิบูลย์.jpg","timestamp":"8/9/2558 23:50:01"},
+"privilege":[{"curri_id":"20","privilege_list":[{
+"title_code":1,
+"title_privilege_code":2,
+"name":"สร้างบัญชีรายชื่อ",
+"privilege":"อนุญาต"},
+{
+"title_code":2,
+"title_privilege_code":1,
+"name":"เพิ่มปีการศึกษาในแต่ละหลักสูตร",
+"privilege":"ไม่อนุญาต"}]},
+{"curri_id":"21","privilege_list":[{
+"title_code":1,
+"title_privilege_code":1,
+"name":"สร้างบัญชีรายชื่อ",
+"privilege":"ไม่อนุญาต"},
+{
+"title_code":2,
+"title_privilege_code":2,
+"name":"เพิ่มปีการศึกษาในแต่ละหลักสูตร",
+"privilege":"อนุญาต"}]}]}
+
 
 
   };
@@ -143,8 +167,14 @@ app.controller('main_controller', function ($scope,
   $scope.setCurrentUser = function (user) {
 
     $scope.currentUser = user;
+     $cookies.putObject("mymy", user);
       	console.log($scope.currentUser);
   };
+
+
+  $scope.can_watch_this_modal = function(){
+
+  }
 });
 
 

@@ -5549,6 +5549,7 @@ app.controller('login_controller', function($scope, $http,$alert,$loading,$timeo
     }
       $scope.login = function (my_modal) {
          var user = AuthService.login($scope.credentials);
+         console.log(user);
          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
           $scope.setCurrentUser(user);
   $scope.$parent.already_login = true;
@@ -6002,7 +6003,7 @@ $scope.choose_people ={};
 
    $http.post(
              '/api/committee/getnoncommittee',
-             JSON.stringify({'curri_id':$rootScope.manage_committee_who_curri_id_now,'these_people':$rootScope.manage_committee_who_all_committees}),
+             JSON.stringify({'aca_year':$rootScope.manage_committee_who_aca_year_now,'curri_id':$rootScope.manage_committee_who_curri_id_now,'these_people':$rootScope.manage_committee_who_all_committees}),
              {
                  headers: {
                      'Content-Type': 'application/json'
@@ -6023,7 +6024,8 @@ $scope.choose_people ={};
 
    $http.post(
              '/api/committee/getnoncommittee',
-             JSON.stringify({'curri_id':$rootScope.manage_committee_who_curri_id_now,'these_people':$rootScope.manage_committee_who_all_committees}),
+             JSON.stringify({'aca_year':$rootScope.manage_committee_who_aca_year_now,
+    'curri_id':$rootScope.manage_committee_who_curri_id_now,'these_people':$rootScope.manage_committee_who_all_committees}),
              {
                  headers: {
                      'Content-Type': 'application/json'
@@ -6071,7 +6073,7 @@ $scope.choose_people ={};
         $scope.to_sent = {};
         $scope.to_sent.these_people = $scope.choose_people;
         $scope.to_sent.curri_id = $rootScope.manage_committee_who_curri_id_now;
-
+$scope.to_sent.aca_year = $rootScope.manage_committee_who_aca_year_now;
            console.log($scope.to_sent);
         $http.post(
              '/api/committee/new',
@@ -6103,6 +6105,7 @@ app.controller('manage_committee_who_controller', function($scope, $http,$alert,
 $scope.init =function() {
      $scope.choose_not_complete = true;
    
+              $scope.year_choosen = {};
               $scope.curri_choosen = {}
              
          $scope.nothing_change = true;
@@ -6113,6 +6116,7 @@ $scope.init =function() {
   
      $scope.choose_not_complete = true;
    
+               $scope.year_choosen = {};
               $scope.curri_choosen = {}
              
                     $scope.result = {};
@@ -6127,11 +6131,26 @@ $scope.init =function() {
               $scope.init();
     });
 
+      $scope.sendCurriAndGetYears = function () {
+        $scope.choose_not_complete =true;
+        $scope.year_choosen = {}
+         $scope.nothing_change = true;
+    
+      
+              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
+
+            $scope.corresponding_aca_years = data;
+
+
+          });
+
+
+    }
 
     $scope.go_to_add_committee =function(){
           $rootScope.manage_committee_who_curri_id_now = $scope.curri_choosen.curri_id;
-          
-
+           $rootScope.manage_committee_who_aca_year_now = $scope.year_choosen.aca_year ;
+     
 
     }
 
@@ -6146,11 +6165,11 @@ $scope.init =function() {
     $scope.find_information = function(){
 
       
-        console.log($scope.curri_choosen.curri_id);
+        console.log($scope.year_choosen);
 
         $http.post(
              '/api/committee/getcommittee',
-             JSON.stringify($scope.curri_choosen.curri_id),
+             JSON.stringify($scope.year_choosen),
              {
                  headers: {
                      'Content-Type': 'application/json'
@@ -6176,9 +6195,9 @@ $scope.init =function() {
         $scope.to_sent = {};
     
        
-         
+           $scope.to_sent.aca_year = $scope.year_choosen.aca_year ;
             $scope.to_sent.curri_id = $scope.curri_choosen.curri_id ;
-            $scope.to_sent.these_people =     $rootScope.manage_committee_who_all_committee;
+            $scope.to_sent.these_people =     $rootScope.manage_committee_who_all_committees;
      
         $http.put(
              '/api/committee/',
