@@ -29,7 +29,7 @@ namespace educationalProject.Models.Wrappers
                     {
                         result.Add(new Teacher_with_t_name
                         {
-                            teacher_id = item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal].ToString(),
+                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
                             t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[FieldName.T_PRENAME].Ordinal].ToString()) + 
                                      item.ItemArray[data.Columns[FieldName.T_NAME].Ordinal].ToString()
                         });
@@ -58,7 +58,7 @@ namespace educationalProject.Models.Wrappers
 
         public object SelectPresidentCurriAndAllTeacherInCurri(Curriculum_academic data)
         {
-            string president;
+            int president;
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
@@ -81,12 +81,12 @@ namespace educationalProject.Models.Wrappers
                 {
                     DataTable tabledata = new DataTable();
                     tabledata.Load(res);
-                    president = tabledata.Rows[0].ItemArray[0].ToString();
+                    president = Convert.ToInt32(tabledata.Rows[0].ItemArray[0]);
                     oTeacher_educational t = null;
-                    teacher_id = "-1";
+                    teacher_id = -1;
                     foreach (DataRow item in tabledata.Rows)
                     {
-                        if (item.ItemArray[1].ToString() != teacher_id)
+                        if (Convert.ToInt32(item.ItemArray[1]) != teacher_id)
                         {
                             t = new oTeacher_educational
                             {
@@ -97,7 +97,7 @@ namespace educationalProject.Models.Wrappers
                                 email = item.ItemArray[tabledata.Columns[FieldName.EMAIL].Ordinal].ToString(),
                                 gender = Convert.ToChar(item.ItemArray[tabledata.Columns[FieldName.GENDER].Ordinal]),
                                 degree = Convert.ToChar(item.ItemArray[17]),
-                                teacher_id = item.ItemArray[1].ToString(),
+                                teacher_id = Convert.ToInt32(item.ItemArray[1]),
                                 tel = item.ItemArray[tabledata.Columns[FieldName.TEL].Ordinal].ToString(),
                                 e_prename = item.ItemArray[tabledata.Columns[FieldName.E_PRENAME].Ordinal].ToString(),
                                 t_prename = NameManager.GatherPreName(item.ItemArray[tabledata.Columns[FieldName.T_PRENAME].Ordinal].ToString()),
@@ -118,7 +118,7 @@ namespace educationalProject.Models.Wrappers
                             degree = Convert.ToChar(item.ItemArray[26]),
                             grad_year = Convert.ToInt32(item.ItemArray[tabledata.Columns[Educational_teacher_staff.FieldName.GRAD_YEAR].Ordinal]),
                             major = item.ItemArray[tabledata.Columns[Educational_teacher_staff.FieldName.MAJOR].Ordinal].ToString(),
-                            personnel_id = item.ItemArray[25].ToString(),
+                            personnel_id = Convert.ToInt32(item.ItemArray[25]),
                             pre_major = item.ItemArray[tabledata.Columns[Educational_teacher_staff.FieldName.PRE_MAJOR].Ordinal].ToString(),
                         });
                     }
@@ -147,7 +147,7 @@ namespace educationalProject.Models.Wrappers
                                 email = item.ItemArray[tabledata.Columns[FieldName.EMAIL].Ordinal].ToString(),
                                 gender = Convert.ToChar(item.ItemArray[tabledata.Columns[FieldName.GENDER].Ordinal]),
                                 degree = Convert.ToChar(item.ItemArray[tabledata.Columns[FieldName.DEGREE].Ordinal]),
-                                teacher_id = item.ItemArray[tabledata.Columns[FieldName.TEACHER_ID].Ordinal].ToString(),
+                                teacher_id = Convert.ToInt32(item.ItemArray[tabledata.Columns[FieldName.TEACHER_ID].Ordinal]),
                                 tel = item.ItemArray[tabledata.Columns[FieldName.TEL].Ordinal].ToString(),
                                 e_prename = item.ItemArray[tabledata.Columns[FieldName.E_PRENAME].Ordinal].ToString(),
                                 t_prename = NameManager.GatherPreName(item.ItemArray[tabledata.Columns[FieldName.T_PRENAME].Ordinal].ToString()),
@@ -197,7 +197,8 @@ namespace educationalProject.Models.Wrappers
             List<string> result = new List<string>();
 
             string temp5tablename = "#temp5";
-
+            string temp6tablename = "#temp6";
+            string temp7tablename = "#temp7";
             string createtabletemp5 = string.Format("CREATE TABLE {0}(" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
                                       "[{1}] VARCHAR(60) NULL," +
@@ -206,37 +207,65 @@ namespace educationalProject.Models.Wrappers
                                       "ALTER COLUMN {1} VARCHAR(60) COLLATE DATABASE_DEFAULT ",
                                       temp5tablename, FieldName.EMAIL);
 
-            string insertcmd = "";
-            string insertintousercurri;
-            foreach (UsernamePassword item in list)
-            {
-                insertintousercurri = string.Format("insert into {0} values ",User_curriculum.FieldName.TABLE_NAME);
-                int len = insertintousercurri.Length;
-                
-                foreach (string curriitem in target_curri_id_list) {
-                    if (insertintousercurri.Length <= len)
-                        insertintousercurri += string.Format("('{0}', '{1}')", item.username, curriitem);
-                    else
-                        insertintousercurri += string.Format(",('{0}', '{1}')", item.username, curriitem);
-                }
-                //since no value to be insert in user_curriculum so we make this var as empty string
-                if (insertintousercurri.Length <= len)
-                    insertintousercurri = "";
+            string createtabletemp6 = string.Format("CREATE TABLE {0}(" +
+                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
+                                      "[{1}] INT NULL," +
+                                      "PRIMARY KEY ([row_num])) ",
+                                      temp6tablename, User_list.FieldName.USER_ID);
 
+
+            string createtabletemp7 = string.Format("CREATE TABLE {0}(" +
+                          "[row_num] INT IDENTITY(1, 1) NOT NULL," +
+                          "[{1}] {2} NULL," +
+                          "PRIMARY KEY ([row_num])) " +
+                          "ALTER TABLE {0} " +
+                          "ALTER COLUMN {1} {2} COLLATE DATABASE_DEFAULT ",
+                          temp7tablename, User_curriculum.FieldName.CURRI_ID,DBFieldDataType.CURRI_ID_TYPE);
+
+            string insertintotemp7 = string.Format("insert into {0} values ", temp7tablename);
+
+            int len = insertintotemp7.Length;
+
+            foreach (string curriitem in target_curri_id_list)
+            {
+                if (insertintotemp7.Length <= len)
+                    insertintotemp7 += string.Format("('{0}')", curriitem);
+                else
+                    insertintotemp7 += string.Format(",('{0}')", curriitem);
+            }
+
+            string insertintousercurri = "";
+            if (insertintotemp7.Length > len)
+                insertintousercurri = string.Format("insert into {0} " +
+                                      "select {1},{2} from {3},{4} ",
+                                      User_curriculum.FieldName.TABLE_NAME,
+                                      User_curriculum.FieldName.USER_ID,
+                                      User_curriculum.FieldName.CURRI_ID, temp6tablename, temp7tablename);
+            else
+                insertintotemp7 = "";
+
+            string insertcmd = "";
+
+            foreach (UsernamePassword item in list)
+            {   
                 string ts = DateTime.Now.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[93];
 
-                insertcmd += string.Format("IF NOT EXISTS(select * from {0} where {1} = '{2}') and " +
-                                   "NOT EXISTS(select * from {3} where {4} = '{2}' or {13} = '{2}') and " +
+                insertcmd += string.Format(
+                                   "IF NOT EXISTS(select * from {3} where {4} = '{2}' or {13} = '{2}') and " +
                                    "NOT EXISTS(select * from {5} where {4} = '{2}' or {13} = '{2}') and " +
                                    "NOT EXISTS(select * from {6} where {4} = '{2}' or {13} = '{2}') and " +
                                    "NOT EXISTS(select * from {7} where {4} = '{2}' or {13} = '{2}') and " +
                                    "NOT EXISTS(select * from {8} where {4} = '{2}' or {13} = '{2}') and " +
                                    "NOT EXISTS(select * from {9} where {4} = '{2}' or {13} = '{2}') and " +
-                                   "NOT EXISTS(select * from {19} where {4} = '{2}' or {13} = '{2}') " +
+                                   "NOT EXISTS(select * from {20} where {4} = '{2}' or {13} = '{2}') " +
                                    "begin " +
-                                   "insert into {0} values('{2}', '{10}') " +
-                                   "insert into {3} ({11}, {12}, {13}, {14}, {4}, {15}) values ('{2}', '{10}', '{2}', '{16}', '{2}', '{17}') " +
+                                   "insert into {19} " +
+                                   "select * from (insert into {0} output inserted.{1} values ('{10}')) as outputinsert " +
+
+                                   "insert into {3} ({11}, {12}, {13}, {14}, {4}, {15}) select {1},'{10}', '{2}', '{16}', '{2}', '{17}' from {19} " +
                                    insertintousercurri + " " +
+                                   
+                                   "delete from {19} " +
                                    "end " +
                                    "else " +
                                    "begin " +
@@ -250,6 +279,7 @@ namespace educationalProject.Models.Wrappers
                                    /*******10*/ "อาจารย์",
                                    /*******11 ID*/FieldName.TEACHER_ID, FieldName.USER_TYPE, FieldName.USERNAME,
                                    FieldName.PASSWORD, FieldName.TIMESTAMP, item.password, ts, temp5tablename,
+                                   temp6tablename,
                                    Admin.FieldName.TABLE_NAME);
 
             }
@@ -259,7 +289,8 @@ namespace educationalProject.Models.Wrappers
 
 
         
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} END ", createtabletemp5,insertcmd,selectcmd);
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} {5} END ", createtabletemp5,createtabletemp6,createtabletemp7,
+                insertintotemp7,insertcmd,selectcmd);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -291,7 +322,10 @@ namespace educationalProject.Models.Wrappers
                 //Whether it success or not it must close connection in order to end block
                 d.SQLDisconnect();
             }
-            return result;
+            if (result.Count != 0)
+                return result;
+            else
+                return null;
         }
     }
 }

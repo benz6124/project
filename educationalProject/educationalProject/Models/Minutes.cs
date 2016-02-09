@@ -23,7 +23,7 @@ namespace educationalProject.Models
         }
         private int _minutes_id;
         private string _date;
-        private string _teacher_id;
+        private int _teacher_id;
         private string _topic_name;
         private string _detail;
         private string _place;
@@ -33,7 +33,7 @@ namespace educationalProject.Models
         private int _aca_year;
         public int minutes_id { get { return _minutes_id; } set { _minutes_id = value; } }
         public string date { get { return _date; } set { _date = value; } }
-        public string teacher_id { get { return _teacher_id; } set { _teacher_id = value; } }
+        public int teacher_id { get { return _teacher_id; } set { _teacher_id = value; } }
         public string topic_name { get { return _topic_name; } set { _topic_name = value; } }
         public string detail { get { return _detail; } set { _detail = value; } }
         public string place { get { return _place; } set { _place = value; } }

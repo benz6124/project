@@ -10,7 +10,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
     {
         public object SelectPresidentCurriAndAllTeacherInCurri(Curriculum_academic data)
         {
-            string president;
+            int president;
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
@@ -33,12 +33,12 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 {
                     DataTable tabledata = new DataTable();
                     tabledata.Load(res);
-                    president = tabledata.Rows[0].ItemArray[0].ToString();
+                    president = Convert.ToInt32(tabledata.Rows[0].ItemArray[0]);
                     oTeacher_educational t = null;
-                    teacher_id = "-1";
+                    teacher_id = -1;
                     foreach (DataRow item in tabledata.Rows)
                     {
-                        if (item.ItemArray[1].ToString() != teacher_id)
+                        if (Convert.ToInt32(item.ItemArray[1]) != teacher_id)
                         {
                             t = new oTeacher_educational
                             {
@@ -49,7 +49,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                 email = item.ItemArray[tabledata.Columns[FieldName.EMAIL].Ordinal].ToString(),
                                 gender = Convert.ToChar(item.ItemArray[tabledata.Columns[FieldName.GENDER].Ordinal]),
                                 degree = Convert.ToChar(item.ItemArray[17]),
-                                teacher_id = item.ItemArray[1].ToString(),
+                                teacher_id = Convert.ToInt32(item.ItemArray[1]),
                                 tel = item.ItemArray[tabledata.Columns[FieldName.TEL].Ordinal].ToString(),
                                 e_prename = item.ItemArray[tabledata.Columns[FieldName.E_PRENAME].Ordinal].ToString(),
                                 t_prename = NameManager.GatherPreName(item.ItemArray[tabledata.Columns[FieldName.T_PRENAME].Ordinal].ToString()),
@@ -68,7 +68,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             degree = Convert.ToChar(item.ItemArray[26]),
                             grad_year = Convert.ToInt32(item.ItemArray[tabledata.Columns[Educational_teacher_staff.FieldName.GRAD_YEAR].Ordinal]),
                             major = item.ItemArray[tabledata.Columns[Educational_teacher_staff.FieldName.MAJOR].Ordinal].ToString(),
-                            personnel_id = item.ItemArray[25].ToString(),
+                            personnel_id = Convert.ToInt32(item.ItemArray[25]),
                             pre_major = item.ItemArray[tabledata.Columns[Educational_teacher_staff.FieldName.PRE_MAJOR].Ordinal].ToString(),
                         });
                     }
@@ -97,7 +97,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                 email = item.ItemArray[tabledata.Columns[FieldName.EMAIL].Ordinal].ToString(),
                                 gender = Convert.ToChar(item.ItemArray[tabledata.Columns[FieldName.GENDER].Ordinal]),
                                 degree = Convert.ToChar(item.ItemArray[tabledata.Columns[FieldName.DEGREE].Ordinal]),
-                                teacher_id = item.ItemArray[tabledata.Columns[FieldName.TEACHER_ID].Ordinal].ToString(),
+                                teacher_id = Convert.ToInt32(item.ItemArray[tabledata.Columns[FieldName.TEACHER_ID].Ordinal]),
                                 tel = item.ItemArray[tabledata.Columns[FieldName.TEL].Ordinal].ToString(),
                                 e_prename = item.ItemArray[tabledata.Columns[FieldName.E_PRENAME].Ordinal].ToString(),
                                 t_prename = NameManager.GatherPreName(item.ItemArray[tabledata.Columns[FieldName.T_PRENAME].Ordinal].ToString()),

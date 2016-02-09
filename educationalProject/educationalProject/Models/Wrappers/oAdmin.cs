@@ -121,7 +121,7 @@ namespace educationalProject.Models.Wrappers
                         result.Add(new Admin_with_creator
                         {
                             timestamp = Convert.ToDateTime(item.ItemArray[data.Columns[FieldName.TIMESTAMP].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
-                            admin_creator_id = item.ItemArray[data.Columns[FieldName.ADMIN_CREATOR_ID].Ordinal].ToString(),
+                            admin_creator_id = item.ItemArray[data.Columns[FieldName.ADMIN_CREATOR_ID].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ADMIN_CREATOR_ID].Ordinal]) : 0,
                             creator_name = item.ItemArray[data.Columns["creator_name"].Ordinal].ToString(),
                             t_name = item.ItemArray[data.Columns[FieldName.T_NAME].Ordinal].ToString(),
                             file_name_pic = item.ItemArray[data.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString(),

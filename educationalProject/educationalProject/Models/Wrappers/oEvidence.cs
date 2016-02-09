@@ -33,7 +33,7 @@ namespace educationalProject.Models.Wrappers
                             evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
                             file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
                             secret = Convert.ToChar(item.ItemArray[data.Columns[FieldName.SECRET].Ordinal]),
-                            teacher_id = item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal].ToString(),
+                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
                             //DANGER NULLABLE ZONE
                             primary_evidence_num = item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]):0,
                             evidence_real_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal]),
@@ -86,7 +86,7 @@ namespace educationalProject.Models.Wrappers
                             evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
                             file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
                             secret = Convert.ToChar(item.ItemArray[data.Columns[FieldName.SECRET].Ordinal]),
-                            teacher_id = item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal].ToString(),
+                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
                             //DANGER NULLABLE ZONE
                             primary_evidence_num = item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]) : 0,
                             evidence_real_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal]),
@@ -141,7 +141,7 @@ namespace educationalProject.Models.Wrappers
                             evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
                             file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
                             secret = Convert.ToChar(item.ItemArray[data.Columns[FieldName.SECRET].Ordinal]),
-                            teacher_id = item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal].ToString(),
+                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
                             //DANGER NULLABLE ZONE
                             primary_evidence_num = item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]) : 0,
                             evidence_real_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal]),
@@ -199,7 +199,7 @@ namespace educationalProject.Models.Wrappers
                             evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
                             file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
                             secret = Convert.ToChar(item.ItemArray[data.Columns[FieldName.SECRET].Ordinal]),
-                            teacher_id = item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal].ToString(),
+                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
                             //DANGER NULLABLE ZONE
                             primary_evidence_num = item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]) : 0,
                             evidence_real_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal]),
@@ -257,7 +257,7 @@ namespace educationalProject.Models.Wrappers
                             evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
                             file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
                             secret = Convert.ToChar(item.ItemArray[data.Columns[FieldName.SECRET].Ordinal]),
-                            teacher_id = item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal].ToString(),
+                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
                             //DANGER NULLABLE ZONE
                             primary_evidence_num = item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]) : 0,
                             evidence_real_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal]),
@@ -328,7 +328,7 @@ namespace educationalProject.Models.Wrappers
                             evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
                             file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
                             secret = Convert.ToChar(item.ItemArray[data.Columns[FieldName.SECRET].Ordinal]),
-                            teacher_id = item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal].ToString(),
+                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
                             //DANGER NULLABLE ZONE
                             primary_evidence_num = item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]) : 0,
                             evidence_real_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal]),
@@ -403,7 +403,7 @@ namespace educationalProject.Models.Wrappers
                             evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
                             file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
                             secret = Convert.ToChar(item.ItemArray[data.Columns[FieldName.SECRET].Ordinal]),
-                            teacher_id = item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal].ToString(),
+                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
                             //DANGER NULLABLE ZONE
                             primary_evidence_num = item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]) : 0,
                             evidence_real_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal]),
@@ -587,7 +587,7 @@ namespace educationalProject.Models.Wrappers
                             evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
                             file_name = item.ItemArray[7].ToString(),
                             secret = Convert.ToChar(item.ItemArray[data.Columns[FieldName.SECRET].Ordinal]),
-                            teacher_id = item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal].ToString(),
+                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
                             //DANGER NULLABLE ZONE
                             primary_evidence_num = item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]) : 0,
                             evidence_real_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal]),

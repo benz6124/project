@@ -49,7 +49,7 @@ namespace educationalProject.Controllers
                     o.aca_year = Convert.ToInt32(obj["aca_year"]);
                     o.curri_id = obj["curri_id"].ToString();
                     o.others_evaluation_id = Convert.ToInt32(obj["others_evaluation_id"]);
-                    o.assessor_id = obj["assessor_id"].ToString();
+                    o.assessor_id = Convert.ToInt32(obj["assessor_id"]);
                     o.date = d.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
                     o.time = d.GetDateTimeFormats()[101];
                     if (obj["suggestion"] != null)

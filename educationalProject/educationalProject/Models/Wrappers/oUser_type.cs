@@ -15,7 +15,7 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oUser_type> result = new List<oUser_type>();
-            d.iCommand.CommandText = string.Format("select * from {0}", FieldName.TABLE_NAME);
+            d.iCommand.CommandText = string.Format("select * from {0} where user_type != 'ผู้ดูแลระบบ'", FieldName.TABLE_NAME);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();

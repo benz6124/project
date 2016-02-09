@@ -29,7 +29,7 @@ namespace educationalProject.Models.Wrappers
                             curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                             aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
                             file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
-                            personnel_id = item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal].ToString(),
+                            personnel_id = item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal]) : 0,
                             date = Convert.ToDateTime(item.ItemArray[data.Columns[Self_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3]
                     });
                     }
@@ -93,7 +93,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format("IF NOT EXISTS (select * from {0} where {1}='{2}' and {3} = {4}) " +
                                        "BEGIN " +
                                        "INSERT INTO {0} VALUES " +
-                                       "('{2}', {4}, '{5}', '{6}', '{7}') " +
+                                       "('{2}', {4}, '{5}', {6}, '{7}') " +
                                        "END " +
                                        "ELSE " +
                                        "BEGIN " +

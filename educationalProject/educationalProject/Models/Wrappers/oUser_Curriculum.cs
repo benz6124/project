@@ -43,7 +43,7 @@ namespace educationalProject.Models.Wrappers
                         if (Convert.ToInt32(item.ItemArray[data.Columns["user_type_num"].Ordinal]) == 1)
                             result.Add(new User_curriculum_with_brief_detail
                             {
-                                user_id = item.ItemArray[data.Columns[Personnel.FieldName.USER_ID].Ordinal].ToString(),
+                                user_id = Convert.ToInt32(item.ItemArray[data.Columns[Personnel.FieldName.USER_ID].Ordinal]),
                                 t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString()) +
                                          item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
@@ -53,7 +53,7 @@ namespace educationalProject.Models.Wrappers
                         else
                             result.Add(new User_curriculum_with_brief_detail
                             {
-                                user_id = item.ItemArray[data.Columns[Personnel.FieldName.USER_ID].Ordinal].ToString(),
+                                user_id = Convert.ToInt32(item.ItemArray[data.Columns[Personnel.FieldName.USER_ID].Ordinal]),
                                 t_name = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString() +
                                      item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),

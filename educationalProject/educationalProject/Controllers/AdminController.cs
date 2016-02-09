@@ -37,7 +37,7 @@ namespace educationalProject.Controllers
             emaillower = emaillower.ToLower();
             UsernamePassword u =  new UsernamePassword(emaillower, password);
 
-            datacontext.admin_creator_id = data["admin_creator_id"].ToString();
+            datacontext.admin_creator_id = Convert.ToInt32(data["admin_creator_id"]);
             datacontext.username = emaillower;
             datacontext.password = u.password;
 

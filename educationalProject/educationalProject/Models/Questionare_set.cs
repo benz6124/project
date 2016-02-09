@@ -23,12 +23,12 @@ namespace educationalProject.Models
         private string _curri_id;
         private int _aca_year;
         private string _date;
-        private string _personnel_id;
+        private int _personnel_id;
         public int questionare_set_id { get { return _questionare_set_id; } set { _questionare_set_id = value; } }
         public string name { get { return _name; } set { _name = value; } }
         public string curri_id { get { return _curri_id; } set { _curri_id = value; } }
         public int aca_year { get { return _aca_year; } set { _aca_year = value; } }
         public string date { get { return _date; } set { _date = value; } }
-        public string personnel_id { get { return _personnel_id; } set { _personnel_id = value; } }
+        public int personnel_id { get { return _personnel_id; } set { _personnel_id = value; } }
     }
 }

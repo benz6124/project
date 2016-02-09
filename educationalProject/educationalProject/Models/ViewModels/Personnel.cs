@@ -28,7 +28,7 @@ namespace educationalProject.Models.ViewModels
             public static readonly string CURRI_ID = "CURRI_ID";
         }
 
-        private string _personnel_id;
+        private int _personnel_id;
         private string _username;
         private string _user_type;
         private string _t_prename;
@@ -45,7 +45,7 @@ namespace educationalProject.Models.ViewModels
         private string _room;
         private string _curri_id;
 
-        public string personnel_id { get { return _personnel_id; } set { _personnel_id = value; } }
+        public int personnel_id { get { return _personnel_id; } set { _personnel_id = value; } }
         public string username { get { return _username; } set { _username = value; } }
         public string user_type { get { return _user_type; } set { _user_type = value; } }
         public string t_prename { get { return _t_prename; } set { _t_prename = value; } }

@@ -24,10 +24,13 @@ namespace educationalProject.Models
             public static readonly string FILE_NAME_PIC = "FILE_NAME_PIC";
             public static readonly string TIMESTAMP = "TIMESTAMP";
             //----------------------
+            public static readonly string ASSESSOR_ID = "ASSESSOR_ID";
             public static readonly string TEACHER_ID = "TEACHER_ID";
             public static readonly string TABLE_NAME = "ASSESSOR";
         }
-        private string _teacher_id;
-        public string teacher_id { get { return _teacher_id; } set { _teacher_id = value; } }
+        private int _assessor_id;
+        private int _teacher_id;
+        public int assessor_id { get { return _assessor_id; } set { _assessor_id = value; } }
+        public int teacher_id { get { return _teacher_id; } set { _teacher_id = value; } }
     }
 }

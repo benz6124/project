@@ -100,7 +100,9 @@ namespace educationalProject.Controllers
 
                 //5.If result is list,try to send mail (send only mail that not it resultfromdb)
                 //Otherwise send errorresult back to user.
-                if (resultfromdb.GetType().ToString() != "System.String")
+                if (resultfromdb == null)
+                    return Ok();
+                else if (resultfromdb.GetType().ToString() != "System.String")
                 {
                     List<string> erroremail = (List<string>)resultfromdb;
                     

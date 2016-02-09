@@ -17,11 +17,11 @@ namespace educationalProject.Models
         }
 
         private int _primary_evidence_num;
-        private string _teacher_id;
+        private int _teacher_id;
         private char _status;
         private string _curri_id;
         public int primary_evidence_num { get { return _primary_evidence_num; } set { _primary_evidence_num = value; } }
-        public string teacher_id { get { return _teacher_id; } set { _teacher_id = value; } }
+        public int teacher_id { get { return _teacher_id; } set { _teacher_id = value; } }
         public char status { get { return _status; } set { _status = value; } }
         public string curri_id { get { return _curri_id; } set { _curri_id = value; } }
     }

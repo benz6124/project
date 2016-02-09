@@ -136,7 +136,7 @@ namespace educationalProject.Models.Wrappers
                             evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
                             curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                             status = Convert.ToChar(item.ItemArray[data.Columns[Primary_evidence_status.FieldName.STATUS].Ordinal]),
-                            teacher_id = item.ItemArray[data.Columns[Primary_evidence_status.FieldName.TEACHER_ID].Ordinal].ToString()
+                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[Primary_evidence_status.FieldName.TEACHER_ID].Ordinal])
                         });
                     }
 
@@ -177,7 +177,7 @@ namespace educationalProject.Models.Wrappers
                             evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
                             curri_id = curri_id_param,
                             status = '6',
-                            teacher_id = ""
+                            teacher_id = 0
                         });
                     }
                     data.Dispose();
@@ -217,7 +217,7 @@ namespace educationalProject.Models.Wrappers
             {
                 if(item.status == '0' || item.status == '1' || item.status == '4' || item.status == '5')
                 {
-                    updateprievistatuscmd += string.Format("update {0} set {1} = '{2}' where {3} = {4} and {5} = '{6}' ",
+                    updateprievistatuscmd += string.Format("update {0} set {1} = {2} where {3} = {4} and {5} = '{6}' ",
                         Primary_evidence_status.FieldName.TABLE_NAME, Primary_evidence_status.FieldName.TEACHER_ID,
                         item.teacher_id, Primary_evidence_status.FieldName.PRIMARY_EVIDENCE_NUM, item.primary_evidence_num,
                         Primary_evidence_status.FieldName.CURRI_ID, item.curri_id);
@@ -229,7 +229,7 @@ namespace educationalProject.Models.Wrappers
                 }
                 else if(item.status == '6')
                 {
-                    insertintoprievistatuscmd += string.Format("insert into {0} values ({1},'{2}','{3}',{4}) ",
+                    insertintoprievistatuscmd += string.Format("insert into {0} values ({1},'{2}',{3},{4}) ",
                         Primary_evidence_status.FieldName.TABLE_NAME, item.primary_evidence_num, item.curri_id, item.teacher_id, '4');
                 }
 
@@ -246,7 +246,7 @@ namespace educationalProject.Models.Wrappers
                 {
                     insertintoprimaryevidencecmd += string.Format("insert into {0} values ({1},{2},'{3}','{4}') ",
                         FieldName.TABLE_NAME, item.aca_year, item.indicator_num, item.curri_id, item.evidence_name);
-                    insertintoprimaryevidencecmd += string.Format("insert into {0} values ({1},'{2}','{3}',{4}) ",
+                    insertintoprimaryevidencecmd += string.Format("insert into {0} values ({1},'{2}',{3},{4}) ",
                         Primary_evidence_status.FieldName.TABLE_NAME,
                         string.Format("(select max({0}) from {1})",FieldName.PRIMARY_EVIDENCE_NUM,FieldName.TABLE_NAME)
                         ,item.curri_id, item.teacher_id, '0');
@@ -305,7 +305,6 @@ namespace educationalProject.Models.Wrappers
             /*Insert into use the combine result from both table and insert in back to databaseeee*/
             string insertintoprimaryevidencestatusfromdeleted = "";
             string updateevidence = "";
-            string droptemptable = "";
 
             if (list.First().primary_evidence_num != -1)
             {
@@ -358,19 +357,21 @@ namespace educationalProject.Models.Wrappers
                 createtabletemp2 = string.Format("CREATE TABLE {0} (" +
                                                         "[row_num] INT IDENTITY(1, 1) NOT NULL," +
                                                         "[{1}] INT NOT NULL," +
-                                                        "[{2}] {6} NOT NULL," +
-                                                        "[{3}] {5} NOT NULL," +
+                                                        "[{2}] {5} NOT NULL," +
+                                                        "[{3}] INT NOT NULL," +
                                                         "[{4}] CHAR NOT NULL," +
-                                                        "PRIMARY KEY([row_num])) ", temp2tablename,
+                                                        "PRIMARY KEY([row_num])) " +
+                                                        "ALTER TABLE {0} " +
+                                                        "ALTER COLUMN [{2}] {5} COLLATE DATABASE_DEFAULT ", temp2tablename,
                                                         FieldName.PRIMARY_EVIDENCE_NUM, FieldName.CURRI_ID,
                                                         Primary_evidence_status.FieldName.TEACHER_ID,
-                                                        Primary_evidence_status.FieldName.STATUS,DBFieldDataType.USER_ID_TYPE,
+                                                        Primary_evidence_status.FieldName.STATUS,
                                                         DBFieldDataType.CURRI_ID_TYPE);
                 insertintotemp2 = string.Format("insert into {0} " +
                                                        "select t1.{1}, t1.{2}, t1.{3}, t1.{4} from " +
                                                        "(select * from {5} as p1 where p1.{1} in " +
-                                                       "(select p2.{6} from {7} as p2 where {8})) as t1 " +
-                                                       "inner join {7} as t2 on t2.{6} = t1.{1} ",
+                                                       "(select p2.{6} from {7} as p2 where {8})) as t1 ",// +
+                                                      // "inner join {7} as t2 on t2.{6} = t1.{1} ",
                                                        temp2tablename, Primary_evidence_status.FieldName.PRIMARY_EVIDENCE_NUM, Primary_evidence_status.FieldName.CURRI_ID,
                                                        Primary_evidence_status.FieldName.TEACHER_ID, Primary_evidence_status.FieldName.STATUS,
                                                        Primary_evidence_status.FieldName.TABLE_NAME, FieldName.PRIMARY_EVIDENCE_NUM,
@@ -392,12 +393,12 @@ namespace educationalProject.Models.Wrappers
                                       Evidence.FieldName.TABLE_NAME, Evidence.FieldName.PRIMARY_EVIDENCE_NUM,
                                       temp1tablename, FieldName.PRIMARY_EVIDENCE_NUM, temp2tablename, Primary_evidence_status.FieldName.CURRI_ID,
                                       Primary_evidence_status.FieldName.TEACHER_ID, Primary_evidence_status.FieldName.STATUS);
-                droptemptable = string.Format("DROP TABLE {0} DROP TABLE {1} ", temp2tablename, temp1tablename);
+                //droptemptable = string.Format("DROP TABLE {0} DROP TABLE {1} ", temp2tablename, temp1tablename);
             }
             
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} END", createtabletemp1, insertintotemp1, createtabletemp2,
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} {5} {6} {7} {8} END", createtabletemp1, insertintotemp1, createtabletemp2,
                 insertintotemp2, updatetemp2, insertintoprimaryevidencestatusfromdeleted,
-                updateevidence, droptemptable, deletefromprimaryevidencecmd, insertintoprimaryevidencecmd);
+                updateevidence, deletefromprimaryevidencecmd, insertintoprimaryevidencecmd);
             try
             {
                 int rowAffected = d.iCommand.ExecuteNonQuery();
@@ -422,7 +423,7 @@ namespace educationalProject.Models.Wrappers
                 return "Cannot connect to database.";
             List<Primary_evidence_name_id_only> result = new List<Primary_evidence_name_id_only>();
             d.iCommand.CommandText = string.Format("select p1.{0},{1}.{2} from " +
-                   "( select * from {3} where {4} = '{5}' and {6} = '{7}' and ({8} = '0' or {8} = '4') " +
+                   "( select * from {3} where {4} = '{5}' and {6} = {7} and ({8} = '0' or {8} = '4') " +
                    "and {0} IN " +
                    "(select {14} from {1} where {9} = {10} and {11} = {12} and " +
                    "({13} = '0' OR {13} = '{5}'))) as p1 INNER JOIN {1} on p1.{0} = {1}.{14}",

@@ -13,9 +13,9 @@ namespace educationalProject.Models
             public static readonly string CURRI_ID = "CURRI_ID";
             public static readonly string TABLE_NAME = "USER_CURRICULUM";
         }
-        private string _user_id;
+        private int _user_id;
         private string _curri_id;
-        public string user_id { get { return _user_id; } set { _user_id = value; } }
+        public int user_id { get { return _user_id; } set { _user_id = value; } }
         public string curri_id { get { return _curri_id; } set { _curri_id = value; } }
     }
 }

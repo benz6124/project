@@ -47,13 +47,18 @@ namespace educationalProject.Models.ViewModels.Wrappers
                         //MAIN INFOMRATION
                         string usrtype = item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString();
                         if (usrtype == "อาจารย์")
-                            result.user_id = item.ItemArray[data.Columns[Teacher.FieldName.TEACHER_ID].Ordinal].ToString();
+                            result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[Teacher.FieldName.TEACHER_ID].Ordinal]);
                         else if (usrtype == "เจ้าหน้าที่")
-                            result.user_id = item.ItemArray[data.Columns[Staff.FieldName.STAFF_ID].Ordinal].ToString();
+                            result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[Staff.FieldName.STAFF_ID].Ordinal]);
                         else if (usrtype == "นักศึกษา" || usrtype == "ศิษย์เก่า")
-                            result.user_id = item.ItemArray[data.Columns[Student.FieldName.STUDENT_ID].Ordinal].ToString();
+                            result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[Student.FieldName.USER_ID].Ordinal]);
+                        else if (usrtype == "บริษัท")
+                            result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[Company.FieldName.COMPANY_ID].Ordinal]);
+                        else if (usrtype == "ผู้ประเมินจากภายนอก")
+                            result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[Assessor.FieldName.ASSESSOR_ID].Ordinal]);
                         else
-                            result.user_id = item.ItemArray[data.Columns[Teacher.FieldName.USERNAME].Ordinal].ToString();
+                            result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[Admin.FieldName.ADMIN_ID].Ordinal]);
+
 
                         result.username = item.ItemArray[data.Columns[Teacher.FieldName.USERNAME].Ordinal].ToString();
                         result.user_type = usrtype;

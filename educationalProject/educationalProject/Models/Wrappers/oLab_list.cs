@@ -14,13 +14,10 @@ namespace educationalProject.Models.Wrappers
             string temp4tablename = "#temp4";
             string createtabletemp4 = string.Format("create table {0} (" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                      "[{1}] {4} NOT NULL," +
+                                      "[{1}] INT NOT NULL," +
                                       "[{2}] VARCHAR(16) NULL," +
                                       "[{3}] VARCHAR(60) NULL," +
                                       "PRIMARY KEY([row_num])) " +
-
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {1} {4} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN {2} VARCHAR(16) COLLATE DATABASE_DEFAULT " +
@@ -28,7 +25,7 @@ namespace educationalProject.Models.Wrappers
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN {3} VARCHAR(60) COLLATE DATABASE_DEFAULT ",
                                       temp4tablename, Lab_officer.FieldName.OFFICER,
-                                      Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,DBFieldDataType.USER_ID_TYPE);
+                                      Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME);
 
             string insertintotemp4 = string.Format("insert into {0} " +
                                      "select {1}, {2}, {3} from {4} " +
@@ -87,7 +84,7 @@ namespace educationalProject.Models.Wrappers
                             {
                                 curr.officer.Add(new Personnel_with_t_name
                                 {
-                                    user_id = item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString(),
+                                    user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
                                     t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                                 });
                             }
@@ -95,7 +92,7 @@ namespace educationalProject.Models.Wrappers
                             {
                                 curr.officer.Add(new Personnel_with_t_name
                                 {
-                                    user_id = item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString(),
+                                    user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
                                     t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                                 });
                             }
@@ -211,7 +208,7 @@ namespace educationalProject.Models.Wrappers
                         {
                             curr.officer.Add(new Personnel_with_t_name
                             {
-                                user_id = item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString(),
+                                user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
                                 t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                             });
                         }
@@ -219,7 +216,7 @@ namespace educationalProject.Models.Wrappers
                         {
                             curr.officer.Add(new Personnel_with_t_name
                             {
-                                user_id = item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString(),
+                                user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
                                 t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                             });
                         }
@@ -260,11 +257,9 @@ namespace educationalProject.Models.Wrappers
                                       "PRIMARY KEY ([row_num])) ", temp1tablename, FieldName.LAB_NUM);
             string createtabletemp2 = string.Format("create table {0} (" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                      "[{1}] {2} NULL," +
-                                      "PRIMARY KEY ([row_num])) " +
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {1} {2} COLLATE DATABASE_DEFAULT "
-                                      , temp2tablename, Lab_officer.FieldName.OFFICER,DBFieldDataType.USER_ID_TYPE);
+                                      "[{1}] INT NULL," +
+                                      "PRIMARY KEY ([row_num])) "
+                                      , temp2tablename, Lab_officer.FieldName.OFFICER);
 
             string insertintotemp1 = string.Format("INSERT INTO {0} " +
                                      "select * from " +
@@ -321,7 +316,7 @@ namespace educationalProject.Models.Wrappers
                         {
                             curr.officer.Add(new Personnel_with_t_name
                             {
-                                user_id = item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString(),
+                                user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
                                 t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                             });
                         }
@@ -329,7 +324,7 @@ namespace educationalProject.Models.Wrappers
                         {
                             curr.officer.Add(new Personnel_with_t_name
                             {
-                                user_id = item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString(),
+                                user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
                                 t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                             });
                         }

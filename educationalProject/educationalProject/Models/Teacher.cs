@@ -33,14 +33,14 @@ namespace educationalProject.Models
             public static readonly string ALIVE = "ALIVE";
             public static readonly string TABLE_NAME = "TEACHER";
         }
-        private string _teacher_id;
+        private int _teacher_id;
         private char _degree;
         private char _position;
         private string _personnel_type;
         private string _person_id;
         private string _status;
         private int _alive;
-        public string teacher_id { get { return _teacher_id; } set { _teacher_id = value; } }
+        public int teacher_id { get { return _teacher_id; } set { _teacher_id = value; } }
         public char degree { get { return _degree; } set { _degree = value; } }
         public char position { get { return _position; } set { _position = value; } }
         public string personnel_type { get { return _personnel_type; } set { _personnel_type = value; } }

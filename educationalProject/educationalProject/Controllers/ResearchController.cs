@@ -49,7 +49,7 @@ namespace educationalProject.Controllers
                 {
                     Teacher_with_t_name t = new Teacher_with_t_name
                     {
-                        teacher_id = item["teacher_id"].ToString()
+                        teacher_id = Convert.ToInt32(item["teacher_id"])
                     };
                     data.researcher.Add(t);
 
@@ -105,7 +105,7 @@ namespace educationalProject.Controllers
                 {
                     Teacher_with_t_name t = new Teacher_with_t_name
                     {
-                        teacher_id = item["teacher_id"].ToString()
+                        teacher_id = Convert.ToInt32(item["teacher_id"])
                     };
                     data.researcher.Add(t);
 

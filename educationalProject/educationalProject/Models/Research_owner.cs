@@ -14,8 +14,8 @@ namespace educationalProject.Models
             public static readonly string TABLE_NAME = "RESEARCH_OWNER";
         }
         private int _research_id;
-        private string _teacher_id;
+        private int _teacher_id;
         public int research_id { get { return _research_id; } set { _research_id = value; } }
-        public string teacher_id { get { return _teacher_id; } set { _teacher_id = value; } }
+        public int teacher_id { get { return _teacher_id; } set { _teacher_id = value; } }
     }
 }

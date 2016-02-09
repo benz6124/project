@@ -24,6 +24,7 @@ namespace educationalProject.Models
             public static readonly string FILE_NAME_PIC = "FILE_NAME_PIC";
             public static readonly string TIMESTAMP = "TIMESTAMP";
             //----------------------
+            public static readonly string USER_ID = "USER_ID";
             public static readonly string STUDENT_ID = "STUDENT_ID";
             public static readonly string CURRI_ID = "CURRI_ID";
             public static readonly string TYPE = "TYPE";
@@ -38,7 +39,7 @@ namespace educationalProject.Models
             public static readonly string COOP = "COOP";
             public static readonly string TABLE_NAME = "STUDENT";
         }
-
+        private int _user_id;
         private string _student_id;
         private string _curri_id;
         private string _type;
@@ -51,6 +52,7 @@ namespace educationalProject.Models
         private char _quota;
         private int _subtype;
         private char _coop;
+        public int user_id { get { return _user_id; } set { _user_id = value; } }
         public string student_id { get { return _student_id; } set { _student_id = value;} }
         public string curri_id { get { return _curri_id; } set { _curri_id = value; } }
         public string type { get { return _type; } set { _type = value; } }

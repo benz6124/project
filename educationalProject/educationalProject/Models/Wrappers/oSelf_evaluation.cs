@@ -20,10 +20,10 @@ namespace educationalProject.Models.Wrappers
             string updatecmd = "";
             foreach(oSelf_evaluation item in list)
             {
-                insertcmd += string.Format("({0},{1},'{2}',{3},'{4}','{5}','{6}',{7})",
+                insertcmd += string.Format("({0},{1},{2},{3},'{4}','{5}','{6}',{7})",
                              indicator_num, item.sub_indicator_num, item.teacher_id, item.evaluation_score, item.date, item.time, curri_id, aca_year);
                 if (item != list.Last()) insertcmd += ",";
-                updatecmd += string.Format("update {0} set {1} = '{2}',{3} = {4},{5} = '{6}',{7} = '{8}' where {9} = {10} and {11} = {12} and {13} = '{14}' and {15} = {16} ",
+                updatecmd += string.Format("update {0} set {1} = {2},{3} = {4},{5} = '{6}',{7} = '{8}' where {9} = {10} and {11} = {12} and {13} = '{14}' and {15} = {16} ",
                                             FieldName.TABLE_NAME, FieldName.TEACHER_ID, item.teacher_id, FieldName.EVALUATION_SCORE, item.evaluation_score, FieldName.DATE, item.date, FieldName.TIME, item.time,
                                             FieldName.INDICATOR_NUM, item.indicator_num, FieldName.SUB_INDICATOR_NUM, item.sub_indicator_num, FieldName.CURRI_ID, item.curri_id, FieldName.ACA_YEAR, item.aca_year);
             }
@@ -44,15 +44,8 @@ namespace educationalProject.Models.Wrappers
                                        "END", selectcmd, insertcmd, updatecmd);
             try
             {
-                int rowAffected = d.iCommand.ExecuteNonQuery();
-                if (rowAffected > 0)
-                {
-                    return null;
-                }
-                else
-                {
-                    return "No self_evaluation are inserted or updated.";
-                }
+                d.iCommand.ExecuteNonQuery();
+                return null;
             }
             catch (Exception ex)
             {

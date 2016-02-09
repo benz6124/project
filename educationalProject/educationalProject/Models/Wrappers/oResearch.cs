@@ -143,7 +143,7 @@ namespace educationalProject.Models.Wrappers
                         }
                         curr.researcher.Add(new Teacher_with_t_name
                         {
-                            teacher_id = item.ItemArray[data.Columns[Teacher.FieldName.TEACHER_ID].Ordinal].ToString(),
+                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[Teacher.FieldName.TEACHER_ID].Ordinal]),
                             t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                         });
                     }
@@ -233,12 +233,9 @@ namespace educationalProject.Models.Wrappers
                                       "PRIMARY KEY ([row_num])) ", temp1tablename, FieldName.RESEARCH_ID);
             string createtabletemp2 = string.Format("create table {0} (" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                      "[{1}] {2} NULL," +
-                                      "PRIMARY KEY ([row_num])) " +
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {1} {2} COLLATE DATABASE_DEFAULT "
-                                      , temp2tablename, Research_owner.FieldName.TEACHER_ID,
-                                      DBFieldDataType.USER_ID_TYPE);
+                                      "[{1}] INT NULL," +
+                                      "PRIMARY KEY ([row_num])) "
+                                      , temp2tablename, Research_owner.FieldName.TEACHER_ID);
 
             string insertintotemp1 = string.Format("INSERT INTO {0} " +
                                      "select * from " +
@@ -288,7 +285,7 @@ namespace educationalProject.Models.Wrappers
                         }
                         curr.researcher.Add(new Teacher_with_t_name
                         {
-                            teacher_id = item.ItemArray[data.Columns[Teacher.FieldName.TEACHER_ID].Ordinal].ToString(),
+                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[Teacher.FieldName.TEACHER_ID].Ordinal]),
                             t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                         });
                     }
@@ -394,7 +391,7 @@ namespace educationalProject.Models.Wrappers
                         }
                         curr.researcher.Add(new Teacher_with_t_name
                         {
-                            teacher_id = item.ItemArray[data.Columns[Teacher.FieldName.TEACHER_ID].Ordinal].ToString(),
+                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[Teacher.FieldName.TEACHER_ID].Ordinal]),
                             t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                         });
                     }

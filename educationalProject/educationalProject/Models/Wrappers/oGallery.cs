@@ -28,28 +28,25 @@ namespace educationalProject.Models.Wrappers
             string createtabletemp5 = string.Format("create table {0}(" +
                                       "[row_num] int identity(1,1) not null," +
                                       "[{1}] INT NULL," +
-                                      "[{2}] {11} NULL," +
+                                      "[{2}] INT NULL," +
                                       "[{3}] VARCHAR(1000) NULL," +
                                       "[{4}] DATE NULL," +
-                                      "[{5}] {12} NULL," +
+                                      "[{5}] {11} NULL," +
                                       "[{6}] INT NULL," +
-                                      "[{7}] {13} NOT NULL," +
+                                      "[{7}] {12} NOT NULL," +
                                       "[{8}] VARCHAR(MAX) NULL," +
                                       "[{9}] varchar(16) null," +
                                       "[{10}] varchar(60) null," +
                                       "PRIMARY KEY ([row_num])) " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN [{2}] {11} COLLATE DATABASE_DEFAULT " +
-
-                                      "ALTER TABLE {0} " +
                                       "ALTER COLUMN [{3}] VARCHAR(1000) COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN [{5}] {12} COLLATE DATABASE_DEFAULT " +
+                                      "ALTER COLUMN [{5}] {11} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN [{7}] {13} COLLATE DATABASE_DEFAULT " +
+                                      "ALTER COLUMN [{7}] {12} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN [{8}] VARCHAR(MAX) COLLATE DATABASE_DEFAULT " +
@@ -62,7 +59,7 @@ namespace educationalProject.Models.Wrappers
                                       , temp5tablename, FieldName.GALLERY_ID, FieldName.PERSONNEL_ID, FieldName.NAME,
                                       FieldName.DATE_CREATED, FieldName.CURRI_ID, FieldName.ACA_YEAR,
                                       Picture.FieldName.FILE_NAME, Picture.FieldName.CAPTION,
-                                      Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,DBFieldDataType.USER_ID_TYPE,
+                                      Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
                                       DBFieldDataType.CURRI_ID_TYPE,DBFieldDataType.FILE_NAME_TYPE);
 
             string insertintotemp5_1 = string.Format("insert into {16} " +
@@ -106,7 +103,7 @@ namespace educationalProject.Models.Wrappers
                             result.Add(new Gallery_detail
                             {
                                 aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                                personnel_id = item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal].ToString(),
+                                personnel_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal]),
                                 t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                                 gallery_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.GALLERY_ID].Ordinal]),
@@ -289,7 +286,7 @@ namespace educationalProject.Models.Wrappers
                             result.Add(new Gallery_detail
                             {
                                 aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                                personnel_id = item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal].ToString(),
+                                personnel_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal]),
                                 t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                                 gallery_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.GALLERY_ID].Ordinal]),
@@ -410,7 +407,7 @@ namespace educationalProject.Models.Wrappers
                                 result.Add(new Gallery_detail
                                 {
                                     aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                                    personnel_id = item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal].ToString(),
+                                    personnel_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal]),
                                     t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
                                     curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                                     gallery_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.GALLERY_ID].Ordinal]),

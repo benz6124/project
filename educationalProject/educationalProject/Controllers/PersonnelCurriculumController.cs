@@ -22,7 +22,7 @@ namespace educationalProject.Controllers
                 list.Add(new User_curriculum
                 {
                     curri_id = data["curri_id"].ToString(),
-                    user_id = p["user_id"].ToString()
+                    user_id = Convert.ToInt32(p["user_id"])
                 });
             }
 
@@ -45,7 +45,7 @@ namespace educationalProject.Controllers
                     list.Add(new User_curriculum
                     {
                         curri_id = data["curri_id"].ToString(),
-                        user_id = p["user_id"].ToString()
+                        user_id = Convert.ToInt32(p["user_id"])
                     });
                 }
             }
@@ -54,7 +54,7 @@ namespace educationalProject.Controllers
                 list.Add(new User_curriculum
                 {
                     curri_id = data["curri_id"].ToString(),
-                    user_id = "0000000000000000000000000000"
+                    user_id = -999
                 });
             }
             object resultfromdb = datacontext.Delete(list);

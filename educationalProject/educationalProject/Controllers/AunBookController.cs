@@ -46,7 +46,7 @@ namespace educationalProject.Controllers
                 datacontext.aca_year = Convert.ToInt32(datareceive["aca_year"]);
                 datacontext.curri_id = datareceive["curri_id"].ToString();
                 datacontext.date = DateTime.Now.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
-                datacontext.personnel_id = datareceive["personnel_id"].ToString();
+                datacontext.personnel_id = Convert.ToInt32(datareceive["personnel_id"]);
 
                 //GET FILENAME WITH CHANGE FILENAME TO HAVE ITS EXTENSION
                 MultipartFileData file = result.FileData[0];

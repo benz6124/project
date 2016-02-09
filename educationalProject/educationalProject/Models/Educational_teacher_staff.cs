@@ -17,13 +17,13 @@ namespace educationalProject.Models
             public static readonly string COLLEGE = "COLLEGE";
             public static readonly string TABLE_NAME = "EDUCATIONAL_TEACHER_STAFF";
         }
-        private string _personnel_id;
+        private int _personnel_id;
         private char _degree;
         private string _pre_major;
         private string _major;
         private int _grad_year;
         private string _college;
-        public string personnel_id { get { return _personnel_id; } set { _personnel_id = value; } }
+        public int personnel_id { get { return _personnel_id; } set { _personnel_id = value; } }
         public char degree { get { return _degree; } set { _degree = value; } }
         public string major { get { return _major; } set { _major = value; } }
         public string pre_major { get { return _pre_major; } set { _pre_major = value; } }

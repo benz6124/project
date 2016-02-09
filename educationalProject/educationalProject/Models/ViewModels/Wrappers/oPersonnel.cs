@@ -17,19 +17,16 @@ namespace educationalProject.Models.ViewModels.Wrappers
 
             string createtabletemp1 = string.Format("create table {0} (" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                      "[{1}] {7} NOT NULL," +
+                                      "[{1}] INT NOT NULL," +
                                       "[{2}] VARCHAR(16) NULL," +
                                       "[{3}] VARCHAR(60) NULL," +
 
-                                      "[{4}] {8} NULL," +
+                                      "[{4}] {7} NULL," +
 
-                                      "[{5}] {9} NULL," +
+                                      "[{5}] {8} NULL," +
 
                                       "[{6}] VARCHAR(40) NULL," +
                                       "PRIMARY KEY([row_num])) " +
-
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {1} {7} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN {2} VARCHAR(16) COLLATE DATABASE_DEFAULT " +
@@ -38,16 +35,16 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                       "ALTER COLUMN {3} VARCHAR(60) COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {4} {8} COLLATE DATABASE_DEFAULT " +
+                                      "ALTER COLUMN {4} {7} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {5} {9} COLLATE DATABASE_DEFAULT " +
+                                      "ALTER COLUMN {5} {8} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN {6} VARCHAR(40) COLLATE DATABASE_DEFAULT ",
                                       temp1tablename, USER_ID,
                                       Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, FieldName.CURRI_ID,
-                                      FieldName.FILE_NAME_PIC, FieldName.USER_TYPE,DBFieldDataType.USER_ID_TYPE,
+                                      FieldName.FILE_NAME_PIC, FieldName.USER_TYPE,
                                       DBFieldDataType.CURRI_ID_TYPE,DBFieldDataType.FILE_NAME_TYPE);
 
             string insertintotemp1_1 = string.Format("INSERT INTO {0} " +
@@ -127,13 +124,10 @@ namespace educationalProject.Models.ViewModels.Wrappers
             string createtabletemp1 = string.Format("create table {0} (" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
                                       "[user_type] INT NOT NULL," +
-                                      "[{1}] {4} NOT NULL," +
+                                      "[{1}] INT NOT NULL," +
                                       "[{2}] VARCHAR(16) NULL," +
                                       "[{3}] VARCHAR(60) NULL," +
                                       "PRIMARY KEY([row_num])) " +
-
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {1} {4} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN {2} VARCHAR(16) COLLATE DATABASE_DEFAULT " +
@@ -141,7 +135,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN {3} VARCHAR(60) COLLATE DATABASE_DEFAULT ",
                                       temp1tablename,USER_ID,
-                                      Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,DBFieldDataType.USER_ID_TYPE);
+                                      Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME);
 
             string insertintotemp1_1 = string.Format("INSERT INTO {0} " +
                                        "select 1,{1},{2},{3} from {4} where " +
@@ -221,14 +215,14 @@ namespace educationalProject.Models.ViewModels.Wrappers
                         if(Convert.ToInt32(item.ItemArray[data.Columns["user_type"].Ordinal]) == 1)
                         result.Add(new Personnel_with_t_name
                         {
-                            user_id = item.ItemArray[data.Columns[USER_ID].Ordinal].ToString(),
+                            user_id = Convert.ToInt32(item.ItemArray[data.Columns[USER_ID].Ordinal]),
                             t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) +
                                      item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                         });
                         else
                             result.Add(new Personnel_with_t_name
                             {
-                                user_id = item.ItemArray[data.Columns[USER_ID].Ordinal].ToString(),
+                                user_id = Convert.ToInt32(item.ItemArray[data.Columns[USER_ID].Ordinal]),
                                 t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString() +
                                      item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                             });
@@ -290,9 +284,6 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                       "[{19}] INT NULL," +
                                       "[{20}] VARCHAR(200) NULL," +
                                       "PRIMARY KEY([row_num])) " + 
-
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {1} {23} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN {2} VARCHAR(40) COLLATE DATABASE_DEFAULT " +
@@ -358,7 +349,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                       Educational_teacher_staff.FieldName.PRE_MAJOR, Educational_teacher_staff.FieldName.MAJOR,
                                       Educational_teacher_staff.FieldName.GRAD_YEAR,
                                       Educational_teacher_staff.FieldName.COLLEGE,USER_TYPE_NUM,FieldName.ROOM,
-                                      DBFieldDataType.USER_ID_TYPE,DBFieldDataType.FILE_NAME_TYPE,
+                                      "INT",DBFieldDataType.FILE_NAME_TYPE,
                                       DBFieldDataType.CURRI_ID_TYPE,DBFieldDataType.USERNAME_TYPE);
 
 
@@ -444,13 +435,13 @@ namespace educationalProject.Models.ViewModels.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        personnel_id = item.ItemArray[data.Columns[USER_ID].Ordinal].ToString();
+                        personnel_id = Convert.ToInt32(item.ItemArray[data.Columns[USER_ID].Ordinal]);
                         if(result.FirstOrDefault(p => p.personnel_id == personnel_id) == null)
                         {
                             if (Convert.ToInt32(item.ItemArray[data.Columns[USER_TYPE_NUM].Ordinal]) == 1)
                                 result.Add(new Personnel_educational
                                 {
-                                    personnel_id = item.ItemArray[data.Columns[USER_ID].Ordinal].ToString(),
+                                    personnel_id = Convert.ToInt32(item.ItemArray[data.Columns[USER_ID].Ordinal]),
                                     addr = item.ItemArray[data.Columns[FieldName.ADDR].Ordinal].ToString(),
                                     citizen_id = item.ItemArray[data.Columns[FieldName.CITIZEN_ID].Ordinal].ToString(),
                                     curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
@@ -471,7 +462,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             else
                                 result.Add(new Personnel_educational
                                 {
-                                    personnel_id = item.ItemArray[data.Columns[USER_ID].Ordinal].ToString(),
+                                    personnel_id = Convert.ToInt32(item.ItemArray[data.Columns[USER_ID].Ordinal]),
                                     addr = item.ItemArray[data.Columns[FieldName.ADDR].Ordinal].ToString(),
                                     citizen_id = item.ItemArray[data.Columns[FieldName.CITIZEN_ID].Ordinal].ToString(),
                                     curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
@@ -501,7 +492,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                 grad_year = Convert.ToInt32(item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.GRAD_YEAR].Ordinal]),
                                 pre_major = item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.PRE_MAJOR].Ordinal].ToString(),
                                 major = item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.MAJOR].Ordinal].ToString(),
-                                personnel_id = item.ItemArray[data.Columns[USER_ID].Ordinal].ToString()
+                                personnel_id = Convert.ToInt32(item.ItemArray[data.Columns[USER_ID].Ordinal])
                             });
                         }
                     }
@@ -547,7 +538,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                         if (usrtype == "อาจารย์")
                             result.Add(new User_curriculum_with_brief_detail
                             {
-                                user_id = item.ItemArray[data.Columns[USER_ID].Ordinal].ToString(),
+                                user_id = Convert.ToInt32(item.ItemArray[data.Columns[USER_ID].Ordinal]),
                                 t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) +
                                          item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
@@ -557,7 +548,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                         else
                             result.Add(new User_curriculum_with_brief_detail
                             {
-                                user_id = item.ItemArray[data.Columns[USER_ID].Ordinal].ToString(),
+                                user_id = Convert.ToInt32(item.ItemArray[data.Columns[USER_ID].Ordinal]),
                                 t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString() +
                                      item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),

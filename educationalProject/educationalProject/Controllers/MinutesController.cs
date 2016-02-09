@@ -56,7 +56,7 @@ namespace educationalProject.Controllers
                 data.curri_id = datareceive["curri_id"].ToString();
                 data.aca_year = Convert.ToInt32(datareceive["aca_year"]);
                 data.topic_name = datareceive["topic_name"].ToString();
-                data.teacher_id = datareceive["teacher_id"].ToString();
+                data.teacher_id = Convert.ToInt32(datareceive["teacher_id"]);
                 data.date = Convert.ToDateTime(datareceive["date"].ToString(), new System.Globalization.CultureInfo("fr-FR")).GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
 
 
@@ -66,7 +66,7 @@ namespace educationalProject.Controllers
                 {
                     data.attendee.Add(new Teacher_with_t_name
                     {
-                        teacher_id = item["teacher_id"].ToString()
+                        teacher_id = Convert.ToInt32(item["teacher_id"])
                     });
                 }
 
@@ -159,7 +159,7 @@ namespace educationalProject.Controllers
                 data.curri_id = datareceive["curri_id"].ToString();
                 data.aca_year = Convert.ToInt32(datareceive["aca_year"]);
                 data.topic_name = datareceive["topic_name"].ToString();
-                data.teacher_id = datareceive["teacher_id"].ToString();
+                data.teacher_id = Convert.ToInt32(datareceive["teacher_id"]);
                 data.date = Convert.ToDateTime(datareceive["date"].ToString(), new System.Globalization.CultureInfo("fr-FR")).GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
                 data.minutes_id = Convert.ToInt32(datareceive["minutes_id"]);
 
@@ -169,7 +169,7 @@ namespace educationalProject.Controllers
                 {
                     data.attendee.Add(new Teacher_with_t_name
                     {
-                        teacher_id = item["teacher_id"].ToString()
+                        teacher_id = Convert.ToInt32(item["teacher_id"])
                     });
                 }
 

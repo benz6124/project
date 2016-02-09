@@ -29,9 +29,6 @@ namespace educationalProject.Models.Wrappers
                                       "PRIMARY KEY([row_num])) " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN t1_id {7} COLLATE DATABASE_DEFAULT " +
-
-                                      "ALTER TABLE {0} " +
                                       "ALTER COLUMN t1_prename varchar(16) COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
@@ -47,15 +44,12 @@ namespace educationalProject.Models.Wrappers
                                       "ALTER COLUMN {6} {9} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN t2_id {7} COLLATE DATABASE_DEFAULT " +
-
-                                      "ALTER TABLE {0} " +
                                       "ALTER COLUMN t2_prename varchar(16) COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN t2_name varchar(60) COLLATE DATABASE_DEFAULT ",
                                       temp5tablename, FieldName.MINUTES_ID, FieldName.CURRI_ID, FieldName.ACA_YEAR,
-                                      FieldName.DATE, FieldName.TOPIC_NAME, FieldName.FILE_NAME,DBFieldDataType.USER_ID_TYPE,
+                                      FieldName.DATE, FieldName.TOPIC_NAME, FieldName.FILE_NAME,"INT",
                                       DBFieldDataType.CURRI_ID_TYPE,DBFieldDataType.FILE_NAME_TYPE);
 
             //retrieve normal row with attendee data
@@ -128,7 +122,7 @@ namespace educationalProject.Models.Wrappers
                                 result.Add(new Minutes_detail
                                 {
                                     aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                                    teacher_id = item.ItemArray[data.Columns["t1_id"].Ordinal].ToString(),
+                                    teacher_id = item.ItemArray[data.Columns["t1_id"].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns["t1_id"].Ordinal]) : 0,
                                     t_name = NameManager.GatherPreName(item.ItemArray[data.Columns["t1_prename"].Ordinal].ToString()) + item.ItemArray[data.Columns["t1_name"].Ordinal].ToString(),
                                     curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                                     file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
@@ -138,7 +132,7 @@ namespace educationalProject.Models.Wrappers
                                 });
                                 result.FirstOrDefault(m => m.minutes_id == minutes_id).attendee.Add(new Teacher_with_t_name
                                 {
-                                    teacher_id = item.ItemArray[data.Columns["t2_id"].Ordinal].ToString(),
+                                    teacher_id = Convert.ToInt32(item.ItemArray[data.Columns["t2_id"].Ordinal]),
                                     t_name = NameManager.GatherPreName(item.ItemArray[data.Columns["t2_prename"].Ordinal].ToString()) + item.ItemArray[data.Columns["t2_name"].Ordinal].ToString()
                                 });
                             }
@@ -146,7 +140,7 @@ namespace educationalProject.Models.Wrappers
                             {
                                 result.FirstOrDefault(m => m.minutes_id == minutes_id).attendee.Add(new Teacher_with_t_name
                                 {
-                                    teacher_id = item.ItemArray[data.Columns["t2_id"].Ordinal].ToString(),
+                                    teacher_id = Convert.ToInt32(item.ItemArray[data.Columns["t2_id"].Ordinal]),
                                     t_name = NameManager.GatherPreName(item.ItemArray[data.Columns["t2_prename"].Ordinal].ToString()) + item.ItemArray[data.Columns["t2_name"].Ordinal].ToString()
                                 });
                             }
@@ -274,11 +268,9 @@ namespace educationalProject.Models.Wrappers
 
             string createtabletemp2 = string.Format("create table {0} (" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                      "[{1}] {2} NULL," +
-                                      "PRIMARY KEY ([row_num])) " +
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {1} {2} COLLATE DATABASE_DEFAULT "
-                                      , temp2tablename, Minutes_attendee.FieldName.TEACHER_ID,DBFieldDataType.USER_ID_TYPE);
+                                      "[{1}] INT NULL," +
+                                      "PRIMARY KEY ([row_num])) "
+                                      , temp2tablename, Minutes_attendee.FieldName.TEACHER_ID);
 
             string createtabletemp3 = string.Format("create table {0} (" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
@@ -355,7 +347,7 @@ namespace educationalProject.Models.Wrappers
                                 result.Add(new Minutes_detail
                                 {
                                     aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                                    teacher_id = item.ItemArray[data.Columns["t1_id"].Ordinal].ToString(),
+                                    teacher_id = item.ItemArray[data.Columns["t1_id"].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns["t1_id"].Ordinal]) : 0,
                                     t_name = NameManager.GatherPreName(item.ItemArray[data.Columns["t1_prename"].Ordinal].ToString()) + item.ItemArray[data.Columns["t1_name"].Ordinal].ToString(),
                                     curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                                     file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
@@ -365,7 +357,7 @@ namespace educationalProject.Models.Wrappers
                                 });
                                 result.FirstOrDefault(m => m.minutes_id == minutes_id).attendee.Add(new Teacher_with_t_name
                                 {
-                                    teacher_id = item.ItemArray[data.Columns["t2_id"].Ordinal].ToString(),
+                                    teacher_id = Convert.ToInt32(item.ItemArray[data.Columns["t2_id"].Ordinal]),
                                     t_name = NameManager.GatherPreName(item.ItemArray[data.Columns["t2_prename"].Ordinal].ToString()) + item.ItemArray[data.Columns["t2_name"].Ordinal].ToString()
                                 });
                             }
@@ -373,7 +365,7 @@ namespace educationalProject.Models.Wrappers
                             {
                                 result.FirstOrDefault(m => m.minutes_id == minutes_id).attendee.Add(new Teacher_with_t_name
                                 {
-                                    teacher_id = item.ItemArray[data.Columns["t2_id"].Ordinal].ToString(),
+                                    teacher_id = Convert.ToInt32(item.ItemArray[data.Columns["t2_id"].Ordinal]),
                                     t_name = NameManager.GatherPreName(item.ItemArray[data.Columns["t2_prename"].Ordinal].ToString()) + item.ItemArray[data.Columns["t2_name"].Ordinal].ToString()
                                 });
                             }
@@ -525,7 +517,7 @@ namespace educationalProject.Models.Wrappers
                                 result.Add(new Minutes_detail
                                 {
                                     aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                                    teacher_id = item.ItemArray[data.Columns["t1_id"].Ordinal].ToString(),
+                                    teacher_id = item.ItemArray[data.Columns["t1_id"].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns["t1_id"].Ordinal]) : 0,
                                     t_name = NameManager.GatherPreName(item.ItemArray[data.Columns["t1_prename"].Ordinal].ToString()) + item.ItemArray[data.Columns["t1_name"].Ordinal].ToString(),
                                     curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                                     file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
@@ -535,7 +527,7 @@ namespace educationalProject.Models.Wrappers
                                 });
                                 result.FirstOrDefault(m => m.minutes_id == minutes_id).attendee.Add(new Teacher_with_t_name
                                 {
-                                    teacher_id = item.ItemArray[data.Columns["t2_id"].Ordinal].ToString(),
+                                    teacher_id = Convert.ToInt32(item.ItemArray[data.Columns["t2_id"].Ordinal]),
                                     t_name = NameManager.GatherPreName(item.ItemArray[data.Columns["t2_prename"].Ordinal].ToString()) + item.ItemArray[data.Columns["t2_name"].Ordinal].ToString()
                                 });
                             }
@@ -543,7 +535,7 @@ namespace educationalProject.Models.Wrappers
                             {
                                 result.FirstOrDefault(m => m.minutes_id == minutes_id).attendee.Add(new Teacher_with_t_name
                                 {
-                                    teacher_id = item.ItemArray[data.Columns["t2_id"].Ordinal].ToString(),
+                                    teacher_id = Convert.ToInt32(item.ItemArray[data.Columns["t2_id"].Ordinal]),
                                     t_name = NameManager.GatherPreName(item.ItemArray[data.Columns["t2_prename"].Ordinal].ToString()) + item.ItemArray[data.Columns["t2_name"].Ordinal].ToString()
                                 });
                             }

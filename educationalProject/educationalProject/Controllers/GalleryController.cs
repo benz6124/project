@@ -72,7 +72,7 @@ namespace educationalProject.Controllers
                 data.name = datareceive["name"].ToString();
                 data.date_created = DateTime.Now.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
                 data.aca_year = Convert.ToInt32(datareceive["aca_year"]);
-                data.personnel_id = datareceive["personnel_id"].ToString();
+                data.personnel_id = Convert.ToInt32(datareceive["personnel_id"]);
 
                 JArray tlist = (JArray)datareceive["pictures"];
 
@@ -130,7 +130,7 @@ namespace educationalProject.Controllers
                 data.name = datareceive["name"].ToString();
                 data.date_created = DateTime.Now.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
                 data.aca_year = Convert.ToInt32(datareceive["aca_year"]);
-                data.personnel_id = datareceive["personnel_id"].ToString();
+                data.personnel_id = Convert.ToInt32(datareceive["personnel_id"]);
                 data.gallery_id = Convert.ToInt32(datareceive["gallery_id"]);
                 JArray tlist = (JArray)datareceive["pictures"];
 

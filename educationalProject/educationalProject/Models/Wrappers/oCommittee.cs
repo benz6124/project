@@ -34,7 +34,7 @@ namespace educationalProject.Models.Wrappers
                             file_name_pic = item.ItemArray[data.Columns[Teacher.FieldName.FILE_NAME_PIC].Ordinal].ToString(),
                             date_promoted = Convert.ToDateTime(item.ItemArray[data.Columns[FieldName.DATE_PROMOTED].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
                             aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                            teacher_id = item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal].ToString(),
+                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
                             t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) +
                                      item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
                             email = item.ItemArray[data.Columns[Teacher.FieldName.EMAIL].Ordinal].ToString()
@@ -71,17 +71,14 @@ namespace educationalProject.Models.Wrappers
             string temp5tablename = "#temp5";
             string createtabletemp5 = string.Format("create table {0}( " +
                                       "[row_num] int identity(1, 1) not null," +
-                                      "[{1}] {5} null," +
-                                      "[{2}] {6} null," +
+                                      "[{1}] INT null," +
+                                      "[{2}] {5} null," +
                                       "[{3}] VARCHAR(16) NULL," +
                                       "[{4}] VARCHAR(60) NULL," +
                                       "primary key([row_num])) " +
 
                                       "alter table {0} " +
-                                      "alter column {1} {5} collate database_default " +
-
-                                      "alter table {0} " +
-                                      "alter column {2} {6} collate database_default " +
+                                      "alter column {2} {5} collate database_default " +
 
                                       "alter table {0} " +
                                       "alter column[{3}] VARCHAR(16) collate database_default " +
@@ -90,7 +87,7 @@ namespace educationalProject.Models.Wrappers
                                       "alter column[{4}] VARCHAR(60) collate database_default ",
                                       temp5tablename, FieldName.TEACHER_ID, FieldName.CURRI_ID,
                                       Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
-                                      DBFieldDataType.USER_ID_TYPE, DBFieldDataType.CURRI_ID_TYPE);
+                                      DBFieldDataType.CURRI_ID_TYPE);
 
             string insertintotemp5_1 = string.Format("insert into {0} " +
                 "select {17}, {2}, {3}, {4} from {5}, {6} " +
@@ -135,7 +132,7 @@ namespace educationalProject.Models.Wrappers
                         {
                             curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                             aca_year = this.aca_year,
-                            teacher_id = item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal].ToString(),
+                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
                             t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) +
                                      item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                         });
@@ -197,7 +194,7 @@ namespace educationalProject.Models.Wrappers
                             file_name_pic = item.ItemArray[data.Columns[Teacher.FieldName.FILE_NAME_PIC].Ordinal].ToString(),
                             date_promoted = Convert.ToDateTime(item.ItemArray[data.Columns[FieldName.DATE_PROMOTED].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
                             aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                            teacher_id = item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal].ToString(),
+                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
                             t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) +
                                      item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
                             email = item.ItemArray[data.Columns[Teacher.FieldName.EMAIL].Ordinal].ToString()

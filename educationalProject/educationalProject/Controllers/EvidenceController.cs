@@ -68,7 +68,7 @@ namespace educationalProject.Controllers
                 datacontext.evidence_name = datareceive["evidence_name"].ToString();
                 datacontext.indicator_num = Convert.ToInt32(datareceive["indicator_num"]);
                 datacontext.secret = datareceive["secret"].ToString()[0];
-                datacontext.teacher_id = datareceive["teacher_id"].ToString();
+                datacontext.teacher_id = Convert.ToInt32(datareceive["teacher_id"]);
 
                 //evidence_real_code evidence_name secret teacher_id
                 //GET FILENAME WITH CHANGE FILENAME TO HAVE ITS EXTENSION
@@ -115,7 +115,7 @@ namespace educationalProject.Controllers
                 datacontext.evidence_name = datareceive["evidence_name"].ToString();
                 datacontext.indicator_num = Convert.ToInt32(datareceive["indicator_num"]);
                 datacontext.secret = datareceive["secret"].ToString()[0];
-                datacontext.teacher_id = datareceive["teacher_id"].ToString();
+                datacontext.teacher_id = Convert.ToInt32(datareceive["teacher_id"]);
                 datacontext.primary_evidence_num = Convert.ToInt32(datareceive["primary_evidence_num"]);
 
                 //evidence_real_code evidence_name secret teacher_id
@@ -203,7 +203,7 @@ namespace educationalProject.Controllers
                 datacontext.evidence_name = datareceive["evidence_name"].ToString();
                 datacontext.indicator_num = Convert.ToInt32(datareceive["indicator_num"]);
                 datacontext.secret = datareceive["secret"].ToString()[0];
-                datacontext.teacher_id = datareceive["teacher_id"].ToString();
+                datacontext.teacher_id = Convert.ToInt32(datareceive["teacher_id"]);
                 datacontext.evidence_code = Convert.ToInt32(datareceive["evidence_code"]);
 
                 //evidence_real_code evidence_name secret teacher_id

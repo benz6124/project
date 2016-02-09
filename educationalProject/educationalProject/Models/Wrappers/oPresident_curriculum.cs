@@ -17,11 +17,11 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format("IF NOT EXISTS (select * from {0} where {1} = '{2}' and {3} = {4}) " +
                                        "BEGIN " +
                                        "INSERT INTO {0} VALUES " +
-                                       "('{5}', '{2}',{4}) " +
+                                       "({5}, '{2}',{4}) " +
                                        "END " +
                                        "ELSE " +
                                        "BEGIN " +
-                                       "UPDATE {0} SET {6} = '{5}' where {1} = '{2}' and {3} = {4} " +
+                                       "UPDATE {0} SET {6} = {5} where {1} = '{2}' and {3} = {4} " +
                                        "END",
                 FieldName.TABLE_NAME, FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year, teacher_id, FieldName.TEACHER_ID);
             try

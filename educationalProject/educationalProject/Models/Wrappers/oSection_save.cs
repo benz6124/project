@@ -32,7 +32,7 @@ namespace educationalProject.Models.Wrappers
                         detail = item.ItemArray[data.Columns[FieldName.DETAIL].Ordinal].ToString();
                         indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]);
                         sub_indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.SUB_INDICATOR_NUM].Ordinal]);
-                        teacher_id = item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal].ToString();
+                        teacher_id = item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]) : 0;
                         date = Convert.ToDateTime(item.ItemArray[data.Columns[Self_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3];
                         time = (timeofday.Hour > 9 ? "" : "0") + h + '.' + (timeofday.Minute > 9 ? "" : "0") + m;
                     }
@@ -81,7 +81,7 @@ namespace educationalProject.Models.Wrappers
                         detail = item.ItemArray[data.Columns[FieldName.DETAIL].Ordinal].ToString();
                         indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]);
                         sub_indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.SUB_INDICATOR_NUM].Ordinal]);
-                        teacher_id = item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal].ToString();
+                        teacher_id = item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]) : 0;
                         date = Convert.ToDateTime(item.ItemArray[data.Columns[Self_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3];
                         time = (timeofday.Hour > 9 ? "" : "0") + h + '.' + (timeofday.Minute > 9 ? "" : "0") + m;
                     }

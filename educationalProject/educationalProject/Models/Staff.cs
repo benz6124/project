@@ -27,7 +27,7 @@ namespace educationalProject.Models
             public static readonly string STAFF_ID = "STAFF_ID";
             public static readonly string TABLE_NAME = "STAFF";
         }
-        private string _staff_id;
-        public string staff_id { get { return _staff_id; } set { _staff_id = value; } }
+        private int _staff_id;
+        public int staff_id { get { return _staff_id; } set { _staff_id = value; } }
     }
 }

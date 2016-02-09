@@ -24,11 +24,13 @@ namespace educationalProject.Models
             public static readonly string FILE_NAME_PIC = "FILE_NAME_PIC";
             public static readonly string TIMESTAMP = "TIMESTAMP";
             //----------------------
+            public static readonly string ADMIN_ID = "ADMIN_ID";
             public static readonly string ADMIN_CREATOR_ID = "ADMIN_CREATOR_ID";
             public static readonly string TABLE_NAME = "ADMIN";
         }
-
-        private string _admin_creator_id;
-        public string admin_creator_id { get { return  _admin_creator_id; } set { _admin_creator_id = value; } }
+        private int _admin_id;
+        private int _admin_creator_id;
+        public int admin_id { get { return _admin_id; } set { _admin_id = value; } }
+        public int admin_creator_id { get { return  _admin_creator_id; } set { _admin_creator_id = value; } }
     }
 }
