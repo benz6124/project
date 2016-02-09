@@ -53,13 +53,18 @@ app.factory('AuthService', function ($http, Session,$cookies) {
   var authService = {};
 
   authService.login = function (credentials) {
-    // return $http
-    //   .post('/login', credentials)
-    //   .then(function (res) {
-    //     Session.create(res.data.id, res.data.user.id,
-    //                    res.data.user.role);
-    //     return res.data.user;
-    //   });
+    return $http
+      .post('/api/users/login', credentials)
+      .then(function (res) {
+        // Session.create(res.data.user_id, res.data.user.username);
+      console.log('login leaw')
+      console.log(res.data);
+        return res.data;
+      });
+
+// return {"user_id":"admin1","username":"admin1","user_type":"ผู้ดูแลระบบ","information":{"t_prename":"","t_name":"ชื่อจริง นามสกุลจริง","e_prename":"","e_name":"","citizen_id":"","gender":" ","email":"b@hotmail.com","tel":"","addr":"","file_name_pic":"myimages/profile_pic/nopic.jpg","timestamp":"7/1/2559 0:05:15"},"privilege":[]};
+
+
 
 
 //  $cookies.putObject("mymy", credentials);
@@ -84,59 +89,30 @@ app.factory('AuthService', function ($http, Session,$cookies) {
 //         // // $cookies.putObject("mymy", credentials);
 //         // return res.data.user;
 //       });
-return {
-
-  "user_id":"00001","username":"wiboon","user_type":"อาจารย์","information":{"t_prename":"นาย","t_name":"วิบูลย์ พร้อมพานิชย์","e_prename":"Mr.","e_name":"Wiboon Prompanich","citizen_id":"1234567890123","gender":"M","email":"kpwiboon@kmitl.ac.th","tel":"0818685657","addr":"กรุงเทพ","file_name_pic":"myimages/profile_pic/วิบูลย์.jpg","timestamp":"8/9/2558 23:50:01"},
-"privilege":[{"curri_id":"20","privilege_list":[{
-"title_code":1,
-"title_privilege_code":2,
-"name":"สร้างบัญชีรายชื่อ",
-"privilege":"อนุญาต"},
-{
-"title_code":2,
-"title_privilege_code":1,
-"name":"เพิ่มปีการศึกษาในแต่ละหลักสูตร",
-"privilege":"ไม่อนุญาต"}]},
-{"curri_id":"21","privilege_list":[{
-"title_code":1,
-"title_privilege_code":1,
-"name":"สร้างบัญชีรายชื่อ",
-"privilege":"ไม่อนุญาต"},
-{
-"title_code":2,
-"title_privilege_code":2,
-"name":"เพิ่มปีการศึกษาในแต่ละหลักสูตร",
-"privilege":"อนุญาต"}]}]}
 
 
 
   };
  
   authService.isAuthenticated = function () {
-    return !!Session.userId;
+    return !!Session.user_id;
   };
  
-  authService.isAuthorized = function (authorizedRoles) {
-    if (!angular.isArray(authorizedRoles)) {
-      authorizedRoles = [authorizedRoles];
-    }
-    return (authService.isAuthenticated() &&
-      authorizedRoles.indexOf(Session.userRole) !== -1);
-  };
+
  
   return authService;
 });
 
 app.service('Session', function () {
-  this.create = function (sessionId, userId, userRole) {
+  this.create = function (sessionId, userId) {
     this.id = sessionId;
     this.userId = userId;
-    this.userRole = userRole;
+
   };
   this.destroy = function () {
     this.id = null;
     this.userId = null;
-    this.userRole = null;
+
   };
 })
 
@@ -144,12 +120,14 @@ app.controller('main_controller', function ($scope,
                                                USER_ROLES,
                                                AuthService,$cookies) {
 
+   $scope.current_user = {};
+  $scope.current_user = $cookies.getObject("mymy");
+$scope.fix_mode = true;
 
-  $scope.currentUser = $cookies.getObject("mymy");
-  $scope.userRoles = USER_ROLES;
-  $scope.isAuthorized = AuthService.isAuthorized;
-  if(!$scope.currentUser){
+
+  if(!$scope.current_user) {
   $scope.already_login = false;
+
   }
   else{
   	console.log('$scope.already_login = false;')
@@ -160,25 +138,45 @@ app.controller('main_controller', function ($scope,
     $scope.logout = function(){
         console.log("log out")
         $cookies.remove('mymy');
-         $scope.currentUser ={};
+         $scope.current_user ={};
           $scope.already_login = false;
     }
 
-  $scope.setCurrentUser = function (user) {
-
-    $scope.currentUser = user;
+  $scope.setcurrent_user = function (user) {
+      $scope.already_login = true;
+    $scope.current_user = user;
      $cookies.putObject("mymy", user);
-      	console.log($scope.currentUser);
+      	console.log($scope.current_user);
   };
 
 
-  $scope.can_watch_this_modal = function(){
+  $scope.watch_only_admin = function(){
 
+    if($scope.current_user.user_type == 'ผู้ดูแลระบบ'){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+
+    $scope.watch_in_curri = function(){
+      return false;
+    }
+    $scope.watch_only_president = function(){
+      if($scope.current_user.user_type == 'ประธานหลักสูตร'){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 });
 
 
 
+  
 
 
 app.factory('AuthResolver', function ($q, $rootScope, $state) {
@@ -186,10 +184,10 @@ app.factory('AuthResolver', function ($q, $rootScope, $state) {
     resolve: function () {
     	console.log('im resolve')
       var deferred = $q.defer();
-      var unwatch = $rootScope.$watch('currentUser', function (currentUser) {
-        if (angular.isDefined(currentUser)) {
-          if (currentUser) {
-            deferred.resolve(currentUser);
+      var unwatch = $rootScope.$watch('current_user', function (current_user) {
+        if (angular.isDefined(current_user)) {
+          if (current_user) {
+            deferred.resolve(current_user);
           } else {
             deferred.reject();
             $state.go('user-login');
