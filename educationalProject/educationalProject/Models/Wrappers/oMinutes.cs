@@ -57,14 +57,14 @@ namespace educationalProject.Models.Wrappers
                                        "select * from " +
                                        "(select {1}.{2}, {1}.{3} as t1_id, t1.{4} as t1_prename, t1.{5} as t1_name, {1}.{6}, {1}.{7}, {1}.{8}, " +
                                        "{1}.{9}, {1}.{10} , {11}.{12}, t2.{4}, t2.{5} " +
-                                       "from {1}, {13} as t1, {11}, {13} as t2 " +
+                                       "from {1}, ({13}) as t1, {11}, ({13}) as t2 " +
                                        "where {6} = '{14}' and {7} = {15} and {1}.{2} = {11}.{16} " +
                                        "and t1.{17} = {1}.{3} and t2.{17} = {11}.{12}) as outputsel1 order by {8} desc ",
                                        temp5tablename, FieldName.TABLE_NAME, FieldName.MINUTES_ID, FieldName.TEACHER_ID,
                                        Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, FieldName.CURRI_ID,
                                        FieldName.ACA_YEAR, FieldName.DATE, FieldName.TOPIC_NAME, FieldName.FILE_NAME,
                                        Minutes_attendee.FieldName.TABLE_NAME, Minutes_attendee.FieldName.TEACHER_ID,
-                                       Teacher.FieldName.TABLE_NAME, curri_id, aca_year, Minutes_attendee.FieldName.MINUTES_ID,
+                                       oTeacher.getSelectTeacherByJoinCommand(), curri_id, aca_year, Minutes_attendee.FieldName.MINUTES_ID,
                                        Teacher.FieldName.TEACHER_ID);
 
             //retrieve extra row with pic_file data

@@ -28,13 +28,13 @@ namespace educationalProject.Models.Wrappers
                                       Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME);
 
             string insertintotemp4 = string.Format("insert into {0} " +
-                                     "select {1}, {2}, {3} from {4} " +
+                                     "select {1}, {2}, {3} from ({4}) as tt " +
                                      "insert into {0} " +
-                                     "select {5}, {6}, {7} from {8} ",
+                                     "select {5}, {6}, {7} from ({8}) as ss ",
                                      temp4tablename, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME,
-                                     Teacher.FieldName.T_NAME, Teacher.FieldName.TABLE_NAME,
+                                     Teacher.FieldName.T_NAME, oTeacher.getSelectTeacherByJoinCommand(),
                                      Staff.FieldName.STAFF_ID, Staff.FieldName.T_PRENAME, Staff.FieldName.T_NAME,
-                                     Staff.FieldName.TABLE_NAME);
+                                     oStaff.getSelectStaffByJoinCommand());
 
             string selectcmd = string.Format("select {0}.*,pdata.{1}, {2}, {3} from " +
                                "{0}, {4}," +

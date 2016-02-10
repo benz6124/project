@@ -26,6 +26,7 @@ namespace educationalProject.Models
             //----------------------
             public static readonly string ASSESSOR_ID = "ASSESSOR_ID";
             public static readonly string TEACHER_ID = "TEACHER_ID";
+            public static readonly string ALIAS_NAME = "AJ_RES";
             public static readonly string TABLE_NAME = "ASSESSOR";
         }
         private int _assessor_id;

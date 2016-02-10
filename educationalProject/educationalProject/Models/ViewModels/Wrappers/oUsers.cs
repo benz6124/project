@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data;
-using educationalProject.Models.ViewModels;
+using educationalProject.Models.Wrappers;
 using educationalProject.Utils;
 namespace educationalProject.Models.ViewModels.Wrappers
 {
@@ -16,23 +16,23 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 return "Cannot connect to database.";
             User_information_with_privilege_information result = new User_information_with_privilege_information();
             string selectcmd = string.Format(
-                               "if exists(select * from {0} where {1} = '{2}') " +
-                                    "select * from {0} where {1} = '{2}' " +
-                                "else if exists(select * from {3} where {1} = '{2}') " +
-                                    "select * from {3} where {1} = '{2}' " +
-                                "else if exists(select * from {4} where {1} = '{2}') " +
-                                    "select * from {4} where {1} = '{2}' " +
-                                "else if exists(select * from {5} where {1} = '{2}') " +
-                                    "select * from {5} where {1} = '{2}' " +
-                                "else if exists(select * from {6} where {1} = '{2}') " +
-                                    "select * from {6} where {1} = '{2}' " +
-                                "else if exists(select * from {7} where {1} = '{2}') " +
-                                    "select * from {7} where {1} = '{2}' " +
-                                "else if exists(select * from {8} where {1} = '{2}') " +
-                                    "select * from {8} where {1} = '{2}' " ,
-                               Teacher.FieldName.TABLE_NAME, Teacher.FieldName.USERNAME, preferredusername,
-                               Staff.FieldName.TABLE_NAME,Student.FieldName.TABLE_NAME,Alumni.FieldName.TABLE_NAME,
-                               Company.FieldName.TABLE_NAME,Assessor.FieldName.TABLE_NAME,Admin.FieldName.TABLE_NAME);
+                               "if exists(select * from ({0}) as tsres where {1} = '{2}') " +
+                                    "select * from ({0}) as tsres where {1} = '{2}' " +
+                                "else if exists(select * from ({3}) as stres where {1} = '{2}') " +
+                                    "select * from ({3}) as stres where {1} = '{2}' " +
+                                "else if exists(select * from ({4}) as std where {1} = '{2}') " +
+                                    "select * from ({4}) as std where {1} = '{2}' " +
+                                "else if exists(select * from ({5}) as alum where {1} = '{2}') " +
+                                    "select * from ({5}) as alum where {1} = '{2}' " +
+                                "else if exists(select * from ({6}) as comp where {1} = '{2}') " +
+                                    "select * from ({6}) as comp where {1} = '{2}' " +
+                                "else if exists(select * from ({7}) as assres where {1} = '{2}') " +
+                                    "select * from ({7}) as assres where {1} = '{2}' " +
+                                "else if exists(select * from ({8}) as admres where {1} = '{2}') " +
+                                    "select * from ({8}) as admres where {1} = '{2}' ",
+                               oTeacher.getSelectTeacherByJoinCommand(), Teacher.FieldName.USERNAME, preferredusername,
+                               oStaff.getSelectStaffByJoinCommand(),oStudent.getSelectStudentByJoinCommand(),oAlumni.getSelectAlumniByJoinCommand(),
+                               oCompany.getSelectCompanyByJoinCommand(),oAssessor.getSelectAssessorByJoinCommand(),oAdmin.getSelectAdminByJoinCommand());
 
             d.iCommand.CommandText = selectcmd;
             try

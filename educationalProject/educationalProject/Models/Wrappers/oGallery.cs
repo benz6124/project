@@ -14,10 +14,10 @@ namespace educationalProject.Models.Wrappers
             if (!isUpdate)
             {
                 return string.Format("select {0}.*,{1}.{2},{1}.{15},{3},{4} " +
-                    "from {0},{1},{5} where {6} = '{7}' and {8} = {9} " +
+                    "from {0},{1},({5}) as tt where {6} = '{7}' and {8} = {9} " +
                     "and {0}.{10} = {1}.{11} and {12} = {13} order by {14} desc ",
                     FieldName.TABLE_NAME, Picture.FieldName.TABLE_NAME, Picture.FieldName.FILE_NAME,
-                    Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, Teacher.FieldName.TABLE_NAME,
+                    Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, oTeacher.getSelectTeacherByJoinCommand(),
                     FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year, FieldName.GALLERY_ID,
                     Picture.FieldName.GALLERY_ID, Teacher.FieldName.TEACHER_ID, FieldName.PERSONNEL_ID,
                     FieldName.DATE_CREATED, Picture.FieldName.CAPTION);
@@ -64,10 +64,10 @@ namespace educationalProject.Models.Wrappers
 
             string insertintotemp5_1 = string.Format("insert into {16} " +
                                        "select {0}.*,{1}.{2},{1}.{15},{3},{4} " +
-                                       "from {0},{1},{5} where {6} = '{7}' and {8} = {9} " +
+                                       "from {0},{1},({5}) as tt where {6} = '{7}' and {8} = {9} " +
                                        "and {0}.{10} = {1}.{11} and {12} = {13} order by {14} desc ",
                                        FieldName.TABLE_NAME, Picture.FieldName.TABLE_NAME, Picture.FieldName.FILE_NAME,
-                                       Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, Teacher.FieldName.TABLE_NAME,
+                                       Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, oTeacher.getSelectTeacherByJoinCommand(),
                                        FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year, FieldName.GALLERY_ID,
                                        Picture.FieldName.GALLERY_ID, Teacher.FieldName.TEACHER_ID, FieldName.PERSONNEL_ID,
                                        FieldName.DATE_CREATED, Picture.FieldName.CAPTION,temp5tablename);

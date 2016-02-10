@@ -15,11 +15,11 @@ namespace educationalProject.Models.ViewModels.Wrappers
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            d.iCommand.CommandText = string.Format("select {0}.*,{1},{2} from {3} INNER JOIN {4} on {5}.{6}={7}.{8}",
+            d.iCommand.CommandText = string.Format("select {0}.*,{1},{2} from {3} INNER JOIN ({4}) as {7} on {5}.{6}={7}.{8}",
                 Self_evaluation.FieldName.TABLE_NAME, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
                 Self_evaluation.FieldName.TABLE_NAME,
-                Teacher.FieldName.TABLE_NAME, Self_evaluation.FieldName.TABLE_NAME,
-                Self_evaluation.FieldName.TEACHER_ID, Teacher.FieldName.TABLE_NAME, Teacher.FieldName.TEACHER_ID);
+                oTeacher.getSelectTeacherByJoinCommand(), Self_evaluation.FieldName.TABLE_NAME,
+                Self_evaluation.FieldName.TEACHER_ID, Teacher.FieldName.ALIAS_NAME, Teacher.FieldName.TEACHER_ID);
             try
             {
                 //Retrieve self_evaluation data
@@ -57,11 +57,11 @@ namespace educationalProject.Models.ViewModels.Wrappers
                     return "";
                 }
 
-                d.iCommand.CommandText = string.Format("select {0}.*,{1},{2} from {3} INNER JOIN {4} on {5}.{6}={7}.{8}",
+                d.iCommand.CommandText = string.Format("select {0}.*,{1},{2} from {3} INNER JOIN ({4}) as {7} on {5}.{6}={7}.{8}",
                 Others_evaluation.FieldName.TABLE_NAME, Assessor.FieldName.T_PRENAME, Assessor.FieldName.T_NAME,
                 Others_evaluation.FieldName.TABLE_NAME,
-                Assessor.FieldName.TABLE_NAME, Others_evaluation.FieldName.TABLE_NAME,
-                Others_evaluation.FieldName.ASSESSOR_ID, Assessor.FieldName.TABLE_NAME, Assessor.FieldName.USERNAME);
+                oAssessor.getSelectAssessorByJoinCommand(), Others_evaluation.FieldName.TABLE_NAME,
+                Others_evaluation.FieldName.ASSESSOR_ID, Assessor.FieldName.ALIAS_NAME, Assessor.FieldName.USERNAME);
 
                 //retrieve others_evaluation data
                 res = d.iCommand.ExecuteReader();
@@ -124,12 +124,13 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 "(select * from " +
                 "(select * from {2} as s1 where s1.{3} = {4} and s1.{5} = '{6}' and s1.{7} = {8} and " +
                 "s1.{9} >= ALL(select {9} from {2} as s2 where s2.{3} = {4} and s2.{10} = s1.{10} and s2.{5} = '{6}' and s2.{7} = {8})) as r1 " +
-                "where r1.{11} >= ALL(select r2.{11} from {2} as r2 where r2.{3} = {4} and r2.{10} = r1.{10} and r2.{5} = '{6}' and r2.{7} = {8} and r2.{9}=r1.{9})) as self_eval_result INNER JOIN {12} on self_eval_result.{13} = {12}.{14}",
+                "where r1.{11} >= ALL(select r2.{11} from {2} as r2 where r2.{3} = {4} and r2.{10} = r1.{10} and r2.{5} = '{6}' and r2.{7} = {8} and r2.{9}=r1.{9})) as self_eval_result INNER JOIN ({12}) as {15} on self_eval_result.{13} = {15}.{14}",
                 Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, Self_evaluation.FieldName.TABLE_NAME,
                 Self_evaluation.FieldName.INDICATOR_NUM, inddata.indicator_num, Self_evaluation.FieldName.CURRI_ID, curri_id,
                 Self_evaluation.FieldName.ACA_YEAR,inddata.aca_year,Self_evaluation.FieldName.DATE,
                 Self_evaluation.FieldName.SUB_INDICATOR_NUM,Self_evaluation.FieldName.TIME,
-                Teacher.FieldName.TABLE_NAME,Self_evaluation.FieldName.TEACHER_ID,Teacher.FieldName.TEACHER_ID
+                oTeacher.getSelectTeacherByJoinCommand(),Self_evaluation.FieldName.TEACHER_ID,Teacher.FieldName.TEACHER_ID,
+                Teacher.FieldName.ALIAS_NAME
                 );
             try
             {
@@ -168,18 +169,19 @@ namespace educationalProject.Models.ViewModels.Wrappers
                     //Reserved for return error string
                     return "";
                 }
-                res.Close();
+                res.Close();return this;
                 d.iCommand.CommandText = string.Format(
                 "select others_eval_result.*, {0}, {1} from " +
                 "(select * from " +
                 "(select * from {2} as o1 where o1.{3} = {4} and o1.{5} = '{6}' and o1.{7} = {8} and " +
                 "o1.{9} >= ALL(select {9} from {2} as o2 where o2.{3} = {4} and o2.{10} = o1.{10} and o2.{5} = '{6}' and o2.{7} = {8})) as r1 " +
-                "where r1.{11} >= ALL(select r2.{11} from {2} as r2 where r2.{3} = {4} and r2.{10} = r1.{10} and r2.{5} = '{6}' and r2.{7} = {8} and r2.{9}=r1.{9})) as others_eval_result INNER JOIN {12} on others_eval_result.{13} = {12}.{14}",
+                "where r1.{11} >= ALL(select r2.{11} from {2} as r2 where r2.{3} = {4} and r2.{10} = r1.{10} and r2.{5} = '{6}' and r2.{7} = {8} and r2.{9}=r1.{9})) as others_eval_result INNER JOIN ({12}) as {15} on others_eval_result.{13} = {15}.{14}",
                 Assessor.FieldName.T_PRENAME, Assessor.FieldName.T_NAME, Others_evaluation.FieldName.TABLE_NAME,
                 Others_evaluation.FieldName.INDICATOR_NUM, inddata.indicator_num, Others_evaluation.FieldName.CURRI_ID, curri_id,
                 Others_evaluation.FieldName.ACA_YEAR, inddata.aca_year, Others_evaluation.FieldName.DATE,
                 Others_evaluation.FieldName.SUB_INDICATOR_NUM, Others_evaluation.FieldName.TIME,
-                Assessor.FieldName.TABLE_NAME, Others_evaluation.FieldName.ASSESSOR_ID, Assessor.FieldName.USERNAME
+                oAssessor.getSelectAssessorByJoinCommand(), Others_evaluation.FieldName.ASSESSOR_ID, Assessor.FieldName.USERNAME,
+                Assessor.FieldName.ALIAS_NAME
                 );
                 //retrieve others_evaluation data
                 res = d.iCommand.ExecuteReader();

@@ -25,9 +25,13 @@ namespace educationalProject.Models
             public static readonly string TIMESTAMP = "TIMESTAMP";
             //----------------------
             public static readonly string STAFF_ID = "STAFF_ID";
+            public static readonly string ROOM = "ROOM";
+            public static readonly string ALIAS_NAME = "SJ_RES";
             public static readonly string TABLE_NAME = "STAFF";
         }
         private int _staff_id;
+        private string _room;
         public int staff_id { get { return _staff_id; } set { _staff_id = value; } }
+        public string room { get { return _room; } set { _room = value; } }
     }
 }

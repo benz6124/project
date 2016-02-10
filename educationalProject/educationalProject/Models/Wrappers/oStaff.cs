@@ -9,6 +9,22 @@ namespace educationalProject.Models.Wrappers
 {
     public class oStaff : Staff
     {
+        public static string getSelectStaffByJoinCommand()
+        {
+            return string.Format("select {0}.{1},{2},{3},{4},{5}," +
+            "{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}," +
+            "{16} " +
+            "from {17},{0} where {1} = {18}",
+            /**tablename 0 **/ FieldName.TABLE_NAME, /**iden 1**/ FieldName.STAFF_ID, FieldName.USER_TYPE, FieldName.USERNAME,
+            FieldName.PASSWORD, FieldName.T_PRENAME, FieldName.T_NAME, FieldName.E_PRENAME, FieldName.E_NAME,
+            FieldName.CITIZEN_ID, FieldName.GENDER, FieldName.EMAIL, FieldName.TEL, FieldName.ADDR,
+            FieldName.FILE_NAME_PIC, FieldName.TIMESTAMP,  /***common 15***/
+
+            /**extended data**/
+            FieldName.ROOM,
+
+            User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_ID);
+        }
         public object Insert(List<UsernamePassword> list, List<string> target_curri_id_list)
         {
             DBConnector d = new DBConnector();

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using educationalProject.Utils;
+using educationalProject.Models.Wrappers;
 namespace educationalProject.Models.ViewModels.Wrappers
 {
     public class oTeacher_educational : Teacher_educational
@@ -18,10 +19,10 @@ namespace educationalProject.Models.ViewModels.Wrappers
             d.iCommand.CommandText = string.Format
                 ("select * from " +
                  "(select p1.{0} from {1} as p1 where p1.{2} = '{3}' and p1.{4} = {5}) as r1," +
-                 "(select * from {6} as p2 inner join(select * from {7} where {8} = '{3}') as rr1 on p2.{9} = rr1.{10}) as r2 " +
+                 "(select * from ({6}) as p2 inner join(select * from {7} where {8} = '{3}') as rr1 on p2.{9} = rr1.{10}) as r2 " +
                  "inner join {11} on r2.{9} = {11}.{12}",
                  FieldName.TEACHER_ID,President_curriculum.FieldName.TABLE_NAME,President_curriculum.FieldName.CURRI_ID,
-                 data.curri_id,President_curriculum.FieldName.ACA_YEAR,data.aca_year,FieldName.TABLE_NAME,
+                 data.curri_id,President_curriculum.FieldName.ACA_YEAR,data.aca_year,oTeacher.getSelectTeacherByJoinCommand(),
                  User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.CURRI_ID,FieldName.TEACHER_ID,
                  User_curriculum.FieldName.USER_ID,Educational_teacher_staff.FieldName.TABLE_NAME,
                  Educational_teacher_staff.FieldName.PERSONNEL_ID);
@@ -74,12 +75,13 @@ namespace educationalProject.Models.ViewModels.Wrappers
                     }
                     res.Close();
                     tabledata.Dispose();
-                    d.iCommand.CommandText = string.Format("select * from {0} where " +
+                    d.iCommand.CommandText = string.Format("select * from ({8}) as {0} where " +
                                        "{1} IN(select {2} from {3} where {4} = '{5}') and " +
                                        "not exists(select * from {6} where {0}.{1} = {6}.{7})",
-                                       FieldName.TABLE_NAME, FieldName.TEACHER_ID, User_curriculum.FieldName.USER_ID,
+                                       FieldName.ALIAS_NAME, FieldName.TEACHER_ID, User_curriculum.FieldName.USER_ID,
                                        User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.CURRI_ID,
-                                       data.curri_id, Educational_teacher_staff.FieldName.TABLE_NAME, Educational_teacher_staff.FieldName.PERSONNEL_ID);
+                                       data.curri_id, Educational_teacher_staff.FieldName.TABLE_NAME, Educational_teacher_staff.FieldName.PERSONNEL_ID,
+                                       oTeacher.getSelectTeacherByJoinCommand());
                     res = d.iCommand.ExecuteReader();
                     //read teacher data without eduhistory
                     if (res.HasRows)

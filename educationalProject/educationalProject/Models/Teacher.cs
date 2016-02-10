@@ -25,6 +25,7 @@ namespace educationalProject.Models
             public static readonly string TIMESTAMP = "TIMESTAMP";
             //----------------------
             public static readonly string TEACHER_ID = "TEACHER_ID";
+            public static readonly string ROOM = "ROOM";
             public static readonly string DEGREE = "DEGREE";
             public static readonly string POSITION = "POSITION";
             public static readonly string PERSONNEL_TYPE = "PERSONNEL_TYPE";
@@ -32,12 +33,14 @@ namespace educationalProject.Models
             public static readonly string STATUS = "STATUS";
             public static readonly string ALIVE = "ALIVE";
             public static readonly string TABLE_NAME = "TEACHER";
+            public static readonly string ALIAS_NAME = "TJ_RES";
         }
         private int _teacher_id;
         private char _degree;
         private char _position;
         private string _personnel_type;
         private string _person_id;
+        private string _room;
         private string _status;
         private int _alive;
         public int teacher_id { get { return _teacher_id; } set { _teacher_id = value; } }
@@ -46,6 +49,7 @@ namespace educationalProject.Models
         public string personnel_type { get { return _personnel_type; } set { _personnel_type = value; } }
         public string person_id { get { return _person_id; } set { _person_id = value; } }
         public string status { get { return _status; } set { _status = value; } }
+        public string room { get { return _room; } set { _room = value; } }
         public int alive { get { return _alive; } set { _alive = value; } }
     }
 }

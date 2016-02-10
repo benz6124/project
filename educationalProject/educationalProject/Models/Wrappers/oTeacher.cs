@@ -10,14 +10,32 @@ namespace educationalProject.Models.Wrappers
 {
     public class oTeacher : Teacher
     {
+        public static string getSelectTeacherByJoinCommand()
+        {
+            return string.Format("select {0}.{1},{2},{3},{4},{5}," +
+            "{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}," +
+            "{16},{17},{18},{19},{20},{21},{22} " +
+            "from {23},{0} where {1} = {24}",
+            /**tablename 0 **/ FieldName.TABLE_NAME, /**iden 1**/ FieldName.TEACHER_ID, FieldName.USER_TYPE, FieldName.USERNAME,
+            FieldName.PASSWORD, FieldName.T_PRENAME, FieldName.T_NAME, FieldName.E_PRENAME, FieldName.E_NAME,
+            FieldName.CITIZEN_ID, FieldName.GENDER, FieldName.EMAIL, FieldName.TEL, FieldName.ADDR,
+            FieldName.FILE_NAME_PIC, FieldName.TIMESTAMP,  /***common 15***/
+
+            /**extended data**/
+            FieldName.ROOM, FieldName.DEGREE, FieldName.POSITION, FieldName.PERSONNEL_TYPE, FieldName.PERSON_ID,
+            FieldName.STATUS, FieldName.ALIVE,
+
+            User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_ID);
+        }
         public object SelectTeacherIdAndTName(string curri_id)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<Teacher_with_t_name> result = new List<Teacher_with_t_name>();
-            d.iCommand.CommandText = string.Format("select * from {0} where exists(select * from {1} where {0}.{2} = {1}.{3} and {4}='{5}')", 
-                FieldName.TABLE_NAME, User_curriculum.FieldName.TABLE_NAME,FieldName.TEACHER_ID,User_curriculum.FieldName.USER_ID,User_curriculum.FieldName.CURRI_ID,curri_id);
+            d.iCommand.CommandText = string.Format("select * from ({0}) as {6} where exists(select * from {1} where {6}.{2} = {1}.{3} and {4}='{5}')", 
+                getSelectTeacherByJoinCommand(), User_curriculum.FieldName.TABLE_NAME,FieldName.TEACHER_ID,User_curriculum.FieldName.USER_ID,User_curriculum.FieldName.CURRI_ID,curri_id,
+                FieldName.ALIAS_NAME);
             try  
             {  
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -66,10 +84,10 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format
                 ("select * from " +
                  "(select p1.{0} from {1} as p1 where p1.{2} = '{3}' and p1.{4} = {5}) as r1," +
-                 "(select * from {6} as p2 inner join(select * from {7} where {8} = '{3}') as rr1 on p2.{9} = rr1.{10}) as r2 " +
+                 "(select * from ({6}) as p2 inner join(select * from {7} where {8} = '{3}') as rr1 on p2.{9} = rr1.{10}) as r2 " +
                  "inner join {11} on r2.{9} = {11}.{12}",
                  FieldName.TEACHER_ID, President_curriculum.FieldName.TABLE_NAME, President_curriculum.FieldName.CURRI_ID,
-                 data.curri_id, President_curriculum.FieldName.ACA_YEAR, data.aca_year, FieldName.TABLE_NAME,
+                 data.curri_id, President_curriculum.FieldName.ACA_YEAR, data.aca_year, getSelectTeacherByJoinCommand(),
                  User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.CURRI_ID, FieldName.TEACHER_ID,
                  User_curriculum.FieldName.USER_ID, Educational_teacher_staff.FieldName.TABLE_NAME,
                  Educational_teacher_staff.FieldName.PERSONNEL_ID);
@@ -124,12 +142,13 @@ namespace educationalProject.Models.Wrappers
                     }
                     res.Close();
                     tabledata.Dispose();
-                    d.iCommand.CommandText = string.Format("select * from {0} where " +
+                    d.iCommand.CommandText = string.Format("select * from ({0}) as {8} where " +
                                        "{1} IN(select {2} from {3} where {4} = '{5}') and " +
-                                       "not exists(select * from {6} where {0}.{1} = {6}.{7})",
-                                       FieldName.TABLE_NAME, FieldName.TEACHER_ID, User_curriculum.FieldName.USER_ID,
+                                       "not exists(select * from {6} where {8}.{1} = {6}.{7})",
+                                       getSelectTeacherByJoinCommand(), FieldName.TEACHER_ID, User_curriculum.FieldName.USER_ID,
                                        User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.CURRI_ID,
-                                       data.curri_id, Educational_teacher_staff.FieldName.TABLE_NAME, Educational_teacher_staff.FieldName.PERSONNEL_ID);
+                                       data.curri_id, Educational_teacher_staff.FieldName.TABLE_NAME, Educational_teacher_staff.FieldName.PERSONNEL_ID,
+                                       FieldName.ALIAS_NAME);
                     res = d.iCommand.ExecuteReader();
                     //read teacher data without eduhistory
                     if (res.HasRows)

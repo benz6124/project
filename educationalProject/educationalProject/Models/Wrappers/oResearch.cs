@@ -11,15 +11,15 @@ namespace educationalProject.Models.Wrappers
     {
         private string getSelectByCurriculumCommand()
         {
-            return string.Format("select r.*,{0}.{1},{0}.{2} from " +
+            return string.Format("select r.*,{14}.{1},{14}.{2} from " +
                 "(select {3}.{4},{3}.{5},{3}.{6}," +
                 "{3}.{7}, {3}.{8},{9} from {3}, {10} where " +
-                "{5} = '{11}' and {3}.{4} = {10}.{12}) as r,{0} where r.{9} = {0}.{13}",
-                Teacher.FieldName.TABLE_NAME, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
+                "{5} = '{11}' and {3}.{4} = {10}.{12}) as r,({0}) as {14} where r.{9} = {14}.{13}",
+                oTeacher.getSelectTeacherByJoinCommand(), Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
                 FieldName.TABLE_NAME, FieldName.RESEARCH_ID, FieldName.CURRI_ID, FieldName.FILE_NAME,
                 FieldName.NAME, FieldName.YEAR_PUBLISH, Research_owner.FieldName.TEACHER_ID,
                 Research_owner.FieldName.TABLE_NAME, curri_id, Research_owner.FieldName.RESEARCH_ID,
-                Teacher.FieldName.TEACHER_ID);
+                Teacher.FieldName.TEACHER_ID,Teacher.FieldName.ALIAS_NAME);
         }
         public object Select()
         {
@@ -350,15 +350,15 @@ namespace educationalProject.Models.Wrappers
             }
 
             
-            string selectcmd = string.Format("select temp1out.{6},r.*,{0}.{1},{0}.{2} from " +
+            string selectcmd = string.Format("select temp1out.{6},r.*,{15}.{1},{15}.{2} from " +
                 "(select {3}.{4},{3}.{5},{3}.{6}," +
                 "{3}.{7}, {3}.{8},{9} from {3}, {10} where " +
-                "{5} = '{11}' and {3}.{4} = {10}.{12}) as r,(select {6} from {14}) as temp1out,{0} where r.{9} = {0}.{13}",
-                Teacher.FieldName.TABLE_NAME, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
+                "{5} = '{11}' and {3}.{4} = {10}.{12}) as r,(select {6} from {14}) as temp1out,({0}) as {15} where r.{9} = {15}.{13}",
+                oTeacher.getSelectTeacherByJoinCommand(), Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
                 FieldName.TABLE_NAME, FieldName.RESEARCH_ID, FieldName.CURRI_ID, FieldName.FILE_NAME,
                 FieldName.NAME, FieldName.YEAR_PUBLISH, Research_owner.FieldName.TEACHER_ID,
                 Research_owner.FieldName.TABLE_NAME, rdata.curri_id, Research_owner.FieldName.RESEARCH_ID,
-                Teacher.FieldName.TEACHER_ID,temp1tablename);
+                Teacher.FieldName.TEACHER_ID,temp1tablename,Teacher.FieldName.ALIAS_NAME);
             
             d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} END", createtabletemp1,
                 insertintotemp1, deletefromresearchowner, insertintoresearchowner, selectcmd);

@@ -10,6 +10,22 @@ namespace educationalProject.Models.Wrappers
     
     public class oAdmin : Admin
     {
+        public static string getSelectAdminByJoinCommand()
+        {
+            return string.Format("select {0}.{1},{2},{3},{4},{5}," +
+            "{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}," +
+            "{16} " +
+            "from {17},{0} where {1} = {18}",
+            /**tablename 0 **/ FieldName.TABLE_NAME, /**iden 1**/ FieldName.ADMIN_ID, FieldName.USER_TYPE, FieldName.USERNAME,
+            FieldName.PASSWORD, FieldName.T_PRENAME, FieldName.T_NAME, FieldName.E_PRENAME, FieldName.E_NAME,
+            FieldName.CITIZEN_ID, FieldName.GENDER, FieldName.EMAIL, FieldName.TEL, FieldName.ADDR,
+            FieldName.FILE_NAME_PIC, FieldName.TIMESTAMP,  /***common 15***/
+
+            /**extended data**/
+            FieldName.ADMIN_CREATOR_ID,
+
+            User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_ID);
+        }
         private string getselectcmd()
         {
             string temp5tablename = "#temp5";
@@ -87,12 +103,12 @@ namespace educationalProject.Models.Wrappers
 
 
             string insertintotemp5_1 = string.Format("insert into {0} " +
-                "select a1.*, a2.{1} from {2} as a1, {2} as a2 where a1.{3} = a2.{4} ",
-                temp5tablename, FieldName.T_NAME, FieldName.TABLE_NAME, FieldName.ADMIN_CREATOR_ID,
-                FieldName.USERNAME);
+                "select a1.*, a2.{1} from ({2}) as a1, ({2}) as a2 where a1.{3} = a2.{4} ",
+                temp5tablename, FieldName.T_NAME, getSelectAdminByJoinCommand(), FieldName.ADMIN_CREATOR_ID,
+                FieldName.ADMIN_ID);
             string insertintotemp5_2 = string.Format("insert into {0} " +
-                "select *, null from {1} where {2} = 'ดั้งเดิม' ",
-                temp5tablename, FieldName.TABLE_NAME, FieldName.ADMIN_CREATOR_ID);
+                "select *, null from ({1}) as adm where {2} is null ",
+                temp5tablename, getSelectAdminByJoinCommand(), FieldName.ADMIN_CREATOR_ID);
 
             string selectcmd = string.Format("select * from {0} order by {1} ", temp5tablename, FieldName.TIMESTAMP);
 

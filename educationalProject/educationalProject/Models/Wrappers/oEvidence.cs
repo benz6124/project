@@ -175,12 +175,12 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<Evidence_with_t_name> result = new List<Evidence_with_t_name>();
-            d.iCommand.CommandText = string.Format("select e.*,{7}.{10},{7}.{11} from (select * from {0} " +
-                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join {7} on e.{8} = {7}.{9} order by e.{12}",
+            d.iCommand.CommandText = string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
+                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join ({7}) as {13} on e.{8} = {13}.{9} order by e.{12}",
                 FieldName.TABLE_NAME, FieldName.INDICATOR_NUM, inddata.indicator_num, FieldName.CURRI_ID,
-                curri_id, FieldName.ACA_YEAR, inddata.aca_year,Teacher.FieldName.TABLE_NAME,
+                curri_id, FieldName.ACA_YEAR, inddata.aca_year,oTeacher.getSelectTeacherByJoinCommand(),
                 FieldName.TEACHER_ID,Teacher.FieldName.TEACHER_ID,Teacher.FieldName.T_PRENAME,Teacher.FieldName.T_NAME,
-                FieldName.EVIDENCE_REAL_CODE
+                FieldName.EVIDENCE_REAL_CODE,Teacher.FieldName.ALIAS_NAME
                 );
             try
             {
@@ -234,10 +234,10 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<Evidence_with_t_name> result = new List<Evidence_with_t_name>();
-            d.iCommand.CommandText = string.Format("select e.*,{5}.{8},{5}.{9} from (select * from {0} " +
-                "where {1} = '{2}' and {3} = {4}) as e inner join {5} on e.{6} = {5}.{7}",
+            d.iCommand.CommandText = string.Format("select e.*,{10}.{8},{10}.{9} from (select * from {0} " +
+                "where {1} = '{2}' and {3} = {4}) as e inner join ({5}) as {10} on e.{6} = {10}.{7}",
                 FieldName.TABLE_NAME, FieldName.CURRI_ID,
-                curri_id, FieldName.ACA_YEAR, aca_year, Teacher.FieldName.TABLE_NAME,
+                curri_id, FieldName.ACA_YEAR, aca_year, oTeacher.getSelectTeacherByJoinCommand(),
                 FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME
                 );
             try
@@ -303,12 +303,12 @@ namespace educationalProject.Models.Wrappers
                 FieldName.TABLE_NAME, FieldName.PRIMARY_EVIDENCE_NUM,FieldName.TEACHER_ID,FieldName.CURRI_ID,FieldName.INDICATOR_NUM,FieldName.EVIDENCE_REAL_CODE,FieldName.FILE_NAME, FieldName.EVIDENCE_NAME,FieldName.SECRET,FieldName.ACA_YEAR,
                 teacher_id, curri_id, indicator_num, evidence_real_code, file_name, evidence_name, secret, aca_year) +
                 //Select part
-                string.Format("select e.*,{7}.{10},{7}.{11} from (select * from {0} " +
-                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join {7} on e.{8} = {7}.{9} order by e.{12}",
+                string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
+                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join ({7}) as {13} on e.{8} = {13}.{9} order by e.{12}",
                 FieldName.TABLE_NAME, FieldName.INDICATOR_NUM, indicator_num, FieldName.CURRI_ID,
-                curri_id, FieldName.ACA_YEAR, aca_year, Teacher.FieldName.TABLE_NAME,
+                curri_id, FieldName.ACA_YEAR, aca_year, oTeacher.getSelectTeacherByJoinCommand(),
                 FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
-                FieldName.EVIDENCE_REAL_CODE
+                FieldName.EVIDENCE_REAL_CODE,Teacher.FieldName.ALIAS_NAME
                 );
 
             try
@@ -377,13 +377,13 @@ namespace educationalProject.Models.Wrappers
                         Primary_evidence_status.FieldName.TABLE_NAME, Primary_evidence_status.FieldName.STATUS,
                         Primary_evidence_status.FieldName.PRIMARY_EVIDENCE_NUM, primary_evidence_num,
                         Primary_evidence_status.FieldName.CURRI_ID, curri_id) +
-                //Select part
-                string.Format("select e.*,{7}.{10},{7}.{11} from (select * from {0} " +
-                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join {7} on e.{8} = {7}.{9} order by e.{12}",
+//Select part
+string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
+                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join ({7}) as {13} on e.{8} = {13}.{9} order by e.{12}",
                 FieldName.TABLE_NAME, FieldName.INDICATOR_NUM, indicator_num, FieldName.CURRI_ID,
-                curri_id, FieldName.ACA_YEAR, aca_year, Teacher.FieldName.TABLE_NAME,
+                curri_id, FieldName.ACA_YEAR, aca_year, oTeacher.getSelectTeacherByJoinCommand(),
                 FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
-                FieldName.EVIDENCE_REAL_CODE
+                FieldName.EVIDENCE_REAL_CODE,Teacher.FieldName.ALIAS_NAME
                 );
 
             try
@@ -554,11 +554,12 @@ namespace educationalProject.Models.Wrappers
                                          temp1tablename, FieldName.FILE_NAME, FieldName.TABLE_NAME);
 
 
-            string selectfromevidencecmd = string.Format("select e.*,{7}.{10},{7}.{11} from (select * from {0} " +
-                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join {7} on e.{8} = {7}.{9}",
+            string selectfromevidencecmd = string.Format("select e.*,{12}.{10},{12}.{11} from (select * from {0} " +
+                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join ({7}) as {12} on e.{8} = {12}.{9}",
                 FieldName.TABLE_NAME, FieldName.INDICATOR_NUM, indicator_num, FieldName.CURRI_ID,
-                curri_id, FieldName.ACA_YEAR, aca_year, Teacher.FieldName.TABLE_NAME,
-                FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME
+                curri_id, FieldName.ACA_YEAR, aca_year, oTeacher.getSelectTeacherByJoinCommand(),
+                FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
+                Teacher.FieldName.ALIAS_NAME
                 );
 
             mainselectcmd = string.Format("select {0}.{1},evires.* from {0},({2}) as evires order by evires.{3}",

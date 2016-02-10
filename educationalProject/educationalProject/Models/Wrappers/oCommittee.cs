@@ -16,9 +16,10 @@ namespace educationalProject.Models.Wrappers
                 return "Cannot connect to database.";
             List<Committee_with_detail> result = new List<Committee_with_detail>();
 
-            d.iCommand.CommandText = string.Format("select {0}.*,{1},{2},{3},{12} from {0},{4} where {5} = '{6}' and {7} = {8} and {0}.{9} = {4}.{10} order by {11}", 
+            d.iCommand.CommandText = string.Format("select {0}.*,{1},{2},{3},{12} from {0},({4}) as {13} where {5} = '{6}' and {7} = {8} and {0}.{9} = {13}.{10} order by {11}", 
                 FieldName.TABLE_NAME,Teacher.FieldName.T_PRENAME,Teacher.FieldName.T_NAME,Teacher.FieldName.FILE_NAME_PIC,
-                Teacher.FieldName.TABLE_NAME,FieldName.CURRI_ID,curri_id,FieldName.ACA_YEAR,aca_year,FieldName.TEACHER_ID,Teacher.FieldName.TEACHER_ID,FieldName.DATE_PROMOTED,Teacher.FieldName.EMAIL);
+                oTeacher.getSelectTeacherByJoinCommand(),FieldName.CURRI_ID,curri_id,FieldName.ACA_YEAR,aca_year,FieldName.TEACHER_ID,Teacher.FieldName.TEACHER_ID,FieldName.DATE_PROMOTED,Teacher.FieldName.EMAIL,
+                Teacher.FieldName.ALIAS_NAME);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -90,16 +91,16 @@ namespace educationalProject.Models.Wrappers
                                       DBFieldDataType.CURRI_ID_TYPE);
 
             string insertintotemp5_1 = string.Format("insert into {0} " +
-                "select {17}, {2}, {3}, {4} from {5}, {6} " +
+                "select {17}, {2}, {3}, {4} from ({5}) as {18}, {6} " +
                 "where {17} = {7} and {2} = '{8}' " +
-                "and not exists (select * from {9} where {10} = '{8}' and {11} = {12} and {9}.{13} = {5}.{17}) " +
-                "and not exists (select * from {14} where {15} = '{8}' and {16} = {12} and {14}.{1} = {5}.{17}) ",
+                "and not exists (select * from {9} where {10} = '{8}' and {11} = {12} and {9}.{13} = {18}.{17}) " +
+                "and not exists (select * from {14} where {15} = '{8}' and {16} = {12} and {14}.{1} = {18}.{17}) ",
                 temp5tablename, FieldName.TEACHER_ID, User_curriculum.FieldName.CURRI_ID, Teacher.FieldName.T_PRENAME,
-                Teacher.FieldName.T_NAME,/**5**/Teacher.FieldName.TABLE_NAME,/**6**/User_curriculum.FieldName.TABLE_NAME,
+                Teacher.FieldName.T_NAME,/**5**/oTeacher.getSelectTeacherByJoinCommand(),/**6**/User_curriculum.FieldName.TABLE_NAME,
                 User_curriculum.FieldName.USER_ID, curri_id, President_curriculum.FieldName.TABLE_NAME,
                 President_curriculum.FieldName.CURRI_ID, President_curriculum.FieldName.ACA_YEAR,
                 /**12**/this.aca_year, President_curriculum.FieldName.TEACHER_ID, FieldName.TABLE_NAME,
-                FieldName.CURRI_ID, FieldName.ACA_YEAR, Teacher.FieldName.TEACHER_ID);
+                FieldName.CURRI_ID, FieldName.ACA_YEAR, Teacher.FieldName.TEACHER_ID,Teacher.FieldName.ALIAS_NAME);
 
             string excludecond = "1=1 ";
             foreach (string user_id in user_list)
@@ -107,13 +108,14 @@ namespace educationalProject.Models.Wrappers
 
             string insertintotemp5_2 = string.Format("insert into {0} " +
                                        "select {1}.{2}, {3}, {4}, {5} " +
-                                       "from {1}, {6} " +
+                                       "from {1}, ({6}) as {12} " +
                                        "where {3} = '{7}' and {8} = {9} and ({10}) " +
-                                       "and {1}.{2} = {6}.{11} ",
+                                       "and {1}.{2} = {12}.{11} ",
                                        temp5tablename, FieldName.TABLE_NAME, FieldName.TEACHER_ID, FieldName.CURRI_ID,
                                        Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
-                                       Teacher.FieldName.TABLE_NAME, curri_id,
-                                       FieldName.ACA_YEAR, aca_year, excludecond, Teacher.FieldName.TEACHER_ID);
+                                       oTeacher.getSelectTeacherByJoinCommand(), curri_id,
+                                       FieldName.ACA_YEAR, aca_year, excludecond, Teacher.FieldName.TEACHER_ID,
+                                       Teacher.FieldName.ALIAS_NAME);
 
             string selectcmd = string.Format("select * from {0} order by {1} ", temp5tablename, FieldName.TEACHER_ID);
 
@@ -174,9 +176,10 @@ namespace educationalProject.Models.Wrappers
                              date_promoted);
             }
 
-            string selectcmd = string.Format("select {0}.*,{1},{2},{3},{12} from {0},{4} where {5} = '{6}' and {7} = {8} and {0}.{9} = {4}.{10} order by {11} ",
+            string selectcmd = string.Format("select {0}.*,{1},{2},{3},{12} from {0},({4}) as {13} where {5} = '{6}' and {7} = {8} and {0}.{9} = {13}.{10} order by {11} ",
                 FieldName.TABLE_NAME, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, Teacher.FieldName.FILE_NAME_PIC,
-                Teacher.FieldName.TABLE_NAME, FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year, FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, FieldName.DATE_PROMOTED, Teacher.FieldName.EMAIL);
+                oTeacher.getSelectTeacherByJoinCommand(), FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year, FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, FieldName.DATE_PROMOTED, Teacher.FieldName.EMAIL,
+                Teacher.FieldName.ALIAS_NAME);
 
             d.iCommand.CommandText = string.Format("BEGIN {0} {1} END",insertcmd,selectcmd);
             try

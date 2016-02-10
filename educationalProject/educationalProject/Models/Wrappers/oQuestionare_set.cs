@@ -14,12 +14,12 @@ namespace educationalProject.Models.Wrappers
             return string.Format("select q.*,{0},{1} from " +
                 "(select {2}.{3},{4},{5},{6},{7},{8},{9} " +
                 "from {2}, {10} where {5} = '{11}' and {6} = {12} and {2}.{3} = {10}.{13}) as q " +
-                "inner join {14} on q.{4} = {14}.{15}", Teacher.FieldName.T_PRENAME,
+                "inner join ({14}) as {16} on q.{4} = {16}.{15}", Teacher.FieldName.T_PRENAME,
                 Teacher.FieldName.T_NAME, FieldName.TABLE_NAME, FieldName.QUESTIONARE_SET_ID, FieldName.PERSONNEL_ID,
                 FieldName.CURRI_ID, FieldName.ACA_YEAR, FieldName.NAME, FieldName.DATE, Questionare_privilege.FieldName.PRIVILEGE,
                 Questionare_privilege.FieldName.TABLE_NAME, curri_id, aca_year,
-                Questionare_privilege.FieldName.QUESTIONARE_SET_ID, Teacher.FieldName.TABLE_NAME,
-                Teacher.FieldName.TEACHER_ID
+                Questionare_privilege.FieldName.QUESTIONARE_SET_ID, oTeacher.getSelectTeacherByJoinCommand(),
+                Teacher.FieldName.TEACHER_ID,Teacher.FieldName.ALIAS_NAME
                 );
         }
         public object Select()
