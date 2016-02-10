@@ -9,15 +9,162 @@ namespace educationalProject.Models.ViewModels.Wrappers
 {
     public class oUsers : User
     {
+        private string getSelectTeacherWithCurriculumCommand()
+        {
+            string temp99tablename = "#temp99";
+            string createtabletemp99 = string.Format("create table {0}(" +
+            "[row_num] int identity(1, 1) not null," +
+            "[{1}] INT NULL," +
+            "[{2}] VARCHAR(40) NULL," +
+            "[{3}] {28} NULL," +
+            "[{4}] VARCHAR(MAX) NULL," +
+            "[{5}] VARCHAR(16) NULL," +
+            "[{6}] VARCHAR(60) NULL," +
+            "[{7}] VARCHAR(16) NULL," +
+            "[{8}] VARCHAR(60) NULL," +
+            "[{9}] CHAR(13) NULL," +
+            "[{10}] CHAR NULL," +
+            "[{11}] VARCHAR(60) NULL," +
+            "[{12}] VARCHAR(20) NULL," +
+            "[{13}] VARCHAR(80) NULL," +
+            "[{14}] {29} NULL," +
+            "[{15}] DATETIME2 NULL," +
+            "[{16}] VARCHAR(40) NULL," +
+            "[{17}] CHAR NULL," +
+            "[{18}] CHAR NULL," +
+            "[{19}] VARCHAR(2) NULL," +
+            "[{20}] VARCHAR(4) NULL," +
+            "[{21}] VARCHAR(40) NULL," +
+            "[{22}] TINYINT NULL," +
+
+            "[{23}] CHAR NULL," +
+            "[{24}] VARCHAR(100) NULL," +
+            "[{25}] VARCHAR(200) NULL," +
+            "[{26}] INT NULL," +
+            "[{27}] VARCHAR(200) NULL," +
+            "PRIMARY KEY([row_num])) " +
+
+            "alter table {0} " +
+            "alter column [{2}] VARCHAR(40) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{3}] {28} collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{4}] VARCHAR(MAX) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{5}] VARCHAR(16) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{6}] VARCHAR(60) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{7}] VARCHAR(16) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{8}] VARCHAR(60) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{9}] CHAR(13) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{10}] CHAR collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{11}] VARCHAR(60) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{12}] VARCHAR(20) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{13}] VARCHAR(80) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{14}] {29} collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{16}] VARCHAR(40) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{17}] CHAR collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{18}] CHAR collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{19}] VARCHAR(2) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{20}] VARCHAR(4) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{21}] VARCHAR(40) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{23}] CHAR collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{24}] VARCHAR(100) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{25}] VARCHAR(200) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{27}] VARCHAR(200) collate database_default ",
+            temp99tablename, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.USER_TYPE, Teacher.FieldName.USERNAME,
+            Teacher.FieldName.PASSWORD,Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,Teacher.FieldName.E_PRENAME, Teacher.FieldName.E_NAME,
+            Teacher.FieldName.CITIZEN_ID,Teacher.FieldName.GENDER,Teacher.FieldName.EMAIL,Teacher.FieldName.TEL, Teacher.FieldName.ADDR, Teacher.FieldName.FILE_NAME_PIC,
+            Teacher.FieldName.TIMESTAMP, Teacher.FieldName.ROOM, Teacher.FieldName.DEGREE,Teacher.FieldName.POSITION, Teacher.FieldName.PERSONNEL_TYPE,
+            Teacher.FieldName.PERSON_ID, Teacher.FieldName.STATUS, Teacher.FieldName.ALIVE, "edudeg", Educational_teacher_staff.FieldName.PRE_MAJOR,Educational_teacher_staff.FieldName.MAJOR,
+            Educational_teacher_staff.FieldName.GRAD_YEAR, Educational_teacher_staff.FieldName.COLLEGE,DBFieldDataType.USERNAME_TYPE,DBFieldDataType.FILE_NAME_TYPE);
+
+            string insertintotemp99truecase = string.Format("insert into {0} " +
+            "select tsres.*, {1}.{2} as edudeg, {3}, {4}, {5},{6} from " +
+            "({7}) as tsres, {1} where {8} = '{9}' " +
+            "and {10} = {11} ", temp99tablename, Educational_teacher_staff.FieldName.TABLE_NAME,
+            Educational_teacher_staff.FieldName.DEGREE, Educational_teacher_staff.FieldName.PRE_MAJOR,
+            Educational_teacher_staff.FieldName.MAJOR, Educational_teacher_staff.FieldName.GRAD_YEAR,
+            Educational_teacher_staff.FieldName.COLLEGE, oTeacher.getSelectTeacherByJoinCommand(),
+            Teacher.FieldName.USERNAME, username, Educational_teacher_staff.FieldName.PERSONNEL_ID,
+            Teacher.FieldName.TEACHER_ID);
+
+            string insertintotemp99falsecase = string.Format("insert into {0} " +
+            "select *, null, null, null, null, null from ({3}) as stres where {1} = '{2}' ",
+            temp99tablename, Teacher.FieldName.USERNAME, username, oTeacher.getSelectTeacherByJoinCommand());
+
+
+            string insertintotemp99_1 = string.Format("if exists(select * from {0} where {1} = '{2}' " +
+            "and {3} in (select {4} from {5} where {3} = {4})) " +
+            insertintotemp99truecase + " " + "else " + insertintotemp99falsecase + " ",
+            User_list.FieldName.TABLE_NAME, Teacher.FieldName.USERNAME, username,
+            User_list.FieldName.USER_ID, Educational_teacher_staff.FieldName.PERSONNEL_ID,
+            Educational_teacher_staff.FieldName.TABLE_NAME);
+
+
+            string insertintotemp99_2 = string.Format("insert into {0}({1}) " +
+            "select {2} from (select max({3}) as {3} from {0}) as tid,{4} where {3} = {5} ",
+            temp99tablename, Teacher.FieldName.USERNAME, User_curriculum.FieldName.CURRI_ID,
+            Teacher.FieldName.TEACHER_ID, User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID);
+
+            string selectcmd = string.Format("select * from {0} ", temp99tablename);
+
+            return string.Format(" BEGIN {0} {1} {2} {3} END ", createtabletemp99, insertintotemp99_1, insertintotemp99_2, selectcmd);
+        }
+
+
         public object SelectUser(string preferredusername)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             User_information_with_privilege_information result = new User_information_with_privilege_information();
+
+            username = preferredusername;
+            //string selectfromteacheriftrue = string.Format("
             string selectcmd = string.Format(
                                "if exists(select * from ({0}) as tsres where {1} = '{2}') " +
-                                    "select * from ({0}) as tsres where {1} = '{2}' " +
+                                getSelectTeacherWithCurriculumCommand() +
                                 "else if exists(select * from ({3}) as stres where {1} = '{2}') " +
                                     "select * from ({3}) as stres where {1} = '{2}' " +
                                 "else if exists(select * from ({4}) as std where {1} = '{2}') " +
@@ -32,7 +179,8 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                     "select * from ({8}) as admres where {1} = '{2}' ",
                                oTeacher.getSelectTeacherByJoinCommand(), Teacher.FieldName.USERNAME, preferredusername,
                                oStaff.getSelectStaffByJoinCommand(),oStudent.getSelectStudentByJoinCommand(),oAlumni.getSelectAlumniByJoinCommand(),
-                               oCompany.getSelectCompanyByJoinCommand(),oAssessor.getSelectAssessorByJoinCommand(),oAdmin.getSelectAdminByJoinCommand());
+                               oCompany.getSelectCompanyByJoinCommand(),oAssessor.getSelectAssessorByJoinCommand(),oAdmin.getSelectAdminByJoinCommand()
+                               );
 
             d.iCommand.CommandText = selectcmd;
             try
@@ -44,42 +192,86 @@ namespace educationalProject.Models.ViewModels.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        //MAIN INFOMRATION
-                        string usrtype = item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString();
-                        if (usrtype == "อาจารย์")
-                            result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[Teacher.FieldName.TEACHER_ID].Ordinal]);
-                        else if (usrtype == "เจ้าหน้าที่")
-                            result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[Staff.FieldName.STAFF_ID].Ordinal]);
-                        else if (usrtype == "นักศึกษา" || usrtype == "ศิษย์เก่า")
-                            result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[Student.FieldName.USER_ID].Ordinal]);
-                        else if (usrtype == "บริษัท")
-                            result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[Company.FieldName.COMPANY_ID].Ordinal]);
-                        else if (usrtype == "ผู้ประเมินจากภายนอก")
-                            result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[Assessor.FieldName.ASSESSOR_ID].Ordinal]);
+                        //USER_TYPE != null mean that row have main data (main info + eduhistory)
+                        if (item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString() != "")
+                        {
+                            //result.username == null means the first loop round (no data are read)
+                            //Read main data if that condition is TRUE 
+                            string usrtype = item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString();
+                            if (result.username == null)
+                            {
+                                //MAIN INFORMRATION
+                                if (usrtype == "อาจารย์")
+                                    result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[Teacher.FieldName.TEACHER_ID].Ordinal]);
+                                else if (usrtype == "เจ้าหน้าที่")
+                                    result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[Staff.FieldName.STAFF_ID].Ordinal]);
+                                else if (usrtype == "นักศึกษา" || usrtype == "ศิษย์เก่า")
+                                    result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[Student.FieldName.USER_ID].Ordinal]);
+                                else if (usrtype == "บริษัท")
+                                    result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[Company.FieldName.COMPANY_ID].Ordinal]);
+                                else if (usrtype == "ผู้ประเมินจากภายนอก")
+                                    result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[Assessor.FieldName.ASSESSOR_ID].Ordinal]);
+                                else
+                                    result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[Admin.FieldName.ADMIN_ID].Ordinal]);
+
+
+                                result.username = item.ItemArray[data.Columns[Teacher.FieldName.USERNAME].Ordinal].ToString();
+                                result.user_type = usrtype;
+                                //**********************************************
+                                result.information.addr = item.ItemArray[data.Columns[Teacher.FieldName.ADDR].Ordinal].ToString();
+                                result.information.citizen_id = item.ItemArray[data.Columns[Teacher.FieldName.CITIZEN_ID].Ordinal].ToString();
+                                result.information.email = item.ItemArray[data.Columns[Teacher.FieldName.EMAIL].Ordinal].ToString();
+                                result.information.tel = item.ItemArray[data.Columns[Teacher.FieldName.TEL].Ordinal].ToString();
+                                result.information.gender = item.ItemArray[data.Columns[Teacher.FieldName.GENDER].Ordinal].ToString() != "" ? Convert.ToChar(item.ItemArray[data.Columns[Teacher.FieldName.GENDER].Ordinal]) : ' ';
+                                result.information.file_name_pic = item.ItemArray[data.Columns[Teacher.FieldName.FILE_NAME_PIC].Ordinal].ToString();
+                                result.information.timestamp = item.ItemArray[data.Columns[Teacher.FieldName.TIMESTAMP].Ordinal].ToString();
+                                result.information.e_name = item.ItemArray[data.Columns[Teacher.FieldName.E_NAME].Ordinal].ToString();
+                                result.information.e_prename = item.ItemArray[data.Columns[Teacher.FieldName.E_PRENAME].Ordinal].ToString();
+                                result.information.t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString();
+                                result.information.t_prename = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString();
+                                result.information.SetPassword(item.ItemArray[data.Columns[Teacher.FieldName.PASSWORD].Ordinal].ToString());
+
+                                if (usrtype == "อาจารย์")
+                                {
+                                    result.information.degree = item.ItemArray[data.Columns[Teacher.FieldName.DEGREE].Ordinal].ToString() != "" ? Convert.ToChar(item.ItemArray[data.Columns[Teacher.FieldName.DEGREE].Ordinal]) : ' ';
+                                    result.information.position = item.ItemArray[data.Columns[Teacher.FieldName.POSITION].Ordinal].ToString() != "" ? Convert.ToChar(item.ItemArray[data.Columns[Teacher.FieldName.POSITION].Ordinal]) : ' ';
+                                    result.information.personnel_type = item.ItemArray[data.Columns[Teacher.FieldName.PERSONNEL_TYPE].Ordinal].ToString();
+                                    result.information.person_id = item.ItemArray[data.Columns[Teacher.FieldName.PERSON_ID].Ordinal].ToString();
+                                    result.information.room = item.ItemArray[data.Columns[Teacher.FieldName.ROOM].Ordinal].ToString();
+                                    result.information.status = item.ItemArray[data.Columns[Teacher.FieldName.STATUS].Ordinal].ToString();
+                                    result.information.alive = item.ItemArray[data.Columns[Teacher.FieldName.POSITION].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[Teacher.FieldName.ALIVE].Ordinal]) : -1;
+                                }
+                            }
+                            //read secondary data such as educational history (if exists)
+                            if (usrtype == "อาจารย์" || usrtype == "เจ้าหน้าที่")
+                            {
+                                //if edudeg column value is not null => ADD IT
+                                if(item.ItemArray[data.Columns["edudeg"].Ordinal].ToString() != "")
+                                {
+                                    result.information.education.Add(new Educational_teacher_staff
+                                    {
+                                        college = item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.COLLEGE].Ordinal].ToString(),
+                                        degree = Convert.ToChar(item.ItemArray[data.Columns["edudeg"].Ordinal].ToString()),
+                                        grad_year = item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.GRAD_YEAR].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.GRAD_YEAR].Ordinal]) : 0,
+                                        major = item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.MAJOR].Ordinal].ToString(),
+                                        personnel_id = result.user_id,
+                                        pre_major = item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.PRE_MAJOR].Ordinal].ToString()
+                                    });
+                                }
+                            }
+                        }
                         else
-                            result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[Admin.FieldName.ADMIN_ID].Ordinal]);
-
-
-                        result.username = item.ItemArray[data.Columns[Teacher.FieldName.USERNAME].Ordinal].ToString();
-                        result.user_type = usrtype;
-                        //**********************************************
-                        result.information.addr = item.ItemArray[data.Columns[Teacher.FieldName.ADDR].Ordinal].ToString();
-                        result.information.citizen_id = item.ItemArray[data.Columns[Teacher.FieldName.CITIZEN_ID].Ordinal].ToString();
-                        result.information.email = item.ItemArray[data.Columns[Teacher.FieldName.EMAIL].Ordinal].ToString();
-                        result.information.tel = item.ItemArray[data.Columns[Teacher.FieldName.TEL].Ordinal].ToString();
-                        result.information.gender = item.ItemArray[data.Columns[Teacher.FieldName.GENDER].Ordinal].ToString() != "" ? Convert.ToChar(item.ItemArray[data.Columns[Teacher.FieldName.GENDER].Ordinal]) : ' ';
-                        result.information.file_name_pic = item.ItemArray[data.Columns[Teacher.FieldName.FILE_NAME_PIC].Ordinal].ToString();
-                        result.information.timestamp = item.ItemArray[data.Columns[Teacher.FieldName.TIMESTAMP].Ordinal].ToString();
-                        result.information.e_name = item.ItemArray[data.Columns[Teacher.FieldName.E_NAME].Ordinal].ToString();
-                        result.information.e_prename = item.ItemArray[data.Columns[Teacher.FieldName.E_PRENAME].Ordinal].ToString();
-                        result.information.t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString();
-                        result.information.t_prename = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString();
-                        result.information.SetPassword(item.ItemArray[data.Columns[Teacher.FieldName.PASSWORD].Ordinal].ToString());
+                        {
+                            //Read ternary data such as curriculum which personnel is in
+                            //Username column contain curri_id value
+                            result.curri_id_in.Add(item.ItemArray[data.Columns[Teacher.FieldName.USERNAME].Ordinal].ToString());
+                        }
                     }
                     data.Dispose();
                 }
                 else
                 {
+                    return "ไม่พบชื่อผู้ใช้งานนี้ในระบบ";
                     //Reserved for return error string
                 }
                 res.Close();
@@ -99,120 +291,100 @@ namespace educationalProject.Models.ViewModels.Wrappers
 
         public object SelectUserPrivilege(ref User_information_with_privilege_information userdata)
         {
-            //DBConnector d = new DBConnector();
-            //if (!d.SQLConnect())
-            //    return "Cannot connect to database.";
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
 
-            //string temp5tablename = "#temp5";
+            string temp5tablename = "#temp5";
 
-            //string createtabletemp5 = string.Format("create table {0}(" +
-            //                          "[row_num] int identity(1, 1) not null," +
-            //                          "[{1}] {5} null," +
-            //                          "[{2}] {6} null," +
-            //                          "[{3}] varchar(80) null," +
-            //                          "[{4}] varchar(80) null," +
-            //                          "primary key([row_num])) " +
+            string createtabletemp5 = string.Format("CREATE TABLE {0}(" +
+                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
+                                      "[{1}] INT NULL," +
+                                      "[{2}] {5} NULL," +
+                                      "[{3}] INT NULL," +
+                                      "[{4}] INT null," +
+                                      "PRIMARY KEY([row_num])) " +
 
-            //                          "alter table {0} " +
-            //                          "alter column {1} {5} collate database_default " +
+                                      "alter table {0} " +
+                                      "alter column {2} {5} collate database_default ",
+                                      temp5tablename, Extra_privilege.FieldName.PERSONNEL_ID,
+                                      Extra_privilege.FieldName.CURRI_ID,
+                                      Extra_privilege.FieldName.TITLE_CODE,
+                                      Extra_privilege.FieldName.TITLE_PRIVILEGE_CODE,
+                                      DBFieldDataType.CURRI_ID_TYPE);
 
-            //                          "alter table {0} " +
-            //                          "alter column {2} {6} collate database_default " +
+            string insertintotemp5_1 = string.Format("insert into {0} " +
+                                       "select * from {1} where {2} = {3} ",
+                                       temp5tablename, Extra_privilege.FieldName.TABLE_NAME,
+                                       Extra_privilege.FieldName.PERSONNEL_ID, userdata.user_id);
 
-            //                          "alter table {0} " +
-            //                          "alter column {3} varchar(80) collate database_default " +
+            string insertintotemp5_2 = string.Format("insert into {0} " +
+                                       "select {1}, {2}, {3}, {4} from {5} where {6} = '{7}' " +
+                                       "and {2} in (select {8} from {9} where {10} = {1}) " +
+                                       "and not exists(select * from {11} where {12} = {1} " +
+                                       "and {11}.{13} = {5}.{2} and {11}.{14} = {5}.{3}) ",
+                                       temp5tablename, userdata.user_id, Extra_privilege_by_type.FieldName.CURRI_ID,
+                                       Extra_privilege_by_type.FieldName.TITLE_CODE, Extra_privilege_by_type.FieldName.TITLE_PRIVILEGE_CODE,
+                                       Extra_privilege_by_type.FieldName.TABLE_NAME, Extra_privilege_by_type.FieldName.USER_TYPE,
+                                       userdata.user_type, User_curriculum.FieldName.CURRI_ID, User_curriculum.FieldName.TABLE_NAME,
+                                       User_curriculum.FieldName.USER_ID, Extra_privilege.FieldName.TABLE_NAME,
+                                       Extra_privilege.FieldName.PERSONNEL_ID,
+                                       Extra_privilege.FieldName.CURRI_ID,
+                                       Extra_privilege.FieldName.TITLE_CODE);
 
-            //                          "alter table {0} " +
-            //                          "alter column {4} varchar(80) collate database_default ",
-            //                          temp5tablename,User_list.FieldName.USER_ID,User_curriculum.FieldName.CURRI_ID,
-            //                          Extra_privilege.FieldName.TITLE,Extra_privilege.FieldName.PRIVILEGE,
-            //                          DBFieldDataType.USER_ID_TYPE,DBFieldDataType.CURRI_ID_TYPE
-            //                          );
+            string insertintotemp5_3 = string.Format("insert into {0} " +
+                                       "select {1},{2},{3},{4} from {5}," +
+                                       "(select {2} from {6} where {7} = {1}) as usrcurri " +
+                                       "where {8} = '{9}' " +
+                                       "and not exists(select * from {0} where " +
+                                       "{0}.{10} = usrcurri.{2} and {0}.{11} = {5}.{3}) ",
+                                       temp5tablename, userdata.user_id, User_curriculum.FieldName.CURRI_ID, Default_privilege_by_type.FieldName.TITLE_CODE,
+                                       Default_privilege_by_type.FieldName.TITLE_PRIVILEGE_CODE, Default_privilege_by_type.FieldName.TABLE_NAME,
+                                       User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID,
+                                       Default_privilege_by_type.FieldName.USER_TYPE, userdata.user_type,
+                                       Extra_privilege.FieldName.CURRI_ID,
+                                       Extra_privilege.FieldName.TITLE_CODE);
 
-            //string insertintotemp5_1 = string.Format("insert into {0} " +
-            //                           "select * from {1} where {2} = '{3}' ",
-            //                           temp5tablename,Extra_privilege.FieldName.TABLE_NAME,
-            //                           Extra_privilege.FieldName.PERSONNEL_ID,userdata.user_id
-            //                           );
+            string selectcmd = string.Format("select * from {0} order by {1},{2} ", temp5tablename, Extra_privilege.FieldName.CURRI_ID, Extra_privilege.FieldName.TITLE_CODE);
 
-            //string insertintotemp5_2 = string.Format("insert into {0} " +
-            //                           "select '{1}',{2},{3},{4} " +
-            //                           "from {5} " +
-            //                           "where {2} in (select {6} from {7} where {8} = '{1}') " +
-            //                           "and not exists " +
-            //                           "(select * from {9} " +
-            //                           "where {10} = '{1}' and {9}.{11} = {5}.{3} and {9}.{12} = {5}.{2}) " +
-            //                           "and {13} = '{14}' ",
-            //                           temp5tablename, userdata.user_id, Extra_privilege_by_type.FieldName.CURRI_ID,
-            //                           Extra_privilege_by_type.FieldName.TITLE, Extra_privilege_by_type.FieldName.PRIVILEGE,
-            //                           /***Main 5***/Extra_privilege_by_type.FieldName.TABLE_NAME,
-            //                           User_curriculum.FieldName.CURRI_ID, User_curriculum.FieldName.TABLE_NAME,
-            //                           User_curriculum.FieldName.USER_ID,
-            //                           /***extra 9***/Extra_privilege.FieldName.TABLE_NAME,
-            //                           Extra_privilege.FieldName.PERSONNEL_ID,
-            //                           Extra_privilege.FieldName.TITLE,
-            //                           Extra_privilege.FieldName.CURRI_ID,
-            //                           Extra_privilege_by_type.FieldName.USER_TYPE, userdata.user_type);
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} END", createtabletemp5, insertintotemp5_1,
+                insertintotemp5_2, insertintotemp5_3, selectcmd);
 
-            //string insertintotemp5_3 = string.Format("insert into {0} " +
-            //                           "select usercurri.*, {1}, {2} " +
-            //                           "from (select * from {3} where {4} = '{5}') as usercurri,{6} " +
-            //                           "where {7} = '{8}' and not exists (select * from {0} where " +
-            //                           "{0}.{9} = {6}.{1} and {0}.{10} = usercurri.{11}) ",
-            //                           temp5tablename, Default_privilege_by_type.FieldName.TITLE, Default_privilege_by_type.FieldName.PRIVILEGE,
-            //                           User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID,
-            //                           userdata.user_id,
-            //                           /*default 6*/Default_privilege_by_type.FieldName.TABLE_NAME,
-            //                           Default_privilege_by_type.FieldName.USER_TYPE, userdata.user_type,
-            //                           Extra_privilege.FieldName.TITLE, Extra_privilege.FieldName.CURRI_ID,
-            //                           User_curriculum.FieldName.CURRI_ID);
+            try
+            {
+                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                if (res.HasRows)
+                {
+                    DataTable data = new DataTable();
+                    data.Load(res);
+                    foreach (DataRow item in data.Rows)
+                    {
+                        string curri_id = item.ItemArray[data.Columns[User_curriculum.FieldName.CURRI_ID].Ordinal].ToString();
+                        if (!userdata.privilege.ContainsKey(curri_id))
+                        {
 
-            //string selectcmd = string.Format("select * from {0} order by {1},{2} ", temp5tablename,
-            //                   Extra_privilege.FieldName.TITLE, Extra_privilege.FieldName.CURRI_ID);
-            
-            // d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} END", createtabletemp5,insertintotemp5_1,
-            //     insertintotemp5_2,insertintotemp5_3,selectcmd);
-
-            //try
-            //{
-            //    System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
-            //    if (res.HasRows)
-            //    {
-            //        DataTable data = new DataTable();
-            //        data.Load(res);
-            //        foreach (DataRow item in data.Rows)
-            //        {
-            //            string curri_id = item.ItemArray[data.Columns[User_curriculum.FieldName.CURRI_ID].Ordinal].ToString();
-            //            if (userdata.privilege.FirstOrDefault(t => t.curri_id == curri_id) == null)
-            //            {
-            //                userdata.privilege.Add(new Privilege_by_curriculum
-            //                {
-            //                    curri_id = item.ItemArray[data.Columns[User_curriculum.FieldName.CURRI_ID].Ordinal].ToString()
-            //                });
-            //            }
-            //            userdata.privilege.First(t => t.curri_id == curri_id).privilege_list.Add(new Title_privilege {
-            //                privilege = item.ItemArray[data.Columns[Extra_privilege.FieldName.PRIVILEGE].Ordinal].ToString(),
-            //                title = item.ItemArray[data.Columns[Extra_privilege.FieldName.TITLE].Ordinal].ToString()
-            //            });
-            //        }
-            //        data.Dispose();
-            //    }
-            //    else
-            //    {
-            //        //Reserved for return error string
-            //    }
-            //    res.Close();
-            //}
-            //catch (Exception ex)
-            //{
-            //    //Handle error from sql execution
-            //    return ex.Message;
-            //}
-            //finally
-            //{
-            //    //Whether it success or not it must close connection in order to end block
-            //    d.SQLDisconnect();
-            //}
+                            userdata.privilege.Add(curri_id, new Dictionary<int, int>());
+                        }
+                        userdata.privilege[curri_id][Convert.ToInt32(item.ItemArray[data.Columns[Extra_privilege.FieldName.TITLE_CODE].Ordinal])] = Convert.ToInt32(item.ItemArray[data.Columns[Extra_privilege.FieldName.TITLE_PRIVILEGE_CODE].Ordinal]);
+                    }
+                    data.Dispose();
+                }
+                else
+                {
+                    //Reserved for return error string
+                }
+                res.Close();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
             return null;
         }
     }

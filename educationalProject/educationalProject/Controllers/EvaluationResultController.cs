@@ -12,6 +12,7 @@ namespace educationalProject.Controllers
     public class EvaluationResultController : ApiController
     {
         private oEvaluation_overall_result datacontext = new oEvaluation_overall_result();
+        [ActionName("individual")]
         public IHttpActionResult PostByIndicatorAndCurriculum(JObject obj)
         {
             oIndicator data = new oIndicator

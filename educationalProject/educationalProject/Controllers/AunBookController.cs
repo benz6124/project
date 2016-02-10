@@ -14,6 +14,26 @@ namespace educationalProject.Controllers
     {
         private oAun_book datacontext = new oAun_book();
 
+        public IHttpActionResult Get()
+        {
+            Dictionary<string, Dictionary<int, int>> test = new Dictionary<string, Dictionary<int,int>>();
+            test.Add("21",new Dictionary<int, int>());
+            test.Add("22", new Dictionary<int, int>());
+            test.Add("23", new Dictionary<int, int>());
+
+            test["21"][1] = 1;
+            test["21"][2] = 2;
+            test["21"][3] = 4;
+            test["21"][15] = 2;
+
+            test["22"][4] = 3;
+            test["22"][6] = 2;
+            test["22"][3] = 1;
+
+            test["23"][1] = 2;
+            test["23"][2] = 2;
+            return Ok(test);
+        }
         public IHttpActionResult PostToQueryDownloadLinkByCurriculumAcademic(oCurriculum_academic data)
         {
             if (data.curri_id == null) return BadRequest();
