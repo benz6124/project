@@ -20,7 +20,7 @@
     <link rel="shortcut icon" href="/bower_components/quantumui/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/bower_components/quantumui/images/favicon.ico" type="image/x-icon">
     <link href="/bower_components/hover/css/hover.css" rel="stylesheet" media="all">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="all">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link href="/bower_components/quantumui/dist/css/addon/effect-light.min.css" rel="stylesheet" />
@@ -47,8 +47,8 @@
 
     <link href="/Content/dropdowns-enhancement.css" rel="stylesheet" />
 
-
-    <link href="/bower_components/quantumui/dist/css/quantumui.css" rel="stylesheet" />
+<link href="/bower_components/quantumui/dist/css/quantumui.css" rel="stylesheet" />
+    <link href="/bower_components/superslides-0.6.2/dist/stylesheets/superslides.css" rel="stylesheet" />
     <script type="text/javascript" src="/bower_components/dropdowns-enhancement/dropdowns-enhancement.js"></script>
 
      <script src="/bower_components/wow/dist/wow.min.js"></script>
@@ -58,7 +58,7 @@
 </head>
 
 
-<body data-ng-controller="main_controller">
+<body data-ng-controller="main_controller"  ng-class="{'overflow_dont_care': not_choose_curri_and_year_yet == true , 'overflow_care': not_choose_curri_and_year_yet == false}" >
 
 <div>
  
@@ -82,8 +82,8 @@
                 <ul class="nav navbar-nav navbar-right">
 
                     <li ng-show = "already_login" >
-                        <img src="{{current_user.information.file_name_pic}}" style="margin-right:35px;margin-top:2px;margin-bottom:0px" class="img-circle profile_pic wow flipInY hvr-bob" data-wow-duration="2s" height="70" />
-                        <ul class="dropdownImg">
+                        <img src="{{current_user.information.file_name_pic}}" style="margin-right:35px;margin-top:1px;margin-bottom:0px" class="img-circle profile_pic wow flipInY" data-wow-duration="2s" height="71" />
+                        <ul class="dropdownImg" >
                             <li class="profile_name"> </i> {{current_user.username}}</li>
                             <li class="bull"><a href="" data-placement="right" data-nq-toggle-modal="#manage_profile">แก้ไขข้อมูล</a></li>
                             <li class="bull"><a href="" ng-click="logout()">ออกจากระบบ</a></li>
@@ -105,7 +105,7 @@
 
     </section>
 
-    <section class="wow" ng-if = "already_login" >
+    <section  ng-if = "already_login" >
         <div style="width:100%; margin-top:-5px;" ng-init="asideSettings={enlargeHover:true, offCanvas:'mobile'}">
             <div id="leftMenuAside" data-nq-aside="myLeftAside" class="aside aside-with-menu"
                  data-collapsible="true"
@@ -382,13 +382,13 @@
 
 <!--index part -->
 
- <div ng-controller="choice_index_controller" ng-init="init_var()">
+ <div ng-controller="choice_index_controller" ng-init="init_var()" style="height:100%">
 
 
 
 <div class="contain">
 
-        <div class="row" ng-class="{'not_login_index_select_button_row': already_login == false }" style="position:absolute;z-index:1;top:100px;width:100%;margin-left: 25px;">
+        <div class="row wow flipInX"data-wow-duration="2s" data-wow-delay="1s"ng-class="{'not_login_index_select_button_row': already_login == false }" style="position:absolute;z-index:1;top:100px;width:100%;margin-left: 25px;">
     
            
             <div class="col-sm-6" style="margin-left:80px">
@@ -423,21 +423,42 @@
         </div>
 
 
+<div id="slides" style="position:relative;z-index:0" ng-show='not_choose_year'>
+
+
+
+    <div class="slides-container">
+      <img src="/myImages/slide/IMG_7834.jpg" width="4272" height="2848" >
+      <img src="/myImages/slide/IMG_7871.jpg" width="4272" height="2848" >
+      <img src="/myImages/slide/IMG_7849.jpg" width="4272" height="2848" >
+       <img src="/myImages/slide/IMG_7863.jpg" width="4272" height="2848" >
+      <img src="/myImages/slide/IMG_7903.jpg" width="4272" height="2848" >
+            <img src="/myImages/slide/IMG_7845.jpg" width="4272" height="2848" >
+       <img src="/myImages/slide/IMG_7917.jpg" width="4272" height="2848" >
+      <img src="/myImages/slide/IMG_7824.jpg" width="4272" height="2848" >
+            <img src="/myImages/slide/IMG_7855.jpg" width="4272" height="2848" >
+                  <img src="/myImages/slide/IMG_7910.jpg" width="4272" height="2848" >
+<img src="/myImages/slide/IMG_7923.jpg" width="4272" height="2848" >
+      <img src="/myImages/slide/IMG_7869.jpg" width="4272" height="2848" >
+            <img src="/myImages/slide/IMG_7892.jpg" width="4272" height="2848" >
+    </div>
+
+    <nav class="slides-navigation wow bounceInDown"  data-wow-duration="3s">
+      <a href="" class="next hvr-bob"><i class="fa fa-chevron-circle-right fa-3x"></i></a>
+      <a href="" class="hvr-bob" ng-class="{prev_login: already_login == true , prev: already_login == false}" class="prev"><i class="fa fa-chevron-circle-left fa-3x"></i></a>
+    </nav>
+  </div>
 
 
 
 
 
-
-   <div data-nq-carousel="" effect='slide-left-right'  interval='5000'   style="width:100%;height:100%;position:relative;" ng-show='not_choose_year' >
+<!--    <div data-nq-carousel="" effect='slide-left-right' hover-stop='false' interval='5000'   style="width:100%;height:100%;position:relative;" ng-show='not_choose_year' >
 
        <div data-carousel-item="" >
-    <!--  <h3 class="carousel-title">AUN dawdad fwfwf awds dawdwdw</h3> -->
+   
       <img src="/myImages/slide/IMG_7834.jpg">
-     <!--  <div class="carousel-caption">
-        <h4>This is the cation of the carousel item 1</h4>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </div> -->
+ 
     </div>
 
 
@@ -459,20 +480,62 @@
    
     </div>
 
+          <div data-carousel-item="">
+    
+      <img src="/myImages/slide/IMG_7903.jpg">
+
+    </div>
 <div data-carousel-item="">
 
       <img src="/myImages/slide/IMG_7845.jpg">
 
     </div>
+
+
+          <div data-carousel-item="">
+    
+      <img src="/myImages/slide/IMG_7917.jpg">
+
+    </div>
+
+
     <div data-carousel-item="">
     
       <img src="/myImages/slide/IMG_7824.jpg">
 
     </div>
+     <div data-carousel-item="">
+    
+      <img src="/myImages/slide/IMG_7855.jpg">
 
-     
+    </div>
 
-  </div>
+
+          <div data-carousel-item="">
+    
+      <img src="/myImages/slide/IMG_7910.jpg">
+
+    </div>
+        <div data-carousel-item="">
+    
+      <img src="/myImages/slide/IMG_7923.jpg">
+
+    </div>
+
+    <div data-carousel-item="">
+    
+      <img src="/myImages/slide/IMG_7869.jpg">
+
+    </div>
+
+       
+
+          <div data-carousel-item="">
+    
+      <img src="/myImages/slide/IMG_7892.jpg">
+
+    </div>
+  </div> -->
 </div>
 <!--start the dependent on curriculum and aca_year -->
 
@@ -498,6 +561,60 @@
 
 
         <div class="tab-pane fade active in" >
+
+        <div ng-show="select_overall">
+    
+         <h3 class="headerPanel wow flipInX" data-wow-duration="2s" style="text-align:left">ผลการประเมินในภาพรวม</h3>
+              <table class="table table-bordered table-hover table_modal  evaluation wow bounceInDown" data-wow-duration="2s">
+
+                <thead>
+
+                <th class="col-md-1 number">ข้อที่</th>
+                <th class="col-md-7 topic">หัวข้อการประเมิน</th>
+                <th class="col-md-2 result">
+
+                <a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ยังไม่มีการประเมิน" style="color:white;cursor:default;"> ผลการประเมินตนเอง</a>
+
+                </th>
+
+                <th class="col-md-2 result">
+
+
+<a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ยังไม่มีการประเมิน" style="color:white;cursor:default;" >ผลการประเมิน<br />จากภายนอก</a>
+                </th>
+  
+
+                </thead>
+
+
+   <tbody ng-repeat="each_evaluation_in_indicator in evaluation_overall"> 
+                <tr >
+
+                     <td class="number"  style="background-color:#686868;color:white;text-align:center" ng-class="{resultGreenback: each_evaluation_in_indicator.indicator_result_other_average>each_evaluation_in_indicator.indicator_result_self_average  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.indicator_result_self_average>each_evaluation_in_indicator.indicator_result_other_average &&  each_evaluation_in_indicator.complete_both}"> {{each_evaluation_in_indicator.indicator_num}}</td>
+                      <td class="topic"   style="background-color:#686868;color:white;text-align:center" ng-class="{resultGreenback: each_evaluation_in_indicator.indicator_result_other_average>each_evaluation_in_indicator.indicator_result_self_average  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.indicator_result_self_average>each_evaluation_in_indicator.indicator_result_other_average &&  each_evaluation_in_indicator.complete_both}">{{each_evaluation_in_indicator.indicator_name}}   </td>
+
+                          <td class="result"  style="background-color:#686868;color:white;text-align:center"  ng-class="{resultGreenback: each_evaluation_in_indicator.indicator_result_other_average>each_evaluation_in_indicator.indicator_result_self_average  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.indicator_result_self_average>each_evaluation_in_indicator.indicator_result_other_average &&  each_evaluation_in_indicator.complete_both}" >{{each_evaluation_in_indicator.indicator_result_self_average}}</td>
+
+                            <td class="result"  style="background-color:#686868;color:white;text-align:center" ng-class="{resultGreenback: each_evaluation_in_indicator.indicator_result_other_average>each_evaluation_in_indicator.indicator_result_self_average  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.indicator_result_self_average>each_evaluation_in_indicator.indicator_result_other_average &&  each_evaluation_in_indicator.complete_both}" > {{each_evaluation_in_indicator.indicator_result_other_average}}</td>
+
+
+
+                  
+                </tr>
+
+
+                    <tr ng-repeat="each_evaluation_in_sub_indicator in each_evaluation_in_indicator.sub_indicator_result">
+                         <td class="number">{{each_evaluation_in_indicator.indicator_num}}.{{each_evaluation_in_sub_indicator.sub_indicator_num}}</td>
+                      <td class="topic" >{{each_evaluation_in_sub_indicator.sub_indicator_name}}</td>
+                        <td class="result"  ng-class="{resultGreen: each_evaluation_in_sub_indicator.sub_indicator_other_result>each_evaluation_in_sub_indicator.sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both , resultRed:each_evaluation_in_sub_indicator.sub_indicator_self_result>each_evaluation_in_sub_indicator.sub_indicator_other_result  &&  each_evaluation_in_indicator.complete_both }" >{{each_evaluation_in_sub_indicator.sub_indicator_self_result}}</td>
+                                   <td class="result"  ng-class="{resultGreen: each_evaluation_in_sub_indicator.sub_indicator_other_result>each_evaluation_in_sub_indicator.sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both , resultRed:each_evaluation_in_sub_indicator.sub_indicator_self_result>each_evaluation_in_sub_indicator.sub_indicator_other_result  &&  each_evaluation_in_indicator.complete_both}"  >{{each_evaluation_in_sub_indicator.sub_indicator_other_result}}</td>
+                         </tr>
+
+</tbody>
+
+            </table>
+
+        </div>
         <div ng-hide="select_overall">
             <h2 class="headerPanel wow flipInX" data-wow-duration="3s" style="text-align:center">AUN {{indicator_choosen.indicator_num}} {{indicator_choosen.indicator_name_t}} ({{indicator_choosen.indicator_name_e}})</h2>
 
@@ -3471,9 +3588,9 @@ glyphicon glyphicon-bell"></i> </span>
                                             <tr>
                           
                                                 <th style="width:70px">รูป</th>
-                                                <th style="width:400px">ชื่อ-นามสกุล</th>
-                      <th style="width:60px;padding-left: 0px;padding-right: 0px;">อีเมล์</th>
-                                                <th style="width:140px">วันที่แต่งตั้ง</th>
+                                                <th style="width:300px">ชื่อ-นามสกุล</th>
+                      <th style="width:70px;padding-left: 0px;padding-right: 0px;">อีเมล์</th>
+                                                <th style="width:70px">วันที่แต่งตั้ง</th>
                 
                                                 <th style="width:30px">ลบ</th>
                                               
@@ -4701,15 +4818,18 @@ glyphicon glyphicon-bell"></i> </span>
 
                     <div class="row">
                         <div class="col-md-4">
-                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">ชื่อผู้ใช้งานใหม่:   </span></h3>
+                            <h3 style="margin-left:20px;margin-top:4px;"><span class="topicHeader">ชื่อผู้ใช้งานใหม่:   </span></h3>
                         </div>
+
                         <div class="col-md-8">
-                            <input type="text" class="form-control" ng-model = "new_username" placeholder="กรุณาใส่ชื่อผู้ใช้งานใหม่"><span class="normal">  </span>
+                            <input type="text" class="form-control" ng-pattern="/^[a-zA-Z0-9]*$/" ng-model = "new_username" placeholder="กรุณาใส่ชื่อผู้ใช้งานใหม่"><span class="normal">  </span>
+
 
                         </div>
                     </div>
 
-                  
+      <h3 style="margin-left:20px;margin-top:4px;color:#bc2e29;margin-bottom:0px" ng-show='show_error'><span class="topicHeader">{{error_msg}}</span></h3>
+
 
 
                     <div class="custom-footer">
@@ -4720,47 +4840,47 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
                 </div>
 
-                <div id="change_password" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true">
+                <div id="change_password" data-ng-controller="change_password_controller" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1"><span class="headerModal">เปลี่ยนรหัสผ่าน</span></h1>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">รหัสผ่านเก่า:   </span></h3>
+                            <h3 style="margin-left:20px;margin-top:3px;"><span class="topicHeader">รหัสผ่านเก่า:   </span></h3>
                         </div>
                         <div class="col-md-8">
-                            <input type="password" class="form-control" placeholder="กรุณาใส่รหัสผ่านเก่า"><span class="normal">  </span>
+                            <input type="password" class="form-control" ng-model="old_password" placeholder="กรุณาใส่รหัสผ่านเก่า"><span class="normal">  </span>
 
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-4">
-                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">รหัสผ่านใหม่:   </span></h3>
+                            <h3 style="margin-left:20px;margin-top:3px;"><span class="topicHeader">รหัสผ่านใหม่:   </span></h3>
                         </div>
                         <div class="col-md-8">
-                            <input type="password" class="form-control" placeholder="กรุณาใส่รหัสผ่านใหม่"><span class="normal">  </span>
+                            <input type="password" class="form-control" ng-model="new_password" placeholder="กรุณาใส่รหัสผ่านเก่า"><span class="normal">  </span>
 
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-4">
-                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">ยืนยันรหัสผ่านใหม่:   </span></h3>
+                            <h3 style="margin-left:20px;margin-top:3px;"><span class="topicHeader">ยืนยันรหัสผ่านใหม่:   </span></h3>
                         </div>
                         <div class="col-md-8">
-                            <input type="password" class="form-control" placeholder="กรุณาใส่รหัสผ่านใหม่"><span class="normal">  </span>
+                            <input type="password" class="form-control" ng-model="new_password2" placeholder="กรุณาใส่รหัสผ่านใหม่ที่มีความยาวมากกว่า 8 อักขระ"><span class="normal">  </span>
 
                         </div>
                     </div>
                    
-
+              <h3 style="margin-left:20px;margin-top:4px;color:#bc2e29;margin-bottom:0px" ng-show='show_error'><span class="topicHeader">{{error_msg}}</span></h3>
 
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                            <button class="btn btn-success  " ng-disabled="still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
                 </div>
@@ -5881,6 +6001,20 @@ glyphicon glyphicon-bell"></i> </span>
 
 <script type="text/javascript" src="http://arrow.scrolltotop.com/arrow13.js"></script>
 <noscript>Not seeing a <a href="http://www.scrolltotop.com/">Scroll to Top Button</a>? Go to our FAQ page for more info.</noscript>
+
+ <script src="/bower_components/superslides-0.6.2/examples/javascripts/jquery.easing.1.3.js"></script>
+  <script src="/bower_components/superslides-0.6.2/examples/javascripts/javascripts/jquery.animate-enhanced.min.js"></script>
+  <script src="/bower_components/superslides-0.6.2/dist/jquery.superslides.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    $(function() {
+      $('#slides').superslides({
+        hashchange: false,
+           animation: 'fade'
+           ,    play: 5000
+      });
+    });
+  </script>
+
 
  <script type="text/ng-template" id="/alert/mycustomtemplate.html">
           <div class="alert" ng-class="alertType">

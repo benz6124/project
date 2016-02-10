@@ -86,6 +86,7 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$cookies
     }
     $scope.choose_overall = function(){
         $scope.select_overall = true;
+        $scope.get_all_evaluation();
     }
     $scope.sendCurriAndGetYears = function (curri) {
         $scope.select_all_complete = false;
@@ -93,6 +94,7 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$cookies
          $scope.already_select_curri = true;
            $scope.not_choose_year = true;
            $scope.year_choosen = {};
+            $scope.$parent.not_choose_curri_and_year_yet = true;
         // console.log("it's me");
       
         //    $http.post('/api/curriculumacademic',  {'Cu_curriculum': curri }).success(function (data, status, headers, config) {
@@ -142,9 +144,11 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$cookies
              ).success(function (data) {
                  $scope.corresponding_indicators = data;
                   $scope.not_select_curri_and_year = false;
-            $scope.select_overall = true;
+           $scope.choose_overall();
             $scope.not_select_sub_indicator = true;
                    $scope.not_choose_year = false;
+
+                   $scope.$parent.not_choose_curri_and_year_yet = false;
              });
 
          }
@@ -202,6 +206,69 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$cookies
 
     }
     
+     $scope.get_all_evaluation = function (){
+
+         $http.post(
+             '/api/evaluationresult/overall',
+             JSON.stringify($scope.year_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            $scope.evaluation_overall = data;
+
+            var index;
+            var inner_index;
+            for(index=0;index<$scope.evaluation_overall.length;index++){
+                if(angular.isNumber($scope.evaluation_overall[index].indicator_result_self_average)==false || angular.isNumber($scope.evaluation_overall[index].indicator_result_other_average)==false){
+                    $scope.evaluation_overall[index].complete_both = false;
+                }
+                else{
+                    $scope.evaluation_overall[index].complete_both = true;
+                }
+
+            }
+
+         });
+$scope.evaluation_overall = [
+{
+'indicator_name':'ชื่อ indicator'
+, 'indicator_num':1
+, 'indicator_result_self_average':7.8
+, 'indicator_result_other_average':6.8
+,'sub_indicator_result':
+[{'sub_indicator_name':'ชื่อ sub_indicator', 'sub_indicator_num':1, 'sub_indicator_self_result':4 , 'sub_indicator_other_result':6 }
+,{'sub_indicator_name':'ชื่อ sub_indicator2', 'sub_indicator_num':2, 'sub_indicator_self_result':3 , 'sub_indicator_other_result':3}]
+ }
+,
+
+{
+'indicator_name':'ชื่อ indicator2'
+, 'indicator_num':2
+, 'indicator_result_self_average':''
+, 'indicator_result_other_average':''
+,'sub_indicator_result':
+[{'sub_indicator_name':'ชื่อ sub_indicator', 'sub_indicator_num':1, 'sub_indicator_self_result':'' , 'sub_indicator_other_result':'' }
+,{'sub_indicator_name':'ชื่อ sub_indicator2', 'sub_indicator_num':2, 'sub_indicator_self_result':'', 'sub_indicator_other_result':''}]
+ }
+ ,{} ];
+
+
+var index;
+var inner_index;
+for(index=0;index<$scope.evaluation_overall.length;index++){
+    if(angular.isNumber($scope.evaluation_overall[index].indicator_result_self_average)==false || angular.isNumber($scope.evaluation_overall[index].indicator_result_other_average)==false){
+        $scope.evaluation_overall[index].complete_both = false;
+    }
+    else{
+        $scope.evaluation_overall[index].complete_both = true;
+    }
+
+}
+     }
+
     $scope.sendIndicatorCurriAndGetEvaluation = function () {
         // $scope.loading = new $loading();
         // $scope.loading.show();
@@ -210,7 +277,7 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$cookies
         // console.log($scope.indicator_choosen);
 
         $http.post(
-             '/api/evaluationresult',
+             '/api/evaluationresult/individual',
              JSON.stringify($scope.indicator_choosen),
              {
                  headers: {
@@ -241,7 +308,7 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$cookies
 
                 for (index = 0; index < $scope.evaluation_result_receive.self.length; index++) {
                     console.log(index);
-                    $scope.evaluation_result.results[index] = []
+                    $scope.evaluation_result.results[index] = {};
                     $scope.evaluation_result.results[index].sub_indicator_name =  $scope.corresponding_sub_indicators[index].sub_indicator_name;
                     $scope.evaluation_result.results[index].sub_indicator_num = $scope.evaluation_result_receive.self[index].sub_indicator_num;
                     $scope.evaluation_result.results[index].self_result = $scope.evaluation_result_receive.self[index].evaluation_score;
@@ -6526,6 +6593,88 @@ $scope.show_my_pictures=function(){
 
 });
 
+
+app.controller('change_password_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+
+       $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+  $scope.init = function(){
+    $scope.old_password = '';
+        $scope.new_password = '';
+            $scope.new_password2 = '';
+            $scope.show_error =false;
+            $scope.error_msg = '';
+  }
+
+
+ $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+  $scope.still_not_complete = function(){
+    if(!$scope.old_password || !$scope.new_password || !$scope.new_password2){
+        return true;
+    }
+    if($scope.new_password != $scope.new_password2){
+           $scope.error_msg = '*** กรุณากรอกรหัสผ่านใหม่ให้สอดคล้องกัน';
+        $scope.show_error =true;
+        return true;
+    }
+    if($scope.new_password2.length < 8)
+
+    {
+                  $scope.error_msg = '*** กรุณากรอกรหัสผ่านใหม่ที่มีความยาวมากกว่า 8 อักขระ';
+                $scope.show_error =true;
+        return true;
+    }
+       $scope.show_error =false;
+    return false;
+  }
+
+  $scope.save_to_server = function(){
+      console.log("save_to_server");
+
+        $scope.to_sent = {};
+       
+        $scope.to_sent.user_id =   $scope.$parent.current_user.user_id;
+         $scope.to_sent.old_password = $scope.old_password;
+        $scope.to_sent.new_password = $scope.new_password;
+        console.log($scope.to_sent);
+
+        $http.put(
+             '/api/users/changepassword',
+             JSON.stringify($scope.to_sent),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+                  $scope.close_modal(my_modal);
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+         
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'รหัสผ่านเก่าไม่ถูกต้อง',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
+  }
+});
+
+
 app.controller('change_username_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 
        $scope.$on("modal.hide", function (event, args) {
@@ -6539,6 +6688,8 @@ app.controller('change_username_controller', function($scope, $http,$alert,$load
 
   $scope.init = function(){
     $scope.new_username = '';
+$scope.show_error = false;
+$scope.error_msg = '';
   }
 
 
@@ -6549,6 +6700,8 @@ app.controller('change_username_controller', function($scope, $http,$alert,$load
 
   $scope.still_not_complete = function(){
     if(!$scope.new_username){
+        $scope.show_error = true;
+        $scope.error_msg = '*** กรุณากรอกชื่อผู้ใช้ใหม่ที่เป็นอักขระภาษาอังกฤษหรือตัวเลขเท่านั้น';
         return true;
     }
 
@@ -6563,28 +6716,28 @@ app.controller('change_username_controller', function($scope, $http,$alert,$load
         $scope.to_sent.user_id =   $scope.$parent.current_user.user_id;
         console.log($scope.to_sent);
 
-  //       $http.put(
-  //            '/api/studentstatusother',
-  //            JSON.stringify($scope.result),
-  //            {
-  //                headers: {
-  //                    'Content-Type': 'application/json'
-  //                }
-  //            }
-  //        ).success(function (data) {
-  //                 $scope.close_modal(my_modal);
-  //              $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-  //                        placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+        $http.put(
+             '/api/users/changeusername',
+             JSON.stringify($scope.to_sent),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+                  $scope.close_modal(my_modal);
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
          
-  //        })
-  //   .error(function(data, status, headers, config) {
-  //                 if(status==500){
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
 
-  //    $alert({title:'เกิดข้อผิดพลาด', content:'ชื่อผู้ใช้นี้มีอยู่แล้วในระบบ',alertType:'danger',
-  //                        placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-  //    }
+     $alert({title:'เกิดข้อผิดพลาด', content:'ชื่อผู้ใช้นี้มีอยู่แล้วในระบบ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
 
-  // }); 
+  }); 
   }
 });
 

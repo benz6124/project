@@ -16,40 +16,35 @@ var app = angular.module('myProject', [
 
 
 
- app.config(function($stateProvider){
+//  app.config(function($stateProvider){
 
-$stateProvider.state('protected-route', {
-  url: '/',
-  resolve: {
+// $stateProvider.state('protected-route', {
+//   url: '/',
+//   resolve: {
 
-    auth: function resolveAuthentication(AuthResolver) { 
+//     auth: function resolveAuthentication(AuthResolver) { 
 
-      return AuthResolver.resolve();
-    }
-  }
-});
+//       return AuthResolver.resolve();
+//     }
+//   }
+// });
 	
-});
+// });
 
 
 
 app.constant('AUTH_EVENTS', {
   loginSuccess: 'auth-login-success',
   loginFailed: 'auth-login-failed',
-  logoutSuccess: 'auth-logout-success',
-  sessionTimeout: 'auth-session-timeout',
-  notAuthenticated: 'auth-not-authenticated',
-  notAuthorized: 'auth-not-authorized'
+  // logoutSuccess: 'auth-logout-success',
+  // sessionTimeout: 'auth-session-timeout',
+  // notAuthenticated: 'auth-not-authenticated',
+  // notAuthorized: 'auth-not-authorized'
 })
 
-app.constant('USER_ROLES', {
-  all: '*',
-  admin: 'admin',
-  editor: 'editor',
-  guest: 'guest'
-})
 
-app.factory('AuthService', function ($http, Session,$cookies) {
+
+app.factory('AuthService', function ($http,$cookies) {
   var authService = {};
 
   authService.login = function (credentials) {
@@ -62,68 +57,38 @@ app.factory('AuthService', function ($http, Session,$cookies) {
         return res.data;
       });
 
-// return {"user_id":"admin1","username":"admin1","user_type":"ผู้ดูแลระบบ","information":{"t_prename":"","t_name":"ชื่อจริง นามสกุลจริง","e_prename":"","e_name":"","citizen_id":"","gender":" ","email":"b@hotmail.com","tel":"","addr":"","file_name_pic":"myimages/profile_pic/nopic.jpg","timestamp":"7/1/2559 0:05:15"},"privilege":[]};
-
-
-
-
-//  $cookies.putObject("mymy", credentials);
-   	
-
-// return {
-// 'username': credentials.username,
-// 'user_type':'admin',
-// 'information':{'t_name':'fafa', 'email':'blahblah'},
-// 'privilege':{'21':{'สร้างหลักสูตร':'อนุญาต' , 'อัลบั้ม':'ดูเท่านั้น'} }
-// }
-
-
-
-// return $http
-//       .post('/api/users/login', credentials)
-//       .then(function (res) {
-//         console.log('')
-//         console.log(res.data)
-//         // Session.create(res.data.id, res.data.user.id,
-//         //                res.data.user.role);
-//         // // $cookies.putObject("mymy", credentials);
-//         // return res.data.user;
-//       });
-
-
-
   };
  
-  authService.isAuthenticated = function () {
-    return !!Session.user_id;
-  };
+  // authService.isAuthenticated = function () {
+  //   return !!Session.user_id;
+  // };
  
 
  
   return authService;
 });
 
-app.service('Session', function () {
-  this.create = function (sessionId, userId) {
-    this.id = sessionId;
-    this.userId = userId;
+// app.service('Session', function () {
+//   this.create = function (sessionId, userId) {
+//     this.id = sessionId;
+//     this.userId = userId;
 
-  };
-  this.destroy = function () {
-    this.id = null;
-    this.userId = null;
+//   };
+//   this.destroy = function () {
+//     this.id = null;
+//     this.userId = null;
 
-  };
-})
+//   };
+// })
 
 app.controller('main_controller', function ($scope,
-                                               USER_ROLES,
+                                             
                                                AuthService,$cookies) {
 
    $scope.current_user = {};
   $scope.current_user = $cookies.getObject("mymy");
 $scope.fix_mode = true;
-
+$scope.not_choose_curri_and_year_yet = true;
 
   if(!$scope.current_user) {
   $scope.already_login = false;
@@ -179,23 +144,23 @@ $scope.fix_mode = true;
   
 
 
-app.factory('AuthResolver', function ($q, $rootScope, $state) {
-  return {
-    resolve: function () {
-    	console.log('im resolve')
-      var deferred = $q.defer();
-      var unwatch = $rootScope.$watch('current_user', function (current_user) {
-        if (angular.isDefined(current_user)) {
-          if (current_user) {
-            deferred.resolve(current_user);
-          } else {
-            deferred.reject();
-            $state.go('user-login');
-          }
-          unwatch();
-        }
-      });
-      return deferred.promise;
-    }
-  };
-})
+// app.factory('AuthResolver', function ($q, $rootScope, $state) {
+//   return {
+//     resolve: function () {
+//     	console.log('im resolve')
+//       var deferred = $q.defer();
+//       var unwatch = $rootScope.$watch('current_user', function (current_user) {
+//         if (angular.isDefined(current_user)) {
+//           if (current_user) {
+//             deferred.resolve(current_user);
+//           } else {
+//             deferred.reject();
+//             $state.go('user-login');
+//           }
+//           unwatch();
+//         }
+//       });
+//       return deferred.promise;
+//     }
+//   };
+// })
