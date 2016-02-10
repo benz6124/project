@@ -67,7 +67,7 @@
     margin-bottom: 0px;
 " >
       
-            <div class="container-fluid" style="  border-style: solid;border-width: 1px;border-color:#6F002B;height:80px">
+            <div class="container-fluid" style="  height:80px">
 
 
 
@@ -75,14 +75,14 @@
                 <ul class="nav navbar-nav navbar-left" >
 
                    <!--  <li><img src="/myImages/logo_kmitl.gif" width="100px" style="margin-left:80px" /></li> -->
-                    <li class="headerWeb" style="margin-left:70px;margin-top: 9px;">CUPT-QA Online For Computer Engineering KMITL</li>
+                    <li class="headerWeb" style="margin-left:47px;margin-top: 7px;">CUPT-QA Online For Computer Engineering KMITL</li>
 
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
 
                     <li ng-show = "already_login" >
-                        <img src="{{current_user.information.file_name_pic}}" style="margin-right:35px;margin-top:1px;margin-bottom:0px" class="img-circle profile_pic wow flipInY" data-wow-duration="2s" height="71" />
+                        <img src="{{current_user.information.file_name_pic}}" style="margin-right:35px;margin-top:1px;" class="img-circle profile_pic wow flipInY" data-wow-duration="2s" height="71" />
                         <ul class="dropdownImg" >
                             <li class="profile_name"> </i> {{current_user.username}}</li>
                             <li class="bull"><a href="" data-placement="right" data-nq-toggle-modal="#manage_profile">แก้ไขข้อมูล</a></li>
@@ -119,13 +119,11 @@
                  data-ng-swipe-right="$aside.toggleCollapse(false);">
 
                 <div class="aside-header">
-                    <div class="aside-buttons" style="
-    padding-top: 5px;
-">
-                        <span ng-show="myLeftAside.$collapsed" ng-click="$aside.toggleCollapse()"><i class="glyphicon glyphicon-arrow-right"></i></span>
-                        <span ng-hide="myLeftAside.$collapsed" ng-click="$aside.toggleCollapse()"><i class="glyphicon glyphicon-arrow-left"></i></span>
+                    <div class="aside-buttons" style="padding-top: 5px;">
+                  <!--       <span ng-show="myLeftAside.$collapsed" ng-click="$aside.toggleCollapse()"><i class="glyphicon glyphicon-arrow-right"></i></span>
+                        <span ng-hide="myLeftAside.$collapsed" ng-click="$aside.toggleCollapse()"><i class="glyphicon glyphicon-arrow-left"></i></span> -->
                     </div>
-                    <span ng-hide="$aside.$collapsed" class="aside-title" style="margin-left:7px;margin-top:10px;font-size:25px;font-weight:bold;color:#E8C8D7"><i class="glyphicon glyphicon-wrench"></i> &nbsp;แถบเครื่องมือ</span>
+                   <!--  <span ng-hide="$aside.$collapsed" class="aside-title" style="margin-left:7px;margin-top:10px;font-size:25px;font-weight:bold;color:#E8C8D7"><i class="glyphicon glyphicon-wrench"></i> &nbsp;แถบเครื่องมือ</span> -->
 
                 </div>
                 <div class="aside-body">
@@ -184,7 +182,7 @@
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;ประเมินหลักสูตร</span></span>
                             </a>
                         </li>
-                        <li ng-show='watch_in_curri() || fix_mode'>
+                        <li ng-show='watch_in_curri() || fix_mode' class="hierarchy">
                             <a href="" data-nq-collapse="" data-target-id="#collapseStat">
                                 <i class="glyphicon glyphicon-folder-open"></i>
                                 <span ng-hide="$aside.$collapsed"><span class="topic"> &nbsp;&nbsp;จัดการข้อมูล</span></span>
@@ -272,7 +270,7 @@
                         </li>
 
                      
-                        <li ng-show='watch_only_president() || fix_mode'>
+                        <li ng-show='watch_only_president() || fix_mode' class="hierarchy">
                             <a href="" data-nq-toggle-modal="#change_priviledge" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-cog"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic">&nbsp;&nbsp;แก้ไขระดับการเข้าถึง</span></span>
@@ -315,7 +313,7 @@
 
              <li  ng-show="watch_only_admin()  || fix_mode">
                             <a href="" data-nq-toggle-modal="#change_priviledge_by_type_admin" data-effect="from-left" data-placement="right">
-                                <i class="glyphicon glyphicon-list-alt"></i>
+                                <i class="glyphicon glyphicon-cog"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic">&nbsp;&nbsp;แก้ไขระดับการเข้าถึง</span></span>
                             </a>
                         </li>
@@ -352,7 +350,7 @@
 
                           <li  ng-show="watch_only_admin() || fix_mode">
                             <a href="" data-nq-toggle-modal="#manage_indicators" data-effect="from-left" data-placement="right">
-                                <i class="glyphicon glyphicon-user"></i>
+                                <i class="glyphicon glyphicon-th-list"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการตัวบ่งชี้</span></span>
                             </a>
                         </li>
@@ -388,7 +386,7 @@
 
 <div class="contain">
 
-        <div class="row wow flipInX"data-wow-duration="2s" data-wow-delay="1s"ng-class="{'not_login_index_select_button_row': already_login == false }" style="position:absolute;z-index:1;top:100px;width:100%;margin-left: 25px;">
+        <div class="row wow flipInX"data-wow-duration="2s" data-wow-delay="1s"ng-class="{'not_login_index_select_button_row': already_login == false }" style="position:fixed;z-index:1;top:100px;width:100%;margin-left: 25px;">
     
            
             <div class="col-sm-6" style="margin-left:80px">
@@ -445,20 +443,26 @@
           <p class="topicNewHeader">The Council of the University Presidents of Thailand Quality Assurance</p>
           </div>
         </li>
+
+          <li><img src="/myImages/slide/IMG_7855.jpg" width="4272" height="2848" ></li>
+           <li><img src="/myImages/slide/IMG_7849.jpg" width="4272" height="2848" ></li>
+            <li><img src="/myImages/slide/IMG_7903.jpg" width="4272" height="2848" ></li>
+                  <li><img src="/myImages/slide/IMG_7910.jpg" width="4272" height="2848" ></li>
+              <li><img src="/myImages/slide/IMG_7871.jpg" width="4272" height="2848" ></li>
    <li><img src="/myImages/slide/IMG_7824.jpg" width="4272" height="2848" ></li>
 <!--       <li><img src="/myImages/slide/IMG_7834.jpg" width="4272" height="2848" ></li> -->
-    <li><img src="/myImages/slide/IMG_7903.jpg" width="4272" height="2848" ></li>
-      <li><img src="/myImages/slide/IMG_7849.jpg" width="4272" height="2848" ></li>
+  
+     
        <li><img src="/myImages/slide/IMG_7863.jpg" width="4272" height="2848" ></li>
       
    <!--          <li><img src="/myImages/slide/IMG_7845.jpg" width="4272" height="2848" ></li> -->
        <li><img src="/myImages/slide/IMG_7917.jpg" width="4272" height="2848" ></li>
-     <li><img src="/myImages/slide/IMG_7871.jpg" width="4272" height="2848" ></li>
-            <li><img src="/myImages/slide/IMG_7855.jpg" width="4272" height="2848" ></li>
-                  <li><img src="/myImages/slide/IMG_7910.jpg" width="4272" height="2848" ></li>
+   
+          
+            
 <li><img src="/myImages/slide/IMG_7923.jpg" width="4272" height="2848" ></li>
-      <li><img src="/myImages/slide/IMG_7869.jpg" width="4272" height="2848" ></li>
-            <li><img src="/myImages/slide/IMG_7892.jpg" width="4272" height="2848" ></li>
+<!--       <li><img src="/myImages/slide/IMG_7869.jpg" width="4272" height="2848" ></li>
+            <li><img src="/myImages/slide/IMG_7892.jpg" width="4272" height="2848" ></li> -->
        
       </ul>
 
@@ -466,7 +470,11 @@
       <a href="" class="next hvr-bob"><i class="fa fa-chevron-circle-right fa-3x"></i></a>
       <a href="" class="hvr-bob" ng-class="{prev_login: already_login == true , prev: already_login == false}" class="prev"><i class="fa fa-chevron-circle-left fa-3x"></i></a>
     </nav>
+
+  
     </div>
+
+
   </div>
 
 

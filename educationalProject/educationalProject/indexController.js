@@ -26,7 +26,9 @@ app.controller('GalleryCtrl', function ($scope, Lightbox) {
 app.controller('choice_index_controller', function($scope, $http,$alert,$cookies,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
 
     // 
-
+    $scope.test_please = {
+        privilege:{'21':{'1':'1'}}
+    }
     $scope.not_select_curri_and_year = true;
     $scope.not_select_sub_indicator = true;
     $scope.year_choosen = {};

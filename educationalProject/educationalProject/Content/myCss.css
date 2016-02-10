@@ -397,7 +397,7 @@ td button li label{
     
 
      position: absolute;
-          top: 50%;
+          top: 64%;
           right: -200px;
           margin-top: -24.5px;
          padding-left: 0px;
@@ -856,7 +856,7 @@ font-weight: bold;
 
 li.headerWeb{
  
-  font-size:41px;
+  font-size:43px;
  color:#D8D8D8  ;
   margin-top:18px;
     font-family: 'Quicksand' ;
@@ -1182,7 +1182,7 @@ font-size: 22px!important;
 }
 
 .not_login_index_select_button_row {
-position:absolute !important;
+position:fixed !important;
 z-index:1 !important;
 top:100px !important;
 width:100% !important;
@@ -1218,4 +1218,8 @@ margin-left: -7px !important;
   padding: 10px 20px;
   background-color:rgba(0 , 0, 0,0.6);
   color:rgba(255 , 255, 255,0.7);
+}
+
+li.hierarchy ul.dropdown a{
+  padding-left: 0px !important;
 }
