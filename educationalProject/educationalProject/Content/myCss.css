@@ -1208,3 +1208,14 @@ margin-left: -7px !important;
     max-height:100%;
 }
 
+
+.container_each {
+  position: relative;
+  width: 40%;
+  max-width: 500px;
+  left: 50%;
+  top: 59%;
+  padding: 10px 20px;
+  background-color:rgba(0 , 0, 0,0.6);
+  color:rgba(255 , 255, 255,0.7);
+}
