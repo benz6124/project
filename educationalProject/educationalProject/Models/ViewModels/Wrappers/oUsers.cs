@@ -152,7 +152,214 @@ namespace educationalProject.Models.ViewModels.Wrappers
             return string.Format(" BEGIN {0} {1} {2} {3} END ", createtabletemp99, insertintotemp99_1, insertintotemp99_2, selectcmd);
         }
 
+        private string getSelectStaffWithCurriculumCommand()
+        {
+            string temp99tablename = "#temp98";
+            string createtabletemp99 = string.Format("create table {0}(" +
+            "[row_num] int identity(1, 1) not null," +
+            "[{1}] INT NULL," +
+            "[{2}] VARCHAR(40) NULL," +
+            "[{3}] {22} NULL," +
+            "[{4}] VARCHAR(MAX) NULL," +
+            "[{5}] VARCHAR(16) NULL," +
+            "[{6}] VARCHAR(60) NULL," +
+            "[{7}] VARCHAR(16) NULL," +
+            "[{8}] VARCHAR(60) NULL," +
+            "[{9}] CHAR(13) NULL," +
+            "[{10}] CHAR NULL," +
+            "[{11}] VARCHAR(60) NULL," +
+            "[{12}] VARCHAR(20) NULL," +
+            "[{13}] VARCHAR(80) NULL," +
+            "[{14}] {23} NULL," +
+            "[{15}] DATETIME2 NULL," +
+      
+            "[{16}] VARCHAR(40) NULL," +
+      
+            "[{17}] CHAR NULL," +
+            "[{18}] VARCHAR(100) NULL," +
+            "[{19}] VARCHAR(200) NULL," +
+            "[{20}] INT NULL," +
+            "[{21}] VARCHAR(200) NULL," +
+            "PRIMARY KEY([row_num])) " +
 
+            "alter table {0} " +
+            "alter column [{2}] VARCHAR(40) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{3}] {22} collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{4}] VARCHAR(MAX) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{5}] VARCHAR(16) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{6}] VARCHAR(60) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{7}] VARCHAR(16) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{8}] VARCHAR(60) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{9}] CHAR(13) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{10}] CHAR collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{11}] VARCHAR(60) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{12}] VARCHAR(20) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{13}] VARCHAR(80) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{14}] {23} collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{16}] VARCHAR(40) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{17}] CHAR collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{18}] VARCHAR(100) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{19}] VARCHAR(200) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{21}] VARCHAR(200) collate database_default ",
+            temp99tablename, Staff.FieldName.STAFF_ID, Staff.FieldName.USER_TYPE, Staff.FieldName.USERNAME,
+            Staff.FieldName.PASSWORD, Staff.FieldName.T_PRENAME, Staff.FieldName.T_NAME, Staff.FieldName.E_PRENAME, Staff.FieldName.E_NAME,
+            Staff.FieldName.CITIZEN_ID, Staff.FieldName.GENDER, Staff.FieldName.EMAIL, Staff.FieldName.TEL, Staff.FieldName.ADDR, Staff.FieldName.FILE_NAME_PIC,
+            Staff.FieldName.TIMESTAMP, Staff.FieldName.ROOM,"edudeg", Educational_teacher_staff.FieldName.PRE_MAJOR, Educational_teacher_staff.FieldName.MAJOR,
+            Educational_teacher_staff.FieldName.GRAD_YEAR, Educational_teacher_staff.FieldName.COLLEGE, DBFieldDataType.USERNAME_TYPE, DBFieldDataType.FILE_NAME_TYPE);
+
+            string insertintotemp99truecase = string.Format("insert into {0} " +
+            "select tsres.*, {1}.{2} as edudeg, {3}, {4}, {5},{6} from " +
+            "({7}) as tsres, {1} where {8} = '{9}' " +
+            "and {10} = {11} ", temp99tablename, Educational_teacher_staff.FieldName.TABLE_NAME,
+            Educational_teacher_staff.FieldName.DEGREE, Educational_teacher_staff.FieldName.PRE_MAJOR,
+            Educational_teacher_staff.FieldName.MAJOR, Educational_teacher_staff.FieldName.GRAD_YEAR,
+            Educational_teacher_staff.FieldName.COLLEGE, oStaff.getSelectStaffByJoinCommand(),
+            Staff.FieldName.USERNAME, username, Educational_teacher_staff.FieldName.PERSONNEL_ID,
+            Staff.FieldName.STAFF_ID);
+
+            string insertintotemp99falsecase = string.Format("insert into {0} " +
+            "select *, null, null, null, null, null from ({3}) as stres where {1} = '{2}' ",
+            temp99tablename, Staff.FieldName.USERNAME, username, oStaff.getSelectStaffByJoinCommand());
+
+
+            string insertintotemp99_1 = string.Format("if exists(select * from {0} where {1} = '{2}' " +
+            "and {3} in (select {4} from {5} where {3} = {4})) " +
+            insertintotemp99truecase + " " + "else " + insertintotemp99falsecase + " ",
+            User_list.FieldName.TABLE_NAME, Staff.FieldName.USERNAME, username,
+            User_list.FieldName.USER_ID, Educational_teacher_staff.FieldName.PERSONNEL_ID,
+            Educational_teacher_staff.FieldName.TABLE_NAME);
+
+
+            string insertintotemp99_2 = string.Format("insert into {0}({1}) " +
+            "select {2} from (select max({3}) as {3} from {0}) as tid,{4} where {3} = {5} ",
+            temp99tablename, Staff.FieldName.USERNAME, User_curriculum.FieldName.CURRI_ID,
+            Staff.FieldName.STAFF_ID, User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID);
+
+            string selectcmd = string.Format("select * from {0} ", temp99tablename);
+
+            return string.Format(" BEGIN {0} {1} {2} {3} END ", createtabletemp99, insertintotemp99_1, insertintotemp99_2, selectcmd);
+        }
+
+        private string getSelectAssessorWithCurriculumCommand()
+        {
+            string temp99tablename = "#temp97";
+            string createtabletemp99 = string.Format("create table {0}(" +
+            "[row_num] int identity(1, 1) not null," +
+            "[{1}] INT NULL," +
+            "[{2}] VARCHAR(40) NULL," +
+            "[{3}] {17} NULL," +
+            "[{4}] VARCHAR(MAX) NULL," +
+            "[{5}] VARCHAR(16) NULL," +
+            "[{6}] VARCHAR(60) NULL," +
+            "[{7}] VARCHAR(16) NULL," +
+            "[{8}] VARCHAR(60) NULL," +
+            "[{9}] CHAR(13) NULL," +
+            "[{10}] CHAR NULL," +
+            "[{11}] VARCHAR(60) NULL," +
+            "[{12}] VARCHAR(20) NULL," +
+            "[{13}] VARCHAR(80) NULL," +
+            "[{14}] {18} NULL," +
+            "[{15}] DATETIME2 NULL," +
+
+            "[{16}] INT NULL," +
+
+            "PRIMARY KEY([row_num])) " +
+
+            "alter table {0} " +
+            "alter column [{2}] VARCHAR(40) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{3}] {17} collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{4}] VARCHAR(MAX) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{5}] VARCHAR(16) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{6}] VARCHAR(60) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{7}] VARCHAR(16) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{8}] VARCHAR(60) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{9}] CHAR(13) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{10}] CHAR collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{11}] VARCHAR(60) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{12}] VARCHAR(20) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{13}] VARCHAR(80) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{14}] {18} collate database_default "
+,
+            temp99tablename, Assessor.FieldName.ASSESSOR_ID, Assessor.FieldName.USER_TYPE, Assessor.FieldName.USERNAME,
+            Assessor.FieldName.PASSWORD, Assessor.FieldName.T_PRENAME, Assessor.FieldName.T_NAME, Assessor.FieldName.E_PRENAME, Assessor.FieldName.E_NAME,
+            Assessor.FieldName.CITIZEN_ID, Assessor.FieldName.GENDER, Assessor.FieldName.EMAIL, Assessor.FieldName.TEL, Assessor.FieldName.ADDR, Assessor.FieldName.FILE_NAME_PIC,
+            Assessor.FieldName.TIMESTAMP, Assessor.FieldName.TEACHER_ID, DBFieldDataType.USERNAME_TYPE, DBFieldDataType.FILE_NAME_TYPE);
+
+            string insertintotemp99falsecase = string.Format("insert into {0} " +
+            "select *, null, null, null, null, null from ({3}) as stres where {1} = '{2}' ",
+            temp99tablename, Assessor.FieldName.USERNAME, username, oAssessor.getSelectAssessorByJoinCommand());
+
+
+            string insertintotemp99_1 = insertintotemp99falsecase;
+
+
+            string insertintotemp99_2 = string.Format("insert into {0}({1}) " +
+            "select {2} from (select max({3}) as {3} from {0}) as tid,{4} where {3} = {5} ",
+            temp99tablename, Assessor.FieldName.USERNAME, User_curriculum.FieldName.CURRI_ID,
+            Assessor.FieldName.ASSESSOR_ID, User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID);
+
+            string selectcmd = string.Format("select * from {0} ", temp99tablename);
+
+            return string.Format(" BEGIN {0} {1} {2} {3} END ", createtabletemp99, insertintotemp99_1, insertintotemp99_2, selectcmd);
+        }
         public object SelectUser(string preferredusername)
         {
             DBConnector d = new DBConnector();
@@ -166,9 +373,9 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                "if exists(select * from ({0}) as tsres where {1} = '{2}') " +
                                 getSelectTeacherWithCurriculumCommand() +
                                 "else if exists(select * from ({3}) as stres where {1} = '{2}') " +
-                                    "select * from ({3}) as stres where {1} = '{2}' " +
+                                getSelectStaffWithCurriculumCommand() +
                                 "else if exists(select * from ({4}) as std where {1} = '{2}') " +
-                                    "select * from ({4}) as std where {1} = '{2}' " +
+                                getSelectAssessorWithCurriculumCommand() +
                                 "else if exists(select * from ({5}) as alum where {1} = '{2}') " +
                                     "select * from ({5}) as alum where {1} = '{2}' " +
                                 "else if exists(select * from ({6}) as comp where {1} = '{2}') " +
@@ -240,6 +447,14 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                     result.information.room = item.ItemArray[data.Columns[Teacher.FieldName.ROOM].Ordinal].ToString();
                                     result.information.status = item.ItemArray[data.Columns[Teacher.FieldName.STATUS].Ordinal].ToString();
                                     result.information.alive = item.ItemArray[data.Columns[Teacher.FieldName.POSITION].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[Teacher.FieldName.ALIVE].Ordinal]) : -1;
+                                }
+                                else if (usrtype == "เจ้าหน้าที่")
+                                {
+                                    result.information.room = item.ItemArray[data.Columns[Staff.FieldName.ROOM].Ordinal].ToString();
+                                }
+                                else if (usrtype == "ผู้ประเมินจากภายนอก")
+                                {
+
                                 }
                             }
                             //read secondary data such as educational history (if exists)
