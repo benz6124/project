@@ -1168,3 +1168,17 @@ font-size: 22px!important;
 .container {
   position: relative;
 }
+
+.not_login_index_select_button_row {
+position:absolute !important;
+z-index:1 !important;
+top:100px !important;
+width:100% !important;
+margin-left: -2px !important;
+}
+
+.not_login_indicator_row{
+
+    margin-left: 65px !important;
+
+}

@@ -4349,7 +4349,7 @@ $scope.evidence_we_want.teacher_id = "00007";
 
 app.controller('create_user_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
    $scope.curri_choosen = [];
-   $scope.my_type = {};
+   $scope.my_type = '';
       $scope.files = [];
 $scope.choose_not_complete = true;
         $scope.please_wait = false;
@@ -4376,6 +4376,7 @@ angular.forEach(
     
 
    $scope.init =function() {
+
    angular.forEach(
     angular.element("input[type='file']"),
     function(inputElem) {
@@ -4383,21 +4384,31 @@ angular.forEach(
     });
        $scope.files = [];
    $scope.curri_choosen = [];
-      $scope.my_type = {};
+      $scope.my_type = '';
                $scope.please_wait = false;
 $scope.choose_not_complete = true;
+$scope.choose_type = false;
           $http.get('/api/usertype').success(function (data) {
               
                 $scope.all_usertype = data;
 
 
               });
+
    }
 
    $scope.still_not_complete = function(){
-        if($scope.files.length == 0 ||  !$scope.my_type){
+ 
+        if($scope.files.length == 0 ){
+
+
             return true;
         }
+        if(!$scope.my_type){
+                    return true;
+        }
+
+        return false;
    }
   $scope.close_modal = function(my_modal){
         $scope.init();
@@ -4432,9 +4443,9 @@ $scope.my_new_user.type = $scope.my_type;
         }).
         success(function (data, status, headers, config) {
             if(!data){
-            $scope.init ();
+            
                   my_modal.$hide();
-
+$scope.init ();
                  $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลสำเร็จ',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
             }
