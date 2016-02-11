@@ -135,7 +135,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             Teacher.FieldName.TEACHER_ID);
 
             string insertintotemp99falsecase = string.Format("insert into {0} " +
-            "select *, null, null, null, null, null from ({3}) as stres where {1} = '{2}' ",
+            "select *, null,null, null, null, null, null from ({3}) as stres where {1} = '{2}' ",
             temp99tablename, Teacher.FieldName.USERNAME, username, oTeacher.getSelectTeacherByJoinCommand());
 
 
@@ -467,6 +467,254 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
 
             return string.Format(" BEGIN {0} {1} {2} {3} END ", createtabletemp99, insertintotemp99_1, insertintotemp99_2, selectcmd);
         }
+
+        private string getSelectStudentWithCurriculumCommand()
+        {
+            string temp99tablename = "#temp95";
+            string createtabletemp99 = string.Format("create table {0}(" +
+            "[row_num] int identity(1, 1) not null," +
+            "[{1}] INT NULL," +
+            "[{2}] VARCHAR(40) NULL," +
+            "[{3}] {28} NULL," +
+            "[{4}] VARCHAR(MAX) NULL," +
+            "[{5}] VARCHAR(16) NULL," +
+            "[{6}] VARCHAR(60) NULL," +
+            "[{7}] VARCHAR(16) NULL," +
+            "[{8}] VARCHAR(60) NULL," +
+            "[{9}] CHAR(13) NULL," +
+            "[{10}] CHAR NULL," +
+            "[{11}] VARCHAR(60) NULL," +
+            "[{12}] VARCHAR(20) NULL," +
+            "[{13}] VARCHAR(80) NULL," +
+            "[{14}] {29} NULL," +
+            "[{15}] DATETIME2 NULL," +
+
+            "[{16}] VARCHAR(120) NOT NULL," +
+            "[{17}] {30} NULL," +
+            "[{18}] VARCHAR(2) NULL," +
+            "[{19}] INT NULL," +
+            "[{20}] DATE NULL," +
+            "[{21}] INT NULL," +
+            "[{22}] INT NULL," +
+            "[{23}] DATE NULL," +
+            "[{24}] VARCHAR(64) NULL," +
+            "[{25}] CHAR NULL," +
+            "[{26}] TINYINT NULL," +
+            "[{27}] CHAR NULL," +
+            "PRIMARY KEY([row_num])) " +
+
+            "alter table {0} " +
+            "alter column [{2}] VARCHAR(40) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{3}] {28} collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{4}] VARCHAR(MAX) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{5}] VARCHAR(16) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{6}] VARCHAR(60) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{7}] VARCHAR(16) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{8}] VARCHAR(60) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{9}] CHAR(13) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{10}] CHAR collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{11}] VARCHAR(60) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{12}] VARCHAR(20) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{13}] VARCHAR(80) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{14}] {29} collate database_default " +
+            
+
+            "alter table {0} " +
+            "alter column [{16}] VARCHAR(120) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{17}] {30} collate database_default " +  //curri_id
+
+            "alter table {0} " +
+            "alter column [{18}] VARCHAR(2) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{24}] VARCHAR(64) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{25}] CHAR collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{27}] CHAR collate database_default ",
+            temp99tablename, Student.FieldName.USER_ID, Student.FieldName.USER_TYPE, Student.FieldName.USERNAME,
+            Student.FieldName.PASSWORD, Student.FieldName.T_PRENAME, Student.FieldName.T_NAME, Student.FieldName.E_PRENAME, Student.FieldName.E_NAME,
+            Student.FieldName.CITIZEN_ID, Student.FieldName.GENDER, Student.FieldName.EMAIL, Student.FieldName.TEL, Student.FieldName.ADDR, Student.FieldName.FILE_NAME_PIC,
+            Student.FieldName.TIMESTAMP, Student.FieldName.STUDENT_ID,Student.FieldName.CURRI_ID,Student.FieldName.TYPE,
+            Student.FieldName.ADMIS_YEAR, Student.FieldName.ADMIS_DATE,Student.FieldName.GRAD_YEAR,Student.FieldName.GRAD_SEMESTER,
+            Student.FieldName.GRAD_DATE,Student.FieldName.STATUS,Student.FieldName.QUOTA,Student.FieldName.SUBTYPE,
+            Student.FieldName.COOP,DBFieldDataType.USERNAME_TYPE, DBFieldDataType.FILE_NAME_TYPE,DBFieldDataType.CURRI_ID_TYPE);
+
+            string insertintotemp99falsecase = string.Format("insert into {0} " +
+            "select * from ({3}) as stres where {1} = '{2}' ",
+            temp99tablename, Student.FieldName.USERNAME, username, oStudent.getSelectStudentByJoinCommand());
+
+
+            string insertintotemp99_1 = insertintotemp99falsecase;
+
+
+            string insertintotemp99_2 = string.Format("insert into {0}({1}) " +
+            "select {2} from (select max({3}) as {6} from {0}) as tid,{4} where {6} = {5} ",
+            temp99tablename, Student.FieldName.USERNAME, User_curriculum.FieldName.CURRI_ID,
+            Student.FieldName.USER_ID, User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID,
+            "std_id");
+
+            string selectcmd = string.Format("select * from {0} ", temp99tablename);
+
+            return string.Format(" BEGIN {0} {1} {2} {3} END ", createtabletemp99, insertintotemp99_1, insertintotemp99_2, selectcmd);
+        }
+
+        private string getSelectAlumniWithCurriculumCommand()
+        {
+            string temp99tablename = "#temp94";
+            string createtabletemp99 = string.Format("create table {0}(" +
+            "[row_num] int identity(1, 1) not null," +
+            "[{1}] INT NULL," +
+            "[{2}] VARCHAR(40) NULL," +
+            "[{3}] {30} NULL," +
+            "[{4}] VARCHAR(MAX) NULL," +
+            "[{5}] VARCHAR(16) NULL," +
+            "[{6}] VARCHAR(60) NULL," +
+            "[{7}] VARCHAR(16) NULL," +
+            "[{8}] VARCHAR(60) NULL," +
+            "[{9}] CHAR(13) NULL," +
+            "[{10}] CHAR NULL," +
+            "[{11}] VARCHAR(60) NULL," +
+            "[{12}] VARCHAR(20) NULL," +
+            "[{13}] VARCHAR(80) NULL," +
+            "[{14}] {31} NULL," +
+            "[{15}] DATETIME2 NULL," +
+
+            "[{16}] VARCHAR(120) NOT NULL," +
+            "[{17}] {32} NULL," +
+            "[{18}] VARCHAR(2) NULL," +
+            "[{19}] INT NULL," +
+            "[{20}] DATE NULL," +
+            "[{21}] INT NULL," +
+            "[{22}] INT NULL," +
+            "[{23}] DATE NULL," +
+            "[{24}] VARCHAR(64) NULL," +
+            "[{25}] CHAR NULL," +
+            "[{26}] TINYINT NULL," +
+            "[{27}] CHAR NULL," +
+            "[{28}] VARCHAR(100) NULL," +
+            "[{29}] VARCHAR(20) NULL," +
+            "PRIMARY KEY([row_num])) " +
+
+            "alter table {0} " +
+            "alter column [{2}] VARCHAR(40) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{3}] {30} collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{4}] VARCHAR(MAX) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{5}] VARCHAR(16) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{6}] VARCHAR(60) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{7}] VARCHAR(16) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{8}] VARCHAR(60) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{9}] CHAR(13) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{10}] CHAR collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{11}] VARCHAR(60) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{12}] VARCHAR(20) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{13}] VARCHAR(80) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{14}] {31} collate database_default " +
+
+
+            "alter table {0} " +
+            "alter column [{16}] VARCHAR(120) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{17}] {32} collate database_default " +  //curri_id
+
+            "alter table {0} " +
+            "alter column [{18}] VARCHAR(2) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{24}] VARCHAR(64) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{25}] CHAR collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{27}] CHAR collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{28}] VARCHAR(100) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{29}] VARCHAR(20) collate database_default ",
+
+            temp99tablename, Alumni.FieldName.USER_ID, Alumni.FieldName.USER_TYPE, Alumni.FieldName.USERNAME,
+            Alumni.FieldName.PASSWORD, Alumni.FieldName.T_PRENAME, Alumni.FieldName.T_NAME, Alumni.FieldName.E_PRENAME, Alumni.FieldName.E_NAME,
+            Alumni.FieldName.CITIZEN_ID, Alumni.FieldName.GENDER, Alumni.FieldName.EMAIL, Alumni.FieldName.TEL, Alumni.FieldName.ADDR, Student.FieldName.FILE_NAME_PIC,
+            Alumni.FieldName.TIMESTAMP, Alumni.FieldName.STUDENT_ID, Alumni.FieldName.CURRI_ID, Alumni.FieldName.TYPE,
+            Alumni.FieldName.ADMIS_YEAR, Alumni.FieldName.ADMIS_DATE, Alumni.FieldName.GRAD_YEAR, Alumni.FieldName.GRAD_SEMESTER,
+            Alumni.FieldName.GRAD_DATE, Alumni.FieldName.STATUS, Alumni.FieldName.QUOTA, Alumni.FieldName.SUBTYPE,
+            Alumni.FieldName.COOP,Alumni.ExtraFieldName.COMPANY_ADDR,Alumni.ExtraFieldName.COMPANY_TEL,
+            DBFieldDataType.USERNAME_TYPE, DBFieldDataType.FILE_NAME_TYPE, DBFieldDataType.CURRI_ID_TYPE);
+
+            string insertintotemp99falsecase = string.Format("insert into {0} " +
+            "select * from ({3}) as stres where {1} = '{2}' ",
+            temp99tablename, Alumni.FieldName.USERNAME, username, oAlumni.getSelectAlumniByJoinCommand());
+
+
+            string insertintotemp99_1 = insertintotemp99falsecase;
+
+
+            string insertintotemp99_2 = string.Format("insert into {0}({1}) " +
+            "select {2} from (select max({3}) as {6} from {0}) as tid,{4} where {6} = {5} ",
+            temp99tablename, Alumni.FieldName.USERNAME, User_curriculum.FieldName.CURRI_ID,
+            Alumni.FieldName.USER_ID, User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID,
+            "alum_id");
+
+            string selectcmd = string.Format("select * from {0} ", temp99tablename);
+
+            return string.Format(" BEGIN {0} {1} {2} {3} END ", createtabletemp99, insertintotemp99_1, insertintotemp99_2, selectcmd);
+        }
         public object SelectUser(string preferredusername)
         {
             DBConnector d = new DBConnector();
@@ -482,9 +730,9 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
                                 "else if exists(select * from ({3}) as stres where {1} = '{2}') " +
                                 getSelectStaffWithCurriculumCommand() +
                                 "else if exists(select * from ({4}) as std where {1} = '{2}') " +
-                                "select * from ({4}) as comp where {1} = '{2}' " +
+                                getSelectStudentWithCurriculumCommand() +
                                 "else if exists(select * from ({5}) as alum where {1} = '{2}') " +
-                                    "select * from ({5}) as alum where {1} = '{2}' " +
+                                getSelectAlumniWithCurriculumCommand() +
                                 "else if exists(select * from ({6}) as comp where {1} = '{2}') " +
                                     getSelectCompanyWithCurriculumCommand() +
                                 "else if exists(select * from ({7}) as assres where {1} = '{2}') " +
@@ -564,6 +812,14 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
                                     result.information.company_name = item.ItemArray[data.Columns[Company.FieldName.COMPANY_NAME].Ordinal].ToString();
                                 }
                                 else if (usrtype == "ผู้ประเมินจากภายนอก")
+                                {
+
+                                }
+                                else if (usrtype == "นักศึกษา")
+                                {
+
+                                }
+                                else if (usrtype == "ศิษย์เก่า")
                                 {
 
                                 }
@@ -789,7 +1045,6 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
                 {
                     return "ไม่พบผู้ใช้งานนี้ในระบบ";
                 }
-                return null;
             }
             catch (Exception ex)
             {

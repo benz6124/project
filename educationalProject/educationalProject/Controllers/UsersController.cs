@@ -193,7 +193,7 @@ namespace educationalProject.Controllers
             object result = datacontext.UpdatePassword(old_password,ref new_password,user_id);
 
             if (result == null)
-                return Ok(new_password);
+                return Ok();
             else
                 return InternalServerError(new Exception(result.ToString()));
         }
