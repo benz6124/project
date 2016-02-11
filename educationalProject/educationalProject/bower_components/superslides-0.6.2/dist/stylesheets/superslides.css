@@ -23,13 +23,13 @@
   margin: 0 auto;
   position: absolute;
   z-index: 3;
-  top: 39%;
+  top: 52%;
   width: 100%;
 }
 .slides-navigation a {
   position: absolute;
   display: block;
-  color:#800031;
+  color:rgba(128, 0, 49,0.8);
 }
 .slides-navigation a.prev {
 

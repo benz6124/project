@@ -25,10 +25,8 @@ app.controller('GalleryCtrl', function ($scope, Lightbox) {
 
 app.controller('choice_index_controller', function($scope, $http,$alert,$cookies,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
 
-    // 
-    $scope.test_please = {
-        privilege:{'21':{'1':'1'}}
-    }
+
+ 
     $scope.not_select_curri_and_year = true;
     $scope.not_select_sub_indicator = true;
     $scope.year_choosen = {};
@@ -46,6 +44,36 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$cookies
        $rootScope.all_curriculums = [];
 
     // console.log(select_nothing);
+
+
+    $rootScope.clear_choosen = function(){
+       $scope.not_select_curri_and_year = true;
+        $scope.not_select_sub_indicator = true;
+        $scope.year_choosen = {};
+         $scope.curri_choosen={};
+         $scope.indicator_choosen = {};
+         $scope.sub_indicator_choosen = {};
+         $scope.select_overall = true;
+         $scope.select_year_support_text = 0;
+         $scope.select_all_complete = false;
+         $scope.already_select_curri = false;
+         $scope.questions = [];
+         $scope.show_preview_support_text = 0;
+         $scope.current_section_save = [];
+         $scope.not_choose_year = true;
+    }
+    $scope.can_edit_reason = function(){
+
+    if($scope.$parent.already_login == true){
+        if(!$scope.$parent.current_user.privilege[$scope.curri_choosen.curri_id]){
+            return false;
+        }
+        if( $scope.$parent.current_user.privilege[$scope.curri_choosen.curri_id]['15'] ==2){
+        return true;
+       }
+    }
+       return false;
+    }
 
      $scope.init_var = function(){
 
@@ -177,13 +205,6 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$cookies
 
 
     }
-     // $scope.loading = new $loading({
-     //        busyText: 'ระบบกำลังดำเนินการโหลด...',
-     //        theme: 'success',
-     //        timeout: false,
-     //        delayHide: 1000,
-     //        showSpinner:false
-     //    });
 
     
      $scope.sendIndicatorAndGetSubIndicators = function (indicator) {
@@ -583,7 +604,8 @@ app.controller('add_aca_year', function($scope, $http,$alert,$loading,$timeout,n
         $scope.new_curri_academic.aca_year = ""
  $scope.please_wait = false;
         $scope.error_leaw = false;
-    
+      $scope.all_curri_that_have_privileges = [];
+  $scope.$parent.scan_only_privilege_curri('2',$scope.all_curri_that_have_privileges);
     }
 
        $scope.$on("modal.hide", function (event, args) {
@@ -667,11 +689,12 @@ if( $scope.curri_choosen!= "none" && $scope.new_curri_academic.aca_year != ""){
      }
     }
 });
-app.controller('create_curriculum', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
+app.controller('create_curriculum_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
     $scope.init = function(){
         $scope.new_curri = {}
  $scope.please_wait = false;
   $scope.new_curri.level = {};
+
     }
 
        $scope.$on("modal.hide", function (event, args) {
@@ -771,6 +794,8 @@ $scope.init =function() {
               $scope.curri_choosen = {}
                 $scope.indicator_choosen= {};
                     $scope.result = {};
+                     $scope.all_curri_that_have_privileges = [];
+  $scope.$parent.scan_only_privilege_curri('11',$scope.all_curri_that_have_privileges);
 
 }
   
@@ -874,6 +899,8 @@ $scope.init =function() {
               $scope.curri_choosen = {}
                $scope.indicator_choosen= {};
                   $scope.result ={};
+                   $scope.all_curri_that_have_privileges = [];
+  $scope.$parent.scan_only_privilege_curri('13',$scope.all_curri_that_have_privileges);
 }
 
  $scope.$on("modal.hide", function (event, args) {
@@ -977,6 +1004,8 @@ $scope.init =function() {
               $scope.curri_choosen = {};
                  $scope.indicator_choosen= {};
                    $scope.result = {};
+                    $scope.all_curri_that_have_privileges = [];
+  $scope.$parent.scan_only_privilege_curri('12',$scope.all_curri_that_have_privileges);
 
 }
     
@@ -1096,7 +1125,8 @@ $scope.init =function() {
    $scope.year_choosen = {};
        $scope.curri_choosen = {};
 $scope.indicator_choosen = {};
-
+ $scope.all_curri_that_have_privileges = [];
+  $scope.$parent.scan_only_privilege_curri('4',$scope.all_curri_that_have_privileges);
 }
 
    $scope.$on("modal.hide", function (event, args) {
@@ -1465,7 +1495,7 @@ if( $scope.files.length != 0){
 
 });
 
-app.controller('upload_aun_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service) {
+app.controller('upload_aun_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service,$rootScope) {
 
     $scope.init =function() {
         console.log("init");
@@ -1479,6 +1509,13 @@ app.controller('upload_aun_controller', function($scope, $alert,$http,request_ye
       angular.element(inputElem).val(null);
     });
   $scope.please_wait = false;
+
+
+
+
+$scope.all_curri_that_have_privileges = [];
+$scope.$parent.scan_only_privilege_curri('14',$scope.all_curri_that_have_privileges);
+
 }
   $scope.please_wait = false;
 
@@ -2761,6 +2798,8 @@ $scope.init =function() {
                        $scope.personnel_choose = {};
                        $rootScope.my_evidence_real_code_we_have_now =[];
                        $scope.nothing_change =true;
+                         $scope.all_curri_that_have_privileges = [];
+  $scope.$parent.scan_only_privilege_curri('3',$scope.all_curri_that_have_privileges);
 }
 
 
@@ -3612,6 +3651,8 @@ $scope.init =function() {
                     $scope.result = {};
                     $scope.nothing_change = true;
                       $rootScope.manage_lab_my_world_wide_labs = [];
+                       $scope.all_curri_that_have_privileges = [];
+  $scope.$parent.scan_only_privilege_curri('10',$scope.all_curri_that_have_privileges);
 }
 
 
@@ -3807,6 +3848,8 @@ $scope.init =function() {
                     $scope.result = {};
                     $scope.nothing_change = true;
                       $rootScope.manage_survey_my_world_wide_surveys = [];
+                       $scope.all_curri_that_have_privileges = [];
+  $scope.$parent.scan_only_privilege_curri('5',$scope.all_curri_that_have_privileges);
 }
    $scope.$on("modal.hide", function (event, args) {
      $scope.init();
@@ -4124,6 +4167,8 @@ $scope.init =function() {
                     $scope.result = {};
                     $scope.nothing_change = true;
                       $rootScope.manage_survey_my_world_wide_surveys = [];
+                          $scope.all_curri_that_have_privileges = [];
+  $scope.$parent.scan_only_privilege_curri('6',$scope.all_curri_that_have_privileges);
 }
 
 
@@ -4457,6 +4502,16 @@ angular.forEach(
                $scope.please_wait = false;
 $scope.choose_not_complete = true;
 $scope.choose_type = false;
+if($scope.$parent.current_user.user_type != 'ผู้ดูแลระบบ'){
+
+  $scope.all_curri_that_have_privileges = [];
+  $scope.$parent.scan_only_privilege_curri('1',$scope.all_curri_that_have_privileges);
+}
+else{
+    $scope.all_curri_that_have_privileges = $rootScope.all_curriculums;
+}
+
+
           $http.get('/api/usertype').success(function (data) {
               
                 $scope.all_usertype = data;
@@ -5634,6 +5689,14 @@ $scope.title_choosen = {};
     }
 });
 
+
+app.controller('manage_profile_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
+$scope.remove_education = function(index_to_remove){
+    $scope.$parent.current_user.information.education.splice(index_to_remove,1);
+
+}
+
+ });
 app.controller('login_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
     $scope.credentials = {
         username: '',
@@ -5650,11 +5713,16 @@ app.controller('login_controller', function($scope, $http,$alert,$loading,$timeo
   //        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
   //         $scope.setcurrent_user(user);
   // $scope.$parent.already_login = true;
+  $scope.credentials.username.toLowerCase();
         AuthService.login($scope.credentials).then(function (user) {
-
-          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+            $rootScope.have_privilege_in_these_curri = {};
+          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);  
           $scope.setcurrent_user(user);
              my_modal.$hide();
+
+               $alert({title:'เข้าสู่ระบบสำเร็จ', content:'ยินดีต้อนรับ '+$scope.$parent.current_user.username,alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'loginPop'});
+
         }, function () {
 
 
@@ -5799,7 +5867,7 @@ $scope.title_choosen = {};
 
 app.controller('change_priviledge_by_type_admin_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
-
+    console.log('heellll');
     $scope.not_choose_title_yet = true;
      
    $scope.manage_privilege_admin_result={};
@@ -5924,6 +5992,8 @@ $scope.init =function() {
                 $scope.indicator_choosen= {};
          $scope.nothing_change = true;
                 $rootScope.manage_research_my_research_now = {};
+                 $scope.all_curri_that_have_privileges = [];
+  $scope.$parent.scan_only_privilege_curri('9',$scope.all_curri_that_have_privileges);
 }
 
 
@@ -6323,6 +6393,8 @@ $scope.init =function() {
                 $scope.indicator_choosen= {};
          $scope.nothing_change = true;
                 $rootScope.manage_research_my_research_now = {};
+                 $scope.all_curri_that_have_privileges = [];
+  $scope.$parent.scan_only_privilege_curri('7',$scope.all_curri_that_have_privileges);
 }
 
 
@@ -7187,8 +7259,18 @@ $scope.init =function() {
                     $scope.result = {};
                     $scope.nothing_change = true;
                       $rootScope.manage_minutes_my_world_wide_minutes = [];
+                       $scope.all_curri_that_have_privileges = [];
+  $scope.$parent.scan_only_privilege_curri('8',$scope.all_curri_that_have_privileges);
 }
-  
+       $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
 
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};

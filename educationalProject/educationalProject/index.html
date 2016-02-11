@@ -62,51 +62,10 @@
 
 <div>
  
-    <section class="wow">
-        <div class="navbar"style="
-    margin-bottom: 0px;
-" >
-      
-            <div class="container-fluid" style="  height:80px">
 
-
-
-
-                <ul class="nav navbar-nav navbar-left" >
-
-                   <!--  <li><img src="/myImages/logo_kmitl.gif" width="100px" style="margin-left:80px" /></li> -->
-                    <li class="headerWeb" style="margin-left:47px;margin-top: 7px;">CUPT-QA Online For Computer Engineering KMITL</li>
-
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-
-                    <li ng-show = "already_login" >
-                        <img src="{{current_user.information.file_name_pic}}" style="margin-right:35px;margin-top:1px;" class="img-circle profile_pic wow flipInY" data-wow-duration="2s" height="71" />
-                        <ul class="dropdownImg" >
-                            <li class="profile_name"> </i> {{current_user.username}}</li>
-                            <li class="bull"><a href="" data-placement="right" data-nq-toggle-modal="#manage_profile">แก้ไขข้อมูล</a></li>
-                            <li class="bull"><a href="" ng-click="logout()">ออกจากระบบ</a></li>
-
-                        </ul>
-
-                      
-<!-- 
-<a href="" >ออกจากระบบ</a> -->
-
-
-                    </li>
-                     <li ng-hide = "already_login" >
-                    <a href="" ng-hide = "already_login" data-nq-toggle-modal="#login_form" class="topicNewHeader" style="color:#b3b3b3;margin-top:15px;margin-right:15px">เข้าสู่ระบบ</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-    </section>
 
     <section  ng-if = "already_login" >
-        <div style="width:100%; margin-top:-5px;" ng-init="asideSettings={enlargeHover:true, offCanvas:'mobile'}">
+        <div style="width:100%; " ng-init="asideSettings={enlargeHover:true, offCanvas:'mobile'}">
             <div id="leftMenuAside" data-nq-aside="myLeftAside" class="aside aside-with-menu"
                  data-collapsible="true"
                  data-top-offset="0px"
@@ -136,7 +95,7 @@
                         </span>
                     </p> -->
                     <ul class="nav nav-stacked">
-                        <li ng-show="watch_only_admin() || fix_mode" >
+                        <li ng-show="watch_only_admin() || have_privilege_to_open_modal('1') || fix_mode" >
 
 
                             <a href="" data-nq-toggle-modal="#create_user" data-effect="from-left" data-placement="bottom">
@@ -146,14 +105,14 @@
                         </li>
 
 
-                        <li  ng-show="watch_only_admin()|| fix_mode">
+                        <li  ng-show="have_privilege_to_open_modal('16')|| watch_only_admin() || fix_mode">
                             <a href="" data-nq-toggle-modal="#create_curri" data-effect="from-left" data-placement="bottom">
                                 <i class="glyphicon glyphicon-book"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;สร้างหลักสูตร</span></span>
                             </a>
                         </li>
 
-                        <li  ng-show='watch_in_curri() || fix_mode'>
+                        <li  ng-show='have_privilege_to_open_modal("2") || fix_mode'>
                             <a href="" data-nq-toggle-modal="#add_aca_year" data-effect="from-left" data-placement="bottom">
                                 <i class="glyphicon glyphicon-calendar"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;เพิ่มปีการศึกษา</span></span>
@@ -161,7 +120,7 @@
                         </li>
 
 
-                        <li ng-show='watch_in_curri() || fix_mode'>
+                        <li ng-show='have_privilege_to_open_modal("3") || fix_mode'>
                             <a href="" data-nq-toggle-modal="#manage_evidences" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-briefcase"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการหลักฐาน</span></span>
@@ -169,34 +128,34 @@
                         </li>
 
 
-                        <li ng-show='watch_in_curri() || fix_mode'>
+                        <li ng-show='have_privilege_to_open_modal("4") || fix_mode'>
                             <a href="" data-nq-toggle-modal="#evaluate_me" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-pencil"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;ประเมินหลักสูตรตนเอง</span></span>
                             </a>
                         </li>
 
-                          <li ng-show='watch_in_curri() || fix_mode'>
+                          <li ng-show='have_privilege_to_open_modal("17") || fix_mode'>
                             <a href="" data-nq-toggle-modal="#evaluate_other" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-pencil"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;ประเมินหลักสูตร</span></span>
                             </a>
                         </li>
-                        <li ng-show='watch_in_curri() || fix_mode' class="hierarchy">
+                        <li ng-show='have_privilege_to_open_modal("5") || have_privilege_to_open_modal("6") || have_privilege_to_open_modal("7")|| have_privilege_to_open_modal("8")|| have_privilege_to_open_modal("9")|| have_privilege_to_open_modal("10")|| have_privilege_to_open_modal("11")|| have_privilege_to_open_modal("12")|| have_privilege_to_open_modal("13")' class="hierarchy">
                             <a href="" data-nq-collapse="" data-target-id="#collapseStat">
                                 <i class="glyphicon glyphicon-folder-open"></i>
                                 <span ng-hide="$aside.$collapsed"><span class="topic"> &nbsp;&nbsp;จัดการข้อมูล</span></span>
                             </a>
 
                             <ul class="dropdown">
-                                <li>
+                                <li  ng-show='have_privilege_to_open_modal("5") || fix_mode' >
                                     <a href="" data-nq-toggle-modal="#manage_survey" data-effect="slide-left">
                                         <span class="topic"> แบบสอบถาม</span>
                                     </a>
                                 </li>
 
 
-                                <li>
+                                <li  ng-show='have_privilege_to_open_modal("6") || fix_mode'>
                                     <a href="" data-nq-toggle-modal="#manage_album" data-effect="slide-left">
                                         <span class="topic"> อัลบั้มรูปภาพ</span>
                                     </a>
@@ -204,25 +163,25 @@
                                 
 
                                 
-                                <li>
+                                <li  ng-show='have_privilege_to_open_modal("7") || fix_mode'>
                                     <a href="" data-nq-toggle-modal="#show_education_personnel" data-screenMode="true" data-effect="slide-left" data-placement="right">
                                         <span class="topic"> ข้อมูลบุคลากร</span>
                                     </a>
                                 </li>
 
-                                <li>
+                                <li  ng-show='have_privilege_to_open_modal("8") || fix_mode'>
                                     <a href="" data-nq-toggle-modal="#manage_minutes" data-screenMode="true" data-effect="slide-left" data-placement="right">
                                         <span class="topic">รายงานการประชุม</span>
                                     </a>
                                 </li>
 
-                                <li>
+                                <li  ng-show='have_privilege_to_open_modal("9") || fix_mode'>
                                     <a href="" data-nq-toggle-modal="#manage_research" data-screenMode="true" data-effect="slide-left" data-placement="right">
                                         <span class="topic"> งานวิจัย</span>
                                     </a>
                                 </li>
   
-                                <li>
+                                <li  ng-show='have_privilege_to_open_modal("10") || fix_mode'>
                                     <a href="" data-nq-toggle-modal="#manage_lab" data-effect="slide-left">
                                         <span class="topic"> ห้องปฏิบัติการ</span>
                                     </a>
@@ -231,19 +190,19 @@
                              
 
 
-                                <li>
+                                <li  ng-show='have_privilege_to_open_modal("11") || fix_mode'>
                                     <a href="" data-nq-toggle-modal="#stat_grad" data-effect="slide-left">
                                         <span class="topic"> สถิติการจบการศึกษา</span>
                                     </a>
                                 </li>
 
-                                <li>
+                                <li  ng-show='have_privilege_to_open_modal("12") || fix_mode'>
                                     <a href="" data-nq-toggle-modal="#new_students" data-effect="slide-left">
                                         <span class="topic"> สถิติการรับนักศึกษาใหม่</span>
                                     </a>
                                 </li>
 
-                                <li>
+                                <li  ng-show='have_privilege_to_open_modal("13") || fix_mode'>
                                     <a href="" data-nq-toggle-modal="#student_amount" data-effect="slide-left">
                                         <span class="topic"> สถิติจำนวนนักศึกษา</span>
                                     </a>
@@ -262,7 +221,7 @@
 
                         </li>
 
-                         <li ng-show='watch_only_president()  || fix_mode'>
+                         <li ng-show='have_privilege_to_open_modal("18")  || fix_mode'>
                             <a href="" data-nq-toggle-modal="#manage_bind_person" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-list-alt"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic">&nbsp;&nbsp;โยงบัญชีผู้ใช้งาน</span></span>
@@ -270,20 +229,20 @@
                         </li>
 
                      
-                        <li ng-show='watch_only_president() || fix_mode' class="hierarchy">
+                        <li class="hierarchy" ng-show='have_privilege_to_open_modal("19") || have_privilege_to_open_modal("20")'>
                             <a href="" data-nq-toggle-modal="#change_priviledge" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-cog"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic">&nbsp;&nbsp;แก้ไขระดับการเข้าถึง</span></span>
                             </a>
 
                             <ul class="dropdown">
-                                <li>
+                                <li ng-show='have_privilege_to_open_modal("19") || fix_mode' >
                                     <a href="" data-nq-toggle-modal="#change_priviledge_by_type_president" data-effect="slide-left">
                                         <span class="topic">แก้ไขตามประเภทบุคลากร</span>
                                     </a>
                                 </li>
 
-                                <li>
+                                <li ng-show='have_privilege_to_open_modal("20") || fix_mode'>
                                     <a href="" data-nq-toggle-modal="#change_priviledge_person_president" data-effect="slide-left">
                                         <span class="topic">แก้ไขของแต่ละผู้ใช้</span>
                                     </a>
@@ -311,21 +270,22 @@
                             </ul>
                         </li> -->
 
-             <li  ng-show="watch_only_admin()  || fix_mode">
-                            <a href="" data-nq-toggle-modal="#change_priviledge_by_type_admin" data-effect="from-left" data-placement="right">
+             <li  ng-show="have_privilege_to_open_modal('21') || fix_mode">
+                     
+                                            <a href="" data-nq-toggle-modal="#change_priviledge_by_type_admin" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-cog"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic">&nbsp;&nbsp;แก้ไขระดับการเข้าถึง</span></span>
                             </a>
                         </li>
 
 
-                        <li ng-show='watch_in_curri() || fix_mode'>
+                        <li ng-show='have_privilege_to_open_modal("14") || fix_mode'>
                             <a href="" data-nq-toggle-modal="#upload_aun" data-effect="from-left" data-placement="bottom">
                                 <i class="glyphicon glyphicon-book"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;อัพโหลดเล่มรายงาน</span></span>
                             </a>
                         </li>
-                          <li ng-show="watch_only_admin() || fix_mode">
+                          <li ng-show="have_privilege_to_open_modal('22')|| fix_mode">
                             <a href="" data-nq-toggle-modal="#manage_president" data-effect="from-left" data-placement="bottom">
                                 <i class="glyphicon glyphicon-user"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;แต่งตั้งประธานหลักสูตร</span></span>
@@ -334,35 +294,35 @@
 
 
                         
-<li ng-show="watch_only_admin() || fix_mode">
+<li ng-show="have_privilege_to_open_modal('23') || fix_mode">
                             <a href="" data-nq-toggle-modal="#manage_admin_who" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-user"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;แต่งตั้งผู้ควบคุมระบบ</span></span>
                             </a>
                         </li>
 
-<li  ng-show="watch_in_curri() || fix_mode">
+<li  ng-show="have_privilege_to_open_modal('24') || fix_mode">
                             <a href="" data-nq-toggle-modal="#manage_committee_who" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-user"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;แต่งตั้งกรรมการหลักสูตร</span></span>
                             </a>
                         </li>
 
-                          <li  ng-show="watch_only_admin() || fix_mode">
+                          <li  ng-show="have_privilege_to_open_modal('25')  || fix_mode">
                             <a href="" data-nq-toggle-modal="#manage_indicators" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-th-list"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการตัวบ่งชี้</span></span>
                             </a>
                         </li>
 
-                             <li ng-show='watch_only_president() || fix_mode'>
+                             <li ng-show='have_privilege_to_open_modal("26") || fix_mode'>
                             <a href="" data-nq-toggle-modal="#manage_primary_evidences_president" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-user"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการหลักฐานพื้นฐาน (ประธาน)</span></span>
                             </a>
                         </li>
 
-                          <li  ng-show="watch_only_admin() || fix_mode">
+                          <li  ng-show="have_privilege_to_open_modal('27') || fix_mode">
                             <a href="" data-nq-toggle-modal="#manage_primary_evidences_admin" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-user"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการหลักฐานพื้นฐาน</span></span>
@@ -386,7 +346,7 @@
 
 <div class="contain">
 
-        <div class="row wow flipInX"data-wow-duration="2s" data-wow-delay="1s"ng-class="{'not_login_index_select_button_row': already_login == false }" style="position:fixed;z-index:1;top:100px;width:100%;margin-left: 25px;">
+        <div class="row wow flipInX"data-wow-duration="2s" data-wow-delay="1s"ng-class="{'not_login_index_select_button_row': already_login == false }" style="position:absolute;z-index:1;top:100px;width:100%;margin-left: 25px;">
     
            
             <div class="col-sm-6" style="margin-left:80px">
@@ -476,7 +436,42 @@
 
 
   </div>
+ <div class="navbar" ng-class="{backto_full: not_choose_year == false }"style="
+    position:absolute;top:0;width:100%;background-color:rgba(111, 0, 43,0.8);
+" >
+      
+            <div class="container-fluid" style=" height:80px">
 
+
+
+
+                <ul class="nav navbar-nav navbar-left" >
+
+                
+                    <li class="headerWeb" style="margin-left:47px;margin-top: 7px;">CUPT-QA Online For Computer Engineering KMITL</li>
+
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li ng-show = "already_login" >
+                        <img src="{{current_user.information.file_name_pic}}" style="margin-right:35px;margin-top:1px;" class="img-circle profile_pic wow flipInY" data-wow-duration="2s" height="79" />
+                        <ul class="dropdownImg" >
+                            <li class="profile_name">  {{current_user.username}}</li>
+                            <li class="bull"><a href="" data-placement="right" data-nq-toggle-modal="#manage_profile">แก้ไขข้อมูล</a></li>
+                            <li class="bull"><a href="" ng-click="logout()" >ออกจากระบบ</a></li>
+
+                        </ul>
+
+
+
+                    </li>
+                     <li ng-hide = "already_login" >
+                    <a href="" data-nq-toggle-modal="#login_form" class="topicNewHeader login_text" style="color:#b3b3b3;margin-top:15px;margin-right:15px">เข้าสู่ระบบ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
 <!--    <div data-nq-carousel="" effect='slide-left-right' hover-stop='false' interval='5000'   style="width:100%;height:100%;position:relative;" ng-show='not_choose_year' >
 
@@ -565,7 +560,7 @@
 <!--start the dependent on curriculum and aca_year -->
 
 <div ng-hide="not_select_curri_and_year" style="
-    margin-top: 80px;
+    margin-top: 163px;
 ">
   <div class="wow flipInX" data-wow-delay="0.3s" data-wow-duration="3s"  >
         <div class="big-nav" ng-class="{'not_login_indicator_row': already_login == false }" >
@@ -762,7 +757,7 @@
                     <span class="topicHeader wow bounceInUp" data-wow-duration="3s" ng-bind-html="current_section_save.detail"></span>
     <hr ng-show="already_login" />
                       
-                      <div ng-show="already_login">
+                      <div ng-show="can_edit_reason()">
                     <button class="btn editor hvr-wobble-vertical " type="button" data-nq-toggle-modal="#another_aca" data-qo-effect="flip-x" data-wow-duration="1s"  style="background-color:#6F002B;border:none;" ng-click="clear_select_year_support_text_choosen()"> <span class="glyphicon glyphicon-export" /><span class="normal"> ดึงข้อมูลจากปีการศึกษาอื่น</span></button>
 
   <br />  <br />
@@ -862,7 +857,7 @@
 
 
                             <div class="col-md-8">
-                             <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
+                             <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
             <option style="display:none" value=""></option></select>
 
                         
@@ -922,7 +917,7 @@
     padding-right: 25px;
 ">
                                 <div class="topicHeader">
-                                   <select data-qo-disable-clear="true" name = "choose_curri" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true"  >
+                                   <select data-qo-disable-clear="true" name = "choose_curri" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true"  >
                                   <option style="display:none" value=""></option></select>
                                 </div>
                             </div>
@@ -954,7 +949,7 @@
                     </div>
 
 <!-- create_curriculum controller -->
-                    <div id="create_curri" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-ng-controller="create_curriculum" data-ng-init="init()">
+                    <div id="create_curri" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-ng-controller="create_curriculum_controller" data-ng-init="init()">
                         <div class="custom-header">
                             <h1 class="headerModalH1">สร้างหลักสูตร</h1>
                         </div>
@@ -1108,7 +1103,7 @@
                         </div>
 
   <div class="row" style="margin-left:10px;margin-top:0px;margin-right:5px;" >
-    <select  data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curri_id as curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตรที่ต้องการโยงบุคลากร" data-qo-max-length ="0"  data-qo-multiple="true" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
+    <select  data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curri_id as curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตรที่ต้องการโยงบุคลากร" data-qo-max-length ="0"  data-qo-multiple="true" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
             <option style="display:none" value=""></option></select>
 </div>
 
@@ -1772,7 +1767,7 @@
 
 
                         <div class="col-md-8" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
@@ -1876,7 +1871,7 @@
 
 
                       
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
             <option style="display:none" value=""></option></select>
 
                      
@@ -2398,7 +2393,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
 
                       
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
             <option style="display:none" value=""></option></select>
 
                      
@@ -2496,7 +2491,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
 
                         <div class="col-md-8" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
@@ -2704,7 +2699,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
 
                         <div class="col-md-8" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
@@ -3079,7 +3074,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                         <div class="col-md-6" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
                         
             <option style="display:none" value=""></option></select>
 
@@ -4007,7 +4002,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                           <div class="col-md-6" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
@@ -4512,7 +4507,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                         <div class="col-md-8" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
@@ -4720,7 +4715,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                         <div class="col-md-8" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
@@ -4885,7 +4880,7 @@ glyphicon glyphicon-bell"></i> </span>
                             <h3 style="margin-left:20px;margin-top:3px;"><span class="topicHeader">รหัสผ่านใหม่:   </span></h3>
                         </div>
                         <div class="col-md-8">
-                            <input type="password" class="form-control" ng-model="new_password" placeholder="กรุณาใส่รหัสผ่านเก่า"><span class="normal">  </span>
+                            <input type="password" class="form-control" ng-model="new_password" placeholder="กรุณาใส่รหัสผ่านใหม่"><span class="normal">  </span>
 
                         </div>
                     </div>
@@ -4910,10 +4905,97 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
                 </div>
 
-                <div id="manage_profile" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-qo-size="lg">
+
+
+
+
+
+      <div id="create_new_education" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-qo-max-height="100%">
+
+       <div class="custom-header">
+                        <h1 class="headerModalH1">เพิ่มข้อมูลการศึกษา</h1>
+                    </div>
+
+
+
+
+                                     
+  <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่อปริญญา   </span></h3>
+                            </div>
+                            <div class="col-md-9">
+                                <input  type="text" class="form-control" placeholder="" ng-model="new_research.name" required><span class="normal">  </span>
+
+                            </div>
+                        </div>
+
+  <div class="row">
+  <div class="col-md-3" >
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">สถาบัน   </span></h3>
+                            </div>
+ <div class="col-md-9" style="padding-right:22px;">
+
+
+                                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_researcher.t_name for each_researcher in manage_research_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้วิจัย"  data-ng-model="$parent.new_research.researcher" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
+<option style="display:none" value=""></option></select>    
+
+</div>
+
+</div>
+
+                                     
+  <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ปีที่จบการศึกษา   </span></h3>
+                            </div>
+                            <div class="col-md-9">
+                                <input  type="number" class="form-control" placeholder="" ng-model="new_research.year_publish" required><span class="normal">  </span>
+
+                            </div>
+                        </div>
+
+  <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ตัวย่อปริญญา   </span></h3>
+                            </div>
+                            <div class="col-md-9">
+                                <input  type="text" class="form-control" placeholder="" ng-model="new_research.name" required><span class="normal">  </span>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ระดับปริญญา   </span></h3>
+                            </div>
+                            <div class="col-md-9">
+                             <select ng-class="{ little_danger: create_curri_form.level.$untouched && create_curri_form.$dirty }" name="level" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา" data-ng-model="new_curri.level" data-qo-disable-clear="true" required>
+                              <option value="1">ปริญญาตรี</option>
+                              <option  value="2">ปริญญาโท</option>
+                              <option value="3">ปริญญาเอก</option>
+                             
+                            <option style="display:none" value=""></option></select>
+
+                            </div>
+                        </div>
+
+           <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                            <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                        </div>
+                    </div>
+</div>
+
+
+
+                <div id="manage_profile" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-qo-size="lg" ng-controller="manage_profile_controller">
                     <div class="custom-header">
 
-                        <h1 class="headerModalH1"><span class="headerModal">ส่วนจัดการผู้ใช้งาน</span></h1>
+                        <h1 class="headerModalH1" style="
+    margin-top: 0px;
+"><span class="headerModal">ส่วนจัดการผู้ใช้งาน</span></h1>
                     </div>
 
                     <img src="{{current_user.information.file_name_pic}}" class="img-circle" width="300" style="float:left;margin-left:70px">
@@ -4932,7 +5014,9 @@ glyphicon glyphicon-bell"></i> </span>
                                 <div class="col-md-2" style="
     padding-left: 0px;
 ">
-                              <button type="button" data-nq-toggle-modal="#change_username" class="btn btn-primary form-control">เปลี่ยน</button>
+                              <button type="button" data-nq-toggle-modal="#change_username" style="
+    padding-top: 3px;
+" class="btn btn-primary form-control">เปลี่ยน</button>
 
                            
 
@@ -4944,7 +5028,9 @@ glyphicon glyphicon-bell"></i> </span>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">รหัสผ่าน:   </span></h3>
                             </div>
                             <div class="col-md-6">
-                                <button type="button" data-nq-toggle-modal="#change_password" class="btn btn-danger form-control">เปลี่ยนรหัสผ่าน</button>
+                                <button type="button" data-nq-toggle-modal="#change_password" style="
+    padding-top: 3px;
+" class="btn btn-danger form-control">เปลี่ยนรหัสผ่าน</button>
 
                             </div>
                         </div>
@@ -4965,19 +5051,19 @@ glyphicon glyphicon-bell"></i> </span>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">คำนำหน้า:   </span></h3>
                             </div>
                             <div class="col-md-6">
-                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกคำนำหน้าชื่อ" data-ng-model="current_user.t_prename">
-                                    <option>นาย</option>
-                                    <option>นางสาว</option>
-                                    <option>นาง</option>
-                                    <option>ดร.</option>
-                                    <option>ผศ.ดร.</option>
-                                    <option>รศ.ดร.</option>
-                                    <option>ศ.ดร.</option>
-                                    <option>ผศ.</option>
-                                    <option>รศ.</option>
-                                    <option>ศ.</option>
-
-                                <option style="display:none" value=""></option></select>
+                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกคำนำหน้าชื่อ" data-ng-model="current_user.information.t_prename">
+                                    <option value="นาย">นาย</option>
+                                    <option value="นางสาว">นางสาว</option>
+                                    <option value="นาง">นาง</option>
+                                    <option value="ดร.">ดร.</option>
+                                    <option value="ผศ.ดร.">ผศ.ดร.</option>
+                                    <option value="รศ.ดร.">รศ.ดร.</option>
+                                    <option value="ศ.ดร.">ศ.ดร.</option>
+                                    <option value="ผศ.">ผศ.</option>
+                                    <option value="รศ.">รศ.</option>
+                                    <option value="ศ.">ศ.</option>
+</select>
+                              
 
                             </div>
                         </div>
@@ -5017,13 +5103,13 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                       
-              <!--           <div class="row">
+                        <div class="row">
                             <div class="col-md-3" style="margin-left:25px">
                                 <h3 style="margin-top:0px;"><span class="topicHeader">สถานะ:   </span></h3>
                             </div>
                             <div class="col-md-6">
-                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกสถานะ" data-ng-model="staticSelectModel">
-                                    <option>ทำงานอยู่</option>
+                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกสถานะ" data-ng-model="current_user.information.status">
+                                    <option>ทำงาน</option>
                                     <option>ศึกษาต่อ</option>
                                     <option>ลาคลอด</option>
 
@@ -5031,7 +5117,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                                 <option style="display:none" value=""></option></select>
                             </div>
-                        </div> -->
+                        </div>
 
                         <div class="row">
                             <div class="col-md-3" style="margin-left:25px">
@@ -5046,155 +5132,69 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                     </div>
-                   <!--  <div class="row">
-                        <div class="col-md-3   " style="margin-left:25px">
-                            <h3 style="margin-top:0px;margin-bottom:0px"><span class="topicHeader">หัวข้อที่สนใจ:   </span></h3>
+   <div class="clearfix">
 
 
-                        </div>
-                        <div class="col-md-5" style="margin-left:50px;margin-top:0px" data-ng-init="tagsInputInitModel=['Database Systems', 'GIS','Object Technology','Software Engineering']">
+                            <div class="panel panel-default" style="margin-bottom:0px;clear:both" data-nq-pageable=""
+                                 data-qo-selectable="true" >
+              
 
-                            <input type="text" data-ng-model="tagsInputInitModel" data-nq-tags-input="" data-qo-placeholder="กรอกหัวข้อที่สนใจ">
+              
+                                  <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
-
-                        </div>
-                    </div> -->
-                    <br />
-               
-                   <!--  <div class="container-fluid">
-                        <div class="clearfix">
+                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="flip-x" data-nq-toggle-modal="#create_new_education"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลการศึกษา</button>
 
 
-                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
-                                 data-qo-selectable="true">
-                                <div class="panel-heading clearfix">
-                               
-
-
-                                    <div class="pull-left" style="padding-left:15px;">
-                                        <button type="button" class="btn btn-xs btn-primary plusgreen hvr-buzz" data-nq-show-insert="" data-template-id="insertMinutes"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลการศึกษา</button>
-                                    </div>
-
-                                </div>
-
-                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="350px" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
-
-
-                                    <table class="table table-bordered table-hover bg-white table_modal">
-                                     
+  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
+                                      
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
+                          
+                                                <th style="width:200px">ชื่อคณะ</th>
+ <th style="width:200px;padding-left: 0px;padding-right: 0px;">ชื่อสถาบัน</th>
+                                                <th style="width:70px">ปริญญา</th>
+                                     
+                                                
+                                                <th style="width:40px;padding-left: 0px;padding-right: 0px;">ปีที่จบ</th>
+                                                <th style="width:30px">แก้ไข</th>
+                                                <th style="width:30px">ลบ</th>
+                                              
                                             
-                                                <th class="col-xs-3">คณะ</th>
-                                                <th class="col-xs-3 ">สาขาวิชา</th>
-                                                <th class="col-xs-3">สถาบัน</th>
-                                                <th class="col-xs-1">ปีที่จบ</th>
-                                                <th class="col-xs-1">แก้ไข</th>
-                                                <th class="col-xs-1">ลบ</th>
-
-
-
                                             </tr>
                                         </thead>
                                         <tbody class="flattened">
-                                   
-                                            <tr>
+                                        <form name="manage_survey_form" novalidate>
+                                          
 
-                                                <td>วิศวกรรมศาสตรบัณฑิต</td>
-                                                <td>วิศวกรรมคอมพิวเตอร์</td>
-                                                <td>สถาบันพระจอมเกล้าเจ้าคุณทหารลาดกระบัง</td>
-                                                <td>N/A</td>
+                                            <tr  ng-repeat="each_education in current_user.information.education">
+                          <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{each_education.major}}</span> </td>
+                                              <td style=" padding-left: 10px ;"><span style="font-size:19px;">{{each_education.college}}</span> </td>
+            
+                            <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{each_education.pre_major}}</span> </td>
+                                    <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{each_education.grad_year}}</span> </td>           
+                       
 
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
+                                    
+   <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="" >
+                                        <span class="topic"><i style="color:#eea236;margin0"class="glyphicon glyphicon-wrench"></i> </span>
+                                    </a></td> 
 
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
+                                    
+
+                                          <td > <a  style="margin-top:7px" data-ng-click="remove_education($index)" href=""  class="hvr-pulse" >
+                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                    </a></td> 
+
                                             </tr>
 
-                                            <tr>
-
-                                                <td>M.Eng.</td>
-                                                <td>Computer Technology</td>
-                                                <td>Asian Institute of Technology, Thailand</td>
-                                                <td>N/A</td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Delete">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-remove"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-
+                                            </form>
                                         </tbody>
 
                                     </table>
-                                </div>
 
-                           
-
-                                <div data-nq-pageable-template="" ng-form="" data-on-change="panelTitle= 'เพิ่มข้อมูลการศึกษา'" ng-submit="$hide()" style="max-height:100%; overflow:hidden; overflow-y:auto;">
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h3 style="margin-left:20px;margin-top:5px"><span class="topicHeader">คณะ:   </span></h3>
-                                        </div>
-                                        <div class="col-md-8" style="margin-top:5px">
-                                            <input type="text" class="form-control" placeholder=""><span class="normal">  </span>
-
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h3 style="margin-left:20px;margin-top:0px"><span class="topicHeader">สาขาวิชา:   </span></h3>
-                                        </div>
-                                        <div class="col-md-8" style="margin-top:5px">
-                                            <input type="text" class="form-control" placeholder=""><span class="normal">  </span>
-
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">สถาบัน:  </span></h3>
-                                        </div>
-
-                                        <div class="col-md-8" style="margin-top:5px">
-                                            <input type="text" class="form-control" placeholder=""><span class="normal">  </span>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h3 style="margin-left:20px;margin-top:0px"><span class="topicHeader">ปีที่จบ:   </span></h3>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <input type="number" class="form-control"><span class="normal">  </span>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div> -->
+         </div> 
+</div>
+</div>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
                             <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
@@ -5203,268 +5203,7 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
                 </div>
 
-                <div id="teacher_role" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-qo-screen-mode="true">
-                    <div class="custom-header">
-
-                        <h1 class="headerModalH1"><span class="headerModal">ส่วนการจัดการบุคลากรทางการศึกษา</span></h1>
-                    </div>
-
-
-                    <div class="row">
-
-
-                        <div class="col-md-10" style="margin-left:45px">
-                            <select data-qo-disable-clear="true" data-qo-button-class="mySelect" name="staticSelectModel" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="staticSelectModel">
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2554</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2552</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546</option>
-                                <option>วิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมสารสนเทศฉบับ พ.ศ.2552</option>
-                            <option style="display:none" value=""></option></select>
-
-                        </div>
-                        <!--   <div class="col-md-3">
-                                       <select data-qo-disable-clear="true" data-qo-button-class="mySelect"   name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="staticSelectModel" >
-                                                 <option>2557</option><option>2556</option>
-                                                 <option>2555</option>
-                                                 <option>2554</option>
-                                                 <option>2553</option>
-                                                 <option>2552</option>
-                                                 <option>2551</option>
-
-
-                                             <option style="display:none" value=""></option></select>
-                        </div> -->
-
-                        <div class="col-md-1">
-                            <button class="btn btn-primary hvr-rotate" style="margin-bottom:10px"><i class="glyphicon glyphicon-search"></i> ค้นหา</button>
-                        </div>
-                    </div>
-
-
-                    <div class="container-fluid">
-                        <div class="clearfix">
-
-
-                            <div class="panel panel-default" data-nq-pageable=""
-                                 data-qo-selectable="true">
-                                <div class="panel-heading clearfix">
-                                    <!-- <h1 class="panel-title pull-left"></i> รายงานการประชุม </h1> -->
-                                    <!-- <div class="pull-left" style="padding-left:15px;">
-                                        <button type="button" class="btn btn-xs btn-primary plusgreen hvr-buzz"data-nq-show-insert="" data-template-id="insertMinutes"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้</button>
-                                    </div> -->
-
-                                </div>
-
-                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="455px" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
-
-
-                                    <!--          <div  data-qo-min-height="200px" data-nq-scroll="" data-qo-max-height="350px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden;"> -->
-                                    <table class="table table-bordered table-hover bg-white table_modal">
-                                        <!--nq-fix-table-scroll class would fix thead always visible at top of the table if you put the table into a scrollable container-->
-                                        <thead class="nq-fix-table-scroll">
-                                            <tr>
-                                                <!--nq-column-sort directive would bind sorting handler to the element-->
-                                                <th class="col-xs-1">รูป</th>
-                                                <th class="col-xs-2">ชื่ออาจารย์</th>
-                                                <th class="col-xs-4 ">ประวัติการศึกษา</th>
-
-                                                <th class="col-xs-1 ">ประเภทอาจารย์</th>
-                                                <th class="col-xs-2">ประเภทบุคลากร</th>
-                                                <th class="col-xs-1">สถานะ</th>
-                                                <th class="col-xs-1">แก้ไข</th>
-
-
-
-
-                                            </tr>
-                                        </thead>
-                                        <tbody class="flattened">
-                                            <!--pageable-repeat is required sub directive-->
-                                            <tr>
-                                                <td><img src="/myImages/profile_pic/บุญธีร์.jpg" class="img-circle" width="70"></td>
-                                                <td> รศ. ดร. บุญธีร์ เครือตราชู</td>
-                                                <td>
-                                                    <div>
-                                                        วศ.บ. - (มหาวิทยาลัยเกษตรศาสตร์)
-                                                    </div>
-                                                    <div>
-                                                        M.S. (Oregon State University, USA)
-                                                    </div>
-                                                    <div>
-                                                        Ph.D. (Oregon State University, USA)
-
-
-
-                                                    </div>
-                                                </td>
-
-
-
-
-
-                                                <td>N/A</td>
-                                                <td>N/A</td>
-                                                <td>ทำงาน</td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-
-                                            </tr>
-
-                                            <tr>
-                                                <td><img src="/myImages/profile_pic/ชมพูนุท.jpg" class="img-circle" width="70"></td>
-                                                <td>ดร. ชมพูนุท จินจาคาม</td>
-                                                <td>
-                                                    <div> วศ.บ. (วิศวกรรมอิเล็กทรอนิกส์) KMITL </div>
-                                                    <div>วศ.ม. (วิศวกรรมอิเล็กทรอนิกส์) KMITL </div>
-                                                    <div>D.Eng. (Science and Technology) Tokai University, JAPAN</div>
-
-                                                </td>
-
-
-
-
-                                                <td>N/A</td>
-                                                <td>N/A</td>
-                                                <td>ทำงาน</td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-
-                                            </tr>
-
-
-                                            <tr>
-                                                <td><img src="/myImages/profile_pic/วิบูลย์.jpg" class="img-circle" width="70"></td>
-                                                <td>อ.วิบูลย์ พร้อมพานิชย์</td>
-                                                <td>
-                                                    <div>วศ.บ. วิศวกรรมคอมพิวเตอร์ KMITL</div>
-                                                    <div> M.Eng. Computer Technology (Asian Institute of Technology, Thailand)</div>
-                                                </td>
-
-
-
-
-                                                <td>N/A</td>
-                                                <td>N/A</td>
-                                                <td>ทำงาน</td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-
-                                            </tr>
-
-
-                                            <tr>
-                                                <td><img src="/myImages/profile_pic/ชุติเมษฎ์.jpg" class="img-circle" width="70"></td>
-                                                <td>ผศ. ดร. ชุติเมษฎ์ ศรีนิลทา</td>
-                                                <td>
-                                                    <div> วศ.บ. วิศวกรรมไฟฟ้า (มหาวิทยาลัยเกษตรศาสตร์) </div>
-                                                    <div> M.S. Computer Engineering (Syracuse University, USA) </div>
-                                                    <div> Ph.D. Computer Engineering (Syracuse University, USA)</div>
-                                                </td>
-
-
-
-
-                                                <td>N/A</td>
-                                                <td>N/A</td>
-                                                <td>ทำงาน</td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-
-                                            </tr>
-
-                                            <tr>
-                                                <td><img src="/myImages/profile_pic/อรัญญา.jpg" class="img-circle" width="70"></td>
-                                                <td>ผศ. ดร. อรัญญา วลัยรัชต์</td>
-                                                <td>
-                                                    <div> วท.บ. ฟิสิกส์ (มหาวิทยาลัยศรีนครินทรวิโรฒ บางแสน) </div>
-                                                    <div> วศ.ม. วิศวกรรมไฟฟ้า (สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง) </div>
-                                                    <div> D.Eng. Electronics (Tokai University, Japan)</div>
-                                                </td>
-
-
-
-
-
-                                                <td>N/A</td>
-                                                <td>N/A</td>
-                                                <td>ทำงาน</td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-
-                                            </tr>
-                                            <tr>
-                                                <td><img src="/myImages/profile_pic/เกียรติกูล.jpg" class="img-circle" width="70"></td>
-                                                <td>รศ. ดร. เกียรติกูล เจียรนัยธนะกิจ</td>
-                                                <td>
-                                                    วศ.บ. วิศวกรรมคอมพิวเตอร์ (สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง)
-                                                    M.S. Computer Science (Oregon State University, USA)
-                                                    วศ.ด. วิศวกรรมไฟฟ้า (สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง)
-                                                </td>
-
-
-
-
-
-                                                <td>N/A</td>
-                                                <td>N/A</td>
-                                                <td>ทำงาน</td>
-
-                                                <td>
-                                                    <a class="hvr-grow" role="button" data-title="Update">
-                                                        <i style="text-align:center" class="fic glyphicon glyphicon-pencil"></i>
-                                                    </a>
-                                                </td>
-
-
-                                            </tr>
-
-                                        </tbody>
-
-                                    </table>
-                                </div>
-
-                                <!--           <div data-nq-pageable-template=""    data-qo-max-height="350px"data-on-change="panelTitle= 'สร้างรายงานการประชุม'"  style="overflow:hidden; overflow-y:auto;" data-nq-scroll="" ng-submit="$hide()" >
-                                -->
-
-
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="custom-footer" style="background-color:#6F002B;">
-                        <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
-                    </div>
-
-                </div>
-
+        
               
 <div id="create_new_research" data-nq-modal="" data-qo-fire-emit = "true" data-qo-fire-emit = "true" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_research_controller">
        <div class="custom-header">
@@ -5616,7 +5355,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                         <div class="col-md-8" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
@@ -5726,7 +5465,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                         <div class="col-md-8" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>

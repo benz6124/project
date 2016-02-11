@@ -97,10 +97,10 @@ button{
 
 }
 
-div.navbar>div.container-fluid>ul>li>a:hover{
+/*div.navbar>div.container-fluid>ul>li>a:hover{
   background-color: #6F002B;
 
-}
+}*/
 
 .navbar{
   background-color:#6F002B; 
@@ -168,10 +168,10 @@ td.code{
 
 }
 
-.btn.form-control:hover,.btn.form-control:active {
+/*.btn.form-control:hover,.btn.form-control:active {
 
     background-color:#B8B8B8  !important;
-}
+}*/
 
 
 /*ul.nav.nav-stacked li{
@@ -417,7 +417,7 @@ td button li label{
     
 
      position: absolute;
-          top: 33%;
+          top: 39%;
           right: 13%;
           margin-top: 49px;
          padding-left: 0px;
@@ -837,6 +837,13 @@ table.evaluation{
     border-color: #d43f3a;
 }
 
+.loginPop{
+  font-size: 18px !important;
+      color: #fff;
+    background-color: #6F002B;
+    border-color: #4d001d;
+}
+
 .alertPopFileSize{
   font-size: 18px !important;
 
@@ -1182,7 +1189,7 @@ font-size: 22px!important;
 }
 
 .not_login_index_select_button_row {
-position:fixed !important;
+position:absolute !important;
 z-index:1 !important;
 top:100px !important;
 width:100% !important;
@@ -1214,7 +1221,7 @@ margin-left: -7px !important;
   width: 40%;
   max-width: 500px;
   left: 50%;
-  top: 59%;
+  top: 67%;
   padding: 10px 20px;
   background-color:rgba(0 , 0, 0,0.6);
   color:rgba(255 , 255, 255,0.7);
@@ -1222,4 +1229,21 @@ margin-left: -7px !important;
 
 li.hierarchy ul.dropdown a{
   padding-left: 0px !important;
+}
+
+.backto_full{
+  background-color:#6F002B !important;
+}
+
+a.login_text:hover{
+  cursor: pointer!important;
+  color:white!important;
+  background-color: transparent !important;
+}
+
+.nav>li>a:focus, .nav>li>a:hover{
+   background-color: transparent !important;
+}
+.modal-content {
+  max-height: 100% !important;
 }
