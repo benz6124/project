@@ -13,7 +13,7 @@ namespace educationalProject.Models.ViewModels
         private User_information _information;
 
         private Dictionary<string, Dictionary<int, int>> _privilege;
-
+        private Dictionary<string, List<int>> _president_in;
         private List<string> _curri_id_in;
         public int user_id { get { return _user_id; } set { _user_id = value; } }
         public string username { get { return _username; } set { _username = value; } }
@@ -21,11 +21,13 @@ namespace educationalProject.Models.ViewModels
         public User_information information { get { return _information; } set { _information = value; } }
         public Dictionary<string, Dictionary<int, int>> privilege { get { return _privilege; } set { _privilege = value; } }
         public List<string> curri_id_in { get { return _curri_id_in; } set { _curri_id_in = value; } }
+        public Dictionary<string, List<int>> president_in { get { return _president_in; } set { _president_in = value; } }
         public User_information_with_privilege_information()
         {
             information = new User_information();
             privilege = new Dictionary<string, Dictionary<int, int>>();
             curri_id_in = new List<string>();
+            president_in = new Dictionary<string, List<int>>();
         }
     }
 }

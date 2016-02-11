@@ -166,5 +166,36 @@ namespace educationalProject.Controllers
                 return InternalServerError(new Exception(result.ToString()));
             }
         }
+
+        [ActionName("changeusername")]
+        public IHttpActionResult PutForChangeUsername(JObject userdata)
+        {
+            oUsers datacontext = new oUsers();
+            string username = userdata["username"].ToString().ToLower();
+            int user_id = Convert.ToInt32(userdata["user_id"]);
+
+            object result = datacontext.UpdateUsername(username, user_id);
+
+            if (result == null)
+                return Ok();
+            else
+                return InternalServerError(new Exception(result.ToString()));
+        }
+
+        [ActionName("changepassword")]
+        public IHttpActionResult PutForChangePassword(JObject userdata)
+        {
+            oUsers datacontext = new oUsers();
+            string old_password = userdata["old_password"].ToString();
+            string new_password = userdata["new_password"].ToString();
+            int user_id = Convert.ToInt32(userdata["user_id"]);
+
+            object result = datacontext.UpdatePassword(old_password,ref new_password,user_id);
+
+            if (result == null)
+                return Ok(new_password);
+            else
+                return InternalServerError(new Exception(result.ToString()));
+        }
     }
 }

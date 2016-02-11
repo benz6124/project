@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data;
+using Microsoft.AspNet.Identity;
 using educationalProject.Models.Wrappers;
 using educationalProject.Utils;
 namespace educationalProject.Models.ViewModels.Wrappers
 {
     public class oUsers : User
     {
+        private static readonly PasswordHasher hasher = new PasswordHasher();
         private string getSelectTeacherWithCurriculumCommand()
         {
             string temp99tablename = "#temp99";
@@ -147,9 +149,16 @@ namespace educationalProject.Models.ViewModels.Wrappers
             temp99tablename, Teacher.FieldName.USERNAME, User_curriculum.FieldName.CURRI_ID,
             Teacher.FieldName.TEACHER_ID, User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID);
 
+            string insertintotemp99_3 = string.Format("insert into {0}({1},{2}) " +
+                "select {3},{4} from {5} where {6} in (select {7} from {8} where {9} = '{10}') ",
+                temp99tablename, Educational_teacher_staff.FieldName.MAJOR, Educational_teacher_staff.FieldName.GRAD_YEAR,
+                President_curriculum.FieldName.CURRI_ID,President_curriculum.FieldName.ACA_YEAR,
+                President_curriculum.FieldName.TABLE_NAME,President_curriculum.FieldName.TEACHER_ID,
+                User_list.FieldName.USER_ID,User_list.FieldName.TABLE_NAME,Teacher.FieldName.USERNAME,
+                username);
             string selectcmd = string.Format("select * from {0} ", temp99tablename);
 
-            return string.Format(" BEGIN {0} {1} {2} {3} END ", createtabletemp99, insertintotemp99_1, insertintotemp99_2, selectcmd);
+            return string.Format(" BEGIN {0} {1} {2} {3} {4} END ", createtabletemp99, insertintotemp99_1, insertintotemp99_2,insertintotemp99_3, selectcmd);
         }
 
         private string getSelectStaffWithCurriculumCommand()
@@ -475,11 +484,22 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                 }
                             }
                         }
-                        else
+                        else if(item.ItemArray[data.Columns[Teacher.FieldName.USERNAME].Ordinal].ToString() != "")
                         {
                             //Read ternary data such as curriculum which personnel is in
                             //Username column contain curri_id value
                             result.curri_id_in.Add(item.ItemArray[data.Columns[Teacher.FieldName.USERNAME].Ordinal].ToString());
+                        }
+                        else
+                        {
+                            //Read 4th data such as which curriculum+year that the login teacher is president 
+                            //major and grad_year column contain curri_id and aca_year value
+                            string curri_id = item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.MAJOR].Ordinal].ToString();
+                            if (!result.president_in.ContainsKey(curri_id))
+                            {
+                                result.president_in.Add(curri_id, new List<int>());
+                            }
+                            result.president_in[curri_id].Add(Convert.ToInt32(item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.GRAD_YEAR].Ordinal]));
                         }
                     }
                     data.Dispose();
@@ -601,6 +621,77 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 d.SQLDisconnect();
             }
             return null;
+        }
+
+        public object UpdateUsername(string preferredusername, int user_id)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+
+            d.iCommand.CommandText = string.Format("update {0} set {1} = '{2}' where {3} = {4}",
+                User_list.FieldName.TABLE_NAME,Teacher.FieldName.USERNAME,preferredusername,
+                User_list.FieldName.USER_ID,user_id);
+            try
+            {
+                d.iCommand.ExecuteNonQuery();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+        }
+
+        public object UpdatePassword(string preferoldpassword,ref string newpassword,int user_id)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+
+            d.iCommand.CommandText = string.Format("select {0} from {1} where {2} = {3}",
+                Teacher.FieldName.PASSWORD,User_list.FieldName.TABLE_NAME,User_list.FieldName.USER_ID,user_id);
+            try
+            {
+                object oldpass = d.iCommand.ExecuteScalar();
+                if (oldpass != null)
+                {
+                    PasswordVerificationResult result = hasher.VerifyHashedPassword(oldpass.ToString(), preferoldpassword);
+                    if(result == PasswordVerificationResult.Success || result == PasswordVerificationResult.SuccessRehashNeeded)
+                    {
+                        newpassword = hasher.HashPassword(newpassword);
+                        d.iCommand.CommandText = string.Format("update {0} set {1} = '{2}' where {3} = {4}",
+                            User_list.FieldName.TABLE_NAME, Teacher.FieldName.PASSWORD, newpassword, User_list.FieldName.USER_ID, user_id);
+                        d.iCommand.ExecuteNonQuery();
+                        return null;
+                    }
+                    else
+                    {
+                        return "รหัสผ่านเก่าไม่ถูกต้อง";
+                    }
+                }
+                else
+                {
+                    return "ไม่พบผู้ใช้งานนี้ในระบบ";
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
         }
     }
 }
