@@ -97,10 +97,10 @@ button{
 
 }
 
-/*div.navbar>div.container-fluid>ul>li>a:hover{
+div.navbar>div.container-fluid>ul>li>a:hover{
   background-color: #6F002B;
 
-}*/
+}
 
 .navbar{
   background-color:#6F002B; 
@@ -1241,7 +1241,7 @@ a.login_text:hover{
   background-color: transparent !important;
 }
 
-.nav>li>a:focus, .nav>li>a:hover{
+.nav>li>a.login_text:focus, .nav>li>a.login_text:hover{
    background-color: transparent !important;
 }
 .modal-content {

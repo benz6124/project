@@ -5735,7 +5735,7 @@ $scope.init = function(){
     });
 
   $scope.$on("modal.show", function (event, args) {
-              $scope.init();
+      $scope.init();
     });
 
  $scope.close_modal = function(my_modal){
@@ -5802,7 +5802,7 @@ $scope.create_not_complete = function(){
 
 }
 
-$scope.init() = function(){
+$scope.init = function(){
 
     $scope.fix_this_edu = $rootScope.manage_profile_fix_this_edu;
 }
