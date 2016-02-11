@@ -5690,11 +5690,173 @@ $scope.title_choosen = {};
 });
 
 
+
+app.controller('create_new_education_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
+  
+$scope.create_not_complete = function(){
+
+    if(!$scope.new_grad){
+        return true;
+    }
+    if( !$scope.new_grad.major || !$scope.new_grad.college || !$scope.new_grad.grad_year || !$scope.new_grad.pre_major || !$scope.new_grad.degree ){
+        return true;
+    }
+
+    if(isNaN($scope.new_grad.degree)==true){
+        return true;
+    }
+    if(angular.isNumber($scope.new_grad.grad_year) == false){
+        return true;
+    }
+
+
+    if($scope.new_grad.grad_year<=0){
+        return true;
+    }
+
+    return false;
+
+}
+
+$scope.init = function(){
+    $scope.new_grad = {};
+    $scope.new_grad.major = "";
+    $scope.new_grad.college = "";
+    $scope.new_grad.grad_year = "";
+    $scope.new_grad.pre_major = "";
+    $scope.new_grad.degree = "";
+}   
+
+
+
+  $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+ $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+
+$scope.save_to_server = function(){
+    $scope.new_grad.personnel_id = $scope.$parent.current_user.user_id;
+     $http.post(
+             '/api/education',
+             JSON.stringify($scope.new_grad),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            $scope.$parent.current_user.information.education = data;
+               $scope.close_modal(my_modal);
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+            
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+   
+ }
+});
+}
+ 
+
+});
+
+
+app.controller('fix_education_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
+  
+$scope.create_not_complete = function(){
+
+    if(!$scope.fix_this_edu){
+        return true;
+    }
+    if( !$scope.fix_this_edu.major || !$scope.fix_this_edu.college || !$scope.fix_this_edu.grad_year || !$scope.fix_this_edu.pre_major || !$scope.fix_this_edu.degree ){
+        return true;
+    }
+
+    if(isNaN($scope.fix_this_edu.degree)==true){
+        return true;
+    }
+    if(angular.isNumber($scope.fix_this_edu.grad_year) == false){
+        return true;
+    }
+
+
+    if($scope.fix_this_edu.grad_year<=0){
+        return true;
+    }
+
+    return false;
+
+}
+
+$scope.init() = function(){
+
+    $scope.fix_this_edu = $rootScope.manage_profile_fix_this_edu;
+}
+
+
+  $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+$scope.save_to_server = function(){
+
+     $http.put(
+             '/api/education',
+             JSON.stringify($scope.fix_this_edu),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+            $scope.$parent.current_user.information.education = data;
+               $scope.close_modal(my_modal);
+               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+            
+         })
+    .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+   
+ }
+});
+}
+});
+
+
 app.controller('manage_profile_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
+
+$scope.go_to_fix = function(fix_this_obj){
+    $rootScope.manage_profile_fix_this_edu = fix_this_obj;
+}
+
 $scope.remove_education = function(index_to_remove){
     $scope.$parent.current_user.information.education.splice(index_to_remove,1);
 
 }
+
 
  });
 app.controller('login_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
