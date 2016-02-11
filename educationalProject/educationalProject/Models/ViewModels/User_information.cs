@@ -32,6 +32,9 @@ namespace educationalProject.Models.ViewModels
         public string file_name_pic { get { return _file_name_pic; } set { _file_name_pic = value; } }
         public string timestamp { get { return _timestamp; } set { _timestamp = value; } }
 
+        //For company
+        private string _company_name;
+        public string company_name { get { return _company_name; } set { _company_name = value; } }
         //For teacher
         private char _degree;
         private char _position;
@@ -40,6 +43,7 @@ namespace educationalProject.Models.ViewModels
         private string _room;
         private string _status;
         private int _alive;
+        private List<string> _interest;
         public char degree { get { return _degree; } set { _degree = value; } }
         public char position { get { return _position; } set { _position = value; } }
         public string personnel_type { get { return _personnel_type; } set { _personnel_type = value; } }
@@ -47,6 +51,7 @@ namespace educationalProject.Models.ViewModels
         public string status { get { return _status; } set { _status = value; } }
         public string room { get { return _room; } set { _room = value; } }
         public int alive { get { return _alive; } set { _alive = value; } }
+        public List<string> interest { get { return _interest; } set { _interest = value; } }
 
         //Common for teacher and staff
 
@@ -56,6 +61,7 @@ namespace educationalProject.Models.ViewModels
         public User_information()
         {
             education = new List<Educational_teacher_staff>();
+            interest = new List<string>();
         }
         public string GetPassword()
         {

@@ -133,10 +133,10 @@ namespace educationalProject.Models.Wrappers
                         t.history.Add(new Educational_teacher_staff
                         {
                             college = item.ItemArray[tabledata.Columns[Educational_teacher_staff.FieldName.COLLEGE].Ordinal].ToString(),
-                            degree = Convert.ToChar(item.ItemArray[26]),
+                            degree = Convert.ToChar(item.ItemArray[27]),
                             grad_year = Convert.ToInt32(item.ItemArray[tabledata.Columns[Educational_teacher_staff.FieldName.GRAD_YEAR].Ordinal]),
                             major = item.ItemArray[tabledata.Columns[Educational_teacher_staff.FieldName.MAJOR].Ordinal].ToString(),
-                            personnel_id = Convert.ToInt32(item.ItemArray[25]),
+                            personnel_id = Convert.ToInt32(item.ItemArray[26]),
                             pre_major = item.ItemArray[tabledata.Columns[Educational_teacher_staff.FieldName.PRE_MAJOR].Ordinal].ToString(),
                         });
                     }

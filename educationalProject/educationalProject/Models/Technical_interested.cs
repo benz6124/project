@@ -7,7 +7,7 @@ namespace educationalProject.Models
 {
     public class Technical_interested
     {
-        protected struct FieldName
+        internal struct FieldName
         {
             public static readonly string TEACHER_ID = "TEACHER_ID";
             public static readonly string TOPIC_INTERESTED = "TOPIC_INTERESTED";

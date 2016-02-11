@@ -99,6 +99,7 @@
     <Compile Include="Controllers\CurriculumAcademicController.cs" />
     <Compile Include="Controllers\CurriculumController.cs" />
     <Compile Include="Controllers\DefaultPrivilegeByTypeController.cs" />
+    <Compile Include="Controllers\EducationController.cs" />
     <Compile Include="Controllers\EvaluationResultController.cs" />
     <Compile Include="Controllers\EvidenceController.cs" />
     <Compile Include="Controllers\ExtraPrivilegeByTypeController.cs" />
@@ -232,6 +233,7 @@
     <Compile Include="Models\Wrappers\oCommittee.cs" />
     <Compile Include="Models\Wrappers\oCompany.cs" />
     <Compile Include="Models\Wrappers\oCurriculum_academic.cs" />
+    <Compile Include="Models\Wrappers\oEducation.cs" />
     <Compile Include="Models\Wrappers\oTitle.cs" />
     <Compile Include="Models\Wrappers\oUser_curriculum.cs" />
     <Compile Include="Models\Wrappers\oCu_Curriculum.cs" />

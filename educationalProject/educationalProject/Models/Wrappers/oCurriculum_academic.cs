@@ -30,13 +30,13 @@ namespace educationalProject.Models.Wrappers
                             aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal])
                         });
                     }
-                    res.Close();
                     data.Dispose();
                 }
                 else
                 {
                     //Reserved for return error string
                 }
+                res.Close();
             }
             catch (Exception ex)
             {
@@ -104,13 +104,14 @@ namespace educationalProject.Models.Wrappers
                             aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal])
                         });
                     }
-                    res.Close();
+
                     data.Dispose();
                 }
                 else
                 {
                     //Reserved for return error string
                 }
+                res.Close();
             }
             catch (Exception ex)
             {

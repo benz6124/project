@@ -9,6 +9,7 @@ namespace educationalProject.Models
     {
         internal struct FieldName
         {
+            public static readonly string EDUCATION_ID = "EDUCATION_ID";
             public static readonly string PERSONNEL_ID = "PERSONNEL_ID";
             public static readonly string DEGREE = "DEGREE";
             public static readonly string PRE_MAJOR = "PRE_MAJOR";
@@ -23,6 +24,8 @@ namespace educationalProject.Models
         private string _major;
         private int _grad_year;
         private string _college;
+        private int _education_id;
+        public int education_id { get { return _education_id; } set { _education_id = value; } }
         public int personnel_id { get { return _personnel_id; } set { _personnel_id = value; } }
         public char degree { get { return _degree; } set { _degree = value; } }
         public string major { get { return _major; } set { _major = value; } }

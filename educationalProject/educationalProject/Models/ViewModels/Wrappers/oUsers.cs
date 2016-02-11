@@ -39,6 +39,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             "[{21}] VARCHAR(40) NULL," +
             "[{22}] TINYINT NULL," +
 
+            "[{30}] INT NULL," +
             "[{23}] CHAR NULL," +
             "[{24}] VARCHAR(100) NULL," +
             "[{25}] VARCHAR(200) NULL," +
@@ -119,12 +120,14 @@ namespace educationalProject.Models.ViewModels.Wrappers
             Teacher.FieldName.CITIZEN_ID,Teacher.FieldName.GENDER,Teacher.FieldName.EMAIL,Teacher.FieldName.TEL, Teacher.FieldName.ADDR, Teacher.FieldName.FILE_NAME_PIC,
             Teacher.FieldName.TIMESTAMP, Teacher.FieldName.ROOM, Teacher.FieldName.DEGREE,Teacher.FieldName.POSITION, Teacher.FieldName.PERSONNEL_TYPE,
             Teacher.FieldName.PERSON_ID, Teacher.FieldName.STATUS, Teacher.FieldName.ALIVE, "edudeg", Educational_teacher_staff.FieldName.PRE_MAJOR,Educational_teacher_staff.FieldName.MAJOR,
-            Educational_teacher_staff.FieldName.GRAD_YEAR, Educational_teacher_staff.FieldName.COLLEGE,DBFieldDataType.USERNAME_TYPE,DBFieldDataType.FILE_NAME_TYPE);
+            Educational_teacher_staff.FieldName.GRAD_YEAR, Educational_teacher_staff.FieldName.COLLEGE,DBFieldDataType.USERNAME_TYPE,DBFieldDataType.FILE_NAME_TYPE,
+            Educational_teacher_staff.FieldName.EDUCATION_ID);
 
             string insertintotemp99truecase = string.Format("insert into {0} " +
-            "select tsres.*, {1}.{2} as edudeg, {3}, {4}, {5},{6} from " +
-            "({7}) as tsres, {1} where {8} = '{9}' " +
-            "and {10} = {11} ", temp99tablename, Educational_teacher_staff.FieldName.TABLE_NAME,
+            "select tsres.*, {1} ,{2}.{3} as edudeg, {4}, {5}, {6},{7} from " +
+            "({8}) as tsres, {2} where {9} = '{10}' " +
+            "and {11} = {12} ", temp99tablename, Educational_teacher_staff.FieldName.EDUCATION_ID,
+            Educational_teacher_staff.FieldName.TABLE_NAME,
             Educational_teacher_staff.FieldName.DEGREE, Educational_teacher_staff.FieldName.PRE_MAJOR,
             Educational_teacher_staff.FieldName.MAJOR, Educational_teacher_staff.FieldName.GRAD_YEAR,
             Educational_teacher_staff.FieldName.COLLEGE, oTeacher.getSelectTeacherByJoinCommand(),
@@ -156,9 +159,15 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 President_curriculum.FieldName.TABLE_NAME,President_curriculum.FieldName.TEACHER_ID,
                 User_list.FieldName.USER_ID,User_list.FieldName.TABLE_NAME,Teacher.FieldName.USERNAME,
                 username);
-            string selectcmd = string.Format("select * from {0} ", temp99tablename);
+            string insertintotemp99_4 = string.Format("insert into {0}({1}) " +
+                "select {2} from {3} where {4} in (select {5} from {6} where {7} = '{8}') ",
+                temp99tablename, Educational_teacher_staff.FieldName.COLLEGE, Technical_interested.FieldName.TOPIC_INTERESTED,
+                Technical_interested.FieldName.TABLE_NAME, Technical_interested.FieldName.TEACHER_ID,
+                User_list.FieldName.USER_ID, User_list.FieldName.TABLE_NAME, Teacher.FieldName.USERNAME, username);
 
-            return string.Format(" BEGIN {0} {1} {2} {3} {4} END ", createtabletemp99, insertintotemp99_1, insertintotemp99_2,insertintotemp99_3, selectcmd);
+string selectcmd = string.Format("select * from {0} ", temp99tablename);
+
+            return string.Format(" BEGIN {0} {1} {2} {3} {4} {5} END ", createtabletemp99, insertintotemp99_1, insertintotemp99_2,insertintotemp99_3,insertintotemp99_4, selectcmd);
         }
 
         private string getSelectStaffWithCurriculumCommand()
@@ -183,7 +192,8 @@ namespace educationalProject.Models.ViewModels.Wrappers
             "[{15}] DATETIME2 NULL," +
       
             "[{16}] VARCHAR(40) NULL," +
-      
+
+            "[{24}] INT NULL," +
             "[{17}] CHAR NULL," +
             "[{18}] VARCHAR(100) NULL," +
             "[{19}] VARCHAR(200) NULL," +
@@ -248,12 +258,14 @@ namespace educationalProject.Models.ViewModels.Wrappers
             Staff.FieldName.PASSWORD, Staff.FieldName.T_PRENAME, Staff.FieldName.T_NAME, Staff.FieldName.E_PRENAME, Staff.FieldName.E_NAME,
             Staff.FieldName.CITIZEN_ID, Staff.FieldName.GENDER, Staff.FieldName.EMAIL, Staff.FieldName.TEL, Staff.FieldName.ADDR, Staff.FieldName.FILE_NAME_PIC,
             Staff.FieldName.TIMESTAMP, Staff.FieldName.ROOM,"edudeg", Educational_teacher_staff.FieldName.PRE_MAJOR, Educational_teacher_staff.FieldName.MAJOR,
-            Educational_teacher_staff.FieldName.GRAD_YEAR, Educational_teacher_staff.FieldName.COLLEGE, DBFieldDataType.USERNAME_TYPE, DBFieldDataType.FILE_NAME_TYPE);
+            Educational_teacher_staff.FieldName.GRAD_YEAR, Educational_teacher_staff.FieldName.COLLEGE, DBFieldDataType.USERNAME_TYPE, DBFieldDataType.FILE_NAME_TYPE,
+            Educational_teacher_staff.FieldName.EDUCATION_ID);
 
             string insertintotemp99truecase = string.Format("insert into {0} " +
-            "select tsres.*, {1}.{2} as edudeg, {3}, {4}, {5},{6} from " +
-            "({7}) as tsres, {1} where {8} = '{9}' " +
-            "and {10} = {11} ", temp99tablename, Educational_teacher_staff.FieldName.TABLE_NAME,
+            "select tsres.*, {1} ,{2}.{3} as edudeg, {4}, {5}, {6},{7} from " +
+            "({8}) as tsres, {2} where {9} = '{10}' " +
+            "and {11} = {12} ", temp99tablename,Educational_teacher_staff.FieldName.EDUCATION_ID, 
+            Educational_teacher_staff.FieldName.TABLE_NAME,
             Educational_teacher_staff.FieldName.DEGREE, Educational_teacher_staff.FieldName.PRE_MAJOR,
             Educational_teacher_staff.FieldName.MAJOR, Educational_teacher_staff.FieldName.GRAD_YEAR,
             Educational_teacher_staff.FieldName.COLLEGE, oStaff.getSelectStaffByJoinCommand(),
@@ -345,15 +357,14 @@ namespace educationalProject.Models.ViewModels.Wrappers
             "alter column [{13}] VARCHAR(80) collate database_default " +
 
             "alter table {0} " +
-            "alter column [{14}] {18} collate database_default "
-,
+            "alter column [{14}] {18} collate database_default ",
             temp99tablename, Assessor.FieldName.ASSESSOR_ID, Assessor.FieldName.USER_TYPE, Assessor.FieldName.USERNAME,
             Assessor.FieldName.PASSWORD, Assessor.FieldName.T_PRENAME, Assessor.FieldName.T_NAME, Assessor.FieldName.E_PRENAME, Assessor.FieldName.E_NAME,
             Assessor.FieldName.CITIZEN_ID, Assessor.FieldName.GENDER, Assessor.FieldName.EMAIL, Assessor.FieldName.TEL, Assessor.FieldName.ADDR, Assessor.FieldName.FILE_NAME_PIC,
             Assessor.FieldName.TIMESTAMP, Assessor.FieldName.TEACHER_ID, DBFieldDataType.USERNAME_TYPE, DBFieldDataType.FILE_NAME_TYPE);
 
             string insertintotemp99falsecase = string.Format("insert into {0} " +
-            "select *, null, null, null, null, null from ({3}) as stres where {1} = '{2}' ",
+            "select * from ({3}) as stres where {1} = '{2}' ",
             temp99tablename, Assessor.FieldName.USERNAME, username, oAssessor.getSelectAssessorByJoinCommand());
 
 
@@ -364,6 +375,93 @@ namespace educationalProject.Models.ViewModels.Wrappers
             "select {2} from (select max({3}) as {3} from {0}) as tid,{4} where {3} = {5} ",
             temp99tablename, Assessor.FieldName.USERNAME, User_curriculum.FieldName.CURRI_ID,
             Assessor.FieldName.ASSESSOR_ID, User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID);
+
+            string selectcmd = string.Format("select * from {0} ", temp99tablename);
+
+            return string.Format(" BEGIN {0} {1} {2} {3} END ", createtabletemp99, insertintotemp99_1, insertintotemp99_2, selectcmd);
+        }
+        private string getSelectCompanyWithCurriculumCommand()
+        {
+            string temp99tablename = "#temp96";
+            string createtabletemp99 = string.Format("create table {0}(" +
+            "[row_num] int identity(1, 1) not null," +
+            "[{1}] INT NULL," +
+            "[{2}] VARCHAR(40) NULL," +
+            "[{3}] {18} NULL," +
+            "[{4}] VARCHAR(MAX) NULL," +
+            "[{5}] VARCHAR(16) NULL," +
+            "[{6}] VARCHAR(60) NULL," +
+            "[{7}] VARCHAR(16) NULL," +
+            "[{8}] VARCHAR(60) NULL," +
+            "[{9}] CHAR(13) NULL," +
+            "[{10}] CHAR NULL," +
+            "[{11}] VARCHAR(60) NULL," +
+            "[{12}] VARCHAR(20) NULL," +
+            "[{13}] VARCHAR(80) NULL," +
+            "[{14}] {19} NULL," +
+            "[{15}] DATETIME2 NULL," +
+
+            "[{16}] INT NULL," +
+            "[{17}] VARCHAR(200) NULL," +
+            "PRIMARY KEY([row_num])) " +
+
+            "alter table {0} " +
+            "alter column [{2}] VARCHAR(40) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{3}] {18} collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{4}] VARCHAR(MAX) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{5}] VARCHAR(16) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{6}] VARCHAR(60) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{7}] VARCHAR(16) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{8}] VARCHAR(60) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{9}] CHAR(13) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{10}] CHAR collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{11}] VARCHAR(60) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{12}] VARCHAR(20) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{13}] VARCHAR(80) collate database_default " +
+
+            "alter table {0} " +
+            "alter column [{14}] {19} collate database_default " +
+            "alter table {0} " +
+            "alter column [{17}] VARCHAR(200) collate database_default ",
+            temp99tablename, Company.FieldName.COMPANY_ID, Company.FieldName.USER_TYPE, Company.FieldName.USERNAME,
+            Company.FieldName.PASSWORD, Company.FieldName.T_PRENAME, Company.FieldName.T_NAME, Company.FieldName.E_PRENAME, Company.FieldName.E_NAME,
+            Company.FieldName.CITIZEN_ID, Company.FieldName.GENDER, Company.FieldName.EMAIL, Company.FieldName.TEL, Company.FieldName.ADDR, Company.FieldName.FILE_NAME_PIC,
+            Company.FieldName.TIMESTAMP, Company.FieldName.TEACHER_ID, Company.FieldName.COMPANY_NAME,DBFieldDataType.USERNAME_TYPE, DBFieldDataType.FILE_NAME_TYPE);
+
+            string insertintotemp99falsecase = string.Format("insert into {0} " +
+            "select * from ({3}) as stres where {1} = '{2}' ",
+            temp99tablename, Company.FieldName.USERNAME, username, oCompany.getSelectCompanyByJoinCommand());
+
+
+            string insertintotemp99_1 = insertintotemp99falsecase;
+
+
+            string insertintotemp99_2 = string.Format("insert into {0}({1}) " +
+            "select {2} from (select max({3}) as {3} from {0}) as tid,{4} where {3} = {5} ",
+            temp99tablename, Company.FieldName.USERNAME, User_curriculum.FieldName.CURRI_ID,
+            Company.FieldName.COMPANY_ID, User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID);
 
             string selectcmd = string.Format("select * from {0} ", temp99tablename);
 
@@ -384,13 +482,13 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                 "else if exists(select * from ({3}) as stres where {1} = '{2}') " +
                                 getSelectStaffWithCurriculumCommand() +
                                 "else if exists(select * from ({4}) as std where {1} = '{2}') " +
-                                getSelectAssessorWithCurriculumCommand() +
+                                "select * from ({4}) as comp where {1} = '{2}' " +
                                 "else if exists(select * from ({5}) as alum where {1} = '{2}') " +
                                     "select * from ({5}) as alum where {1} = '{2}' " +
                                 "else if exists(select * from ({6}) as comp where {1} = '{2}') " +
-                                    "select * from ({6}) as comp where {1} = '{2}' " +
+                                    getSelectCompanyWithCurriculumCommand() +
                                 "else if exists(select * from ({7}) as assres where {1} = '{2}') " +
-                                    "select * from ({7}) as assres where {1} = '{2}' " +
+                                    getSelectAssessorWithCurriculumCommand() +
                                 "else if exists(select * from ({8}) as admres where {1} = '{2}') " +
                                     "select * from ({8}) as admres where {1} = '{2}' ",
                                oTeacher.getSelectTeacherByJoinCommand(), Teacher.FieldName.USERNAME, preferredusername,
@@ -461,6 +559,10 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                 {
                                     result.information.room = item.ItemArray[data.Columns[Staff.FieldName.ROOM].Ordinal].ToString();
                                 }
+                                else if (usrtype == "บริษัท")
+                                {
+                                    result.information.company_name = item.ItemArray[data.Columns[Company.FieldName.COMPANY_NAME].Ordinal].ToString();
+                                }
                                 else if (usrtype == "ผู้ประเมินจากภายนอก")
                                 {
 
@@ -479,6 +581,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                         grad_year = item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.GRAD_YEAR].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.GRAD_YEAR].Ordinal]) : 0,
                                         major = item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.MAJOR].Ordinal].ToString(),
                                         personnel_id = result.user_id,
+                                        education_id = Convert.ToInt32(item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.EDUCATION_ID].Ordinal]),
                                         pre_major = item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.PRE_MAJOR].Ordinal].ToString()
                                     });
                                 }
@@ -489,6 +592,12 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             //Read ternary data such as curriculum which personnel is in
                             //Username column contain curri_id value
                             result.curri_id_in.Add(item.ItemArray[data.Columns[Teacher.FieldName.USERNAME].Ordinal].ToString());
+                        }
+                        else if(item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.COLLEGE].Ordinal].ToString() != "")
+                        {
+                            //Read 5th data such as topic interested which teacher is interest
+                            //college column contain topic_interest value
+                            result.information.interest.Add(item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.COLLEGE].Ordinal].ToString());
                         }
                         else
                         {
