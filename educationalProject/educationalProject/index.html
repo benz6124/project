@@ -5105,17 +5105,17 @@ glyphicon glyphicon-bell"></i> </span>
 "><span class="headerModal">ส่วนจัดการผู้ใช้งาน</span></h1>
                     </div>
 
-                    <img src="{{current_user.information.file_name_pic}}" class="img-circle" style="float:left;margin-left:13%;height:310px">
-                    <div style="float:right;margin-left:5px;margin-right:12%">
+                    <img src="{{current_user.information.file_name_pic}}" class="img-circle" style="float:left;margin-left:5%;height:410px">
+
+                    <div style="float:right;margin-left:5px;margin-right:13%">
+                
+
                         <div class="row">
-                            <div class="col-md-3" style="margin-left:25px">
+                            <div class="col-md-4" style="margin-left:0px">
                                 <h3 style="margin-top:0px;"><span class="topicHeader">ชื่อผู้ใช้งาน:   </span></h3>
                             </div>
                             <div class="col-md-6">
                                    <span class="topicNewHeader"  ng-bind='current_user.username'>  </span>
-
-
-
                             </div>
 
                                 <div class="col-md-2" style="
@@ -5125,13 +5125,11 @@ glyphicon glyphicon-bell"></i> </span>
     padding-top: 3px;
 " class="btn btn-primary form-control">เปลี่ยน</button>
 
-                           
-
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-3" style="margin-left:25px">
+                            <div class="col-md-4" style="margin-left:0px">
                                 <h3 style="margin-top:0px;"><span class="topicHeader">รหัสผ่าน:   </span></h3>
                             </div>
                             <div class="col-md-8">
@@ -5142,24 +5140,60 @@ glyphicon glyphicon-bell"></i> </span>
                             </div>
                         </div>
 
+                      
 
                         <div class="row">
-                            <div class="col-md-3" style="margin-left:25px">
+                            <div class="col-md-4" style="margin-left:0px">
                                 <h3 style="margin-top:0px;"><span class="topicHeader">รูปโปรไฟล์:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="file" class="full form-control" ng-model="current_user.information.file_name_pic" accept="image/*">
+                                <input type="file" class="full form-control" file-upload ng-model="current_user.information.file_name_pic" accept="image/*">
+
+                            </div>
+
+                        </div>
+
+  
+      <div class="row">
+                            <div class="col-md-4" style="margin-left:0px">
+                                <h3 style="margin-top:0px;"><span class="topicHeader">prename:   </span></h3>
+                            </div>
+                            <div class="col-md-8">
+                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="please select your prename" data-ng-model="current_user.information.e_prename">
+                                   <option value="Mr.">Mr.</option>
+                                    <option value="Mrs.">Mrs.</option>
+                                    <option value="Miss.">Miss.</option>
+                                    <option value="Dr.">Dr.</option>
+                                    <option value="Asst.Prof.Dr.">Asst.Prof.Dr.</option>
+                                    <option value="Asst.Prof.">Asst.Prof.</option>
+                                    <option value="Assoc.Prof.Dr.">Assoc.Prof.Dr.</option>
+                                    <option value="Assoc.Prof.">Assoc.Prof.</option>
+                                    <option value="Prof.Dr.">Prof.Dr.</option>
+                                    <option value="Prof.">Prof.</option>
+                              
+</select>
+                              
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4" style="margin-left:0px">
+                                <h3 style="margin-top:0px;"><span class="topicHeader">name-surname:   </span></h3>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="full form-control" placeholder="" data-ng-model="current_user.information.e_name" ><span class="normal">  </span>
 
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-3" style="margin-left:25px">
+                            <div class="col-md-4" style="margin-left:0px">
                                 <h3 style="margin-top:0px;"><span class="topicHeader">คำนำหน้า:   </span></h3>
                             </div>
                             <div class="col-md-8">
                                 <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกคำนำหน้าชื่อ" data-ng-model="current_user.information.t_prename">
-                                    <option value="นาย">นาย</option>
+                                 
+      <option value="นาย">นาย</option>
                                     <option value="นางสาว">นางสาว</option>
                                     <option value="นาง">นาง</option>
                                     <option value="ดร.">ดร.</option>
@@ -5169,13 +5203,23 @@ glyphicon glyphicon-bell"></i> </span>
                                     <option value="ผศ.">ผศ.</option>
                                     <option value="รศ.">รศ.</option>
                                     <option value="ศ.">ศ.</option>
+
+
+
+
+
+
+
+
+
+
 </select>
                               
 
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3" style="margin-left:25px">
+                            <div class="col-md-4" style="margin-left:0x">
                                 <h3 style="margin-top:0px;"><span class="topicHeader">ชื่อ-นามสกุล:   </span></h3>
                             </div>
                             <div class="col-md-8">
@@ -5188,7 +5232,7 @@ glyphicon glyphicon-bell"></i> </span>
                     
 
                         <div class="row">
-                            <div class="col-md-3" style="margin-left:25px">
+                            <div class="col-md-4" style="margin-left:0px">
                                 <h3 style="margin-top:0px;"><span class="topicHeader">ที่อยู่:   </span></h3>
                             </div>
                             <div class="col-md-8">
@@ -5198,7 +5242,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-3" style="margin-left:25px">
+                            <div class="col-md-4" style="margin-left:0px">
                                 <h3 style="margin-top:0px;"><span class="topicHeader">เบอร์โทร:   </span></h3>
                             </div>
                             <div class="col-md-8">
@@ -5211,7 +5255,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                       
                         <div class="row">
-                            <div class="col-md-3" style="margin-left:25px">
+                            <div class="col-md-4" style="margin-left:0px">
                                 <h3 style="margin-top:0px;"><span class="topicHeader">สถานะ:   </span></h3>
                             </div>
                             <div class="col-md-8">
@@ -5227,7 +5271,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-3" style="margin-left:25px">
+                            <div class="col-md-4" style="margin-left:0px">
                                 <h3 style="margin-top:0px;"><span class="topicHeader">อีเมล์:   </span></h3>
                             </div>
                             <div class="col-md-8">
@@ -5236,6 +5280,19 @@ glyphicon glyphicon-bell"></i> </span>
                             </div>
                         </div>
 
+   <div class="row">
+                        <div class="col-md-4   " style="margin-left:0px" >
+                            <h3 style="margin-top:0px;"><span class="topicHeader">หัวข้อที่สนใจ:   </span></h3>
+
+
+                        </div>
+                        <div class="col-md-8"  >
+
+                            <input type="text" data-ng-model="current_user.information.interest" data-nq-tags-input="" data-qo-placeholder="กรอกหัวข้อที่สนใจ">
+
+
+                        </div>
+                    </div>
 
 
                     </div>

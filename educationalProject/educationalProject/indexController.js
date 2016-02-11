@@ -5848,6 +5848,45 @@ $scope.save_to_server = function(){
 
 app.controller('manage_profile_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
 
+
+
+ $scope.init = function(){
+     $scope.files = [];
+ }
+ $scope.$on("fileSelected", function (event, args) {
+        $scope.$apply(function () {            
+           var extension = args.file.name.split('.');
+
+ if(args.file.size > 25000000){
+                   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                $alert({title:'เกิดข้อผิดพลาด', content:'ไฟล์ที่เลือกมีขนาดมากกว่า 25 MB',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+            }
+            else        if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
+        || extension[extension.length-1] == 'bat' || extension[extension.length-1] == 'BAT'  || extension[extension.length-1] == 'ini' || extension[extension.length-1] == 'INIT' ){
+        
+                     angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+                 
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+       }
+            else{
+                $scope.files = [];
+                   $scope.files.push(args.file);
+            }
+
+         
+        });
+    });
+
 $scope.go_to_fix = function(fix_this_obj){
     $rootScope.manage_profile_fix_this_edu = fix_this_obj;
 }
@@ -6875,7 +6914,7 @@ app.controller('change_password_controller', function($scope, $http,$alert,$load
     return false;
   }
 
-  $scope.save_to_server = function(){
+  $scope.save_to_server = function(my_modal){
       console.log("save_to_server");
 
         $scope.to_sent = {};
@@ -6894,6 +6933,7 @@ app.controller('change_password_controller', function($scope, $http,$alert,$load
                  }
              }
          ).success(function (data) {
+
                   $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
@@ -6944,7 +6984,7 @@ $scope.error_msg = '';
     return false;
   }
 
-  $scope.save_to_server = function(){
+  $scope.save_to_server = function(my_modal){
       console.log("save_to_server");
 
         $scope.to_sent = {};
@@ -6961,6 +7001,7 @@ $scope.error_msg = '';
                  }
              }
          ).success(function (data) {
+              $scope.$parent.current_user.username = $scope.to_sent.username;
                   $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
