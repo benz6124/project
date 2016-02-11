@@ -270,36 +270,27 @@ namespace educationalProject.Models.Wrappers
                 string ts = DateTime.Now.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[93];
 
                 insertcmd += string.Format(
-                                   "IF NOT EXISTS(select * from {3} where {4} = '{2}' or {13} = '{2}') and " +
-                                   "NOT EXISTS(select * from {5} where {4} = '{2}' or {13} = '{2}') and " +
-                                   "NOT EXISTS(select * from {6} where {4} = '{2}' or {13} = '{2}') and " +
-                                   "NOT EXISTS(select * from {7} where {4} = '{2}' or {13} = '{2}') and " +
-                                   "NOT EXISTS(select * from {8} where {4} = '{2}' or {13} = '{2}') and " +
-                                   "NOT EXISTS(select * from {9} where {4} = '{2}' or {13} = '{2}') and " +
-                                   "NOT EXISTS(select * from {20} where {4} = '{2}' or {13} = '{2}') " +
+                                   "IF NOT EXISTS(select * from {0} where {1} = '{2}' or {3} = '{2}') " +
                                    "begin " +
-                                   "insert into {19} " +
-                                   "select * from (insert into {0} output inserted.{1} values ('{10}')) as outputinsert " +
+                                   "insert into {4} " +
+                                   "select * from (insert into {0} ({5}, {1}, {6}, {3}, {7}) output inserted.{8} " +
+                                   "values ('{9}', '{2}', '{10}', '{2}', '{11}')) as outputinsert " +
 
-                                   "insert into {3} ({11}, {12}, {13}, {14}, {4}, {15}) select {1},'{10}', '{2}', '{16}', '{2}', '{17}' from {19} " +
+                                   "insert into {12} ({13}) select {8} from {4} " +
                                    insertintousercurri + " " +
                                    
-                                   "delete from {19} " +
+                                   "delete from {4} " +
                                    "end " +
                                    "else " +
                                    "begin " +
-                                   "insert into {18} values ('{2}') " +
-                                   "end ",
-                                   User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_ID, item.username,
-                                   /*Main table index 3 must SWAP!*/ FieldName.TABLE_NAME,
-                                   FieldName.EMAIL, Student.FieldName.TABLE_NAME,
-                                   Alumni.ExtraFieldName.TABLE_NAME, Staff.FieldName.TABLE_NAME,
-                                   Company.FieldName.TABLE_NAME, Assessor.FieldName.TABLE_NAME,
-                                   /*******10*/ "อาจารย์",
-                                   /*******11 ID*/FieldName.TEACHER_ID, FieldName.USER_TYPE, FieldName.USERNAME,
-                                   FieldName.PASSWORD, FieldName.TIMESTAMP, item.password, ts, temp5tablename,
-                                   temp6tablename,
-                                   Admin.FieldName.TABLE_NAME);
+                                   "insert into {14} values ('{2}') " +
+                                   "end ",User_list.FieldName.TABLE_NAME,Personnel.FieldName.USERNAME,item.username,
+                                   Personnel.FieldName.EMAIL,temp6tablename,
+                                   User_list.FieldName.USER_TYPE,FieldName.PASSWORD,FieldName.TIMESTAMP,
+                                   User_list.FieldName.USER_ID,
+                                   /*****9****/ "อาจารย์",item.password,ts,
+                                   /****12****/ FieldName.TABLE_NAME,FieldName.TEACHER_ID,temp5tablename
+                                   );
 
             }
 
