@@ -743,14 +743,15 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
-            
+            console.log("interr")
+                console.log(data)
               $scope.result = data;
              $scope.choose_not_complete = false;
              
               var value;
               var key;
-             if ($scope.result.num_admis_f==-1){
-             
+             if ($scope.result.grad_in_time==-1){
+                console.log("-1 ka")
                 angular.forEach($scope.result, function(value, key) {
                  
                   
@@ -766,6 +767,7 @@ $scope.init =function() {
     $scope.close_modal = function(my_modal){
         $scope.init();
         my_modal.$hide();
+
     }
     $scope.save_to_server = function(my_modal){
         console.log("save_to_server");
@@ -847,13 +849,13 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
-            
+            console.log(data)
                $scope.result = data;
              $scope.choose_not_complete = false;
              
               var value;
               var key;
-             if ($scope.result.num_admis_f==-1){
+             if ($scope.result.ny1==-1){
              
                 angular.forEach($scope.result, function(value, key) {
                  
@@ -885,9 +887,10 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
+                 $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-                $scope.close_modal();
+           
          })
     .error(function(data, status, headers, config) {
                   if(status==500){
