@@ -5146,11 +5146,20 @@ glyphicon glyphicon-bell"></i> </span>
                             <div class="col-md-4" style="margin-left:0px">
                                 <h3 style="margin-top:0px;"><span class="topicHeader">รูปโปรไฟล์:   </span></h3>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-7" style="
+    padding-right: 5px;
+">
                                 <input type="file" class="full form-control" file-upload ng-model="current_user.information.file_name_pic" accept="image/*">
 
                             </div>
-
+                                      <div class="col-md-1" style="
+    padding-left: 0px;
+    padding-top: 6px;
+">
+<a href=""   data-ng-click="back_to_default()" class="hvr-pulse" >
+                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-remove"></i> </span>
+                                    </a>
+                                    </div>
                         </div>
 
   
@@ -5159,7 +5168,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">prename:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="please select your prename" data-ng-model="current_user.information.e_prename">
+                                <select data-ng-change = "something_change()" data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="please select your prename" data-ng-model="current_user.information.e_prename">
                                    <option value="Mr.">Mr.</option>
                                     <option value="Mrs.">Mrs.</option>
                                     <option value="Miss.">Miss.</option>
@@ -5181,7 +5190,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">name-surname:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="full form-control" placeholder="" data-ng-model="current_user.information.e_name" ><span class="normal">  </span>
+                                <input type="text" data-ng-change = "something_change()" class="full form-control" placeholder="" data-ng-model="current_user.information.e_name" ><span class="normal">  </span>
 
                             </div>
                         </div>
@@ -5191,7 +5200,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">คำนำหน้า:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกคำนำหน้าชื่อ" data-ng-model="current_user.information.t_prename">
+                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-ng-change = "something_change()" data-nq-select="" data-qo-placeholder="กรุณาเลือกคำนำหน้าชื่อ" data-ng-model="current_user.information.t_prename">
                                  
       <option value="นาย">นาย</option>
                                     <option value="นางสาว">นางสาว</option>
@@ -5223,7 +5232,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">ชื่อ-นามสกุล:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="full form-control" placeholder="" data-ng-model="current_user.information.t_name" ><span class="normal">  </span>
+                                <input type="text" data-ng-change = "something_change()"class="full form-control" placeholder="" data-ng-model="current_user.information.t_name" ><span class="normal">  </span>
 
                             </div>
                         </div>
@@ -5236,7 +5245,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">ที่อยู่:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="full form-control" placeholder="" data-ng-model="current_user.information.addr"><span class="normal">  </span>
+                                <input type="text" data-ng-change = "something_change()"class="full form-control" placeholder="" data-ng-model="current_user.information.addr"><span class="normal">  </span>
 
                             </div>
                         </div>
@@ -5246,7 +5255,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">เบอร์โทร:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="full form-control" placeholder=""  data-ng-model="current_user.information.tel"><span class="normal">  </span>
+                                <input type="text" data-ng-change = "something_change()"class="full form-control" placeholder=""  data-ng-model="current_user.information.tel"><span class="normal">  </span>
 
                             </div>
                         </div>
@@ -5259,14 +5268,14 @@ glyphicon glyphicon-bell"></i> </span>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">สถานะ:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="กรุณาเลือกสถานะ" data-ng-model="current_user.information.status">
+                                <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-ng-change = "something_change()" data-nq-select="" data-qo-placeholder="กรุณาเลือกสถานะ" data-ng-model="current_user.information.status">
                                     <option>ทำงาน</option>
                                     <option>ศึกษาต่อ</option>
                                     <option>ลาคลอด</option>
 
 
 
-                                <option style="display:none" value=""></option></select>
+                            
                             </div>
                         </div>
 
@@ -5275,7 +5284,7 @@ glyphicon glyphicon-bell"></i> </span>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">อีเมล์:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="full form-control" placeholder="" data-ng-model="current_user.information.email"><span class="normal">  </span>
+                                <input type="text" class="full form-control" placeholder="" data-ng-model="current_user.information.email" data-ng-change = "something_change()"><span class="normal">  </span>
 
                             </div>
                         </div>
@@ -5288,7 +5297,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                         <div class="col-md-8"  >
 
-                            <input type="text" data-ng-model="current_user.information.interest" data-nq-tags-input="" data-qo-placeholder="กรอกหัวข้อที่สนใจ">
+                            <input type="text" data-ng-model="current_user.information.interest" data-nq-tags-input="" data-qo-placeholder="กรอกหัวข้อที่สนใจ" data-ng-change = "something_change()">
 
 
                         </div>
@@ -5339,7 +5348,7 @@ glyphicon glyphicon-bell"></i> </span>
                        
 
                                     
-   <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="" ng-click="go_to_fix(each_education)">
+   <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_education" ng-click="go_to_fix(each_education)">
                                         <span class="topic"><i style="color:#eea236;margin0"class="glyphicon glyphicon-wrench"></i> </span>
                                     </a></td> 
 
@@ -5361,8 +5370,8 @@ glyphicon glyphicon-bell"></i> </span>
 </div>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                            <button class="btn btn-success  " ng-disabled="nothing_really_change() || please_wait || fix_not_complete()"ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="back_close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
                 </div>

@@ -3746,7 +3746,7 @@ $scope.init =function() {
 
         for(index =0;index<$rootScope.manage_lab_fix_this_lab.officer.length;index++){
             for(inside_index=0;inside_index<$rootScope.manage_lab_all_personnels_in_curri.length;inside_index++){
-                if($rootScope.manage_lab_all_personnels_in_curri[inside_index].personnel_id  == $rootScope.manage_lab_fix_this_lab.officer[index].personnel_id){
+                if($rootScope.manage_lab_all_personnels_in_curri[inside_index].user_id  == $rootScope.manage_lab_fix_this_lab.officer[index].user_id){
                           $rootScope.manage_lab_fix_this_lab_init.push($rootScope.manage_lab_all_personnels_in_curri[inside_index]);
                 }
           
@@ -5359,7 +5359,7 @@ $scope.init =function() {
         
               var index;    
               for(index=0;index<$scope.result.length;index++){
-                if($rootScope.all_id_we_have_now_in_curri.indexOf($scope.result[index].personnel_id)!=-1 ){
+                if($rootScope.all_id_we_have_now_in_curri.indexOf($scope.result[index].user_id)!=-1 ){
               
                     $scope.result_to_del.splice($scope.result_to_del.indexOf($scope.result[index]));
                 }
@@ -5434,7 +5434,7 @@ $scope.init =function() {
 
     $rootScope.all_id_we_have_now_in_curri = [];
     for(index=0;index< $rootScope.manage_bind_all_people_in_curri.length;index++){
-          $rootScope.all_id_we_have_now_in_curri.push($rootScope.manage_bind_all_people_in_curri[index].personnel_id);
+          $rootScope.all_id_we_have_now_in_curri.push($rootScope.manage_bind_all_people_in_curri[index].user_id);
     }
   }
 
@@ -5744,7 +5744,7 @@ $scope.init = function(){
     }
 
 
-$scope.save_to_server = function(){
+$scope.save_to_server = function(my_modal){
     $scope.new_grad.personnel_id = $scope.$parent.current_user.user_id;
      $http.post(
              '/api/education',
@@ -5756,6 +5756,7 @@ $scope.save_to_server = function(){
              }
          ).success(function (data) {
             $scope.$parent.current_user.information.education = data;
+            $rootScope.save_obj.information.education = data;
                $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
@@ -5776,7 +5777,11 @@ $scope.save_to_server = function(){
 
 
 app.controller('fix_education_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
-  
+  $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
 $scope.create_not_complete = function(){
 
     if(!$scope.fix_this_edu){
@@ -5829,6 +5834,7 @@ $scope.save_to_server = function(){
              }
          ).success(function (data) {
             $scope.$parent.current_user.information.education = data;
+            $rootScope.save_obj.information.education =data;
                $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
@@ -5848,10 +5854,117 @@ $scope.save_to_server = function(){
 
 app.controller('manage_profile_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
 
+$scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
 
+$scope.back_to_default = function(){
+       angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+       $scope.files= [];
+
+}
+$scope.fix_not_complete = function(){
+    if(!$scope.$parent.current_user ){
+        console.log("1")
+        return true;
+    }
+    if(!$scope.$parent.current_user.information.e_name || !$scope.$parent.current_user.information.t_name || !$scope.$parent.current_user.information.addr || !$scope.$parent.current_user.information.tel || !$scope.$parent.current_user.information.email){
+              
+        return true;
+    }
+
+  
+        // console.log($scope.$parent.current_user.information.e_prename);
+        // console.log();
+        if($scope.$parent.current_user.information.e_prename.length == 14 && $scope.$parent.current_user.information.e_prename  != 'Assoc.Prof.Dr.'){
+               return true;
+        }
+     
+              if($scope.$parent.current_user.information.t_prename.length == 14 ){
+               return true;
+        } 
+
+
+             if($scope.$parent.current_user.information.status.length== 14 ){
+               return true;
+        }       
+ 
+
+    if($scope.$parent.current_user.information.tel.length <9){
+              console.log("4")
+        return true;
+    }
+    return false;
+}
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
 
  $scope.init = function(){
      $scope.files = [];
+     $scope.please_wait = false;
+     $scope.nothing_change = true;
+     $scope.save_interest = angular.copy($scope.$parent.current_user.information.interest)
+
+     $rootScope.save_obj = angular.copy($scope.$parent.current_user);
+          console.log("$rootScope.save_obj")
+     console.log($rootScope.save_obj)
+ }
+
+$scope.nothing_really_change = function(){
+
+
+    var equal = true;
+    var dont_go = false;
+    var index;
+    var index2;
+
+    if (!$scope.save_interest || !$scope.$parent.current_user.information.interest){
+        return true;
+    }
+    if($scope.$parent.current_user.information.interest.length != $scope.save_interest.length){
+         equal = false;
+    }
+    else{
+          for(index =0 ;index<$scope.$parent.current_user.information.interest.length;index++ ){
+         
+               
+                if($scope.$parent.current_user.information.interest[index] != $scope.save_interest[index]){
+             
+                    equal = false;
+                 
+                    break;
+                }
+
+        
+           
+          }
+    }
+  
+    if(equal == true){
+  
+        return $scope.nothing_change;
+
+
+    }
+    else{
+         console.log('equal false')
+        return false;
+    }
+
+}
+$scope.same_interest = function(){
+    console.log($scope.$parent.current_user.information.interest == $scope.save_interest)
+    return $scope.$parent.current_user.information.interest == $scope.save_interest;
+}
+ $scope.something_change = function(){
+    $scope.nothing_change = false;
  }
  $scope.$on("fileSelected", function (event, args) {
         $scope.$apply(function () {            
@@ -5881,6 +5994,7 @@ app.controller('manage_profile_controller', function($scope, $http,$alert,$loadi
             else{
                 $scope.files = [];
                    $scope.files.push(args.file);
+                   $scope.nothing_change = false;
             }
 
          
@@ -5888,13 +6002,63 @@ app.controller('manage_profile_controller', function($scope, $http,$alert,$loadi
     });
 
 $scope.go_to_fix = function(fix_this_obj){
-    $rootScope.manage_profile_fix_this_edu = fix_this_obj;
+    $rootScope.manage_profile_fix_this_edu = angular.copy(fix_this_obj);
 }
 
 $scope.remove_education = function(index_to_remove){
     $scope.$parent.current_user.information.education.splice(index_to_remove,1);
-
+    $scope.nothing_change = false;
 }
+
+ $scope.close_modal = function(my_modal){
+     $scope.init();
+        my_modal.$hide();
+    }
+
+    $scope.back_close_modal = function(my_modal){
+        $scope.$parent.current_user = $rootScope.save_obj;
+        my_modal.$hide();
+    }
+    $scope.save_to_server = function(my_modal) {
+   $scope.please_wait = true;
+     
+      var formData = new FormData();
+      if($scope.files.length != 0){
+            $scope.$parent.current_user.information.file_name_pic = $scope.files[0].name;
+      }
+
+    formData.append("model", angular.toJson($scope.$parent.current_user));
+formData.append("file" , $scope.files[0]);
+   
+        $http({
+            method: 'PUT',
+            url: "/api/users/edit",
+
+            headers: { 'Content-Type': undefined },
+
+
+            data:formData,
+            transformRequest: angular.indentity 
+
+        }).
+        success(function (data, status, headers, config) {
+    $scope.$parent.current_user = data;
+             
+ $scope.close_modal(my_modal);
+                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+               
+           
+        }).
+        error(function (data, status, headers, config) {
+                      $scope.please_wait = false;
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        });
+    }
+
+
 
 
  });
