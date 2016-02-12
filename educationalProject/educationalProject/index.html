@@ -646,16 +646,16 @@
 
                 <th class="col-md-1 number">ข้อที่</th>
                 <th class="col-md-7 topic">หัวข้อการประเมิน</th>
-                <th class="col-md-2 result"><a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ประเมินโดย {{evaluation_result_receive.self[0].t_name}} <br/> วันที่ {{evaluation_result_receive.self[0].date}} เวลา {{evaluation_result_receive.self[0].time}}" style="color:white;cursor:default;" ng-hide="self_not_evaluated"> ผลการประเมินตนเอง</a>
+                <th class="col-md-2 result"><a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ประเมินโดย {{this_indicator_show.self_name}} <br/> วันที่ {{this_indicator_show.self_date}} เวลา {{this_indicator_show.self_time}}" style="color:white;cursor:default;" ng-show="self_evaluated"> ผลการประเมินตนเอง</a>
 
-                <a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ยังไม่มีการประเมิน" style="color:white;cursor:default;" ng-show="self_not_evaluated"> ผลการประเมินตนเอง</a>
+                <a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ยังไม่มีการประเมิน" style="color:white;cursor:default;" ng-hide="self_evaluated"> ผลการประเมินตนเอง</a>
 
                 </th>
 
-                <th class="col-md-2 result"><a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ประเมินโดย {{evaluation_result_receive.others[0].t_name}} <br/> วันที่ {{evaluation_result_receive.others[0].date}} เวลา {{evaluation_result_receive.others[0].time}}" style="color:white;cursor:default;" ng-hide="others_not_evaluated">ผลการประเมิน<br />จากภายนอก</a>
+                <th class="col-md-2 result"><a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ประเมินโดย {{this_indicator_show.other_name}} <br/> วันที่ {{this_indicator_show.other_date}} เวลา {{this_indicator_show.other_time}}" style="color:white;cursor:default;" ng-show="others_evaluated">ผลการประเมิน<br />จากภายนอก</a>
 
 
-<a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ยังไม่มีการประเมิน" style="color:white;cursor:default;" ng-show="others_not_evaluated">ผลการประเมิน<br />จากภายนอก</a>
+<a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ยังไม่มีการประเมิน" style="color:white;cursor:default;" ng-hide="others_evaluated">ผลการประเมิน<br />จากภายนอก</a>
                 </th>
   
 
@@ -663,12 +663,12 @@
 
 
    
-                <tr ng-repeat="result in evaluation_result.results">
+                <tr ng-repeat="result in this_indicator_show.sub_indicator_result">
                   <td class="number">{{indicator_choosen.indicator_num}}.{{result.sub_indicator_num}}</td>
                   <td class="topic">{{result.sub_indicator_name}}</td>
               
-                   <td class="result" ng-class="{resultGreen: result.other_result>result.self_result  , resultRed:result.self_result>result.other_result }" >{{result.self_result}}</td>
-                    <td class="result"  ng-class="{resultGreen: result.other_result>result.self_result  , resultRed:result.self_result>result.other_result }" >{{result.other_result}}</td>
+                   <td class="result" ng-class="{resultGreen: result.sub_indicator_other_result>result.sub_indicator_self_result  , resultRed:result.sub_indicator_self_result>result.sub_indicator_other_result }" >{{result.sub_indicator_self_result}}</td>
+                    <td class="result"  ng-class="{resultGreen: result.sub_indicator_other_result>result.sub_indicator_self_result  , resultRed:result.sub_indicator_self_result>result.sub_indicator_other_result }" >{{result.sub_indicator_other_result}}</td>
                   
                 </tr>
 

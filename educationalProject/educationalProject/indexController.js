@@ -254,32 +254,7 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$cookies
 
             }
 
-         });
-$scope.evaluation_overall = [
-{
-'indicator_name':'ชื่อ indicator'
-, 'indicator_num':1
-, 'indicator_result_self_average':7.8
-, 'indicator_result_other_average':6.8
-,'sub_indicator_result':
-[{'sub_indicator_name':'ชื่อ sub_indicator', 'sub_indicator_num':1, 'sub_indicator_self_result':4 , 'sub_indicator_other_result':6 }
-,{'sub_indicator_name':'ชื่อ sub_indicator2', 'sub_indicator_num':2, 'sub_indicator_self_result':3 , 'sub_indicator_other_result':3}]
- }
-,
-
-{
-'indicator_name':'ชื่อ indicator2'
-, 'indicator_num':2
-, 'indicator_result_self_average':''
-, 'indicator_result_other_average':''
-,'sub_indicator_result':
-[{'sub_indicator_name':'ชื่อ sub_indicator', 'sub_indicator_num':1, 'sub_indicator_self_result':'' , 'sub_indicator_other_result':'' }
-,{'sub_indicator_name':'ชื่อ sub_indicator2', 'sub_indicator_num':2, 'sub_indicator_self_result':'', 'sub_indicator_other_result':''}]
- }
- ,{} ];
-
-
-var index;
+            var index;
 var inner_index;
 for(index=0;index<$scope.evaluation_overall.length;index++){
     if(angular.isNumber($scope.evaluation_overall[index].indicator_result_self_average)==false || angular.isNumber($scope.evaluation_overall[index].indicator_result_other_average)==false){
@@ -290,105 +265,35 @@ for(index=0;index<$scope.evaluation_overall.length;index++){
     }
 
 }
+
+         });
+
+
      }
 
     $scope.sendIndicatorCurriAndGetEvaluation = function () {
-        // $scope.loading = new $loading();
-        // $scope.loading.show();
-        $scope.indicator_choosen.curri_id = $scope.curri_choosen.curri_id;
+        console.log($scope.indicator_choosen)
+        $scope.this_indicator_show = {};
+        $scope.self_evaluated = true;
+        $scope.others_evaluated = true;
+        var index;
+        for(index=0;index<$scope.evaluation_overall.length;index++){
+            if($scope.evaluation_overall[index].indicator_num == $scope.indicator_choosen.indicator_num){
+                $scope.this_indicator_show = $scope.evaluation_overall[index];
+            }
+        }
+        if(!$scope.this_indicator_show.indicator_result_self_average){
+                   $scope.self_evaluated = false;
+        }
+        if(!$scope.this_indicator_show.indicator_result_other_average){
+               $scope.others_evaluated = false;
+        }
 
-        // console.log($scope.indicator_choosen);
-
-        $http.post(
-             '/api/evaluationresult/individual',
-             JSON.stringify($scope.indicator_choosen),
-             {
-                 headers: {
-                     'Content-Type': 'application/json'
-                 }
-             }
-         ).success(function (data) {
-            console.log("this is evaluationresult");
-            console.log(data);
-             $scope.evaluation_result_receive = data;
-             $scope.evaluation_result= [];
-             var index;
-            
-             // console.log($scope.evaluation_result_receive);
-             // console.log($scope.evaluation_result_receive.self.length);
-            //  $scope.evaluation_result.teacher = []
-            // $scope.evaluation_result.teacher.teacher_name = $scope.evaluation_result_receive.self[0].t_name;
-            // $scope.evaluation_result.teacher.date = $scope.evaluation_result_receive.self[0].date;
-            // $scope.evaluation_result.teacher.time = $scope.evaluation_result_receive.self[0].time;
-            //  $scope.evaluation_result.assessor = [];
-            //  $scope.evaluation_result.assessor.assessor_name = $scope.evaluation_result_receive.others[0].t_name;
-            //   $scope.evaluation_result.assessor.date = $scope.evaluation_result_receive.others[0].date;
-            //    $scope.evaluation_result.assessor.time = $scope.evaluation_result_receive.others[0].time;
-             $scope.evaluation_result.results = {};
-
-            if ($scope.evaluation_result_receive.self.length>$scope.evaluation_result_receive.others.length)
-                {
-
-                for (index = 0; index < $scope.evaluation_result_receive.self.length; index++) {
-                    console.log(index);
-                    $scope.evaluation_result.results[index] = {};
-                    $scope.evaluation_result.results[index].sub_indicator_name =  $scope.corresponding_sub_indicators[index].sub_indicator_name;
-                    $scope.evaluation_result.results[index].sub_indicator_num = $scope.evaluation_result_receive.self[index].sub_indicator_num;
-                    $scope.evaluation_result.results[index].self_result = $scope.evaluation_result_receive.self[index].evaluation_score;
-                    // $scope.evaluation_result.results[index].other_result = $scope.evaluation_result_receive.others[index].evaluation_score;
-                      }
-                      $scope.self_not_evaluated = false;
-                     $scope.others_not_evaluated = true;
-                     $scope.evaluation_self_date = $scope.evaluation_result_receive.self[0].date;
-                     $scope.evaluation_self_time =  $scope.evaluation_result_receive.self[0].time;
-                     $scope.evaluation_self_teacher = $scope.evaluation_result_receive.self[0].t_name;
-                     $scope.evaluation_others_date = "";
-                     $scope.evaluation_others_time = "";
-                     $scope.evaluation_others_assessor = "";
-              
-
-                    }
-                else if($scope.evaluation_result_receive.self.length<$scope.evaluation_result_receive.others.length){
-                    $scope.self_not_evaluated = true;
-                     $scope.others_not_evaluated = false;
-                       $scope.evaluation_self_date = "";
-                     $scope.evaluation_self_time =  "";
-                     $scope.evaluation_self_teacher = "";
-                    $scope.evaluation_others_date = $scope.evaluation_result_receive.others[0].date;
-                     $scope.evaluation_others_assessor = $scope.evaluation_result_receive.others[0].time;
-                     $scope.evaluation_others_time = $scope.evaluation_result_receive.others[0].t_name;
-                     for (index = 0; index < $scope.evaluation_result_receive.others.length; index++) {
-                    console.log(index);
-                    $scope.evaluation_result.results[index] = []
-                    $scope.evaluation_result.results[index].sub_indicator_name =  $scope.corresponding_sub_indicators[index].sub_indicator_name;
-                    $scope.evaluation_result.results[index].sub_indicator_num = $scope.evaluation_result_receive.others[index].sub_indicator_num;
-
-                    $scope.evaluation_result.results[index].other_result = $scope.evaluation_result_receive.others[index].evaluation_score;
-                }
-                }else{
-                 for (index = 0; index < $scope.evaluation_result_receive.self.length; index++) {
-                    console.log(index);
-                    $scope.evaluation_result.results[index] = []
-                    $scope.evaluation_result.results[index].sub_indicator_name =  $scope.corresponding_sub_indicators[index].sub_indicator_name;
-                    $scope.evaluation_result.results[index].sub_indicator_num = $scope.evaluation_result_receive.self[index].sub_indicator_num;
-                    $scope.evaluation_result.results[index].self_result = $scope.evaluation_result_receive.self[index].evaluation_score;
-                    $scope.evaluation_result.results[index].other_result = $scope.evaluation_result_receive.others[index].evaluation_score;
-                        }
-
-                             $scope.self_not_evaluated = false;
-                     $scope.others_not_evaluated = false;
-                      $scope.evaluation_self_date = $scope.evaluation_result_receive.self[0].date;
-                     $scope.evaluation_self_time =  $scope.evaluation_result_receive.self[0].time;
-                     $scope.evaluation_self_teacher = $scope.evaluation_result_receive.self[0].t_name;
-                     $scope.evaluation_others_date = $scope.evaluation_result_receive.others[0].date;
-                     $scope.evaluation_others_assessor = $scope.evaluation_result_receive.others[0].time;
-                     $scope.evaluation_others_time = $scope.evaluation_result_receive.others[0].t_name;
-              
-                }
-       console.log( $scope.self_not_evaluated);
-                      console.log( $scope.others_not_evaluated);
-            $scope.sendIndicatorCurriAndGetEvidence();
-         });
+        $scope.sendIndicatorCurriAndGetEvidence();
+        // // $scope.loading = new $loading();
+        // // $scope.loading.show();
+        // $scope.indicator_choosen.curri_id = $scope.curri_choosen.curri_id;
+        // $scope.evaluation_result_receive
     }
 
     $scope.download_file = function(path) { 
@@ -6401,8 +6306,7 @@ $scope.init =function() {
          ).success(function (data) {
             $rootScope.manage_research_all_teachers_in_curri = data;
 
-        console.log("go_to_fix_research");
-        console.log($rootScope.manage_research_all_teachers_in_curri)
+     
         $rootScope.manage_research_fix_this_research = angular.copy(this_research);
         // console.log( $rootScope.manage_research_fix_this_research);
   
@@ -6435,8 +6339,7 @@ $scope.init =function() {
           
             }
         }
-        console.log($rootScope.manage_research_fix_this_research.researcher)
-     console.log($rootScope.manage_lab_research_this_research_init)
+
          });
 
 
