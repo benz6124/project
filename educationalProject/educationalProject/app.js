@@ -153,11 +153,16 @@ for(index=0;index<$rootScope.all_curriculums.length;index++){
 
   if(title_code=='18' || title_code=='19' || title_code=='20'|| title_code=='24'|| title_code=='26'){
 
-    if($scope.current_user.user_type == 'ประธานหลักสูตร'){
-      return true;
+
+    if(angular.isUndefined($scope.current_user.president_in)==true){
+      
+      return false;
     }
-    
-    return false;
+    else{
+          
+        return true;
+    }
+
   }
 
   if(title_code=='17' ){

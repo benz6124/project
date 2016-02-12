@@ -5485,14 +5485,14 @@ $scope.init =function() {
    $scope.manage_privilege_president_result={};
 $scope.title_choosen = {};
 
-  $http.get('api/titleprivilege').success(function (data) {
+  $http.get('/api/title').success(function (data) {
           
              $scope.all_title = data;
           
            });
 }
 
-     $http.get('api/titleprivilege').success(function (data) {
+     $http.get('/api/title').success(function (data) {
           
              $scope.all_title = data;
           
@@ -5730,7 +5730,7 @@ $scope.init = function(){
               $scope.init();
     });
 
-$scope.save_to_server = function(){
+$scope.save_to_server = function(my_modal){
 
      $http.put(
              '/api/education',
@@ -6024,14 +6024,14 @@ $scope.init =function() {
    $scope.manage_privilege_president_result={};
 $scope.title_choosen = {};
 
-  $http.get('api/titleprivilege').success(function (data) {
+  $http.get('/api/title').success(function (data) {
           
              $scope.all_title = data;
           
            });
 }
 
-     $http.get('api/titleprivilege').success(function (data) {
+     $http.get('/api/title').success(function (data) {
           
              $scope.all_title = data;
           
@@ -6146,14 +6146,14 @@ $scope.init =function() {
    $scope.manage_privilege_admin_result={};
 $scope.title_choosen = {};
 
-  $http.get('api/titleprivilege').success(function (data) {
+  $http.get('/api/title').success(function (data) {
           
              $scope.all_title = data;
           
            });
 }
 
-     $http.get('api/titleprivilege').success(function (data) {
+     $http.get('/api/title').success(function (data) {
           
              $scope.all_title = data;
           
