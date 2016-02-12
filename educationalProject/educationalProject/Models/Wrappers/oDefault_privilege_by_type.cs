@@ -94,11 +94,11 @@ namespace educationalProject.Models.Wrappers
                                 title_privilege_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_PRIVILEGE_CODE].Ordinal])
                             });
                         else
-                            result.choices.Add(new Title_privilege {
-                                title_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_CODE].Ordinal]),
-                                title_privilege_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_PRIVILEGE_CODE].Ordinal]),
-                                privilege = item.ItemArray[data.Columns[Title_privilege.FieldName.PRIVILEGE].Ordinal].ToString()
-                            });
+                            result.choices.Add(new Title_privilege (
+                                Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_CODE].Ordinal]),
+                                Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_PRIVILEGE_CODE].Ordinal]),
+                                item.ItemArray[data.Columns[Title_privilege.FieldName.PRIVILEGE].Ordinal].ToString()
+                            ));
                     }
                     data.Dispose();
                 }

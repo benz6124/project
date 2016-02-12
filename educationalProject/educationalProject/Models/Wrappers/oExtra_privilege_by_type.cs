@@ -96,19 +96,14 @@ namespace educationalProject.Models.Wrappers
                             result.list.Add(new Extra_privilege_by_type_with_name
                             {
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                                privilege = item.ItemArray[data.Columns[Title_privilege.FieldName.PRIVILEGE].Ordinal].ToString(),
+                                my_privilege = new Title_privilege(Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_CODE].Ordinal]), Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_PRIVILEGE_CODE].Ordinal]),
+                                item.ItemArray[data.Columns[Title_privilege.FieldName.PRIVILEGE].Ordinal].ToString()),
                                 name = item.ItemArray[data.Columns[Title.FieldName.NAME].Ordinal].ToString(),
-                                user_type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString(),
-                                title_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_CODE].Ordinal]),
-                                title_privilege_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_PRIVILEGE_CODE].Ordinal])
+                                user_type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString()
                             });
                         else
-                            result.choices.Add(new Title_privilege
-                            {
-                                title_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_CODE].Ordinal]),
-                                title_privilege_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_PRIVILEGE_CODE].Ordinal]),
-                                privilege = item.ItemArray[data.Columns[Title_privilege.FieldName.PRIVILEGE].Ordinal].ToString()
-                            });
+                            result.choices.Add(new Title_privilege(Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_CODE].Ordinal]), Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_PRIVILEGE_CODE].Ordinal]),
+                                item.ItemArray[data.Columns[Title_privilege.FieldName.PRIVILEGE].Ordinal].ToString()));
                     }
                     data.Dispose();
                 }
@@ -138,7 +133,7 @@ namespace educationalProject.Models.Wrappers
                 return "Cannot connect to database.";
 
             string InsertOrUpdateCommand = "";
-            foreach(Extra_privilege_by_type e in edata.list)
+            foreach(Extra_privilege_by_type_with_name e in edata.list)
             {
                 InsertOrUpdateCommand += string.Format("IF NOT EXISTS(select * from {0} where {1} = '{2}' and {3} = '{4}' and {5} = {6}) " +
                                          "BEGIN " +
@@ -148,7 +143,7 @@ namespace educationalProject.Models.Wrappers
                                          "BEGIN " +
                                          "UPDATE {0} set {8} = '{7}' where {1} = '{2}' and {3} = '{4}' and {5} = '{6}' " +
                                          "END ", FieldName.TABLE_NAME, FieldName.USER_TYPE, e.user_type, FieldName.CURRI_ID, e.curri_id,
-                                         FieldName.TITLE_CODE, e.title_code, e.title_privilege_code, FieldName.TITLE_PRIVILEGE_CODE);
+                                         FieldName.TITLE_CODE, e.my_privilege.title_code, e.my_privilege.title_privilege_code, FieldName.TITLE_PRIVILEGE_CODE);
             }
 
             d.iCommand.CommandText = InsertOrUpdateCommand;
