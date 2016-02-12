@@ -5671,7 +5671,7 @@ glyphicon glyphicon-bell"></i> </span>
               
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
-                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="flip-x" data-nq-toggle-modal="#create_survey" data-ng-click="go_to_create_survey()"><i class="fic glyphicon glyphicon-plus-sign"></i> สร้างแบบสอบถาม</button>
+                                  <button ng-show="$parent.current_user.privilege[curri_choosen.curri_id]['5'] >=3"type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="flip-x" data-nq-toggle-modal="#create_survey" data-ng-click="go_to_create_survey()"><i class="fic glyphicon glyphicon-plus-sign"></i> สร้างแบบสอบถาม</button>
 
 
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
@@ -5684,9 +5684,9 @@ glyphicon glyphicon-bell"></i> </span>
                                                 <th style="width:100px">กลุ่มเป้าหมาย</th>
                                                 <th style="width:50px">วันที่สร้าง</th>
                                                 <th style="width:140px">ผู้สร้าง</th>
-                                                <th style="width:30px">ตอบ</th>
+                                                <th style="width:30px" ng-show="$parent.current_user.privilege[curri_choosen.curri_id]['5'] >=2">ตอบ</th>
                                                 <th style="width:30px">ผล</th>
-                                                <th style="width:30px">ลบ</th>
+                                                <th style="width:30px" ng-show="$parent.current_user.privilege[curri_choosen.curri_id]['5'] ==4">ลบ</th>
                                               
                                             
                                             </tr>
@@ -5708,21 +5708,9 @@ glyphicon glyphicon-bell"></i> </span>
   </td>
                       <td ><span style="font-size:19px">{{survey.date}}</span> </td>              
                                                               <td ><span style="font-size:19px">{{survey.t_name}}</span> </td>
-                                               <!--  <td>adad</td>
-                                                <td>dadad</td>
-                                                    <td>dawd</td>
-                                                <td>d</td>
-                                                <td>da</td>
-                                                  <td>a</td> -->
-                                             <!--    <td class=" left_column" ><span class="topicHeader" ng-hide="primary_evidence.just_create">{{primary_evidence.evidence_name}}</span>
-
-                                                <span class="topicHeader" ng-show="primary_evidence.just_create"> <input class="form-control"  type="text" ng-model="primary_evidence.evidence_name " required/></span>
-
-
-                                                </td>-->
-  
+                                 
                                     
-   <td > <a href="" style="margin-top:7px" class="hvr-pulse" data-nq-toggle-modal="#do_survey" data-effect="from-left" data-ng-click="go_to_answer(survey)">
+   <td ng-show="$parent.current_user.privilege[curri_choosen.curri_id]['5'] >=2"> <a href="" style="margin-top:7px" class="hvr-pulse" data-nq-toggle-modal="#do_survey" data-effect="from-left" data-ng-click="go_to_answer(survey)">
                                         <span class="topic"><i style="color:#204d74;margin0"class="glyphicon glyphicon-hand-up"></i> </span>
                                     </a></td> 
 
@@ -5730,7 +5718,7 @@ glyphicon glyphicon-bell"></i> </span>
                                         <span class="topic"><i style="color:#4cae4c"class="glyphicon glyphicon-stats"></i> </span>
                                     </a></td> 
 
-                                          <td > <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_qestionare($index)" >
+                                          <td ng-show="$parent.current_user.privilege[curri_choosen.curri_id]['5'] ==4"> <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_qestionare($index)" >
                                         <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td> 
 

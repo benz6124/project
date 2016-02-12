@@ -3873,9 +3873,11 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
+  
              $scope.nothing_change = true;
                $rootScope.manage_survey_my_world_wide_surveys = data;
-         
+                   console.log('$rootScope.manage_survey_my_world_wide_surveys')
+            console.log($rootScope.manage_survey_my_world_wide_surveys)
              $scope.choose_not_complete = false;
              
             
