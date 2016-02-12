@@ -3873,7 +3873,7 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
-  
+
              $scope.nothing_change = true;
                $rootScope.manage_survey_my_world_wide_surveys = data;
                    console.log('$rootScope.manage_survey_my_world_wide_surveys')
@@ -5544,8 +5544,8 @@ $scope.title_choosen = {};
 
       $scope.to_sent = {};
       $scope.to_sent.curri_id = $scope.curri_choosen.curri_id;
-      $scope.to_sent.title = $scope.title_choosen;
-
+      $scope.to_sent.title_code = $scope.title_choosen.title_code;
+     $scope.to_sent.name = $scope.title_choosen.name;
         $http.post(
              '/api/extraprivilegebytype',
              JSON.stringify($scope.to_sent),
@@ -6083,8 +6083,8 @@ $scope.title_choosen = {};
 
       $scope.to_sent = {};
       $scope.to_sent.curri_id = $scope.curri_choosen.curri_id;
-      $scope.to_sent.title = $scope.title_choosen;
-
+      $scope.to_sent.title_code = $scope.title_choosen.title_code;
+     $scope.to_sent.name = $scope.title_choosen.name;
         $http.post(
              '/api/extraprivilege',
              JSON.stringify($scope.to_sent),
@@ -6201,10 +6201,10 @@ $scope.title_choosen = {};
 
       $scope.find_information = function(){
   
-
       $scope.to_sent = {};
-   
-      $scope.to_sent.title = $scope.title_choosen;
+     
+      $scope.to_sent.title_code = $scope.title_choosen.title_code;
+     $scope.to_sent.name = $scope.title_choosen.name;
 
         $http.post(
              '/api/defaultprivilegebytype',
