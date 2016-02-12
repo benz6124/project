@@ -604,14 +604,14 @@
                 <th class="col-md-7 topic">หัวข้อการประเมิน</th>
                 <th class="col-md-2 result">
 
-                <a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ยังไม่มีการประเมิน" style="color:white;cursor:default;"> ผลการประเมินตนเอง</a>
+                <a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"   style="color:white;cursor:default;"> ผลการประเมินตนเอง</a>
 
                 </th>
 
                 <th class="col-md-2 result">
 
 
-<a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ยังไม่มีการประเมิน" style="color:white;cursor:default;" >ผลการประเมิน<br />จากภายนอก</a>
+<a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"   style="color:white;cursor:default;" >ผลการประเมิน<br />จากภายนอก</a>
                 </th>
   
 
@@ -5685,7 +5685,7 @@ glyphicon glyphicon-bell"></i> </span>
                                                 <th style="width:50px">วันที่สร้าง</th>
                                                 <th style="width:140px">ผู้สร้าง</th>
                                                 <th style="width:30px" ng-show="$parent.current_user.privilege[curri_choosen.curri_id]['5'] >=2">ตอบ</th>
-                                                <th style="width:30px">ผล</th>
+                                                <th style="width:30px" >ผล</th>
                                                 <th style="width:30px" ng-show="$parent.current_user.privilege[curri_choosen.curri_id]['5'] ==4">ลบ</th>
                                               
                                             
@@ -5714,7 +5714,7 @@ glyphicon glyphicon-bell"></i> </span>
                                         <span class="topic"><i style="color:#204d74;margin0"class="glyphicon glyphicon-hand-up"></i> </span>
                                     </a></td> 
 
-                                       <td > <a href=""  style="margin-top:7px"data-nq-toggle-modal="#result_survey" data-effect="from-left" data-ng-click="go_to_result(survey)" class="hvr-pulse" >
+                                       <td > <a href="" ng-show="survey.personnel_id == current_user.user_id || president_in_this_curri_and_year()" style="margin-top:7px" data-nq-toggle-modal="#result_survey" data-effect="from-left" data-ng-click="go_to_result(survey)" class="hvr-pulse" >
                                         <span class="topic"><i style="color:#4cae4c"class="glyphicon glyphicon-stats"></i> </span>
                                     </a></td> 
 

@@ -3791,6 +3791,12 @@ $scope.init =function() {
 
     }
 
+
+$scope.president_in_this_curri_and_year = function(){
+    if($scope.$parent.current_user.)
+}
+
+
     $scope.go_to_answer = function(this_survey){
 
            $http.post(
