@@ -38,7 +38,7 @@ namespace educationalProject.Models.Wrappers
                                       FieldName.TITLE_PRIVILEGE_CODE, Title.FieldName.NAME,
                                       Title_privilege.FieldName.PRIVILEGE);
 
-            string insertintotemp5_1 = string.Format("insert into {7} " +
+            string insertintotemp5_1 = string.Format("insert into {8} " +
                                        "select {0}.*, tp.{1}, tp.{2} " +
                                        "from {0} , " +
                                        "({3}) as tp " +
@@ -64,9 +64,10 @@ namespace educationalProject.Models.Wrappers
                                        Title_privilege.FieldName.TITLE_CODE, Title_privilege.FieldName.TITLE_PRIVILEGE_CODE,
                                        FieldName.TABLE_NAME, FieldName.TITLE_CODE, FieldName.USER_TYPE,temp5tablename);
 
-            string insertintotemp5_3 = string.Format("select null,{0},{1},null,{2} from {3} where {0} = {4} ",
+            string insertintotemp5_3 = string.Format("insert into {5} " +
+                                    "select null,{0},{1},null,{2} from {3} where {0} = {4} ",
                                     FieldName.TITLE_CODE, FieldName.TITLE_PRIVILEGE_CODE, Title_privilege.FieldName.PRIVILEGE,
-                                    Title_privilege.FieldName.TABLE_NAME, title_code);
+                                    Title_privilege.FieldName.TABLE_NAME, title_code,temp5tablename);
 
 
             string selcmd = string.Format("select * from {0} order by {1} ", temp5tablename,FieldName.USER_TYPE);

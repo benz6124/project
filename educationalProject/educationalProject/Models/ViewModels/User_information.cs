@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using Newtonsoft.Json;
 
 namespace educationalProject.Models.ViewModels
 {
@@ -34,6 +34,7 @@ namespace educationalProject.Models.ViewModels
 
         //For company
         private string _company_name;
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string company_name { get { return _company_name; } set { _company_name = value; } }
         //For teacher
         private char _degree;
@@ -42,15 +43,30 @@ namespace educationalProject.Models.ViewModels
         private string _person_id;
         private string _room;
         private string _status;
-        private int _alive;
+        private int? _alive;
         private List<string> _interest;
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public char degree { get { return _degree; } set { _degree = value; } }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public char position { get { return _position; } set { _position = value; } }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string personnel_type { get { return _personnel_type; } set { _personnel_type = value; } }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string person_id { get { return _person_id; } set { _person_id = value; } }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string status { get { return _status; } set { _status = value; } }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string room { get { return _room; } set { _room = value; } }
-        public int alive { get { return _alive; } set { _alive = value; } }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public int? alive { get { return _alive; } set { _alive = value; } }
+
         public List<string> interest { get { return _interest; } set { _interest = value; } }
 
         //Common for teacher and staff
@@ -62,6 +78,7 @@ namespace educationalProject.Models.ViewModels
         {
             education = new List<Educational_teacher_staff>();
             interest = new List<string>();
+            alive = null;
         }
         public string GetPassword()
         {

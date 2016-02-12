@@ -69,9 +69,10 @@ namespace educationalProject.Models.Wrappers
                                        Default_privilege_by_type.FieldName.USER_TYPE,
                                        Title.FieldName.TITLE_CODE, Title_privilege.FieldName.TITLE_PRIVILEGE_CODE, temp5tablename);
 
-            string insertintotemp5_3 = string.Format("select null,null,{0},{1},null,{2} from {3} where {0} = {4} ",
+            string insertintotemp5_3 = string.Format("insert into {5} " +
+                                    "select null,null,{0},{1},null,{2} from {3} where {0} = {4} ",
                                     FieldName.TITLE_CODE, FieldName.TITLE_PRIVILEGE_CODE, Title_privilege.FieldName.PRIVILEGE,
-                                    Title_privilege.FieldName.TABLE_NAME, title_code);
+                                    Title_privilege.FieldName.TABLE_NAME, title_code,temp5tablename);
 
             string selcmd = string.Format("select * from {0} order by {1} ", temp5tablename,FieldName.USER_TYPE);
 
@@ -86,6 +87,9 @@ namespace educationalProject.Models.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
+                        /*string s1 = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString();
+                        string s2 = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString();
+                        string s3 = item.ItemArray[data.Columns[Title.FieldName.NAME].Ordinal].ToString();*/
                         if (item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString() != "" &&
                             item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString() != "" &&
                             item.ItemArray[data.Columns[Title.FieldName.NAME].Ordinal].ToString() != "")

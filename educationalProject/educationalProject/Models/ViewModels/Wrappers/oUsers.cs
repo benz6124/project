@@ -859,6 +859,8 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
                         {
                             //Read 4th data such as which curriculum+year that the login teacher is president 
                             //major and grad_year column contain curri_id and aca_year value
+                            if (result.president_in == null)
+                                result.president_in = new Dictionary<string, List<int>>();
                             string curri_id = item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.MAJOR].Ordinal].ToString();
                             if (!result.president_in.ContainsKey(curri_id))
                             {

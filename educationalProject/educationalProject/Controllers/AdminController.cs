@@ -20,8 +20,8 @@ namespace educationalProject.Controllers
 
         public IHttpActionResult PostForCreateNewAdmin(JObject data)
         {
-            return Ok();
-            /*const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             RNGCryptoServiceProvider gen = new RNGCryptoServiceProvider();
             byte[] num = new byte[8];
 
@@ -41,12 +41,13 @@ namespace educationalProject.Controllers
             datacontext.admin_creator_id = Convert.ToInt32(data["admin_creator_id"]);
             datacontext.username = emaillower;
             datacontext.password = u.password;
+            datacontext.t_name = data["t_name"].ToString();
 
             object result = datacontext.InsertWithSelect();
             if (result.GetType().ToString() != "System.String")
                 return Ok(result);
             else
-                return InternalServerError(new Exception(result.ToString()));*/
+                return InternalServerError(new Exception(result.ToString()));
         }
     }
 }
