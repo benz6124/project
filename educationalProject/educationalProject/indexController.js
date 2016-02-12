@@ -6402,6 +6402,7 @@ $scope.init =function() {
             $rootScope.manage_research_all_teachers_in_curri = data;
 
         console.log("go_to_fix_research");
+        console.log($rootScope.manage_research_all_teachers_in_curri)
         $rootScope.manage_research_fix_this_research = angular.copy(this_research);
         // console.log( $rootScope.manage_research_fix_this_research);
   
@@ -6434,8 +6435,8 @@ $scope.init =function() {
           
             }
         }
-        console.log("manage_lab_research_this_research_init")
-        console.log(manage_lab_research_this_research_init);
+        console.log($rootScope.manage_research_fix_this_research.researcher)
+     console.log($rootScope.manage_lab_research_this_research_init)
          });
 
 
