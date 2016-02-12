@@ -12,6 +12,7 @@ namespace educationalProject.Controllers
     public class EvaluationResultController : ApiController
     {
         private oEvaluation_overall_result datacontext = new oEvaluation_overall_result();
+        /*
         [ActionName("individual")]
         public IHttpActionResult PostByIndicatorAndCurriculum(JObject obj)
         {
@@ -21,6 +22,12 @@ namespace educationalProject.Controllers
                 indicator_num = Convert.ToInt32(obj["indicator_num"])
             };
             return Ok(datacontext.SelectByIndicatorAndCurriculum(data, obj["curri_id"].ToString()));
+        }*/
+
+        [ActionName("overall")]
+        public IHttpActionResult PostForQueryOverallResult(oCurriculum_academic data)
+        {
+            return Ok(datacontext.Select(data));
         }
     }
 }

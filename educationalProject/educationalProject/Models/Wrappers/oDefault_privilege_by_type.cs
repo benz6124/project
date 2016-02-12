@@ -44,7 +44,7 @@ namespace educationalProject.Models.Wrappers
                                        "({3}) as tp " +
                                        "where {0}.{4} = tp.{5} " +
                                        "and {0}.{6} = tp.{6} " +
-                                       "and {0}.{4} = 1 ",
+                                       "and {0}.{4} = {7} ",
                                        FieldName.TABLE_NAME, Title.FieldName.NAME, Title_privilege.FieldName.PRIVILEGE,
                                        oTitle_privilege.getSelectTitlePrivilegeCommand(),
                                        FieldName.TITLE_CODE, Title.FieldName.TITLE_CODE,

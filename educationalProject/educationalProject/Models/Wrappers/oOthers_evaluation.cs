@@ -79,7 +79,7 @@ namespace educationalProject.Models.Wrappers
                                        "select {1},0,{2},{3}," +
                                        "'','0','',null,null,'','{4}',{6} " +
                                        "from {0} where " +
-                                       "{2} = 1 and {5} = " +
+                                       "{2} = {13} and {5} = " +
                                        "(select max(s1.{5}) from {0} as s1 where s1.{5} <= {6}) " +
                                        "and not exists(select * from {7} " +
                                        "where {8} = '{4}' and {9} = {6} and " +
@@ -89,7 +89,7 @@ namespace educationalProject.Models.Wrappers
                                        Sub_indicator.FieldName.INDICATOR_NUM, Sub_indicator.FieldName.SUB_INDICATOR_NUM,
                                        curri_id, Sub_indicator.FieldName.ACA_YEAR, aca_year, FieldName.TABLE_NAME,
                                        FieldName.CURRI_ID, FieldName.ACA_YEAR, FieldName.INDICATOR_NUM,
-                                       FieldName.SUB_INDICATOR_NUM, temp5tablename);
+                                       FieldName.SUB_INDICATOR_NUM, temp5tablename,indicator_num);
 
             string selectcmd = string.Format("select * from {0} order by {1} ", temp5tablename, FieldName.SUB_INDICATOR_NUM);
 
@@ -123,7 +123,7 @@ namespace educationalProject.Models.Wrappers
                                 date = Convert.ToDateTime(item.ItemArray[data.Columns[FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
                                 time = (timeofday.Hour > 9 ? "" : "0") + h + '.' + (timeofday.Minute > 9 ? "" : "0") + m,
                                 suggestion = item.ItemArray[data.Columns[FieldName.DETAIL].Ordinal].ToString(),
-                                evaluation_score = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVALUATION_SCORE].Ordinal]),
+                                evaluation_score = item.ItemArray[data.Columns[FieldName.EVALUATION_SCORE].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVALUATION_SCORE].Ordinal]) : 0,
                                 indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
                                 sub_indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.SUB_INDICATOR_NUM].Ordinal]),
                                 sub_indicator_name = item.ItemArray[data.Columns[Sub_indicator.FieldName.SUB_INDICATOR_NAME].Ordinal].ToString()
@@ -189,19 +189,20 @@ namespace educationalProject.Models.Wrappers
                                       "ALTER COLUMN [{1}] {2} collate DATABASE_DEFAULT ",
                                       temp5tablename, Evidence.FieldName.FILE_NAME,DBFieldDataType.FILE_NAME_TYPE);
             string updatecmd = "";
+
             if (odata.file_name == "")
             {
                 foreach (Others_evaluation_sub_indicator_name o in odata.evaluation_detail)
                     updatecmd += string.Format("if not exists (select * from {0} where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8}) " +
                                 "BEGIN " +
-                                "INSERT INTO {0} values ({6},{8},'{9}','{10}','{11}','{12}','{13}',null,'{2}',{4}) " +
+                                "INSERT INTO {0} values ({6},{8},'{9}',{10},'{11}','{12}','{13}',null,'{2}',{4}) " +
                                 "END " +
                                 "ELSE " +
                                 "BEGIN " +
-                                "UPDATE {0} set {14} = '{9}',{15} = '{10}',{16} = '{11}',{17} = '{12}',{18} = '{13}' where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8} " +
+                                "UPDATE {0} set {14} = '{9}',{15} = {10},{16} = '{11}',{17} = '{12}',{18} = '{13}' where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8} " +
                                 "END ", FieldName.TABLE_NAME, FieldName.CURRI_ID, o.curri_id, FieldName.ACA_YEAR, o.aca_year,
                                 FieldName.INDICATOR_NUM, o.indicator_num, FieldName.SUB_INDICATOR_NUM, o.sub_indicator_num,
-                                o.assessor_id, o.evaluation_score, o.suggestion, o.date, o.time,
+                                o.assessor_id, o.evaluation_score > 0 ? "'" + o.evaluation_score.ToString() + "'" :"null", o.suggestion, o.date, o.time,
                                 FieldName.ASSESSOR_ID, FieldName.EVALUATION_SCORE, FieldName.DETAIL, FieldName.DATE, FieldName.TIME);
             }
 
@@ -211,19 +212,20 @@ namespace educationalProject.Models.Wrappers
                 Others_evaluation_sub_indicator_name minobj = odata.evaluation_detail.Min();
                     updatecmd += string.Format("if not exists (select * from {0} where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8}) " +
                                 "BEGIN " +
-                                "INSERT INTO {0} values ({6},{8},'{9}','{10}','{11}','{12}','{13}','{20}','{2}',{4}) " +
+                                "INSERT INTO {0} values ({6},{8},'{9}',{10},'{11}','{12}','{13}','{20}','{2}',{4}) " +
                                 "END " +
                                 "ELSE " +
                                 "BEGIN " +
 
                                 "INSERT INTO #TEMP5 " +
                                 "select * from " +
-                                "(UPDATE {0} set {14} = '{9}',{15} = '{10}',{16} = '{11}',{17} = '{12}',{18} = '{13}',{19} = '{20}' " +
+                                "(UPDATE {0} set {14} = '{9}',{15} = {10},{16} = '{11}',{17} = '{12}',{18} = '{13}',{19} = '{20}' " +
                                 "output deleted.{19} " +
                                 "where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8}) as outputupdate " +
                                 "END ", FieldName.TABLE_NAME, FieldName.CURRI_ID, minobj.curri_id, FieldName.ACA_YEAR, minobj.aca_year,
                                 FieldName.INDICATOR_NUM, minobj.indicator_num, FieldName.SUB_INDICATOR_NUM, minobj.sub_indicator_num,
-                                minobj.assessor_id, minobj.evaluation_score, minobj.suggestion, minobj.date, minobj.time,
+                                minobj.assessor_id, minobj.evaluation_score > 0 ? "'" + minobj.evaluation_score.ToString() + "'" : "null",
+                                minobj.suggestion, minobj.date, minobj.time,
                                 FieldName.ASSESSOR_ID, FieldName.EVALUATION_SCORE, FieldName.DETAIL, FieldName.DATE, FieldName.TIME,
                                 Evidence.FieldName.FILE_NAME,odata.file_name);
 
@@ -233,14 +235,14 @@ namespace educationalProject.Models.Wrappers
                     {
                         updatecmd += string.Format("if not exists (select * from {0} where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8}) " +
                                 "BEGIN " +
-                                "INSERT INTO {0} values ({6},{8},'{9}','{10}','{11}','{12}','{13}',null,'{2}',{4}) " +
+                                "INSERT INTO {0} values ({6},{8},'{9}',{10},'{11}','{12}','{13}',null,'{2}',{4}) " +
                                 "END " +
                                 "ELSE " +
                                 "BEGIN " +
-                                "UPDATE {0} set {14} = '{9}',{15} = '{10}',{16} = '{11}',{17} = '{12}',{18} = '{13}' where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8} " +
+                                "UPDATE {0} set {14} = '{9}',{15} = {10},{16} = '{11}',{17} = '{12}',{18} = '{13}' where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8} " +
                                 "END ", FieldName.TABLE_NAME, FieldName.CURRI_ID, o.curri_id, FieldName.ACA_YEAR, o.aca_year,
                                 FieldName.INDICATOR_NUM, o.indicator_num, FieldName.SUB_INDICATOR_NUM, o.sub_indicator_num,
-                                o.assessor_id, o.evaluation_score, o.suggestion, o.date, o.time,
+                                o.assessor_id, o.evaluation_score > 0 ? "'" + o.evaluation_score.ToString() + "'" : "null", o.suggestion, o.date, o.time,
                                 FieldName.ASSESSOR_ID, FieldName.EVALUATION_SCORE, FieldName.DETAIL, FieldName.DATE, FieldName.TIME);
                     }
                 }

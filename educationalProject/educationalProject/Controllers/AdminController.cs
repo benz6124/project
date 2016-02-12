@@ -20,7 +20,8 @@ namespace educationalProject.Controllers
 
         public IHttpActionResult PostForCreateNewAdmin(JObject data)
         {
-            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return Ok();
+            /*const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             RNGCryptoServiceProvider gen = new RNGCryptoServiceProvider();
             byte[] num = new byte[8];
 
@@ -45,7 +46,7 @@ namespace educationalProject.Controllers
             if (result.GetType().ToString() != "System.String")
                 return Ok(result);
             else
-                return InternalServerError(new Exception(result.ToString()));
+                return InternalServerError(new Exception(result.ToString()));*/
         }
     }
 }

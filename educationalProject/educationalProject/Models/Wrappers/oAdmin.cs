@@ -29,88 +29,66 @@ namespace educationalProject.Models.Wrappers
         private string getselectcmd()
         {
             string temp5tablename = "#temp5";
-
             string createtabletemp5 = string.Format("CREATE TABLE {0}( " +
-                                      "[row_num] int identity(1,1) not null," +
-                                      "[{1}] VARCHAR(40) NULL," +
-                                      "[{2}] {16}  NOT NULL," +
-                                      "[{3}] VARCHAR(MAX) NULL," +
-                                      "[{4}] {16} NULL," +
-                                      "[{5}] VARCHAR(16) NULL," +
+                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
+                                      "[{1}] INT NULL," +
+                                      "[{2}] VARCHAR(40) NULL," +
+                                      "[{3}] {10} NULL," +
+                                      "[{4}] VARCHAR(16) NULL," +
+                                      "[{5}] VARCHAR(60) NULL," +
                                       "[{6}] VARCHAR(60) NULL," +
-                                      "[{7}] VARCHAR(16) NULL," +
-                                      "[{8}] VARCHAR(60) NULL," +
-                                      "[{9}] CHAR(13) NULL," +
-                                      "[{10}] CHAR NULL," +
-                                      "[{11}] VARCHAR(60) NULL," +
-                                      "[{12}] VARCHAR(20) NULL," +
-                                      "[{13}] VARCHAR(80) NULL," +
-                                      "[{14}] {17} NULL," +
-                                      "[{15}] DATETIME2 NULL," +
-                                      "[creator_name] VARCHAR(70) NULL," +
+                                      "[{7}] {11} NULL," +
+                                      "[{8}] DATETIME2 NULL," +
+                                      "[{9}] INT NULL," +
+                                      "[c_t_prename] VARCHAR(16) NULL," +
+                                      "[c_t_name] VARCHAR(60) NULL," +
                                       "PRIMARY KEY([row_num])) " +
 
                                       "alter table {0} " +
-                                      "alter column {1} VARCHAR(40) collate database_default " +
+                                      "alter column [{2}] VARCHAR(40) collate database_default " +
 
                                       "alter table {0} " +
-                                      "alter column [{2}] {16} collate database_default " +
+                                      "alter column [{3}] {10} collate database_default " +
 
                                       "alter table {0} " +
-                                      "alter column [{3}] VARCHAR(MAX) collate database_default " +
+                                      "alter column [{4}] VARCHAR(16) collate database_default " +
 
                                       "alter table {0} " +
-                                      "alter column [{4}] {16} collate database_default " +
-
-                                      "alter table {0} " +
-                                      "alter column [{5}] VARCHAR(16) collate database_default " +
+                                      "alter column [{5}] VARCHAR(60) collate database_default " +
 
                                       "alter table {0} " +
                                       "alter column [{6}] VARCHAR(60) collate database_default " +
 
                                       "alter table {0} " +
-                                      "alter column [{7}] VARCHAR(16) collate database_default " +
+                                      "alter column [{7}] {11} collate database_default " +
 
                                       "alter table {0} " +
-                                      "alter column [{8}] VARCHAR(60) collate database_default " +
+                                      "alter column [c_t_prename] VARCHAR(16) collate database_default " +
 
                                       "alter table {0} " +
-                                      "alter column [{9}] CHAR(13) collate database_default " +
-
-                                      "alter table {0} " +
-                                      "alter column [{10}] CHAR collate database_default " +
-
-                                      "alter table {0} " +
-                                      "alter column [{11}] VARCHAR(60) collate database_default " +
-
-                                      "alter table {0} " +
-                                      "alter column [{12}] VARCHAR(20) collate database_default " +
-
-                                      "alter table {0} " +
-                                      "alter column [{13}] VARCHAR(80) collate database_default " +
-
-                                      "alter table {0} " +
-                                      "alter column [{14}] {17} collate database_default " +
-
-                                      "alter table {0} " +
-                                      "alter column [creator_name] VARCHAR(70) collate database_default ",
-                                      temp5tablename, FieldName.USER_TYPE, FieldName.USERNAME, FieldName.PASSWORD,
-                                      FieldName.ADMIN_CREATOR_ID, FieldName.T_PRENAME, FieldName.T_NAME,
-                                      FieldName.E_PRENAME, FieldName.E_NAME, FieldName.CITIZEN_ID,
-                                      FieldName.GENDER, FieldName.EMAIL, FieldName.TEL, FieldName.ADDR,
-                                      FieldName.FILE_NAME_PIC, FieldName.TIMESTAMP, DBFieldDataType.USERNAME_TYPE,
+                                      "alter column [c_t_name] VARCHAR(60) collate database_default ",
+                                      temp5tablename, FieldName.ADMIN_ID, FieldName.USER_TYPE, FieldName.USERNAME,
+                                      FieldName.T_PRENAME, FieldName.T_NAME, FieldName.EMAIL, FieldName.FILE_NAME_PIC,
+                                      FieldName.TIMESTAMP, FieldName.ADMIN_CREATOR_ID, DBFieldDataType.USERNAME_TYPE,
                                       DBFieldDataType.FILE_NAME_TYPE);
 
-
             string insertintotemp5_1 = string.Format("insert into {0} " +
-                "select a1.*, a2.{1} from ({2}) as a1, ({2}) as a2 where a1.{3} = a2.{4} ",
-                temp5tablename, FieldName.T_NAME, getSelectAdminByJoinCommand(), FieldName.ADMIN_CREATOR_ID,
-                FieldName.ADMIN_ID);
-            string insertintotemp5_2 = string.Format("insert into {0} " +
-                "select *, null from ({1}) as adm where {2} is null ",
-                temp5tablename, getSelectAdminByJoinCommand(), FieldName.ADMIN_CREATOR_ID);
+                                       "select {1}, a1.{2}, a1.{3}, a1.{4}, a1.{5}, a1.{6}, a1.{7}, a1.{8}," +
+                                       "a1.{9}, a2.{4}, a2.{5} " +
+                                       "from ({10}) as a1, {11} as a2 where a1.{9} = a2.{12} ",
+                                       temp5tablename, FieldName.ADMIN_ID, FieldName.USER_TYPE, FieldName.USERNAME,
+                                       FieldName.T_PRENAME, FieldName.T_NAME, FieldName.EMAIL, FieldName.FILE_NAME_PIC,
+                                       FieldName.TIMESTAMP, FieldName.ADMIN_CREATOR_ID, getSelectAdminByJoinCommand(),
+                                       User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_ID);
 
-            string selectcmd = string.Format("select * from {0} order by {1} ", temp5tablename, FieldName.TIMESTAMP);
+            string insertintotemp5_2 = string.Format("insert into {0} " +
+                                       "select {1}, {2}, {3}, {4},{5}, {6}, {7}, {8}, null, null, null " +
+                                       "from ({9}) as adm where {10} is null ",
+                                        temp5tablename, FieldName.ADMIN_ID, FieldName.USER_TYPE, FieldName.USERNAME,
+                                       FieldName.T_PRENAME, FieldName.T_NAME, FieldName.EMAIL, FieldName.FILE_NAME_PIC,
+                                       FieldName.TIMESTAMP, getSelectAdminByJoinCommand(), FieldName.ADMIN_CREATOR_ID);
+
+            string selectcmd = string.Format("select * from {0} order by {1} DESC ", temp5tablename, FieldName.TIMESTAMP);
 
             return string.Format("BEGIN {0} {1} {2} {3} END ", createtabletemp5, insertintotemp5_1,
                 insertintotemp5_2, selectcmd);
@@ -121,8 +99,6 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<Admin_with_creator> result = new List<Admin_with_creator>();
-
-
 
             d.iCommand.CommandText = getselectcmd();
             try
@@ -138,12 +114,13 @@ namespace educationalProject.Models.Wrappers
                         {
                             timestamp = Convert.ToDateTime(item.ItemArray[data.Columns[FieldName.TIMESTAMP].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
                             admin_creator_id = item.ItemArray[data.Columns[FieldName.ADMIN_CREATOR_ID].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ADMIN_CREATOR_ID].Ordinal]) : 0,
-                            creator_name = item.ItemArray[data.Columns["creator_name"].Ordinal].ToString(),
-                            t_name = item.ItemArray[data.Columns[FieldName.T_NAME].Ordinal].ToString(),
+                            creator_name = item.ItemArray[data.Columns["c_t_prename"].Ordinal].ToString() + item.ItemArray[data.Columns["c_t_name"].Ordinal].ToString(),
+                            t_name = item.ItemArray[data.Columns[FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[FieldName.T_NAME].Ordinal].ToString(),
                             file_name_pic = item.ItemArray[data.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString(),
                             email = item.ItemArray[data.Columns[FieldName.EMAIL].Ordinal].ToString(),
                             username = item.ItemArray[data.Columns[FieldName.USERNAME].Ordinal].ToString(),
-                            user_type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString()
+                            user_type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString(),
+                            admin_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ADMIN_ID].Ordinal])
                         });
                     }
                     data.Dispose();
