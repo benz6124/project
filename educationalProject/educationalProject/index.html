@@ -2048,7 +2048,7 @@
     padding-left: 0px;
     padding-right: 0px;
 ">
-    <select data-qo-disable-clear="true" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice for choice in manage_privilege_president_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.each_type.privilege" data-qo-disable-clear="true" >
+    <select data-qo-disable-clear="true" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_president_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.each_type.privilege" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                                          
                                            </td>
@@ -2194,7 +2194,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
     padding-left: 0px;
     padding-right: 0px;
 ">
-    <select data-qo-disable-clear="true" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice for choice in manage_privilege_president_person_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.each_person.privilege" data-qo-disable-clear="true" >
+    <select data-qo-disable-clear="true" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_president_person_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.each_person.privilege" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                                          
                                            </td>
@@ -2272,7 +2272,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
     padding-left: 0px;
     padding-right: 0px;
 ">
-    <select data-qo-disable-clear="true" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice for choice in manage_privilege_admin_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.each_type.privilege" data-qo-disable-clear="true" >
+    <select data-qo-disable-clear="true" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_admin_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.each_type.privilege" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                                          
                                            </td>
@@ -2732,7 +2732,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
               
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
-                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="from-right" data-nq-toggle-modal="#create_minute" data-ng-click="go_to_create_minute()"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลรายงานการประชุม</button>
+                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="from-right" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$parent.current_user.privilege[curri_choosen.curri_id]['8'] >=4 "data-nq-toggle-modal="#create_minute" data-ng-click="go_to_create_minute()"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลรายงานการประชุม</button>
 
 
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
@@ -2747,11 +2747,11 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                                 <th style="width:77px">ผู้เข้าร่วม</th>
                                                   <th style="width:83px">ภาพการประชุม</th>
 
-                                               <th style="width:20px">ดาวน์โหลด</th>
+                                               <th style="width:20px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$parent.current_user.privilege[curri_choosen.curri_id]['8'] >=3 ">ดาวน์โหลด</th>
 
-                                                <th style="width:20px">แก้ไข</th>
+                                                <th style="width:20px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$parent.current_user.privilege[curri_choosen.curri_id]['8'] ==5 ">แก้ไข</th>
                                        
-                                                <th style="width:53px">ลบ</th>
+                                                <th style="width:53px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$parent.current_user.privilege[curri_choosen.curri_id]['8'] ==5 ">ลบ</th>
                                               
                                             
                                             </tr>
@@ -2787,13 +2787,13 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                     </a></td> 
 
 
-                                          <td > <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="download_file(minute.file_name)" >
+                                          <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$parent.current_user.privilege[curri_choosen.curri_id]['8'] >=3 "> <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="download_file(minute.file_name)" >
                                         <span class="topic"><i style="color:#00802b"class="glyphicon glyphicon-download-alt"></i> </span>
                                     </a></td> 
-    <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_minute" data-ng-click="go_to_fix_minute(minute)">
+    <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$parent.current_user.privilege[curri_choosen.curri_id]['8'] ==5 "> <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_minute" data-ng-click="go_to_fix_minute(minute)">
                                         <span class="topic"><i style="color:#eea236;"class="glyphicon glyphicon-wrench"></i> </span>
                                     </a></td> 
-                                          <td > <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_minute($index)" >
+                                          <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$parent.current_user.privilege[curri_choosen.curri_id]['8'] ==5 "> <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_minute($index)" >
                                         <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td> 
                                             </tr>
@@ -5671,7 +5671,7 @@ glyphicon glyphicon-bell"></i> </span>
               
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
-                                  <button ng-show="$parent.current_user.privilege[curri_choosen.curri_id]['5'] >=3"type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="flip-x" data-nq-toggle-modal="#create_survey" data-ng-click="go_to_create_survey()"><i class="fic glyphicon glyphicon-plus-sign"></i> สร้างแบบสอบถาม</button>
+                                  <button ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$parent.current_user.privilege[curri_choosen.curri_id]['5'] >=3"type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="flip-x" data-nq-toggle-modal="#create_survey" data-ng-click="go_to_create_survey()"><i class="fic glyphicon glyphicon-plus-sign"></i> สร้างแบบสอบถาม</button>
 
 
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
@@ -5684,9 +5684,9 @@ glyphicon glyphicon-bell"></i> </span>
                                                 <th style="width:100px">กลุ่มเป้าหมาย</th>
                                                 <th style="width:50px">วันที่สร้าง</th>
                                                 <th style="width:140px">ผู้สร้าง</th>
-                                                <th style="width:30px" ng-show="$parent.current_user.privilege[curri_choosen.curri_id]['5'] >=2">ตอบ</th>
+                                                <th style="width:30px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$parent.current_user.privilege[curri_choosen.curri_id]['5'] >=2">ตอบ</th>
                                                 <th style="width:30px" >ผล</th>
-                                                <th style="width:30px" ng-show="$parent.current_user.privilege[curri_choosen.curri_id]['5'] ==4">ลบ</th>
+                                                <th style="width:30px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$parent.current_user.privilege[curri_choosen.curri_id]['5'] ==4">ลบ</th>
                                               
                                             
                                             </tr>
@@ -5710,15 +5710,15 @@ glyphicon glyphicon-bell"></i> </span>
                                                               <td ><span style="font-size:19px">{{survey.t_name}}</span> </td>
                                  
                                     
-   <td ng-show="$parent.current_user.privilege[curri_choosen.curri_id]['5'] >=2"> <a href="" style="margin-top:7px" class="hvr-pulse" data-nq-toggle-modal="#do_survey" data-effect="from-left" data-ng-click="go_to_answer(survey)">
+   <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$parent.current_user.privilege[curri_choosen.curri_id]['5'] >=2"> <a href="" style="margin-top:7px" class="hvr-pulse" data-nq-toggle-modal="#do_survey" data-effect="from-left" data-ng-click="go_to_answer(survey)">
                                         <span class="topic"><i style="color:#204d74;margin0"class="glyphicon glyphicon-hand-up"></i> </span>
                                     </a></td> 
 
-                                       <td > <a href="" ng-show="survey.personnel_id == current_user.user_id || president_in_this_curri_and_year()" style="margin-top:7px" data-nq-toggle-modal="#result_survey" data-effect="from-left" data-ng-click="go_to_result(survey)" class="hvr-pulse" >
+                                       <td > <a href="" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||survey.personnel_id == current_user.user_id" style="margin-top:7px" data-nq-toggle-modal="#result_survey" data-effect="from-left" data-ng-click="go_to_result(survey)" class="hvr-pulse" >
                                         <span class="topic"><i style="color:#4cae4c"class="glyphicon glyphicon-stats"></i> </span>
                                     </a></td> 
 
-                                          <td ng-show="$parent.current_user.privilege[curri_choosen.curri_id]['5'] ==4"> <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_qestionare($index)" >
+                                          <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$parent.current_user.privilege[curri_choosen.curri_id]['5'] ==4"> <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_qestionare($index)" >
                                         <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td> 
 

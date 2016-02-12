@@ -3792,9 +3792,7 @@ $scope.init =function() {
     }
 
 
-$scope.president_in_this_curri_and_year = function(){
-    if($scope.$parent.current_user.)
-}
+
 
 
     $scope.go_to_answer = function(this_survey){
@@ -5561,7 +5559,8 @@ $scope.title_choosen = {};
                  }
              }
          ).success(function (data) {
-
+            console.log('what we received')
+            console.log(data)
                    $scope.not_choose_title_yet = false;
               $scope.manage_privilege_president_result = data;
              $scope.choose_not_complete = false;

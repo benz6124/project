@@ -129,6 +129,26 @@ $scope.not_choose_curri_and_year_yet = true;
     }
   }
 
+$rootScope.president_in_this_curri_and_year = function(curri_id,aca_year){
+
+    if(angular.isUndefined($scope.current_user.president_in)==true){
+         
+        return false;
+    }
+     if(angular.isUndefined($scope.current_user.president_in[curri_id])==true){
+        
+        return false;
+    }
+
+     var index;
+     for(index =0;index<$scope.current_user.president_in[curri_id].length;index++ ){
+     
+        if($scope.current_user.president_in[curri_id][index] == aca_year){
+            return true;
+        }
+     }
+     return false;
+}
 
   $scope.scan_only_privilege_curri = function(title_code,obj_privilege_curri){
     var index;
