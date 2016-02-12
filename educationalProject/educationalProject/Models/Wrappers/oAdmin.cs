@@ -148,92 +148,87 @@ namespace educationalProject.Models.Wrappers
 
         public object InsertWithSelect()
         {
-            //DBConnector d = new DBConnector();
-            //if (!d.SQLConnect())
-            //    return "Cannot connect to database.";
-            //List<string> result = new List<string>();
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+            List<Admin_with_creator> result = new List<Admin_with_creator>();
 
-            //string temp6tablename = "#temp6";
+            string temp6tablename = "#temp6";
 
-            //string createtabletemp6 = string.Format("CREATE TABLE {0}(" +
-            //                          "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-            //                          "[{1}] INT NULL," +
-            //                          "PRIMARY KEY ([row_num])) ",
-            //                          temp6tablename, User_list.FieldName.USER_ID);
+            string createtabletemp6 = string.Format("CREATE TABLE {0}(" +
+                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
+                                      "[{1}] INT NULL," +
+                                      "PRIMARY KEY ([row_num])) ",
+                                      temp6tablename, User_list.FieldName.USER_ID);
 
-            //string insertcmd = "";
+            string insertcmd = "";
 
-            //foreach (UsernamePassword item in list)
-            //{
-            //    string ts = DateTime.Now.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[93];
+                string ts = DateTime.Now.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[93];
+            
+            insertcmd += string.Format(
+                               "IF NOT EXISTS(select * from {0} where {1} = '{2}' or {3} = '{2}') " +
+                               "begin " +
+                               "insert into {4} " +
+                               "select * from (insert into {0} ({5}, {1}, {6}, {3}, {7},{16}) output inserted.{8} " +
+                               "values ('{9}', '{2}', '{10}', '{2}', '{11}','{17}')) as outputinsert " +
 
-            //    insertcmd += string.Format(
-            //                       "IF NOT EXISTS(select * from {0} where {1} = '{2}' or {3} = '{2}') " +
-            //                       "begin " +
-            //                       "insert into {4} " +
-            //                       "select * from (insert into {0} ({5}, {1}, {6}, {3}, {7}) output inserted.{8} " +
-            //                       "values ('{9}', '{2}', '{10}', '{2}', '{11}')) as outputinsert " +
+                               "insert into {12} ({13},{14}) select {8},{15} from {4} " +
 
-            //                       "insert into {12} ({13}) select {8} from {4} " +
-            //                       insertintousercurri + " " +
+                               getselectcmd() + " " +
+                               "end " +
+                               "else " +
+                               "RETURN ", User_list.FieldName.TABLE_NAME, Personnel.FieldName.USERNAME, username,
+                               Personnel.FieldName.EMAIL, temp6tablename,
+                               User_list.FieldName.USER_TYPE, FieldName.PASSWORD, FieldName.TIMESTAMP,
+                               User_list.FieldName.USER_ID,
+                               /*****9****/ "ผู้ดูแลระบบ", password, ts,
+                               /****12****/ FieldName.TABLE_NAME, FieldName.ADMIN_ID, FieldName.ADMIN_CREATOR_ID, admin_creator_id,
+                               FieldName.T_NAME,t_name);
 
-            //                       "delete from {4} " +
-            //                       "end " +
-            //                       "else " +
-            //                       "begin " +
-            //                       "insert into {14} values ('{2}') " +
-            //                       "end ", User_list.FieldName.TABLE_NAME, Personnel.FieldName.USERNAME, item.username,
-            //                       Personnel.FieldName.EMAIL, temp6tablename,
-            //                       User_list.FieldName.USER_TYPE, FieldName.PASSWORD, FieldName.TIMESTAMP,
-            //                       User_list.FieldName.USER_ID,
-            //                       /*****9****/ "ผู้ประเมินจากภายนอก", item.password, ts,
-            //                       /****12****/ FieldName.TABLE_NAME, FieldName.ASSESSOR_ID, temp5tablename
-            //                       );
-
-            //}
-
-            //string selectcmd = string.Format("select {1} from {0} ", temp5tablename, FieldName.EMAIL);
-
-
-
-
-            //d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} {5} END ", createtabletemp5, createtabletemp6, createtabletemp7,
-            //    insertintotemp7, insertcmd, selectcmd);
-            //try
-            //{
-            //    System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
-            //    if (res.HasRows)
-            //    {
-            //        DataTable data = new DataTable();
-            //        data.Load(res);
-            //        foreach (DataRow item in data.Rows)
-            //        {
-            //            result.Add(
-            //                item.ItemArray[data.Columns[FieldName.EMAIL].Ordinal].ToString()
-            //            );
-            //        }
-            //        data.Dispose();
-            //    }
-            //    else
-            //    {
-            //        //Reserved for return error string
-            //    }
-            //    res.Close();
-            //}
-            //catch (Exception ex)
-            //{
-            //    //Handle error from sql execution
-            //    return ex.Message;
-            //}
-            //finally
-            //{
-            //    //Whether it success or not it must close connection in order to end block
-            //    d.SQLDisconnect();
-            //}
-            //if (result.Count != 0)
-            //    return result;
-            //else
-                return null;
+            
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} END ", createtabletemp6, 
+               insertcmd);
+            try
+            {
+                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                if (res.HasRows)
+                {
+                    DataTable data = new DataTable();
+                    data.Load(res);
+                    foreach (DataRow item in data.Rows)
+                    {
+                        result.Add(new Admin_with_creator
+                        {
+                            timestamp = Convert.ToDateTime(item.ItemArray[data.Columns[FieldName.TIMESTAMP].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
+                            admin_creator_id = item.ItemArray[data.Columns[FieldName.ADMIN_CREATOR_ID].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ADMIN_CREATOR_ID].Ordinal]) : 0,
+                            creator_name = item.ItemArray[data.Columns["c_t_prename"].Ordinal].ToString() + item.ItemArray[data.Columns["c_t_name"].Ordinal].ToString(),
+                            t_name = item.ItemArray[data.Columns[FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[FieldName.T_NAME].Ordinal].ToString(),
+                            file_name_pic = item.ItemArray[data.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString(),
+                            email = item.ItemArray[data.Columns[FieldName.EMAIL].Ordinal].ToString(),
+                            username = item.ItemArray[data.Columns[FieldName.USERNAME].Ordinal].ToString(),
+                            user_type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString(),
+                            admin_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ADMIN_ID].Ordinal])
+                        });
+                    }
+                    data.Dispose();
+                }
+                else
+                {
+                    return "มีชื่อผู้ใช้งานนี้แล้วในระบบ";
+                }
+                res.Close();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return result;
         }
     }
 }

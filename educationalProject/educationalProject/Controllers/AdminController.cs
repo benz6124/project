@@ -34,7 +34,7 @@ namespace educationalProject.Controllers
                 password += chars[num[j]];
             }
             //=========================
-            string emaillower = null;
+            string emaillower = data["email"].ToString();
             emaillower = emaillower.ToLower();
             UsernamePassword u =  new UsernamePassword(emaillower, password);
 
