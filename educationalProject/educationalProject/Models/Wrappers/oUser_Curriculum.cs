@@ -21,9 +21,9 @@ namespace educationalProject.Models.Wrappers
             foreach (User_curriculum c in list)
             {
                 if (insertcmd.Length <= len)
-                    insertcmd += string.Format("('{0}','{1}')", c.user_id, c.curri_id);
+                    insertcmd += string.Format("({0},'{1}')", c.user_id, c.curri_id);
                 else
-                    insertcmd += string.Format(",('{0}','{1}')", c.user_id, c.curri_id);
+                    insertcmd += string.Format(",({0},'{1}')", c.user_id, c.curri_id);
             }
 
             string selectcmd = ViewModels.Wrappers.oPersonnel.GetSelectWithCurriculumCommand(list.First().curri_id);
@@ -40,7 +40,8 @@ namespace educationalProject.Models.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        if (Convert.ToInt32(item.ItemArray[data.Columns["user_type_num"].Ordinal]) == 1)
+                        string usrtype = item.ItemArray[data.Columns[Personnel.FieldName.USER_TYPE].Ordinal].ToString();
+                        if (usrtype == "อาจารย์")
                             result.Add(new User_curriculum_with_brief_detail
                             {
                                 user_id = Convert.ToInt32(item.ItemArray[data.Columns[Personnel.FieldName.USER_ID].Ordinal]),
@@ -48,7 +49,7 @@ namespace educationalProject.Models.Wrappers
                                          item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                                 file_name_pic = item.ItemArray[data.Columns[Personnel.FieldName.FILE_NAME_PIC].Ordinal].ToString(),
-                                type = item.ItemArray[data.Columns[Personnel.FieldName.USER_TYPE].Ordinal].ToString()
+                                type = usrtype
                             });
                         else
                             result.Add(new User_curriculum_with_brief_detail
@@ -58,7 +59,7 @@ namespace educationalProject.Models.Wrappers
                                      item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                                 file_name_pic = item.ItemArray[data.Columns[Personnel.FieldName.FILE_NAME_PIC].Ordinal].ToString(),
-                                type = item.ItemArray[data.Columns[Personnel.FieldName.USER_TYPE].Ordinal].ToString()
+                                type = usrtype
                             });
                     }
                     data.Dispose();
@@ -79,7 +80,6 @@ namespace educationalProject.Models.Wrappers
                 //Whether it success or not it must close connection in order to end block
                 d.SQLDisconnect();
             }
-
             return result;
         }
 
@@ -97,7 +97,7 @@ namespace educationalProject.Models.Wrappers
             string excludecond = "";
             foreach (User_curriculum c in list)
             {
-                excludecond += string.Format("and {0} != '{1}' ", FieldName.USER_ID, c.user_id);
+                excludecond += string.Format("and {0} != {1} ", FieldName.USER_ID, c.user_id);
             }
             deletecmd += excludecond;
 

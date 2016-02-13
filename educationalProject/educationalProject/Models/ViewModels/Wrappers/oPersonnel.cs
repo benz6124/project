@@ -14,103 +14,14 @@ namespace educationalProject.Models.ViewModels.Wrappers
 
         public static string GetSelectWithCurriculumCommand(string curri_id)
         {
-            string temp1tablename = "#temp1";
-
-            string createtabletemp1 = string.Format("create table {0} (" +
-                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                      "[{1}] INT NOT NULL," +
-                                      "[{2}] VARCHAR(16) NULL," +
-                                      "[{3}] VARCHAR(60) NULL," +
-
-                                      "[{4}] {7} NULL," +
-
-                                      "[{5}] {8} NULL," +
-
-                                      "[{6}] VARCHAR(40) NULL," +
-                                      "PRIMARY KEY([row_num])) " +
-
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {2} VARCHAR(16) COLLATE DATABASE_DEFAULT " +
-
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {3} VARCHAR(60) COLLATE DATABASE_DEFAULT " +
-
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {4} {7} COLLATE DATABASE_DEFAULT " +
-
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {5} {8} COLLATE DATABASE_DEFAULT " +
-
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {6} VARCHAR(40) COLLATE DATABASE_DEFAULT ",
-                                      temp1tablename, USER_ID,
-                                      Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, FieldName.CURRI_ID,
-                                      FieldName.FILE_NAME_PIC, FieldName.USER_TYPE,
-                                      DBFieldDataType.CURRI_ID_TYPE,DBFieldDataType.FILE_NAME_TYPE);
-
-            string insertintotemp1_1 = string.Format("INSERT INTO {0} " +
-                                       "select {1},{2},{3},{4},{5},{6} from ({7}) as t,{8} where " +
-                                       "{1} = {9} and {10} = '{11}' ",
-                                       temp1tablename, Teacher.FieldName.TEACHER_ID,
-                                       Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, FieldName.CURRI_ID,
-                                      FieldName.FILE_NAME_PIC, FieldName.USER_TYPE, oTeacher.getSelectTeacherByJoinCommand(),
-                                      User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID,
-                                      User_curriculum.FieldName.CURRI_ID, curri_id);
-
-
-            string insertintotemp1_2 = string.Format("INSERT INTO {0} " +
-                                       "select {1},{2},{3},{4},{5},{6} from ({7}) as ss,{8} where " +
-                                       "{1} = {9} and {10} = '{11}' ",
-                                       temp1tablename, Staff.FieldName.STAFF_ID,
-                                       Staff.FieldName.T_PRENAME, Staff.FieldName.T_NAME, FieldName.CURRI_ID,
-                                      FieldName.FILE_NAME_PIC, FieldName.USER_TYPE, oStaff.getSelectStaffByJoinCommand(),
-                                      User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID,
-                                      User_curriculum.FieldName.CURRI_ID, curri_id);
-
-            string insertintotemp1_3 = string.Format("INSERT INTO {0} " +
-                           "select {1},{2},{3},{8}.{10},{5},{6} from {7},{8} where " +
-                           "{1} = {9} and {8}.{10} = '{11}' ",
-                           temp1tablename, Student.FieldName.STUDENT_ID,
-                           Student.FieldName.T_PRENAME, Student.FieldName.T_NAME, FieldName.CURRI_ID,
-                          FieldName.FILE_NAME_PIC, FieldName.USER_TYPE, Student.FieldName.TABLE_NAME,
-                          User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID,
-                          User_curriculum.FieldName.CURRI_ID, curri_id);
-
-            string insertintotemp1_4 = string.Format("INSERT INTO {0} " +
-                           "select {1},{2},{3},{8}.{10},{5},{6} from {7},{8} where " +
-                           "{1} = {9} and {8}.{10} = '{11}' ",
-                           temp1tablename, Alumni.FieldName.STUDENT_ID,
-                           Alumni.FieldName.T_PRENAME, Alumni.FieldName.T_NAME, FieldName.CURRI_ID,
-                          FieldName.FILE_NAME_PIC, FieldName.USER_TYPE, Alumni.ExtraFieldName.TABLE_NAME,
-                          User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID,
-                          User_curriculum.FieldName.CURRI_ID, curri_id);
-
-            string insertintotemp1_5 = string.Format("INSERT INTO {0} " +
-                           "select {1},{2},{3},{4},{5},{6} from {7},{8} where " +
-                           "{1} = {9} and {10} = '{11}' ",
-                           temp1tablename, Company.FieldName.USERNAME,
-                           Company.FieldName.T_PRENAME, Company.FieldName.T_NAME, FieldName.CURRI_ID,
-                          FieldName.FILE_NAME_PIC, FieldName.USER_TYPE, Company.FieldName.TABLE_NAME,
-                          User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID,
-                          User_curriculum.FieldName.CURRI_ID, curri_id);
-
-            string insertintotemp1_6 = string.Format("INSERT INTO {0} " +
-                           "select {1},{2},{3},{4},{5},{6} from ({7}) as ass,{8} where " +
-                           "{1} = {9} and {10} = '{11}' ",
-                           temp1tablename, Assessor.FieldName.USERNAME,
-                           Assessor.FieldName.T_PRENAME, Assessor.FieldName.T_NAME, FieldName.CURRI_ID,
-                          FieldName.FILE_NAME_PIC, FieldName.USER_TYPE, oAssessor.getSelectAssessorByJoinCommand(),
-                          User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID,
-                          User_curriculum.FieldName.CURRI_ID, curri_id);
-
-            string selectcmd = string.Format("select {0},{1},{2},{3},{4},{5} from {6} ", USER_ID,
-                                      Staff.FieldName.T_PRENAME, Staff.FieldName.T_NAME, FieldName.CURRI_ID,
-                                      FieldName.FILE_NAME_PIC, FieldName.USER_TYPE, temp1tablename);
-
-
-            return string.Format("BEGIN {0} {1} {2} {3} {4} {5} {6} {7} END", createtabletemp1,
-                insertintotemp1_1, insertintotemp1_2,insertintotemp1_3,insertintotemp1_4,
-                insertintotemp1_5,insertintotemp1_6,selectcmd);
+            return string.Format("select {6}.{0},{1},{2},{3},{4},{5} from {6},{7} " +
+                          "where {8} = '{9}' " +
+                          "and {6}.{0} = {7}.{10} order by {5} ",
+                          User_list.FieldName.USER_ID, FieldName.T_PRENAME,
+                          FieldName.T_NAME, FieldName.CURRI_ID,
+                          FieldName.FILE_NAME_PIC, FieldName.USER_TYPE, User_list.FieldName.TABLE_NAME,
+                          User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.CURRI_ID,
+                          curri_id, User_curriculum.FieldName.USER_ID);
         }
         public object SelectPersonnelIdAndTName(string curri_id,int selectmode) 
             //selectmode 0 : only teacher and staff,1 for all
@@ -120,90 +31,28 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 return "Cannot connect to database.";
             List<Personnel_with_t_name> result = new List<Personnel_with_t_name>();
 
-            string temp1tablename = "#temp1";
-
-            string createtabletemp1 = string.Format("create table {0} (" +
-                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                      "[user_type] INT NOT NULL," +
-                                      "[{1}] INT NOT NULL," +
-                                      "[{2}] VARCHAR(16) NULL," +
-                                      "[{3}] VARCHAR(60) NULL," +
-                                      "PRIMARY KEY([row_num])) " +
-
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {2} VARCHAR(16) COLLATE DATABASE_DEFAULT " +
-
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {3} VARCHAR(60) COLLATE DATABASE_DEFAULT ",
-                                      temp1tablename,USER_ID,
-                                      Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME);
-
-            string insertintotemp1_1 = string.Format("INSERT INTO {0} " +
-                                       "select 1,{1},{2},{3} from ({4}) as {9} where " +
-                                       "exists(select * from {5} where {9}.{1} = {5}.{6} and {7}='{8}')",
-                                       temp1tablename, Teacher.FieldName.TEACHER_ID,
-                                      Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, oTeacher.getSelectTeacherByJoinCommand(),
-                                      User_curriculum.FieldName.TABLE_NAME,
-                                      User_curriculum.FieldName.USER_ID,
-                                      User_curriculum.FieldName.CURRI_ID, curri_id,Teacher.FieldName.ALIAS_NAME);
-
-            string insertintotemp1_2 = string.Format("INSERT INTO {0} " +
-                                       "select 2,{1},{2},{3} from ({4}) as {9} where " +
-                                       "exists(select * from {5} where {9}.{1} = {5}.{6} and {7}='{8}')",
-                                       temp1tablename, Staff.FieldName.STAFF_ID,
-                                      Staff.FieldName.T_PRENAME, Staff.FieldName.T_NAME, oStaff.getSelectStaffByJoinCommand(),
-                                      User_curriculum.FieldName.TABLE_NAME, 
-                                      User_curriculum.FieldName.USER_ID,
-                                      User_curriculum.FieldName.CURRI_ID, curri_id,Staff.FieldName.ALIAS_NAME);
-            string selectcmd = string.Format("select user_type,{0},{1},{2} from {3} ", USER_ID,
-                                      Staff.FieldName.T_PRENAME, Staff.FieldName.T_NAME, temp1tablename);
-            if (selectmode == 1)
+            if(selectmode == 0)
             {
-                string insertintotemp1_3 = string.Format("INSERT INTO {0} " +
-                           "select 2,{1},{2},{3} from {4} where " +
-                           "exists(select * from {5} where {4}.{1} = {5}.{6} and {7}='{8}')",
-                           temp1tablename, Student.FieldName.STUDENT_ID,
-                          Student.FieldName.T_PRENAME, Student.FieldName.T_NAME, Student.FieldName.TABLE_NAME,
-                          User_curriculum.FieldName.TABLE_NAME,
-                          User_curriculum.FieldName.USER_ID,
-                          User_curriculum.FieldName.CURRI_ID, curri_id);
-
-                string insertintotemp1_4 = string.Format("INSERT INTO {0} " +
-                          "select 2,{1},{2},{3} from {4} where " +
-                          "exists(select * from {5} where {4}.{1} = {5}.{6} and {7}='{8}')",
-                          temp1tablename, Alumni.FieldName.STUDENT_ID,
-                          Alumni.FieldName.T_PRENAME, Alumni.FieldName.T_NAME, Alumni.ExtraFieldName.TABLE_NAME,
-                          User_curriculum.FieldName.TABLE_NAME,
-                          User_curriculum.FieldName.USER_ID,
-                          User_curriculum.FieldName.CURRI_ID, curri_id);
-
-                string insertintotemp1_5 = string.Format("INSERT INTO {0} " +
-                          "select 2,{1},{2},{3} from {4} where " +
-                          "exists(select * from {5} where {4}.{1} = {5}.{6} and {7}='{8}')",
-                          temp1tablename, Company.FieldName.USERNAME,
-                          Company.FieldName.T_PRENAME, Company.FieldName.T_NAME, Company.FieldName.TABLE_NAME,
-                          User_curriculum.FieldName.TABLE_NAME,
-                          User_curriculum.FieldName.USER_ID,
-                          User_curriculum.FieldName.CURRI_ID, curri_id);
-
-                string insertintotemp1_6 = string.Format("INSERT INTO {0} " +
-                          "select 2,{1},{2},{3} from ({4}) as {9} where " +
-                          "exists(select * from {5} where {9}.{1} = {5}.{6} and {7}='{8}')",
-                          temp1tablename, Assessor.FieldName.USERNAME,
-                          Assessor.FieldName.T_PRENAME, Assessor.FieldName.T_NAME, oAssessor.getSelectAssessorByJoinCommand(),
-                          User_curriculum.FieldName.TABLE_NAME,
-                          User_curriculum.FieldName.USER_ID,
-                          User_curriculum.FieldName.CURRI_ID, curri_id,Assessor.FieldName.ALIAS_NAME);
-
-                d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} {5} {6} {7} END", createtabletemp1,
-                insertintotemp1_1, insertintotemp1_2,insertintotemp1_3,insertintotemp1_4,insertintotemp1_5,insertintotemp1_6, selectcmd);
+                d.iCommand.CommandText = string.Format("select {4}.{0},{1},{2},{3} from {4},{5} " +
+                                         "where {6} = '{7}' " +
+                                         "and {4}.{0} = {5}.{8} " +
+                                         "and ({3} = 'อาจารย์' or {3} = 'เจ้าหน้าที่') ",
+                                         FieldName.USER_ID, FieldName.T_PRENAME,
+                                         Student.FieldName.T_NAME, FieldName.USER_TYPE,
+                                         User_list.FieldName.TABLE_NAME, User_curriculum.FieldName.TABLE_NAME,
+                                         FieldName.CURRI_ID, curri_id, User_curriculum.FieldName.USER_ID);
             }
             else
             {
-                d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} END", createtabletemp1,
-                insertintotemp1_1, insertintotemp1_2, selectcmd);
+                d.iCommand.CommandText = string.Format("select {4}.{0},{1},{2},{3} from {4},{5} " +
+                                         "where {6} = '{7}' " +
+                                         "and {4}.{0} = {5}.{8} " ,
+                                         FieldName.USER_ID, FieldName.T_PRENAME,
+                                         Student.FieldName.T_NAME, FieldName.USER_TYPE,
+                                         User_list.FieldName.TABLE_NAME, User_curriculum.FieldName.TABLE_NAME,
+                                         FieldName.CURRI_ID, curri_id, User_curriculum.FieldName.USER_ID);
             }
-            
+
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -213,7 +62,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        if(Convert.ToInt32(item.ItemArray[data.Columns["user_type"].Ordinal]) == 1)
+                        if(item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString() == "อาจารย์")
                         result.Add(new Personnel_with_t_name
                         {
                             user_id = Convert.ToInt32(item.ItemArray[data.Columns[USER_ID].Ordinal]),
