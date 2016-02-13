@@ -26,15 +26,15 @@ namespace educationalProject.Controllers
             return Ok(result);
         }
 
-        //Retrieve curriculum_academic data by use Cu_curriculum
         [ActionName("getByCurriculum")]
         public IHttpActionResult PostByCurriculum(oCu_curriculum data)
         {
             if (data.curri_id == null) return BadRequest("กรุณาเลือกหลักสูตร");
-            object result = datacontext.SelectWhere(string.Format("curri_id='{0}'", data.curri_id));
+            datacontext.curri_id = data.curri_id;
+            object result = datacontext.SelectByCurriculum();
             return Ok(result);
         }
-      
+
         [ActionName("add")]
         public IHttpActionResult PostNewCurriculumAcademic(oCurriculum_academic data)
         {

@@ -82,13 +82,14 @@ namespace educationalProject.Models.Wrappers
             }
         }
 
-        public object SelectWhere(string wherecond)
+        public object SelectByCurriculum()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oCurriculum_academic> result = new List<oCurriculum_academic>();
-            d.iCommand.CommandText = string.Format("select * from {0} where {1}",FieldName.TABLE_NAME,wherecond);
+            d.iCommand.CommandText = string.Format("select * from {0} where {1} = {2}", FieldName.TABLE_NAME,FieldName.CURRI_ID,ParameterName.CURRI_ID);
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURRI_ID, curri_id));
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -132,8 +133,10 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
 
-            d.iCommand.CommandText = string.Format("insert into {0} values ('{1}',{2})",
-                FieldName.TABLE_NAME, curri_id, aca_year);
+            d.iCommand.CommandText = string.Format("insert into {0} values ({1},{2})",
+                FieldName.TABLE_NAME, ParameterName.CURRI_ID, ParameterName.ACA_YEAR);
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURRI_ID, curri_id));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.ACA_YEAR, aca_year));
             try
             {
                 int rowAffected = d.iCommand.ExecuteNonQuery();
