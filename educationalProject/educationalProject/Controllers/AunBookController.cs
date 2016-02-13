@@ -53,8 +53,7 @@ namespace educationalProject.Controllers
                 return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType,Request);
             }
 
-            //string savepath = HttpContext.Current.Server.MapPath("~/download/aunbook");
-            string savepath = "D:\\download\\aunbook\\";
+            string savepath = WebApiApplication.SERVERPATH + "download/aunbook";
             var result = new MultipartFormDataStreamProvider(savepath);
 
             try
@@ -81,8 +80,7 @@ namespace educationalProject.Controllers
 
                 if (resultfromdb == null)
                 {
-                    //string delpath = HttpContext.Current.Server.MapPath("~/");
-                    string delpath = "D:/";
+                    string delpath = WebApiApplication.SERVERPATH;
                     //Check whether file name property chenge? (Changes mean there is to-be delete file)
                     if (datacontext.file_name != oldfilename)
                     {

@@ -29,8 +29,7 @@ namespace educationalProject.Controllers
                 return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
             }
 
-            //string savepath = HttpContext.Current.Server.MapPath("~/temp");
-            string savepath = "D:\\temp\\";
+            string savepath = WebApiApplication.SERVERPATH + "temp";
             var result = new MultipartFormDataStreamProvider(savepath);
             List<UsernamePassword> userlist = new List<UsernamePassword>();
             List<string> curri_list = new List<string>();

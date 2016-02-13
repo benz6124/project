@@ -37,14 +37,11 @@ namespace educationalProject.Controllers
                 return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
             }
 
-            //string savepathmain = HttpContext.Current.Server.MapPath("~/download/minutes");
-            string savepathmain = "D:\\download\\minutes\\";
+            string savepathmain = WebApiApplication.SERVERPATH + "download/minutes";
+            string savepathsub = WebApiApplication.SERVERPATH + "myImages/minutes";
 
-            //string savepathsub = HttpContext.Current.Server.MapPath("~/myImages/minutes");
-            string savepathsub = "D:\\myImages\\minutes\\";
 
-            //string temppath = HttpContext.Current.Server.MapPath("~/temp");
-            string temppath = "D:\\temp\\";
+            string temppath = WebApiApplication.SERVERPATH + "temp";
             var result = new MultipartFormDataStreamProvider(temppath);
             Minutes_detail data = new Minutes_detail();
             try
@@ -112,8 +109,7 @@ namespace educationalProject.Controllers
             object result = datacontext.Delete(list);
             if (result.GetType().ToString() != "System.String")
             {
-                //string delpath = HttpContext.Current.Server.MapPath("~/");
-                string delpath = "D:/";
+                string delpath = WebApiApplication.SERVERPATH;
                 List<string> strlist = (List<string>)result;
                 //try catch foreach delete every file that targeted in strlist
                 try
@@ -140,14 +136,11 @@ namespace educationalProject.Controllers
                 return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
             }
 
-            //string savepathmain = HttpContext.Current.Server.MapPath("~/download/minutes");
-            string savepathmain = "D:\\download\\minutes\\";
+            string savepathmain = WebApiApplication.SERVERPATH + "download/minutes";
 
-            //string savepathsub = HttpContext.Current.Server.MapPath("~/myImages/minutes");
-            string savepathsub = "D:\\myImages\\minutes\\";
+            string savepathsub = WebApiApplication.SERVERPATH + "myImages/minutes";
 
-            //string temppath = HttpContext.Current.Server.MapPath("~/temp");
-            string temppath = "D:\\temp\\";
+            string temppath = WebApiApplication.SERVERPATH + "temp";
             var result = new MultipartFormDataStreamProvider(temppath);
             Minutes_detail data = new Minutes_detail();
             try
@@ -215,7 +208,7 @@ namespace educationalProject.Controllers
                 if (resultfromdb.GetType().ToString() != "System.String")
                 {
                     //string delpath = HttpContext.Current.Server.MapPath("~/");
-                    string delpath = "D:/";
+                    string delpath = WebApiApplication.SERVERPATH;
                     List<Minutes_pic> picture_delete_list = ((List<Minutes_detail>)resultfromdb).Last().pictures;
                     //try catch foreach delete every file that targeted in strlist
 

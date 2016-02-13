@@ -30,8 +30,7 @@ namespace educationalProject.Controllers
             object result = datacontext.Delete(list);
             if (result.GetType().ToString() != "System.String")
             {
-                //string delpath = HttpContext.Current.Server.MapPath("~/");
-                string delpath = "D:/";
+                string delpath = WebApiApplication.SERVERPATH;
                 List<string> strlist = (List<string>)result;
                 //try catch foreach delete every file that targeted in strlist
                 try
@@ -58,8 +57,7 @@ namespace educationalProject.Controllers
                 return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
             }
 
-            //string savepath = HttpContext.Current.Server.MapPath("~/myImages/gallery");
-            string savepath = "D:\\myImages\\gallery\\";
+            string savepath = WebApiApplication.SERVERPATH + "myImages/gallery";
             var result = new MultipartFormDataStreamProvider(savepath);
             Gallery_detail data = new Gallery_detail();
             try
@@ -116,8 +114,7 @@ namespace educationalProject.Controllers
                 return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
             }
 
-            //string savepath = HttpContext.Current.Server.MapPath("~/myImages/gallery");
-            string savepath = "D:\\myImages\\gallery\\";
+            string savepath = WebApiApplication.SERVERPATH + "myImages/gallery";
             var result = new MultipartFormDataStreamProvider(savepath);
             Gallery_detail data = new Gallery_detail();
             try
@@ -164,8 +161,7 @@ namespace educationalProject.Controllers
 
                 if (resultfromdb.GetType().ToString() != "System.String")
                 {
-                    //string delpath = HttpContext.Current.Server.MapPath("~/");
-                    string delpath = "D:/";
+                    string delpath = WebApiApplication.SERVERPATH;
                     List<Picture> picture_delete_list = ((List<Gallery_detail>)resultfromdb).Last().pictures;
                     //try catch foreach delete every file that targeted in strlist
                     

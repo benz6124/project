@@ -52,8 +52,7 @@ namespace educationalProject.Controllers
                 return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
             }
 
-            //string savepath = HttpContext.Current.Server.MapPath("~/download/evidence");
-            string savepath = "D:\\download\\evidence\\";
+            string savepath = WebApiApplication.SERVERPATH + "download/evidence";
             var result = new MultipartFormDataStreamProvider(savepath);
 
             try
@@ -99,8 +98,7 @@ namespace educationalProject.Controllers
                 return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
             }
 
-            //string savepath = HttpContext.Current.Server.MapPath("~/download/evidence");
-            string savepath = "D:\\download\\evidence\\";
+            string savepath = WebApiApplication.SERVERPATH + "download/evidence";
             var result = new MultipartFormDataStreamProvider(savepath);
 
             try
@@ -155,8 +153,7 @@ namespace educationalProject.Controllers
             object result = datacontext.Update(list);
             if (result.GetType().ToString() != "System.String")
             {
-                //string delpath = HttpContext.Current.Server.MapPath("~/");
-                string delpath = "D:/";
+                string delpath = WebApiApplication.SERVERPATH;
                 List<string> strlist = (List<string>)result;
                 //try catch foreach delete every file that targeted in strlist
                 try
@@ -187,8 +184,7 @@ namespace educationalProject.Controllers
                 return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
             }
 
-            //string savepath = HttpContext.Current.Server.MapPath("~/download/evidence");
-            string savepath = "D:\\download\\evidence\\";
+            string savepath = WebApiApplication.SERVERPATH + "download/evidence";
             var result = new MultipartFormDataStreamProvider(savepath);
 
             try
@@ -221,8 +217,7 @@ namespace educationalProject.Controllers
                 {
                     if (datacontext.file_name[0] == '0')
                     {
-                        //string delpath = HttpContext.Current.Server.MapPath("~/");
-                        string delpath = "D:/";
+                        string delpath = WebApiApplication.SERVERPATH;
                         //delete file that targeted (it has set via datacontext's file_name property  
                         if (datacontext.file_name != "")
                             if (File.Exists(string.Format("{0}{1}", delpath, datacontext.file_name.Substring(1))))

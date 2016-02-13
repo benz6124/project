@@ -29,8 +29,7 @@ namespace educationalProject.Controllers
                 return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
             }
 
-            //string savepath = HttpContext.Current.Server.MapPath("~/download/research");
-            string savepath = "D:\\download\\research\\";
+            string savepath = WebApiApplication.SERVERPATH + "download/research";
             var result = new MultipartFormDataStreamProvider(savepath);
             Research_detail data = new Research_detail();
             try
@@ -85,8 +84,7 @@ namespace educationalProject.Controllers
                 return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
             }
 
-            //string savepath = HttpContext.Current.Server.MapPath("~/download/research");
-            string savepath = "D:\\download\\research\\";
+            string savepath = WebApiApplication.SERVERPATH + "download/research";
             var result = new MultipartFormDataStreamProvider(savepath);
             Research_detail data = new Research_detail();
             try
@@ -132,8 +130,7 @@ namespace educationalProject.Controllers
                     //If the update has edited file : DELETE OLD FILE
                     if (result.FileData.Count != 0)
                     {
-                        //string delpath = HttpContext.Current.Server.MapPath("~/");
-                        string delpath = "D:/";
+                        string delpath = WebApiApplication.SERVERPATH;
                         //Check whether file exists!
                         if (File.Exists(string.Format("{0}{1}", delpath, datacontext.file_name)))
                             File.Delete(string.Format("{0}{1}", delpath, datacontext.file_name));
@@ -156,8 +153,7 @@ namespace educationalProject.Controllers
             object result = datacontext.Delete(list);
             if (result.GetType().ToString() != "System.String")
             {
-                //string delpath = HttpContext.Current.Server.MapPath("~/");
-                string delpath = "D:/";
+                string delpath = WebApiApplication.SERVERPATH;
                 List<string> strlist = (List<string>)result;
                 //try catch foreach delete every file that targeted in strlist
                 try

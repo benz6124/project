@@ -29,8 +29,7 @@ namespace educationalProject.Controllers
                 return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
             }
 
-            //string savepath = HttpContext.Current.Server.MapPath("~/download/othersevaluation/");
-            string savepath = "D:\\download\\othersevaluation\\";
+            string savepath = WebApiApplication.SERVERPATH + "download/othersevaluation";
             var result = new MultipartFormDataStreamProvider(savepath);
 
             try
@@ -82,8 +81,7 @@ namespace educationalProject.Controllers
                 {
                     if (result.FileData.Count > 0)
                     {
-                        //string delpath = HttpContext.Current.Server.MapPath("~/");
-                        string delpath = "D:/";
+                        string delpath = WebApiApplication.SERVERPATH;
                         //delete file that targeted (it has set via datacontext's [suggestion] property  
                         if (datacontext.suggestion != "")
                             if (File.Exists(string.Format("{0}{1}", delpath, datacontext.suggestion)))
