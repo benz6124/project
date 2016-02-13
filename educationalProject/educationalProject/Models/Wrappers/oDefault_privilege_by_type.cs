@@ -87,11 +87,10 @@ namespace educationalProject.Models.Wrappers
                             item.ItemArray[data.Columns[Title.FieldName.NAME].Ordinal].ToString() != "")
                             result.list.Add(new Default_privilege_by_type_with_name
                             {
-                                privilege = item.ItemArray[data.Columns[Title_privilege.FieldName.PRIVILEGE].Ordinal].ToString(),
+                                my_privilege = new Title_privilege(Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_CODE].Ordinal]), Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_PRIVILEGE_CODE].Ordinal]),
+                                item.ItemArray[data.Columns[Title_privilege.FieldName.PRIVILEGE].Ordinal].ToString()),
                                 name = item.ItemArray[data.Columns[Title.FieldName.NAME].Ordinal].ToString(),
-                                user_type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString(),
-                                title_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_CODE].Ordinal]),
-                                title_privilege_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_PRIVILEGE_CODE].Ordinal])
+                                user_type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString()
                             });
                         else
                             result.choices.Add(new Title_privilege (
@@ -128,7 +127,7 @@ namespace educationalProject.Models.Wrappers
                 return "Cannot connect to database.";
 
             string InsertOrUpdateCommand = "";
-            foreach (Default_privilege_by_type ditem in ddata.list)
+            foreach (Default_privilege_by_type_with_name ditem in ddata.list)
             {
                 InsertOrUpdateCommand += string.Format("IF NOT EXISTS(select * from {0} where {1} = '{2}' and {3} = {4}) " +
                                          "BEGIN " +
@@ -138,7 +137,7 @@ namespace educationalProject.Models.Wrappers
                                          "BEGIN " +
                                          "UPDATE {0} set {6} = '{5}' where {1} = '{2}' and {3} = '{4}' " +
                                          "END ", FieldName.TABLE_NAME, FieldName.USER_TYPE, ditem.user_type, 
-                                         FieldName.TITLE_CODE, ditem.title_code, ditem.title_privilege_code, FieldName.TITLE_PRIVILEGE_CODE);
+                                         FieldName.TITLE_CODE, ditem.my_privilege.title_code, ditem.my_privilege.title_privilege_code, FieldName.TITLE_PRIVILEGE_CODE);
             }
 
             d.iCommand.CommandText = InsertOrUpdateCommand;

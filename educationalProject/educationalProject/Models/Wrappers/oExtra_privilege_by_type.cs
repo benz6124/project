@@ -87,9 +87,6 @@ namespace educationalProject.Models.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        /*string s1 = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString();
-                        string s2 = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString();
-                        string s3 = item.ItemArray[data.Columns[Title.FieldName.NAME].Ordinal].ToString();*/
                         if (item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString() != "" &&
                             item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString() != "" &&
                             item.ItemArray[data.Columns[Title.FieldName.NAME].Ordinal].ToString() != "")
