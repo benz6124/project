@@ -13,14 +13,17 @@ namespace educationalProject.Models.Wrappers
         {
             if (!isUpdate)
             {
-                return string.Format("select {0}.*,{1}.{2},{1}.{15},{3},{4} " +
-                    "from {0},{1},({5}) as tt where {6} = '{7}' and {8} = {9} " +
-                    "and {0}.{10} = {1}.{11} and {12} = {13} order by {14} desc ",
-                    FieldName.TABLE_NAME, Picture.FieldName.TABLE_NAME, Picture.FieldName.FILE_NAME,
-                    Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, oTeacher.getSelectTeacherByJoinCommand(),
-                    FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year, FieldName.GALLERY_ID,
-                    Picture.FieldName.GALLERY_ID, Teacher.FieldName.TEACHER_ID, FieldName.PERSONNEL_ID,
-                    FieldName.DATE_CREATED, Picture.FieldName.CAPTION);
+                return string.Format("select {0}.*,{1},{2},{3},{4},{5} " +
+                                     "from {0},{6},{7} where {8} = '{9}' and {10} = {11} " +
+                                     "and {0}.{12} = {6}.{13} and {14} = {15} order by {16} desc ",
+                                     FieldName.TABLE_NAME, Picture.FieldName.FILE_NAME, Picture.FieldName.CAPTION,
+                                     User_list.FieldName.USER_TYPE, Personnel.FieldName.T_PRENAME,
+                                     Personnel.FieldName.T_NAME,
+                                     Picture.FieldName.TABLE_NAME, User_list.FieldName.TABLE_NAME,
+                                     FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year,
+                                     FieldName.GALLERY_ID, Picture.FieldName.GALLERY_ID,
+                                     User_list.FieldName.USER_ID, FieldName.PERSONNEL_ID,
+                                     FieldName.DATE_CREATED);
             }
 
             string temp1tablename = "#temp1";
@@ -31,48 +34,56 @@ namespace educationalProject.Models.Wrappers
                                       "[{2}] INT NULL," +
                                       "[{3}] VARCHAR(1000) NULL," +
                                       "[{4}] DATE NULL," +
-                                      "[{5}] {11} NULL," +
+                                      "[{5}] {12} NULL," +
                                       "[{6}] INT NULL," +
-                                      "[{7}] {12} NOT NULL," +
+                                      "[{7}] {13} NOT NULL," +
                                       "[{8}] VARCHAR(MAX) NULL," +
-                                      "[{9}] varchar(16) null," +
-                                      "[{10}] varchar(60) null," +
+                                      "[{9}] VARCHAR(40) NULL," +
+                                      "[{10}] varchar(16) null," +
+                                      "[{11}] varchar(60) null," +
                                       "PRIMARY KEY ([row_num])) " +
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN [{3}] VARCHAR(1000) COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN [{5}] {11} COLLATE DATABASE_DEFAULT " +
+                                      "ALTER COLUMN [{5}] {12} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN [{7}] {12} COLLATE DATABASE_DEFAULT " +
+                                      "ALTER COLUMN [{7}] {13} COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN [{8}] VARCHAR(MAX) COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN [{9}] varchar(16) COLLATE DATABASE_DEFAULT " +
+                                      "ALTER COLUMN [{9}] VARCHAR(40) COLLATE DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN [{10}] varchar(60) COLLATE DATABASE_DEFAULT "
+                                      "ALTER COLUMN [{10}] varchar(16) COLLATE DATABASE_DEFAULT " +
+
+                                      "ALTER TABLE {0} " +
+                                      "ALTER COLUMN [{11}] varchar(60) COLLATE DATABASE_DEFAULT "
                                       , temp5tablename, FieldName.GALLERY_ID, FieldName.PERSONNEL_ID, FieldName.NAME,
                                       FieldName.DATE_CREATED, FieldName.CURRI_ID, FieldName.ACA_YEAR,
                                       Picture.FieldName.FILE_NAME, Picture.FieldName.CAPTION,
+                                      User_list.FieldName.USER_TYPE,
                                       Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
                                       DBFieldDataType.CURRI_ID_TYPE,DBFieldDataType.FILE_NAME_TYPE);
 
-            string insertintotemp5_1 = string.Format("insert into {16} " +
-                                       "select {0}.*,{1}.{2},{1}.{15},{3},{4} " +
-                                       "from {0},{1},({5}) as tt where {6} = '{7}' and {8} = {9} " +
-                                       "and {0}.{10} = {1}.{11} and {12} = {13} order by {14} desc ",
-                                       FieldName.TABLE_NAME, Picture.FieldName.TABLE_NAME, Picture.FieldName.FILE_NAME,
-                                       Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, oTeacher.getSelectTeacherByJoinCommand(),
-                                       FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year, FieldName.GALLERY_ID,
-                                       Picture.FieldName.GALLERY_ID, Teacher.FieldName.TEACHER_ID, FieldName.PERSONNEL_ID,
-                                       FieldName.DATE_CREATED, Picture.FieldName.CAPTION,temp5tablename);
+            string insertintotemp5_1 = string.Format("insert into {17} " +
+                                     "select {0}.*,{1},{2},{3},{4},{5} " +
+                                     "from {0},{6},{7} where {8} = '{9}' and {10} = {11} " +
+                                     "and {0}.{12} = {6}.{13} and {14} = {15} order by {16} desc ",
+                                     FieldName.TABLE_NAME, Picture.FieldName.FILE_NAME, Picture.FieldName.CAPTION,
+                                     User_list.FieldName.USER_TYPE, Personnel.FieldName.T_PRENAME,
+                                     Personnel.FieldName.T_NAME,
+                                     Picture.FieldName.TABLE_NAME, User_list.FieldName.TABLE_NAME,
+                                     FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year,
+                                     FieldName.GALLERY_ID, Picture.FieldName.GALLERY_ID,
+                                     User_list.FieldName.USER_ID, FieldName.PERSONNEL_ID,
+                                     FieldName.DATE_CREATED,temp5tablename);
 
-            string insertintotemp5_2 = string.Format("insert into {0} select 0, null, null,null, null, null,{1}, null,null, null " +
+            string insertintotemp5_2 = string.Format("insert into {0} select 0, null, null,null, null, null,{1}, null,null,null, null " +
                                        "from {2} ", temp5tablename, Picture.FieldName.FILE_NAME, temp1tablename);
 
             string selectcmd = string.Format("select * from {0} ", temp5tablename);
@@ -97,14 +108,18 @@ namespace educationalProject.Models.Wrappers
                     foreach (DataRow item in data.Rows)
                     {
                         gallery_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.GALLERY_ID].Ordinal]);
-                        //If date is not null (means result is row with picture data)
                         if (result.FirstOrDefault(g => g.gallery_id == gallery_id) == null)
                         {
+                            string real_t_prename;
+                            if (item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString() == "อาจารย์")
+                                real_t_prename = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString());
+                            else
+                                real_t_prename = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString();
                             result.Add(new Gallery_detail
                             {
                                 aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
                                 personnel_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal]),
-                                t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
+                                t_name = real_t_prename + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                                 gallery_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.GALLERY_ID].Ordinal]),
                                 date_created = Convert.ToDateTime(item.ItemArray[data.Columns[FieldName.DATE_CREATED].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
@@ -280,18 +295,23 @@ namespace educationalProject.Models.Wrappers
                     foreach (DataRow item in data.Rows)
                     {
                         gallery_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.GALLERY_ID].Ordinal]);
-                        //If date is not null (means result is row with picture data)
                         if (result.FirstOrDefault(g => g.gallery_id == gallery_id) == null)
                         {
+                            string real_t_prename;
+                            if (item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString() == "อาจารย์")
+                                real_t_prename = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString());
+                            else
+                                real_t_prename = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString();
                             result.Add(new Gallery_detail
                             {
                                 aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
                                 personnel_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal]),
-                                t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
+                                t_name = real_t_prename + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                                 gallery_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.GALLERY_ID].Ordinal]),
                                 date_created = Convert.ToDateTime(item.ItemArray[data.Columns[FieldName.DATE_CREATED].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
-                                name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString()
+                                name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString(),
+                                pictures = new List<Picture>()
                             });
                         }
                         result.First(g => g.gallery_id == gallery_id).pictures.Add(new Picture
@@ -404,15 +424,21 @@ namespace educationalProject.Models.Wrappers
                             //If date is not null (means result is row with picture data)
                             if (result.FirstOrDefault(g => g.gallery_id == gallery_id) == null)
                             {
+                                string real_t_prename;
+                                if (item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString() == "อาจารย์")
+                                    real_t_prename = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString());
+                                else
+                                    real_t_prename = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString();
                                 result.Add(new Gallery_detail
                                 {
                                     aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
                                     personnel_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal]),
-                                    t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
+                                    t_name = real_t_prename + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
                                     curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                                     gallery_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.GALLERY_ID].Ordinal]),
                                     date_created = Convert.ToDateTime(item.ItemArray[data.Columns[FieldName.DATE_CREATED].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
-                                    name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString()
+                                    name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString(),
+                                    pictures = new List<Picture>()
                                 });
                             }
                             result.First(g => g.gallery_id == gallery_id).pictures.Add(new Picture
