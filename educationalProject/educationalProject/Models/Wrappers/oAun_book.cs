@@ -53,12 +53,17 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
-        public object SelectFileDownloadLink(string wherecond)
+        public object SelectFileDownloadLink()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            d.iCommand.CommandText = string.Format("select {0} from {1} where {2}", FieldName.FILE_NAME,FieldName.TABLE_NAME,wherecond);
+            d.iCommand.CommandText = string.Format("select {0} from {1} where {2} = {3} and {4} = {5}", 
+                                     FieldName.FILE_NAME,FieldName.TABLE_NAME,
+                                     FieldName.CURRI_ID,ParameterName.CURRI_ID,
+                                     FieldName.ACA_YEAR,ParameterName.ACA_YEAR);
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURRI_ID, curri_id));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.ACA_YEAR, aca_year));
             try
             {
                 object result = d.iCommand.ExecuteScalar();
@@ -90,17 +95,23 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
 
-            d.iCommand.CommandText = string.Format("IF NOT EXISTS (select * from {0} where {1}='{2}' and {3} = {4}) " +
+            d.iCommand.CommandText = string.Format("IF NOT EXISTS (select * from {0} where {1} = {2} and {3} = {4}) " +
                                        "BEGIN " +
                                        "INSERT INTO {0} VALUES " +
-                                       "('{2}', {4}, '{5}', {6}, '{7}') " +
+                                       "({2}, {4}, {5}, {6}, {7}) " +
                                        "END " +
                                        "ELSE " +
                                        "BEGIN " +
-                                       "UPDATE {0} SET {8} = '{5}',{9} = '{6}',{10} = '{7}' OUTPUT deleted.{8} where {1} = '{2}' and {3} = {4} " +
+                                       "UPDATE {0} SET {8} = {5},{9} = {6},{10} = {7} OUTPUT deleted.{8} where {1} = {2} and {3} = {4} " +
                                        "END",
-                    FieldName.TABLE_NAME, FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year, file_name, personnel_id, date, 
+                    FieldName.TABLE_NAME, FieldName.CURRI_ID, ParameterName.CURRI_ID, 
+                    FieldName.ACA_YEAR, ParameterName.ACA_YEAR, ParameterName.FILE_NAME, ParameterName.PERSONNEL_ID, ParameterName.DATE, 
                     FieldName.FILE_NAME, FieldName.PERSONNEL_ID, FieldName.DATE);
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.DATE, date));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.PERSONNEL_ID, personnel_id));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.FILE_NAME, file_name));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURRI_ID, curri_id));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.ACA_YEAR, aca_year));
             try
             {
                 object filenameres = d.iCommand.ExecuteScalar();

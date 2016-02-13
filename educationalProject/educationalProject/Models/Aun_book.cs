@@ -16,6 +16,14 @@ namespace educationalProject.Models
             public static readonly string ACA_YEAR = "ACA_YEAR";
             public static readonly string TABLE_NAME = "AUN_BOOK";
         }
+        protected struct ParameterName
+        {
+            public static readonly string FILE_NAME = "@" + FieldName.FILE_NAME;
+            public static readonly string PERSONNEL_ID = "@" + FieldName.PERSONNEL_ID;
+            public static readonly string DATE = "@" + FieldName.DATE;
+            public static readonly string CURRI_ID = "@" + FieldName.CURRI_ID;
+            public static readonly string ACA_YEAR = "@" + FieldName.ACA_YEAR;
+        }
         private string _file_name;
         private int _personnel_id;
         private string _date;

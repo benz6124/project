@@ -37,7 +37,9 @@ namespace educationalProject.Controllers
         public IHttpActionResult PostToQueryDownloadLinkByCurriculumAcademic(oCurriculum_academic data)
         {
             if (data.curri_id == null) return BadRequest();
-            object result = datacontext.SelectFileDownloadLink(string.Format("curri_id = '{0}' and aca_year = {1}", data.curri_id, data.aca_year));
+            datacontext.curri_id = data.curri_id;
+            datacontext.aca_year = data.aca_year;
+            object result = datacontext.SelectFileDownloadLink();
             if (result == null)
                 return Ok(datacontext.file_name);
             else if (result.ToString().Contains("notfound"))
@@ -93,7 +95,7 @@ namespace educationalProject.Controllers
                 else
                     return InternalServerError(new Exception(result.ToString()));
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 return InternalServerError(e);
             }
