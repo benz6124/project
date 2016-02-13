@@ -11,42 +11,15 @@ namespace educationalProject.Models.Wrappers
     {
         private string getSelectByCurriculumAcademicCommand()
         {
-            string temp4tablename = "#temp4";
-            string createtabletemp4 = string.Format("create table {0} (" +
-                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                      "[{1}] INT NOT NULL," +
-                                      "[{2}] VARCHAR(16) NULL," +
-                                      "[{3}] VARCHAR(60) NULL," +
-                                      "PRIMARY KEY([row_num])) " +
-
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {2} VARCHAR(16) COLLATE DATABASE_DEFAULT " +
-
-                                      "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {3} VARCHAR(60) COLLATE DATABASE_DEFAULT ",
-                                      temp4tablename, Lab_officer.FieldName.OFFICER,
-                                      Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME);
-
-            string insertintotemp4 = string.Format("insert into {0} " +
-                                     "select {1}, {2}, {3} from ({4}) as tt " +
-                                     "insert into {0} " +
-                                     "select {5}, {6}, {7} from ({8}) as ss ",
-                                     temp4tablename, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME,
-                                     Teacher.FieldName.T_NAME, oTeacher.getSelectTeacherByJoinCommand(),
-                                     Staff.FieldName.STAFF_ID, Staff.FieldName.T_PRENAME, Staff.FieldName.T_NAME,
-                                     oStaff.getSelectStaffByJoinCommand());
-
-            string selectcmd = string.Format("select {0}.*,pdata.{1}, {2}, {3} from " +
-                               "{0}, {4}," +
-                               "(select {1}, {2}, {3} from {5}) as pdata " +
-                               "where {0}.{6} = {4}.{7} and {4}.{1} = pdata.{1} " +
-                               "and {8} = '{9}' and {10} = {11} order by {12}, pdata.{1}",
-                               FieldName.TABLE_NAME, Lab_officer.FieldName.OFFICER,
-                               Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, Lab_officer.FieldName.TABLE_NAME,
-                               temp4tablename, FieldName.LAB_NUM, Lab_officer.FieldName.LAB_NUM,
-                               FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year,FieldName.NAME);
-
-            return string.Format("BEGIN {0} {1} {2} END", createtabletemp4, insertintotemp4, selectcmd);
+            return string.Format("select {0}.*,{1},{2},{3},{4} from {0},{5},{6} " +
+                                 "where {7} = '{8}' and {9} = {10} and " +
+                                 "{0}.{11} = {5}.{12} and {13} = {1} order by {14} ",
+                                 FieldName.TABLE_NAME,Lab_officer.FieldName.OFFICER,Personnel.FieldName.USER_TYPE,
+                                 Personnel.FieldName.T_PRENAME, Personnel.FieldName.T_NAME,
+                                 Lab_officer.FieldName.TABLE_NAME,User_list.FieldName.TABLE_NAME,
+                                 FieldName.CURRI_ID,curri_id,FieldName.ACA_YEAR,aca_year,
+                                 FieldName.LAB_NUM,Lab_officer.FieldName.LAB_NUM,Personnel.FieldName.USER_ID,
+                                 FieldName.NAME) ;
         }
         public object SelectByCurriculumAcademic()
         {
@@ -63,39 +36,30 @@ namespace educationalProject.Models.Wrappers
                 {
                     DataTable data = new DataTable();
                     data.Load(res);
-                    lab_num = -1;
-                    Lab_list_detail curr = null;
                     foreach (DataRow item in data.Rows)
                     {
-                        if (lab_num != Convert.ToInt32(item.ItemArray[data.Columns[FieldName.LAB_NUM].Ordinal]))
-                        {
-                            curr = new Lab_list_detail
+                        int labid = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.LAB_NUM].Ordinal]);
+                        if (result.FirstOrDefault(t => t.lab_num == labid) == null)
+                            result.Add(new Lab_list_detail
                             {
-                                curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
+                                lab_num = labid,
                                 aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
+                                curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                                 name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString(),
-                                room = item.ItemArray[data.Columns[FieldName.ROOM].Ordinal].ToString(),
-                                lab_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.LAB_NUM].Ordinal])
-                            };
-                            lab_num = curr.lab_num;
-                            result.Add(curr);
-                        }
-                            if(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString()[0] != 'k')
+                                room = item.ItemArray[data.Columns[FieldName.ROOM].Ordinal].ToString()
+                            });
+                        if (item.ItemArray[data.Columns[Personnel.FieldName.USER_TYPE].Ordinal].ToString() == "อาจารย์")
+                            result.First(t => t.lab_num == labid).officer.Add(new Personnel_with_t_name
                             {
-                                curr.officer.Add(new Personnel_with_t_name
-                                {
-                                    user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
-                                    t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
-                                });
-                            }
-                            else
+                                user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
+                                t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString()
+                            });
+                        else
+                            result.First(t => t.lab_num == labid).officer.Add(new Personnel_with_t_name
                             {
-                                curr.officer.Add(new Personnel_with_t_name
-                                {
-                                    user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
-                                    t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
-                                });
-                            }
+                                user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
+                                t_name = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString()
+                            });
                     }
                     data.Dispose();
                 }
@@ -134,7 +98,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format("{0} and ({1})", deleteprecmd, excludecond);
             try
             {
-                int rowAffected = d.iCommand.ExecuteNonQuery();
+                d.iCommand.ExecuteNonQuery();
                 return null;
             }
             catch (Exception ex)
@@ -169,7 +133,7 @@ namespace educationalProject.Models.Wrappers
 
             foreach (Personnel_with_t_name p in ldata.officer)
             {
-                    insertintolabofficer += string.Format("({0},'{1}')", ldata.lab_num, p.user_id);
+                    insertintolabofficer += string.Format("({0},{1})", ldata.lab_num, p.user_id);
                 if (p != ldata.officer.Last())
                     insertintolabofficer += ",";
             }
@@ -187,39 +151,30 @@ namespace educationalProject.Models.Wrappers
                 {
                     DataTable data = new DataTable();
                     data.Load(res);
-                    lab_num = -1;
-                    Lab_list_detail curr = null;
                     foreach (DataRow item in data.Rows)
                     {
-                        if (lab_num != Convert.ToInt32(item.ItemArray[data.Columns[FieldName.LAB_NUM].Ordinal]))
-                        {
-                            curr = new Lab_list_detail
+                        int labid = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.LAB_NUM].Ordinal]);
+                        if (result.FirstOrDefault(t => t.lab_num == labid) == null)
+                            result.Add(new Lab_list_detail
                             {
-                                curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
+                                lab_num = labid,
                                 aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
+                                curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                                 name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString(),
-                                room = item.ItemArray[data.Columns[FieldName.ROOM].Ordinal].ToString(),
-                                lab_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.LAB_NUM].Ordinal])
-                            };
-                            lab_num = curr.lab_num;
-                            result.Add(curr);
-                        }
-                        if (item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString()[0] != 'k')
-                        {
-                            curr.officer.Add(new Personnel_with_t_name
+                                room = item.ItemArray[data.Columns[FieldName.ROOM].Ordinal].ToString()
+                            });
+                        if (item.ItemArray[data.Columns[Personnel.FieldName.USER_TYPE].Ordinal].ToString() == "อาจารย์")
+                            result.First(t => t.lab_num == labid).officer.Add(new Personnel_with_t_name
                             {
                                 user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
-                                t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
+                                t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString()
                             });
-                        }
                         else
-                        {
-                            curr.officer.Add(new Personnel_with_t_name
+                            result.First(t => t.lab_num == labid).officer.Add(new Personnel_with_t_name
                             {
                                 user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
-                                t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
+                                t_name = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString()
                             });
-                        }
                     }
                     data.Dispose();
                 }
@@ -272,7 +227,7 @@ namespace educationalProject.Models.Wrappers
 
             foreach (Personnel_with_t_name p in ldata.officer)
             {
-                    insertintotemp2 += string.Format(",('{0}')", p.user_id);
+                    insertintotemp2 += string.Format(",({0})", p.user_id);
             }
 
             string insertintolabofficer = string.Format(" INSERT INTO {0} " +
@@ -295,39 +250,30 @@ namespace educationalProject.Models.Wrappers
                 {
                     DataTable data = new DataTable();
                     data.Load(res);
-                    lab_num = -1;
-                    Lab_list_detail curr = null;
                     foreach (DataRow item in data.Rows)
                     {
-                        if (lab_num != Convert.ToInt32(item.ItemArray[data.Columns[FieldName.LAB_NUM].Ordinal]))
-                        {
-                            curr = new Lab_list_detail
+                        int labid = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.LAB_NUM].Ordinal]);
+                        if (result.FirstOrDefault(t => t.lab_num == labid) == null)
+                            result.Add(new Lab_list_detail
                             {
-                                curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
+                                lab_num = labid,
                                 aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
+                                curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                                 name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString(),
-                                room = item.ItemArray[data.Columns[FieldName.ROOM].Ordinal].ToString(),
-                                lab_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.LAB_NUM].Ordinal])
-                            };
-                            lab_num = curr.lab_num;
-                            result.Add(curr);
-                        }
-                        if (item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal].ToString()[0] != 'k')
-                        {
-                            curr.officer.Add(new Personnel_with_t_name
+                                room = item.ItemArray[data.Columns[FieldName.ROOM].Ordinal].ToString()
+                            });
+                        if (item.ItemArray[data.Columns[Personnel.FieldName.USER_TYPE].Ordinal].ToString() == "อาจารย์")
+                            result.First(t => t.lab_num == labid).officer.Add(new Personnel_with_t_name
                             {
                                 user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
-                                t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
+                                t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString()
                             });
-                        }
                         else
-                        {
-                            curr.officer.Add(new Personnel_with_t_name
+                            result.First(t => t.lab_num == labid).officer.Add(new Personnel_with_t_name
                             {
                                 user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
-                                t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
+                                t_name = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString()
                             });
-                        }
                     }
                     data.Dispose();
                 }

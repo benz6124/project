@@ -234,12 +234,9 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<Evidence_with_t_name> result = new List<Evidence_with_t_name>();
-            d.iCommand.CommandText = string.Format("select e.*,{10}.{8},{10}.{9} from (select * from {0} " +
-                "where {1} = '{2}' and {3} = {4}) as e inner join ({5}) as {10} on e.{6} = {10}.{7}",
+            d.iCommand.CommandText = string.Format("select * from {0} where {1} = '{2}' and {3} = {4}",
                 FieldName.TABLE_NAME, FieldName.CURRI_ID,
-                curri_id, FieldName.ACA_YEAR, aca_year, oTeacher.getSelectTeacherByJoinCommand(),
-                FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME
-                );
+                curri_id, FieldName.ACA_YEAR, aca_year);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
@@ -257,12 +254,10 @@ namespace educationalProject.Models.Wrappers
                             evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
                             file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
                             secret = Convert.ToChar(item.ItemArray[data.Columns[FieldName.SECRET].Ordinal]),
-                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
                             //DANGER NULLABLE ZONE
                             primary_evidence_num = item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]) : 0,
                             evidence_real_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal]),
-                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
-                            t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
+                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal])
                         });
                     }
                     data.Dispose();

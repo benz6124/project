@@ -25,6 +25,7 @@ namespace educationalProject.Models
         private int _grad_year;
         private string _college;
         private int _education_id;
+
         public int education_id { get { return _education_id; } set { _education_id = value; } }
         public int personnel_id { get { return _personnel_id; } set { _personnel_id = value; } }
         public char degree { get { return _degree; } set { _degree = value; } }
