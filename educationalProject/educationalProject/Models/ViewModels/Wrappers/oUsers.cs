@@ -957,6 +957,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
 
             string createtabletemp5 = string.Format("CREATE TABLE {0}(" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
+                                      "[privilege_type] INT NULL," +
                                       "[{1}] INT NULL," +
                                       "[{2}] {5} NULL," +
                                       "[{3}] INT NULL," +
@@ -972,12 +973,12 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                       DBFieldDataType.CURRI_ID_TYPE);
 
             string insertintotemp5_1 = string.Format("insert into {0} " +
-                                       "select * from {1} where {2} = {3} ",
+                                       "select 1,* from {1} where {2} = {3} ",
                                        temp5tablename, Extra_privilege.FieldName.TABLE_NAME,
                                        Extra_privilege.FieldName.PERSONNEL_ID, userdata.user_id);
 
             string insertintotemp5_2 = string.Format("insert into {0} " +
-                                       "select {1}, {2}, {3}, {4} from {5} where {6} = '{7}' " +
+                                       "select 1,{1}, {2}, {3}, {4} from {5} where {6} = '{7}' " +
                                        "and {2} in (select {8} from {9} where {10} = {1}) " +
                                        "and not exists(select * from {11} where {12} = {1} " +
                                        "and {11}.{13} = {5}.{2} and {11}.{14} = {5}.{3}) ",
@@ -991,7 +992,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                        Extra_privilege.FieldName.TITLE_CODE);
 
             string insertintotemp5_3 = string.Format("insert into {0} " +
-                                       "select {1},{2},{3},{4} from {5}," +
+                                       "select 1,{1},{2},{3},{4} from {5}," +
                                        "(select {2} from {6} where {7} = {1}) as usrcurri " +
                                        "where {8} = '{9}' " +
                                        "and not exists(select * from {0} where " +
@@ -1002,11 +1003,39 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                        Default_privilege_by_type.FieldName.USER_TYPE, userdata.user_type,
                                        Extra_privilege.FieldName.CURRI_ID,
                                        Extra_privilege.FieldName.TITLE_CODE);
+            string insertintotemp5_4 = string.Format("insert into {0} " +
+                                       "select 2, {1}, {2}, {3}, {4} " +
+                                       "from {5} where {6} = 'กรรมการหลักสูตร' " +
+                                       "and {2} in (select distinct {7} from {8} where {9} = {1}) ",
+                                       temp5tablename, userdata.user_id, Extra_privilege_by_type.FieldName.CURRI_ID,
+                                       Extra_privilege_by_type.FieldName.TITLE_CODE, Extra_privilege_by_type.FieldName.TITLE_PRIVILEGE_CODE,
+                                       Extra_privilege_by_type.FieldName.TABLE_NAME,
+                                       Extra_privilege_by_type.FieldName.USER_TYPE,
+                                       Committee.FieldName.CURRI_ID, Committee.FieldName.TABLE_NAME, Committee.FieldName.TEACHER_ID);
 
+            string insertintotemp5_5 = string.Format("insert into {0} " +
+                                       "select 2, {1}, {2}, {3}, {4} " +
+                                       "from (select distinct {2} from {5} where {6} = {1}) as committeeres, {7} " +
+                                       "where {8} = 'กรรมการหลักสูตร' " +
+                                       "and not exists(select * from {9} " +
+                                       "where {10} = 'กรรมการหลักสูตร' and {9}.{11} = committeeres.{2} " +
+                                       "and {9}.{12} = {7}.{13}) ",
+                                       temp5tablename, userdata.user_id, Committee.FieldName.CURRI_ID,
+                                       Default_privilege_by_type.FieldName.TITLE_CODE,
+                                       Default_privilege_by_type.FieldName.TITLE_PRIVILEGE_CODE,
+                                       Committee.FieldName.TABLE_NAME, Committee.FieldName.TEACHER_ID,
+                                       Default_privilege_by_type.FieldName.TABLE_NAME,
+                                       Default_privilege_by_type.FieldName.USER_TYPE,
+                                       Extra_privilege_by_type.FieldName.TABLE_NAME,
+                                       Extra_privilege_by_type.FieldName.USER_TYPE,
+                                       Extra_privilege_by_type.FieldName.CURRI_ID,
+                                       Extra_privilege_by_type.FieldName.TITLE_CODE,
+                                       Default_privilege_by_type.FieldName.TITLE_CODE);
+            
             string selectcmd = string.Format("select * from {0} order by {1},{2} ", temp5tablename, Extra_privilege.FieldName.CURRI_ID, Extra_privilege.FieldName.TITLE_CODE);
 
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} END", createtabletemp5, insertintotemp5_1,
-                insertintotemp5_2, insertintotemp5_3, selectcmd);
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} {5} {6} END", createtabletemp5, insertintotemp5_1,
+                insertintotemp5_2, insertintotemp5_3,insertintotemp5_4,insertintotemp5_5, selectcmd);
 
             try
             {
@@ -1018,12 +1047,31 @@ namespace educationalProject.Models.ViewModels.Wrappers
                     foreach (DataRow item in data.Rows)
                     {
                         string curri_id = item.ItemArray[data.Columns[User_curriculum.FieldName.CURRI_ID].Ordinal].ToString();
-                        if (!userdata.privilege.ContainsKey(curri_id))
-                        {
 
-                            userdata.privilege.Add(curri_id, new Dictionary<int, int>());
+                        
+                        if (Convert.ToInt32(item.ItemArray[data.Columns["privilege_type"].Ordinal]) == 1)
+                        {
+                            //Add normal privilege
+                            if (!userdata.privilege.ContainsKey(curri_id))
+                            {
+
+                                userdata.privilege.Add(curri_id, new Dictionary<int, int>());
+                            }
+                            userdata.privilege[curri_id][Convert.ToInt32(item.ItemArray[data.Columns[Extra_privilege.FieldName.TITLE_CODE].Ordinal])] = Convert.ToInt32(item.ItemArray[data.Columns[Extra_privilege.FieldName.TITLE_PRIVILEGE_CODE].Ordinal]);
                         }
-                        userdata.privilege[curri_id][Convert.ToInt32(item.ItemArray[data.Columns[Extra_privilege.FieldName.TITLE_CODE].Ordinal])] = Convert.ToInt32(item.ItemArray[data.Columns[Extra_privilege.FieldName.TITLE_PRIVILEGE_CODE].Ordinal]);
+                        else
+                        {
+                            //Add committee privilege
+                            if (userdata.committee_privilege == null)
+                                userdata.committee_privilege = new Dictionary<string, Dictionary<int, int>>();
+                            if (!userdata.committee_privilege.ContainsKey(curri_id))
+                            {
+
+                                userdata.committee_privilege.Add(curri_id, new Dictionary<int, int>());
+                            }
+                            userdata.committee_privilege[curri_id][Convert.ToInt32(item.ItemArray[data.Columns[Extra_privilege.FieldName.TITLE_CODE].Ordinal])] = Convert.ToInt32(item.ItemArray[data.Columns[Extra_privilege.FieldName.TITLE_PRIVILEGE_CODE].Ordinal]);
+                        }
+
                     }
                     data.Dispose();
                 }
