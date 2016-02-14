@@ -13,6 +13,7 @@ namespace educationalProject.Models.ViewModels
 
         private Dictionary<string, Dictionary<int, int>> _privilege;
         private Dictionary<string, List<int>> _president_in;
+        private Dictionary<string, List<int>> _committee_in;
         private List<string> _curri_id_in;
         public int user_id { get { return _user_id; } set { _user_id = value; } }
         public string username { get { return _username; } set { _username = value; } }
@@ -23,12 +24,16 @@ namespace educationalProject.Models.ViewModels
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public Dictionary<string, List<int>> president_in { get { return _president_in; } set { _president_in = value; } }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public Dictionary<string, List<int>> committee_in { get { return _committee_in; } set { _committee_in = value; } }
         public User_information_with_privilege_information()
         {
             information = new User_information();
             privilege = new Dictionary<string, Dictionary<int, int>>();
             curri_id_in = new List<string>();
             president_in = null;
+            committee_in = null;
         }
     }
 }

@@ -26,11 +26,14 @@ namespace educationalProject.Models.ViewModels.Wrappers
             "[{8}] VARCHAR(60) NULL," +
             "[{9}] CHAR(13) NULL," +
             "[{10}] CHAR NULL," +
-            "[{11}] VARCHAR(60) NULL," +
-            "[{12}] VARCHAR(20) NULL," +
-            "[{13}] VARCHAR(80) NULL," +
+            
+            "[{11}] VARCHAR(1000) NULL," +
+            "[{12}] VARCHAR(1000) NULL," +
+            "[{13}] VARCHAR(1000) NULL," +
             "[{14}] {29} NULL," +
+            
             "[{15}] DATETIME2 NULL," +
+
             "[{16}] VARCHAR(40) NULL," +
             "[{17}] CHAR NULL," +
             "[{18}] CHAR NULL," +
@@ -75,13 +78,13 @@ namespace educationalProject.Models.ViewModels.Wrappers
             "alter column [{10}] CHAR collate database_default " +
 
             "alter table {0} " +
-            "alter column [{11}] VARCHAR(60) collate database_default " +
+            "alter column [{11}] VARCHAR(1000) collate database_default " +
 
             "alter table {0} " +
-            "alter column [{12}] VARCHAR(20) collate database_default " +
+            "alter column [{12}] VARCHAR(1000) collate database_default " +
 
             "alter table {0} " +
-            "alter column [{13}] VARCHAR(80) collate database_default " +
+            "alter column [{13}] VARCHAR(1000) collate database_default " +
 
             "alter table {0} " +
             "alter column [{14}] {29} collate database_default " +
@@ -146,28 +149,41 @@ namespace educationalProject.Models.ViewModels.Wrappers
             User_list.FieldName.USER_ID, Educational_teacher_staff.FieldName.PERSONNEL_ID,
             Educational_teacher_staff.FieldName.TABLE_NAME);
 
-
-            string insertintotemp99_2 = string.Format("insert into {0}({1}) " +
-            "select {2} from (select max({3}) as {3} from {0}) as tid,{4} where {3} = {5} ",
-            temp99tablename, Teacher.FieldName.USERNAME, User_curriculum.FieldName.CURRI_ID,
-            Teacher.FieldName.TEACHER_ID, User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID);
-
-            string insertintotemp99_3 = string.Format("insert into {0}({1},{2}) " +
-                "select {3},{4} from {5} where {6} in (select {7} from {8} where {9} = '{10}') ",
-                temp99tablename, Educational_teacher_staff.FieldName.MAJOR, Educational_teacher_staff.FieldName.GRAD_YEAR,
+            //User_id = -1 => retrieve curri_in
+            string insertintotemp99_2 = string.Format("insert into {0}({1},{2}) " +
+            "select -1,{3} from (select max({1}) as {1} from {0}) as tid,{4} " +
+            "where {1} = {5} ",
+            temp99tablename, Teacher.FieldName.TEACHER_ID, Personnel.FieldName.EMAIL,
+            User_curriculum.FieldName.CURRI_ID,User_curriculum.FieldName.TABLE_NAME,
+            User_list.FieldName.USER_ID
+            );
+            
+            //User_id = -2 => retrieve president_in
+            string insertintotemp99_3 = string.Format("insert into {0}({1},{2},{3}) " +
+                "select -2,{4},{5} from (select max({1}) as {1} from {0}) as tid,{6} " +
+                "where tid.{1} = {6}.{7} ",
+                temp99tablename, Teacher.FieldName.TEACHER_ID, Personnel.FieldName.EMAIL, Personnel.FieldName.TEL,
                 President_curriculum.FieldName.CURRI_ID,President_curriculum.FieldName.ACA_YEAR,
-                President_curriculum.FieldName.TABLE_NAME,President_curriculum.FieldName.TEACHER_ID,
-                User_list.FieldName.USER_ID,User_list.FieldName.TABLE_NAME,Teacher.FieldName.USERNAME,
-                username);
-            string insertintotemp99_4 = string.Format("insert into {0}({1}) " +
-                "select {2} from {3} where {4} in (select {5} from {6} where {7} = '{8}') ",
-                temp99tablename, Educational_teacher_staff.FieldName.COLLEGE, Technical_interested.FieldName.TOPIC_INTERESTED,
-                Technical_interested.FieldName.TABLE_NAME, Technical_interested.FieldName.TEACHER_ID,
-                User_list.FieldName.USER_ID, User_list.FieldName.TABLE_NAME, Teacher.FieldName.USERNAME, username);
+                President_curriculum.FieldName.TABLE_NAME,President_curriculum.FieldName.TEACHER_ID);
 
-string selectcmd = string.Format("select * from {0} ", temp99tablename);
+            //User_id = -3 => retrieve topic_interested
+            string insertintotemp99_4 = string.Format("insert into {0}({1},{2}) " +
+                "select -3,{3} from (select max({1}) as {1} from {0}) as tid,{4} " +
+                "where tid.{1} = {4}.{5} ",
+                temp99tablename, Teacher.FieldName.TEACHER_ID, Personnel.FieldName.EMAIL, Technical_interested.FieldName.TOPIC_INTERESTED,
+                Technical_interested.FieldName.TABLE_NAME, Technical_interested.FieldName.TEACHER_ID);
 
-            return string.Format(" BEGIN {0} {1} {2} {3} {4} {5} END ", createtabletemp99, insertintotemp99_1, insertintotemp99_2,insertintotemp99_3,insertintotemp99_4, selectcmd);
+            //User_id = -4 => retrieve committee_in
+            string insertintotemp99_5 = string.Format("insert into {0}({1},{2},{3}) " +
+                "select -4,{4},{5} from (select max({1}) as {1} from {0}) as tid,{6} " +
+                "where tid.{1} = {6}.{7} ",
+                temp99tablename, Teacher.FieldName.TEACHER_ID, Personnel.FieldName.EMAIL, Personnel.FieldName.TEL,
+                Committee.FieldName.CURRI_ID, Committee.FieldName.ACA_YEAR,
+                Committee.FieldName.TABLE_NAME, Committee.FieldName.TEACHER_ID);
+
+            string selectcmd = string.Format("select * from {0} ", temp99tablename);
+
+            return string.Format(" BEGIN {0} {1} {2} {3} {4} {5} {6} END ", createtabletemp99, insertintotemp99_1, insertintotemp99_2,insertintotemp99_3,insertintotemp99_4,insertintotemp99_5, selectcmd);
         }
 
         private string getSelectStaffWithCurriculumCommand()
@@ -185,9 +201,9 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
             "[{8}] VARCHAR(60) NULL," +
             "[{9}] CHAR(13) NULL," +
             "[{10}] CHAR NULL," +
-            "[{11}] VARCHAR(60) NULL," +
-            "[{12}] VARCHAR(20) NULL," +
-            "[{13}] VARCHAR(80) NULL," +
+            "[{11}] VARCHAR(1000) NULL," +
+            "[{12}] VARCHAR(1000) NULL," +
+            "[{13}] VARCHAR(1000) NULL," +
             "[{14}] {23} NULL," +
             "[{15}] DATETIME2 NULL," +
       
@@ -229,13 +245,13 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
             "alter column [{10}] CHAR collate database_default " +
 
             "alter table {0} " +
-            "alter column [{11}] VARCHAR(60) collate database_default " +
+            "alter column [{11}] VARCHAR(1000) collate database_default " +
 
             "alter table {0} " +
-            "alter column [{12}] VARCHAR(20) collate database_default " +
+            "alter column [{12}] VARCHAR(1000) collate database_default " +
 
             "alter table {0} " +
-            "alter column [{13}] VARCHAR(80) collate database_default " +
+            "alter column [{13}] VARCHAR(1000) collate database_default " +
 
             "alter table {0} " +
             "alter column [{14}] {23} collate database_default " +
@@ -285,10 +301,14 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
             Educational_teacher_staff.FieldName.TABLE_NAME);
 
 
-            string insertintotemp99_2 = string.Format("insert into {0}({1}) " +
-            "select {2} from (select max({3}) as {3} from {0}) as tid,{4} where {3} = {5} ",
-            temp99tablename, Staff.FieldName.USERNAME, User_curriculum.FieldName.CURRI_ID,
-            Staff.FieldName.STAFF_ID, User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID);
+            //User_id = -1 => retrieve curri_in
+            string insertintotemp99_2 = string.Format("insert into {0}({1},{2}) " +
+            "select -1,{3} from (select max({1}) as {1} from {0}) as tid,{4} " +
+            "where {1} = {5} ",
+            temp99tablename, Staff.FieldName.STAFF_ID, Personnel.FieldName.EMAIL,
+            User_curriculum.FieldName.CURRI_ID, User_curriculum.FieldName.TABLE_NAME,
+            User_list.FieldName.USER_ID
+            );
 
             string selectcmd = string.Format("select * from {0} ", temp99tablename);
 
@@ -310,9 +330,9 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
             "[{8}] VARCHAR(60) NULL," +
             "[{9}] CHAR(13) NULL," +
             "[{10}] CHAR NULL," +
-            "[{11}] VARCHAR(60) NULL," +
-            "[{12}] VARCHAR(20) NULL," +
-            "[{13}] VARCHAR(80) NULL," +
+            "[{11}] VARCHAR(1000) NULL," +
+            "[{12}] VARCHAR(1000) NULL," +
+            "[{13}] VARCHAR(1000) NULL," +
             "[{14}] {18} NULL," +
             "[{15}] DATETIME2 NULL," +
 
@@ -348,13 +368,13 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
             "alter column [{10}] CHAR collate database_default " +
 
             "alter table {0} " +
-            "alter column [{11}] VARCHAR(60) collate database_default " +
+            "alter column [{11}] VARCHAR(1000) collate database_default " +
 
             "alter table {0} " +
-            "alter column [{12}] VARCHAR(20) collate database_default " +
+            "alter column [{12}] VARCHAR(1000) collate database_default " +
 
             "alter table {0} " +
-            "alter column [{13}] VARCHAR(80) collate database_default " +
+            "alter column [{13}] VARCHAR(1000) collate database_default " +
 
             "alter table {0} " +
             "alter column [{14}] {18} collate database_default ",
@@ -371,10 +391,14 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
             string insertintotemp99_1 = insertintotemp99falsecase;
 
 
-            string insertintotemp99_2 = string.Format("insert into {0}({1}) " +
-            "select {2} from (select max({3}) as {3} from {0}) as tid,{4} where {3} = {5} ",
-            temp99tablename, Assessor.FieldName.USERNAME, User_curriculum.FieldName.CURRI_ID,
-            Assessor.FieldName.ASSESSOR_ID, User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID);
+            //User_id = -1 => retrieve curri_in
+            string insertintotemp99_2 = string.Format("insert into {0}({1},{2}) " +
+            "select -1,{3} from (select max({1}) as {1} from {0}) as tid,{4} " +
+            "where {1} = {5} ",
+            temp99tablename, Assessor.FieldName.ASSESSOR_ID, Personnel.FieldName.EMAIL,
+            User_curriculum.FieldName.CURRI_ID, User_curriculum.FieldName.TABLE_NAME,
+            User_list.FieldName.USER_ID
+            );
 
             string selectcmd = string.Format("select * from {0} ", temp99tablename);
 
@@ -395,9 +419,9 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
             "[{8}] VARCHAR(60) NULL," +
             "[{9}] CHAR(13) NULL," +
             "[{10}] CHAR NULL," +
-            "[{11}] VARCHAR(60) NULL," +
-            "[{12}] VARCHAR(20) NULL," +
-            "[{13}] VARCHAR(80) NULL," +
+            "[{11}] VARCHAR(1000) NULL," +
+            "[{12}] VARCHAR(1000) NULL," +
+            "[{13}] VARCHAR(1000) NULL," +
             "[{14}] {19} NULL," +
             "[{15}] DATETIME2 NULL," +
 
@@ -433,13 +457,13 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
             "alter column [{10}] CHAR collate database_default " +
 
             "alter table {0} " +
-            "alter column [{11}] VARCHAR(60) collate database_default " +
+            "alter column [{11}] VARCHAR(1000) collate database_default " +
 
             "alter table {0} " +
-            "alter column [{12}] VARCHAR(20) collate database_default " +
+            "alter column [{12}] VARCHAR(1000) collate database_default " +
 
             "alter table {0} " +
-            "alter column [{13}] VARCHAR(80) collate database_default " +
+            "alter column [{13}] VARCHAR(1000) collate database_default " +
 
             "alter table {0} " +
             "alter column [{14}] {19} collate database_default " +
@@ -458,10 +482,14 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
             string insertintotemp99_1 = insertintotemp99falsecase;
 
 
-            string insertintotemp99_2 = string.Format("insert into {0}({1}) " +
-            "select {2} from (select max({3}) as {3} from {0}) as tid,{4} where {3} = {5} ",
-            temp99tablename, Company.FieldName.USERNAME, User_curriculum.FieldName.CURRI_ID,
-            Company.FieldName.COMPANY_ID, User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID);
+            //User_id = -1 => retrieve curri_in
+            string insertintotemp99_2 = string.Format("insert into {0}({1},{2}) " +
+            "select -1,{3} from (select max({1}) as {1} from {0}) as tid,{4} " +
+            "where {1} = {5} ",
+            temp99tablename, Company.FieldName.COMPANY_ID, Personnel.FieldName.EMAIL,
+            User_curriculum.FieldName.CURRI_ID, User_curriculum.FieldName.TABLE_NAME,
+            User_list.FieldName.USER_ID
+            );
 
             string selectcmd = string.Format("select * from {0} ", temp99tablename);
 
@@ -483,9 +511,9 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
             "[{8}] VARCHAR(60) NULL," +
             "[{9}] CHAR(13) NULL," +
             "[{10}] CHAR NULL," +
-            "[{11}] VARCHAR(60) NULL," +
-            "[{12}] VARCHAR(20) NULL," +
-            "[{13}] VARCHAR(80) NULL," +
+            "[{11}] VARCHAR(1000) NULL," +
+            "[{12}] VARCHAR(1000) NULL," +
+            "[{13}] VARCHAR(1000) NULL," +
             "[{14}] {29} NULL," +
             "[{15}] DATETIME2 NULL," +
 
@@ -531,13 +559,13 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
             "alter column [{10}] CHAR collate database_default " +
 
             "alter table {0} " +
-            "alter column [{11}] VARCHAR(60) collate database_default " +
+            "alter column [{11}] VARCHAR(1000) collate database_default " +
 
             "alter table {0} " +
-            "alter column [{12}] VARCHAR(20) collate database_default " +
+            "alter column [{12}] VARCHAR(1000) collate database_default " +
 
             "alter table {0} " +
-            "alter column [{13}] VARCHAR(80) collate database_default " +
+            "alter column [{13}] VARCHAR(1000) collate database_default " +
 
             "alter table {0} " +
             "alter column [{14}] {29} collate database_default " +
@@ -576,11 +604,14 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
             string insertintotemp99_1 = insertintotemp99falsecase;
 
 
-            string insertintotemp99_2 = string.Format("insert into {0}({1}) " +
-            "select {2} from (select max({3}) as {6} from {0}) as tid,{4} where {6} = {5} ",
-            temp99tablename, Student.FieldName.USERNAME, User_curriculum.FieldName.CURRI_ID,
-            Student.FieldName.USER_ID, User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID,
-            "std_id");
+            //User_id = -1 => retrieve curri_in
+            string insertintotemp99_2 = string.Format("insert into {0}({1},{2}) " +
+            "select -1,{3} from (select max({1}) as {4} from {0}) as tid,{5} " +
+            "where {4} = {6} ",
+            temp99tablename, Student.FieldName.USER_ID, Personnel.FieldName.EMAIL,
+            User_curriculum.FieldName.CURRI_ID,"std_id", User_curriculum.FieldName.TABLE_NAME,
+            User_list.FieldName.USER_ID
+            );
 
             string selectcmd = string.Format("select * from {0} ", temp99tablename);
 
@@ -602,9 +633,9 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
             "[{8}] VARCHAR(60) NULL," +
             "[{9}] CHAR(13) NULL," +
             "[{10}] CHAR NULL," +
-            "[{11}] VARCHAR(60) NULL," +
-            "[{12}] VARCHAR(20) NULL," +
-            "[{13}] VARCHAR(80) NULL," +
+            "[{11}] VARCHAR(1000) NULL," +
+            "[{12}] VARCHAR(1000) NULL," +
+            "[{13}] VARCHAR(1000) NULL," +
             "[{14}] {31} NULL," +
             "[{15}] DATETIME2 NULL," +
 
@@ -652,13 +683,13 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
             "alter column [{10}] CHAR collate database_default " +
 
             "alter table {0} " +
-            "alter column [{11}] VARCHAR(60) collate database_default " +
+            "alter column [{11}] VARCHAR(1000) collate database_default " +
 
             "alter table {0} " +
-            "alter column [{12}] VARCHAR(20) collate database_default " +
+            "alter column [{12}] VARCHAR(1000) collate database_default " +
 
             "alter table {0} " +
-            "alter column [{13}] VARCHAR(80) collate database_default " +
+            "alter column [{13}] VARCHAR(1000) collate database_default " +
 
             "alter table {0} " +
             "alter column [{14}] {31} collate database_default " +
@@ -705,11 +736,14 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
             string insertintotemp99_1 = insertintotemp99falsecase;
 
 
-            string insertintotemp99_2 = string.Format("insert into {0}({1}) " +
-            "select {2} from (select max({3}) as {6} from {0}) as tid,{4} where {6} = {5} ",
-            temp99tablename, Alumni.FieldName.USERNAME, User_curriculum.FieldName.CURRI_ID,
-            Alumni.FieldName.USER_ID, User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID,
-            "alum_id");
+            //User_id = -1 => retrieve curri_in
+            string insertintotemp99_2 = string.Format("insert into {0}({1},{2}) " +
+            "select -1,{3} from (select max({1}) as {4} from {0}) as tid,{5} " +
+            "where {4} = {6} ",
+            temp99tablename, Student.FieldName.USER_ID, Personnel.FieldName.EMAIL,
+            User_curriculum.FieldName.CURRI_ID, "alum_id", User_curriculum.FieldName.TABLE_NAME,
+            User_list.FieldName.USER_ID
+            );
 
             string selectcmd = string.Format("select * from {0} ", temp99tablename);
 
@@ -723,7 +757,6 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
             User_information_with_privilege_information result = new User_information_with_privilege_information();
 
             username = preferredusername;
-            //string selectfromteacheriftrue = string.Format("
             string selectcmd = string.Format(
                                "if exists(select * from ({0}) as tsres where {1} = '{2}') " +
                                 getSelectTeacherWithCurriculumCommand() +
@@ -754,6 +787,8 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
+                        //column 1 = identifier for each user
+                        int mode = Convert.ToInt32(item.ItemArray[data.Columns[1].Ordinal]);
                         //USER_TYPE != null mean that row have main data (main info + eduhistory)
                         if (item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString() != "")
                         {
@@ -843,30 +878,51 @@ string selectcmd = string.Format("select * from {0} ", temp99tablename);
                                 }
                             }
                         }
-                        else if(item.ItemArray[data.Columns[Teacher.FieldName.USERNAME].Ordinal].ToString() != "")
+                        //User_id = -1 => retrieve curri_in
+
+                        //User_id = -2 => retrieve president_in
+
+
+                        //User_id = -3 => retrieve topic_interested
+
+                        //User_id = -4 => retrieve committee_in
+                        else if (mode == -1)
                         {
                             //Read ternary data such as curriculum which personnel is in
-                            //Username column contain curri_id value
-                            result.curri_id_in.Add(item.ItemArray[data.Columns[Teacher.FieldName.USERNAME].Ordinal].ToString());
+                            //major column contain curri_id value
+                            result.curri_id_in.Add(item.ItemArray[data.Columns[Personnel.FieldName.EMAIL].Ordinal].ToString());
                         }
-                        else if(item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.COLLEGE].Ordinal].ToString() != "")
+                        else if(mode == -3)
                         {
                             //Read 5th data such as topic interested which teacher is interest
-                            //college column contain topic_interest value
-                            result.information.interest.Add(item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.COLLEGE].Ordinal].ToString());
+                            //major column contain topic_interest value
+                            result.information.interest.Add(item.ItemArray[data.Columns[Personnel.FieldName.EMAIL].Ordinal].ToString());
                         }
-                        else
+                        else if(mode == -2)
                         {
                             //Read 4th data such as which curriculum+year that the login teacher is president 
                             //major and grad_year column contain curri_id and aca_year value
                             if (result.president_in == null)
                                 result.president_in = new Dictionary<string, List<int>>();
-                            string curri_id = item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.MAJOR].Ordinal].ToString();
+                            string curri_id = item.ItemArray[data.Columns[Personnel.FieldName.EMAIL].Ordinal].ToString();
                             if (!result.president_in.ContainsKey(curri_id))
                             {
                                 result.president_in.Add(curri_id, new List<int>());
                             }
-                            result.president_in[curri_id].Add(Convert.ToInt32(item.ItemArray[data.Columns[Educational_teacher_staff.FieldName.GRAD_YEAR].Ordinal]));
+                            result.president_in[curri_id].Add(Convert.ToInt32(item.ItemArray[data.Columns[Personnel.FieldName.TEL].Ordinal]));
+                        }
+                        else
+                        {
+                            //Read 6th data such as which curriculum+year that the login teacher is committee
+                            //major and grad_year column contain curri_id and aca_year value
+                            if (result.committee_in == null)
+                                result.committee_in = new Dictionary<string, List<int>>();
+                            string curri_id = item.ItemArray[data.Columns[Personnel.FieldName.EMAIL].Ordinal].ToString();
+                            if (!result.committee_in.ContainsKey(curri_id))
+                            {
+                                result.committee_in.Add(curri_id, new List<int>());
+                            }
+                            result.committee_in[curri_id].Add(Convert.ToInt32(item.ItemArray[data.Columns[Personnel.FieldName.TEL].Ordinal]));
                         }
                     }
                     data.Dispose();
