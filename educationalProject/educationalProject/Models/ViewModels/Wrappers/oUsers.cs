@@ -785,16 +785,23 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 {
                     DataTable data = new DataTable();
                     data.Load(res);
+                    int mode = -999;
                     foreach (DataRow item in data.Rows)
                     {
+                        
+                        string usrtype = item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString();
+
+                        //Admin didn't have any extra data (except creator and date which account was created.)
+                        //So mode read is not necessery.
                         //column 1 = identifier for each user
-                        int mode = Convert.ToInt32(item.ItemArray[data.Columns[1].Ordinal]);
+                        if (usrtype != "ผู้ดูแลระบบ")
+                            mode = Convert.ToInt32(item.ItemArray[data.Columns[1].Ordinal]);
                         //USER_TYPE != null mean that row have main data (main info + eduhistory)
-                        if (item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString() != "")
+                        if (usrtype != "")
                         {
                             //result.username == null means the first loop round (no data are read)
                             //Read main data if that condition is TRUE 
-                            string usrtype = item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString();
+                            
                             if (result.username == null)
                             {
                                 //MAIN INFORMRATION
