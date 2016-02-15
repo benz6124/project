@@ -191,7 +191,10 @@ namespace educationalProject.Models.ViewModels.Wrappers
                         {
                             Sub_indicator_result target = result.First(t => t.indicator_num == Convert.ToInt32(item.ItemArray[data.Columns[Indicator.FieldName.INDICATOR_NUM].Ordinal])).
                                                             sub_indicator_result.First(t => t.sub_indicator_num == Convert.ToInt32(item.ItemArray[data.Columns[Sub_indicator.FieldName.SUB_INDICATOR_NUM].Ordinal]));
-                            target.sub_indicator_self_result = Convert.ToInt32(item.ItemArray[data.Columns[Self_evaluation.FieldName.EVALUATION_SCORE].Ordinal]);
+                            if (item.ItemArray[data.Columns[Self_evaluation.FieldName.EVALUATION_SCORE].Ordinal].ToString() != "")
+                            {
+                                target.sub_indicator_self_result = Convert.ToInt32(item.ItemArray[data.Columns[Self_evaluation.FieldName.EVALUATION_SCORE].Ordinal]);
+                            }
                         }
 
                         //Type 4:Retrieve overall individual result of other evaluation
