@@ -142,7 +142,7 @@ namespace educationalProject.Models.Wrappers
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            d.iCommand.CommandText = string.Format("insert into {0} values ({1},{2},{3},'{4}','{5}','{6}','{7}','{8}')",
+            d.iCommand.CommandText = string.Format("insert into {0} values ({1},{2},{3},{4},'{5}','{6}','{7}','{8}')",
                 FieldName.TABLE_NAME,aca_year,indicator_num,sub_indicator_num,teacher_id, detail, date, time, curri_id);
             try
             {
