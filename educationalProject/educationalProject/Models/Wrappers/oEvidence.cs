@@ -120,9 +120,9 @@ namespace educationalProject.Models.Wrappers
                 return "Cannot connect to database.";
             List<oEvidence> result = new List<oEvidence>();
             d.iCommand.CommandText = string.Format("select * from {0} " + 
-                "where {1} = {2} and {3} = '{4}' and {5} = {6}", 
+                "where {1} = {2} and {3} = '{4}' and {5} = {6} order by {7} ", 
                 FieldName.TABLE_NAME,FieldName.INDICATOR_NUM,inddata.indicator_num,FieldName.CURRI_ID,
-                curri_id,FieldName.ACA_YEAR,inddata.aca_year);
+                curri_id,FieldName.ACA_YEAR,inddata.aca_year,FieldName.EVIDENCE_REAL_CODE);
             try
             {
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
