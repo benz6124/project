@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-
 namespace educationalProject.Models.ViewModels
 {
     public class Questionare_set_detail_full : Questionare_set

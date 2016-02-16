@@ -269,7 +269,6 @@
     <Compile Include="Utils\NameManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="aa.js" />
     <Content Include="app.js" />
     <Content Include="app\app.js" />
     <Content Include="app\controllers\indexController.js" />

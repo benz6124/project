@@ -162,7 +162,6 @@ D:\4D\project\educationalProject\educationalProject\bin\System.Web.Http.WebHost.
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AspNet.Identity.Core.xml
 D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb
-D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\roslyn\csc.exe
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
