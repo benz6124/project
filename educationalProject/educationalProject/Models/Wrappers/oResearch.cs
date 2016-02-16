@@ -13,7 +13,7 @@ namespace educationalProject.Models.Wrappers
             return string.Format("select r.*,{14}.{1},{14}.{2} from " +
                 "(select {3}.{4},{3}.{5},{3}.{6}," +
                 "{3}.{7}, {3}.{8},{9} from {3}, {10} where " +
-                "{5} = '{11}' and {3}.{4} = {10}.{12}) as r,({0}) as {14} where r.{9} = {14}.{13}",
+                "{5} = '{11}' and {3}.{4} = {10}.{12}) as r,({0}) as {14} where r.{9} = {14}.{13} order by {8} desc ",
                 oTeacher.getSelectTeacherByJoinCommand(), Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
                 FieldName.TABLE_NAME, FieldName.RESEARCH_ID, FieldName.CURRI_ID, FieldName.FILE_NAME,
                 FieldName.NAME, FieldName.YEAR_PUBLISH, Research_owner.FieldName.TEACHER_ID,
@@ -121,26 +121,22 @@ namespace educationalProject.Models.Wrappers
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
                 if (res.HasRows)
                 {
-                    research_id = -1;
-                    Research_detail curr = null;
                     DataTable data = new DataTable();
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        if(research_id != Convert.ToInt32(item.ItemArray[data.Columns[FieldName.RESEARCH_ID].Ordinal]))
-                        {
-                            curr = new Research_detail
+                        int rid = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.RESEARCH_ID].Ordinal]);
+                        if (result.FirstOrDefault(r => r.research_id == rid) == null)
+                            result.Add(new Research_detail
                             {
                                 name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                                 file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
                                 research_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.RESEARCH_ID].Ordinal]),
                                 year_publish = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.YEAR_PUBLISH].Ordinal])
-                            };
-                            research_id = curr.research_id;
-                            result.Add(curr);
-                        }
-                        curr.researcher.Add(new Teacher_with_t_name
+                            });
+
+                        result.First(r => r.research_id == rid).researcher.Add(new Teacher_with_t_name
                         {
                             teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[Teacher.FieldName.TEACHER_ID].Ordinal]),
                             t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
@@ -263,26 +259,22 @@ namespace educationalProject.Models.Wrappers
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
                 if (res.HasRows)
                 {
-                    research_id = -1;
-                    Research_detail curr = null;
                     DataTable data = new DataTable();
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        if (research_id != Convert.ToInt32(item.ItemArray[data.Columns[FieldName.RESEARCH_ID].Ordinal]))
-                        {
-                            curr = new Research_detail
+                        int rid = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.RESEARCH_ID].Ordinal]);
+                        if (result.FirstOrDefault(r => r.research_id == rid) == null)
+                            result.Add(new Research_detail
                             {
                                 name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                                 file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
                                 research_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.RESEARCH_ID].Ordinal]),
                                 year_publish = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.YEAR_PUBLISH].Ordinal])
-                            };
-                            research_id = curr.research_id;
-                            result.Add(curr);
-                        }
-                        curr.researcher.Add(new Teacher_with_t_name
+                            });
+
+                        result.First(r => r.research_id == rid).researcher.Add(new Teacher_with_t_name
                         {
                             teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[Teacher.FieldName.TEACHER_ID].Ordinal]),
                             t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
@@ -366,35 +358,31 @@ namespace educationalProject.Models.Wrappers
                 System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
                 if (res.HasRows)
                 {
-                    research_id = -1;
-                    Research_detail curr = null;
                     DataTable data = new DataTable();
                     data.Load(res);
 
                     //get to-be delete file_name set in file_name property of main object for future use
                     file_name = data.Rows[0].ItemArray[0].ToString();
+
                     foreach (DataRow item in data.Rows)
                     {
-                        if (research_id != Convert.ToInt32(item.ItemArray[data.Columns[FieldName.RESEARCH_ID].Ordinal]))
-                        {
-                            curr = new Research_detail
+                        int rid = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.RESEARCH_ID].Ordinal]);
+                        if (result.FirstOrDefault(r => r.research_id == rid) == null)
+                            result.Add(new Research_detail
                             {
                                 name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
                                 file_name = item.ItemArray[3].ToString(),
                                 research_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.RESEARCH_ID].Ordinal]),
                                 year_publish = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.YEAR_PUBLISH].Ordinal])
-                            };
-                            research_id = curr.research_id;
-                            result.Add(curr);
-                        }
-                        curr.researcher.Add(new Teacher_with_t_name
+                            });
+
+                        result.First(r => r.research_id == rid).researcher.Add(new Teacher_with_t_name
                         {
                             teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[Teacher.FieldName.TEACHER_ID].Ordinal]),
                             t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                         });
                     }
-
                     data.Dispose();
                 }
                 else
