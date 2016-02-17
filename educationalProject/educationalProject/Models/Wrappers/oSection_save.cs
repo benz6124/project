@@ -84,13 +84,13 @@ namespace educationalProject.Models.Wrappers
                         date = Convert.ToDateTime(item.ItemArray[data.Columns[Self_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3];
                         time = (timeofday.Hour > 9 ? "" : "0") + h + '.' + (timeofday.Minute > 9 ? "" : "0") + m;
                     }
-                    res.Close();
                     data.Dispose();
                 }
                 else
                 {
                     //Reserved for return error string
                 }
+                res.Close();
             }
             catch (Exception ex)
             {
@@ -114,15 +114,8 @@ namespace educationalProject.Models.Wrappers
                 FieldName.TABLE_NAME, FieldName.TIME, time, FieldName.DATE, date, FieldName.TEACHER_ID, teacher_id, FieldName.DETAIL, detail, FieldName.INDICATOR_NUM, indicator_num, FieldName.SUB_INDICATOR_NUM, sub_indicator_num, FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year);
             try
             {
-                int rowAffected = d.iCommand.ExecuteNonQuery();
-                if (rowAffected == 1)
-                {
-                    return null;
-                }
-                else
-                {
-                    return "No section_save are updated.";
-                }
+                d.iCommand.ExecuteNonQuery();
+                return null;
             }
             catch (Exception ex)
             {
@@ -145,15 +138,8 @@ namespace educationalProject.Models.Wrappers
                 FieldName.TABLE_NAME,aca_year,indicator_num,sub_indicator_num,teacher_id, detail, date, time, curri_id);
             try
             {
-                int rowAffected = d.iCommand.ExecuteNonQuery();
-                if (rowAffected == 1)
-                {
-                    return null;
-                }
-                else
-                {
-                    return "No section_save are inserted.";
-                }
+                d.iCommand.ExecuteNonQuery();
+                return null;
             }
             catch (Exception ex)
             {

@@ -13,13 +13,13 @@ namespace educationalProject.Models.Wrappers
             return string.Format("select {0}.*,{1},{2},{3},{4} " +
                                   "from {0},{5},{6} " +
                                   "where {7} = '{8}' and {9} = {10} " +
-                                  "and {0}.{11} = {5}.{12} and {13} = {14} ",
+                                  "and {0}.{11} = {5}.{12} and {13} = {14} order by {15} desc ",
                                   FieldName.TABLE_NAME,Questionare_privilege.FieldName.PRIVILEGE,
                                   User_list.FieldName.USER_TYPE,Personnel.FieldName.T_PRENAME,Personnel.FieldName.T_NAME,
                                   Questionare_privilege.FieldName.TABLE_NAME,User_list.FieldName.TABLE_NAME,
                                   FieldName.CURRI_ID,curri_id,FieldName.ACA_YEAR,aca_year,
                                   FieldName.QUESTIONARE_SET_ID,Questionare_privilege.FieldName.QUESTIONARE_SET_ID,
-                                  User_list.FieldName.USER_ID,FieldName.PERSONNEL_ID
+                                  User_list.FieldName.USER_ID,FieldName.PERSONNEL_ID,FieldName.DATE
                 );
         }
         public object Select()

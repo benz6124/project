@@ -88,13 +88,13 @@ namespace educationalProject.Models.Wrappers
                             year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.YEAR].Ordinal])
                         });
                     }
-                    res.Close();
                     data.Dispose();
                 }
                 else
                 {
                     //Reserved for return error string
                 }
+                res.Close();
             }
             catch (Exception ex)
             {
@@ -128,15 +128,8 @@ namespace educationalProject.Models.Wrappers
                     FieldName.NY1, FieldName.NY2, FieldName.NY3, FieldName.NY4, FieldName.NY5, FieldName.NY6, FieldName.NY7,FieldName.NY8);
             try
             {
-                int rowAffected = d.iCommand.ExecuteNonQuery();
-                if (rowAffected == 1)
-                {
-                    return null;
-                }
-                else
-                {
-                    return "No student_count are inserted or updated.";
-                }
+                d.iCommand.ExecuteNonQuery();
+                return null;
             }
             catch (Exception ex)
             {

@@ -88,13 +88,13 @@ namespace educationalProject.Models.Wrappers
                             year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.YEAR].Ordinal])
                         });
                     }
-                    res.Close();
                     data.Dispose();
                 }
                 else
                 {
                     //Reserved for return error string
                 }
+                res.Close();
             }
             catch (Exception ex)
             {
@@ -128,15 +128,8 @@ namespace educationalProject.Models.Wrappers
                     FieldName.GRAD_IN_TIME,FieldName.GRAD_OVER_TIME,FieldName.QUITY1, FieldName.QUITY2, FieldName.QUITY3, FieldName.QUITY4, FieldName.MOVE_IN);
             try
             {
-                int rowAffected = d.iCommand.ExecuteNonQuery();
-                if (rowAffected == 1)
-                {
-                    return null;
-                }
-                else
-                {
-                    return "No student_status_other are inserted or updated.";
-                }
+                d.iCommand.ExecuteNonQuery();
+                return null;
             }
             catch (Exception ex)
             {
