@@ -201,10 +201,5 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
-
-        public object SelectCustom(string wherecond, string groupbycol, string havingcond, string orderbycol)
-        {
-            return "Ok";
-        }
     }
 }

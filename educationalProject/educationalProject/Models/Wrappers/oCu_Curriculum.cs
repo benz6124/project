@@ -119,15 +119,8 @@ namespace educationalProject.Models.Wrappers
                 FieldName.TABLE_NAME, FieldName.CURRI_ID, year, curr_tname, curr_ename, degree_t_full, degree_t_bf, degree_e_full, degree_e_bf, level, period);
             try
             {
-                int rowAffected = d.iCommand.ExecuteNonQuery();
-                if (rowAffected == 1)
-                {
-                    return null;
-                }
-                else
-                {
-                    return "No cu_curriculum are inserted.";
-                }
+                d.iCommand.ExecuteNonQuery();
+                return null;
             }
             catch (Exception ex)
             {
@@ -139,10 +132,6 @@ namespace educationalProject.Models.Wrappers
                 //Whether it success or not it must close connection in order to end block
                 d.SQLDisconnect();
             }
-        }
-        public object SelectCustom(string wherecond,string groupbycol,string havingcond,string orderbycol)
-        {
-            return "Ok";
         }
     }
 }

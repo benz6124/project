@@ -47,7 +47,7 @@ namespace educationalProject.Models.Wrappers
                                 t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString()) +
                                          item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                                file_name_pic = item.ItemArray[data.Columns[Personnel.FieldName.FILE_NAME_PIC].Ordinal].ToString(),
+                                file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[Personnel.FieldName.FILE_NAME_PIC].Ordinal].ToString()),
                                 type = usrtype
                             });
                         else
@@ -57,7 +57,7 @@ namespace educationalProject.Models.Wrappers
                                 t_name = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString() +
                                      item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                                file_name_pic = item.ItemArray[data.Columns[Personnel.FieldName.FILE_NAME_PIC].Ordinal].ToString(),
+                                file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[Personnel.FieldName.FILE_NAME_PIC].Ordinal].ToString()),
                                 type = usrtype
                             });
                     }

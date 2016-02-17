@@ -297,7 +297,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                     email = item.ItemArray[data.Columns[FieldName.EMAIL].Ordinal].ToString(),
                                     e_name = item.ItemArray[data.Columns[FieldName.E_NAME].Ordinal].ToString(),
                                     e_prename = item.ItemArray[data.Columns[FieldName.E_PRENAME].Ordinal].ToString(),
-                                    file_name_pic = item.ItemArray[data.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString(),
+                                    file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString()),
                                     gender = Convert.ToChar(item.ItemArray[data.Columns[FieldName.GENDER].Ordinal]),
                                     tel = item.ItemArray[data.Columns[FieldName.TEL].Ordinal].ToString(),
                                     timestamp = item.ItemArray[data.Columns[FieldName.TIMESTAMP].Ordinal].ToString(),
@@ -318,7 +318,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                     email = item.ItemArray[data.Columns[FieldName.EMAIL].Ordinal].ToString(),
                                     e_name = item.ItemArray[data.Columns[FieldName.E_NAME].Ordinal].ToString(),
                                     e_prename = item.ItemArray[data.Columns[FieldName.E_PRENAME].Ordinal].ToString(),
-                                    file_name_pic = item.ItemArray[data.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString(),
+                                    file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString()),
                                     gender = Convert.ToChar(item.ItemArray[data.Columns[FieldName.GENDER].Ordinal]),
                                     tel = item.ItemArray[data.Columns[FieldName.TEL].Ordinal].ToString(),
                                     timestamp = item.ItemArray[data.Columns[FieldName.TIMESTAMP].Ordinal].ToString(),
@@ -391,7 +391,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                 t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) +
                                          item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                                file_name_pic = item.ItemArray[data.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString(),
+                                file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString()),
                                 type = usrtype
                             });
                         else
@@ -401,7 +401,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                 t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString() +
                                      item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                                file_name_pic = item.ItemArray[data.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString(),
+                                file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString()),
                                 type = usrtype
                             });
                     }

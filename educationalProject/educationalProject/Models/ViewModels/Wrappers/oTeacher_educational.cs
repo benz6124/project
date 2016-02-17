@@ -161,8 +161,8 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                 tel = item.ItemArray[tabledata.Columns[FieldName.TEL].Ordinal].ToString(),
                                 e_prename = item.ItemArray[tabledata.Columns[FieldName.E_PRENAME].Ordinal].ToString(),
                                 t_prename = NameManager.GatherPreName(item.ItemArray[tabledata.Columns[FieldName.T_PRENAME].Ordinal].ToString()),
-                                file_name_pic = item.ItemArray[tabledata.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString()
-                            });
+                                file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[tabledata.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString())
+                                });
 
                             if(item.ItemArray[tabledata.Columns[Educational_teacher_staff.FieldName.COLLEGE].Ordinal].ToString() != "")
                                 result.First(t => t.teacher_id == tid).history.Add(new Educational_teacher_staff

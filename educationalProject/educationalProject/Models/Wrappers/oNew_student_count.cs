@@ -132,15 +132,8 @@ namespace educationalProject.Models.Wrappers
                     FieldName.NUM_GOODSTUDY_M, FieldName.NUM_GOODSTUDY_F, FieldName.NUM_CHILDSTAFF_M, FieldName.NUM_CHILDSTAFF_F, FieldName.NUM_DIRECT_M, FieldName.NUM_DIRECT_F, FieldName.NUM_ADMIS_M, FieldName.NUM_ADMIS_F,FieldName.NUM_OTHERS_M,FieldName.NUM_OTHERS_F);
             try
             {
-                int rowAffected = d.iCommand.ExecuteNonQuery();
-                if (rowAffected == 1)
-                {
-                    return null;
-                }
-                else
-                {
-                    return "No new_student_count are inserted or updated.";
-                }
+                d.iCommand.ExecuteNonQuery();
+                return null;
             }
             catch (Exception ex)
             {
