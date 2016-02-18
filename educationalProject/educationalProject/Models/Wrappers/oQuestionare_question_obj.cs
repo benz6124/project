@@ -73,11 +73,17 @@ namespace educationalProject.Models.Wrappers
                 Questionare_result_sub.FieldName.TABLE_NAME, qdata.question_list.First().questionare_set_id,
                 qdata.suggestion);
 
-
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} END", insertintoquestionareresobj, insertintoquestionareressub);
+            string truecasecmd = string.Format("BEGIN {0} {1} END", insertintoquestionareresobj, insertintoquestionareressub);
+            d.iCommand.CommandText = string.Format("if exists (select * from {0} where {1} = {2}) {3} else return ",
+                Questionare_set.FieldName.TABLE_NAME, Questionare_set.FieldName.QUESTIONARE_SET_ID, qdata.question_list.First().questionare_set_id,
+                truecasecmd);
             try
             {
-                d.iCommand.ExecuteNonQuery();
+                int rowaffacted = d.iCommand.ExecuteNonQuery();
+                if (rowaffacted > 0)
+                    return null;
+                else
+                    return "The to-be answer questionare is already deleted.";
             }
             catch (Exception ex)
             {
@@ -89,7 +95,6 @@ namespace educationalProject.Models.Wrappers
                 //Whether it success or not it must close connection in order to end block
                 d.SQLDisconnect();
             }
-            return null;
         }
     }
 }
