@@ -340,11 +340,10 @@ namespace educationalProject.Models.Wrappers
                     insertintoresearchowner += ",";
             }
 
-            
             string selectcmd = string.Format("select temp1out.{6},r.*,{15}.{1},{15}.{2} from " +
                 "(select {3}.{4},{3}.{5},{3}.{6}," +
                 "{3}.{7}, {3}.{8},{9} from {3}, {10} where " +
-                "{5} = '{11}' and {3}.{4} = {10}.{12}) as r,(select {6} from {14}) as temp1out,({0}) as {15} where r.{9} = {15}.{13}",
+                "{5} = '{11}' and {3}.{4} = {10}.{12}) as r,(select {6} from {14}) as temp1out,({0}) as {15} where r.{9} = {15}.{13} order by {7} ",
                 oTeacher.getSelectTeacherByJoinCommand(), Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
                 FieldName.TABLE_NAME, FieldName.RESEARCH_ID, FieldName.CURRI_ID, FieldName.FILE_NAME,
                 FieldName.NAME, FieldName.YEAR_PUBLISH, Research_owner.FieldName.TEACHER_ID,
