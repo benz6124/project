@@ -28,7 +28,7 @@ namespace educationalProject.Controllers
         }
         public IHttpActionResult PostToQuerySectionSave(oSection_save data)
         {
-            object result = data.SelectWhere(string.Format("indicator_num = {0} and sub_indicator_num = {1} and aca_year = {2} and curri_id = '{3}'", data.indicator_num, data.sub_indicator_num, data.aca_year, data.curri_id));
+            object result = data.SelectWhere();
             if (result == null)
                 return Ok(data);
             else return InternalServerError(new Exception(result.ToString()));
@@ -45,30 +45,11 @@ namespace educationalProject.Controllers
             datacontext.indicator_num = data.indicator_num;
             datacontext.sub_indicator_num = data.sub_indicator_num;
             datacontext.teacher_id = data.teacher_id;
-            if (data.date == null || data.time == null)
-            {
-                object result = datacontext.Insert();
+                object result = datacontext.InsertOrUpdate();
                 if (result == null)
                     return Ok();
                 else
                     return InternalServerError(new Exception(result.ToString()));
-
-            }
-            else if(data.date == "" || data.time == "")
-            {
-                object result = datacontext.Insert();
-                if (result == null)
-                    return Ok();
-                else
-                    return InternalServerError(new Exception(result.ToString()));
-            }
-            else {
-                object result = datacontext.Update();
-                if (result == null)
-                    return Ok();
-                else
-                    return InternalServerError(new Exception(result.ToString()));
-            }
         }
     }
 }

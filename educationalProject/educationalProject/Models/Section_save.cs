@@ -18,6 +18,18 @@ namespace educationalProject.Models
             public static readonly string ACA_YEAR = "ACA_YEAR";
             public static readonly string TABLE_NAME = "SECTION_SAVE";
         }
+
+        protected struct ParameterName
+        {
+            public static readonly string INDICATOR_NUM = "@" + FieldName.INDICATOR_NUM;
+            public static readonly string SUB_INDICATOR_NUM = "@" + FieldName.SUB_INDICATOR_NUM;
+            public static readonly string TEACHER_ID = "@" + FieldName.TEACHER_ID;
+            public static readonly string DETAIL = "@" + FieldName.DETAIL;
+            public static readonly string DATE = "@" + FieldName.DATE;
+            public static readonly string TIME = "@" + FieldName.TIME;
+            public static readonly string CURRI_ID = "@" + FieldName.CURRI_ID;
+            public static readonly string ACA_YEAR = "@" + FieldName.ACA_YEAR;
+        }
         private int _indicator_num;
         private int _sub_indicator_num;
         private int _teacher_id;
