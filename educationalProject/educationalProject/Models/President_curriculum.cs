@@ -13,6 +13,13 @@ namespace educationalProject.Models
             public static readonly string ACA_YEAR = "ACA_YEAR";
             public static readonly string TABLE_NAME = "PRESIDENT_CURRICULUM";
         }
+
+        internal struct ParameterName
+        {
+            public static readonly string TEACHER_ID = "@" + FieldName.TEACHER_ID;
+            public static readonly string CURRI_ID = "@" + FieldName.CURRI_ID;
+            public static readonly string ACA_YEAR = "@" + FieldName.ACA_YEAR;
+        }
         private int _teacher_id;
         private int _aca_year;
         private string _curri_id;

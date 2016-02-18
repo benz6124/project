@@ -296,7 +296,7 @@ namespace educationalProject.Models.Wrappers
 
             foreach (Teacher_with_t_name t in mdata.attendee)
             {
-                insertintotemp2 += string.Format(",('{0}')", t.teacher_id);
+                insertintotemp2 += string.Format(",({0})", t.teacher_id);
             }
 
             string insertintotemp3 = string.Format("INSERT INTO {0} VALUES (null)", temp3tablename);
@@ -422,7 +422,7 @@ namespace educationalProject.Models.Wrappers
             {
                 insertintotemp1_1 = string.Format("INSERT INTO {0} " +
                                          "select * from " +
-                                         "(update {1} set {2} = '{3}', {4} = '{5}', {6} = '{7}',{8} = '{9}' " +
+                                         "(update {1} set {2} = {3}, {4} = '{5}', {6} = '{7}',{8} = '{9}' " +
                                          "OUTPUT deleted.{8} where {10} = {11}) as outputupdate ",
                                          temp1tablename, FieldName.TABLE_NAME, FieldName.TEACHER_ID, mdata.teacher_id,
                                          FieldName.DATE, mdata.date, FieldName.TOPIC_NAME, mdata.topic_name,
@@ -430,7 +430,7 @@ namespace educationalProject.Models.Wrappers
             }
             else
             {
-                insertintotemp1_1 = string.Format("update {0} set {1} = '{2}', {3} = '{4}', {5} = '{6}' " +
+                insertintotemp1_1 = string.Format("update {0} set {1} = {2}, {3} = '{4}', {5} = '{6}' " +
                          "where {7} = {8} ",
                          FieldName.TABLE_NAME, FieldName.TEACHER_ID, mdata.teacher_id,
                          FieldName.DATE, mdata.date, FieldName.TOPIC_NAME, mdata.topic_name,
@@ -446,7 +446,7 @@ namespace educationalProject.Models.Wrappers
 
             foreach (Teacher_with_t_name t in mdata.attendee)
             {
-                insertintominutesattendee += string.Format("({0},'{1}')", mdata.minutes_id, t.teacher_id);
+                insertintominutesattendee += string.Format("({0},{1})", mdata.minutes_id, t.teacher_id);
                 if (t != mdata.attendee.Last())
                     insertintominutesattendee += ",";
             }

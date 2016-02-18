@@ -242,7 +242,7 @@ namespace educationalProject.Models.Wrappers
             string insertintotemp2 = string.Format("INSERT INTO {0} VALUES (null)", temp2tablename);
                 
                 foreach(Teacher_with_t_name item in rdata.researcher)
-                insertintotemp2 += string.Format(",('{0}')", item.teacher_id);
+                insertintotemp2 += string.Format(",({0})", item.teacher_id);
 
             string insertintoresowner = string.Format(" INSERT INTO {0} " +
                                         "select {1},{2} from {3},{4} where {2} is not null ",
@@ -335,7 +335,7 @@ namespace educationalProject.Models.Wrappers
 
             foreach (Teacher_with_t_name t in rdata.researcher)
             {
-                insertintoresearchowner += string.Format("({0},'{1}')", rdata.research_id, t.teacher_id);
+                insertintoresearchowner += string.Format("({0},{1})", rdata.research_id, t.teacher_id);
                 if (t != rdata.researcher.Last())
                     insertintoresearchowner += ",";
             }
