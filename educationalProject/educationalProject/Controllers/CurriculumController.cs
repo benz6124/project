@@ -20,6 +20,7 @@ namespace educationalProject.Controllers
         public IHttpActionResult PostNewCurriculum(oCu_curriculum data)
         {
             data.year = (DateTime.Now.Year+543).ToString();
+            data.period += (char)0x30;
             object result = data.Insert();
             if (result == null)
                 return Ok(datacontext.Select());

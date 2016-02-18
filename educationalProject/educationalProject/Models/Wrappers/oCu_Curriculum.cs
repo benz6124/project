@@ -115,8 +115,21 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             
-            d.iCommand.CommandText = string.Format("insert into {0} values ((select MAX({1})+1 FROM {0}),'{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}')",
-                FieldName.TABLE_NAME, FieldName.CURRI_ID, year, curr_tname, curr_ename, degree_t_full, degree_t_bf, degree_e_full, degree_e_bf, level, period);
+            d.iCommand.CommandText = string.Format("insert into {0} values ((select MAX({1})+1 FROM {0}),{2},{3},{4},{5},{6},{7},{8},{9},{10})",
+                FieldName.TABLE_NAME, FieldName.CURRI_ID, ParameterName.YEAR, ParameterName.CURR_TNAME, 
+                ParameterName.CURR_ENAME, ParameterName.DEGREE_T_FULL, ParameterName.DEGREE_T_BF, 
+                ParameterName.DEGREE_E_FULL, ParameterName.DEGREE_E_BF, ParameterName.LEVEL, ParameterName.PERIOD);
+
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.YEAR, year));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURR_TNAME, curr_tname));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURR_ENAME, curr_ename));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.DEGREE_T_FULL, degree_t_full));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.DEGREE_T_BF, degree_t_bf));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.DEGREE_E_FULL, degree_e_full));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.DEGREE_E_BF, degree_e_bf));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.LEVEL, level));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.PERIOD, period));
+
             try
             {
                 d.iCommand.ExecuteNonQuery();
