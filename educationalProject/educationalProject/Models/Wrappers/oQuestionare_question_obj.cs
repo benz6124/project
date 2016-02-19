@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 using educationalProject.Models.ViewModels;
 namespace educationalProject.Models.Wrappers
 {
     public class oQuestionare_question_obj : Questionare_question_obj
     {
-        public object SelectByQuestionIdAsQuestionForm(int qid)
+        public async Task<object> SelectByQuestionIdAsQuestionForm(int qid)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -18,7 +19,7 @@ namespace educationalProject.Models.Wrappers
                 FieldName.QUESTIONARE_SET_ID, qid);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -54,7 +55,7 @@ namespace educationalProject.Models.Wrappers
         }
 
 
-        public object InsertQuestionAnswer(Questionare_question_form qdata)
+        public async Task<object> InsertQuestionAnswer(Questionare_question_form qdata)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -79,7 +80,7 @@ namespace educationalProject.Models.Wrappers
                 truecasecmd);
             try
             {
-                int rowaffacted = d.iCommand.ExecuteNonQuery();
+                int rowaffacted = await d.iCommand.ExecuteNonQueryAsync();
                 if (rowaffacted > 0)
                     return null;
                 else

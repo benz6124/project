@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Threading.Tasks;
 using educationalProject.Models.Wrappers;
 
 namespace educationalProject.Controllers
@@ -11,9 +12,9 @@ namespace educationalProject.Controllers
     public class StudentStatusOtherController : ApiController
     {
         private oStudent_status_other datacontext = new oStudent_status_other();
-        public IHttpActionResult PostByCurriculumAcademic(oCurriculum_academic data)
+        public async Task<IHttpActionResult> PostByCurriculumAcademic(oCurriculum_academic data)
         {
-            object result = datacontext.SelectWhere(string.Format("curri_id = {0} and year = {1}", data.curri_id, data.aca_year));
+            object result = await datacontext.SelectWhere(string.Format("curri_id = {0} and year = {1}", data.curri_id, data.aca_year));
             if (result.GetType().ToString().CompareTo("System.String") == 0)
                 return InternalServerError(new Exception(result.ToString()));
             else if (((List<oStudent_status_other>)result).Count != 0)
@@ -33,9 +34,9 @@ namespace educationalProject.Controllers
                 return Ok(datacontext);
             }
         }
-        public IHttpActionResult PutStudentStatusOther(oStudent_status_other data)
+        public async Task<IHttpActionResult> PutStudentStatusOther(oStudent_status_other data)
         {
-            object result = data.InsertOrUpdate();
+            object result = await data.InsertOrUpdate();
             if (result == null)
                 return Ok();
             else

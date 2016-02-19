@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
 {
@@ -12,7 +13,7 @@ namespace educationalProject.Models.Wrappers
             return string.Format("select * from {0} where {1} = {2} ",
                 FieldName.TABLE_NAME, FieldName.PERSONNEL_ID, personnel_id);
         }
-        public object Insert()
+        public async Task<object> Insert()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -24,7 +25,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format("BEGIN {0} {1} END",insertcmd,selectcmd);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -62,7 +63,7 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
-        public object Update()
+        public async Task<object> Update()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -74,7 +75,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format("BEGIN {0} {1} END", insertcmd, selectcmd);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();

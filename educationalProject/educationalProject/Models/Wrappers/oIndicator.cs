@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
 {
     public class oIndicator : Indicator
     {
-        public object SelectWhereOrderByWithKeepYearSource(string wherecond, string orderbycol, int? dir,int source_year)
+        public async Task<object> SelectWhereOrderByWithKeepYearSource(string wherecond, string orderbycol, int? dir,int source_year)
         {
             string[] direction = { "ASC", "DESC" };
             DBConnector d = new DBConnector();
@@ -18,7 +19,7 @@ namespace educationalProject.Models.Wrappers
                 FieldName.TABLE_NAME, wherecond, orderbycol, ((dir != null) ? direction[dir.Value] : ""));
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -54,7 +55,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object SelectDistinctIndicatorYear()
+        public async Task<object> SelectDistinctIndicatorYear()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -63,7 +64,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format("select distinct aca_year from {0}", FieldName.TABLE_NAME);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -93,7 +94,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object Delete(string wherecond)
+        public async Task<object> Delete(string wherecond)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -103,7 +104,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format("delete from {0} where {1}", FieldName.TABLE_NAME, wherecond);
             try
             {
-                d.iCommand.ExecuteNonQuery();
+                await d.iCommand.ExecuteNonQueryAsync();
             }
             catch (Exception ex)
             {

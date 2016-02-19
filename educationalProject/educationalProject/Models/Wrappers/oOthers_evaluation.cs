@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Models.ViewModels;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
 {
     public class oOthers_evaluation : Others_evaluation
     {
-        public object SelectByIndicator()
+        public async Task<object> SelectByIndicator()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -99,7 +100,7 @@ namespace educationalProject.Models.Wrappers
 
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -171,7 +172,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object InsertOrUpdate(Others_evaluation_s_indic_name_list_with_file_name odata)
+        public async Task<object> InsertOrUpdate(Others_evaluation_s_indic_name_list_with_file_name odata)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -256,7 +257,7 @@ namespace educationalProject.Models.Wrappers
 
             try
             {
-                object result = d.iCommand.ExecuteScalar();
+                object result = await d.iCommand.ExecuteScalarAsync();
                 if (result != null)
                 {
                     //File name to delete from #temp5 table

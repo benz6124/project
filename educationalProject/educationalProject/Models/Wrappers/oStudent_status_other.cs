@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
 {
@@ -58,7 +59,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object SelectWhere(string wherecond)
+        public async Task<object> SelectWhere(string wherecond)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -67,7 +68,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format("select * from {0} where {1}", FieldName.TABLE_NAME,wherecond);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -109,7 +110,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object InsertOrUpdate()
+        public async Task<object> InsertOrUpdate()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -128,7 +129,7 @@ namespace educationalProject.Models.Wrappers
                     FieldName.GRAD_IN_TIME,FieldName.GRAD_OVER_TIME,FieldName.QUITY1, FieldName.QUITY2, FieldName.QUITY3, FieldName.QUITY4, FieldName.MOVE_IN);
             try
             {
-                d.iCommand.ExecuteNonQuery();
+                await d.iCommand.ExecuteNonQueryAsync();
                 return null;
             }
             catch (Exception ex)

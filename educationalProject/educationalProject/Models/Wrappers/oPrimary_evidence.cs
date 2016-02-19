@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 using educationalProject.Models.ViewModels;
 namespace educationalProject.Models.Wrappers
@@ -54,7 +55,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object SelectWhere(string wherecond)
+        public async Task<object> SelectWhere(string wherecond)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -63,7 +64,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format("select * from {0} where {1}", FieldName.TABLE_NAME, wherecond);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -100,7 +101,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object SelectWithDetail(oIndicator inddata,string curri_id_param)
+        public async Task<object> SelectWithDetail(oIndicator inddata,string curri_id_param)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -120,7 +121,7 @@ namespace educationalProject.Models.Wrappers
                                );
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -200,7 +201,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object UpdateDetail(List<Primary_evidence_detail> list)
+        public async Task<object> UpdateDetail(List<Primary_evidence_detail> list)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -257,15 +258,8 @@ namespace educationalProject.Models.Wrappers
                 insertintoexclusiveprimaryevicmd);
             try
             {
-                int rowAffected = d.iCommand.ExecuteNonQuery();
-                if (rowAffected > 0)
-                {
-                    return null;
-                }
-                else
-                {
-                    return "No primary_evidence data are updated.";
-                }
+                await d.iCommand.ExecuteNonQueryAsync();
+                return null;
             }
             catch (Exception ex)
             {
@@ -279,7 +273,7 @@ namespace educationalProject.Models.Wrappers
             }
         }
 
-        public object UpdateDetail(List<Primary_evidence> list)
+        public async Task<object> UpdateDetail(List<Primary_evidence> list)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -400,7 +394,7 @@ namespace educationalProject.Models.Wrappers
                 updateevidence, deletefromprimaryevidencecmd, insertintoprimaryevidencecmd);
             try
             {
-                int rowAffected = d.iCommand.ExecuteNonQuery();
+                await d.iCommand.ExecuteNonQueryAsync();
                 return null;
             }
             catch (Exception ex)
@@ -415,7 +409,7 @@ namespace educationalProject.Models.Wrappers
             }
         }
 
-        public object SelectOnlyNameAndId(string p_curri_id,int p_aca_year,string p_teacher_id,int p_indicator_num)
+        public async Task<object> SelectOnlyNameAndId(string p_curri_id,int p_aca_year,string p_teacher_id,int p_indicator_num)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -435,7 +429,7 @@ namespace educationalProject.Models.Wrappers
                 );
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();

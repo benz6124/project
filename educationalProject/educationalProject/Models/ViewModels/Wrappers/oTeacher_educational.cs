@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 using educationalProject.Models.Wrappers;
 namespace educationalProject.Models.ViewModels.Wrappers
 {
     public class oTeacher_educational : Teacher_educational
     {
-        public object SelectPresidentCurriAndAllTeacherInCurri(Curriculum_academic data)
+        public async Task<object> SelectPresidentCurriAndAllTeacherInCurri(Curriculum_academic data)
         {
             int president = -1;
             DBConnector d = new DBConnector();
@@ -48,7 +49,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             try
             {
                 //Read teacher-eduhistory data with president curriculum's teacher id
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 do
                 {
                     if (res.HasRows)

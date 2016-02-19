@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Models.ViewModels;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
@@ -94,7 +95,7 @@ namespace educationalProject.Models.Wrappers
         }
 
 
-        public object Select()
+        public async Task<object> Select()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -104,7 +105,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = getselectcmd();
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -145,7 +146,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object InsertWithSelect()
+        public async Task<object> InsertWithSelect()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -189,7 +190,7 @@ namespace educationalProject.Models.Wrappers
                insertcmd);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();

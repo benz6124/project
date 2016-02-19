@@ -83,17 +83,17 @@ namespace educationalProject.Controllers
                 //4.Add user to database base on select_user_type
                 object resultfromdb = null;
                 if (select_user_type == "อาจารย์")
-                    resultfromdb = teachercontext.Insert(userlist, curri_list);
+                    resultfromdb = await teachercontext.Insert(userlist, curri_list);
                 else if (select_user_type == "เจ้าหน้าที่")
-                    resultfromdb = staffcontext.Insert(userlist, curri_list);
+                    resultfromdb = await staffcontext.Insert(userlist, curri_list);
                 else if (select_user_type == "นักศึกษา")
-                    resultfromdb = studentcontext.Insert(userlist, curri_list);
+                    resultfromdb = await studentcontext.Insert(userlist, curri_list);
                 else if (select_user_type == "ศิษย์เก่า")
-                    resultfromdb = alumnicontext.Insert(userlist, curri_list);
+                    resultfromdb = await alumnicontext.Insert(userlist, curri_list);
                 else if (select_user_type == "บริษัท")
-                    resultfromdb = companycontext.Insert(userlist, curri_list);
+                    resultfromdb = await companycontext.Insert(userlist, curri_list);
                 else if (select_user_type == "ผู้ประเมินจากภายนอก")
-                    resultfromdb = assessorcontext.Insert(userlist, curri_list);
+                    resultfromdb = await assessorcontext.Insert(userlist, curri_list);
                 else
                     return BadRequest("กรุณาเลือกประเภทผู้ใช้งาน");
 
@@ -126,14 +126,14 @@ namespace educationalProject.Controllers
         }
 
         [ActionName("login")]
-        public IHttpActionResult PostForLogin(JObject usrpwdata)
+        public async Task<IHttpActionResult> PostForLogin(JObject usrpwdata)
         {
             UsernamePassword data = new UsernamePassword();
             data.username = usrpwdata["username"].ToString();
             data.password = usrpwdata["password"].ToString();
             oUsers context = new oUsers();
             data.username = data.username.ToLower();
-            object result = context.SelectUser(data.username);
+            object result = await context.SelectUser(data.username);
 
             //Check whether preferred user is exists?
             if (result.GetType().ToString() != "System.String")
@@ -167,13 +167,13 @@ namespace educationalProject.Controllers
         }
 
         [ActionName("changeusername")]
-        public IHttpActionResult PutForChangeUsername(JObject userdata)
+        public async Task<IHttpActionResult> PutForChangeUsername(JObject userdata)
         {
             oUsers datacontext = new oUsers();
             string username = userdata["username"].ToString().ToLower();
             int user_id = Convert.ToInt32(userdata["user_id"]);
 
-            object result = datacontext.UpdateUsername(username, user_id);
+            object result = await datacontext.UpdateUsername(username, user_id);
 
             if (result == null)
                 return Ok();

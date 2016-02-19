@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Models.ViewModels;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
@@ -20,7 +21,7 @@ namespace educationalProject.Models.Wrappers
                                  FieldName.LAB_NUM,Lab_officer.FieldName.LAB_NUM,Personnel.FieldName.USER_ID,
                                  FieldName.NAME) ;
         }
-        public object SelectByCurriculumAcademic()
+        public async Task<object> SelectByCurriculumAcademic()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -30,7 +31,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = getSelectByCurriculumAcademicCommand();
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -81,7 +82,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object Delete(List<Lab_list_detail> list)
+        public async Task<object> Delete(List<Lab_list_detail> list)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -97,7 +98,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format("{0} and ({1})", deleteprecmd, excludecond);
             try
             {
-                d.iCommand.ExecuteNonQuery();
+                await d.iCommand.ExecuteNonQueryAsync();
                 return null;
             }
             catch (Exception ex)
@@ -113,7 +114,7 @@ namespace educationalProject.Models.Wrappers
         }
 
 
-        public object UpdateLabListWithSelect(Lab_list_detail ldata)
+        public async Task<object> UpdateLabListWithSelect(Lab_list_detail ldata)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -145,7 +146,7 @@ namespace educationalProject.Models.Wrappers
                 deletefromlabofficer, insertintolabofficer, selectcmd);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -197,7 +198,7 @@ namespace educationalProject.Models.Wrappers
         }
 
 
-        public object InsertNewLabListWithSelect(Lab_list_detail ldata)
+        public async Task<object> InsertNewLabListWithSelect(Lab_list_detail ldata)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -244,7 +245,7 @@ namespace educationalProject.Models.Wrappers
 
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();

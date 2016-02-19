@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 
 namespace educationalProject.Models.Wrappers
 {
     public class oUser_type : User_type
     {
-        public object Select()
+        public async Task<object> Select()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -17,7 +18,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format("select * from {0} where user_type != 'ผู้ดูแลระบบ'", FieldName.TABLE_NAME);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();

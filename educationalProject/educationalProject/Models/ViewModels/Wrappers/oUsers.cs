@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using educationalProject.Models.Wrappers;
 using educationalProject.Utils;
@@ -748,7 +749,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
 
             return string.Format(" BEGIN {0} {1} {2} {3} END ", createtabletemp99, insertintotemp99_1, insertintotemp99_2, selectcmd);
         }
-        public object SelectUser(string preferredusername)
+        public async Task<object> SelectUser(string preferredusername)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -779,7 +780,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             d.iCommand.CommandText = selectcmd;
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -1101,7 +1102,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             return null;
         }
 
-        public object UpdateUsername(string preferredusername, int user_id)
+        public async Task<object> UpdateUsername(string preferredusername, int user_id)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -1112,7 +1113,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 User_list.FieldName.USER_ID,user_id);
             try
             {
-                d.iCommand.ExecuteNonQuery();
+                await d.iCommand.ExecuteNonQueryAsync();
                 return null;
             }
             catch (Exception ex)

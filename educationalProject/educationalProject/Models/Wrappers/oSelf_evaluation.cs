@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
 {
     public class oSelf_evaluation : Self_evaluation
     {
-        public object InsertOrUpdate(List<oSelf_evaluation> list)
+        public async Task<object> InsertOrUpdate(List<oSelf_evaluation> list)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -42,7 +43,7 @@ namespace educationalProject.Models.Wrappers
                                        "END", selectcmd, insertcmd, updatecmd);
             try
             {
-                d.iCommand.ExecuteNonQuery();
+                await d.iCommand.ExecuteNonQueryAsync();
                 return null;
             }
             catch (Exception ex)

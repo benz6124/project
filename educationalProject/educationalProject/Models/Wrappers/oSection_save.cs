@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
 {
     public class oSection_save : Section_save
     {
 
-        public object SelectWhere()
+        public async Task<object> SelectWhere()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -23,7 +24,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURRI_ID, curri_id));
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -64,7 +65,7 @@ namespace educationalProject.Models.Wrappers
             return null;
         }
 
-        public object InsertOrUpdate()
+        public async Task<object> InsertOrUpdate()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -89,7 +90,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURRI_ID, curri_id));
             try
             {
-                d.iCommand.ExecuteNonQuery();
+                await d.iCommand.ExecuteNonQueryAsync();
                 return null;
             }
             catch (Exception ex)

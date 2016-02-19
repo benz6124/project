@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Threading.Tasks;
 using educationalProject.Models.Wrappers;
 namespace educationalProject.Controllers
 {
@@ -11,9 +12,9 @@ namespace educationalProject.Controllers
     {
         private oSub_indicator datacontext = new oSub_indicator();
         //Retrieve sub_indicator by indicator data
-        public IHttpActionResult PostByIndicator(oIndicator data)
+        public async Task<IHttpActionResult> PostByIndicator(oIndicator data)
         {
-            object result = datacontext.SelectByIndicatorWithKeepAcaYearSource(data);
+            object result = await datacontext.SelectByIndicatorWithKeepAcaYearSource(data);
             return Ok(result);
         }
     }

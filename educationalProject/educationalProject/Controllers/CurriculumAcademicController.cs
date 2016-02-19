@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Threading.Tasks;
 using educationalProject.Models;
 using educationalProject.Models.Wrappers;
 namespace educationalProject.Controllers
@@ -13,32 +14,32 @@ namespace educationalProject.Controllers
         private oCurriculum_academic datacontext = new oCurriculum_academic();
 
         [ActionName("getmaxacayear")]
-        public IHttpActionResult GetMaxAcademicYear()
+        public async Task<IHttpActionResult> GetMaxAcademicYear()
         {
-            object result = datacontext.SelectMaxAcademicYear();
+            object result = await datacontext.SelectMaxAcademicYear();
             return Ok(result);
         }
 
         [ActionName("getdistinctacayear")]
-        public IHttpActionResult GetDistinctAcademicYear()
+        public async Task<IHttpActionResult> GetDistinctAcademicYear()
         {
-            object result = datacontext.SelectDistinctAcademicYear();
+            object result = await datacontext.SelectDistinctAcademicYear();
             return Ok(result);
         }
 
         [ActionName("getByCurriculum")]
-        public IHttpActionResult PostByCurriculum(oCu_curriculum data)
+        public async Task<IHttpActionResult> PostByCurriculum(oCu_curriculum data)
         {
             if (data.curri_id == null) return BadRequest("กรุณาเลือกหลักสูตร");
             datacontext.curri_id = data.curri_id;
-            object result = datacontext.SelectByCurriculum();
+            object result = await datacontext.SelectByCurriculum();
             return Ok(result);
         }
 
         [ActionName("add")]
-        public IHttpActionResult PostNewCurriculumAcademic(oCurriculum_academic data)
+        public async Task<IHttpActionResult> PostNewCurriculumAcademic(oCurriculum_academic data)
         {
-            object result = data.Insert();
+            object result = await data.Insert();
             if (result == null)
                 return Ok();
             else if (result.ToString().Contains("Duplicate"))

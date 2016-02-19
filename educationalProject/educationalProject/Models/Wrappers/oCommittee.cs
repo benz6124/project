@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Models.ViewModels;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
 {
     public class oCommittee : Committee
     {
-        public object SelectWithBriefDetail()
+        public async Task<object> SelectWithBriefDetail()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -21,7 +22,7 @@ namespace educationalProject.Models.Wrappers
                 Teacher.FieldName.ALIAS_NAME);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -61,7 +62,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object SelectNonCommitteeWithBriefDetail(List<string> user_list)
+        public async Task<object> SelectNonCommitteeWithBriefDetail(List<string> user_list)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -122,7 +123,7 @@ namespace educationalProject.Models.Wrappers
                 insertintotemp5_2, selectcmd);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -159,7 +160,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object InsertNewCommitteeWithSelect(List<string> user_list)
+        public async Task<object> InsertNewCommitteeWithSelect(List<string> user_list)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -183,7 +184,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format("BEGIN {0} {1} END",insertcmd,selectcmd);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -223,7 +224,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object Delete(List<string> user_list)
+        public async Task<object> Delete(List<string> user_list)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -238,7 +239,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = deletecmd;
             try
             {
-                d.iCommand.ExecuteNonQuery();
+                await d.iCommand.ExecuteNonQueryAsync();
                     return null;
             }
             catch (Exception ex)

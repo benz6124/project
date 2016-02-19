@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Threading.Tasks;
 using educationalProject.Models.ViewModels;
 using educationalProject.Models.Wrappers;
 using Newtonsoft.Json.Linq;
@@ -14,17 +15,17 @@ namespace educationalProject.Controllers
         private oLab_list datacontext = new oLab_list();
 
         [ActionName("getlablist")]
-        public IHttpActionResult PostForQueryLabList(oCurriculum_academic data)
+        public async Task<IHttpActionResult> PostForQueryLabList(oCurriculum_academic data)
         {
             datacontext.aca_year = data.aca_year;
             datacontext.curri_id = data.curri_id;
-            return Ok(datacontext.SelectByCurriculumAcademic());
+            return Ok(await datacontext.SelectByCurriculumAcademic());
         }
 
 
 
         [ActionName("newlablist")]
-        public IHttpActionResult PostForNewLabList(JObject data)
+        public async Task<IHttpActionResult> PostForNewLabList(JObject data)
         {
             Lab_list_detail detail = new Lab_list_detail
             {
@@ -42,7 +43,7 @@ namespace educationalProject.Controllers
                     user_id = Convert.ToInt32(item["user_id"])
                 });
             }
-            object result = datacontext.InsertNewLabListWithSelect(detail);
+            object result = await datacontext.InsertNewLabListWithSelect(detail);
             if (result.GetType().ToString() != "System.String")
                 return Ok(result);
             else
@@ -50,7 +51,7 @@ namespace educationalProject.Controllers
         }
 
         [ActionName("edit")]
-        public IHttpActionResult Put(JObject data)
+        public async Task<IHttpActionResult> Put(JObject data)
         {
             Lab_list_detail detail = new Lab_list_detail
             {
@@ -70,7 +71,7 @@ namespace educationalProject.Controllers
                 });
             }
 
-            object result = datacontext.UpdateLabListWithSelect(detail);
+            object result = await datacontext.UpdateLabListWithSelect(detail);
             if (result.GetType().ToString() != "System.String")
                 return Ok(result);
             else
@@ -78,9 +79,9 @@ namespace educationalProject.Controllers
         }
 
         [ActionName("delete")]
-        public IHttpActionResult PutForDeleteLab(List<Lab_list_detail> list)
+        public async Task<IHttpActionResult> PutForDeleteLab(List<Lab_list_detail> list)
         {
-            object result = datacontext.Delete(list);
+            object result = await datacontext.Delete(list);
             if (result == null)
                 return Ok();
             else

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Models.ViewModels;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
@@ -69,7 +70,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object SelectWithDetail(oCurriculum_academic curriacadata)
+        public async Task<object> SelectWithDetail(oCurriculum_academic curriacadata)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -82,7 +83,7 @@ namespace educationalProject.Models.Wrappers
 
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -138,7 +139,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object SelectWithResult(int qid)
+        public async Task<object> SelectWithResult(int qid)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -200,7 +201,7 @@ namespace educationalProject.Models.Wrappers
     
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -254,7 +255,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object Delete(List<Questionare_set_detail> list)
+        public async Task<object> Delete(List<Questionare_set_detail> list)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -270,7 +271,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format("{0} and ({1})", deleteprecmd, excludecond);
             try
             {
-                int rowAffected = d.iCommand.ExecuteNonQuery();
+                await d.iCommand.ExecuteNonQueryAsync();
                 return null;
             }
             catch (Exception ex)
@@ -285,7 +286,7 @@ namespace educationalProject.Models.Wrappers
             }
         }
 
-        public object InsertNewQuestionareWithSelect(Questionare_set_detail_full qdata)
+        public async Task<object> InsertNewQuestionareWithSelect(Questionare_set_detail_full qdata)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -360,7 +361,7 @@ namespace educationalProject.Models.Wrappers
 
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();

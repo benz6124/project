@@ -15,33 +15,33 @@ namespace educationalProject.Controllers
     {
         private oEvidence datacontext = new oEvidence();
         [ActionName("getnormal")]
-        public IHttpActionResult PostByIndicatorAndCurriculum(JObject obj)
+        public async Task<IHttpActionResult> PostByIndicatorAndCurriculum(JObject obj)
         {
             oIndicator data = new oIndicator
             {
                 aca_year = Convert.ToInt32(obj["aca_year"]),
                 indicator_num = Convert.ToInt32(obj["indicator_num"])
             };
-            return Ok(datacontext.SelectByIndicatorAndCurriculum(data, obj["curri_id"].ToString()));
+            return Ok(await datacontext.SelectByIndicatorAndCurriculum(data, obj["curri_id"].ToString()));
         }
 
         [ActionName("getwithtname")]
-        public IHttpActionResult PostByIndicatorAndCurriculumWithGetName(JObject obj)
+        public async Task<IHttpActionResult> PostByIndicatorAndCurriculumWithGetName(JObject obj)
         {
             oIndicator data = new oIndicator
             {
                 aca_year = Convert.ToInt32(obj["aca_year"]),
                 indicator_num = Convert.ToInt32(obj["indicator_num"])
             };
-            return Ok(datacontext.SelectByIndicatorAndCurriculumWithTName(data, obj["curri_id"].ToString()));
+            return Ok(await datacontext.SelectByIndicatorAndCurriculumWithTName(data, obj["curri_id"].ToString()));
         }
 
         [ActionName("getbycurriculumacademic")]
-        public IHttpActionResult PostByCurriculumAcademic(oCurriculum_academic data)
+        public async Task<IHttpActionResult> PostByCurriculumAcademic(oCurriculum_academic data)
         {
             datacontext.curri_id = data.curri_id;
             datacontext.aca_year = data.aca_year;
-            return Ok(datacontext.SelectByCurriculumAcademic());
+            return Ok(await datacontext.SelectByCurriculumAcademic());
         }
 
         [ActionName("newevidence")]
@@ -77,7 +77,7 @@ namespace educationalProject.Controllers
                 datacontext.file_name = "download/evidence/" + newfilename;
                 File.Move(string.Format("{0}/{1}", savepath, fileInfo.Name), string.Format("{0}/{1}", savepath, newfilename));
 
-                object resultfromdb = datacontext.InsertNewEvidenceWithSelect();
+                object resultfromdb = await datacontext.InsertNewEvidenceWithSelect();
                 if (resultfromdb.GetType().ToString() != "System.String")
                     return Ok(resultfromdb);
                 else
@@ -124,7 +124,7 @@ namespace educationalProject.Controllers
                 datacontext.file_name = "download/evidence/" + newfilename;
                 File.Move(string.Format("{0}/{1}", savepath, fileInfo.Name), string.Format("{0}/{1}", savepath, newfilename));
 
-                object resultfromdb = datacontext.InsertNewPrimaryEvidenceWithSelect();
+                object resultfromdb = await datacontext.InsertNewPrimaryEvidenceWithSelect();
                 if (resultfromdb.GetType().ToString() != "System.String")
                     return Ok(resultfromdb);
                 else
@@ -137,9 +137,9 @@ namespace educationalProject.Controllers
         }
 
         [ActionName("newevidencefromothers")]
-        public IHttpActionResult PutNewEvidenceFromOthers(oEvidence data)
+        public async Task<IHttpActionResult> PutNewEvidenceFromOthers(oEvidence data)
         {
-            object result = data.InsertNewEvidenceWithSelect();
+            object result = await data.InsertNewEvidenceWithSelect();
             if (result.GetType().ToString() != "System.String")
                 return Ok(result);
             else
@@ -147,10 +147,10 @@ namespace educationalProject.Controllers
         }
 
         [ActionName("updateevidence")]
-        public IHttpActionResult PutForUpdateEvidence(List<Evidence_with_t_name> list)
+        public async Task<IHttpActionResult> PutForUpdateEvidence(List<Evidence_with_t_name> list)
         {
             //Retrieve delete file_name from update evidence
-            object result = datacontext.Update(list);
+            object result = await datacontext.Update(list);
             if (result.GetType().ToString() != "System.String")
             {
                 string delpath = WebApiApplication.SERVERPATH;
@@ -210,7 +210,7 @@ namespace educationalProject.Controllers
                 datacontext.file_name = "download/evidence/" + newfilename;
                 File.Move(string.Format("{0}/{1}", savepath, fileInfo.Name), string.Format("{0}/{1}", savepath, newfilename));
 
-                object resultfromdb = datacontext.UpdateEvidenceWithSelect();
+                object resultfromdb = await datacontext.UpdateEvidenceWithSelect();
 
 
                 if (resultfromdb.GetType().ToString() != "System.String")

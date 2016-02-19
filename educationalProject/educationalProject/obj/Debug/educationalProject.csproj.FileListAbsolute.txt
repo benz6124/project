@@ -193,6 +193,5 @@ C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\education
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb
-D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AspNet.WebApi.Extensions.Compression.Server.dll
 D:\4D\project\educationalProject\educationalProject\bin\System.Net.Http.Extensions.Compression.Core.dll

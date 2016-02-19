@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
 {
@@ -49,7 +50,7 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
-        public object SelectMaxAcademicYear()
+        public async Task<object> SelectMaxAcademicYear()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -58,7 +59,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format("select MAX({1})+1 from {0}", FieldName.TABLE_NAME,FieldName.ACA_YEAR);
             try
             {
-                object res = d.iCommand.ExecuteScalar();
+                object res = await d.iCommand.ExecuteScalarAsync();
                 if (res != null)
                 {
                     return res;
@@ -81,7 +82,7 @@ namespace educationalProject.Models.Wrappers
             }
         }
 
-        public object SelectByCurriculum()
+        public async Task<object> SelectByCurriculum()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -91,7 +92,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURRI_ID, curri_id));
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -126,7 +127,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object Insert()
+        public async Task<object> Insert()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -138,15 +139,8 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.ACA_YEAR, aca_year));
             try
             {
-                int rowAffected = d.iCommand.ExecuteNonQuery();
-                if (rowAffected == 1)
-                {
-                    return null;
-                }
-                else
-                {
-                    return "No cu_curriculum academic are inserted.";
-                }
+                await d.iCommand.ExecuteNonQueryAsync();
+                return null;
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
@@ -163,7 +157,7 @@ namespace educationalProject.Models.Wrappers
             }
         }
 
-        public object SelectDistinctAcademicYear()
+        public async Task<object> SelectDistinctAcademicYear()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -172,7 +166,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format("select distinct {1} from {0}", FieldName.TABLE_NAME,FieldName.ACA_YEAR);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();

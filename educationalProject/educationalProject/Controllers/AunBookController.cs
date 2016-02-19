@@ -34,12 +34,12 @@ namespace educationalProject.Controllers
             test["23"][2] = 2;
             return Ok(test);
         }
-        public IHttpActionResult PostToQueryDownloadLinkByCurriculumAcademic(oCurriculum_academic data)
+        public async Task<IHttpActionResult> PostToQueryDownloadLinkByCurriculumAcademic(oCurriculum_academic data)
         {
             if (data.curri_id == null) return BadRequest();
             datacontext.curri_id = data.curri_id;
             datacontext.aca_year = data.aca_year;
-            object result = datacontext.SelectFileDownloadLink();
+            object result = await datacontext.SelectFileDownloadLink();
             if (result == null)
                 return Ok(datacontext.file_name);
             else if (result.ToString().Contains("notfound"))
@@ -78,7 +78,7 @@ namespace educationalProject.Controllers
 
                 string oldfilename = datacontext.file_name;
 
-                object resultfromdb = datacontext.InsertOrUpdate();
+                object resultfromdb = await datacontext.InsertOrUpdate();
 
                 if (resultfromdb == null)
                 {

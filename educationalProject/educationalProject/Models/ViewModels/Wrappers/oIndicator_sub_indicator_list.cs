@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 namespace educationalProject.Models.ViewModels.Wrappers
 {
     public class oIndicator_sub_indicator_list : Indicator_sub_indicator_list
     {
-        public object SelectByAcademicYear(int year)
+        public async Task<object> SelectByAcademicYear(int year)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -44,7 +45,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} END",createtabletemp1,insertintotemp1,selectcmd);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -96,7 +97,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             return result;
         }
 
-        public object UpdateEntireList(List<oIndicator_sub_indicator_list> list)
+        public async Task<object> UpdateEntireList(List<oIndicator_sub_indicator_list> list)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -123,15 +124,8 @@ namespace educationalProject.Models.ViewModels.Wrappers
             d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} END",delcmd,insertintoindicatorcmd,insertintosubindicatorcmd);
             try
             {
-                int rowAffected = d.iCommand.ExecuteNonQuery();
-                if (rowAffected > 0)
-                {
-                    return null;
-                }
-                else
-                {
-                    return "No indicator-sub indicator data are updated.";
-                }
+                await d.iCommand.ExecuteNonQueryAsync();
+                return null;
             }
             catch (Exception ex)
             {
@@ -145,7 +139,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             }
         }
 
-        public object UpdateOnlySubIndicatorList(List<Sub_indicator> list)
+        public async Task<object> UpdateOnlySubIndicatorList(List<Sub_indicator> list)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -162,15 +156,9 @@ namespace educationalProject.Models.ViewModels.Wrappers
             d.iCommand.CommandText = string.Format("BEGIN\n{0}\n{1}\nEND", delcmd, insertintosubindicatorcmd);
             try
             {
-                int rowAffected = d.iCommand.ExecuteNonQuery();
-                if (rowAffected > 0)
-                {
-                    return null;
-                }
-                else
-                {
-                    return "No sub_indicator data are updated.";
-                }
+                await d.iCommand.ExecuteNonQueryAsync();
+                return null;
+
             }
             catch (Exception ex)
             {
@@ -183,8 +171,6 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 d.SQLDisconnect();
             }
         }
-
-        
 
     }
 }

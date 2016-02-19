@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Threading.Tasks;
 using educationalProject.Models.ViewModels;
 using educationalProject.Models.Wrappers;
 using educationalProject.Models;
@@ -13,7 +14,7 @@ namespace educationalProject.Controllers
     public class PersonnelCurriculumController : ApiController
     {
         oUser_curriculum datacontext = new oUser_curriculum();
-        public IHttpActionResult Post(JObject data)
+        public async Task<IHttpActionResult> Post(JObject data)
         {
             List<User_curriculum> list = new List<User_curriculum>();
             JArray p_list = (JArray)data["these_people"];
@@ -26,7 +27,7 @@ namespace educationalProject.Controllers
                 });
             }
 
-            object resultfromdb = datacontext.InsertNewCurriculumTeacherStaffWithSelect(list);
+            object resultfromdb = await datacontext.InsertNewCurriculumTeacherStaffWithSelect(list);
 
             if (resultfromdb.GetType().ToString() != "System.String")
                 return Ok(resultfromdb);
@@ -34,7 +35,7 @@ namespace educationalProject.Controllers
                 return InternalServerError(new Exception(resultfromdb.ToString()));
         }
 
-        public IHttpActionResult Put(JObject data)
+        public async Task<IHttpActionResult> Put(JObject data)
         {
             List<User_curriculum> list = new List<User_curriculum>();
             JArray p_list = (JArray)data["people"];
@@ -57,7 +58,7 @@ namespace educationalProject.Controllers
                     user_id = -999
                 });
             }
-            object resultfromdb = datacontext.Delete(list);
+            object resultfromdb = await datacontext.Delete(list);
 
             if (resultfromdb == null)
                 return Ok();

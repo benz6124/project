@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 using educationalProject.Models.ViewModels;
 namespace educationalProject.Models.Wrappers
@@ -108,7 +109,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object SelectWithDetailByCurriculum(string curri_id_data)
+        public async Task<object> SelectWithDetailByCurriculum(string curri_id_data)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -118,7 +119,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = getSelectByCurriculumCommand();
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -164,7 +165,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object Delete(List<Research_detail> list)
+        public async Task<object> Delete(List<Research_detail> list)
         {
             DBConnector d = new DBConnector();
             List<string> file_to_delete = new List<string>();
@@ -181,7 +182,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format("{0} and ({1})", deleteprecmd, excludecond);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -214,7 +215,7 @@ namespace educationalProject.Models.Wrappers
         }
 
 
-        public object InsertNewResearchWithSelect(Research_detail rdata)
+        public async Task<object> InsertNewResearchWithSelect(Research_detail rdata)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -256,7 +257,7 @@ namespace educationalProject.Models.Wrappers
                 insertintotemp1, insertintotemp2, insertintoresowner, selectcmd);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -303,7 +304,7 @@ namespace educationalProject.Models.Wrappers
         }
 
 
-        public object UpdateResearchWithSelect(Research_detail rdata)
+        public async Task<object> UpdateResearchWithSelect(Research_detail rdata)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -354,7 +355,7 @@ namespace educationalProject.Models.Wrappers
                 insertintotemp1, deletefromresearchowner, insertintoresearchowner, selectcmd);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();

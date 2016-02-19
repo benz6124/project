@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 using educationalProject.Models.Wrappers;
 namespace educationalProject.Models.ViewModels.Wrappers
@@ -22,7 +23,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                           User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.CURRI_ID,
                           curri_id, User_curriculum.FieldName.USER_ID);
         }
-        public object SelectPersonnelIdAndTName(string curri_id,int selectmode) 
+        public async Task<object> SelectPersonnelIdAndTName(string curri_id,int selectmode) 
             //selectmode 0 : only teacher and staff,1 for all
         {
             DBConnector d = new DBConnector();
@@ -54,7 +55,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
 
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -97,7 +98,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             return result;
         }
 
-        public object selectWithFullDetail(string curri_id_data)
+        public async Task<object> selectWithFullDetail(string curri_id_data)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -277,7 +278,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 insertintotemp1_1, insertintotemp1_2, insertintotemp1_3, insertintotemp1_4, selectcmd);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -366,7 +367,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             return result;
         }
 
-        public object SelectPersonnelWithCurriculum()
+        public async Task<object> SelectPersonnelWithCurriculum()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -376,7 +377,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             d.iCommand.CommandText = GetSelectWithCurriculumCommand(curri_id);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();

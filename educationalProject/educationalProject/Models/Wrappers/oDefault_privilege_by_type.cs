@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Models.ViewModels;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
 {
     public class oDefault_privilege_by_type : Default_privilege_by_type
     {
-        public object SelectByTitle()
+        public async Task<object> SelectByTitle()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -75,7 +76,7 @@ namespace educationalProject.Models.Wrappers
                 insertintotemp5_2, insertintotemp5_3, selcmd);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable(); 
@@ -119,7 +120,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object InsertOrUpdate(Default_privilege_by_type_list_with_privilege_choices ddata)
+        public async Task<object> InsertOrUpdate(Default_privilege_by_type_list_with_privilege_choices ddata)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -142,7 +143,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = InsertOrUpdateCommand;
             try
             {
-                d.iCommand.ExecuteNonQuery();
+                await d.iCommand.ExecuteNonQueryAsync();
             }
             catch (Exception ex)
             {

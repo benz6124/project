@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 using educationalProject.Models.ViewModels;
 namespace educationalProject.Models.Wrappers
@@ -113,7 +114,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
         
-        public object SelectByIndicatorAndCurriculum(oIndicator inddata, string curri_id)
+        public async Task<object> SelectByIndicatorAndCurriculum(oIndicator inddata, string curri_id)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -125,7 +126,7 @@ namespace educationalProject.Models.Wrappers
                 curri_id,FieldName.ACA_YEAR,inddata.aca_year,FieldName.EVIDENCE_REAL_CODE);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -168,7 +169,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object SelectByIndicatorAndCurriculumWithTName(oIndicator inddata, string curri_id)
+        public async Task<object> SelectByIndicatorAndCurriculumWithTName(oIndicator inddata, string curri_id)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -183,7 +184,7 @@ namespace educationalProject.Models.Wrappers
                 );
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -227,7 +228,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object SelectByCurriculumAcademic()
+        public async Task<object> SelectByCurriculumAcademic()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -238,7 +239,7 @@ namespace educationalProject.Models.Wrappers
                 curri_id, FieldName.ACA_YEAR, aca_year);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -280,10 +281,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-
-
-
-        public object InsertNewEvidenceWithSelect()
+        public async Task<object> InsertNewEvidenceWithSelect()
         {
             DBConnector d = new DBConnector();
             List<Evidence_with_t_name> result = new List<Evidence_with_t_name>();
@@ -307,7 +305,7 @@ namespace educationalProject.Models.Wrappers
 
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -352,7 +350,7 @@ namespace educationalProject.Models.Wrappers
         }
 
 
-        public object InsertNewPrimaryEvidenceWithSelect()
+        public async Task<object> InsertNewPrimaryEvidenceWithSelect()
         {
             DBConnector d = new DBConnector();
             List<Evidence_with_t_name> result = new List<Evidence_with_t_name>();
@@ -382,7 +380,7 @@ string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
 
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -426,7 +424,7 @@ string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
             return result;
         }
 
-        public object Update(List<Evidence_with_t_name> list)
+        public async Task<object> Update(List<Evidence_with_t_name> list)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -477,7 +475,7 @@ string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
             List<string> strlist = new List<string>();
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -510,7 +508,7 @@ string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
         }
 
 
-        public object UpdateEvidenceWithSelect()
+        public async Task<object> UpdateEvidenceWithSelect()
         {
             DBConnector d = new DBConnector();
             List<Evidence_with_t_name> result = new List<Evidence_with_t_name>();
@@ -565,7 +563,7 @@ string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
 
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();

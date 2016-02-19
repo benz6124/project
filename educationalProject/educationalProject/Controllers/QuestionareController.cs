@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Threading.Tasks;
 using educationalProject.Models.Wrappers;
 using educationalProject.Models.ViewModels;
 using Newtonsoft.Json.Linq;
@@ -13,16 +14,16 @@ namespace educationalProject.Controllers
     {
         private oQuestionare_set datacontext = new oQuestionare_set();
         [ActionName("getquestionareset")]
-        public IHttpActionResult PostForQueryQuestionareSet(oCurriculum_academic data)
+        public async Task<IHttpActionResult> PostForQueryQuestionareSet(oCurriculum_academic data)
         {
-            return Ok(datacontext.SelectWithDetail(data));
+            return Ok(await datacontext.SelectWithDetail(data));
         }
 
         [ActionName("add")]
-        public IHttpActionResult PutForAddQuestionare(Questionare_set_detail_full data)
+        public async Task<IHttpActionResult> PutForAddQuestionare(Questionare_set_detail_full data)
         {
             data.date = DateTime.Now.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
-            object result = datacontext.InsertNewQuestionareWithSelect(data);
+            object result = await datacontext.InsertNewQuestionareWithSelect(data);
             if (result.GetType().ToString() != "System.String")
                 return Ok(result);
             else
@@ -30,9 +31,9 @@ namespace educationalProject.Controllers
         }
 
         [ActionName("delete")]
-        public IHttpActionResult PutForDeleteQuestionare(List<Questionare_set_detail> list)
+        public async Task<IHttpActionResult> PutForDeleteQuestionare(List<Questionare_set_detail> list)
         {
-            object result = datacontext.Delete(list);
+            object result = await datacontext.Delete(list);
             if (result == null)
                 return Ok();
             else

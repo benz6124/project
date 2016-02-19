@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Newtonsoft.Json.Linq;
+using System.Threading.Tasks;
 using educationalProject.Models.Wrappers;
 using educationalProject.Models.ViewModels.Wrappers;
 namespace educationalProject.Controllers
@@ -25,9 +26,9 @@ namespace educationalProject.Controllers
         }*/
 
         [ActionName("overall")]
-        public IHttpActionResult PostForQueryOverallResult(oCurriculum_academic data)
+        public async Task<IHttpActionResult> PostForQueryOverallResult(oCurriculum_academic data)
         {
-            return Ok(datacontext.Select(data));
+            return Ok(await datacontext.Select(data));
         }
     }
 }

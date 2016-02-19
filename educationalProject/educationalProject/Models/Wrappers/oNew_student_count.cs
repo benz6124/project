@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
 {
@@ -60,7 +61,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object SelectWhere(string wherecond)
+        public async Task<object> SelectWhere(string wherecond)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -69,7 +70,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format("select * from {0} where {1}", FieldName.TABLE_NAME, wherecond);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -113,7 +114,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object InsertOrUpdate()
+        public async Task<object> InsertOrUpdate()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -132,7 +133,7 @@ namespace educationalProject.Models.Wrappers
                     FieldName.NUM_GOODSTUDY_M, FieldName.NUM_GOODSTUDY_F, FieldName.NUM_CHILDSTAFF_M, FieldName.NUM_CHILDSTAFF_F, FieldName.NUM_DIRECT_M, FieldName.NUM_DIRECT_F, FieldName.NUM_ADMIS_M, FieldName.NUM_ADMIS_F,FieldName.NUM_OTHERS_M,FieldName.NUM_OTHERS_F);
             try
             {
-                d.iCommand.ExecuteNonQuery();
+                await d.iCommand.ExecuteNonQueryAsync();
                 return null;
             }
             catch (Exception ex)

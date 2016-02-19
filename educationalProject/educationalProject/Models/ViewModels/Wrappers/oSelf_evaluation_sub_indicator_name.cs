@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Models;
 using educationalProject.Models.Wrappers;
 using educationalProject.Utils;
@@ -9,7 +10,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
 {
     public class oSelf_evaluation_sub_indicator_name : vSelf_evaluation_sub_indicator_name
     {
-        public object SelectByIndicatorAndCurriculum(oIndicator inddata,string curri_id)
+        public async Task<object> SelectByIndicatorAndCurriculum(oIndicator inddata,string curri_id)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -78,7 +79,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} END", createtabletemp90, insertintotemp90_1, insertintotemp90_2, selectcmd);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();

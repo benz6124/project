@@ -14,12 +14,12 @@ namespace educationalProject.Controllers
     public class OthersEvaluationController : ApiController
     {
         private oOthers_evaluation datacontext = new oOthers_evaluation();
-        public IHttpActionResult Post(JObject data)
+        public async Task<IHttpActionResult> Post(JObject data)
         {
             datacontext.aca_year = Convert.ToInt32(data["aca_year"]);
             datacontext.indicator_num = Convert.ToInt32(data["indicator_num"]);
             datacontext.curri_id = data["curri_id"].ToString();
-            return Ok(datacontext.SelectByIndicator());
+            return Ok(await datacontext.SelectByIndicator());
         }
 
         public async Task<IHttpActionResult> Put()
@@ -74,7 +74,7 @@ namespace educationalProject.Controllers
                     listdata.file_name = "";
                 }
 
-                object resultfromdb = datacontext.InsertOrUpdate(listdata);
+                object resultfromdb = await datacontext.InsertOrUpdate(listdata);
 
 
                 if (resultfromdb == null)

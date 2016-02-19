@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Threading.Tasks;
 using educationalProject.Models.Wrappers;
 using educationalProject.Models.ViewModels.Wrappers;
 using Newtonsoft.Json.Linq;
@@ -12,7 +13,7 @@ namespace educationalProject.Controllers
     public class SelfEvaluationController : ApiController
     {
         private oSelf_evaluation datacontext = new oSelf_evaluation();
-        public IHttpActionResult PostToQuerySelfEvaluationData(JObject obj)
+        public async Task<IHttpActionResult> PostToQuerySelfEvaluationData(JObject obj)
         {
             oSelf_evaluation_sub_indicator_name datacontext = new oSelf_evaluation_sub_indicator_name();
             oIndicator data = new oIndicator
@@ -20,11 +21,11 @@ namespace educationalProject.Controllers
                 aca_year = Convert.ToInt32(obj["aca_year"]),
                 indicator_num = Convert.ToInt32(obj["indicator_num"])
             };
-            object result = datacontext.SelectByIndicatorAndCurriculum(data, obj["curri_id"].ToString());
+            object result = await datacontext.SelectByIndicatorAndCurriculum(data, obj["curri_id"].ToString());
             return Ok(result);
         }
 
-        public IHttpActionResult PutForUpdateSelfEvaluation(List<oSelf_evaluation> list)
+        public async Task<IHttpActionResult> PutForUpdateSelfEvaluation(List<oSelf_evaluation> list)
         {
             DateTime d = DateTime.Now;
             foreach (oSelf_evaluation item in list)
@@ -35,7 +36,7 @@ namespace educationalProject.Controllers
             datacontext.aca_year = list.First().aca_year;
             datacontext.curri_id = list.First().curri_id;
             datacontext.indicator_num = list.First().indicator_num;
-            object result = datacontext.InsertOrUpdate(list);
+            object result = await datacontext.InsertOrUpdate(list);
             if (result == null)
                 return Ok();
             else

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Threading.Tasks;
 using System.Security.Cryptography;
 using Newtonsoft.Json.Linq;
 using educationalProject.Models.Wrappers;
@@ -13,12 +14,12 @@ namespace educationalProject.Controllers
     public class AdminController : ApiController
     {
         private oAdmin datacontext = new oAdmin();
-        public IHttpActionResult Get()
+        public async Task<IHttpActionResult> Get()
         {
-            return Ok(datacontext.Select());
+            return Ok(await datacontext.Select());
         }
 
-        public IHttpActionResult PostForCreateNewAdmin(JObject data)
+        public async Task<IHttpActionResult> PostForCreateNewAdmin(JObject data)
         {
 
             const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -43,7 +44,7 @@ namespace educationalProject.Controllers
             datacontext.password = u.password;
             datacontext.t_name = data["t_name"].ToString();
 
-            object result = datacontext.InsertWithSelect();
+            object result = await datacontext.InsertWithSelect();
             if (result.GetType().ToString() != "System.String")
                 return Ok(result);
             else

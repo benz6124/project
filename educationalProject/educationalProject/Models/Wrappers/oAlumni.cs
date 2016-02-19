@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Models.ViewModels;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
@@ -26,7 +27,7 @@ namespace educationalProject.Models.Wrappers
 
             User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_ID);
         }
-        public object Insert(List<UsernamePassword> list, List<string> target_curri_id_list)
+        public async Task<object> Insert(List<UsernamePassword> list, List<string> target_curri_id_list)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -121,7 +122,7 @@ namespace educationalProject.Models.Wrappers
                 insertintotemp7, insertcmd, selectcmd);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();

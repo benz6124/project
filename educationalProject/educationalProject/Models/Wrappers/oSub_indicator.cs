@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using educationalProject.Utils;
 using System.Data;
+using System.Threading.Tasks;
 namespace educationalProject.Models.Wrappers
 {
     public class oSub_indicator : Sub_indicator
@@ -96,7 +97,7 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
-        public object SelectByIndicatorWithKeepAcaYearSource(oIndicator inddata)
+        public async Task<object> SelectByIndicatorWithKeepAcaYearSource(oIndicator inddata)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -106,7 +107,7 @@ namespace educationalProject.Models.Wrappers
                 FieldName.TABLE_NAME, FieldName.ACA_YEAR,inddata.aca_year,FieldName.INDICATOR_NUM,inddata.indicator_num);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -141,7 +142,7 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
-        public object Delete(string wherecond)
+        public async Task<object> Delete(string wherecond)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -150,7 +151,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = string.Format("delete from {0} where {1}", FieldName.TABLE_NAME, wherecond);
             try
             {
-                d.iCommand.ExecuteNonQuery();
+                await d.iCommand.ExecuteNonQueryAsync();
             }
             catch (Exception ex)
             {

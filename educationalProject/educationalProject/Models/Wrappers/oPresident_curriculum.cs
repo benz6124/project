@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
 {
     public class oPresident_curriculum : President_curriculum
     {
-        public object InsertOrUpdate()
+        public async Task<object> InsertOrUpdate()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -29,7 +30,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.TEACHER_ID, teacher_id));
             try
             {
-                d.iCommand.ExecuteNonQuery();
+                await d.iCommand.ExecuteNonQueryAsync();
                 return null;
             }
             catch (Exception ex)

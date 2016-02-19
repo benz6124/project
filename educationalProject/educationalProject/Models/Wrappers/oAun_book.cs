@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data;
 using educationalProject.Utils;
+using System.Threading.Tasks;
 namespace educationalProject.Models.Wrappers
 {
     public class oAun_book : Aun_book
@@ -52,7 +53,7 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
-        public object SelectFileDownloadLink()
+        public async Task<object> SelectFileDownloadLink()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -65,7 +66,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.ACA_YEAR, aca_year));
             try
             {
-                object result = d.iCommand.ExecuteScalar();
+                object result = await d.iCommand.ExecuteScalarAsync();
                 if (result != null)
                 {
                     file_name = result.ToString();
@@ -88,7 +89,7 @@ namespace educationalProject.Models.Wrappers
                 d.SQLDisconnect();
             }
         }
-        public object InsertOrUpdate()
+        public async Task<object> InsertOrUpdate()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -113,7 +114,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.ACA_YEAR, aca_year));
             try
             {
-                object filenameres = d.iCommand.ExecuteScalar();
+                object filenameres = await d.iCommand.ExecuteScalarAsync();
                 if (filenameres != null)
                 {
                     file_name = filenameres.ToString();

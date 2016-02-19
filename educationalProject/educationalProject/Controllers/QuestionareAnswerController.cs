@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using educationalProject.Models.Wrappers;
 using educationalProject.Models.ViewModels;
@@ -12,12 +13,12 @@ namespace educationalProject.Controllers
     public class QuestionareAnswerController : ApiController
     {
         oQuestionare_question_obj datacontext = new oQuestionare_question_obj();
-        public IHttpActionResult PostForQueryQuestions([FromBody]int questionare_set_id)
+        public async Task<IHttpActionResult> PostForQueryQuestions([FromBody]int questionare_set_id)
         {
-            return Ok(datacontext.SelectByQuestionIdAsQuestionForm(questionare_set_id));
+            return Ok(await datacontext.SelectByQuestionIdAsQuestionForm(questionare_set_id));
         }
 
-        public IHttpActionResult PutForAnswerQuestions(List<object> list)
+        public async Task<IHttpActionResult> PutForAnswerQuestions(List<object> list)
         {
             Questionare_question_form q = new Questionare_question_form();
             q.suggestion = JObject.Parse(list.Last().ToString())["suggestion"].ToString();
@@ -34,7 +35,7 @@ namespace educationalProject.Controllers
                 });
             }
 
-            object result = datacontext.InsertQuestionAnswer(q);
+            object result = await datacontext.InsertQuestionAnswer(q);
             if (result == null)
                 return Ok();
             else

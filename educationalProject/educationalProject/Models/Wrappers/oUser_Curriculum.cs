@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 using educationalProject.Models.ViewModels;
 namespace educationalProject.Models.Wrappers
 {
     public class oUser_curriculum : User_curriculum
     {
-        public object InsertNewCurriculumTeacherStaffWithSelect(List<User_curriculum> list)
+        public async Task<object> InsertNewCurriculumTeacherStaffWithSelect(List<User_curriculum> list)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -32,7 +33,7 @@ namespace educationalProject.Models.Wrappers
 
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -84,7 +85,7 @@ namespace educationalProject.Models.Wrappers
 
 
 
-        public object Delete(List<User_curriculum> list)
+        public async Task<object> Delete(List<User_curriculum> list)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -104,7 +105,7 @@ namespace educationalProject.Models.Wrappers
 
             try
             {
-                d.iCommand.ExecuteNonQuery();
+                await d.iCommand.ExecuteNonQueryAsync();
             }
             catch (Exception ex)
             {

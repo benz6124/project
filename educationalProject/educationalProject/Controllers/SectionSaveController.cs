@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Threading.Tasks;
 using educationalProject.Models.Wrappers;
 namespace educationalProject.Controllers
 {
@@ -26,15 +27,15 @@ namespace educationalProject.Controllers
             }
             return Ok(july28Formats*/
         }
-        public IHttpActionResult PostToQuerySectionSave(oSection_save data)
+        public async Task<IHttpActionResult> PostToQuerySectionSave(oSection_save data)
         {
-            object result = data.SelectWhere();
+            object result = await data.SelectWhere();
             if (result == null)
                 return Ok(data);
             else return InternalServerError(new Exception(result.ToString()));
         }
 
-        public IHttpActionResult PutForSectionSave(oSection_save data)
+        public async Task<IHttpActionResult> PutForSectionSave(oSection_save data)
         {
             DateTime d = DateTime.Now;
             datacontext.date = d.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
@@ -45,7 +46,7 @@ namespace educationalProject.Controllers
             datacontext.indicator_num = data.indicator_num;
             datacontext.sub_indicator_num = data.sub_indicator_num;
             datacontext.teacher_id = data.teacher_id;
-                object result = datacontext.InsertOrUpdate();
+                object result = await datacontext.InsertOrUpdate();
                 if (result == null)
                     return Ok();
                 else

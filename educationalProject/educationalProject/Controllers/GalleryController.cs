@@ -17,17 +17,17 @@ namespace educationalProject.Controllers
         private oGallery datacontext = new oGallery();
 
         [ActionName("getgallery")]
-        public IHttpActionResult PostToQueryGallery(oCurriculum_academic data)
+        public async Task<IHttpActionResult> PostToQueryGallery(oCurriculum_academic data)
         {
             datacontext.curri_id = data.curri_id;
             datacontext.aca_year = data.aca_year;
-            return Ok(datacontext.SelectByCurriculumAcademic());
+            return Ok(await datacontext.SelectByCurriculumAcademic());
         }
 
         [ActionName("delete")]
-        public IHttpActionResult PutForDeleteGallery(List<Gallery_detail> list)
+        public async Task<IHttpActionResult> PutForDeleteGallery(List<Gallery_detail> list)
         {
-            object result = datacontext.Delete(list);
+            object result = await datacontext.Delete(list);
             if (result.GetType().ToString() != "System.String")
             {
                 string delpath = WebApiApplication.SERVERPATH;
@@ -92,7 +92,7 @@ namespace educationalProject.Controllers
                 }
 
               
-                object resultfromdb = datacontext.InsertNewGalleryWithSelect(data);
+                object resultfromdb = await datacontext.InsertNewGalleryWithSelect(data);
 
                 if (resultfromdb.GetType().ToString() != "System.String")
                     return Ok(resultfromdb);
@@ -157,7 +157,7 @@ namespace educationalProject.Controllers
                 }
 
 
-                object resultfromdb = datacontext.UpdateGalleryWithSelect(data);
+                object resultfromdb = await datacontext.UpdateGalleryWithSelect(data);
 
                 if (resultfromdb.GetType().ToString() != "System.String")
                 {

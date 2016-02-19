@@ -22,11 +22,11 @@ namespace educationalProject.Controllers
             return Ok(datacontext.SelectByCurriculumAcademic());
         }
         [ActionName("getminutes")]
-        public IHttpActionResult PostForQueryMinutes(oCurriculum_academic data)
+        public async Task<IHttpActionResult> PostForQueryMinutes(oCurriculum_academic data)
         {
             datacontext.curri_id = data.curri_id;
             datacontext.aca_year = data.aca_year;
-            return Ok(datacontext.SelectByCurriculumAcademic());
+            return Ok(await datacontext.SelectByCurriculumAcademic());
         }
 
         [ActionName("add")]
@@ -89,7 +89,7 @@ namespace educationalProject.Controllers
                     }
                 }
                 
-                object resultfromdb = datacontext.InsertNewMinutesWithSelect(data);
+                object resultfromdb = await datacontext.InsertNewMinutesWithSelect(data);
 
                 if (resultfromdb.GetType().ToString() != "System.String")
                     return Ok(resultfromdb);
@@ -104,9 +104,9 @@ namespace educationalProject.Controllers
         }
 
         [ActionName("delete")]
-        public IHttpActionResult PutForDeleteMinutes(List<Minutes_detail> list)
+        public async Task<IHttpActionResult> PutForDeleteMinutes(List<Minutes_detail> list)
         {
-            object result = datacontext.Delete(list);
+            object result = await datacontext.Delete(list);
             if (result.GetType().ToString() != "System.String")
             {
                 string delpath = WebApiApplication.SERVERPATH;
@@ -203,7 +203,7 @@ namespace educationalProject.Controllers
                         }
                     }
                
-                object resultfromdb = datacontext.UpdateMinutesWithSelect(data);
+                object resultfromdb = await datacontext.UpdateMinutesWithSelect(data);
 
                 if (resultfromdb.GetType().ToString() != "System.String")
                 {

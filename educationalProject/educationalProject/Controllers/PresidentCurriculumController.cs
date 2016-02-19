@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Threading.Tasks;
 using educationalProject.Models.ViewModels.Wrappers;
 using educationalProject.Models;
 using educationalProject.Models.Wrappers;
@@ -11,14 +12,14 @@ namespace educationalProject.Controllers
 {
     public class PresidentCurriculumController : ApiController
     {
-        public IHttpActionResult PostToQueryPresidentCurriAndAllTeacherInCurri(Curriculum_academic data)
+        public async Task<IHttpActionResult> PostToQueryPresidentCurriAndAllTeacherInCurri(Curriculum_academic data)
         {
             oTeacher_educational datacontext = new oTeacher_educational();
-            return Ok(datacontext.SelectPresidentCurriAndAllTeacherInCurri(data));
+            return Ok(await datacontext.SelectPresidentCurriAndAllTeacherInCurri(data));
         }
-        public IHttpActionResult PutForUpdate(oPresident_curriculum data)
+        public async Task<IHttpActionResult> PutForUpdate(oPresident_curriculum data)
         {
-            object result = data.InsertOrUpdate();
+            object result = await data.InsertOrUpdate();
             if (result == null)
                 return Ok();
             else

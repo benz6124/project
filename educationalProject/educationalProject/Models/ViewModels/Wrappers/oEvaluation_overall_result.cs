@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 using educationalProject.Models.Wrappers;
 namespace educationalProject.Models.ViewModels.Wrappers
 {
     public class oEvaluation_overall_result : Evaluation_overall_result
     {
-        public object Select(oCurriculum_academic curriacadata)
+        public async Task<object> Select(oCurriculum_academic curriacadata)
         {
             //System.Globalization.CultureInfo en = new System.Globalization.CultureInfo("en-US");
             DBConnector d = new DBConnector();
@@ -127,7 +128,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             try
             {
                 //Retrieve self_evaluation data
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();

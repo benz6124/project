@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Utils;
 using educationalProject.Models.ViewModels;
 namespace educationalProject.Models.Wrappers
@@ -92,7 +93,7 @@ namespace educationalProject.Models.Wrappers
             }
         }
 
-        public object SelectByCurriculumAcademic()
+        public async Task<object> SelectByCurriculumAcademic()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -102,7 +103,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = getSelectByCurriculumAcademicCommand(false);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -175,7 +176,7 @@ namespace educationalProject.Models.Wrappers
         }
 
 
-        public object Delete(List<Minutes_detail> list)
+        public async Task<object> Delete(List<Minutes_detail> list)
         {
             DBConnector d = new DBConnector();
             List<string> file_to_delete = new List<string>();
@@ -219,7 +220,7 @@ namespace educationalProject.Models.Wrappers
 
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -251,7 +252,7 @@ namespace educationalProject.Models.Wrappers
             return file_to_delete;
         }
 
-        public object InsertNewMinutesWithSelect(Minutes_detail mdata)
+        public async Task<object> InsertNewMinutesWithSelect(Minutes_detail mdata)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -327,7 +328,7 @@ namespace educationalProject.Models.Wrappers
 
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -399,7 +400,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object UpdateMinutesWithSelect(Minutes_detail mdata)
+        public async Task<object> UpdateMinutesWithSelect(Minutes_detail mdata)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -497,7 +498,7 @@ namespace educationalProject.Models.Wrappers
 
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Models.ViewModels;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
@@ -89,7 +90,7 @@ namespace educationalProject.Models.Wrappers
             return string.Format("BEGIN {0} {1} {2} {3} END ", createtabletemp5, insertintotemp5_1, insertintotemp5_2, selectcmd);
         }
 
-        public object SelectByCurriculumAcademic()
+        public async Task<object> SelectByCurriculumAcademic()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -99,7 +100,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = getSelectByCurriculumAcademicCommand(false);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -154,7 +155,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object Delete(List<Gallery_detail> list)
+        public async Task<object> Delete(List<Gallery_detail> list)
         {
             DBConnector d = new DBConnector();
             List<string> file_to_delete = new List<string>();
@@ -194,7 +195,7 @@ namespace educationalProject.Models.Wrappers
 
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -226,7 +227,7 @@ namespace educationalProject.Models.Wrappers
             return file_to_delete;
         }
 
-        public object InsertNewGalleryWithSelect(Gallery_detail gdata)
+        public async Task<object> InsertNewGalleryWithSelect(Gallery_detail gdata)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -286,7 +287,7 @@ namespace educationalProject.Models.Wrappers
 
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -341,7 +342,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object UpdateGalleryWithSelect(Gallery_detail gdata)
+        public async Task<object> UpdateGalleryWithSelect(Gallery_detail gdata)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -410,7 +411,7 @@ namespace educationalProject.Models.Wrappers
 
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();

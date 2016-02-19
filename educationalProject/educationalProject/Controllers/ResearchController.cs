@@ -16,9 +16,9 @@ namespace educationalProject.Controllers
         private oResearch datacontext = new oResearch();
 
         [ActionName("getresearch")]
-        public IHttpActionResult PostForQueryResearch([FromBody]string curri_id)
+        public async Task<IHttpActionResult> PostForQueryResearch([FromBody]string curri_id)
         {
-            return Ok(datacontext.SelectWithDetailByCurriculum(curri_id));
+            return Ok(await datacontext.SelectWithDetailByCurriculum(curri_id));
         }
 
         [ActionName("newresearch")]
@@ -62,7 +62,7 @@ namespace educationalProject.Controllers
                 data.file_name = "download/research/" + newfilename;
                 File.Move(string.Format("{0}/{1}", savepath, fileInfo.Name), string.Format("{0}/{1}", savepath, newfilename));
 
-                object resultfromdb = datacontext.InsertNewResearchWithSelect(data);
+                object resultfromdb = await datacontext.InsertNewResearchWithSelect(data);
 
                 if (resultfromdb.GetType().ToString() != "System.String")
                     return Ok(resultfromdb);
@@ -123,7 +123,7 @@ namespace educationalProject.Controllers
                     data.file_name = datareceive["file_name"].ToString();
                 }
 
-                 object resultfromdb = datacontext.UpdateResearchWithSelect(data);
+                 object resultfromdb = await datacontext.UpdateResearchWithSelect(data);
 
                 if (resultfromdb.GetType().ToString() != "System.String")
                 {
@@ -148,9 +148,9 @@ namespace educationalProject.Controllers
         }
 
         [ActionName("delete")]
-        public IHttpActionResult PutForDeleteResearch(List<Research_detail> list)
+        public async Task<IHttpActionResult> PutForDeleteResearch(List<Research_detail> list)
         {
-            object result = datacontext.Delete(list);
+            object result = await datacontext.Delete(list);
             if (result.GetType().ToString() != "System.String")
             {
                 string delpath = WebApiApplication.SERVERPATH;
