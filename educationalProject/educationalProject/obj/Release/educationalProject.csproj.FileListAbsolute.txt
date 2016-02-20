@@ -29,3 +29,5 @@ D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AspNet.Identit
 D:\4D\project\educationalProject\educationalProject\obj\Release\educationalProject.dll
 D:\4D\project\educationalProject\educationalProject\obj\Release\educationalProject.pdb
 D:\4D\project\educationalProject\educationalProject\obj\Release\educationalProject.csprojResolveAssemblyReference.cache
+D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AspNet.WebApi.Extensions.Compression.Server.dll
+D:\4D\project\educationalProject\educationalProject\bin\System.Net.Http.Extensions.Compression.Core.dll
