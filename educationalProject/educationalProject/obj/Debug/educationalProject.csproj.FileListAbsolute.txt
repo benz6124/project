@@ -162,6 +162,9 @@ D:\4D\project\educationalProject\educationalProject\bin\System.Web.Http.WebHost.
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AspNet.Identity.Core.xml
 D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb
+D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AspNet.WebApi.Extensions.Compression.Server.dll
+D:\4D\project\educationalProject\educationalProject\bin\System.Net.Http.Extensions.Compression.Core.dll
+D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\roslyn\csc.exe
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -178,9 +181,11 @@ C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\education
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\educationalProject.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\educationalProject.pdb
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\Microsoft.AspNet.WebApi.Extensions.Compression.Server.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\Newtonsoft.Json.dll
+C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\System.Net.Http.Extensions.Compression.Core.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\System.Net.Http.Formatting.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\System.Web.Http.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\System.Web.Http.WebHost.dll
@@ -193,6 +198,3 @@ C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\education
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AspNet.WebApi.Extensions.Compression.Server.dll
-D:\4D\project\educationalProject\educationalProject\bin\System.Net.Http.Extensions.Compression.Core.dll
-D:\4D\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache

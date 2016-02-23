@@ -2388,10 +2388,10 @@ app.controller('add_new_primary_controller', function($scope, $alert,$http,$root
    $scope.my_new_evidence.secret = false;
    $scope.my_new_evidence_file = [];
  $scope.my_temp_secret_new = false;
-  $scope.my_new_evidence.teacher_id = "00007";
+
 
 $scope.primary_choosen = {};
-$scope.my_new_evidence.primary_choosen = {};
+
         $scope.please_wait = false;
     $scope.init =function() {
                 $scope.please_wait = false;
@@ -2402,7 +2402,7 @@ $scope.my_new_evidence.primary_choosen = {};
    $scope.my_new_evidence_file = [];
      $scope.my_new_evidence.secret = false;
       $scope.my_new_evidence.evidence_name = "";
-        $scope.my_new_evidence.teacher_id = "00007";
+
        $scope.primary_choosen = {};
 $scope.my_new_evidence.primary_choosen = {};
 
@@ -2465,9 +2465,12 @@ $scope.my_new_evidence.primary_choosen = {};
 
 
     $scope.new_evidence_still_not_complete =  function(){
-        if (!$scope.my_new_evidence.primary_choosen || !$scope.my_new_evidence.evidence_real_code ||  $scope.my_new_evidence_file.length ==0){
+        if (!$scope.primary_choosen || !$scope.my_new_evidence.evidence_real_code ||  $scope.my_new_evidence_file.length ==0){
 
                 return true;
+        }
+        else if(!$scope.primary_choosen.evidence_name ){
+            return true;
         }
         else{
              if ($scope.my_new_evidence.evidence_real_code <= 0 || $rootScope.my_evidence_real_code_we_have_now.indexOf($scope.my_new_evidence.evidence_real_code) != -1){
@@ -2507,13 +2510,11 @@ $scope.primary_choosen.curri_id =   $rootScope.manage_evidence_curri_id_now;
     $scope.primary_choosen.indicator_num = $rootScope.manage_evidence_indicator_num;
 $scope.primary_choosen.secret = $scope.my_new_evidence.secret;
 $scope.primary_choosen.evidence_real_code =   $scope.my_new_evidence.evidence_real_code;
-$scope.primary_choosen.teacher_id = "00007";
+$scope.primary_choosen.teacher_id = $rootScope.current_user.user_id;
 
 
     formData.append("model", angular.toJson( $scope.primary_choosen));
     formData.append("file" , $scope.my_new_evidence_file[0]);
-             console.log("save to sserver");
-console.log($scope.my_new_evidence);
 
         $http({
             method: 'PUT',
@@ -2670,7 +2671,7 @@ $scope.choose_to_add_new_primary_file = function(){
     $scope.send_this.curri_id = $scope.curri_choosen.curri_id;
     $scope.send_this.aca_year = $scope.year_choosen.aca_year;
     $scope.send_this.indicator_num  = $scope.indicator_choosen.indicator_num;
-    $scope.send_this.teacher_id = "00007";
+    $scope.send_this.teacher_id = $rootScope.current_user.user_id;
 
     $http.post(
              '/api/primaryevidence/getOnlyNameAndId',
@@ -2683,7 +2684,9 @@ $scope.choose_to_add_new_primary_file = function(){
          ).success(function (data) {
 
                 console.log("my_all_primary_evidences_responsible");
+
              $rootScope.my_all_primary_evidences_responsible = data;
+                            console.log(data);
          });
 
 }
@@ -2721,9 +2724,11 @@ $scope.init =function() {
         $scope.year_choosen = {}
         $scope.indicator_choosen= {};
       $scope.nothing_change =true;
-              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
-            console.log($scope.corresponding_aca_years);
+              request_years_from_curri_choosen_service.async($scope.curri_choosen,3,2).then(function(data) {
+        
             $scope.corresponding_aca_years = data;
+            console.log( $scope.corresponding_aca_years)
+            console.log('sure')
             // $scope.corresponding_aca_years = [2551,2555,2558,2559];
           });
 
@@ -3793,7 +3798,18 @@ $scope.init =function() {
 
 
 
+$scope.right_target = function(targets){
+    var i;
 
+
+    for(i= 0 ;i<targets.length;i++ ){
+        if( $scope.$parent.current_user.user_type == targets[i]){
+            return true;
+        }
+       
+    }
+    return false;
+}
 
     $scope.go_to_answer = function(this_survey){
 
@@ -4221,14 +4237,7 @@ $scope.init =function() {
 
 
 app.controller('import_evidence_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
- $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {};
-                $scope.evidence_we_want = "";
-                    $scope.result = {};
-$scope.code_we_want = "";
-$scope.evidence_we_want = {};
-$scope.all_evidences ={};
+
    $scope.watch_file = function(path) { 
         window.open(path, '_blank', "width=800, left=230,top=0,height=700");  
     }
@@ -4240,18 +4249,21 @@ $scope.all_evidences ={};
        
 
 $scope.still_not_write_code = function() {
-    console.log("still_not_write_code");
+  
     if(!$scope.evidence_we_want || !$scope.code_we_want ){
-          console.log("if1-true");
+         
          return true;
     }
+    else if(!$scope.evidence_we_want.evidence_name){
+        return true;
+    }
     else{
-        console.log($scope.code_we_want);
+      
        if( $rootScope.my_evidence_real_code_we_have_now.indexOf($scope.code_we_want) != -1){
-             console.log("if2-true");
+           
             return true;
         }
-           console.log("false");
+         
         return false;
     }
 }
@@ -4271,10 +4283,19 @@ $scope.init =function() {
               $scope.curri_choosen = {};
                 $scope.evidence_we_want = "";
                     $scope.result = {};
-                    $scope.code_we_want = "";
-
+$scope.code_we_want = "";
+$scope.evidence_we_want = {};
 $scope.all_evidences ={};
-
+     $scope.choose_not_complete = true;
+         $scope.year_choosen = {};
+              $scope.curri_choosen = {};
+                $scope.evidence_we_want = "";
+                    $scope.result = {};
+                    $scope.code_we_want = "";
+$scope.corresponding_aca_years = {};
+$scope.all_evidences ={};
+ $scope.all_curri_that_have_privileges = [];
+  $scope.$parent.scan_only_privilege_curri('3',$scope.all_curri_that_have_privileges);
 
  var index;
   $rootScope.my_evidence_real_code_we_have_now = [];
@@ -4297,7 +4318,20 @@ $scope.all_evidences ={};
         $scope.year_choosen = {}
      
       
-              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
+              request_years_from_curri_choosen_service.async($scope.curri_choosen,3,2).then(function(data) {
+
+
+if($rootScope.manage_evidence_curri_id_now == $scope.curri_choosen.curri_id){
+    var i;
+    for(i=0;i<data.length;i++){
+        if(data[i].aca_year == $rootScope.manage_evidence_year_now ){
+            data.splice(i,1);
+            break;
+        }
+    }
+}
+
+
 
             $scope.corresponding_aca_years = data;
    $scope.evidence_we_want = {};
@@ -4342,7 +4376,7 @@ $scope.evidence_we_want.aca_year = $rootScope.manage_evidence_year_now;
 
 $scope.evidence_we_want.indicator_num = $rootScope.manage_evidence_indicator_num;
 $scope.evidence_we_want.evidence_real_code = $scope.code_we_want;
-$scope.evidence_we_want.teacher_id = "00007";
+$scope.evidence_we_want.teacher_id = $rootScope.current_user.user_id;
 
         
         $http.put(

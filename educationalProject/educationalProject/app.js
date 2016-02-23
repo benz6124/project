@@ -85,20 +85,20 @@ app.controller('main_controller', function ($scope,
                                              
                                                AuthService,$cookies,$rootScope) {
 
-   $scope.current_user = {};
-  $scope.current_user = $cookies.getObject("mymy");
+   $rootScope.current_user = {};
+  $rootScope.current_user = $cookies.getObject("mymy");
 $scope.fix_mode = false;
 $scope.not_choose_curri_and_year_yet = true;
      $rootScope.have_privilege_in_these_curri = {};
-  if(!$scope.current_user) {
+  if(!$rootScope.current_user) {
   $scope.already_login = false;
 
   }
   else{
 
     
-  	console.log('$scope.current_user')
-    console.log($scope.current_user)
+  	console.log('$rootScope.current_user')
+    console.log($rootScope.current_user)
   	  $scope.already_login = true;
   	    
   	
@@ -106,22 +106,22 @@ $scope.not_choose_curri_and_year_yet = true;
     $scope.logout = function(){
         console.log("log out")
         $cookies.remove('mymy');
-         $scope.current_user ={};
+         $rootScope.current_user ={};
           $scope.already_login = false;
           $rootScope.clear_choosen();
     }
 
   $scope.setcurrent_user = function (user) {
       $scope.already_login = true;
-    $scope.current_user = user;
+    $rootScope.current_user = user;
      $cookies.putObject("mymy", user);
-      	console.log($scope.current_user);
+      	console.log($rootScope.current_user);
   };
 
 
   $scope.watch_only_admin = function(){
 
-    if($scope.current_user.user_type == 'ผู้ดูแลระบบ'){
+    if($rootScope.current_user.user_type == 'ผู้ดูแลระบบ'){
       return true;
     }
     else{
@@ -131,28 +131,63 @@ $scope.not_choose_curri_and_year_yet = true;
 
 $rootScope.president_in_this_curri_and_year = function(curri_id,aca_year){
 
-    if(angular.isUndefined($scope.current_user.president_in)==true){
+    if(!$rootScope.current_user){
+      return false;
+    }
+    if(angular.isUndefined($rootScope.current_user.president_in)==true){
          
         return false;
     }
-     if(angular.isUndefined($scope.current_user.president_in[curri_id])==true){
+     if(angular.isUndefined($rootScope.current_user.president_in[curri_id])==true){
         
         return false;
     }
 
      var index;
-     for(index =0;index<$scope.current_user.president_in[curri_id].length;index++ ){
+     for(index =0;index<$rootScope.current_user.president_in[curri_id].length;index++ ){
      
-        if($scope.current_user.president_in[curri_id][index] == aca_year){
+        if($rootScope.current_user.president_in[curri_id][index] == aca_year){
             return true;
         }
      }
      return false;
 }
 
+$rootScope.right_from_committee = function(curri_id,aca_year,topic_num,from){
+
+    if(!$rootScope.current_user){
+      return false;
+    }
+    if(angular.isUndefined($rootScope.current_user.committee_in)==true){
+         
+        return false;
+    }
+     if(angular.isUndefined($rootScope.current_user.committee_in[curri_id])==true){
+        
+        return false;
+    }
+
+     var index;
+     for(index =0;index<$rootScope.current_user.committee_in[curri_id].length;index++ ){
+     
+        if($rootScope.current_user.committee_in[curri_id][index] == aca_year){
+            if($rootScope.current_user.committee_privilege[curri_id][topic_num] >= from){
+              return true;
+            }
+            else{
+              return false;
+            }
+            
+        }
+     }
+     return false;
+}
+
   $scope.scan_only_privilege_curri = function(title_code,obj_privilege_curri){
+
     var index;
     var index2;
+
 for(index=0;index<$rootScope.all_curriculums.length;index++){
     for(index2 = 0;index2<$rootScope.have_privilege_in_these_curri[title_code].length ;index2++){
       
@@ -164,8 +199,12 @@ for(index=0;index<$rootScope.all_curriculums.length;index++){
   }
 
     $scope.have_privilege_to_open_modal = function(title_code){
+
+          var ever_been_committee = !!$rootScope.current_user.committee_in;
+   var ever_been_president = !!$rootScope.current_user.president_in;
+ 
   if(title_code=='16' || title_code=='21' || title_code=='22'|| title_code=='23'|| title_code=='25'|| title_code=='27'){
-    if($scope.current_user.user_type == 'ผู้ดูแลระบบ'){
+    if($rootScope.current_user.user_type == 'ผู้ดูแลระบบ'){
       return true;
     }
     return false;
@@ -174,7 +213,7 @@ for(index=0;index<$rootScope.all_curriculums.length;index++){
   if(title_code=='18' || title_code=='19' || title_code=='20'|| title_code=='24'|| title_code=='26'){
 
 
-    if(angular.isUndefined($scope.current_user.president_in)==true){
+    if(angular.isUndefined($rootScope.current_user.president_in)==true){
       
       return false;
     }
@@ -186,7 +225,7 @@ for(index=0;index<$rootScope.all_curriculums.length;index++){
   }
 
   if(title_code=='17' ){
-    if($scope.current_user.user_type == 'ผู้ประเมินจากภายนอก'){
+    if($rootScope.current_user.user_type == 'ผู้ประเมินจากภายนอก'){
       return true;
     }
     return false;
@@ -204,12 +243,35 @@ for(index=0;index<$rootScope.all_curriculums.length;index++){
       var index2;
 var first = true;
      $rootScope.have_privilege_in_these_curri[title_code] = [];
+
+
       if(title_code=='2' || title_code=='14' || title_code=='1' || title_code=='4' || title_code=='7'){
-        for(index=0;index<$scope.current_user.curri_id_in.length;index++){
-          if($scope.current_user.privilege[$scope.current_user.curri_id_in[index]][title_code] ==2){
+        for(index=0;index<$rootScope.current_user.curri_id_in.length;index++){
+          if($rootScope.current_user.privilege[$rootScope.current_user.curri_id_in[index]][title_code] ==2){
            
-            $rootScope.have_privilege_in_these_curri[title_code].push($scope.current_user.curri_id_in[index]);
+            $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
+            
+          }
+
+          else if (ever_been_committee == true){
+            if(!!$rootScope.current_user.committee_in[$rootScope.current_user.curri_id_in[index]]){
+
+             if($rootScope.current_user.committee_privilege[$rootScope.current_user.curri_id_in[index]][title_code] ==2){
           
+                $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
+            
+              }
+            }
+          }
+
+               else if (ever_been_president == true){
+            if(!!$rootScope.current_user.president_in[$rootScope.current_user.curri_id_in[index]]){
+
+           
+                $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
+            
+            
+            }
           }
 
         }
@@ -217,13 +279,32 @@ var first = true;
 
       else if(title_code=='3' || title_code=='5' || title_code=='6'|| title_code=='8'|| title_code=='9'|| title_code=='10' || title_code=='11'|| title_code=='12'|| title_code=='13'){
        
-        for(index=0;index<$scope.current_user.curri_id_in.length;index++){
-          if($scope.current_user.privilege[$scope.current_user.curri_id_in[index]][title_code] >=2){
+        for(index=0;index<$rootScope.current_user.curri_id_in.length;index++){
+          if($rootScope.current_user.privilege[$rootScope.current_user.curri_id_in[index]][title_code] >=2){
            
-            $rootScope.have_privilege_in_these_curri[title_code].push($scope.current_user.curri_id_in[index]);
+            $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
           
           }
+      else if (ever_been_committee == true){
+            if(!!$rootScope.current_user.committee_in[$rootScope.current_user.curri_id_in[index]]){
 
+             if($rootScope.current_user.committee_privilege[$rootScope.current_user.curri_id_in[index]][title_code] >=2){
+           
+                $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
+            
+              }
+            }
+          }
+
+              else if (ever_been_president == true){
+            if(!!$rootScope.current_user.president_in[$rootScope.current_user.curri_id_in[index]]){
+
+           
+                $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
+            
+            
+            }
+          }
         }
       }
 
@@ -236,7 +317,7 @@ var first = true;
     }
 
     $scope.watch_only_president = function(){
-      if($scope.current_user.user_type == 'ประธานหลักสูตร'){
+      if($rootScope.current_user.user_type == 'ประธานหลักสูตร'){
       return true;
     }
     else{
