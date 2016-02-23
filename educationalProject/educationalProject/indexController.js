@@ -700,6 +700,7 @@ $scope.init =function() {
                 $scope.indicator_choosen= {};
                     $scope.result = {};
                      $scope.all_curri_that_have_privileges = [];
+                           $scope.corresponding_aca_years = [];
   $scope.$parent.scan_only_privilege_curri('11',$scope.all_curri_that_have_privileges);
 
 }
@@ -710,7 +711,7 @@ $scope.init =function() {
         $scope.indicator_choosen= {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
-
+$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
 
           });
@@ -807,6 +808,7 @@ $scope.init =function() {
                $scope.indicator_choosen= {};
                   $scope.result ={};
                    $scope.all_curri_that_have_privileges = [];
+                         $scope.corresponding_aca_years = [];
   $scope.$parent.scan_only_privilege_curri('13',$scope.all_curri_that_have_privileges);
 }
 
@@ -827,7 +829,7 @@ $scope.init =function() {
         $scope.indicator_choosen= {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
-
+$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
 
           });
@@ -913,6 +915,7 @@ $scope.init =function() {
                  $scope.indicator_choosen= {};
                    $scope.result = {};
                     $scope.all_curri_that_have_privileges = [];
+                          $scope.corresponding_aca_years = [];
   $scope.$parent.scan_only_privilege_curri('12',$scope.all_curri_that_have_privileges);
 
 }
@@ -923,7 +926,7 @@ $scope.init =function() {
         $scope.indicator_choosen= {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
-
+$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
 
           });
@@ -1033,6 +1036,10 @@ $scope.init =function() {
    $scope.year_choosen = {};
        $scope.curri_choosen = {};
 $scope.indicator_choosen = {};
+
+            
+                $scope.corresponding_aca_years = [];
+                 $scope.corresponding_indicators = [];
  $scope.all_curri_that_have_privileges = [];
   $scope.$parent.scan_only_privilege_curri('4',$scope.all_curri_that_have_privileges);
 }
@@ -1058,7 +1065,7 @@ $scope.indicator_choosen = {};
         $scope.indicator_choosen= {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
-
+$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
 
           });
@@ -1143,7 +1150,8 @@ app.controller('evaluate_by_other_controller', function($scope, $alert,$http,req
      $scope.year_choosen = {};
        $scope.please_wait = false;
 $scope.indicator_choosen = {};
-
+ $scope.corresponding_aca_years = [];
+                 $scope.corresponding_indicators = [];
   $scope.disabled_search = false;
    angular.forEach(
     angular.element("input[type='file']"),
@@ -1272,7 +1280,7 @@ $scope.indicator_choosen = {};
         $scope.indicator_choosen= {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
-
+$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
              $scope.choose_not_complete = true;
              $scope.corresponding_indicators = {};
@@ -1410,6 +1418,7 @@ app.controller('upload_aun_controller', function($scope, $alert,$http,request_ye
      $scope.choose_not_complete = true;
            $scope.year_choosen = {};
               $scope.curri_choosen = {}
+                    $scope.corresponding_aca_years = [];
   $scope.files = [];
    angular.forEach(
     angular.element("input[type='file']"),
@@ -1454,7 +1463,7 @@ $scope.$parent.scan_only_privilege_curri('14',$scope.all_curri_that_have_privile
         $scope.indicator_choosen= {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
-
+$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
 
           });
@@ -1584,7 +1593,7 @@ $scope.init =function() {
         $scope.indicator_choosen= {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
-
+$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
 
           });
@@ -2710,6 +2719,8 @@ $scope.init =function() {
                        $rootScope.my_evidence_real_code_we_have_now =[];
                        $scope.nothing_change =true;
                          $scope.all_curri_that_have_privileges = [];
+                                         $scope.corresponding_aca_years = [];
+                 $scope.corresponding_indicators = [];
   $scope.$parent.scan_only_privilege_curri('3',$scope.all_curri_that_have_privileges);
 }
 
@@ -2727,8 +2738,8 @@ $scope.init =function() {
               request_years_from_curri_choosen_service.async($scope.curri_choosen,3,2).then(function(data) {
         
             $scope.corresponding_aca_years = data;
-            console.log( $scope.corresponding_aca_years)
-            console.log('sure')
+            $scope.corresponding_indicators = [];
+  
             // $scope.corresponding_aca_years = [2551,2555,2558,2559];
           });
 
@@ -3013,7 +3024,9 @@ $scope.init =function() {
               $scope.curri_choosen = {};
                $scope.indicator_choosen= {};
 
-                 $scope.corresponding_indicators = {};
+       
+                 $scope.corresponding_indicators = [];
+
                  $scope.nothing_change = true;
                    $scope.go_request = false;
 }
@@ -3160,8 +3173,9 @@ $scope.init =function() {
         $scope.year_choosen = {};
               $scope.curri_choosen = {};
                $scope.indicator_choosen= {};
-                $scope.corresponding_aca_years = {};
-                 $scope.corresponding_indicators = {};
+
+                $scope.corresponding_aca_years = [];
+                 $scope.corresponding_indicators = [];
                  $scope.nothing_change = true;
             
 }
@@ -3180,7 +3194,7 @@ $scope.init =function() {
         $scope.year_choosen = {};
               $scope.curri_choosen = {};
                $scope.indicator_choosen= {};
- $scope.corresponding_aca_years = {};
+ $scope.corresponding_aca_years = [];
        $scope.corresponding_indicators = {};
      $scope.nothing_change = true;
 
@@ -3565,6 +3579,7 @@ $scope.init =function() {
                     $scope.nothing_change = true;
                       $rootScope.manage_lab_my_world_wide_labs = [];
                        $scope.all_curri_that_have_privileges = [];
+                             $scope.corresponding_aca_years = [];   
   $scope.$parent.scan_only_privilege_curri('10',$scope.all_curri_that_have_privileges);
 }
 
@@ -3594,7 +3609,7 @@ $scope.init =function() {
         $scope.indicator_choosen= {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
-
+$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
 
 
@@ -3762,6 +3777,7 @@ $scope.init =function() {
                     $scope.nothing_change = true;
                       $rootScope.manage_survey_my_world_wide_surveys = [];
                        $scope.all_curri_that_have_privileges = [];
+                       $scope.corresponding_aca_years = [];
   $scope.$parent.scan_only_privilege_curri('5',$scope.all_curri_that_have_privileges);
 }
    $scope.$on("modal.hide", function (event, args) {
@@ -3787,7 +3803,7 @@ $scope.init =function() {
         $scope.indicator_choosen= {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
-
+$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
 
 
@@ -4098,6 +4114,7 @@ $scope.init =function() {
                     $scope.nothing_change = true;
                       $rootScope.manage_survey_my_world_wide_surveys = [];
                           $scope.all_curri_that_have_privileges = [];
+                          $scope.corresponding_aca_years = [];
   $scope.$parent.scan_only_privilege_curri('6',$scope.all_curri_that_have_privileges);
 }
 
@@ -4137,7 +4154,7 @@ $scope.init =function() {
         $scope.indicator_choosen= {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
-
+$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
 
 
@@ -4292,7 +4309,7 @@ $scope.all_evidences ={};
                 $scope.evidence_we_want = "";
                     $scope.result = {};
                     $scope.code_we_want = "";
-$scope.corresponding_aca_years = {};
+$scope.corresponding_aca_years = [];
 $scope.all_evidences ={};
  $scope.all_curri_that_have_privileges = [];
   $scope.$parent.scan_only_privilege_curri('3',$scope.all_curri_that_have_privileges);
@@ -4631,7 +4648,7 @@ $scope.init =function() {
         $scope.indicator_choosen= {};
       $scope.my_survey_name ="";
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
-
+$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
 
           });
@@ -6580,7 +6597,7 @@ $scope.init =function() {
    
               $scope.year_choosen = {};
               $scope.curri_choosen = {}
-             
+                   $scope.corresponding_aca_years = [];
          $scope.nothing_change = true;
           
 }
@@ -6611,7 +6628,7 @@ $scope.init =function() {
     
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
-
+$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
 
 
@@ -6787,13 +6804,13 @@ $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
               $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
+              
                     $scope.result = {};
                    $scope.my_new_minute = {};
                       $scope.please_wait = false;
-      
+
 $scope.my_pictures.flow.files = [];
-console.log("inside init");  
+
   $scope.my_new_minute.date = "";
   $scope.my_new_minute.attendee =[];
   $scope.my_new_minute.topic_name = "";
@@ -7575,6 +7592,7 @@ $scope.init =function() {
                     $scope.nothing_change = true;
                       $rootScope.manage_minutes_my_world_wide_minutes = [];
                        $scope.all_curri_that_have_privileges = [];
+                             $scope.corresponding_aca_years = [];
   $scope.$parent.scan_only_privilege_curri('8',$scope.all_curri_that_have_privileges);
 }
        $scope.$on("modal.hide", function (event, args) {

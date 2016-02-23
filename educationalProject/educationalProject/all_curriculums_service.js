@@ -80,7 +80,9 @@ app.factory('request_years_from_curri_choosen_service', function($rootScope,$htt
             console.log(valid_year);
                return valid_year;
                console.log('heyy')
-          }else{
+          }
+          
+          else{
              console.log('normal dada');
         return response.data;
           }
