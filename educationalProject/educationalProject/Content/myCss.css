@@ -315,7 +315,13 @@ input[type='file']{
 }
 
 
+ input[type='email'] { 
 
+  font-family:  "FreesiaUPC";
+  font-size: 20px !important;
+
+
+}
 
 
  input[type='number'] { 
@@ -418,7 +424,7 @@ td button li label{
 
      position: absolute;
           top: 39%;
-          right: 13%;
+          right: 7%;
           margin-top: 49px;
          padding-left: 0px;
 
@@ -1111,6 +1117,18 @@ a.highlight_evidence:hover{
 
 }
 
+.gallery-box-show{
+      width: 255px;
+    padding: 5px;
+    margin: 7px;
+    float: left;
+     min-height: 245px;
+ max-height: 245px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+
+}
+
 .thumbnail.edit{
      line-height: 20px;
     margin-bottom: 5px;
@@ -1119,6 +1137,26 @@ a.highlight_evidence:hover{
      max-height: 220px;
      min-height: 220px;
 }
+
+.thumbnail.show{
+     line-height: 20px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    word-break: normal;
+     max-height: 200px;
+
+}
+
+
+
+.gallery-box-show span.title-edit{
+  font-size: 21px;
+}
+
+.gallery-box-show a{
+ font-size: 21px;
+}
+
 
 
 .gallery-box-edit span.title-edit{

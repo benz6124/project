@@ -129,6 +129,72 @@ $scope.not_choose_curri_and_year_yet = true;
     }
   }
 
+
+$rootScope.curri_that_be_president_in = function(obj){
+  if(!$rootScope.current_user){
+      return false;
+    }
+
+     if(angular.isUndefined($rootScope.current_user.president_in)==true){
+         
+        return false;
+    }
+
+    var index;
+
+    for(index =0;index<$rootScope.all_curriculums.length;index++){
+      if(!!$rootScope.current_user.president_in[$rootScope.all_curriculums[index].curri_id]){
+        obj.push($rootScope.all_curriculums[index]);
+      }
+    }
+}
+
+$rootScope.president_in_this_curri = function(curri_id){
+
+    if(!$rootScope.current_user){
+      return false;
+    }
+    if(angular.isUndefined($rootScope.current_user.president_in)==true){
+         
+        return false;
+    }
+     if(angular.isUndefined($rootScope.current_user.president_in[curri_id])==true){
+        
+        return false;
+    }
+
+     // var index;
+     // for(index =0;index<$rootScope.current_user.president_in[curri_id].length;index++ ){
+     
+     //    if($rootScope.current_user.president_in[curri_id][index] == aca_year){
+     //        return true;
+     //    }
+     // }
+     return true;
+}
+
+$rootScope.right_from_committee_just_curri = function(curri_id,topic_num,from){
+
+    if(!$rootScope.current_user){
+      return false;
+    }
+    if(angular.isUndefined($rootScope.current_user.committee_in)==true){
+         
+        return false;
+    }
+     if(angular.isUndefined($rootScope.current_user.committee_in[curri_id])==true){
+        
+        return false;
+    }
+
+    if($rootScope.current_user.committee_privilege[curri_id][topic_num] >= from){
+      return true;
+    }
+
+    return false;
+}
+
+
 $rootScope.president_in_this_curri_and_year = function(curri_id,aca_year){
 
     if(!$rootScope.current_user){
