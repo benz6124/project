@@ -5705,7 +5705,7 @@ $scope.title_choosen = {};
             return true;
         }
         for(index=0;index<$scope.manage_privilege_president_result.list.length;index++){
-            if(!$scope.manage_privilege_president_result.list[index].privilege ){
+            if(!$scope.manage_privilege_president_result.list[index].my_privilege ){
                 return true;
             }
         }
@@ -6273,7 +6273,7 @@ $scope.title_choosen = {};
             return true;
         }
         for(index=0;index<$scope.manage_privilege_president_result.list.length;index++){
-            if(!$scope.manage_privilege_president_result.list[index].privilege ){
+            if(!$scope.manage_privilege_president_result.list[index].my_privilege ){
                 return true;
             }
         }
@@ -6394,7 +6394,7 @@ $scope.title_choosen = {};
             return true;
         }
         for(index=0;index<$scope.manage_privilege_admin_result.list.length;index++){
-            if(!$scope.manage_privilege_admin_result.list[index].privilege ){
+            if(!$scope.manage_privilege_admin_result.list[index].my_privilege ){
                 return true;
             }
         }
