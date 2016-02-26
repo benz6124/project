@@ -24,7 +24,10 @@ namespace educationalProject.Controllers
         {
             return Ok(await datacontext.SelectPersonnelIdAndTName(curri_id, 1));
         }
-
+        public async Task<IHttpActionResult> Get()
+        {
+            return Ok(await datacontext.SelectPersonnelIdAndTName("999", 1));
+        }
         [ActionName("getwitheducation")]
         public async Task<IHttpActionResult> PostToQueryPersonnelWithEducationHistory([FromBody]string curri_id)
         {

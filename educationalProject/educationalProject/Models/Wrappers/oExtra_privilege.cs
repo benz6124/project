@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data;
+using System.Threading.Tasks;
 using educationalProject.Models.ViewModels;
 using educationalProject.Utils;
 namespace educationalProject.Models.Wrappers
 {
     public class oExtra_privilege : Extra_privilege
     {
-        public object SelectByCurriculumAndTitle()
+        public async Task<object> SelectByCurriculumAndTitle()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -145,7 +146,7 @@ namespace educationalProject.Models.Wrappers
                 insertintotemp5_2, insertintotemp5_3, insertintotemp5_4,selectcmd);
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
@@ -206,7 +207,7 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public object InsertOrUpdate(Extra_privilege_individual_list_with_privilege_choices edata)
+        public async Task<object> InsertOrUpdate(Extra_privilege_individual_list_with_privilege_choices edata)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -229,7 +230,7 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.CommandText = InsertOrUpdateCommand;
             try
             {
-                d.iCommand.ExecuteNonQuery();
+                await d.iCommand.ExecuteNonQueryAsync();
             }
             catch (Exception ex)
             {
