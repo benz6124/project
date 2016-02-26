@@ -196,5 +196,121 @@ namespace educationalProject.Controllers
             else
                 return InternalServerError(new Exception(result.ToString()));
         }
+
+        [ActionName("getuserdata")]
+        public async Task<IHttpActionResult> PostForQueryUserData(int user_id)
+        {
+            oUsers datacontext = new oUsers();
+            return Ok(await datacontext.selectUserData(user_id));
+        }
+        [ActionName("edit")]
+        public async Task<IHttpActionResult> PutForUpdateUserData()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
+            }
+
+            string savepath = WebApiApplication.SERVERPATH + "myImages/profile_pic";
+            var result = new MultipartFormDataStreamProvider(savepath);
+
+            try
+            {
+                await Request.Content.ReadAsMultipartAsync(result);
+                oUsers datacontext = new oUsers();
+                //READ JSON DATA PART
+                JObject datareceive = JObject.Parse(result.FormData.GetValues(result.FormData.AllKeys[0])[0]);
+                User_information_with_privilege_information userdata = new User_information_with_privilege_information();
+
+
+
+                //Prerequisite
+                userdata.user_id = Convert.ToInt32(datareceive["user_id"]);
+                //username ignored
+                //citizen_id ignored
+                //gender ignored
+                //timestamp ignored
+
+                //teacher section => degree ignored
+                //teacher section => position ignored
+                //teacher section => personnel_type ignored
+                //teacher section => person_id ignored
+                //teacher,staff section => room ignored
+                //teacher section => alive ignored
+
+                userdata.user_type = datareceive["user_type"].ToString();
+
+                //list of update value
+                userdata.information.t_prename = datareceive["information"]["t_prename"].ToString();
+                userdata.information.t_name = datareceive["information"]["t_name"].ToString();
+                userdata.information.e_prename = datareceive["information"]["e_prename"].ToString();
+                userdata.information.e_name = datareceive["information"]["e_name"].ToString();
+                userdata.information.email = datareceive["information"]["email"].ToString();
+                userdata.information.tel = datareceive["information"]["tel"].ToString();
+                userdata.information.addr = datareceive["information"]["addr"].ToString();
+
+
+                if(userdata.user_type == "อาจารย์")
+                {
+                    //teacher have status
+                    userdata.information.status = datareceive["information"]["status"].ToString();
+                    //teacher have interest
+                    if(datareceive["information"]["interest"] != null)
+                    {
+                        JArray interestarr = (JArray)datareceive["information"]["interest"];
+                        foreach (JValue value in interestarr)
+                            userdata.information.interest.Add(value.ToString());
+                    }
+                }
+
+                if(userdata.user_type == "อาจารย์" || userdata.user_type == "เจ้าหน้าที่")
+                {
+                    if (datareceive["information"]["education"] != null)
+                    {
+                        JArray educationarr = (JArray)datareceive["information"]["education"];
+                        foreach (JObject eduitem in educationarr)
+                            userdata.information.education.Add(new Models.Educational_teacher_staff {
+                                education_id = Convert.ToInt32(eduitem["education_id"])
+                            });
+                    }
+                }
+                //filenamepic will add later
+
+                if (result.FileData.Count > 0)
+                {
+                    MultipartFileData file = result.FileData[0];
+                    FileInfo fileInfo = new FileInfo(file.LocalFileName);
+                    string newfilename = string.Format("{0}.{1}", fileInfo.Name.Substring(9), file.Headers.ContentDisposition.FileName.Split('.').LastOrDefault().Split('\"').FirstOrDefault());
+                    userdata.information.file_name_pic = "myImages/profile_pic/" + newfilename;
+                    File.Move(string.Format("{0}/{1}", savepath, fileInfo.Name), string.Format("{0}/{1}", savepath, newfilename));
+                }
+                else
+                {
+                    //file_name_pic set to null => no change!
+                    userdata.information.file_name_pic = null;
+                }
+
+                object resultfromdb = await datacontext.UpdateUserData(userdata);
+
+                if (resultfromdb.GetType().ToString() != "System.String")
+                {
+                    //delete filename will inside file_name property of oUser object
+                    string delpath = WebApiApplication.SERVERPATH;
+                    if (datacontext.file_name_pic != null)
+                    {
+                        //Check whether file exists!
+                        if (File.Exists(string.Format("{0}{1}", delpath, datacontext.file_name_pic)))
+                            File.Delete(string.Format("{0}{1}", delpath, datacontext.file_name_pic));
+                    }
+                    return Ok(resultfromdb);
+                }
+                else
+                    return InternalServerError(new Exception(resultfromdb.ToString()));
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+        }
     }
 }

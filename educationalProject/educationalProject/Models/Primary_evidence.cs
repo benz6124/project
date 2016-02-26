@@ -6,7 +6,7 @@ namespace educationalProject.Models
 {
     public class Primary_evidence
     {
-        protected struct FieldName
+        internal struct FieldName
         {
             public static readonly string PRIMARY_EVIDENCE_NUM = "PRIMARY_EVIDENCE_NUM";
             public static readonly string ACA_YEAR = "ACA_YEAR";
