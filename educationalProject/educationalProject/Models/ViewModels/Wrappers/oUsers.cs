@@ -1108,13 +1108,17 @@ namespace educationalProject.Models.ViewModels.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
 
-            d.iCommand.CommandText = string.Format("update {0} set {1} = '{2}' where {3} = {4}",
+            d.iCommand.CommandText = string.Format("if not exists(select * from {0} where {1} = '{2}') " +
+                "update {0} set {1} = '{2}' where {3} = {4}",
                 User_list.FieldName.TABLE_NAME,Teacher.FieldName.USERNAME,preferredusername,
                 User_list.FieldName.USER_ID,user_id);
             try
             {
-                await d.iCommand.ExecuteNonQueryAsync();
-                return null;
+                int rowaffected = await d.iCommand.ExecuteNonQueryAsync();
+                if (rowaffected > 0)
+                    return null;
+                else
+                    return "Username already exists!";
             }
             catch (Exception ex)
             {
