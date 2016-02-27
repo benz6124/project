@@ -656,6 +656,8 @@ div.aside-body ul.nav.nav-stacked li a i {
 .just_alert .modal-footer button{
   margin-top: 2.5px!important;
 }
+
+
 .custom-footer{
   background-color:#6F002B !important;
 
@@ -672,6 +674,60 @@ div.aside-body ul.nav.nav-stacked li a i {
 }
 
 .just_alert-backdrop.in {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background-color:#000;
+}
+
+.modalbox-backdrop
+{
+    opacity:0.8 !important;
+ /*      height: 100% !important;
+   z-index: -1 !important;*/
+}
+
+
+.modalbox .modal-header{
+
+  margin-top: 10px;
+  background-color:#bc2e29 !important;
+
+}
+.modalbox .modal-header h4.modal-title{
+  color:white !important;
+  font-size: 35px !important;
+  text-align: center;;
+}
+
+.modalbox .modal-body {
+  font-size: 25px!important;
+  text-align: center;
+}
+.modalbox .modal-footer{
+ 
+  margin-top: 0px;
+  background-color:#bc2e29 !important;
+  color:white !important;
+  font-size: 25px !important;
+
+}
+.modalbox .modal-footer .btn.btn-primary{
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+
+}
+.modalbox .modal-footer button{
+  margin-top: 2.5px!important;
+}
+
+.modalbox-backdrop.in {
     position: absolute;
     top: 0;
     right: 0;

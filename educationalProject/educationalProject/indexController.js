@@ -1898,7 +1898,7 @@ $scope.email_new_admin = "";
 
 });
 
-app.controller('manage_indicators_controller', function($scope, $alert,$http,$rootScope){
+app.controller('manage_indicators_controller', function($scope, $alert,$http,$rootScope,$modal){
   
 
 
@@ -1988,9 +1988,10 @@ console.log(data);
         $scope.validate_year_to_create = function(){
             // console.log("this is value");
             // console.log($scope.year_to_create);
-            return   angular.isUndefined($scope.year_to_create) || $scope.year_to_create < $scope.max_year_curri_have || $scope.year_to_create == "";
+            return   angular.isUndefined($scope.year_to_create) || $scope.year_to_create < $scope.max_year_curri_have || $scope.year_to_create == "" ;
         }
       $scope.choose_indicator = function(in_indi){
+
 if( $scope.validate_year_to_create() != true){
 
         console.log("receive");
@@ -2052,6 +2053,8 @@ if( $scope.validate_year_to_create() != true){
 
                     }
                 }
+
+        
 
                 return false;
 
@@ -2908,8 +2911,8 @@ $scope.choose_not_complete =true;
     }
 });
 
-app.controller('manage_sub_indicators_controller', function($scope, $alert,$http,$rootScope){
-
+app.controller('manage_sub_indicators_controller', function($scope, $alert,$http,$rootScope,ngDialog,$modalBox){
+$scope.please_wait = false;
     // $scope.init = function(){
     //     console.log("manage_sub_indicators_controller init")
     //         $scope.save_indicator = $rootScope.manage_indicators_indicator_choosen;
@@ -2957,6 +2960,13 @@ app.controller('manage_sub_indicators_controller', function($scope, $alert,$http
                     }
                 }
 
+             if(angular.equals($rootScope.manage_indicators_and_sub_save_indicator.save_content,$rootScope.manage_indicators_indicator_choosen)==true){
+           
+            return true;
+             }
+
+             return false;
+
       }
 
 
@@ -2990,12 +3000,14 @@ app.controller('manage_sub_indicators_controller', function($scope, $alert,$http
 
 
     $scope.$on("modal.hide", function (event, args) {
-    $scope.close_modal();
+
+    $scope.start_ka();
       
     });
 
   $scope.$on("modal.show", function (event, args) {
-                 $scope.close_modal();
+    $scope.please_wait = false;
+                 $scope.start_ka();
     });
 
 
@@ -3018,34 +3030,68 @@ app.controller('manage_sub_indicators_controller', function($scope, $alert,$http
     }
 
         $scope.close_modal = function(my_modal){
-            console.log("close ka");
-        $rootScope.manage_indicators_indicator_choosen = angular.copy($rootScope.manage_indicators_and_sub_save_indicator.save_content);
-         $rootScope.manage_indicators_and_sub_result[$rootScope.manage_indicators_and_sub_save_indicator.save_index] =  angular.copy($rootScope.manage_indicators_indicator_choosen);
-      $scope.nothing_change = true;
+        $scope.start_ka();
         my_modal.$hide();
     }
 
 
+$scope.start_ka = function(){
+        console.log("close ka");
+        $rootScope.manage_indicators_indicator_choosen = angular.copy($rootScope.manage_indicators_and_sub_save_indicator.save_content);
+         $rootScope.manage_indicators_and_sub_result[$rootScope.manage_indicators_and_sub_save_indicator.save_index] =  angular.copy($rootScope.manage_indicators_indicator_choosen);
+      $scope.nothing_change = true;
+}
+
+ $scope.ask_to_save_to_server = function (this_modal) {
+                var boxOptions = {
+                content: 'หากคุณกดยืนยัน ตัวบ่งชี้หลักจะถูกบันทึกไปตามค่าขณะนี้ด้วย<br>(ซึ่งคุณสามารถแก้ไขภายหลังได้)',
+                title:'แจ้งเตือน',
+                theme:'danger',
+                boxType: 'confirm',
+                backdrop:'static',
+                confirmText:'ยืนยัน',
+                cancelText:'ยกเลิก',
+                effect:'bounce-in',
+                afterConfirm:function(){ $scope.please_wait = true; $scope.save_to_server(this_modal);},
+                }
+                $modalBox(boxOptions);
+            }
+
     $scope.save_to_server = function(my_modal){
 
-        $rootScope.manage_indicators_indicator_choosen.aca_year = $rootScope.manage_indicators_year_to_create;
 
-        var index;
-        for(index=0;index<$rootScope.manage_indicators_indicator_choosen.sub_indicator_list.length;index++){
-            $rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].aca_year = $rootScope.manage_indicators_year_to_create;
-        }
-        console.log("save_to_server");
-        console.log($rootScope.manage_indicators_indicator_choosen);
 
-        // if($rootScope.manage_indicators_indicator_choosen.sub_indicator_list.length==0){
-        //       $rootScope.manage_indicators_indicator_choosen.sub_indicator_list.push({
-        //     "aca_year":$rootScope.manage_indicators_and_subs_year_choosen
-        //     ,"indicator_num":$rootScope.manage_indicators_indicator_choosen.indicator_num,
-        //     "sub_indicator_num":"","sub_indicator_name":""});
+        // $rootScope.manage_indicators_indicator_choosen.aca_year = $rootScope.manage_indicators_year_to_create;
+
+        // var index;
+        // for(index=0;index<$rootScope.manage_indicators_indicator_choosen.sub_indicator_list.length;index++){
+        //     $rootScope.manage_indicators_indicator_choosen.sub_indicator_list[index].aca_year = $rootScope.manage_indicators_year_to_create;
         // }
+        console.log($rootScope.manage_indicators_and_sub_result);
+        $scope.to_sent = angular.copy($rootScope.manage_indicators_and_sub_result);
+        $scope.to_sent[$rootScope.manage_indicators_and_sub_save_indicator.save_index] = angular.copy($rootScope.manage_indicators_indicator_choosen);
+        // $scope.to_sent.aca_year = $rootScope.manage_indicators_year_to_create;
+
+
+
+                var index;
+          var sub_index;
+ for (index = 0; index < $scope.to_sent.length; index++) {
+    $scope.to_sent[index].aca_year = $rootScope.manage_indicators_year_to_create;
+
+    if(angular.isUndefined($scope.to_sent[index].sub_indicator_list)){
+        $scope.to_sent[index].sub_indicator_list = [];
+    }
+
+    for(sub_index =0; sub_index < $scope.to_sent[index].sub_indicator_list.length ; sub_index++ ){
+        $scope.to_sent[index].sub_indicator_list[sub_index].aca_year =$rootScope.manage_indicators_year_to_create; 
+    }
+ }
+
+
         $http.put(
-             '/api/indicatorsubIndicator/savesubindicator',
-             JSON.stringify($rootScope.manage_indicators_indicator_choosen),
+             '/api/indicatorsubIndicator/saveindicator',
+             JSON.stringify($scope.to_sent),
              {
                  headers: {
                      'Content-Type': 'application/json'
@@ -3053,11 +3099,11 @@ app.controller('manage_sub_indicators_controller', function($scope, $alert,$http
              }
          ).success(function (data) {
 
-
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-                $rootScope.manage_indicators_and_sub_result[$rootScope.manage_indicators_and_sub_save_indicator.save_index] = angular.copy($rootScope.manage_indicators_indicator_choosen);
-                $rootScope.my_backup_indicators[$rootScope.manage_indicators_and_sub_save_indicator.save_index] = angular.copy($rootScope.manage_indicators_indicator_choosen);
+
+                $rootScope.manage_indicators_and_sub_result = angular.copy( $scope.to_sent);
+                $rootScope.my_backup_indicators= angular.copy( $scope.to_sent);
                 $rootScope.manage_indicators_and_sub_save_indicator.save_content = angular.copy($rootScope.manage_indicators_indicator_choosen);
                 $scope.close_modal(my_modal);
 
@@ -6432,6 +6478,7 @@ $scope.title_choosen = {};
         }
 
         if(angular.equals($scope.copy_save,$scope.manage_privilege_admin_result.list)==true){
+
             return true;
         }
 

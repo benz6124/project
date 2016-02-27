@@ -170,7 +170,7 @@
                                     </a>
                                 </li>
 
-                                
+
 
        <li  ng-show='have_privilege_to_open_modal("6") || fix_mode'>
                                     <a href="" data-nq-toggle-modal="#manage_album" data-effect="slide-left">
@@ -3473,7 +3473,7 @@ glyphicon glyphicon-bell"></i> </span>
         <div class="custom-footer">
 
           <div class="topicHeader pull-right">
-              <button class="btn btn-success  " ng-disabled="choose_not_complete ||  still_not_choose_complete() || nothing_change" ng-click="save_to_server(this)">    ยืนยัน</button>
+              <button class="btn btn-success  " ng-disabled="choose_not_complete ||  still_not_choose_complete() || nothing_change " ng-click="save_to_server(this)">    ยืนยัน</button>
               <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
           </div>
       </div>   
@@ -4019,7 +4019,7 @@ glyphicon glyphicon-bell"></i> </span>
                                                 </td>
                                                  <td class="topic_indicator left_column"><input data-ng-change="something_change()" class="form-control"size="64" type="text" ng-model="indicator.indicator_name_e " required/></td>
 
-                                     <td class="number_indicator"> <button style="background-color:transparent;border:none"href="" data-ng-click="choose_indicator(indicator)" class="hvr-pulse" data-nq-toggle-modal="#manage_sub_indicators" ng-disabled="validate_year_to_create()" data-effect="slide-left">
+                                     <td class="number_indicator"> <button style="background-color:transparent;border:none"href="" data-ng-click="choose_indicator(indicator)" class="hvr-pulse" data-nq-toggle-modal="#manage_sub_indicators"  ng-disabled="still_not_choose_complete() || validate_year_to_create()  || manage_indicators_form.$invalid || choose_not_complete" data-effect="slide-left">
                                         <span class="topic"><i class="glyphicon glyphicon-zoom-in"></i> </span>
                                     </button></td>
 
@@ -4108,7 +4108,7 @@ glyphicon glyphicon-bell"></i> </span>
 
  <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="still_not_choose_complete_sub() || nothing_change" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="still_not_choose_complete_sub()  || please_wait" ng-click="ask_to_save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div> 
