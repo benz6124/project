@@ -143,16 +143,6 @@ namespace educationalProject.Controllers
                 data.password = u.information.GetPassword();
                 if (data.isMatchPassword(oldpassword))
                 {
-                    if (u.user_type != "ผู้ดูแลระบบ")
-                    {
-                        //continue to retrieve privilege data (if user type is not admin) and return
-                        result = context.SelectUserPrivilege(ref u);
-                        if (result == null)
-                            return Ok(u);
-                        else
-                            return InternalServerError(new Exception(result.ToString()));
-                    }
-                    //admin login!
                     return Ok(u);
                 }
                 else
