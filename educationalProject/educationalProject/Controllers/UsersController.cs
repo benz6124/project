@@ -116,7 +116,7 @@ namespace educationalProject.Controllers
                     return Ok(resultfromdb);
                 }
                 else
-                    return InternalServerError(new Exception(result.ToString()));
+                    return InternalServerError(new Exception(resultfromdb.ToString()));
 
             }
             catch (Exception e)
@@ -191,7 +191,11 @@ namespace educationalProject.Controllers
         public async Task<IHttpActionResult> PostForQueryUserData([FromBody]int user_id)
         {
             oUsers datacontext = new oUsers();
-            return Ok(await datacontext.selectUserData(user_id));
+            object result = await datacontext.selectUserData(user_id);
+            if (result.GetType().ToString() != "System.String")
+                return Ok(result);
+            else
+                return InternalServerError(new Exception(result.ToString()));
         }
         [ActionName("edit")]
         public async Task<IHttpActionResult> PutForUpdateUserData()

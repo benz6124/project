@@ -81,7 +81,7 @@ namespace educationalProject.Controllers
                 if (resultfromdb.GetType().ToString() != "System.String")
                     return Ok(resultfromdb);
                 else
-                    return InternalServerError(new Exception(result.ToString()));
+                    return InternalServerError(new Exception(resultfromdb.ToString()));
             }
             catch (System.Exception e)
             {
@@ -128,7 +128,7 @@ namespace educationalProject.Controllers
                 if (resultfromdb.GetType().ToString() != "System.String")
                     return Ok(resultfromdb);
                 else
-                    return InternalServerError(new Exception(result.ToString()));
+                    return InternalServerError(new Exception(resultfromdb.ToString()));
             }
             catch (System.Exception e)
             {
@@ -226,7 +226,7 @@ namespace educationalProject.Controllers
                     return Ok(resultfromdb);
                 }
                 else
-                    return InternalServerError(new Exception(result.ToString()));
+                    return InternalServerError(new Exception(resultfromdb.ToString()));
             }
             catch (System.Exception e)
             {

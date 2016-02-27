@@ -90,7 +90,7 @@ namespace educationalProject.Controllers
                     return Ok();
                 }
                 else
-                    return InternalServerError(new Exception(result.ToString()));
+                    return InternalServerError(new Exception(resultfromdb.ToString()));
             }
             catch (Exception e)
             {
