@@ -198,7 +198,7 @@ namespace educationalProject.Controllers
         }
 
         [ActionName("getuserdata")]
-        public async Task<IHttpActionResult> PostForQueryUserData(int user_id)
+        public async Task<IHttpActionResult> PostForQueryUserData([FromBody]int user_id)
         {
             oUsers datacontext = new oUsers();
             return Ok(await datacontext.selectUserData(user_id));
