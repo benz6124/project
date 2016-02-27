@@ -5423,7 +5423,7 @@ $scope.init =function() {
         console.log($scope.curri_choosen.curri_id);
 
         $http.post(
-             '/api/personnel/gettnameandid',
+             'api/personnel/getalltnameandid',
              JSON.stringify($scope.curri_choosen.curri_id),
              {
                  headers: {
@@ -5709,6 +5709,10 @@ $scope.title_choosen = {};
                 return true;
             }
         }
+
+           if(angular.equals($scope.copy_save,$scope.manage_privilege_president_result.list)==true){
+            return true;
+        }
         return false;
     }
     $scope.choose_curri = function(){
@@ -5755,6 +5759,8 @@ $scope.title_choosen = {};
                 }
             }
     
+
+   $scope.copy_save = angular.copy($scope.manage_privilege_president_result.list);
          });
 
 
@@ -6202,7 +6208,15 @@ app.controller('login_controller', function($scope, $http,$alert,$loading,$timeo
              my_modal.$hide();
 
                $alert({title:'เข้าสู่ระบบสำเร็จ', content:'ยินดีต้อนรับ '+$rootScope.current_user.username,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'loginPop'});
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+
+               // if(!!$rootScope.current_user.not_send_primary){
+               //      var i;
+               //      for(i=0;i<$rootScope.current_user.not_send_primary.length;i++){
+               //       $alert({title:'แจ้งเตือน', content:'ท่านมีหลักฐานค้างการอัพโหลด ในหลักสูตร '+rootScope.current_user.not_send_primary[i],alertType:'danger',
+               //           placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+               //      }
+               // }
 
         }, function () {
 
@@ -6269,13 +6283,17 @@ $scope.title_choosen = {};
 
     $scope.still_not_complete = function(){
         var index;
-        if(!$scope.manage_privilege_president_result){
+        if(!$scope.manage_privilege_president_person_result){
             return true;
         }
-        for(index=0;index<$scope.manage_privilege_president_result.list.length;index++){
-            if(!$scope.manage_privilege_president_result.list[index].my_privilege ){
+        for(index=0;index<$scope.manage_privilege_president_person_result.list.length;index++){
+            if(!$scope.manage_privilege_president_person_result.list[index].my_privilege ){
                 return true;
             }
+        }
+
+           if(angular.equals($scope.copy_save,$scope.manage_privilege_president_person_result.list)==true){
+            return true;
         }
         return false;
     }
@@ -6308,7 +6326,24 @@ $scope.title_choosen = {};
              $scope.choose_not_complete = false;
                $scope.nothing_change = true;
 
-    
+
+                     var index;
+            var index2;
+           
+            for(index=0;index< $scope.manage_privilege_president_person_result.list.length;index++){
+                  console.log(index)
+                for(index2=0;index2< $scope.manage_privilege_president_person_result.choices.length;index2++){
+                           console.log(index2)
+                   
+                    if($scope.manage_privilege_president_person_result.list[index].my_privilege.title_privilege_code == $scope.manage_privilege_president_person_result.choices[index2].title_privilege_code){
+                        $scope.manage_privilege_president_person_result.list[index].my_privilege = $scope.manage_privilege_president_person_result.choices[index2];
+                   
+                    }
+                }
+            }
+
+
+   $scope.copy_save = angular.copy($scope.manage_privilege_president_person_result.list);
          });
 
 
@@ -6398,6 +6433,11 @@ $scope.title_choosen = {};
                 return true;
             }
         }
+
+        if(angular.equals($scope.copy_save,$scope.manage_privilege_admin_result.list)==true){
+            return true;
+        }
+
         return false;
     }
     $scope.choose_curri = function(){
@@ -6442,6 +6482,8 @@ $scope.title_choosen = {};
                     }
                 }
             }
+
+            $scope.copy_save = angular.copy($scope.manage_privilege_admin_result.list);
     
          });
 

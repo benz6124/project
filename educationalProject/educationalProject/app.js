@@ -83,23 +83,39 @@ app.factory('AuthService', function ($http,$cookies) {
 
 app.controller('main_controller', function ($scope,
                                              
-                                               AuthService,$cookies,$rootScope) {
+                                               AuthService,$cookies,$rootScope,$http) {
 
    $rootScope.current_user = {};
-  $rootScope.current_user = $cookies.getObject("mymy");
+  $scope.cookies_user_id = $cookies.getObject("mymy");
+
+  console.log('$scope.cookies_user_id',$scope.cookies_user_id)
 $scope.fix_mode = false;
 $scope.not_choose_curri_and_year_yet = true;
      $rootScope.have_privilege_in_these_curri = {};
-  if(!$rootScope.current_user) {
+  if(!$scope.cookies_user_id) {
   $scope.already_login = false;
 
   }
   else{
 
+
+        $http.post(
+             'api/users/getuserdata',
+             JSON.stringify($scope.cookies_user_id),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+          $rootScope.current_user =data;
+          console.log('$rootScope.current_user')
+          console.log($rootScope.current_user)
+          $scope.already_login = true;
     
-  	console.log('$rootScope.current_user')
-    console.log($rootScope.current_user)
-  	  $scope.already_login = true;
+         });
+    
+
   	    
   	
   }
@@ -114,8 +130,8 @@ $scope.not_choose_curri_and_year_yet = true;
   $scope.setcurrent_user = function (user) {
       $scope.already_login = true;
     $rootScope.current_user = user;
-     $cookies.putObject("mymy", user);
-      	console.log($rootScope.current_user);
+     $cookies.putObject("mymy", user.user_id);
+     
   };
 
 

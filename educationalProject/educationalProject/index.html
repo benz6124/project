@@ -2021,7 +2021,7 @@
 
 
 
-    <select data-qo-disable-clear="true" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_president_result.choices track by choice.title_privilege_code" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.each_type.my_privilege" >
+    <select data-qo-disable-clear="true" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_president_result.choices track by choice.title_privilege_code" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.each_type.my_privilege" >
 <option style="display:none" value=""></option></select>   
                                          
                                            </td>
@@ -2043,7 +2043,7 @@
           </div>         </div>
      <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="choose_not_complete || not_choose_title_yet || still_not_complete()"  class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button ng-disabled="choose_not_complete || not_choose_title_yet || still_not_complete() "  class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
@@ -2189,7 +2189,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
           </div>         </div>
      <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="choose_not_complete || not_choose_title_yet || still_not_complete()"  class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button ng-disabled="choose_not_complete || not_choose_title_yet || still_not_complete() "  class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
@@ -2245,7 +2245,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
     padding-left: 0px;
     padding-right: 0px;
 ">
-    <select data-qo-disable-clear="true" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_admin_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="each_type.my_privilege" data-qo-disable-clear="true" >
+    <select data-qo-disable-clear="true" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_admin_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง"  data-ng-model="each_type.my_privilege" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                                          
                                            </td>
