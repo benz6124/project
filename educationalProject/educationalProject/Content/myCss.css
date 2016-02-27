@@ -623,6 +623,13 @@ button.plusgreen:hover{
       opacity:0.8 !important;
 
 }
+div.aside-body ul.nav.nav-stacked li a i {
+  margin-top: 5px;
+}
+/*.just_alert .modal-content{
+      width:1000px;
+
+}*/
 .just_alert .modal-header{
 
   margin-top: 10px;

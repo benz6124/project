@@ -128,7 +128,7 @@ $scope.not_choose_curri_and_year_yet = true;
        var i;
        $scope.content_pop = "<b>ท่านมีหลักฐานค้างการอัพโหลด ในหลักสูตร ปีการศึกษาเหล่านี้</b> <ul>";
               for(i=0;i<$rootScope.current_user.not_send_primary.length;i++){
-                $scope.content_pop =  $scope.content_pop+"<li><b>หลักฐาน</b> "+$rootScope.current_user.not_send_primary[i].evidence_name+" <b>ในหลักสูตร</b> "+$rootScope.current_user.not_send_primary[i].curr_tname+" <b>ปีการศึกษา</b> "+$rootScope.current_user.not_send_primary[i].aca_year+"</li>";
+                $scope.content_pop =  $scope.content_pop+"<li>"+$rootScope.current_user.not_send_primary[i].evidence_name+" <b>หลักสูตร</b> "+$rootScope.current_user.not_send_primary[i].curr_tname+" <b>ปีการศึกษา</b> "+$rootScope.current_user.not_send_primary[i].aca_year+"</li>";
                
               }
                $scope.content_pop  =  $scope.content_pop  +"</ul>"
@@ -137,9 +137,9 @@ $scope.not_choose_curri_and_year_yet = true;
                 content: $scope.content_pop,
                 theme: 'danger',
                 size: 'lg',
-                effect: 'speed-left',
-                speed: 'normal',
-                backdrop:'true',
+                effect: 'bounce-in',
+                speed: 'fast',
+                backdrop:'static',
                typeClass: 'just_alert',
                closeText :'ปิดหน้าต่าง'
               

@@ -118,22 +118,14 @@
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;เพิ่มปีการศึกษา</span></span>
                             </a>
                         </li>
-
-
-                        <li ng-show='have_privilege_to_open_modal("3") || fix_mode'>
-                            <a href="" data-nq-toggle-modal="#manage_evidences" data-effect="from-left" data-placement="right">
-                                <i class="glyphicon glyphicon-briefcase"></i>
-                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการหลักฐาน</span></span>
+   <li  ng-show="have_privilege_to_open_modal('25')  || fix_mode">
+                            <a href="" data-nq-toggle-modal="#manage_indicators" data-effect="from-left" data-placement="right">
+                                <i class="glyphicon glyphicon-th-list"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการตัวบ่งชี้</span></span>
                             </a>
                         </li>
 
-
-                        <li ng-show='have_privilege_to_open_modal("4") || fix_mode'>
-                            <a href="" data-nq-toggle-modal="#evaluate_me" data-effect="from-left" data-placement="right">
-                                <i class="glyphicon glyphicon-pencil"></i>
-                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;ประเมินหลักสูตรตนเอง</span></span>
-                            </a>
-                        </li>
+                    
 
                           <li ng-show='have_privilege_to_open_modal("17") || fix_mode'>
                             <a href="" data-nq-toggle-modal="#evaluate_other" data-effect="from-left" data-placement="right">
@@ -148,49 +140,13 @@
                             </a>
 
                             <ul class="dropdown">
-                                <li  ng-show='have_privilege_to_open_modal("5") || fix_mode' >
-                                    <a href="" data-nq-toggle-modal="#manage_survey" data-effect="slide-left">
-                                        <span class="topic"> แบบสอบถาม</span>
-                                    </a>
-                                </li>
-
-
-                                <li  ng-show='have_privilege_to_open_modal("6") || fix_mode'>
-                                    <a href="" data-nq-toggle-modal="#manage_album" data-effect="slide-left">
-                                        <span class="topic"> อัลบั้มรูปภาพ</span>
-                                    </a>
-                                </li>
-                                
-
-                                
-                                <li  ng-show='have_privilege_to_open_modal("7") || fix_mode'>
+                              <li  ng-show='have_privilege_to_open_modal("7") || fix_mode'>
                                     <a href="" data-nq-toggle-modal="#show_education_personnel" data-screenMode="true" data-effect="slide-left" data-placement="right">
                                         <span class="topic"> ข้อมูลบุคลากร</span>
                                     </a>
                                 </li>
 
-                                <li  ng-show='have_privilege_to_open_modal("8") || fix_mode'>
-                                    <a href="" data-nq-toggle-modal="#manage_minutes" data-screenMode="true" data-effect="slide-left" data-placement="right">
-                                        <span class="topic">รายงานการประชุม</span>
-                                    </a>
-                                </li>
-
-                                <li  ng-show='have_privilege_to_open_modal("9") || fix_mode'>
-                                    <a href="" data-nq-toggle-modal="#manage_research" data-screenMode="true" data-effect="slide-left" data-placement="right">
-                                        <span class="topic"> งานวิจัย</span>
-                                    </a>
-                                </li>
-  
-                                <li  ng-show='have_privilege_to_open_modal("10") || fix_mode'>
-                                    <a href="" data-nq-toggle-modal="#manage_lab" data-effect="slide-left">
-                                        <span class="topic"> ห้องปฏิบัติการ</span>
-                                    </a>
-                                </li>
-
-                             
-
-
-                                <li  ng-show='have_privilege_to_open_modal("11") || fix_mode'>
+                                 <li  ng-show='have_privilege_to_open_modal("11") || fix_mode'>
                                     <a href="" data-nq-toggle-modal="#stat_grad" data-effect="slide-left">
                                         <span class="topic"> สถิติการจบการศึกษา</span>
                                     </a>
@@ -208,6 +164,52 @@
                                     </a>
                                 </li>
 
+              <li  ng-show='have_privilege_to_open_modal("10") || fix_mode'>
+                                    <a href="" data-nq-toggle-modal="#manage_lab" data-effect="slide-left">
+                                        <span class="topic"> ห้องปฏิบัติการ</span>
+                                    </a>
+                                </li>
+
+                                
+
+       <li  ng-show='have_privilege_to_open_modal("6") || fix_mode'>
+                                    <a href="" data-nq-toggle-modal="#manage_album" data-effect="slide-left">
+                                        <span class="topic"> อัลบั้มรูปภาพ</span>
+                                    </a>
+                                </li>
+
+
+
+                                <li  ng-show='have_privilege_to_open_modal("5") || fix_mode' >
+                                    <a href="" data-nq-toggle-modal="#manage_survey" data-effect="slide-left">
+                                        <span class="topic"> แบบสอบถาม</span>
+                                    </a>
+                                </li>
+                         
+                                
+
+                                    <li  ng-show='have_privilege_to_open_modal("9") || fix_mode'>
+                                    <a href="" data-nq-toggle-modal="#manage_research" data-screenMode="true" data-effect="slide-left" data-placement="right">
+                                        <span class="topic"> งานวิจัย</span>
+                                    </a>
+                                </li>
+                              
+
+                                <li  ng-show='have_privilege_to_open_modal("8") || fix_mode'>
+                                    <a href="" data-nq-toggle-modal="#manage_minutes" data-screenMode="true" data-effect="slide-left" data-placement="right">
+                                        <span class="topic">รายงานการประชุม</span>
+                                    </a>
+                                </li>
+
+                            
+  
+                  
+
+                             
+
+
+                               
+
 
                             </ul>
 
@@ -221,15 +223,80 @@
 
                         </li>
 
+
+                        <li ng-show='have_privilege_to_open_modal("3") || fix_mode'>
+                            <a href="" data-nq-toggle-modal="#manage_evidences" data-effect="from-left" data-placement="right">
+                                <i class="glyphicon glyphicon-briefcase"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการหลักฐาน</span></span>
+                            </a>
+                        </li>
+
+        <li ng-show='have_privilege_to_open_modal("26") || fix_mode'>
+                            <a href="" data-nq-toggle-modal="#manage_primary_evidences_president" data-effect="from-left" data-placement="right">
+                                <i class="glyphicon glyphicon-inbox"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการหลักฐานพื้นฐาน</span></span>
+                            </a>
+                        </li>
+
                          <li ng-show='have_privilege_to_open_modal("18")  || fix_mode'>
                             <a href="" data-nq-toggle-modal="#manage_bind_person" data-effect="from-left" data-placement="right">
-                                <i class="glyphicon glyphicon-list-alt"></i>
+                                <i class="glyphicon glyphicon-link"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic">&nbsp;&nbsp;โยงบัญชีผู้ใช้งาน</span></span>
                             </a>
                         </li>
 
                      
-                        <li class="hierarchy" ng-show='have_privilege_to_open_modal("19") || have_privilege_to_open_modal("20")'>
+       
+
+                    
+                          <li ng-show="have_privilege_to_open_modal('22')|| fix_mode">
+                            <a href="" data-nq-toggle-modal="#manage_president" data-effect="from-left" data-placement="bottom">
+                                <i class="glyphicon glyphicon-king"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;แต่งตั้งประธานหลักสูตร</span></span>
+                            </a>
+                        </li>
+
+
+                        
+<li ng-show="have_privilege_to_open_modal('23') || fix_mode">
+                            <a href="" data-nq-toggle-modal="#manage_admin_who" data-effect="from-left" data-placement="right">
+                                <i class="glyphicon glyphicon-sunglasses"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;แต่งตั้งผู้ควบคุมระบบ</span></span>
+                            </a>
+                        </li>
+
+<li  ng-show="have_privilege_to_open_modal('24') || fix_mode">
+                            <a href="" data-nq-toggle-modal="#manage_committee_who" data-effect="from-left" data-placement="right">
+                                <i class="glyphicon glyphicon-knight"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;แต่งตั้งกรรมการหลักสูตร</span></span>
+                            </a>
+                        </li>
+
+                       
+
+                     
+
+                          <li  ng-show="have_privilege_to_open_modal('27') || fix_mode">
+                            <a href="" data-nq-toggle-modal="#manage_primary_evidences_admin" data-effect="from-left" data-placement="right">
+                                <i class="glyphicon glyphicon-inbox"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการหลักฐานพื้นฐาน</span></span>
+                            </a>
+                        </li>
+                            <li ng-show='have_privilege_to_open_modal("14") || fix_mode'>
+                            <a href="" data-nq-toggle-modal="#upload_aun" data-effect="from-left" data-placement="bottom">
+                                <i class="glyphicon glyphicon-book"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;อัพโหลดเล่มรายงาน</span></span>
+                            </a>
+                        </li>
+
+                            <li ng-show='have_privilege_to_open_modal("4") || fix_mode'>
+                            <a href="" data-nq-toggle-modal="#evaluate_me" data-effect="from-left" data-placement="right">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;ประเมินหลักสูตรตนเอง</span></span>
+                            </a>
+                        </li>
+
+                                         <li class="hierarchy" ng-show='have_privilege_to_open_modal("19") || have_privilege_to_open_modal("20")'>
                             <a href="" data-nq-toggle-modal="#change_priviledge" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-cog"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic">&nbsp;&nbsp;แก้ไขระดับการเข้าถึง</span></span>
@@ -252,23 +319,6 @@
                         </li>
 
 
-                      <!--     <li>
-                            <a href="" data-nq-toggle-modal="#change_priviledge" data-effect="from-left" data-placement="right">
-                                <i class="glyphicon glyphicon-cog"></i>
-                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic">&nbsp;&nbsp;แก้ไขระดับการเข้าถึง แอดมิน</span></span>
-                            </a>
-
-                            <ul class="dropdown">
-                                <li>
-                                    <a href="" data-nq-toggle-modal="#change_priviledge_by_type_admin" data-effect="slide-left">
-                                        <span class="topic">แก้ไขตามประเภทบุคลากร</span>
-                                    </a>
-                                </li>
-
-                             
-
-                            </ul>
-                        </li> -->
 
              <li  ng-show="have_privilege_to_open_modal('21') || fix_mode">
                      
@@ -278,56 +328,6 @@
                             </a>
                         </li>
 
-
-                        <li ng-show='have_privilege_to_open_modal("14") || fix_mode'>
-                            <a href="" data-nq-toggle-modal="#upload_aun" data-effect="from-left" data-placement="bottom">
-                                <i class="glyphicon glyphicon-book"></i>
-                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;อัพโหลดเล่มรายงาน</span></span>
-                            </a>
-                        </li>
-                          <li ng-show="have_privilege_to_open_modal('22')|| fix_mode">
-                            <a href="" data-nq-toggle-modal="#manage_president" data-effect="from-left" data-placement="bottom">
-                                <i class="glyphicon glyphicon-user"></i>
-                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;แต่งตั้งประธานหลักสูตร</span></span>
-                            </a>
-                        </li>
-
-
-                        
-<li ng-show="have_privilege_to_open_modal('23') || fix_mode">
-                            <a href="" data-nq-toggle-modal="#manage_admin_who" data-effect="from-left" data-placement="right">
-                                <i class="glyphicon glyphicon-user"></i>
-                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;แต่งตั้งผู้ควบคุมระบบ</span></span>
-                            </a>
-                        </li>
-
-<li  ng-show="have_privilege_to_open_modal('24') || fix_mode">
-                            <a href="" data-nq-toggle-modal="#manage_committee_who" data-effect="from-left" data-placement="right">
-                                <i class="glyphicon glyphicon-user"></i>
-                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;แต่งตั้งกรรมการหลักสูตร</span></span>
-                            </a>
-                        </li>
-
-                          <li  ng-show="have_privilege_to_open_modal('25')  || fix_mode">
-                            <a href="" data-nq-toggle-modal="#manage_indicators" data-effect="from-left" data-placement="right">
-                                <i class="glyphicon glyphicon-th-list"></i>
-                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการตัวบ่งชี้</span></span>
-                            </a>
-                        </li>
-
-                             <li ng-show='have_privilege_to_open_modal("26") || fix_mode'>
-                            <a href="" data-nq-toggle-modal="#manage_primary_evidences_president" data-effect="from-left" data-placement="right">
-                                <i class="glyphicon glyphicon-user"></i>
-                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการหลักฐานพื้นฐาน</span></span>
-                            </a>
-                        </li>
-
-                          <li  ng-show="have_privilege_to_open_modal('27') || fix_mode">
-                            <a href="" data-nq-toggle-modal="#manage_primary_evidences_admin" data-effect="from-left" data-placement="right">
-                                <i class="glyphicon glyphicon-user"></i>
-                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการหลักฐานพื้นฐาน</span></span>
-                            </a>
-                        </li>
                     </ul>
 
 
@@ -3506,7 +3506,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
 
                         <div ng-show="choose_not_complete">
-                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                         </div>
     <div ng-hide="choose_not_complete" class="manage_president_in_hide">
 
