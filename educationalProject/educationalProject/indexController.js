@@ -6184,7 +6184,7 @@ formData.append("file" , $scope.files[0]);
 
 
  });
-app.controller('login_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
+app.controller('login_controller', function($scope, $http,$alert,$loading,$timeout,$rootScope,ngDialog,request_all_curriculums_service_server,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
     $scope.credentials = {
         username: '',
         password: ''
@@ -6209,14 +6209,11 @@ app.controller('login_controller', function($scope, $http,$alert,$loading,$timeo
 
                $alert({title:'เข้าสู่ระบบสำเร็จ', content:'ยินดีต้อนรับ '+$rootScope.current_user.username,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-
-               // if(!!$rootScope.current_user.not_send_primary){
-               //      var i;
-               //      for(i=0;i<$rootScope.current_user.not_send_primary.length;i++){
-               //       $alert({title:'แจ้งเตือน', content:'ท่านมีหลักฐานค้างการอัพโหลด ในหลักสูตร '+rootScope.current_user.not_send_primary[i],alertType:'danger',
-               //           placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
-               //      }
-               // }
+   if(!!$rootScope.current_user.not_send_primary){
+         
+              $rootScope.open_modal_primary_not_send();
+         }
+        
 
         }, function () {
 

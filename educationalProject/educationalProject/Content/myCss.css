@@ -619,7 +619,36 @@ button.plusgreen:hover{
   background-color:#6F002B;
   color:white;
 }
+.just_alert-backdrop{
+      opacity:0.8 !important;
 
+}
+.just_alert .modal-header{
+
+  margin-top: 10px;
+  background-color:#bc2e29 !important;
+
+}
+.just_alert .modal-header h4.modal-title{
+  color:white !important;
+  font-size: 35px !important;
+  text-align: center;;
+}
+
+.just_alert .modal-body {
+  font-size: 20px!important;
+}
+.just_alert .modal-footer{
+ 
+  margin-top: 0px;
+  background-color:#bc2e29 !important;
+  color:white !important;
+  font-size: 25px !important;
+
+}
+.just_alert .modal-footer button{
+  margin-top: 2.5px!important;
+}
 .custom-footer{
   background-color:#6F002B !important;
 
@@ -634,6 +663,19 @@ button.plusgreen:hover{
  /*      height: 100% !important;
    z-index: -1 !important;*/
 }
+
+.just_alert-backdrop.in {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background-color:#000;
+}
+
 /*
 .modal-dialog{
   z-index: 0 !important;

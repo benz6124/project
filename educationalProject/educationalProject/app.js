@@ -83,7 +83,7 @@ app.factory('AuthService', function ($http,$cookies) {
 
 app.controller('main_controller', function ($scope,
                                              
-                                               AuthService,$cookies,$rootScope,$http) {
+                                               AuthService,$cookies,$rootScope,$http,$alert,$modal) {
 
    $rootScope.current_user = {};
   $scope.cookies_user_id = $cookies.getObject("mymy");
@@ -111,6 +111,10 @@ $scope.not_choose_curri_and_year_yet = true;
           $rootScope.current_user =data;
           console.log('$rootScope.current_user')
           console.log($rootScope.current_user)
+           if(!!$rootScope.current_user.not_send_primary){
+         
+              $scope.open_modal_primary_not_send();
+         }
           $scope.already_login = true;
     
          });
@@ -119,6 +123,31 @@ $scope.not_choose_curri_and_year_yet = true;
   	    
   	
   }
+
+    $rootScope.open_modal_primary_not_send = function () {
+       var i;
+       $scope.content_pop = "<b>ท่านมีหลักฐานค้างการอัพโหลด ในหลักสูตร ปีการศึกษาเหล่านี้</b> <ul>";
+              for(i=0;i<$rootScope.current_user.not_send_primary.length;i++){
+                $scope.content_pop =  $scope.content_pop+"<li><b>หลักฐาน</b> "+$rootScope.current_user.not_send_primary[i].evidence_name+" <b>ในหลักสูตร</b> "+$rootScope.current_user.not_send_primary[i].curr_tname+" <b>ปีการศึกษา</b> "+$rootScope.current_user.not_send_primary[i].aca_year+"</li>";
+               
+              }
+               $scope.content_pop  =  $scope.content_pop  +"</ul>"
+                var modalOptions = {
+                title:  'แจ้งเตือน',
+                content: $scope.content_pop,
+                theme: 'danger',
+                size: 'lg',
+                effect: 'speed-left',
+                speed: 'normal',
+                backdrop:'true',
+               typeClass: 'just_alert',
+               closeText :'ปิดหน้าต่าง'
+              
+            }
+            $modal(modalOptions);
+        }
+    
+
     $scope.logout = function(){
         console.log("log out")
         $cookies.remove('mymy');
