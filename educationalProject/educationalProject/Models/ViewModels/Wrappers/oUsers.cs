@@ -171,19 +171,21 @@ namespace educationalProject.Models.ViewModels.Wrappers
                     Technical_interested.FieldName.TOPIC_INTERESTED, Technical_interested.FieldName.TABLE_NAME,
                     Technical_interested.FieldName.TEACHER_ID, user_id);
 
-            //7 select not_send_primary (teacher only ? evid_curri_id, aca_year, evidence_name) => selectnotsendprimary
+            //7 select not_send_primary (teacher only ? evid_curri_id,curr_tname, aca_year, evidence_name) => selectnotsendprimary
             string selectnotsendprimary = "";
             if (usrtype == 0)
-                selectnotsendprimary = string.Format("select {0}.{1} as evid_curri_id,{2},{3} " +
-                "from {0},{4} " +
-                "where {4}.{5} = {0}.{6} " +
-                "and {7} = {8} and ({9} = '0' or {9} = '4') ",
+                selectnotsendprimary = string.Format("select {0}.{1} as evid_curri_id,{2},{3},{4} from {0},{5},{6} " +
+                "where {5}.{7} = {0}.{8} " +
+                "and {9} = {10} and ({11} = '0' or {11} = '4') " +
+                "and {6}.{12} = {0}.{1} ",
                 Primary_evidence_status.FieldName.TABLE_NAME, Primary_evidence_status.FieldName.CURRI_ID,
+                Cu_curriculum.FieldName.CURR_TNAME,
                 Primary_evidence.FieldName.ACA_YEAR, Primary_evidence.FieldName.EVIDENCE_NAME,
-                Primary_evidence.FieldName.TABLE_NAME, Primary_evidence.FieldName.PRIMARY_EVIDENCE_NUM,
-                Primary_evidence_status.FieldName.PRIMARY_EVIDENCE_NUM,
-                Primary_evidence_status.FieldName.TEACHER_ID, user_id,
-                Primary_evidence_status.FieldName.STATUS);
+                /*5*/Primary_evidence.FieldName.TABLE_NAME,Cu_curriculum.FieldName.TABLE_NAME,
+                Primary_evidence.FieldName.PRIMARY_EVIDENCE_NUM, Primary_evidence_status.FieldName.PRIMARY_EVIDENCE_NUM,
+                Primary_evidence_status.FieldName.TEACHER_ID, user_id,Primary_evidence_status.FieldName.STATUS,
+                Cu_curriculum.FieldName.CURRI_ID
+                );
 
 
             //8 select privilege (use predefined select from temp table cmd) except admin => selectprivilege
@@ -368,12 +370,13 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             }
                             else if (tabledata.Columns.Contains("evid_curri_id"))
                             {
-                                //7 retrieve not_send_primary (teacher only ? evid_curri_id, aca_year, evidence_name)
+                                //7 retrieve not_send_primary (teacher only ? evid_curri_id,curr_tname, aca_year, evidence_name)
                                 if (result.not_send_primary == null)
                                     result.not_send_primary = new List<Evidence_brief_detail>();
                                 result.not_send_primary.Add(new Evidence_brief_detail
                                 {
                                     curri_id = item.ItemArray[tabledata.Columns["evid_curri_id"].Ordinal].ToString(),
+                                    curr_tname = item.ItemArray[tabledata.Columns[Cu_curriculum.FieldName.CURR_TNAME].Ordinal].ToString(),
                                     aca_year = Convert.ToInt32(item.ItemArray[tabledata.Columns[Primary_evidence.FieldName.ACA_YEAR].Ordinal]),
                                     evidence_name = item.ItemArray[tabledata.Columns[Primary_evidence.FieldName.EVIDENCE_NAME].Ordinal].ToString()
                                 });
@@ -671,12 +674,13 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             }
                             else if (tabledata.Columns.Contains("evid_curri_id"))
                             {
-                                //7 retrieve not_send_primary (teacher only ? evid_curri_id, aca_year, evidence_name)
+                                //7 retrieve not_send_primary (teacher only ? evid_curri_id,curr_tname, aca_year, evidence_name)
                                 if (result.not_send_primary == null)
                                     result.not_send_primary = new List<Evidence_brief_detail>();
                                 result.not_send_primary.Add(new Evidence_brief_detail
                                 {
                                     curri_id = item.ItemArray[tabledata.Columns["evid_curri_id"].Ordinal].ToString(),
+                                    curr_tname = item.ItemArray[tabledata.Columns[Cu_curriculum.FieldName.CURR_TNAME].Ordinal].ToString(),
                                     aca_year = Convert.ToInt32(item.ItemArray[tabledata.Columns[Primary_evidence.FieldName.ACA_YEAR].Ordinal]),
                                     evidence_name = item.ItemArray[tabledata.Columns[Primary_evidence.FieldName.EVIDENCE_NAME].Ordinal].ToString()
                                 });
@@ -973,12 +977,13 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             }
                             else if (tabledata.Columns.Contains("evid_curri_id"))
                             {
-                                //7 retrieve not_send_primary (teacher only ? evid_curri_id, aca_year, evidence_name)
+                                //7 retrieve not_send_primary (teacher only ? evid_curri_id,curr_tname, aca_year, evidence_name)
                                 if (result.not_send_primary == null)
                                     result.not_send_primary = new List<Evidence_brief_detail>();
                                 result.not_send_primary.Add(new Evidence_brief_detail
                                 {
                                     curri_id = item.ItemArray[tabledata.Columns["evid_curri_id"].Ordinal].ToString(),
+                                    curr_tname = item.ItemArray[tabledata.Columns[Cu_curriculum.FieldName.CURR_TNAME].Ordinal].ToString(),
                                     aca_year = Convert.ToInt32(item.ItemArray[tabledata.Columns[Primary_evidence.FieldName.ACA_YEAR].Ordinal]),
                                     evidence_name = item.ItemArray[tabledata.Columns[Primary_evidence.FieldName.EVIDENCE_NAME].Ordinal].ToString()
                                 });
