@@ -8,6 +8,8 @@ using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 using System.IO;
 using educationalProject.Models.Wrappers;
+using System.Configuration;
+using System.Net.Configuration;
 namespace educationalProject.Controllers
 {
     public class AunBookController : ApiController
@@ -16,6 +18,9 @@ namespace educationalProject.Controllers
 
         public IHttpActionResult Get()
         {
+            var smtpSection = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
+            string username = smtpSection.Network.UserName;
+            /*
             Dictionary<string, Dictionary<int, int>> test = new Dictionary<string, Dictionary<int,int>>();
             test.Add("21",new Dictionary<int, int>());
             test.Add("22", new Dictionary<int, int>());
@@ -32,7 +37,8 @@ namespace educationalProject.Controllers
 
             test["23"][1] = 2;
             test["23"][2] = 2;
-            return Ok(test);
+            return Ok(test);*/
+            return Ok();
         }
         public async Task<IHttpActionResult> PostToQueryDownloadLinkByCurriculumAcademic(oCurriculum_academic data)
         {

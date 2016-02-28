@@ -288,7 +288,9 @@
     <None Include="Views\Home\test.cshtml" />
     <Content Include="testAng.html" />
     <Content Include="testtest.html" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
