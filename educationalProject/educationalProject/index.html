@@ -3303,7 +3303,7 @@ glyphicon glyphicon-bell"></i> </span>
 
    <td > <a style="margin-left:1.5px;margin-top:3.5px"href=""  class="hvr-pulse" ng-click="watch_file(evidence.file_name)">
                                         <span class="topicHeader"><i class="
-glyphicon glyphicon-eye-open"></i> </span></a></td>
+glyphicon glyphicon-eye-open" style="color:darkcyan" ></i> </span></a></td>
 
 
 
@@ -3442,13 +3442,13 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
 
    <td class="number_indicator"> 
 
-   <a href="" data-nq-tooltip="" data-qs-title="ส่งอีเมล์แจ้งเตือนผู้รับผิดชอบทันที" ng-show="primary_evidence.by_pass == '1' "ng-hide="primary_evidence.status == '2' || primary_evidence.status == '6' ||primary_evidence.status == '1' || primary_evidence.status == '5' " class="hvr-pulse" data-ng-click="send_email(primary_evidence.teacher_id)">
-                                        <span class="topic"><i style="color:#eea236"class="
+   <a href="" data-nq-tooltip="" data-qs-title="ส่งอีเมล์แจ้งเตือนผู้รับผิดชอบทันที" ng-show="primary_evidence.by_pass == '1' "ng-hide="primary_evidence.status == '2' || primary_evidence.status == '6' ||primary_evidence.status == '1' || primary_evidence.status == '5' " class="hvr-pulse" data-ng-click="send_email(primary_evidence)">
+                                        <span class="topic"><i style="color:#eea236;margin-top:5px"class="
 glyphicon glyphicon-bell"></i> </span>
                                     </a></td>
                                     
    <td class="noti"> <a href=""  class="hvr-pulse" data-ng-click="remove_primary_evidence($index)">
-                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                        <span class="topic"><i style="color:#d9534f;margin-top:5px"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td>
 
                                  <!--               <td class="number_indicator"> <a style="margin-right:10px"href="" data-ng-click="choose_indicator(indicator)" data-nq-toggle-modal="#manage_sub_indicators" data-effect="slide-left">

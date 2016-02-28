@@ -3443,16 +3443,19 @@ $scope.choose_teacher = function(my_obj){
       }
 
 
-$scope.send_email = function(teacher_id_to_send){
+$scope.send_email = function(primary_obj){
 
-if(angular.isUndefined(teacher_id_to_send)){
+if(angular.isUndefined(primary_obj.teacher_id)){
       $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกผู้รับผิดชอบหลักฐานก่อนส่ง',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
 
 }else{
+    $scope.to_sent = {};
+    $scope.to_sent.curri_id = primary_obj.curri_id;
+    $scope.to_sent.primary_evidence_num = primary_obj.primary_evidence_num;
            $http.post(
              '/api/primaryevidence/sendmail',
-             JSON.stringify(teacher_id_to_send),
+             JSON.stringify($scope.to_sent),
              {
                  headers: {
                      'Content-Type': 'application/json'
@@ -3465,10 +3468,10 @@ if(angular.isUndefined(teacher_id_to_send)){
 
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+             
      $alert({title:'เกิดข้อผิดพลาด', content:'ส่ง Email แจ้งเตือนไม่สำเร็จ',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
 }
