@@ -1784,7 +1784,7 @@ $scope.init =function() {
         return false;
     }
 
-       $scope.save_to_server = function(){
+       $scope.save_to_server = function(my_modal){
 
                
     $scope.to_sent = {};
@@ -1812,8 +1812,18 @@ $scope.init =function() {
              $alert({title:'ดำเนินการสำเร็จ', content:'เพิ่มข้อมูลเรียบร้อย ตรวจสอบอีเมล์เพื่อรับรหัสผ่าน',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
 
+               my_modal.$hide();
+
         
-    });
+    })
+             .error(function(data, status, headers, config) {
+                  if(status==500){
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
 
     }
 
