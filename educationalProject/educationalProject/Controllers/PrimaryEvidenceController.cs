@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Threading.Tasks;
 using educationalProject.Models.ViewModels;
 using educationalProject.Models.Wrappers;
+using educationalProject.Utils;
 using Newtonsoft.Json.Linq;
 namespace educationalProject.Controllers
 {
@@ -57,6 +58,23 @@ namespace educationalProject.Controllers
             object result = await datacontext.SelectOnlyNameAndId(data["curri_id"].ToString(),Convert.ToInt32(data["aca_year"]), data["teacher_id"].ToString(), Convert.ToInt32(data["indicator_num"]));
             if (result.GetType().ToString() != "System.String")
                 return Ok(result);
+            else
+                return InternalServerError(new Exception(result.ToString()));
+        }
+
+        [ActionName("sendmail")]
+        public async Task<IHttpActionResult> PostToSendNotifications(oPrimary_evidence data)
+        {
+            object result = await data.SelectPrimaryEvidenceWithTeacherDetail();
+            if (result.GetType().ToString() != "System.String")
+            {
+                //send mail!
+                object sendresult = await MailingUtils.sendNotificationPrimaryEvidenceIndividual((Evidence_with_teacher_curri_indicator_detail)result);
+                if(sendresult == null)
+                    return Ok();
+                else
+                    return InternalServerError((Exception)sendresult);
+            }
             else
                 return InternalServerError(new Exception(result.ToString()));
         }

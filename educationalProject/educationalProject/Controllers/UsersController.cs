@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using educationalProject.Models.ViewModels;
 using educationalProject.Models.Wrappers;
 using educationalProject.Models.ViewModels.Wrappers;
+using educationalProject.Utils;
 namespace educationalProject.Controllers
 {
     public class UsersController : ApiController
@@ -32,6 +33,7 @@ namespace educationalProject.Controllers
             string savepath = WebApiApplication.SERVERPATH + "temp";
             var result = new MultipartFormDataStreamProvider(savepath);
             List<UsernamePassword> userlist = new List<UsernamePassword>();
+            List<UsernamePassword> nonencryptuserlist = new List<UsernamePassword>();
             List<string> curri_list = new List<string>();
             try
             {
@@ -72,7 +74,13 @@ namespace educationalProject.Controllers
                     }
                     //=========================
                     string strlower = str.ToLower();
+
                     userlist.Add(new UsernamePassword(strlower, password));
+                    nonencryptuserlist.Add(new UsernamePassword
+                    {
+                        username = strlower,
+                        password = password
+                    });
                 }
 
                 //3.Delete temp email file
@@ -100,17 +108,25 @@ namespace educationalProject.Controllers
                 //5.If result is list,try to send mail (send only mail that not it resultfromdb)
                 //Otherwise send errorresult back to user.
                 if (resultfromdb == null)
+                {
+                    foreach (UsernamePassword item in nonencryptuserlist)
+                    {
+                        //send mail!
+                        await MailingUtils.sendUsernamePasswordMail(item.username, item.password);
+                    }
                     return Ok();
+                }
                 else if (resultfromdb.GetType().ToString() != "System.String")
                 {
                     List<string> erroremail = (List<string>)resultfromdb;
-                    
-                    foreach(UsernamePassword item in userlist)
+
+                    foreach (UsernamePassword item in nonencryptuserlist)
                     {
                         //If current mail is not in erroremail => SEND!
-                        if(erroremail.FirstOrDefault(t => t == item.username) == null)
+                        if (erroremail.FirstOrDefault(t => t == item.username) == null)
                         {
                             //send mail!
+                            await MailingUtils.sendUsernamePasswordMail(item.username, item.password);
                         }
                     }
                     return Ok(resultfromdb);

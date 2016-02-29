@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using Newtonsoft.Json.Linq;
 using educationalProject.Models.Wrappers;
 using educationalProject.Models.ViewModels;
+using educationalProject.Utils;
 namespace educationalProject.Controllers
 {
     public class AdminController : ApiController
@@ -46,7 +47,13 @@ namespace educationalProject.Controllers
 
             object result = await datacontext.InsertWithSelect();
             if (result.GetType().ToString() != "System.String")
-                return Ok(result);
+            {
+                object sendresult = await MailingUtils.sendUsernamePasswordMailForAdmin(emaillower, password, datacontext.t_name);
+                if (sendresult == null)
+                    return Ok(result);
+                else
+                    return InternalServerError((Exception)sendresult);
+            }
             else
                 return InternalServerError(new Exception(result.ToString()));
         }

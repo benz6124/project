@@ -19,14 +19,5 @@ namespace educationalProject.Controllers
         }
 
 
-        public IHttpActionResult Get()
-        {
-            List<UsernamePassword> list = new List<UsernamePassword>();
-            list.Add(new UsernamePassword("benza4@hotmail.com", "1"));
-            list.Add(new UsernamePassword("benza@hotmail.com", "1"));
-            List<string> curri = new List<string>();
-            //curri.Add("20"); curri.Add("21");
-            return Ok(datacontext.Insert(list,curri));
-        }
     }
 }

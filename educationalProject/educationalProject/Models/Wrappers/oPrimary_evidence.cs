@@ -462,5 +462,73 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
+
+        public async Task<object> SelectPrimaryEvidenceWithTeacherDetail()
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+            Evidence_with_teacher_curri_indicator_detail result = new Evidence_with_teacher_curri_indicator_detail();
+            d.iCommand.CommandText = string.Format("select {0},{1},{2}.{3},{2}.{4},{5},{6},{7},{8} " +
+            "from {9},{2},{10},{11},{12} " +
+            "where {9}.{13} = '{14}' and {9}.{15} = {16} " +
+            "and {9}.{15} = {2}.{17} " +
+            "and {10}.{18} = {9}.{13} " +
+            "and {19} = {20} " +
+
+            "and {12}.{21} = {2}.{4} " +
+            "and {12}.{22} = (select max({12}.{22}) from {12} where {12}.{22} <= {2}.{3}) " +
+            "and {12}.{22} = {2}.{3} ",
+            FieldName.EVIDENCE_NAME, Cu_curriculum.FieldName.CURR_TNAME,/*2 primary_evidence*/FieldName.TABLE_NAME,
+            FieldName.ACA_YEAR, FieldName.INDICATOR_NUM, Indicator.FieldName.INDICATOR_NAME_T,
+            Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, Teacher.FieldName.EMAIL,
+            /*9*/Primary_evidence_status.FieldName.TABLE_NAME,/*10*/Cu_curriculum.FieldName.TABLE_NAME,
+            /*11*/User_list.FieldName.TABLE_NAME,/*12*/Indicator.FieldName.TABLE_NAME,
+            Primary_evidence_status.FieldName.CURRI_ID, curri_id, Primary_evidence_status.FieldName.PRIMARY_EVIDENCE_NUM,
+            primary_evidence_num, FieldName.PRIMARY_EVIDENCE_NUM, Cu_curriculum.FieldName.CURRI_ID,
+            Primary_evidence_status.FieldName.TEACHER_ID, User_list.FieldName.USER_ID,
+            /*21*/Indicator.FieldName.INDICATOR_NUM, Indicator.FieldName.ACA_YEAR);
+
+            try
+            {
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
+                if (res.HasRows)
+                {
+                    DataTable data = new DataTable();
+                    data.Load(res);
+                    foreach (DataRow item in data.Rows)
+                    {
+                        result.evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString();
+                        result.aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]);
+                        result.curr_tname = item.ItemArray[data.Columns[Cu_curriculum.FieldName.CURR_TNAME].Ordinal].ToString();
+                        result.indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]);
+                        result.indicator_name_t = item.ItemArray[data.Columns[Indicator.FieldName.INDICATOR_NAME_T].Ordinal].ToString();
+
+                        result.t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) +
+                                     item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString();
+
+                        result.email = item.ItemArray[data.Columns[Teacher.FieldName.EMAIL].Ordinal].ToString();
+                    }
+                    data.Dispose();
+                }
+                else
+                {
+                    //Reserved for return error string
+                }
+                res.Close();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return result;
+
+        }
     }
 }
