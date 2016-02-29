@@ -122,5 +122,48 @@ namespace educationalProject.Utils
                 return ex;
             }
         }
+        public static async Task<object> sendNotificationAllPendingPrimaryEvidence(Personnel_with_pending_primary_evidence p)
+        {
+            SmtpSection smtpSection = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
+            try
+            {
+                MailMessage mailMsg = new MailMessage();
+
+                // To
+                mailMsg.To.Add(new MailAddress("benchbb01@hotmail.com"));
+
+                // From
+                mailMsg.From = new MailAddress(smtpSection.Network.UserName, "Educationalproject");
+
+                mailMsg.Subject = string.Format("Educational Project - แจ้งเตือนหลักฐานค้างส่งทั้งหมดของ {0}", p.t_name);
+                mailMsg.IsBodyHtml = true;
+
+                string pendingliststr = "";
+                foreach(Evidence_brief_detail e in p.pendinglist)
+                    pendingliststr += string.Format("<li>{0} <b>หลักสูตร</b> {1} <b>ปีการศึกษา</b> {2}</li>", e.evidence_name, e.curr_tname, e.aca_year);
+
+                mailMsg.Body = string.Format("<h3>เรียน {0}</h3> <br>", p.t_name) +
+                               "ท่านมีหลักฐานที่ค้างส่งอยู่ โดยหลักฐานที่ท่านค้างส่งทั้งหมดมีดังนี้ <br>" +
+                               "<ul>" +
+                               pendingliststr +
+                               "</ul><br>" +
+                               "ขอบคุณครับ/ค่ะ<br><br><br><br>" +
+                               "หากอีเมล์ของท่านถูกแอบอ้างสร้างบัญชี หรือ ไม่ได้จงใจที่จะใช้งานเว็บแอพพลิเคชันของเราจริงๆ ท่านสามารถข้ามอีเมล์นี้ หรือ <b>ลบทิ้ง</b>ได้ทันที";
+                mailMsg.Priority = MailPriority.High;
+
+                // Init SmtpClient and send
+                SmtpClient smtpClient = new SmtpClient(smtpSection.Network.Host, 587);
+                smtpClient.EnableSsl = true;
+                NetworkCredential credentials = new NetworkCredential(smtpSection.Network.UserName, smtpSection.Network.Password);
+                smtpClient.Credentials = credentials;
+                await smtpClient.SendMailAsync(mailMsg);
+                smtpClient.Dispose();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return ex;
+            }
+        }
     }
 }

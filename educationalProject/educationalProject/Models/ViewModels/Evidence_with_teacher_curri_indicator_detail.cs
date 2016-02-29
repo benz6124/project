@@ -12,7 +12,6 @@ namespace educationalProject.Models.ViewModels
         private int _aca_year;
         private int _indicator_num;
         private string _indicator_name_t;
-        private string _t_prename;
         private string _t_name;
         private string _email;
         public string evidence_name { get { return _evidence_name; } set { _evidence_name = value; } }
@@ -20,7 +19,6 @@ namespace educationalProject.Models.ViewModels
         public int aca_year { get { return _aca_year; } set { _aca_year = value; } }
         public int indicator_num { get { return _indicator_num; } set { _indicator_num = value; } }
         public string indicator_name_t { get { return _indicator_name_t; } set { _indicator_name_t = value; } }
-        public string t_prename { get { return _t_prename; } set { _t_prename = value; } }
         public string t_name { get { return _t_name; } set { _t_name = value; } }
         public string email { get { return _email; } set { _email = value; } }
     }

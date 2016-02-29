@@ -528,7 +528,72 @@ namespace educationalProject.Models.Wrappers
                 d.SQLDisconnect();
             }
             return result;
+        }
+        public async Task<object> SelectAllPendingPrimaryEvidence()
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return "Cannot connect to database.";
+            List<Personnel_with_pending_primary_evidence> result = new List<Personnel_with_pending_primary_evidence>();
+            d.iCommand.CommandText = string.Format("select {0},{1}.{2},{3}.{4},{1}.{5},{6},{7},{8},{9} " +
+            "from {3}, {1}, {10}, {11} " +
+            "where ({12} = '0' or {12} = '4') " +
+            "and {3}.{13} = {1}.{14} " +
+            "and {10}.{15} = {3}.{4} " +
+            "and {0} = {16} ",
+            Teacher.FieldName.TEACHER_ID,/*1*/FieldName.TABLE_NAME, FieldName.EVIDENCE_NAME,
+            /*3*/Primary_evidence_status.FieldName.TABLE_NAME, Primary_evidence_status.FieldName.CURRI_ID,
+            FieldName.ACA_YEAR, Cu_curriculum.FieldName.CURR_TNAME, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
+            Teacher.FieldName.EMAIL,
+            /*10*/Cu_curriculum.FieldName.TABLE_NAME,/*11*/User_list.FieldName.TABLE_NAME,
+            Primary_evidence_status.FieldName.STATUS, Primary_evidence_status.FieldName.PRIMARY_EVIDENCE_NUM,
+            FieldName.PRIMARY_EVIDENCE_NUM, Cu_curriculum.FieldName.CURRI_ID, User_list.FieldName.USER_ID);
 
+            try
+            {
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
+                if (res.HasRows)
+                {
+                    DataTable data = new DataTable();
+                    data.Load(res);
+                    foreach (DataRow item in data.Rows)
+                    {
+                        int uid = Convert.ToInt32(item.ItemArray[data.Columns[Teacher.FieldName.TEACHER_ID].Ordinal]);
+                        if (result.FirstOrDefault(t => t.teacher_id == uid) == null)
+                            result.Add(new Personnel_with_pending_primary_evidence
+                            {
+                                email = item.ItemArray[data.Columns[Teacher.FieldName.EMAIL].Ordinal].ToString(),
+                                teacher_id = uid,
+                                t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) +
+                                     item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
+                                pendinglist = new List<Evidence_brief_detail>()
+                            });
+                        result.First(t => t.teacher_id == uid).pendinglist.Add(new Evidence_brief_detail {
+                            evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
+                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
+                            curr_tname = item.ItemArray[data.Columns[Cu_curriculum.FieldName.CURR_TNAME].Ordinal].ToString(),
+                            curri_id = item.ItemArray[data.Columns[Primary_evidence_status.FieldName.CURRI_ID].Ordinal].ToString()
+                        });
+                    }
+                    data.Dispose();
+                }
+                else
+                {
+                    //Reserved for return error string
+                }
+                res.Close();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return result;
         }
     }
 }

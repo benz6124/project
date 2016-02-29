@@ -5,6 +5,8 @@ using System.Net;
 using educationalProject.Models;
 using System.Web.Http;
 using System.Threading.Tasks;
+using System.Configuration;
+using System.Net.Configuration;
 using educationalProject.Models.ViewModels;
 using educationalProject.Models.Wrappers;
 using educationalProject.Utils;
@@ -77,6 +79,29 @@ namespace educationalProject.Controllers
             }
             else
                 return InternalServerError(new Exception(result.ToString()));
+        }
+        [ActionName("sendbulkmail")]
+        public async Task<IHttpActionResult> GetToSendBulkMail([FromUri]string passcode)
+        {
+            SmtpSection smtpSection = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
+            if(passcode != smtpSection.Network.Password)
+                return BadRequest();
+            object retresult = await datacontext.SelectAllPendingPrimaryEvidence();
+            if(retresult.GetType().ToString() != "System.String")
+            {
+                List<Personnel_with_pending_primary_evidence> list = (List<Personnel_with_pending_primary_evidence>)retresult;
+                foreach (Personnel_with_pending_primary_evidence item in list) {
+                    //send mail!
+                    object sendresult = await MailingUtils.sendNotificationAllPendingPrimaryEvidence(item);
+                    while (sendresult != null)
+                        //send again if fail
+                        sendresult = await MailingUtils.sendNotificationAllPendingPrimaryEvidence(item);
+                }
+                return Ok();
+            }
+            else
+                return InternalServerError(new Exception(retresult.ToString()));
+
         }
     }
 }
