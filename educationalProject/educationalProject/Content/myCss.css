@@ -1332,11 +1332,11 @@ font-size: 22px!important;
 }
 
 .not_login_index_select_button_row {
-position:absolute !important;
+position:relative !important;
 z-index:1 !important;
 top:100px !important;
 width:100% !important;
-left: 4% !important;
+left:4.5%!important;
 }
 
 .not_login_indicator_row{
