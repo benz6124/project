@@ -57,11 +57,11 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 {
                     //curri_id = 999 => select the person who didn't in any curriculum
                     d.iCommand.CommandText = string.Format("select {0},{1},{2},{3} from {4} " +
-                         "where not exists(select * from {5} where {5}.{6} = {4}.{0}) ",
+                         "where not exists(select * from {5} where {5}.{6} = {4}.{0}) and {7} != 'ผู้ดูแลระบบ'",
                          FieldName.USER_ID, FieldName.T_PRENAME,
                          Student.FieldName.T_NAME, FieldName.USER_TYPE,
                          User_list.FieldName.TABLE_NAME, User_curriculum.FieldName.TABLE_NAME,
-                         User_curriculum.FieldName.USER_ID);
+                         User_curriculum.FieldName.USER_ID,User_list.FieldName.USER_TYPE);
                 }
             }
 

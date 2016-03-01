@@ -117,7 +117,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                         isFirst = 0;
                         insertintosubindicatorcmd += string.Format("insert into {0} values ", Sub_indicator.FieldName.TABLE_NAME);
                     }
-                        insertintosubindicatorcmd += string.Format("({0},{1},{2},'{3}')", sub_item.aca_year, sub_item.indicator_num, sub_item.sub_indicator_num, sub_item.sub_indicator_name);
+                        insertintosubindicatorcmd += string.Format("({0},{1},{2},'{3}')", sub_item.aca_year, item.indicator_num, sub_item.sub_indicator_num, sub_item.sub_indicator_name);
                 }
             }
 
