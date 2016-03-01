@@ -23,7 +23,7 @@
   margin: 0 auto;
   position: absolute;
   z-index: 3;
-  top: 52%;
+  top: 51%;
   width: 100%;
 }
 .slides-navigation a {
@@ -36,14 +36,18 @@
   left: 1%;
 }
 
+.slides-control i{
+  font-size: 4em !important;
+}
+
 .slides-navigation a.prev_login {
  
-  left: 5%;
+left: 3.5%;
 }
 
 .slides-navigation a.next {
    
-  right: 1%;
+right: 1%;
 }
 
 .slides-pagination {
