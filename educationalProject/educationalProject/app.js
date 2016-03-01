@@ -311,6 +311,7 @@ for(index=0;index<$rootScope.all_curriculums.length;index++){
 
     $scope.have_privilege_to_open_modal = function(title_code){
 
+
           var ever_been_committee = !!$rootScope.current_user.committee_in;
    var ever_been_president = !!$rootScope.current_user.president_in;
  
@@ -360,26 +361,32 @@ var first = true;
         for(index=0;index<$rootScope.current_user.curri_id_in.length;index++){
           if($rootScope.current_user.privilege[$rootScope.current_user.curri_id_in[index]][title_code] ==2){
            
-            $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
+            if($rootScope.have_privilege_in_these_curri[title_code].indexOf($rootScope.current_user.curri_id_in[index])==-1){
+                 $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
+               } 
             
           }
 
-          else if (ever_been_committee == true){
+           if (ever_been_committee == true){
             if(!!$rootScope.current_user.committee_in[$rootScope.current_user.curri_id_in[index]]){
 
              if($rootScope.current_user.committee_privilege[$rootScope.current_user.curri_id_in[index]][title_code] ==2){
           
-                $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
+               if($rootScope.have_privilege_in_these_curri[title_code].indexOf($rootScope.current_user.curri_id_in[index])==-1){
+                 $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
+               } 
             
               }
             }
           }
 
-               else if (ever_been_president == true){
+                if (ever_been_president == true){
             if(!!$rootScope.current_user.president_in[$rootScope.current_user.curri_id_in[index]]){
 
            
-                $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
+                  if($rootScope.have_privilege_in_these_curri[title_code].indexOf($rootScope.current_user.curri_id_in[index])==-1){
+                 $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
+               } 
             
             
             }
@@ -393,25 +400,31 @@ var first = true;
         for(index=0;index<$rootScope.current_user.curri_id_in.length;index++){
           if($rootScope.current_user.privilege[$rootScope.current_user.curri_id_in[index]][title_code] >=2){
            
-            $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
+             if($rootScope.have_privilege_in_these_curri[title_code].indexOf($rootScope.current_user.curri_id_in[index])==-1){
+                 $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
+               } 
           
           }
-      else if (ever_been_committee == true){
+       if (ever_been_committee == true){
             if(!!$rootScope.current_user.committee_in[$rootScope.current_user.curri_id_in[index]]){
 
              if($rootScope.current_user.committee_privilege[$rootScope.current_user.curri_id_in[index]][title_code] >=2){
            
-                $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
+                 if($rootScope.have_privilege_in_these_curri[title_code].indexOf($rootScope.current_user.curri_id_in[index])==-1){
+                 $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
+               } 
             
               }
             }
           }
 
-              else if (ever_been_president == true){
+               if (ever_been_president == true){
             if(!!$rootScope.current_user.president_in[$rootScope.current_user.curri_id_in[index]]){
 
            
-                $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
+                 if($rootScope.have_privilege_in_these_curri[title_code].indexOf($rootScope.current_user.curri_id_in[index])==-1){
+                 $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
+               } 
             
             
             }

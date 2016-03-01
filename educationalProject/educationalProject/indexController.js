@@ -1038,7 +1038,7 @@ app.directive('fileUpload', function () {
     };
 });
 
-app.controller('evaluate_by_me_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service) {
+app.controller('evaluate_by_me_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service,$rootScope) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
    $scope.year_choosen = {};
@@ -1141,6 +1141,11 @@ $scope.indicator_choosen = {};
     }
 
     $scope.save_to_server = function(my_modal){
+
+        var index;
+        for(index=0;index<$scope.corresponding_results.length;index++){
+            $scope.corresponding_results[index].teacher_id = $rootScope.current_user.user_id;
+        }
 
         $http.put(
              '/api/selfevaluation',
@@ -6081,8 +6086,7 @@ $scope.fix_not_complete = function(){
      $scope.save_interest = angular.copy($rootScope.current_user.information.interest)
 
      $rootScope.save_obj = angular.copy($rootScope.current_user);
-          console.log("$rootScope.save_obj")
-     console.log($rootScope.save_obj)
+         
  }
 
 $scope.nothing_really_change = function(){
@@ -6122,7 +6126,7 @@ $scope.nothing_really_change = function(){
 
     }
     else{
-         console.log('equal false')
+         
         return false;
     }
 

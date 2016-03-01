@@ -411,7 +411,7 @@
     <li><img src="/myImages/slide/IMG_7948.jpg" width="4272" height="2848" ></li>
     <li><img src="/myImages/slide/IMG_7959.jpg" width="4272" height="2848" ></li>
   
- <li><img src="/myImages/slide/IMG_7995.jpg" width="4272" height="2848" ></li>
+ 
     <li><img src="/myImages/slide/IMG_7939.jpg" width="4272" height="2848" ></li>
     <li><img src="/myImages/slide/IMG_8006.jpg" width="4272" height="2848" ></li>
 
@@ -422,7 +422,7 @@
             
    <li><img src="/myImages/slide/IMG_7824.jpg" width="4272" height="2848" ></li>
 <!--       <li><img src="/myImages/slide/IMG_7834.jpg" width="4272" height="2848" ></li> -->
-  
+  <li><img src="/myImages/slide/IMG_7995.jpg" width="4272" height="2848" ></li>
      
        <li><img src="/myImages/slide/IMG_7863.jpg" width="4272" height="2848" ></li>
       
@@ -604,14 +604,14 @@
                 <th class="col-md-7 topic">หัวข้อการประเมิน</th>
                 <th class="col-md-2 result">
 
-                <a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"   style="color:white;cursor:default;"> ผลการประเมินตนเอง</a>
+                <a  href="" data-qo-html="true"data-qo-type-class="tool_tip_evaluation"   style="color:white;cursor:default;"> ผลการประเมินตนเอง</a>
 
                 </th>
 
                 <th class="col-md-2 result">
 
 
-<a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"   style="color:white;cursor:default;" >ผลการประเมิน<br />จากภายนอก</a>
+<a  href="" data-qo-html="true"data-qo-type-class="tool_tip_evaluation"   style="color:white;cursor:default;" >ผลการประเมิน<br />จากภายนอก</a>
                 </th>
   
 
@@ -1901,7 +1901,7 @@
 
                                     
 
-                                          <td ng-show="$root.president_in_this_curri(curri_choosen.curri_id) ||$root.current_user.privilege[curri_choosen.curri_id]['9'] >=4 || $root.right_from_committee_just_curri(curri_choosen.curri_id,9,4)"> <a  style="margin-top:7px" data-ng-click="remove_research($index)" href=""  class="hvr-pulse" >
+                                          <td ng-show="$root.president_in_this_curri(curri_choosen.curri_id) ||$root.current_user.privilege[curri_choosen.curri_id]['9'] >=5 || $root.right_from_committee_just_curri(curri_choosen.curri_id,9,5)"> <a  style="margin-top:7px" data-ng-click="remove_research($index)" href=""  class="hvr-pulse" >
                                         <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td> 
 
@@ -3245,6 +3245,8 @@ glyphicon glyphicon-bell"></i> </span>
                               
                                     <br ng-show='$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,3) ||$root.current_user.privilege[curri_choosen.curri_id]["3"] >=3 ' />
                                 <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+
+                             
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher manage_evidence_table" style="margin-top:0px">
                                       
                                         <thead class="nq-fix-table-scroll">
@@ -3274,7 +3276,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                                                  <span  style="padding-left:0px;font-size:19px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['3'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4)" >{{indicator_choosen.indicator_num}}-      <input class="form-control" type="number" ng-pattern="/^[0-9]*$/" style=" display: inline-block;margin-top:2px;margin-bottom:2px;width:50px;padding-top:2px;padding-left:4px;padding-right:2px;padding-bottom:5px"  ng-model="evidence.evidence_real_code" data-ng-change="something_change()" required/></span>
 
-                                                      <span  style="text-align:center;font-size:19px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['3'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4 == false)" >{{indicator_choosen.indicator_num}}-{{evidence.evidence_real_code}}</span>
+                                                      <span  style="text-align:center;font-size:19px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['3'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) == false" >{{indicator_choosen.indicator_num}}-{{evidence.evidence_real_code}}</span>
 
           </td>
 
@@ -3284,7 +3286,7 @@ glyphicon glyphicon-bell"></i> </span>
  -->
 
                                                 <td class=" left_column"><input  ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['3'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4)" class="form-control"size="64" type="text" ng-model="evidence.evidence_name" style="margin-top:2px;margin-bottom:2px"  data-ng-change="something_change()" required/>
-                                                  <span  style="text-align:center;font-size:19px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['3'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4 == false)" >{{evidence.evidence_name}}</span>
+                                                  <span  style="text-align:center;font-size:19px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['3'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) == false" >{{evidence.evidence_name}}</span>
                                                 </td>
 
        <td ><span style="margin-right:15px;font-size:19px">{{evidence.t_name}}</span> </td>
@@ -3333,13 +3335,27 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
           </div>         </div>
 
 
-  <div class="custom-footer">
 
-          <div class="topicHeader pull-right">
-              <button class="btn btn-success  " ng-disabled="nothing_change || choose_not_complete ||  still_not_choose_complete()" ng-click="save_to_server(this)">    ยืนยัน</button>
-              <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
-          </div>
-      </div>   
+
+           <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['3'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4)">
+                        <div class="topicHeader pull-right">
+                            <button ng-disabled="nothing_change || choose_not_complete ||  still_not_choose_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                        </div>
+                    </div>
+
+                         <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['3'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) == false ">
+                        <div class="topicHeader pull-right">
+                         
+                           <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
+                        </div>
+                    </div>
+                  <div class="custom-footer" ng-show="choose_not_complete == true">
+                        <div class="topicHeader pull-right">
+                         
+                           <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
+                        </div>
+                    </div>   
       </div>
 
 
@@ -5626,22 +5642,18 @@ glyphicon glyphicon-bell"></i> </span>
                             </div>
                         </div>
 
-   <div class="row">
-                        <div class="col-md-4   " style="margin-left:0px ;margin-top:2px " >
-                            <h3 style="margin-top:0px;"><span class="topicHeader">หัวข้อที่สนใจ:   </span></h3>
+   <div class="row" style="margin-left:0px ;margin-top:2px ">
+               
+ <h3 style="margin-top:0px;"><span class="topicHeader">หัวข้อที่สนใจ:   </span></h3>
+                            <input type="text" data-qo-nav-class= "nav-make" data-ng-model="current_user.information.interest" data-nq-tags-input="" data-qo-max-length="0"  data-qo-placeholder="กรอกหัวข้อที่สนใจ" data-ng-change = "something_change()">
 
 
-                        </div>
-                        <div class="col-md-8"  >
-
-                            <input type="text" data-ng-model="current_user.information.interest" data-nq-tags-input="" data-qo-placeholder="กรอกหัวข้อที่สนใจ" data-ng-change = "something_change()">
-
-
-                        </div>
+                   
                     </div>
 
 
                     </div>
+
    <div class="clearfix">
 
 
@@ -5956,14 +5968,14 @@ glyphicon glyphicon-bell"></i> </span>
          </div>         </div>        
 
           </div>         </div>
-     <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['6'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,3)">
+     <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['6'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4)">
                         <div class="topicHeader pull-right">
                             <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 
-                         <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['6'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,3) == false ">
+                         <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['6'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4) == false ">
                         <div class="topicHeader pull-right">
                          
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
