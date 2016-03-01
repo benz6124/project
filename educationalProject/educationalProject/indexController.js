@@ -715,7 +715,7 @@ $scope.init =function() {
               request_years_from_curri_choosen_service.async($scope.curri_choosen,11,2).then(function(data) {
 $scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
-
+   $scope.choose_not_complete = true;
           });
 
 
@@ -750,12 +750,12 @@ $scope.corresponding_indicators = [];
                 console.log(data)
               $scope.result = data;
              $scope.choose_not_complete = false;
-             
+              $scope.blank = false;
               var value;
               var key;
              if ($scope.result.grad_in_time==-1){
                 console.log("-1 ka")
-                $scope.blank = false;
+               
                 angular.forEach($scope.result, function(value, key) {
                  
                   
@@ -861,8 +861,9 @@ $scope.corresponding_indicators = [];
              
               var value;
               var key;
+              $scope.blank = false;
              if ($scope.result.ny1==-1){
-                $scope.blank = false;
+                
                 angular.forEach($scope.result, function(value, key) {
                  
                   
@@ -971,8 +972,9 @@ $scope.corresponding_indicators = [];
              
               var value;
               var key;
+                  $scope.blank = false;
              if ($scope.result.num_admis_f==-1){
-                $scope.blank = false;
+            
                 angular.forEach($scope.result, function(value, key) {
                  
                   

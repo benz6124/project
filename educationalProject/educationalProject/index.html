@@ -1800,7 +1800,7 @@
          </div>         </div>        
 
           </div>         </div>
-     <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['10'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,10,4)">
+     <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['10'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,10,4)) && choose_not_complete == false">
                         <div class="topicHeader pull-right">
                             <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
@@ -1919,7 +1919,7 @@
 
 
 
-                      <div class="custom-footer" ng-show="$root.president_in_this_curri(curri_choosen.curri_id) ||$root.current_user.privilege[curri_choosen.curri_id]['9'] >=5 || $root.right_from_committee_just_curri(curri_choosen.curri_id,9,5)">
+                      <div class="custom-footer" ng-show="($root.president_in_this_curri(curri_choosen.curri_id) ||$root.current_user.privilege[curri_choosen.curri_id]['9'] >=5 || $root.right_from_committee_just_curri(curri_choosen.curri_id,9,5)) && choose_not_complete==false">
                         <div class="topicHeader pull-right">
                             <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
@@ -2648,14 +2648,14 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                           </form>
 
                           </div>
-                    <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['11'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,11,3)">
+                    <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['11'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,11,3)) && choose_not_complete == false">
                         <div class="topicHeader pull-right">
                             <button ng-disabled="graduated_form.$invalid" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 
-                    <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['11'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,11,3) == false && choose_not_complete == false">
+                    <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['11'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,11,3) == false   && choose_not_complete == false">
                         <div class="topicHeader pull-right">
                          
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
@@ -2861,7 +2861,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
    
 
 
-                     <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['8'] >=5 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,5)">
+                     <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['8'] >=5 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,5)) && choose_not_complete == false">
                         <div class="topicHeader pull-right">
                             <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
@@ -3337,7 +3337,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
 
 
 
-           <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['3'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4)">
+           <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['3'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4)) && choose_not_complete == false">
                         <div class="topicHeader pull-right">
                             <button ng-disabled="nothing_change || choose_not_complete ||  still_not_choose_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
@@ -4906,14 +4906,14 @@ glyphicon glyphicon-bell"></i> </span>
 
 </form>
 </div>
-                             <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['12'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,12,3)">
+                             <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['12'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,12,3)) && choose_not_complete == false">
                         <div class="topicHeader pull-right">
                             <button ng-disabled="new_student_stat_form.$invalid" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 
-                    <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['12'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,12,3) == false && choose_not_complete == false">
+                    <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['12'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,12,3) == false   && choose_not_complete == false">
                         <div class="topicHeader pull-right">
                          
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
@@ -5152,14 +5152,14 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
 </form>
 </div>
-                   <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['13'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,13,3)">
+                   <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['13'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,13,3))&& choose_not_complete == false">
                         <div class="topicHeader pull-right">
                             <button ng-disabled="student_stat_form.$invalid" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 
-                    <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['13'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,13,3) == false && choose_not_complete == false">
+                    <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['13'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,13,3) == false   && choose_not_complete == false">
                         <div class="topicHeader pull-right">
                          
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
@@ -5968,7 +5968,7 @@ glyphicon glyphicon-bell"></i> </span>
          </div>         </div>        
 
           </div>         </div>
-     <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['6'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4)">
+     <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['6'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4)) && choose_not_complete == false">
                         <div class="topicHeader pull-right">
                             <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
@@ -6090,7 +6090,7 @@ glyphicon glyphicon-bell"></i> </span>
           </div>         </div>
  
 
-                       <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['5'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,5,4)">
+                       <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['5'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,5,4)) && choose_not_complete == false">
                         <div class="topicHeader pull-right">
                             <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
