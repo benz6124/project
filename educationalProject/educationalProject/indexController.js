@@ -1093,7 +1093,6 @@ $scope.still_not_complete = function(){
               request_years_from_curri_choosen_service.async($scope.curri_choosen,4,2).then(function(data) {
 $scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
-            $scope.choose_not_complete = true;
 
           });
 
@@ -1115,7 +1114,7 @@ $scope.indicator_choosen = {};
                  }
              }
          ).success(function (data) {
-     $scope.choose_not_complete = true;
+     
              $scope.corresponding_indicators = data;
          });
 
@@ -3391,7 +3390,6 @@ $scope.name_of_teacher_id = function(ask_id){
  $scope.corresponding_indicators = [];
                     $scope.corresponding_aca_years = data;
                     $scope.nothing_change = true;
-                         $scope.choose_not_complete = true;
 
          });
 
@@ -3525,7 +3523,7 @@ $scope.indicator_choosen = {};
              }
          ).success(function (data) {
               $scope.corresponding_indicators = data;
-              $scope.choose_not_complete = true;
+         
             $scope.nothing_change = true;
 
          });
