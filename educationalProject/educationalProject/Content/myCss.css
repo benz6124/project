@@ -21,26 +21,12 @@
 
 .mySelect{
   background-color: #E8E8E8    !important;
-  height: 100%;
-  padding-bottom:0px;
-  padding-top: 4px;
 
 }
 .mySelect_index{
   background-color: #f2f2f2    !important;
 
-
-    background-color: #f2f2f2 !important;
     padding-top: 3px;
-    height: 100%;
-    padding-bottom: 2px !important;
-    border-bottom-width: 0px !important;
-    border-top-width: 0px !important;
-}
-
-
-
-
 
 }
 
@@ -63,23 +49,15 @@ td,.normal{
 }
 
 
-.modal-footer button{
-  vertical-align: middle ;
-  text-align: center !important;
-  font-size:1em !important;
-  text-align: center;
-    font-family: "FreesiaUPC" !important;    
-
-}
-
 button{
   vertical-align: middle ;
   text-align: center !important;
-  font-size:1.8em !important;
+  font-size:20px !important;
   text-align: center;
     font-family: "FreesiaUPC" !important;    
 
 }
+
 
 
 .nav-tabs>li>a{
@@ -292,14 +270,14 @@ optgroup {
 .topicNewHeader {
   font-family:  "FreesiaUPC";
 
-  font-size: 1em !important;
+  font-size: 22px !important;
 
 }
 
 span.topic{
   font-family:  "FreesiaUPC";
 
-  font-size: 1.1em !important;
+  font-size: 20px !important;
 }
 .headerModal {
   font-family:  "FreesiaUPC";
@@ -331,7 +309,7 @@ input[type='file']{
  input[type='text'] { 
 
   font-family:  "FreesiaUPC";
-  font-size: 1.7em !important;
+  font-size: 20px !important;
 
 
 }
@@ -369,7 +347,7 @@ input.form-control[placeholder]{
 .select-option{
   text-align: center;
   font-family: "FreesiaUPC";
-  font-size: 1.9em;
+  font-size: 20px;
 
 }
 
@@ -394,7 +372,7 @@ button ul li label{
 }
 
 .tooltip{
-   font-size: 1.6em  !important;
+   font-size: 19px !important;
    font-family:  "FreesiaUPC" !important;
 opacity: 0.9 !important;
 
@@ -425,7 +403,7 @@ td button li label{
     
 
      position: absolute;
-          top: 53%;
+          top: 64%;
           right: -200px;
           margin-top: -24.5px;
          padding-left: 0px;
@@ -436,16 +414,22 @@ td button li label{
 
 
    ul li ul.dropdownImg{
-        min-width: 110px;/* Set width of the dropdown */
+        min-width: 110px; /* Set width of the dropdown */
+
         display: none;
+       
         z-index: 999;
         float: left;
-        position: absolute;
-        top: 49%;
-        right: 7%;
-        margin-top: 49px;
-        padding-left: 0px;
-        text-align: center;
+    
+
+     position: absolute;
+          top: 39%;
+          right: 7%;
+          margin-top: 49px;
+         padding-left: 0px;
+
+         text-align: center;
+     
     }
 
     ul.dropdown li:hover{
@@ -599,7 +583,7 @@ table.table_modal th{
 
 table.table_modal td,table.table_modal td div{
   font-family:  "FreesiaUPC" !important;
-  font-size: 1.7em ;
+  font-size: 20px ;
   text-align: center;
   vertical-align: middle;
 }
@@ -659,11 +643,7 @@ div.aside-body ul.nav.nav-stacked li a i {
 }
 
 .just_alert .modal-body {
-  font-size: 1.8em!important;
-}
-
-.just_alert .modal-dialog{
-  width: 65% ;
+  font-size: 20px!important;
 }
 .just_alert .modal-footer{
  
@@ -673,12 +653,8 @@ div.aside-body ul.nav.nav-stacked li a i {
   font-size: 25px !important;
 
 }
-
-
 .just_alert .modal-footer button{
   margin-top: 2.5px!important;
-  padding-top: 2px !important;
-  padding-bottom: 2px !important;
 }
 
 
@@ -771,10 +747,6 @@ div.aside-body ul.nav.nav-stacked li a i {
 */
 .custom-body{
   overflow:hidden !important;
-}
-
-a.login_text {
-    font-size: 2em;
 }
 
 .headerModalH1{
@@ -888,7 +860,7 @@ table.evaluation th{
   background-color: #6F002B;
     text-align: center;
   color:white;
-  font-size: 2em !important;
+  font-size: 22px !important;
   font-weight: normal !important;
   font-family: "FreesiaUPC" !important;
 }
@@ -910,7 +882,7 @@ table.evaluation td{
 
 table.evaluation td.result{
 
-font-size: 1.8em !important;
+  font-size: 23px !important;
 }
 
 table.evidence th{
@@ -965,7 +937,7 @@ table.evaluation{
 
 .big-nav li a,.small-nav li a{
   font-weight: normal !important;
-  font-size:1em !important;
+  font-size:11px !important;
   font-family: 'Helvetica' ;
 }
 
@@ -1002,10 +974,9 @@ font-weight: bold;
 
 li.headerWeb{
  
-  font-size:4em;
+  font-size:43px;
  color:#D8D8D8  ;
-  margin-top:8px;
-   margin-bottom:8px;
+  margin-top:18px;
     font-family: 'Quicksand' ;
     font-weight: normal;
 }
@@ -1334,7 +1305,7 @@ font-size: 22px!important;
 }
 
 .aside-body ul.nav.nav-stacked li a{
-   font-size: 1.5em;
+   font-size: 17px;
    padding-left: 14px;
 }
 

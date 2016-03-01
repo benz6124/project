@@ -349,7 +349,7 @@
         <div class="row wow flipInX"data-wow-duration="2s" data-wow-delay="1s"ng-class="{'not_login_index_select_button_row': already_login == false }" style="position:absolute;z-index:1;top:100px;width:100%;margin-left: 25px;">
     
            
-            <div class="col-sm-6" style="margin-left:10.5em">
+            <div class="col-sm-6" style="margin-left:11em">
 
                  <select data-qo-disable-clear="true" data-qo-button-class="mySelect_index" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
@@ -438,12 +438,8 @@
       </ul>
 
       <nav class="slides-navigation wow bounceInDown"  data-wow-duration="3s">
-      <a href="" class="next hvr-bob"><i class="fa fa-chevron-circle-right" style="
-    font-size: 3.5em;
-"></i></a>
-      <a href="" class="hvr-bob" ng-class="{prev_login: already_login == true , prev: already_login == false}" class="prev"><i class="fa fa-chevron-circle-left" style="
-    font-size: 3.5em;
-"></i></a>
+      <a href="" class="next hvr-bob"><i class="fa fa-chevron-circle-right fa-3x"></i></a>
+      <a href="" class="hvr-bob" ng-class="{prev_login: already_login == true , prev: already_login == false}" class="prev"><i class="fa fa-chevron-circle-left fa-3x"></i></a>
     </nav>
 
   
@@ -463,14 +459,14 @@
                 <ul class="nav navbar-nav navbar-left" >
 
                 
-                    <li class="headerWeb" style="margin-left:1.5em;margin-top: 7px;">CUPT-QA Online For Computer Engineering KMITL</li>
+                    <li class="headerWeb" style="margin-left:47px;margin-top: 7px;">CUPT-QA Online For Computer Engineering KMITL</li>
 
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
 
                     <li ng-show = "already_login" >
-                        <img src="{{current_user.information.file_name_pic}}" style="margin-right:23px;margin-top:1px;max-width:95px" class="img-circle profile_pic wow flipInY" data-wow-duration="2s" height="95"  />
+                        <img src="{{current_user.information.file_name_pic}}" style="margin-right:23px;margin-top:1px;max-width:95px" class="img-circle profile_pic wow flipInY" data-wow-duration="2s" height="79"  />
                         <ul class="dropdownImg" >
                             <li class="profile_name">  {{current_user.username}}</li>
                             <li class="bull"><a href="" data-placement="right" data-effect="from-right" data-nq-toggle-modal="#manage_profile">แก้ไขข้อมูล</a></li>
@@ -482,7 +478,7 @@
 
                     </li>
                      <li ng-hide = "already_login" >
-                    <a href="" data-nq-toggle-modal="#login_form" class="login_text" style="color:#b3b3b3;margin-top:15px;margin-right:15px">เข้าสู่ระบบ</a>
+                    <a href="" data-nq-toggle-modal="#login_form" class="topicNewHeader login_text" style="color:#b3b3b3;margin-top:15px;margin-right:15px">เข้าสู่ระบบ</a>
                     </li>
                 </ul>
             </div>
@@ -600,7 +596,7 @@
         <div ng-show="select_overall">
     
          <h3 class="headerPanel wow flipInX" data-wow-duration="2s" style="text-align:left">ผลการประเมินในภาพรวม</h3>
-              <table style="width:100%" class="table table-bordered table-hover table_modal  evaluation wow bounceInDown" data-wow-duration="2s">
+              <table class="table table-bordered table-hover table_modal  evaluation wow bounceInDown" data-wow-duration="2s">
 
                 <thead>
 
@@ -655,7 +651,7 @@
 
 
            
-            <table class="table table-bordered table-hover table_modal  evaluation wow bounceInDown" style="width:100%" data-wow-duration="2s">
+            <table class="table table-bordered table-hover table_modal  evaluation wow bounceInDown" data-wow-duration="2s">
 
                 <thead>
 
@@ -710,11 +706,11 @@
                         </tr>
 
                         <tr ng-repeat="evidence in corresponding_evidences">
-                            <td class="code" style="font-size:1.6em">{{indicator_choosen.indicator_num}}-{{evidence.evidence_real_code}}</td>
+                            <td class="code">{{indicator_choosen.indicator_num}}-{{evidence.evidence_real_code}}</td>
                             <td class="larger" >
 
-                            <a href="" class="highlight_evidence" ng-click="watch_file(evidence)" style="font-size:1.4em" ng-show="evidence.secret==0">{{evidence.evidence_name}}</a>
-                             <span   ng-show="evidence.secret==1" style="font-size:1.4em">{{evidence.evidence_name}}</span>
+                            <a href="" class="highlight_evidence" ng-click="watch_file(evidence)" style="font-size:20px" ng-show="evidence.secret==0">{{evidence.evidence_name}}</a>
+                             <span   ng-show="evidence.secret==1" style="font-size:20px">{{evidence.evidence_name}}</span>
 
 
                             </td>
@@ -1774,12 +1770,12 @@
         <td  >
 
 
-<span style="padding-left:0px;font-size:1.1em">{{lab.room}}</span>
+<span style="padding-left:0px;font-size:19px">{{lab.room}}</span>
 
                      <td  >
 
 
-<span ng-repeat="each_officer in lab.officer" style="padding-left:0px;font-size:1.1em">{{each_officer.t_name}}<br/></span>
+<span ng-repeat="each_officer in lab.officer" style="padding-left:0px;font-size:19px">{{each_officer.t_name}}<br/></span>
 
 
   </td>      
@@ -1883,12 +1879,12 @@
                                           
 
                                             <tr  ng-repeat="research in manage_research_my_research_now">
-                          <td class="left_column" style=" padding-left: 10px ;"><span style="font-size:1.1em;">{{research.name}}</span> </td>
-                                              <td  style=" padding-left: 10px ;"><span style="font-size:1.1em;">{{research.year_publish}}</span> </td>
+                          <td class="left_column" style=" padding-left: 10px ;"><span style="font-size:19px;">{{research.name}}</span> </td>
+                                              <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{research.year_publish}}</span> </td>
                           <td  >
 
 
-<span ng-repeat="teacher in research.researcher" style="padding-left:0px;font-size:1.1em">{{teacher.t_name}}<br/></span>
+<span ng-repeat="teacher in research.researcher" style="padding-left:0px;font-size:19px">{{teacher.t_name}}<br/></span>
 
 
   </td>            
@@ -2164,7 +2160,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
                                             <tr  ng-repeat="each_person in manage_privilege_president_person_result.list">
 
-                                              <td  ><img src="{{each_person.file_name_pic}}" class="img-circle" height="100"> </td>
+                                              <td  ><img src="{{each_person.file_name_pic}}" class="img-circle" width="70"> </td>
                           <td  ><span style="font-size:21px;">{{each_person.t_name}}</span> </td>
                                            
                                            <td style="
@@ -2334,13 +2330,13 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                           
 
                                             <tr  ng-repeat="person in manage_bind_all_people_in_curri">
-                          <td><span style="font-size:1.1em;"><input type="checkbox" data-ng-model="person.delete_me"></span> </td>
-                                              <td  ><img src="{{person.file_name_pic}}" class="img-circle" height="100"></td>
-               <td  style=" padding-left: 10px ;"><span style="font-size:1.1em;">{{person.t_name}}</span> </td>
+                          <td><span style="font-size:19px;"><input type="checkbox" data-ng-model="person.delete_me"></span> </td>
+                                              <td  ><img src="{{person.file_name_pic}}" class="img-circle" width="70"></td>
+               <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{person.t_name}}</span> </td>
                           
 
 
-                             <td  style=" padding-left: 10px ;"><span style="font-size:1.1em;">{{person.type}}</span> </td>
+                             <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{person.type}}</span> </td>
                                      
                        
     
@@ -2424,27 +2420,27 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                           
 
                                             <tr  ng-repeat="person in result">
-                                             <td  style=" padding-left: 0px; padding-right: 0px;" class="show_lightbox"><span style="font-size:1.1em;"><img src="{{person.file_name_pic}}" ng-click="openLightboxModal(person)"  height="100"></span> </td>
+                                             <td  style=" padding-left: 0px; padding-right: 0px;" class="show_lightbox"><span style="font-size:19px;"><img src="{{person.file_name_pic}}" ng-click="openLightboxModal(person)"  width="70"></span> </td>
 
-                          <td ><span style="font-size:1.1em;">{{person.t_name}}</span> </td>
+                          <td ><span style="font-size:19px;">{{person.t_name}}</span> </td>
 
                                 <td  >
 
 
-<span ng-repeat="each_edu in person.history" style="font-size:1.1em">{{each_edu.pre_major}} {{each_edu.major}} {{each_edu.college}}<br/></span>
+<span ng-repeat="each_edu in person.history" style="font-size:19px">{{each_edu.pre_major}} {{each_edu.major}} {{each_edu.college}}<br/></span>
 
 
   </td>            
 
-  <td style="padding-left: 0px; padding-right: 0px;"><span style="font-size:1.1em; ">{{person.user_type}}</span> </td>
+  <td style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{person.user_type}}</span> </td>
 
                     
-<td  style="padding-left: 0px; padding-right: 0px;"><span style="font-size:1.1em; ">{{person.room}}</span> </td>
+<td  style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{person.room}}</span> </td>
                                             
       
-<td  style="padding-left: 0px; padding-right: 0px;"><span style="font-size:1.1em; " >{{person.email}}</span> </td>
+<td  style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; " >{{person.email}}</span> </td>
 
-                         <td  style="padding-left: 0px; padding-right: 0px;"><span style="font-size:1.1em; ">{{person.tel}}</span> </td>
+                         <td  style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{person.tel}}</span> </td>
                           
                                              
 
@@ -2818,17 +2814,17 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
                                             <tr  ng-repeat="minute in manage_minutes_my_world_wide_minutes">
                                            
- <td class="left_column"style=" padding-left: 10px ;"><span style="font-size:1.1em;">{{minute.topic_name}}</span> </td>
+ <td class="left_column"style=" padding-left: 10px ;"><span style="font-size:19px;">{{minute.topic_name}}</span> </td>
                                         
         <td  >
 
 
-<span style="padding-left:0px;font-size:1.1em">{{minute.date}}</span>  </td>
+<span style="padding-left:0px;font-size:19px">{{minute.date}}</span>  </td>
 
                <!--       <td  >
 
 
-<span ng-repeat="each_officer in lab.officer" style="padding-left:0px;font-size:1.1em">{{each_officer.t_name}}<br/></span>
+<span ng-repeat="each_officer in lab.officer" style="padding-left:0px;font-size:19px">{{each_officer.t_name}}<br/></span>
 
 
   </td>       -->
@@ -3278,9 +3274,9 @@ glyphicon glyphicon-bell"></i> </span>
 
                                                
 
-                                                 <span  style="padding-left:0px;font-size:1.1em" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['3'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4)" >{{indicator_choosen.indicator_num}}-      <input class="form-control" type="number" ng-pattern="/^[0-9]*$/" style=" display: inline-block;margin-top:2px;margin-bottom:2px;width:50px;padding-top:2px;padding-left:4px;padding-right:2px;padding-bottom:5px"  ng-model="evidence.evidence_real_code" data-ng-change="something_change()" required/></span>
+                                                 <span  style="padding-left:0px;font-size:19px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['3'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4)" >{{indicator_choosen.indicator_num}}-      <input class="form-control" type="number" ng-pattern="/^[0-9]*$/" style=" display: inline-block;margin-top:2px;margin-bottom:2px;width:50px;padding-top:2px;padding-left:4px;padding-right:2px;padding-bottom:5px"  ng-model="evidence.evidence_real_code" data-ng-change="something_change()" required/></span>
 
-                                                      <span  style="text-align:center;font-size:1.1em" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['3'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) == false" >{{indicator_choosen.indicator_num}}-{{evidence.evidence_real_code}}</span>
+                                                      <span  style="text-align:center;font-size:19px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['3'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) == false" >{{indicator_choosen.indicator_num}}-{{evidence.evidence_real_code}}</span>
 
           </td>
 
@@ -3290,10 +3286,10 @@ glyphicon glyphicon-bell"></i> </span>
  -->
 
                                                 <td class=" left_column"><input  ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['3'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4)" class="form-control"size="64" type="text" ng-model="evidence.evidence_name" style="margin-top:2px;margin-bottom:2px"  data-ng-change="something_change()" required/>
-                                                  <span  style="text-align:center;font-size:1.1em" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['3'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) == false" >{{evidence.evidence_name}}</span>
+                                                  <span  style="text-align:center;font-size:19px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['3'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) == false" >{{evidence.evidence_name}}</span>
                                                 </td>
 
-       <td ><span style="margin-right:15px;font-size:1.1em">{{evidence.t_name}}</span> </td>
+       <td ><span style="margin-right:15px;font-size:19px">{{evidence.t_name}}</span> </td>
                                                <!--  <span class="topicHeader" ng-show="primary_evidence.just_create"> <input class="form-control"  type="text" ng-model="primary_evidence.evidence_name " required/></span> -->
 
 
@@ -3646,16 +3642,16 @@ glyphicon glyphicon-bell"></i> </span>
                                           
 
                                             <tr  ng-repeat="admin in all_admins">
-                                             <td  style=" padding-left: 0px; padding-right: 0px;" class="show_lightbox"><span style="font-size:1.1em;"><img src="{{admin.file_name_pic}}" ng-click="openLightboxModal(admin.file_name_pic)"  height="100"></span> </td>
+                                             <td  style=" padding-left: 0px; padding-right: 0px;" class="show_lightbox"><span style="font-size:19px;"><img src="{{admin.file_name_pic}}" ng-click="openLightboxModal(admin.file_name_pic)"  width="70"></span> </td>
 
-                          <td ><span style="font-size:1.1em;">{{admin.t_name}}</span> </td>
+                          <td ><span style="font-size:19px;">{{admin.t_name}}</span> </td>
 
      
-                          <td ><span style="font-size:1.1em;">{{admin.email}}</span> </td>
-  <td style="padding-left: 0px; padding-right: 0px;"><span style="font-size:1.1em; ">{{admin.creator_name}}</span> </td>
+                          <td ><span style="font-size:19px;">{{admin.email}}</span> </td>
+  <td style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{admin.creator_name}}</span> </td>
 
                     
-<td  style="padding-left: 0px; padding-right: 0px;"><span style="font-size:1.1em; ">{{admin.timestamp}}</span> </td>
+<td  style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{admin.timestamp}}</span> </td>
                                             
       
                                              
@@ -3771,10 +3767,10 @@ glyphicon glyphicon-bell"></i> </span>
                                           
 
                                             <tr  ng-repeat="committee in manage_committee_who_all_committees">
-                                             <td  ><img src="{{committee.file_name_pic}}" class="img-circle" height="100"> </td>
-                          <td  style=" padding-left: 10px ;"><span style="font-size:1.1em;">{{committee.t_name}}</span> </td>
-                                              <td  style=" padding-left: 10px ;"><span style="font-size:1.1em;">{{committee.email}}</span> </td>
-          <td  style=" padding-left: 10px ;"><span style="font-size:1.1em;">{{committee.date_promoted}}</span> </td>
+                                             <td  ><img src="{{committee.file_name_pic}}" class="img-circle" width="70"> </td>
+                          <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{committee.t_name}}</span> </td>
+                                              <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{committee.email}}</span> </td>
+          <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{committee.date_promoted}}</span> </td>
                           
                                              
         
@@ -5649,7 +5645,7 @@ glyphicon glyphicon-bell"></i> </span>
    <div class="row" style="margin-left:0px ;margin-top:2px ">
                
  <h3 style="margin-top:0px;"><span class="topicHeader">หัวข้อที่สนใจ:   </span></h3>
-                            <input type="text" data-qo-nav-class= "nav-make" data-ng-model="current_user.information.interest" data-nq-tags-input="" data-qo-max-length="0"  data-qo-placeholder="กรอกหัวข้อที่สนใจ" data-ng-change = "something_change()">
+                            <input type="text" data-nq-tags-input="" data-qo-nav-class= "nav-make" data-ng-model="current_user.information.interest"   data-qo-placeholder="กรอกหัวข้อที่สนใจ" data-ng-change = "something_change()">
 
 
                    
@@ -5693,11 +5689,11 @@ glyphicon glyphicon-bell"></i> </span>
                                           
 
                                             <tr  ng-repeat="each_education in current_user.information.education">
-                          <td  style=" padding-left: 10px ;"><span style="font-size:1.1em;">{{each_education.major}}</span> </td>
-                                              <td style=" padding-left: 10px ;"><span style="font-size:1.1em;">{{each_education.college}}</span> </td>
+                          <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{each_education.major}}</span> </td>
+                                              <td style=" padding-left: 10px ;"><span style="font-size:19px;">{{each_education.college}}</span> </td>
             
-                            <td  style=" padding-left: 10px ;"><span style="font-size:1.1em;">{{each_education.pre_major}}</span> </td>
-                                    <td  style=" padding-left: 10px ;"><span style="font-size:1.1em;">{{each_education.grad_year}}</span> </td>           
+                            <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{each_education.pre_major}}</span> </td>
+                                    <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{each_education.grad_year}}</span> </td>           
                        
 
                                     
@@ -5930,13 +5926,13 @@ glyphicon glyphicon-bell"></i> </span>
 
                                             <tr  ng-repeat="album in manage_album_my_world_wide_album">
                                            
- <td class="left_column" style=" padding-left: 10px ;"><span style="font-size:1.1em;">{{album.name}}</span> </td>
+ <td class="left_column" style=" padding-left: 10px ;"><span style="font-size:19px;">{{album.name}}</span> </td>
                                         
                                         
  <td style="
     padding-left: 0px;
     padding-right: 0px;
-"><span style="font-size:1.1em;" class="show_lightbox">
+"><span style="font-size:19px;" class="show_lightbox">
 
  <img ng-repeat ="pic in album.pictures" ng-click="openLightboxModal($index,album.pictures)" ng-if="$index<4" src="{{pic.file_name}}" class="img-rounded" style="margin-left:1px;margin-right:1px;margin-top:3px;margin-bottom:3px" height = "50px"  />
 
@@ -5950,8 +5946,8 @@ glyphicon glyphicon-bell"></i> </span>
                                         <span class="topic"><i style="color:#2980b9"class="glyphicon glyphicon-picture"></i> </span>
                                     </a></td> 
 
-                      <td style="padding-left:0px;padding-right:0px"><span style="font-size:1.1em">{{album.date_created}}</span> </td>              
-                                                              <td ><span style="font-size:1.1em">{{album.t_name}}</span> </td>
+                      <td style="padding-left:0px;padding-right:0px"><span style="font-size:19px">{{album.date_created}}</span> </td>              
+                                                              <td ><span style="font-size:19px">{{album.t_name}}</span> </td>
                                               
                                     
 
@@ -6056,17 +6052,17 @@ glyphicon glyphicon-bell"></i> </span>
 
                                             <tr  ng-repeat="survey in manage_survey_my_world_wide_surveys">
                                            
- <td class="left_column" style=" padding-left: 10px ;"><span style="font-size:1.1em;">{{survey.name}}</span> </td>
+ <td class="left_column" style=" padding-left: 10px ;"><span style="font-size:19px;">{{survey.name}}</span> </td>
                                         
         <td  >
 
 
-<span ng-repeat="each_target in survey.target" style="padding-left:0px;font-size:1.1em">{{each_target}}<br/></span>
+<span ng-repeat="each_target in survey.target" style="padding-left:0px;font-size:19px">{{each_target}}<br/></span>
 
 
   </td>
-                      <td ><span style="font-size:1.1em">{{survey.date}}</span> </td>              
-                                                              <td ><span style="font-size:1.1em">{{survey.t_name}}</span> </td>
+                      <td ><span style="font-size:19px">{{survey.date}}</span> </td>              
+                                                              <td ><span style="font-size:19px">{{survey.t_name}}</span> </td>
                                  
                                     
    <td ng-show=" ($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['5'] >=2 ) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,5,2)"> <a ng-show="right_target(survey.target)" href="" style="margin-top:7px" class="hvr-pulse" data-nq-toggle-modal="#do_survey" data-effect="from-left" data-ng-click="go_to_answer(survey)">
