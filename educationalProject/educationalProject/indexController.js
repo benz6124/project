@@ -4495,6 +4495,9 @@ $scope.all_evidences =[];
       
     });
 
+$scope.choose_evidence = function(){
+        $scope.choose_not_complete = false;
+}
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
     });
@@ -4527,7 +4530,7 @@ $scope.all_evidences =[];
     }
 
     $scope.find_all_evidences_in_curri_and_year = function(){
-
+  $scope.evidence_we_want = {};
           console.log("find_information");
         console.log($scope.year_choosen);
 
@@ -4544,7 +4547,7 @@ $scope.all_evidences =[];
                 console.log(data);
 
               $scope.all_evidences = data;
-             $scope.choose_not_complete = false;
+         
        
    
          });
