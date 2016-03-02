@@ -25,17 +25,15 @@
 }
 .mySelect_index{
   background-color: #f2f2f2    !important;
-width: 45%;
-    padding-top: 3px;
-
+  width: 51%;
+  padding-top: 3px;
 }
 .mySelect_index_year{
   background-color: #f2f2f2    !important;
-width: 15%;
-    padding-top: 3px;
-/*    margin-left: 2%;
+  width: 18%;
+  padding-top: 3px;
+  /*    margin-left: 2%;
     margin-right: 2%; */
-
 }
 
 
@@ -76,7 +74,7 @@ button{
   background-color:#686868
 }
 .big-nav{
-  margin-left:92px;
+ /* margin-left:92px;*/
   width:90%;
   background-color:#484848;
 }
@@ -1339,19 +1337,18 @@ font-size: 22px!important;
   position: relative;
 }
 
-.not_login_index_select_button_row {
+.login_index_select_button_row {
     position: absolute !important;
     z-index: 1 !important;
-    top: 100px !important;
+    top: 99px !important;
     width: 100% !important;
-    left: 6.5%!important;
-    margin-left: auto!important;
-    margin-right: auto !important;
+    margin-left: 2% !important;
+
 }
 
-.not_login_indicator_row{
+.login_indicator_row{
 
-    margin-left: 65px !important;
+    margin-left: 3.8% !important;
 
 }
 

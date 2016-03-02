@@ -3423,9 +3423,9 @@ $scope.name_of_teacher_id = function(ask_id){
 
 $scope.choose_teacher = function(my_obj){
  $scope.nothing_change = false;
-    if(my_obj.status == "2"){
-        my_obj.by_pass="1";
-    }
+    // if(my_obj.status == "2"){
+    //     my_obj.by_pass="1";
+    // }
 }
 
       $scope.still_not_choose_complete =function(){
@@ -3454,6 +3454,7 @@ $scope.choose_teacher = function(my_obj){
 
 $scope.send_email = function(primary_obj){
 
+primary_obj.wait_send_email = true;
 if(angular.isUndefined(primary_obj.teacher_id)){
       $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกผู้รับผิดชอบหลักฐานก่อนส่ง',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
@@ -3471,13 +3472,14 @@ if(angular.isUndefined(primary_obj.teacher_id)){
                  }
              }
          ).success(function (data) {
+            primary_obj.wait_send_email = false;
     
                 $alert({title:'ดำเนินการสำเร็จ', content:'ส่ง Email แจ้งเตือนเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
 
          })
     .error(function(data, status, headers, config) {
-             
+             primary_obj.wait_send_email = false;
      $alert({title:'เกิดข้อผิดพลาด', content:'ส่ง Email แจ้งเตือนไม่สำเร็จ',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
      
@@ -5502,16 +5504,26 @@ $scope.init =function() {
                $scope.choose_people = [];
               $scope.result = angular.copy(data);
               $scope.result_to_del = angular.copy(data);
-        
+            $scope.result = [];
               var index;    
-              for(index=0;index<$scope.result.length;index++){
-                if($rootScope.all_id_we_have_now_in_curri.indexOf($scope.result[index].user_id)!=-1 ){
-              
-                    $scope.result_to_del.splice($scope.result_to_del.indexOf($scope.result[index]));
+              for(index=0;index<$scope.result_to_del.length;index++){
+                console.log('------------')
+                console.log($scope.result_to_del[index].user_id)
+                console.log($rootScope.all_id_we_have_now_in_curri.indexOf($scope.result_to_del[index].user_id)!=-1)
+                if($rootScope.all_id_we_have_now_in_curri.indexOf($scope.result_to_del[index].user_id)!=-1 ){
+                    
+                    $scope.result_to_del[index].keep = false;
+                }else{
+                    $scope.result_to_del[index].keep = true;
                 }
               }
 
-              $scope.result = $scope.result_to_del;
+               for(index=0;index<$scope.result_to_del.length;index++){
+                if($scope.result_to_del[index].keep == true){
+                     $scope.result.push($scope.result_to_del[index]);
+                }
+               }
+            
 
              $scope.choose_not_complete = false;
               
@@ -5538,6 +5550,11 @@ $scope.init =function() {
          ).success(function (data) {
             $rootScope.manage_bind_still_same();
             $rootScope.manage_bind_all_people_in_curri = data;
+                $rootScope.all_id_we_have_now_in_curri = [];
+                var index;
+    for(index=0;index< $rootScope.manage_bind_all_people_in_curri.length;index++){
+          $rootScope.all_id_we_have_now_in_curri.push($rootScope.manage_bind_all_people_in_curri[index].user_id);
+    }
                    $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
@@ -5612,10 +5629,19 @@ $rootScope.manage_bind_still_same = function(){
     
 
 
-    $scope.remove_person = function(index_to_remove){
+    $scope.remove_person = function(index_to_remove,obj){
+        if(obj.user_id == $rootScope.current_user.user_id){
 
-         $rootScope.manage_bind_all_people_in_curri.splice(index_to_remove, 1);    
+
+
+     $alert({title:'เกิดข้อผิดพลาด', content:'ท่านไม่สามารถลบตัวท่านเองออกจากหลักสูตรได้',alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        }
+        else{
+                     $rootScope.manage_bind_all_people_in_curri.splice(index_to_remove, 1);    
            $scope.nothing_change = false;
+        }
+
 
     }
     $scope.find_information = function(){
@@ -6276,6 +6302,7 @@ app.controller('login_controller', function($scope, $http,$alert,$loading,$timeo
 
                $alert({title:'เข้าสู่ระบบสำเร็จ', content:'ยินดีต้อนรับ '+$rootScope.current_user.username,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+               $rootScope.clear_choosen();
    if(!!$rootScope.current_user.not_send_primary){
          
               $rootScope.open_modal_primary_not_send();
