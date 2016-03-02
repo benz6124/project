@@ -5675,12 +5675,21 @@ $rootScope.manage_bind_still_same = function(){
 
       
         var index;
-
+$scope.delete_myself = false;
               $scope.delete_these = [];
  
         for(index=0;index < $rootScope.manage_bind_all_people_in_curri.length ; index++){
             if($rootScope.manage_bind_all_people_in_curri[index].delete_me == true){
-               $scope.delete_these.push($rootScope.manage_bind_all_people_in_curri[index]);
+                if($rootScope.manage_bind_all_people_in_curri[index].user_id != $rootScope.current_user.user_id ){
+              $scope.delete_these.push($rootScope.manage_bind_all_people_in_curri[index]);
+                }
+                else{
+                    $rootScope.manage_bind_all_people_in_curri[index].delete_me = false;
+                    $scope.delete_myself = true;
+                     $alert({title:'เกิดข้อผิดพลาด', content:'ท่านไม่สามารถลบตัวท่านเองออกจากหลักสูตรได้',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+                }
+ 
             }
         }
 
@@ -5691,8 +5700,11 @@ $rootScope.manage_bind_still_same = function(){
          $scope.nothing_change = false;
         }
         else{
+            if( $scope.delete_myself != true){
+                
                 $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกบุคลากรที่ต้องการนำออก',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+            }
         }
        
     }
