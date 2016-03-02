@@ -3243,24 +3243,24 @@ glyphicon glyphicon-bell"></i> </span>
                             <div class="panel panel-default"  data-nq-pageable=""
                                  data-qo-selectable="true">
                           <div align="center">
-                                        <button type="button" style="margin-top:12px;margin-bottom:0px;margin-left:285px"class="btn btn-xs btn-success  hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#upload_evidence" data-ng-click="choose_to_add_new_file()" ng-show='$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,3) ||$root.current_user.privilege[curri_choosen.curri_id]["3"] >=3 '><i class="fic glyphicon glyphicon-plus-sign" ></i> เพิ่มหลักฐานใหม่</button>
+                                        <button type="button" style="margin-top:16px;margin-bottom:0px"class="btn btn-xs btn-success  hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#upload_evidence" data-ng-click="choose_to_add_new_file()" ng-show='$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,3) ||$root.current_user.privilege[curri_choosen.curri_id]["3"] >=3 '><i class="fic glyphicon glyphicon-plus-sign" ></i> เพิ่มหลักฐานใหม่</button>
 
 
   &nbsp; &nbsp;
 
-                                        <button type="button" style="margin-top:12px;margin-bottom:0px;" class="btn btn-xs btn-warning hvr-buzz" data-effect="flip-x"  data-ng-click="choose_to_add_new_primary_file()" data-nq-toggle-modal="#upload_primary_evidence" ng-show='!!$root.current_user.not_send_primary'><i class="fic glyphicon glyphicon-plus-sign"></i> อัพโหลดหลักฐานพื้นฐาน</button>
+                                        <button type="button" style="margin-top:16px;margin-bottom:0px;" class="btn btn-xs btn-warning hvr-buzz" data-effect="flip-x"  data-ng-click="choose_to_add_new_primary_file()" data-nq-toggle-modal="#upload_primary_evidence" ng-show='!!$root.current_user.not_send_primary'><i class="fic glyphicon glyphicon-plus-sign"></i> อัพโหลดหลักฐานพื้นฐาน</button>
 
 
                                         &nbsp; &nbsp;
-                                        <button type="button"  style="margin-top:12px;margin-bottom:0px;" class="btn btn-xs btn-info hvr-buzz" data-ng-click="go_to_import()"data-effect="flip-x" data-nq-toggle-modal="#import_evidence" ng-show='$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,3) ||$root.current_user.privilege[curri_choosen.curri_id]["3"] >=3 '><i class="fic glyphicon glyphicon-plus-sign"></i> นำเข้าหลักฐานที่มีอยู่</button>
+                                        <button type="button"  style="margin-top:16px;margin-bottom:0px;" class="btn btn-xs btn-info hvr-buzz" data-ng-click="go_to_import()"data-effect="flip-x" data-nq-toggle-modal="#import_evidence" ng-show='$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,3) ||$root.current_user.privilege[curri_choosen.curri_id]["3"] >=3 '><i class="fic glyphicon glyphicon-plus-sign"></i> นำเข้าหลักฐานที่มีอยู่</button>
 </div>
 
                               
                                     <br ng-show='$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,3) ||$root.current_user.privilege[curri_choosen.curri_id]["3"] >=3 ' />
-                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;padding-top:0px">
 
                              
-  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher manage_evidence_table" style="margin-top:0px">
+  <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher manage_evidence_table" style="margin-top:0px;">
                                       
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
@@ -5673,7 +5673,7 @@ glyphicon glyphicon-bell"></i> </span>
    <div class="row" style="margin-left:0px ;margin-top:2px ">
                
  <h3 style="margin-top:0px;"><span class="topicHeader">หัวข้อที่สนใจ:   </span></h3>
-                            <input type="text" data-nq-tags-input="" data-qo-nav-class= "nav-make" data-ng-model="current_user.information.interest"   data-qo-placeholder="กรอกหัวข้อที่สนใจ" data-ng-change = "something_change()">
+                            <input type="text" data-nq-tags-input="" data-qo-nav-class= "nav-make" data-ng-model="current_user.information.interest" data-qo-max-text-length="70"  data-qo-placeholder="กรอกหัวข้อที่สนใจ" data-ng-change = "something_change()">
 
 
                    
