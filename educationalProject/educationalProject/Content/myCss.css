@@ -25,8 +25,16 @@
 }
 .mySelect_index{
   background-color: #f2f2f2    !important;
-
+width: 45%;
     padding-top: 3px;
+
+}
+.mySelect_index_year{
+  background-color: #f2f2f2    !important;
+width: 15%;
+    padding-top: 3px;
+/*    margin-left: 2%;
+    margin-right: 2%; */
 
 }
 
@@ -1332,11 +1340,13 @@ font-size: 22px!important;
 }
 
 .not_login_index_select_button_row {
-position:relative !important;
-z-index:1 !important;
-top:100px !important;
-width:100% !important;
-left:4.5%!important;
+    position: absolute !important;
+    z-index: 1 !important;
+    top: 100px !important;
+    width: 100% !important;
+    left: 6.5%!important;
+    margin-left: auto!important;
+    margin-right: auto !important;
 }
 
 .not_login_indicator_row{
