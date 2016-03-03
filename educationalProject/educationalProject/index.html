@@ -5644,7 +5644,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                       
-                        <div class="row">
+                        <div class="row" ng-show="$root.current_user.user_type=='อาจารย์'">
                             <div class="col-md-4" style="margin-left:0px ;margin-top:2px ">
                                 <h3 style="margin-top:0px;"><span class="topicHeader">สถานะ:   </span></h3>
                             </div>
@@ -5659,6 +5659,8 @@ glyphicon glyphicon-bell"></i> </span>
                             
                             </div>
                         </div>
+
+
 
                         <div class="row">
                             <div class="col-md-4" style="margin-left:0px ;margin-top:2px ">

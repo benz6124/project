@@ -6107,14 +6107,16 @@ $scope.fix_not_complete = function(){
                return true;
         } 
 
-
-             if($rootScope.current_user.information.status.length== 14 ){
+        if($rootScope.current_user.user_type == 'อาจารย์'){
+                  if($rootScope.current_user.information.status.length== 14 ){
                return true;
         }       
- 
+  
+        }
+      
 
     if($rootScope.current_user.information.tel.length <9){
-              console.log("4")
+      
         return true;
     }
     return false;
