@@ -1077,9 +1077,17 @@ $scope.still_not_complete = function(){
     }
 
     for(index=0;index<$scope.corresponding_results.length;index++){
-        if (!$scope.corresponding_results[index].evaluation_score){
-            return true;
+        if (!$scope.corresponding_results[index].evaluation_score ){
+
+               return true;
         }
+         if($scope.corresponding_results[index].evaluation_score == 0){
+                 return true;
+            }
+    }
+
+    if($scope.corresponding_results.length == 0){
+        return true;
     }
 
     return false;
@@ -1258,11 +1266,21 @@ for(index=0;index<$rootScope.all_curriculums.length;index++){
     if(!$scope.corresponding_results){
         return true;
     }
-    for(index=0;index<$scope.corresponding_results.length;index++){
-        if (!$scope.corresponding_results[index].evaluation_score){
+
+    if($scope.corresponding_results.evaluation_detail.length == 0){
+        return true;
+    }
+    for(index=0;index<$scope.corresponding_results.evaluation_detail.length;index++){
+        if (!$scope.corresponding_results.evaluation_detail[index].evaluation_score){
+            return true;
+        }
+
+         if ($scope.corresponding_results.evaluation_detail[index].evaluation_score == 0){
             return true;
         }
     }
+
+
 
     return false;
    }
