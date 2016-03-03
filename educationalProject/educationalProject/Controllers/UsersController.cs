@@ -53,13 +53,16 @@ namespace educationalProject.Controllers
 
 
                 //2.Read maillist file
+                
+                MultipartFileData file = result.FileData[0];
+                if (file.Headers.ContentType.ToString() != "text/plain")
+                    return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
+
+                FileInfo fileInfo = new FileInfo(file.LocalFileName);
+
                 const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
                 RNGCryptoServiceProvider gen = new RNGCryptoServiceProvider();
                 byte[] num = new byte[8];
-
-                MultipartFileData file = result.FileData[0];
-                FileInfo fileInfo = new FileInfo(file.LocalFileName);
-
                 string text = File.ReadAllText(string.Format("{0}/{1}", savepath, fileInfo.Name));
                 string [] emaillist = text.Split(' ','\r','\t','\n','\v','\f').Where(t => t != "").ToArray();
                 foreach(string str in emaillist)

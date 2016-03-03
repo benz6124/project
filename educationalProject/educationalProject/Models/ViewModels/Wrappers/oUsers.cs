@@ -759,32 +759,37 @@ namespace educationalProject.Models.ViewModels.Wrappers
             if(userdata.information.file_name_pic == null)
             {
                 mainupdatecmd = string.Format("update {0} set {1} = '{2}', {3} = '{4}', {5} = '{6}', {7} = '{8}'," +
-                "{9} = '{10}', {11} = '{12}', {13} = '{14}' where {15} = {16} ",
+                "{9} = '{10}', {11} = '{12}' where {13} = {14} ",
                 User_list.FieldName.TABLE_NAME, Teacher.FieldName.T_PRENAME, userdata.information.t_prename,
                 Teacher.FieldName.T_NAME, userdata.information.t_name,
                 Teacher.FieldName.E_PRENAME, userdata.information.e_prename,
                 Teacher.FieldName.E_NAME, userdata.information.e_name,
-                Teacher.FieldName.EMAIL, userdata.information.email,
                 Teacher.FieldName.TEL, userdata.information.tel,
                 Teacher.FieldName.ADDR, userdata.information.addr,
                 User_list.FieldName.USER_ID, userdata.user_id);
             }
             else
             {
-                mainupdatecmd = string.Format("insert into {19} " +
+                mainupdatecmd = string.Format("insert into {17} " +
                 "select * from " +
                 "(update {0} set {1} = '{2}', {3} = '{4}', {5} = '{6}', {7} = '{8}'," +
-                "{9} = '{10}', {11} = '{12}', {13} = '{14}',{15} = '{16}' output deleted.{15} where {17} = {18}) as outputupdate ",
+                "{9} = '{10}', {11} = '{12}', {13} = '{14}' output deleted.{13} where {15} = {16}) as outputupdate ",
                 User_list.FieldName.TABLE_NAME, Teacher.FieldName.T_PRENAME, userdata.information.t_prename,
                 Teacher.FieldName.T_NAME, userdata.information.t_name,
                 Teacher.FieldName.E_PRENAME, userdata.information.e_prename,
                 Teacher.FieldName.E_NAME, userdata.information.e_name,
-                Teacher.FieldName.EMAIL, userdata.information.email,
                 Teacher.FieldName.TEL, userdata.information.tel,
                 Teacher.FieldName.ADDR, userdata.information.addr,
                 Teacher.FieldName.FILE_NAME_PIC, userdata.information.file_name_pic,
                 User_list.FieldName.USER_ID, userdata.user_id,temp80tablename);
             }
+
+            //email must UNIQUE
+            string emailupdatecmd = string.Format("if not exists (select * from {0} where {1} = '{2}' and {3} != {4}) " +
+            "BEGIN " +
+            "update {0} set {1} = '{2}' where {3} = {4} " +
+            "END ",
+            User_list.FieldName.TABLE_NAME, Teacher.FieldName.EMAIL, userdata.information.email, User_list.FieldName.USER_ID, userdata.user_id);
 
             string updateteachertable = "";
             string deletefromtechin = "";
@@ -844,8 +849,8 @@ namespace educationalProject.Models.ViewModels.Wrappers
 
             string selectfiletodelcmd = string.Format("select * from {0} ", temp80tablename);
 
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} {5} {6} {7} END ",
-                createtabletemp80, mainupdatecmd, updateteachertable, deletefromtechin, insertintotechin,
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} {5} {6} {7} {8} END ",
+                createtabletemp80, mainupdatecmd, emailupdatecmd, updateteachertable, deletefromtechin, insertintotechin,
                 deletefromeducationcmd, selectuserdatacmd, selectfiletodelcmd);
 
             file_name_pic = null;
