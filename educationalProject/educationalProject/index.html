@@ -272,7 +272,7 @@
                             </a>
                         </li>
 
-                       
+                  
 
                      
 
@@ -293,6 +293,15 @@
                             <a href="" data-nq-toggle-modal="#evaluate_me" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-pencil"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;ประเมินหลักสูตรตนเอง</span></span>
+                            </a>
+                        </li>
+
+     
+
+                            <li ng-show='have_privilege_to_open_modal("28") || fix_mode'>
+                            <a href="" data-nq-toggle-modal="#see_evaluate_other" data-effect="from-left" data-placement="right">
+                                <i class="glyphicon glyphicon-envelope"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;ผลการประเมินหลักสูตร</span></span>
                             </a>
                         </li>
 
@@ -1836,7 +1845,7 @@
  <div id="manage_research" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_research_controller">
 
                     <div class="custom-header">
-                        <h1 class="headerModalH1">ส่วนจัดการงานวิจัย</h1>
+                        <h1 class="headerModalH1">งานวิจัย</h1>
                     </div>
 
           <div class="row" style="
@@ -3087,7 +3096,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
  <div id="manage_primary_evidences_admin" data-ng-controller="manage_primary_evidences_admin_controller" data-ng-init="init()"data-nq-modal="" data-qo-fire-emit = "true"  data-qo-size ="lg" data-qo-independent="true">
       <div class="custom-header">
-          <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการหลักฐานพื้นฐาน</span></h1>
+          <h1 class="headerModalH1"><span class="headerModal">หลักฐานพื้นฐาน</span></h1>
       </div>
 <div class="row" >
 
@@ -3820,6 +3829,133 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
    </div>
+
+
+
+
+         <div id="see_evaluate_other" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="see_evaluate_by_other_controller"data-qo-screen-mode="true" data-qo-independent="true">
+                    <div class="custom-header">
+                        <h1 class="headerModalH1"><span class="headerModal"> ผลการประเมินหลักสูตร</span></h1>
+                    </div>
+
+
+                <div class="row" style="
+    margin-left: 0px;
+    margin-right: 0px;
+">
+
+
+                          <div class="col-md-6" >
+                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+            <option style="display:none" value=""></option></select>
+
+                        </div>
+                        <div class="col-md-2" >
+                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+<option style="display:none" value=""></option></select>   
+                        </div>
+  <div class="col-md-4">
+
+      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+<option style="display:none" value=""></option></select>   
+
+
+                        </div>
+
+
+
+                        </div>
+
+                    <div class="container-fluid" ng-hide="choose_not_complete">
+                        <div class="clearfix">
+<br />
+
+                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
+                                 data-qo-selectable="true">
+              
+                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+
+                                    <table class="table table-bordered table-hover bg-white table_modal evaluate_aun">
+                                      
+                                        <thead class="nq-fix-table-scroll">
+                                            <tr>
+                                             
+                                                <th class="number">ข้อที่</th>
+                                                <th class="topic_evaluation">หัวข้อการประเมิน</th>
+                                                <th class="point">คะแนน</th>
+                                                <th style="width:300px">เหตุผลสนับสนุน</th>
+                                           
+                                            </tr>
+                                        </thead>
+                                        <tbody class="flattened">
+                                        <form name="evaluate_by_me_form" novalidate>
+                                          
+
+                                            <tr data-ng-repeat="result in corresponding_results.evaluation_detail">
+                                                <td>{{result.indicator_num}}.{{result.sub_indicator_num}}</td>
+                                                <td class="left_column">{{result.sub_indicator_name}}
+</td>
+
+       <td ><span ng-show="result.evaluation_score !=0">{{result.evaluation_score}} </span></td>
+  <td >{{result.suggestion}}</td>
+
+                                          <!--       <td><input type="radio"  value="7" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio"  value="6" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio" value="5" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio"  value="4" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio"  value="3" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio" value="2" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio" value="1" data-ng-model="result.evaluation_score"> </td> -->
+
+                                            </tr>
+
+                                            </form>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+
+
+<div ng-show="corresponding_results.evaluation_detail[0].evaluation_score != 0">
+<div class="row">
+                            <div class="col-md-3">
+                                <h3 style="margin-left:20px;margin-top:5px;color:#6F002B;font-weight:bold"><span class="topicNewHeader">ไฟล์สนับสนุนการประเมิน:  </span></h3>
+                            </div>
+                 
+<a href="" ng-click="download_file(corresponding_results.file_name)" class=" hvr-wobble-vertical"><span style="
+    font-size: 30px;color: #739900; " class="glyphicon glyphicon-download-alt " /></a>
+  
+
+
+
+
+</div>
+       
+       <div class="row" >   
+       <span class="topicNewHeader"><span style="margin-left:35px;margin-top:5px;color:#6F002B;font-weight:bold">ประเมินโดย</span>  {{corresponding_results.evaluation_detail[0].t_name}} </span> 
+       </div>   
+             <div class="row">   
+       <span class="topicNewHeader"><span style="margin-left:35px;color:#6F002B;font-weight:bold">ประเมิน ณ วันที่</span>  {{corresponding_results.evaluation_detail[0].date}}<span style="color:#6F002B;font-weight:bold"> เวลา</span> {{corresponding_results.evaluation_detail[0].time}} </span> 
+       </div> 
+</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                      <div class="custom-footer" >
+                        <div class="topicHeader pull-right">
+                         
+                           <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
+                        </div>
+                    </div>
+                </div>
+
+
 
 
               <div id="evaluate_other" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="evaluate_by_other_controller" data-ng-init = "init()"data-qo-screen-mode="true" data-qo-independent="true">
@@ -6025,7 +6161,7 @@ glyphicon glyphicon-bell"></i> </span>
  <div id="manage_survey" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_survey_controller">
 
                     <div class="custom-header">
-                        <h1 class="headerModalH1">ส่วนการจัดการแบบสอบถาม</h1>
+                        <h1 class="headerModalH1">แบบสอบถาม</h1>
                     </div>
 
           <div class="row" style="

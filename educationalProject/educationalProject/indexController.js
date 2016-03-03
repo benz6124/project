@@ -1401,24 +1401,20 @@ $scope.indicator_choosen = {};
     }
 
  $scope.save_to_server = function(my_modal) {
-
+console.log('save')
           $scope.please_wait = true;
       var formData = new FormData();
 $scope.to_sent = {};
 
    
 
-// if( !$scope.files[0]){
-//     $scope.to_sent.evaluation_detail = $scope.corresponding_results;
-//     $scope.to_sent.file_name = "";
-// }else{
-//      $scope.to_sent.evaluation_detail = $scope.corresponding_results;
-//     $scope.to_sent.file_name = $scope.files[0].name;
-// }
-
 
 if( $scope.files.length != 0){
       $scope.to_sent.file_name = $scope.files[0].name;
+}
+var index;
+for(index =0;index<$scope.corresponding_results.evaluation_detail.length;index++){
+    $scope.corresponding_results.evaluation_detail[index].assessor_id = $rootScope.current_user.user_id;
 }
 
 
@@ -1455,6 +1451,144 @@ if( $scope.files.length != 0){
 
 
 });
+
+
+
+
+
+app.controller('see_evaluate_by_other_controller', function($scope,$rootScope, $alert,$http,request_years_from_curri_choosen_service) {
+    $scope.init =function() {
+ 
+     $scope.choose_not_complete = true;
+           $scope.year_choosen = {};
+              $scope.curri_choosen = {}
+  $scope.files = [];
+     $scope.year_choosen = {};
+       $scope.please_wait = false;
+$scope.indicator_choosen = {};
+ $scope.corresponding_aca_years = [];
+                 $scope.corresponding_indicators = [];
+  $scope.disabled_search = false;
+  $scope.all_curri_that_have_privileges = [];
+       var index;
+    var index2;
+
+  $scope.$parent.scan_only_privilege_curri('28',$scope.all_curri_that_have_privileges);
+
+   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+}
+
+
+
+
+    $scope.download_file = function(path) { 
+        window.open(path, '_blank', "");  
+    }
+
+
+
+
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+
+
+    
+
+              $scope.init();
+
+
+    });
+
+
+     $scope.sendCurriAndGetYears = function () {
+        $scope.choose_not_complete =true;
+        $scope.year_choosen = {}
+        $scope.indicator_choosen= {};
+      
+              request_years_from_curri_choosen_service.async($scope.curri_choosen,28,2).then(function(data) {
+
+            $scope.corresponding_aca_years = data;
+             $scope.choose_not_complete = true;
+        $scope.corresponding_indicators = [];
+                    $scope.please_wait = false;
+          });
+
+
+
+    }
+
+
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+ 
+
+    $scope.find_indicators = function(){
+$scope.indicator_choosen = {};
+          console.log("find_indicators");
+        console.log($scope.year_choosen);
+
+        $http.post(
+             '/api/indicator/querybycurriculumacademic',
+             JSON.stringify($scope.year_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+      $scope.choose_not_complete = true;
+             $scope.corresponding_indicators = data;
+                    $scope.please_wait = false;
+         });
+
+    }
+
+    $scope.get_results= function(){
+        console.log($scope.indicator_choosen);
+        $scope.indicator_choosen.curri_id = $scope.curri_choosen.curri_id ;
+          $scope.indicator_choosen.aca_year = $scope.year_choosen.aca_year ;
+        $http.post(
+             '/api/othersevaluation',
+             JSON.stringify($scope.indicator_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+                   console.log("wait results");
+            console.log(data);
+        $scope.please_wait = false;
+             $scope.corresponding_results = data;
+             $scope.choose_not_complete = false;
+
+         
+     
+         });
+
+    }
+
+
+    $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+
+
+
+});
+
+
 
 app.controller('upload_aun_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service,$rootScope) {
 
@@ -3972,6 +4106,17 @@ $scope.right_target = function(targets){
     for(i= 0 ;i<targets.length;i++ ){
         if( $rootScope.current_user.user_type == targets[i]){
             return true;
+        }
+
+        if(targets[i] == 'กรรมการหลักสูตร' && $rootScope.current_user.committee_in){
+            if($rootScope.current_user.committee_in[$scope.curri_choosen.curri_id]){
+                var index;
+                for(index=0;index<$rootScope.current_user.committee_in[$scope.curri_choosen.curri_id].length;index++){
+                    if($rootScope.current_user.committee_in[$scope.curri_choosen.curri_id][index] == $scope.year_choosen.aca_year){
+                        return true;
+                    }
+                }
+            }
         }
        
     }
