@@ -3918,7 +3918,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 <div ng-show="corresponding_results.evaluation_detail[0].evaluation_score != 0">
-<div class="row">
+<div class="row" ng-hide="!corresponding_results.file_name">
                             <div class="col-md-3">
                                 <h3 style="margin-left:20px;margin-top:5px;color:#6F002B;font-weight:bold"><span class="topicNewHeader">ไฟล์สนับสนุนการประเมิน:  </span></h3>
                             </div>
