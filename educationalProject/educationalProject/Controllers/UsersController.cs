@@ -273,7 +273,7 @@ namespace educationalProject.Controllers
                     }
                 }
 
-                if(userdata.user_type == "อาจารย์" || userdata.user_type == "เจ้าหน้าที่")
+                if(userdata.user_type != "นักศึกษา")
                 {
                     if (datareceive["information"]["education"] != null)
                     {

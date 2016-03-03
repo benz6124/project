@@ -16,21 +16,20 @@ namespace educationalProject.Models.Wrappers
                 return "Cannot connect to database.";
             List<User_curriculum_with_brief_detail> result = new List<User_curriculum_with_brief_detail>();
 
-            string insertcmd = string.Format("insert into {0} values ", FieldName.TABLE_NAME);
-            int len = insertcmd.Length;
+            string insertifnotexistscmd = "";
             foreach (User_curriculum c in list)
             {
-                if (insertcmd.Length <= len)
-                    insertcmd += string.Format("({0},'{1}')", c.user_id, c.curri_id);
-                else
-                    insertcmd += string.Format(",({0},'{1}')", c.user_id, c.curri_id);
+                insertifnotexistscmd += string.Format("if not exists(select * from {0} where {1} = '{2}' and {3} = {4}) " +
+                "BEGIN " +
+                "INSERT INTO {0} values({4}, '{2}') " +
+                "END ",
+                FieldName.TABLE_NAME, FieldName.CURRI_ID, c.curri_id, FieldName.USER_ID, c.user_id);
             }
 
             string selectcmd = ViewModels.Wrappers.oPersonnel.GetSelectWithCurriculumCommand(list.First().curri_id);
 
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} END", insertcmd, selectcmd);
-
-
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} END", insertifnotexistscmd, selectcmd);
+            
             try
             {
                 System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();

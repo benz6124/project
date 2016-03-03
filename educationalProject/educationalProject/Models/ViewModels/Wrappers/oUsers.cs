@@ -140,7 +140,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
 
             //2 select education data(teacher and staff only) => selecteducation
             string selecteducation = "";
-            if (usrtype == 0 || usrtype == 1)
+            if (usrtype != 2)
                 selecteducation = string.Format("select * from {0} where {1} = {2} ",
                     Educational_teacher_staff.FieldName.TABLE_NAME, Educational_teacher_staff.FieldName.PERSONNEL_ID,
                     user_id);
@@ -322,7 +322,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             }
                             else if (tabledata.Columns.Contains(Educational_teacher_staff.FieldName.COLLEGE))
                             {
-                                //2 retrieve education data(teacher and staff only)
+                                //2 retrieve education data(all user type except student)
                                 result.information.education.Add(new Educational_teacher_staff
                                 {
                                     college = item.ItemArray[tabledata.Columns[Educational_teacher_staff.FieldName.COLLEGE].Ordinal].ToString(),
@@ -626,7 +626,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             }
                             else if (tabledata.Columns.Contains(Educational_teacher_staff.FieldName.COLLEGE))
                             {
-                                //2 retrieve education data(teacher and staff only)
+                                //2 retrieve education data(all user type except student)
                                 result.information.education.Add(new Educational_teacher_staff
                                 {
                                     college = item.ItemArray[tabledata.Columns[Educational_teacher_staff.FieldName.COLLEGE].Ordinal].ToString(),
@@ -814,7 +814,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
 
             string deletefromeducationcmd = "";
 
-            if (userdata.user_type == "อาจารย์" || userdata.user_type == "เจ้าหน้าที่")
+            if (userdata.user_type != "นักศึกษา")
             {
                 deletefromeducationcmd = string.Format("delete from {0} where {1} = {2} ",
                     Educational_teacher_staff.FieldName.TABLE_NAME, Educational_teacher_staff.FieldName.PERSONNEL_ID,
@@ -929,7 +929,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             }
                             else if (tabledata.Columns.Contains(Educational_teacher_staff.FieldName.COLLEGE))
                             {
-                                //2 retrieve education data(teacher and staff only)
+                                //2 retrieve education data(all user type except student)
                                 result.information.education.Add(new Educational_teacher_staff
                                 {
                                     college = item.ItemArray[tabledata.Columns[Educational_teacher_staff.FieldName.COLLEGE].Ordinal].ToString(),

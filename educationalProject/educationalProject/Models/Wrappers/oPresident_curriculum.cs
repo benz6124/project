@@ -13,8 +13,10 @@ namespace educationalProject.Models.Wrappers
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-
-            d.iCommand.CommandText = string.Format("IF NOT EXISTS (select * from {0} where {1} = {2} and {3} = {4}) " +
+            string deletefromcommittee = string.Format("delete from {0} where {1} = {2} and {3} = {4} and {5} = {6} ",
+                Committee.FieldName.TABLE_NAME, FieldName.CURRI_ID, ParameterName.CURRI_ID, FieldName.ACA_YEAR, ParameterName.ACA_YEAR,
+                FieldName.TEACHER_ID, ParameterName.TEACHER_ID);
+            d.iCommand.CommandText = deletefromcommittee + string.Format("IF NOT EXISTS (select * from {0} where {1} = {2} and {3} = {4}) " +
                                        "BEGIN " +
                                        "INSERT INTO {0} VALUES " +
                                        "({5}, {2},{4}) " +

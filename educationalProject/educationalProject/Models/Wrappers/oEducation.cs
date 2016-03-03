@@ -19,10 +19,12 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<Educational_teacher_staff> result = new List<Educational_teacher_staff>();
-            string insertcmd = string.Format("insert into {0} values ({1},'{2}','{3}','{4}',{5},'{6}') ",
-                FieldName.TABLE_NAME, personnel_id, degree, pre_major, major, grad_year, college);
+            string insertcmd = string.Format("if not exists(select * from {7} where {8} = {1} and {9} = 'นักศึกษา') BEGIN " +
+                "insert into {0} values ({1},'{2}','{3}','{4}',{5},'{6}') ",
+                FieldName.TABLE_NAME, personnel_id, degree, pre_major, major, grad_year, college,
+                User_list.FieldName.TABLE_NAME,User_list.FieldName.USER_ID,User_list.FieldName.USER_TYPE);
             string selectcmd = GetSelectEducationByPersonnelIdCommand();
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} END",insertcmd,selectcmd);
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} END END",insertcmd,selectcmd);
             try
             {
                 System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
@@ -48,6 +50,7 @@ namespace educationalProject.Models.Wrappers
                 else
                 {
                     //Reserved for return error string
+                    return "Student cannot insert education data.";
                 }
                 res.Close();
             }
