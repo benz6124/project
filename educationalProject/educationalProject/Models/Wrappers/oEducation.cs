@@ -50,6 +50,7 @@ namespace educationalProject.Models.Wrappers
                 else
                 {
                     //Reserved for return error string
+                    res.Close();
                     return "Student cannot insert education data.";
                 }
                 res.Close();

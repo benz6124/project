@@ -31,6 +31,8 @@ namespace educationalProject.Models.Wrappers
                                       "[{10}] {14} NULL," +
                                       "[{11}] {13} NULL," +
                                       "[{12}] INT NULL," +
+                                      "[{16}] VARCHAR(16) NULL," +
+                                      "[{17}] VARCHAR(60) NULL," +
                                       "PRIMARY KEY([row_num])) " +
 
                                       "ALTER TABLE {0} " +
@@ -49,20 +51,27 @@ namespace educationalProject.Models.Wrappers
                                       "ALTER COLUMN [{10}] {14} collate DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN [{11}] {13} collate DATABASE_DEFAULT ",
+                                      "ALTER COLUMN [{11}] {13} collate DATABASE_DEFAULT " +
+
+                                      "ALTER TABLE {0} " +
+                                      "ALTER COLUMN [{16}] VARCHAR(16) collate DATABASE_DEFAULT " +
+
+                                      "ALTER TABLE {0} " +
+                                      "ALTER COLUMN [{17}] VARCHAR(60) collate DATABASE_DEFAULT ",
                                       temp5tablename, Sub_indicator.FieldName.SUB_INDICATOR_NAME,
                                       FieldName.OTHERS_EVALUATION_ID, FieldName.INDICATOR_NUM, FieldName.SUB_INDICATOR_NUM,
                                       FieldName.ASSESSOR_ID, FieldName.EVALUATION_SCORE, FieldName.DETAIL,
                                       FieldName.DATE, FieldName.TIME, Evidence.FieldName.FILE_NAME, FieldName.CURRI_ID,
                                       FieldName.ACA_YEAR,DBFieldDataType.CURRI_ID_TYPE,DBFieldDataType.FILE_NAME_TYPE,
-                                      DBFieldDataType.USERNAME_TYPE);
+                                      DBFieldDataType.USERNAME_TYPE,Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME);
 
             string insertintotemp5_1 = string.Format("insert into {13} " +
-                                       "select {2}, {0}.* " +
-                                       "from {0}, {1} " +
+                                       "select {2}, {0}.*,{17},{18} " +
+                                       "from {0}, {1}, {14} " +
                                        "where {0}.{3} = {4} and " +
                                        "{0}.{5} = {1}.{6} and " +
                                        "{0}.{3} = {1}.{7} and " +
+                                       "{15} = {16} and " +  //user_id = assessor_id
                                        "{1}.{8} = " +
                                        "(select max(s1.{8}) from {1} as s1 where s1.{8} <= {9}) and " +
                                        "{0}.{10} = '{11}' and " +
@@ -73,11 +82,13 @@ namespace educationalProject.Models.Wrappers
                                        Sub_indicator.FieldName.SUB_INDICATOR_NUM,
                                        Sub_indicator.FieldName.INDICATOR_NUM,
                                        Sub_indicator.FieldName.ACA_YEAR, aca_year,
-                                       FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, temp5tablename);
+                                       FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, temp5tablename,
+                                       User_list.FieldName.TABLE_NAME,User_list.FieldName.USER_ID,FieldName.ASSESSOR_ID,
+                                       Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME);
 
             string insertintotemp5_2 = string.Format("insert into {12} " +
                                        "select {1},0,{2},{3}," +
-                                       "'','0','',null,null,'','{4}',{6} " +
+                                       "'','0','',null,null,'','{4}',{6},null,null " +
                                        "from {0} where " +
                                        "{2} = {13} and {5} = " +
                                        "(select max(s1.{5}) from {0} as s1 where s1.{5} <= {6}) " +
@@ -120,6 +131,8 @@ namespace educationalProject.Models.Wrappers
                                 others_evaluation_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.OTHERS_EVALUATION_ID].Ordinal]),
                                 aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
                                 assessor_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ASSESSOR_ID].Ordinal]),
+                                t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) +
+                                     item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
                                 date = Convert.ToDateTime(item.ItemArray[data.Columns[FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
                                 time = (timeofday.Hour > 9 ? "" : "0") + h + '.' + (timeofday.Minute > 9 ? "" : "0") + m,
                                 suggestion = item.ItemArray[data.Columns[FieldName.DETAIL].Ordinal].ToString(),

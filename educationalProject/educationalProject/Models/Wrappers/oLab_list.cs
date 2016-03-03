@@ -141,9 +141,9 @@ namespace educationalProject.Models.Wrappers
             curri_id = ldata.curri_id;
             aca_year = ldata.aca_year;
             string selectcmd = getSelectByCurriculumAcademicCommand();
-
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} END", updatelablistcmd,
-                deletefromlabofficer, insertintolabofficer, selectcmd);
+            string updatecondition = string.Format("if exists (select * from {0} where {1} = {2}) ", FieldName.TABLE_NAME, FieldName.LAB_NUM, ldata.lab_num);
+            d.iCommand.CommandText = string.Format("{4} BEGIN {0} {1} {2} {3} END", updatelablistcmd,
+                deletefromlabofficer, insertintolabofficer, selectcmd,updatecondition);
             try
             {
                 System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
@@ -181,6 +181,8 @@ namespace educationalProject.Models.Wrappers
                 else
                 {
                     //Reserved for return error string
+                    res.Close();
+                    return "The target lab is already deleted.";
                 }
                 res.Close();
             }
