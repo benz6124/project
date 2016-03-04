@@ -11,7 +11,7 @@ namespace educationalProject.Models.Wrappers
         private string GetSelectEducationByPersonnelIdCommand()
         {
             return string.Format("select * from {0} where {1} = {2} ",
-                FieldName.TABLE_NAME, FieldName.PERSONNEL_ID, personnel_id);
+                FieldName.TABLE_NAME, FieldName.PERSONNEL_ID, ParameterName.PERSONNEL_ID);
         }
         public async Task<object> Insert()
         {
@@ -20,10 +20,17 @@ namespace educationalProject.Models.Wrappers
                 return "Cannot connect to database.";
             List<Educational_teacher_staff> result = new List<Educational_teacher_staff>();
             string insertcmd = string.Format("if not exists(select * from {7} where {8} = {1} and {9} = 'นักศึกษา') BEGIN " +
-                "insert into {0} values ({1},'{2}','{3}','{4}',{5},'{6}') ",
-                FieldName.TABLE_NAME, personnel_id, degree, pre_major, major, grad_year, college,
+                "insert into {0} values ({1},{2},{3},{4},{5},{6}) ",
+                FieldName.TABLE_NAME, ParameterName.PERSONNEL_ID, ParameterName.DEGREE, ParameterName.PRE_MAJOR, ParameterName.MAJOR, ParameterName.GRAD_YEAR, ParameterName.COLLEGE,
                 User_list.FieldName.TABLE_NAME,User_list.FieldName.USER_ID,User_list.FieldName.USER_TYPE);
             string selectcmd = GetSelectEducationByPersonnelIdCommand();
+
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.PERSONNEL_ID, personnel_id));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.DEGREE, degree));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.PRE_MAJOR, pre_major));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.MAJOR, major));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.GRAD_YEAR, grad_year));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.COLLEGE, college));
             d.iCommand.CommandText = string.Format("BEGIN {0} {1} END END",insertcmd,selectcmd);
             try
             {
@@ -73,10 +80,17 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<Educational_teacher_staff> result = new List<Educational_teacher_staff>();
-            string insertcmd = string.Format("update {0} set {1} = '{2}',{3} = '{4}',{5} = '{6}',{7} = {8},{9} = '{10}' where {11} = {12} ",
-                FieldName.TABLE_NAME, FieldName.DEGREE, degree, FieldName.PRE_MAJOR, pre_major, FieldName.MAJOR, major, FieldName.GRAD_YEAR, grad_year, FieldName.COLLEGE, college, FieldName.EDUCATION_ID, education_id);
+            string updatecmd = string.Format("update {0} set {1} = {2},{3} = {4},{5} = {6},{7} = {8},{9} = {10} where {11} = {12} ",
+                FieldName.TABLE_NAME, FieldName.DEGREE, ParameterName.DEGREE, FieldName.PRE_MAJOR, ParameterName.PRE_MAJOR, FieldName.MAJOR, ParameterName.MAJOR, FieldName.GRAD_YEAR, ParameterName.GRAD_YEAR, FieldName.COLLEGE, ParameterName.COLLEGE, FieldName.EDUCATION_ID, ParameterName.EDUCATION_ID);
             string selectcmd = GetSelectEducationByPersonnelIdCommand();
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} END", insertcmd, selectcmd);
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.PERSONNEL_ID, personnel_id));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.DEGREE, degree));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.PRE_MAJOR, pre_major));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.MAJOR, major));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.GRAD_YEAR, grad_year));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.COLLEGE, college));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.EDUCATION_ID, education_id));
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} END", updatecmd, selectcmd);
             try
             {
                 System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();

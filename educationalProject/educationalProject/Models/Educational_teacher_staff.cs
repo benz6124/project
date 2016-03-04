@@ -17,6 +17,18 @@ namespace educationalProject.Models
             public static readonly string COLLEGE = "COLLEGE";
             public static readonly string TABLE_NAME = "EDUCATIONAL_TEACHER_STAFF";
         }
+
+        public struct ParameterName
+        {
+            public static readonly string EDUCATION_ID = "@" + FieldName.EDUCATION_ID;
+            public static readonly string PERSONNEL_ID = "@" + FieldName.PERSONNEL_ID;
+            public static readonly string DEGREE = "@" + FieldName.DEGREE;
+            public static readonly string PRE_MAJOR = "@" + FieldName.PRE_MAJOR;
+            public static readonly string MAJOR = "@" + FieldName.MAJOR;
+            public static readonly string GRAD_YEAR = "@" + FieldName.GRAD_YEAR;
+            public static readonly string COLLEGE = "@" + FieldName.COLLEGE;
+        }
+
         private int _personnel_id;
         private char _degree;
         private string _pre_major;
