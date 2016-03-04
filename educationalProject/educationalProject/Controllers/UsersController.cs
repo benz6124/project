@@ -122,7 +122,8 @@ namespace educationalProject.Controllers
                 else if (resultfromdb.GetType().ToString() != "System.String")
                 {
                     List<string> erroremail = (List<string>)resultfromdb;
-
+                    if(userlist.Count == erroremail.Count)
+                        return BadRequest("ทุกอีเมล์ในไฟล์ดังกล่าวมีอยู่แล้วในระบบ");
                     foreach (UsernamePassword item in nonencryptuserlist)
                     {
                         //If current mail is not in erroremail => SEND!
@@ -147,6 +148,12 @@ namespace educationalProject.Controllers
         [ActionName("login")]
         public async Task<IHttpActionResult> PostForLogin(JObject usrpwdata)
         {
+            List<System.Net.Http.Headers.CookieHeaderValue> x = Request.Headers.GetCookies("mymy").ToList();
+            if (x.Count == 1)
+            {
+                //If login cookie exists:Return error to indicate that user already logged in
+                return BadRequest("ท่านได้เข้าสู่ระบบอยู่แล้ว");
+            }
             UsernamePassword data = new UsernamePassword();
             data.username = usrpwdata["username"].ToString();
             data.password = usrpwdata["password"].ToString();
