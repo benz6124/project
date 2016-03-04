@@ -6235,10 +6235,7 @@ $scope.save_to_server = function(my_modal){
 
 app.controller('manage_profile_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
 
-$scope.$on("modal.hide", function (event, args) {
-     $scope.init();
-      
-    });
+
 
 $scope.back_to_default = function(){
        angular.forEach(
@@ -6286,7 +6283,12 @@ $scope.fix_not_complete = function(){
 }
 
   $scope.$on("modal.show", function (event, args) {
-              $scope.init();
+             $scope.init();
+    });
+       $scope.$on("modal.hide", function (event, args) {
+    
+        $rootScope.current_user=  $rootScope.save_obj ;
+      
     });
 
  $scope.init = function(){
@@ -6468,6 +6470,7 @@ app.controller('login_controller', function($scope, $http,$alert,$loading,$timeo
         my_modal.$hide();
     }
       $scope.login = function (my_modal) {
+        $scope.please_wait = true;
   //        var user = AuthService.login($scope.credentials);
   //        console.log(user);
   //        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
@@ -6483,6 +6486,7 @@ app.controller('login_controller', function($scope, $http,$alert,$loading,$timeo
                $alert({title:'เข้าสู่ระบบสำเร็จ', content:'ยินดีต้อนรับ '+$rootScope.current_user.username,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
                $rootScope.clear_choosen();
+                     $scope.please_wait = false;
    if(!!$rootScope.current_user.not_send_primary){
          
               $rootScope.open_modal_primary_not_send();
@@ -6493,7 +6497,7 @@ app.controller('login_controller', function($scope, $http,$alert,$loading,$timeo
 
 
           $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-
+      $scope.please_wait = false;
             $alert({title:'เกิดข้อผิดพลาด', content:'ชื่อผู้ใช้และรหัสผ่านไม่ถูกต้อง',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
 
