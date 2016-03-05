@@ -11,10 +11,19 @@ namespace educationalProject.Controllers
     public class UserTypeController : ApiController
     {
         private oUser_type datacontext = new oUser_type();
-        public async Task<IHttpActionResult> Get()
+
+        [ActionName("getexcludeadmin")]
+        public async Task<IHttpActionResult> GetUserTypeExcludeAdmin()
         {
-            object result = await datacontext.Select();
+            object result = await datacontext.SelectExcludeUserType(0);
             return Ok(result);   
+        }
+
+        [ActionName("getexcludeadmcom")]
+        public async Task<IHttpActionResult> GetUserTypeExcludeAdminCommitee()
+        {
+            object result = await datacontext.SelectExcludeUserType(1);
+            return Ok(result);
         }
     }
 }

@@ -59,42 +59,39 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
         
-        public object SelectWhere(string wherecond)
+        public async Task<object> SelectByCurriID()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
-            List<oCu_curriculum> result = new List<oCu_curriculum>();
-            d.iCommand.CommandText = string.Format("select * from {0} where {1}",FieldName.TABLE_NAME,wherecond);
+            d.iCommand.CommandText = string.Format("select * from {0} where {1} = {2}",FieldName.TABLE_NAME,FieldName.CURRI_ID,ParameterName.CURRI_ID);
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURRI_ID, curri_id));
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        result.Add(new oCu_curriculum
-                        {
-                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                            curr_tname = item.ItemArray[data.Columns[FieldName.CURR_TNAME].Ordinal].ToString(),
-                            curr_ename = item.ItemArray[data.Columns[FieldName.CURR_ENAME].Ordinal].ToString(),
-                            degree_e_bf = item.ItemArray[data.Columns[FieldName.DEGREE_E_BF].Ordinal].ToString(),
-                            degree_e_full = item.ItemArray[data.Columns[FieldName.DEGREE_E_FULL].Ordinal].ToString(),
-                            degree_t_bf = item.ItemArray[data.Columns[FieldName.DEGREE_T_BF].Ordinal].ToString(),
-                            degree_t_full = item.ItemArray[data.Columns[FieldName.DEGREE_T_FULL].Ordinal].ToString(),
-                            level = Convert.ToChar(item.ItemArray[data.Columns[FieldName.LEVEL].Ordinal]),
-                            period = Convert.ToChar(item.ItemArray[data.Columns[FieldName.PERIOD].Ordinal]),
-                            year = item.ItemArray[data.Columns[FieldName.YEAR].Ordinal].ToString()
-                        });
+                        curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString();
+                        curr_tname = item.ItemArray[data.Columns[FieldName.CURR_TNAME].Ordinal].ToString();
+                        curr_ename = item.ItemArray[data.Columns[FieldName.CURR_ENAME].Ordinal].ToString();
+                        degree_e_bf = item.ItemArray[data.Columns[FieldName.DEGREE_E_BF].Ordinal].ToString();
+                        degree_e_full = item.ItemArray[data.Columns[FieldName.DEGREE_E_FULL].Ordinal].ToString();
+                        degree_t_bf = item.ItemArray[data.Columns[FieldName.DEGREE_T_BF].Ordinal].ToString();
+                        degree_t_full = item.ItemArray[data.Columns[FieldName.DEGREE_T_FULL].Ordinal].ToString();
+                        level = Convert.ToChar(item.ItemArray[data.Columns[FieldName.LEVEL].Ordinal]);
+                        period = Convert.ToChar(item.ItemArray[data.Columns[FieldName.PERIOD].Ordinal]);
+                        year = item.ItemArray[data.Columns[FieldName.YEAR].Ordinal].ToString();
                     }
                     res.Close();
                     data.Dispose();
                 }
                 else
                 {
-                    //Reserved for return error string
+                    return "Error nor curriculum found.";
                 }
             }
             catch (Exception ex)
@@ -107,7 +104,7 @@ namespace educationalProject.Models.Wrappers
                 //Whether it success or not it must close connection in order to end block
                 d.SQLDisconnect();
             }
-            return result;
+            return null;
         }
 
         public async Task<object> Insert()

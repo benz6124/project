@@ -18,6 +18,16 @@ namespace educationalProject.Controllers
 		    return Ok(result);
         }
 
+        [ActionName("getcurridetail")]
+        public async Task<IHttpActionResult> Get(string id)
+        {
+            datacontext.curri_id = id;
+            object result = await datacontext.SelectByCurriID();
+            if (result != null)
+                return BadRequest(result.ToString());
+            return Ok(datacontext);
+        }
+
         public async Task<IHttpActionResult> PostNewCurriculum(oCu_curriculum data)
         {
             data.year = (DateTime.Now.Year+543).ToString();

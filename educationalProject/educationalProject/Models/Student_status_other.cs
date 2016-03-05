@@ -19,6 +19,18 @@ namespace educationalProject.Models
             public static readonly string CURRI_ID = "CURRI_ID";
             public static readonly string TABLE_NAME = "STUDENT_STATUS_OTHER";
         }
+        protected struct ParameterName
+        {
+            public static readonly string GRAD_IN_TIME = "@" + FieldName.GRAD_IN_TIME;
+            public static readonly string GRAD_OVER_TIME = "@" + FieldName.GRAD_OVER_TIME;
+            public static readonly string QUITY1 = "@" + FieldName.QUITY1;
+            public static readonly string QUITY2 = "@" + FieldName.QUITY2;
+            public static readonly string QUITY3 = "@" + FieldName.QUITY3;
+            public static readonly string QUITY4 = "@" + FieldName.QUITY4;
+            public static readonly string MOVE_IN = "@" + FieldName.MOVE_IN;
+            public static readonly string CURRI_ID = "@" + FieldName.CURRI_ID;
+            public static readonly string YEAR = "@" + FieldName.YEAR;
+        }
         private int _year;
         private int _grad_in_time;
         private int _grad_over_time;

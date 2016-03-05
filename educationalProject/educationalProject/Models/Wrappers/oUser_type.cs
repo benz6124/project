@@ -9,13 +9,16 @@ namespace educationalProject.Models.Wrappers
 {
     public class oUser_type : User_type
     {
-        public async Task<object> Select()
+        public async Task<object> SelectExcludeUserType(int mode)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oUser_type> result = new List<oUser_type>();
-            d.iCommand.CommandText = string.Format("select * from {0} where user_type != 'ผู้ดูแลระบบ'", FieldName.TABLE_NAME);
+            if(mode == 0)
+                d.iCommand.CommandText = string.Format("select * from {0} where {1} != 'ผู้ดูแลระบบ'", FieldName.TABLE_NAME,FieldName.USER_TYPE);
+            else
+                d.iCommand.CommandText = string.Format("select * from {0} where {1} != 'ผู้ดูแลระบบ' and {1} != 'กรรมการหลักสูตร'", FieldName.TABLE_NAME, FieldName.USER_TYPE);
             try
             {
                 System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();

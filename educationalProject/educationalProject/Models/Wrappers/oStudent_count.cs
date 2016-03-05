@@ -59,13 +59,16 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public async Task<object> SelectWhere(string wherecond)
+        public async Task<object> SelectWhereByCurriculumAcademic()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oStudent_count> result = new List<oStudent_count>();
-            d.iCommand.CommandText = string.Format("select * from {0} where {1}", FieldName.TABLE_NAME, wherecond);
+            d.iCommand.CommandText = string.Format("select * from {0} where {1} = {2} and {3} = {4}", FieldName.TABLE_NAME,
+                FieldName.CURRI_ID,ParameterName.CURRI_ID,FieldName.YEAR,ParameterName.YEAR);
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURRI_ID, curri_id));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.YEAR, year));
             try
             {
                 System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
@@ -116,17 +119,29 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
 
-            d.iCommand.CommandText = string.Format("IF NOT EXISTS (select * from {0} where {1}='{2}' and {3} = {4}) " +
+            d.iCommand.CommandText = string.Format("IF NOT EXISTS (select * from {0} where {1}={2} and {3} = {4}) " +
                                        "BEGIN " +
                                        "INSERT INTO {0} VALUES " +
-                                       "('{2}', {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11},{12}) " +
+                                       "({2}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11},{12}) " +
                                        "END " +
                                        "ELSE " +
                                        "BEGIN " +
-                                       "UPDATE {0} SET {13} = {5},{14} = {6},{15} = {7},{16} = {8},{17} = {9},{18} = {10},{19} = {11},{20} = {12} where {1} = '{2}' and {3} = {4} " +
+                                       "UPDATE {0} SET {13} = {5},{14} = {6},{15} = {7},{16} = {8},{17} = {9},{18} = {10},{19} = {11},{20} = {12} where {1} = {2} and {3} = {4} " +
                                        "END",
-                FieldName.TABLE_NAME, FieldName.CURRI_ID, curri_id, FieldName.YEAR, year, ny1, ny2, ny3, ny4, ny5, ny6, ny7,ny8,
+                FieldName.TABLE_NAME, FieldName.CURRI_ID, ParameterName.CURRI_ID, FieldName.YEAR, ParameterName.YEAR, ParameterName.NY1, ParameterName.NY2, ParameterName.NY3, ParameterName.NY4,
+                ParameterName.NY5, ParameterName.NY6, ParameterName.NY7, ParameterName.NY8,
                     FieldName.NY1, FieldName.NY2, FieldName.NY3, FieldName.NY4, FieldName.NY5, FieldName.NY6, FieldName.NY7,FieldName.NY8);
+
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURRI_ID, curri_id));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.YEAR, year));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.NY1, ny1));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.NY2, ny2));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.NY3, ny3));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.NY4, ny4));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.NY5, ny5));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.NY6, ny6));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.NY7, ny7));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.NY8, ny8));
             try
             {
                 await d.iCommand.ExecuteNonQueryAsync();

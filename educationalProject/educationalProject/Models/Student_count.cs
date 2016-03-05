@@ -20,6 +20,20 @@ namespace educationalProject.Models
             public static readonly string YEAR = "YEAR";
             public static readonly string TABLE_NAME = "STUDENT_COUNT";
         }
+
+        protected struct ParameterName
+        {
+            public static readonly string NY1 = "@" + FieldName.NY1;
+            public static readonly string NY2 = "@" + FieldName.NY2;
+            public static readonly string NY3 = "@" + FieldName.NY3;
+            public static readonly string NY4 = "@" + FieldName.NY4;
+            public static readonly string NY5 = "@" + FieldName.NY5;
+            public static readonly string NY6 = "@" + FieldName.NY6;
+            public static readonly string NY7 = "@" + FieldName.NY7;
+            public static readonly string NY8 = "@" + FieldName.NY8;
+            public static readonly string CURRI_ID = "@" + FieldName.CURRI_ID;
+            public static readonly string YEAR = "@" + FieldName.YEAR;
+        }
         private int _ny1;
         private int _ny2;
         private int _ny3;
