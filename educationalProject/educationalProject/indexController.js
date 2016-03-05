@@ -361,6 +361,32 @@ $scope.get_support_content_from_other_year = function (my_modal) {
 }
 
 
+    $scope.find_curri_information = function(){
+
+  
+
+
+        $scope.to_get_url = "/api/curriculum/getcurridetail/"+$scope.curri_choosen.curri_id;
+ $http.get($scope.to_get_url).success(function (data) {
+  
+                   $scope.result = data;
+                if($scope.result.level == 1){
+                    $scope.result.level = "ปริญญาตรี"
+                }
+                else if ($scope.result.level == 2){
+                    $scope.result.level = "ปริญญาโท"
+                }
+                else{
+                    $scope.result.level = "ปริญญาเอก"
+                }
+           
+           });
+
+
+ 
+
+    }
+
 $scope.prepare_to_watch_support_text = function(){
     console.log("prepare_to_watch_support_text");
     $scope.sendSectionSaveAndGetPreviewSupportText();
@@ -692,7 +718,18 @@ $scope.still_not_complete = function(){
     // }
 }
 });
+// app.controller('watch_curri_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
 
+
+
+
+//   $scope.$on("modal.show", function (event, args) {
+//              $scope.find_information();
+//     });
+
+    
+
+// });
 
 app.controller('stat_graduated_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
@@ -1322,7 +1359,7 @@ for(index=0;index<$rootScope.all_curriculums.length;index++){
       angular.element(inputElem).val(null);
     });
                  
-         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาตให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
        }
             else{
@@ -1704,7 +1741,7 @@ $scope.corresponding_indicators = [];
       angular.element(inputElem).val(null);
     });
 
-         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาตให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
        }
             else{
@@ -2397,7 +2434,7 @@ app.controller('change_evidence_file_controller', function($scope, $alert,$http,
       angular.element(inputElem).val(null);
     });
                  
-         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาตให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
        }
             else{
@@ -2535,7 +2572,7 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
       angular.element(inputElem).val(null);
     });
                  
-         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาตให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
        }
             else{
@@ -2696,7 +2733,7 @@ $scope.my_new_evidence.primary_choosen = {};
       angular.element(inputElem).val(null);
     });
                  
-         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาตให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
        }
 
@@ -4617,7 +4654,7 @@ $scope.still_not_write_code = function() {
     }
 }
 $scope.watch_preview = function(){
-    if($scope.choose_not_complete == false){
+    if($scope.choose_not_complete == false ){
         $scope.watch_file($scope.evidence_we_want.file_name);
     }
     else{
@@ -4682,7 +4719,7 @@ if($rootScope.manage_evidence_curri_id_now == $scope.curri_choosen.curri_id){
         }
     }
 }
-
+ $scope.choose_not_complete = true;
 
 $scope.all_evidences =[];
             $scope.corresponding_aca_years = data;
@@ -4696,7 +4733,7 @@ $scope.all_evidences =[];
   $scope.evidence_we_want = {};
           console.log("find_information");
         console.log($scope.year_choosen);
-
+ $scope.choose_not_complete = true;
         $http.post(
              '/api/evidence/getbycurriculumacademic',
              JSON.stringify($scope.year_choosen),
@@ -4768,7 +4805,7 @@ app.controller('create_user_controller', function($scope, $http,$alert,$loading,
       $scope.files = [];
 $scope.choose_not_complete = true;
         $scope.please_wait = false;
-    $http.get('/api/usertype').success(function (data) {
+    $http.get('/api/usertype/getexcludeadmcom').success(function (data) {
            
                 $scope.all_usertype = data;
 
@@ -4813,7 +4850,7 @@ else{
 }
 
 
-          $http.get('/api/usertype').success(function (data) {
+          $http.get('/api/usertype/getexcludeadmcom').success(function (data) {
               
                 $scope.all_usertype = data;
 
@@ -4887,7 +4924,7 @@ $scope.init ();
         }).
         error(function (data, status, headers, config) {
               $scope.please_wait = false;
-               $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+               $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ เนื่องจาก' + data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
 }
@@ -4919,7 +4956,7 @@ $scope.init ();
       angular.element(inputElem).val(null);
     });
                  
-         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาตให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
        }
 
@@ -4942,8 +4979,8 @@ $scope.init =function() {
                     $scope.questions =[];
                     $scope.my_survey_name ="";
 
-                $http.get('/api/usertype').success(function (data) {
-                console.log("/api/usertype");
+                $http.get('/api/usertype/getexcludeadmin').success(function (data) {
+                console.log("/api/usertype/getexcludeadmin");
                 console.log(data);
                 $scope.all_usertype = data;
 
@@ -4971,8 +5008,8 @@ $scope.init =function() {
                     $scope.questions =[];
                     $scope.my_survey_name ="";
 
-                $http.get('/api/usertype').success(function (data) {
-                     console.log("/api/usertype");
+                $http.get('/api/usertype/getexcludeadmin').success(function (data) {
+                     console.log("/api/usertype/getexcludeadmin");
                 console.log(data);
                 $scope.all_usertype = data;
               });
@@ -5144,7 +5181,7 @@ $scope.init =function() {
       angular.element(inputElem).val(null);
     });
                  
-         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาตให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
        }
             else{
@@ -5399,7 +5436,7 @@ $rootScope.manage_research_fix_this_research.researcher = $rootScope.manage_lab_
       angular.element(inputElem).val(null);
     });
                  
-         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาตให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
        }
             else{
@@ -6372,7 +6409,7 @@ $scope.same_interest = function(){
       angular.element(inputElem).val(null);
     });
                  
-         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาตให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
        }
               else        if(extension[extension.length-1] != 'jpeg' && extension[extension.length-1]!='jpg' && extension[extension.length-1] != 'png' && extension[extension.length-1] != 'bmp'
@@ -7365,7 +7402,7 @@ $scope.my_pictures.flow.files = [];
       angular.element(inputElem).val(null);
     });
                  
-         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาตให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
        }
             else{
@@ -7692,7 +7729,7 @@ $scope.my_pictures.flow.files = [];
       angular.element(inputElem).val(null);
     });
                  
-         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาตให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
        }      else        if(extension[extension.length-1] != 'jpeg' && extension[extension.length-1]!='jpg' && extension[extension.length-1] != 'png' && extension[extension.length-1] != 'bmp'
         && extension[extension.length-1] != 'JPEG' && extension[extension.length-1] !='JPG'  && extension[extension.length-1] != 'PNG' && extension[extension.length-1] != 'BMP' ){
@@ -7910,7 +7947,7 @@ $scope.my_pictures = {};
       angular.element(inputElem).val(null);
     });
                  
-         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาติให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
+         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาตให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
        }
 

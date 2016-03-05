@@ -360,10 +360,21 @@
 
     <select data-qo-disable-clear="true" data-qo-button-class="mySelect_index" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
-<span style="visibility:hidden" >dawdad</span>
+
+
+<button style="
+    background-color: transparent;
+    border: none;
+    margin-top: 5px;
+" type="button" data-nq-toggle-modal="#watch_curri" ng-click="find_curri_information()" ng-show="already_select_curri"><i style="font-size:1.5em;color:#00386B" class="glyphicon glyphicon-info-sign"></i></button>
+
+<span style="visibility:hidden" >daad</span>
                <select data-qo-disable-clear="true" data-qo-button-class="mySelect_index_year" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="sendYearAndGetIndicators(year_choosen)" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" data-ng-click="check_curri()">
-<option style="display:none" value=""></option></select>    
-<span style="visibility:hidden" >dawdad</span>
+<option style="display:none" value=""></option></select>  
+
+<span style="visibility:hidden" >daad</span>
+
+
    <button class="btn hvr-wobble-vertical" type="button" style="background-color:#739900;margin-bottom:0px;margin-left:0px; color:white;" ng-click="download_aun_book()">
                     <span class="glyphicon glyphicon-download-alt"></span> ดาวน์โหลดเล่ม
                 </button>
@@ -3833,6 +3844,126 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
+
+                    <div id="watch_curri" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true"  >
+                        <div class="custom-header">
+                            <h1 class="headerModalH1">ข้อมูลหลักสูตร</h1>
+                        </div>
+
+<form name="create_curri_form" novalidate>
+                          <div class="row">
+                            <div class="col-md-4">
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อหลักสูตรภาษาไทย   </span></h3>
+                            </div>
+                            <div class="col-md-8">
+                         <span class="topicHeader" style="color:#6F002B" >       {{result.curr_tname}}
+
+                            </div>
+                        </div>
+
+                  <div class="row">
+                 <div class="col-md-4">
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อหลักสูตรภาษาอังกฤษ   </span></h3>
+                            </div>
+                          
+    <div class="col-md-8">
+                         <span class="topicHeader" style="color:#6F002B" >       {{result.curr_ename}}
+
+                            </div>
+                          
+                        </div>
+
+
+                    <div class="row">
+                  <div class="col-md-4">
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(ย่อ)   </span></h3>
+                            </div>
+                          
+
+                             
+                                <div class="col-md-8">
+                         <span class="topicHeader" style="color:#6F002B" >       {{result.degree_t_bf}}
+
+                            </div>
+                        </div>
+
+                      <div class="row">
+                  <div class="col-md-4">
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(ย่อ)   </span></h3>
+                            </div>
+                    
+
+                        
+   <div class="col-md-8">
+                         <span class="topicHeader" style="color:#6F002B" >       {{result.degree_e_bf}}
+
+                            </div>
+
+                        </div>
+    <div class="row">
+                    <div class="col-md-4">
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(เต็ม)  </span></h3>
+                            </div>
+                     
+
+                          
+
+
+   <div class="col-md-8">
+                         <span class="topicHeader" style="color:#6F002B" >       {{result.degree_t_full}}
+
+                            </div>
+                        </div>
+
+                      <div class="row">
+                   <div class="col-md-4">
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(เต็ม)</span></h3>
+                            </div>
+                       
+
+                            
+
+                             <div class="col-md-8">
+                         <span class="topicHeader" style="color:#6F002B" >       {{result.degree_e_full}}
+
+                            </div>
+                        </div>
+
+
+                     <div class="row">
+                       <div class="col-md-4">
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ระดับปริญญา </span></h3>
+                            </div>
+         
+
+                                <div class="col-md-8">
+                         <span class="topicHeader" style="color:#6F002B" >       {{result.level}} 
+
+                            </div>
+                        </div> 
+
+                        <div class="row">
+                       <div class="col-md-4">
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ระยะเวลาการเรียน </span></h3>
+                            </div>
+
+                     
+
+                            
+
+                                 <div class="col-md-8">
+                         <span class="topicHeader" style="color:#6F002B" >       {{result.period}} ปี
+
+                            </div>
+                        </div>
+</form>
+                            <div class="custom-footer">
+                        <div class="topicHeader pull-right">
+                           <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
+                        </div>
+                    </div>
+                    </div>
+
          <div id="see_evaluate_other" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="see_evaluate_by_other_controller"data-qo-screen-mode="true" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ผลการประเมินหลักสูตร</span></h1>
@@ -6494,9 +6625,13 @@ glyphicon glyphicon-bell"></i> </span>
          
                บันทึกข้อมูลสำเร็จบางส่วน
           อีเมล์เหล่านี้มีอยู่แล้วในระบบ
-                {{ $root.manage_user_email_duplicate}}
+
       
-              
+               
+    <ul >
+                     <li ng-repeat="each in $root.manage_user_email_duplicate track by $index">{{each}}</li>
+                        </ul>
+
            
           </div>
         </script>
