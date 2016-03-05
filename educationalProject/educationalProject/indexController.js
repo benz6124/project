@@ -368,16 +368,17 @@ $scope.get_support_content_from_other_year = function (my_modal) {
 
         $scope.to_get_url = "/api/curriculum/getcurridetail/"+$scope.curri_choosen.curri_id;
  $http.get($scope.to_get_url).success(function (data) {
-  
-                   $scope.result = data;
-                if($scope.result.level == 1){
-                    $scope.result.level = "ปริญญาตรี"
+
+                   $rootScope.result_curri_info = data;
+                         
+                if($rootScope.result_curri_info.level == 1){
+                    $rootScope.result_curri_info.level = "ปริญญาตรี"
                 }
-                else if ($scope.result.level == 2){
-                    $scope.result.level = "ปริญญาโท"
+                else if ($rootScope.result_curri_info.level == 2){
+                    $rootScope.result_curri_info.level = "ปริญญาโท"
                 }
                 else{
-                    $scope.result.level = "ปริญญาเอก"
+                   $rootScope.result_curri_info.level = "ปริญญาเอก"
                 }
            
            });
