@@ -14,7 +14,9 @@ namespace educationalProject.Controllers
         private oStudent_status_other datacontext = new oStudent_status_other();
         public async Task<IHttpActionResult> PostByCurriculumAcademic(oCurriculum_academic data)
         {
-            object result = await datacontext.SelectWhere(string.Format("curri_id = {0} and year = {1}", data.curri_id, data.aca_year));
+            datacontext.curri_id = data.curri_id;
+            datacontext.year = data.aca_year;
+            object result = await datacontext.SelectWhereByCurriculumAcademic();
             if (result.GetType().ToString().CompareTo("System.String") == 0)
                 return InternalServerError(new Exception(result.ToString()));
             else if (((List<oStudent_status_other>)result).Count != 0)

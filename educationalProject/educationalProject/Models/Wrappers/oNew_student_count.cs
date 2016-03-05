@@ -61,13 +61,16 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public async Task<object> SelectWhere(string wherecond)
+        public async Task<object> SelectWhereByCurriculumAcademic()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<oNew_student_count> result = new List<oNew_student_count>();
-            d.iCommand.CommandText = string.Format("select * from {0} where {1}", FieldName.TABLE_NAME, wherecond);
+            d.iCommand.CommandText = string.Format("select * from {0} where {1} = {2} and {3} = {4}", FieldName.TABLE_NAME,
+                FieldName.CURRI_ID, ParameterName.CURRI_ID, FieldName.YEAR, ParameterName.YEAR);
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURRI_ID, curri_id));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.YEAR, year));
             try
             {
                 System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
@@ -120,17 +123,32 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
 
-            d.iCommand.CommandText = string.Format("IF NOT EXISTS (select * from {0} where {1}='{2}' and {3} = {4}) " +
+            d.iCommand.CommandText = string.Format("IF NOT EXISTS (select * from {0} where {1}={2} and {3} = {4}) " +
                                        "BEGIN " +
                                        "INSERT INTO {0} VALUES " +
-                                       "('{2}', {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11},{12},{13},{14}) " +
+                                       "({2}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11},{12},{13},{14}) " +
                                        "END " +
                                        "ELSE " +
                                        "BEGIN " +
-                                       "UPDATE {0} SET {15} = {5},{16} = {6},{17} = {7},{18} = {8},{19} = {9},{20} = {10},{21} = {11},{22} = {12},{23} = {13},{24} = {14} where {1} = '{2}' and {3} = {4} " +
+                                       "UPDATE {0} SET {15} = {5},{16} = {6},{17} = {7},{18} = {8},{19} = {9},{20} = {10},{21} = {11},{22} = {12},{23} = {13},{24} = {14} where {1} = {2} and {3} = {4} " +
                                        "END",
-                FieldName.TABLE_NAME, FieldName.CURRI_ID, curri_id, FieldName.YEAR, year,num_goodstudy_m,num_goodstudy_f,num_childstaff_m,num_childstaff_f,num_direct_m,num_direct_f,num_admis_m,num_admis_f,num_others_m,num_others_f,
+                FieldName.TABLE_NAME, FieldName.CURRI_ID, ParameterName.CURRI_ID, FieldName.YEAR, ParameterName.YEAR,
+                ParameterName.NUM_GOODSTUDY_M, ParameterName.NUM_GOODSTUDY_F, ParameterName.NUM_CHILDSTAFF_M,
+                ParameterName.NUM_CHILDSTAFF_F, ParameterName.NUM_DIRECT_M, ParameterName.NUM_DIRECT_F,
+                ParameterName.NUM_ADMIS_M, ParameterName.NUM_ADMIS_F, ParameterName.NUM_OTHERS_M, ParameterName.NUM_OTHERS_F,
                     FieldName.NUM_GOODSTUDY_M, FieldName.NUM_GOODSTUDY_F, FieldName.NUM_CHILDSTAFF_M, FieldName.NUM_CHILDSTAFF_F, FieldName.NUM_DIRECT_M, FieldName.NUM_DIRECT_F, FieldName.NUM_ADMIS_M, FieldName.NUM_ADMIS_F,FieldName.NUM_OTHERS_M,FieldName.NUM_OTHERS_F);
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURRI_ID, curri_id));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.YEAR, year));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.NUM_GOODSTUDY_M, num_goodstudy_m));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.NUM_GOODSTUDY_F, num_goodstudy_f));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.NUM_CHILDSTAFF_M, num_childstaff_m));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.NUM_CHILDSTAFF_F, num_childstaff_f));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.NUM_DIRECT_M, num_direct_m));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.NUM_DIRECT_F, num_direct_f));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.NUM_ADMIS_M, num_admis_m));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.NUM_ADMIS_F, num_admis_f));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.NUM_OTHERS_M, num_others_m));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.NUM_OTHERS_F, num_others_f));
             try
             {
                 await d.iCommand.ExecuteNonQueryAsync();

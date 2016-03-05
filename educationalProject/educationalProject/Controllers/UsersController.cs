@@ -56,7 +56,7 @@ namespace educationalProject.Controllers
                 
                 MultipartFileData file = result.FileData[0];
                 if (file.Headers.ContentType.ToString() != "text/plain")
-                    return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
+                    return BadRequest("ไฟล์ที่อัพโหลดไม่เป็นไฟล์ข้อความธรรมดา");
 
                 FileInfo fileInfo = new FileInfo(file.LocalFileName);
 
