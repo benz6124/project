@@ -357,7 +357,10 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
 
-            d.iCommand.CommandText =
+            d.iCommand.CommandText = string.Format("if not exists (select * from {0} where {1} = {2} and {3} = {4} and {5} = '{6}' and {7} = {8} ) ",
+                FieldName.TABLE_NAME, FieldName.PRIMARY_EVIDENCE_NUM, primary_evidence_num, FieldName.ACA_YEAR,aca_year, 
+                FieldName.CURRI_ID,curri_id, FieldName.INDICATOR_NUM,indicator_num) +
+                "BEGIN " +
                 //Insert part    
                 string.Format("INSERT INTO {0}({1},{2},{3},{4},{5},{6},{7},{8},{9}) VALUES " +
                       "({18}, '{10}', '{11}', {12}, {13}, '{14}', '{15}', '{16}', {17}) ",
@@ -376,7 +379,7 @@ string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
                 curri_id, FieldName.ACA_YEAR, aca_year, oTeacher.getSelectTeacherByJoinCommand(),
                 FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
                 FieldName.EVIDENCE_REAL_CODE,Teacher.FieldName.ALIAS_NAME
-                );
+                ) + " END";
 
             try
             {
@@ -408,6 +411,8 @@ string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
                 else
                 {
                     //Reserved for return error string
+                    res.Close();
+                    return "หลักฐานพื้นฐานดังกล่าวได้ถูกอัพโหลดไปก่อนแล้ว";
                 }
                 res.Close();
             }

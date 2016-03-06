@@ -407,6 +407,8 @@ namespace educationalProject.Models.Wrappers
                 return "Cannot connect to database.";
             List<Minutes_detail> result = new List<Minutes_detail>();
             Minutes_detail dummyfordeleteminutes = new Minutes_detail();
+            string ifexistscond = string.Format("if exists (select * from {0} where {1} = {2}) ", FieldName.TABLE_NAME,
+    FieldName.MINUTES_ID, mdata.minutes_id);
             string temp1tablename = "#temp1";
 
             string createtabletemp1 = string.Format("create table {0} (" +
@@ -492,7 +494,7 @@ namespace educationalProject.Models.Wrappers
 
             string selectcmd = getSelectByCurriculumAcademicCommand(true);
 
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} {5} {6} END", createtabletemp1,
+            d.iCommand.CommandText = string.Format("{0} BEGIN {1} {2} {3} {4} {5} {6} {7} END",ifexistscond, createtabletemp1,
                 insertintotemp1_1, deletefromminutesattendee, insertintominutesattendee,
                 insertintotemp1_2, insertintominutespiccmd, selectcmd);
 
@@ -564,6 +566,8 @@ namespace educationalProject.Models.Wrappers
                 else
                 {
                     //Reserved for return error string
+                    res.Close();
+                    return "The target minutes is already deleted.";
                 }
                 res.Close();
             }

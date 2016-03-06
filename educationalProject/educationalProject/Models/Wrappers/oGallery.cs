@@ -351,6 +351,8 @@ namespace educationalProject.Models.Wrappers
             Gallery_detail dummyfordeletepictures = new Gallery_detail();
             string temp1tablename = "#temp1";
             string updatepicturecmd = "";
+            string ifexistscond = string.Format("if exists (select * from {0} where {1} = {2}) ", FieldName.TABLE_NAME,
+                FieldName.GALLERY_ID, gdata.gallery_id);
             string insertintopicturecmd = string.Format("insert into {0} values ", Picture.FieldName.TABLE_NAME);
             string deletefrompicturecmd = string.Format("delete from {0} output deleted.{1} where {2} = {3} ",
                                           Picture.FieldName.TABLE_NAME, Picture.FieldName.FILE_NAME, Picture.FieldName.GALLERY_ID,
@@ -406,7 +408,7 @@ namespace educationalProject.Models.Wrappers
 
             string selectcmd = getSelectByCurriculumAcademicCommand(true);
 
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} {5} END",createtabletemp1,updategallerycmd,updatepicturecmd,
+            d.iCommand.CommandText = string.Format("{0} BEGIN {1} {2} {3} {4} {5} {6} END",ifexistscond, createtabletemp1,updategallerycmd,updatepicturecmd,
                 insertintotemp1,insertintopicturecmd,selectcmd);
 
             try
@@ -461,6 +463,8 @@ namespace educationalProject.Models.Wrappers
                 else
                 {
                     //Reserved for return error string
+                    res.Close();
+                    return "Target gallery is already deleted.";
                 }
                 res.Close();
             }

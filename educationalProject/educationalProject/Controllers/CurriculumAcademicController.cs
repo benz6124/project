@@ -39,6 +39,10 @@ namespace educationalProject.Controllers
         [ActionName("add")]
         public async Task<IHttpActionResult> PostNewCurriculumAcademic(oCurriculum_academic data)
         {
+            if(data == null)
+            {
+                return BadRequest("กรุณาเลือกหลักสูตรและระบุปีการศึกษาให้เป็นค่าที่ถูกต้อง");
+            }
             object result = await data.Insert();
             if (result == null)
                 return Ok();

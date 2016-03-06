@@ -310,6 +310,8 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return "Cannot connect to database.";
             List<Research_detail> result = new List<Research_detail>();
+            string ifexistscond = string.Format("if exists (select * from {0} where {1} = {2}) ", FieldName.TABLE_NAME,
+    FieldName.RESEARCH_ID, rdata.research_id);
             string temp1tablename = "#temp1";
 
             string createtabletemp1 = string.Format("create table {0} (" +
@@ -351,7 +353,7 @@ namespace educationalProject.Models.Wrappers
                 Research_owner.FieldName.TABLE_NAME, rdata.curri_id, Research_owner.FieldName.RESEARCH_ID,
                 Teacher.FieldName.TEACHER_ID,temp1tablename,Teacher.FieldName.ALIAS_NAME);
             
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} END", createtabletemp1,
+            d.iCommand.CommandText = string.Format("{0} BEGIN {1} {2} {3} {4} {5} END",ifexistscond, createtabletemp1,
                 insertintotemp1, deletefromresearchowner, insertintoresearchowner, selectcmd);
             try
             {
@@ -388,6 +390,8 @@ namespace educationalProject.Models.Wrappers
                 else
                 {
                     //Reserved for return error string
+                    res.Close();
+                    return "Target research is already deleted.";
                 }
                 res.Close();
             }

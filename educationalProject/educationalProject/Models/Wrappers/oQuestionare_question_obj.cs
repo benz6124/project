@@ -38,6 +38,8 @@ namespace educationalProject.Models.Wrappers
                 else
                 {
                     //Reserved for return error string
+                    res.Close();
+                    return "แบบสอบถามนี้ถูกลบแล้ว";
                 }
                 res.Close();
             }

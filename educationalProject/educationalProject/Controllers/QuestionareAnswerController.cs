@@ -15,7 +15,11 @@ namespace educationalProject.Controllers
         oQuestionare_question_obj datacontext = new oQuestionare_question_obj();
         public async Task<IHttpActionResult> PostForQueryQuestions([FromBody]int questionare_set_id)
         {
-            return Ok(await datacontext.SelectByQuestionIdAsQuestionForm(questionare_set_id));
+            object result = await datacontext.SelectByQuestionIdAsQuestionForm(questionare_set_id);
+            if (result.GetType().ToString() != "System.String")
+                return Ok(result);
+            else
+                return BadRequest(result.ToString());
         }
 
         public async Task<IHttpActionResult> PutForAnswerQuestions(List<object> list)

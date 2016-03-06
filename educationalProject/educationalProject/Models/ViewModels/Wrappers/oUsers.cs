@@ -209,7 +209,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             string usridvar = "@usrid";
             d.iCommand.CommandText = string.Format("declare {2} int = -1; " +
 
-            "SET {2} = (select {22} from {23} where {24} = '{25}') " +
+            "SET {2} = (select {22} from {23} where {24} = {25}) " +
 
            "if exists (select * from {0} where {1} = {2}) " +
            "{3} " +
@@ -239,8 +239,8 @@ namespace educationalProject.Models.ViewModels.Wrappers
            getSelectUserDataCommand(usridvar, 4, "#temp95"), Assessor.FieldName.TABLE_NAME, Assessor.FieldName.ASSESSOR_ID,
            getSelectUserDataCommand(usridvar, 5, "#temp94"), Admin.FieldName.TABLE_NAME, Admin.FieldName.ADMIN_ID,
            getSelectUserDataCommand(usridvar, 6, "#temp93"),User_list.FieldName.USER_ID,User_list.FieldName.TABLE_NAME,
-           Teacher.FieldName.USERNAME,username);
-
+           Teacher.FieldName.USERNAME, Teacher.ParameterName.USERNAME);
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(Teacher.ParameterName.USERNAME, username));
             result.user_id = 0;
 
             try
