@@ -1761,7 +1761,7 @@ $scope.corresponding_indicators = [];
 
     $scope.save_to_server = function(my_modal) {
    $scope.please_wait = true;
-      $scope.model  = {"file_name":$scope.files[0].name,"personnel_id":"00007","date":"","curri_id":$scope.curri_choosen.curri_id,"aca_year":$scope.year_choosen.aca_year}
+      $scope.model  = {"file_name":$scope.files[0].name,"personnel_id":$rootScope.current_user.user_id,"date":"","curri_id":$scope.curri_choosen.curri_id,"aca_year":$scope.year_choosen.aca_year}
 
       var formData = new FormData();
 
@@ -7348,6 +7348,15 @@ $scope.my_pictures.flow.files = [];
     });
 }
 
+$scope.modify_date = function(date){
+    console.log($scope.my_new_minute.date)
+    console.log()
+    if(parseInt($scope.my_new_minute.date.split("/")[2]) < 2500){
+        $scope.my_new_year = parseInt($scope.my_new_minute.date.split("/")[2])+543;
+    $scope.my_new_minute.date = $scope.my_new_minute.date.split("/")[0] +"/"+ $scope.my_new_minute.date.split("/")[1]+ "/"+$scope.my_new_year;
+
+    }
+    }
     $scope.$on("modal.hide", function (event, args) {
      $scope.init();
       

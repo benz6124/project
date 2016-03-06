@@ -3376,8 +3376,8 @@ angular.module('ngQuantum.datepicker', [
             defaultSelect: true, //to do
             allowBlank: false, //to do
             showYears: true,
-            minYear: 1950,
-            maxYear: 2050,
+            minYear: 2500,
+            maxYear: 2580,
             dayOfWeekStart: 1,
             disableWeekends: false,
             disableWeekdays: [],
@@ -3535,6 +3535,7 @@ angular.module('ngQuantum.datepicker', [
                       $picker.changeDate('down', 'month', 1)
                   }
                   $picker.changeDate = function (dir, type, val) {
+
                       var v = !val ? 1 : angular.isNumber(val) ? val : window.isNaN(parseInt(val)) ? 1 : parseInt(val);
                       v = dir == 'down' ? -v : v;
                       type = type || 'day';
@@ -3935,9 +3936,14 @@ angular.module('ngQuantum.datepicker', [
                       return date.year() + date.month();
                   }
                   function scrollYear() {
+
                       if ($picker.yearSelector) {
+
                           $timeout(function () {
+                    console.log('scope.currentYear')
+                    console.log(scope.currentYear)
                               var yelm = '#year-' + (scope.currentYear - 3)
+                     
                               var bar = $picker.yearSelector.data('$scrollBar');
                               bar && bar.scrollTo(yelm)
                           }, 0)
@@ -3980,7 +3986,11 @@ angular.module('ngQuantum.datepicker', [
                               break;
                       }
                       apply(function () {
+                          // console.log(scope.currentDateObject);
                           scope.currentDateObject = scope.currentDate.toObject();
+                          // scope.currentDateObject.year = scope.currentDateObject.year + 543;
+                          // console.log(scope.currentDateObject)
+
                       })
                   }
                   function optimizeTime() {
@@ -4062,6 +4072,8 @@ angular.module('ngQuantum.datepicker', [
                       return /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/.test(val);
                   }
                   function renderModel() {
+                    console.log('render')
+                    console.log(scope.currentDate)
                       if (scope.hasModel) {
                           $timeout(function () {
                               if (options.modelType == 'date')
@@ -4199,6 +4211,7 @@ angular.module('ngQuantum.datepicker', [
                       })
                       
                       scope.$watch('currentDateObject.month', function (newval, oldval) {
+
                           if (newval != oldval && oldval) {
                               scope.selectedDay = scope.selectedDay.replace(oldval + '-', newval + '-');
                           }
@@ -4226,7 +4239,16 @@ angular.module('ngQuantum.datepicker', [
                   function formatPicker() {
                       (options.timeView == 'list') && scrollTime();
                       scope.currentMonthTitle = scope.currentDate.format(options.headerFormat);
+                // console.log(scope.currentMonthTitle)
+                //     console.log(scope.currentMonthTitle.substring())
+                      var my_month = scope.currentMonthTitle.split(" ")[0];
+
                       scope.currentYear = scope.currentDate.year();
+                        if(  scope.currentYear < 2500){
+                            scope.currentYear = scope.currentYear +543;
+                        }
+                      scope.currentMonthTitle = my_month + " "+scope.currentYear;
+                
                       options.showYears && scrollYear();
                   }
                   function apply(fn) {
