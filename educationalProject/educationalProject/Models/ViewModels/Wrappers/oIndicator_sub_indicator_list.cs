@@ -19,10 +19,10 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                       "[{1}] INT NOT NULL," +
                                       "[{2}] INT NOT NULL," +
                                       "[{3}] INT NOT NULL," +
-                                      "[{4}] VARCHAR(200) NULL," +
+                                      "[{4}] VARCHAR(2000) NULL," +
                                       "PRIMARY KEY([{1}],[{2}],[{3}])) " +
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN {4} VARCHAR(200) COLLATE DATABASE_DEFAULT ",
+                                      "ALTER COLUMN {4} VARCHAR(2000) COLLATE DATABASE_DEFAULT ",
                                       temp1tablename, FieldName.ACA_YEAR, FieldName.INDICATOR_NUM,
                                       Sub_indicator.FieldName.SUB_INDICATOR_NUM,
                                       Sub_indicator.FieldName.SUB_INDICATOR_NAME);

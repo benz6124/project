@@ -28,7 +28,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                      "[{6}] TIME(0) NULL," +
                                      "[{7}] {10} NULL," +
                                      "[{8}] INT NULL," +
-                                     "[{9}] VARCHAR(400) NULL," +
+                                     "[{9}] VARCHAR(2000) NULL," +
                                      "PRIMARY KEY([row_num])) " +
 
                                      "alter table {0} " +
@@ -38,7 +38,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                      "alter column [{7}] {10} collate database_default " +
 
                                      "alter table {0} " +
-                                     "alter column [{9}] VARCHAR(400) collate database_default ",
+                                     "alter column [{9}] VARCHAR(2000) collate database_default ",
                                      temp90tablename, FieldName.INDICATOR_NUM, FieldName.SUB_INDICATOR_NUM,
                                      FieldName.TEACHER_ID, FieldName.EVALUATION_SCORE, FieldName.DATE,
                                      FieldName.TIME, FieldName.CURRI_ID, FieldName.ACA_YEAR,

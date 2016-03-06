@@ -19,7 +19,7 @@ namespace educationalProject.Models.Wrappers
             string temp5tablename = "#temp5";
             string createtabletemp5 = string.Format("CREATE TABLE {0}(" +
                                       "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                      "[{1}] VARCHAR(200) NULL," +
+                                      "[{1}] VARCHAR(2000) NULL," +
                                       "[{2}] INT NULL," +
                                       "[{3}] INT NULL," +
                                       "[{4}] INT NULL," +
@@ -36,7 +36,7 @@ namespace educationalProject.Models.Wrappers
                                       "PRIMARY KEY([row_num])) " +
 
                                       "ALTER TABLE {0} " +
-                                      "ALTER COLUMN [{1}] VARCHAR(200) collate DATABASE_DEFAULT " +
+                                      "ALTER COLUMN [{1}] VARCHAR(2000) collate DATABASE_DEFAULT " +
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN [{5}] {15} collate DATABASE_DEFAULT " +

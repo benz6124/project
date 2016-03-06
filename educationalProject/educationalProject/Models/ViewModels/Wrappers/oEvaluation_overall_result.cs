@@ -24,16 +24,16 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                       "[{2}] int null," +
                                       "[{3}] date null," +
                                       "[{4}] TIME(0) null," +
-                                      "[caption1] varchar(1100) null," +
-                                      "[caption2] varchar(1100) null," +
+                                      "[caption1] varchar(2100) null," +
+                                      "[caption2] varchar(2100) null," +
                                       "[{5}] float null," +
                                       "primary key([row_num])) " +
 
                                       "alter table {0} " +
-                                      "alter column[caption1] varchar(1100) collate database_default " +
+                                      "alter column[caption1] varchar(2100) collate database_default " +
 
                                       "alter table {0} " +
-                                      "alter column[caption2] varchar(1100) collate database_default ",
+                                      "alter column[caption2] varchar(2100) collate database_default ",
                                       temp1tablename, Indicator.FieldName.INDICATOR_NUM,
                                       Sub_indicator.FieldName.SUB_INDICATOR_NUM,
                                       Self_evaluation.FieldName.DATE, Self_evaluation.FieldName.TIME,
