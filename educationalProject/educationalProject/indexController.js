@@ -448,10 +448,10 @@ $scope.send_support_text_change_to_server = function(){
 
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
     
@@ -698,6 +698,7 @@ $scope.still_not_complete = function(){
                  }
              }
          ).success(function (data) {
+
              console.log("success");
                  console.log(data);
                  $rootScope.all_curriculums =data;
@@ -705,13 +706,21 @@ $scope.still_not_complete = function(){
                    $alert({title:'ดำเนินการสำเร็จ', content:'สร้างหลักสูตรเรียบร้อยแล้ว',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
                    my_modal.$hide();
+                    $scope.please_wait = false;
                     $scope.new_curri = {};
 
          //เรียกฟังชั่นใน servce ให้อัพเดทค่า
 
 
-         });
+         })
+      .error(function(data, status, headers, config) {
+        
+  $scope.please_wait = false;
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
     
+
+  }); 
     // else{
     //      $scope.please_wait = false;
     //       $alert({title:'เกิดข้อผิดพลาด', content:'กรุณากรอกข้อมูลให้ครบถ้วน',alertType:'danger',
@@ -830,11 +839,10 @@ $scope.corresponding_indicators = [];
             
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
-
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+               
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
     }
@@ -939,11 +947,11 @@ $scope.corresponding_indicators = [];
            
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+               
                     
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
     }
@@ -1052,11 +1060,11 @@ $scope.corresponding_indicators = [];
          
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+              
                     
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
     }
@@ -1211,7 +1219,7 @@ $scope.indicator_choosen = {};
               $scope.init();
          })
          .error(function (data, status, headers, config) {
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
     }
@@ -1500,7 +1508,7 @@ for(index =0;index<$scope.corresponding_results.evaluation_detail.length;index++
         }).
         error(function (data, status, headers, config) {
               $scope.please_wait = false;
-               $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+               $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
 }
@@ -1795,7 +1803,7 @@ $scope.corresponding_indicators = [];
         }).
         error(function (data, status, headers, config) {
                       $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
     };
@@ -1932,12 +1940,11 @@ $scope.change_already = function(){
                $scope.close_modal(my_modal);
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+                
                     
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
-
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
+                        placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     
   }); 
     }
 });
@@ -2015,11 +2022,11 @@ $scope.init =function() {
         
     })
              .error(function(data, status, headers, config) {
-                  if(status==500){
+        
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
 
@@ -2372,11 +2379,11 @@ if ($rootScope.manage_indicators_and_sub_result.length == 0){
                 // $rootScope.manage_indicators_and_sub_save_indicator.save_content = angular.copy($rootScope.manage_indicators_indicator_choosen);
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+            
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
     }
@@ -2496,7 +2503,7 @@ console.log($rootScope.only_object_want_to_change);
         }).
         error(function (data, status, headers, config) {
                       $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
     }
@@ -2659,7 +2666,7 @@ $scope.my_new_evidence.teacher_id = $rootScope.current_user.user_id;
         }).
         error(function (data, status, headers, config) {
                       $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
     }
@@ -2826,7 +2833,7 @@ $scope.primary_choosen.teacher_id = $rootScope.current_user.user_id;
         }).
         error(function (data, status, headers, config) {
                       $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
     }
@@ -3109,11 +3116,11 @@ $scope.choose_not_complete =true;
              
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+               
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+   
 
   }); 
     }
@@ -3317,11 +3324,11 @@ $scope.start_ka = function(){
 
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+               
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+   
 
   }); 
     }
@@ -3476,11 +3483,11 @@ if($scope.go_request == true){
               
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+                
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+    
 
   }); 
     }
@@ -3793,11 +3800,11 @@ $scope.dont_show_me =function(my_obj){
 
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+               
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+
 
   }); 
     }
@@ -3820,6 +3827,24 @@ $scope.init =function() {
                     $scope.result = {};
                     $scope.suggestion = "";
 }
+
+  $scope.$on("modal.show", function (event, args) {
+
+
+      if($rootScope.no_open_result_survey == true){
+
+
+        $rootScope.no_open_result_survey == false;
+
+     args.hide()
+        }
+        else{
+            $scope.init();
+        }
+              
+    });
+
+
   
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -3834,14 +3859,38 @@ $scope.init =function() {
 
 app.controller('answer_survey_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
+
+
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
               $scope.curri_choosen = {}
                 $scope.indicator_choosen= {};
                     $scope.result = {};
                     $scope.suggestion = "";
+                    $scope.please_wait = false;
+    
 }
-  
+       $scope.$on("modal.hide", function (event, args) {
+          
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+
+
+      if($rootScope.no_open_answer_survey == true){
+
+
+        $rootScope.no_open_answer_survey == false;
+
+     args.hide()
+        }
+        else{
+            $scope.init();
+        }
+              
+    });
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
               $scope.curri_choosen = {}
@@ -3868,28 +3917,33 @@ $scope.init =function() {
         my_modal.$hide();
     }
   $scope.save_to_server = function(my_modal){
+     $scope.please_wait = true;
 
-        $rootScope.manage_survey_questionare_set.push({"suggestion":$scope.suggestion}) ;
+
+        $scope.to_sent = angular.copy( $rootScope.manage_survey_questionare_set);
+         $scope.to_sent.push({"suggestion":$scope.suggestion}) ;
         $http.put(
              '/api/questionareanswer',
-             JSON.stringify( $rootScope.manage_survey_questionare_set),
+             JSON.stringify( $scope.to_sent),
              {
                  headers: {
                      'Content-Type': 'application/json'
                  }
              }
          ).success(function (data) {
+             $scope.please_wait = false;
             $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
                
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+         $scope.please_wait = false;
+             
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
     }
@@ -4092,11 +4146,11 @@ console.log('manage_lab_fix_this_lab_init')
                
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+ 
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+  
 
   }); 
     }
@@ -4190,8 +4244,18 @@ $scope.right_target = function(targets){
                  }
              }
          ).success(function (data) {
+          
              $rootScope.manage_survey_questionare_set = data;
-         });
+         })        
+         .error(function(data, status, headers, config) {
+
+                  if(status==400){
+            $rootScope.no_open_answer_survey =true;
+     $alert({title:'เกิดข้อผิดพลาด', content:data.message,alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
 
 
 
@@ -4216,7 +4280,15 @@ $scope.right_target = function(targets){
              }
          ).success(function (data) {
             $rootScope.manage_survey_result = data;
-         });
+         })   .error(function(data, status, headers, config) {
+                  if(status==400){
+                    $rootScope.no_open_result_survey = true;
+
+     $alert({title:'เกิดข้อผิดพลาด', content:message.data,alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+     }
+
+  }); 
 
 
         $rootScope.manage_survey_questionare_of_result = this_survey;
@@ -4309,11 +4381,11 @@ $scope.right_target = function(targets){
                
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+     
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+    
 
   }); 
     }
@@ -4439,6 +4511,7 @@ return false;
 
         }).
         success(function (data, status, headers, config) {
+               $scope.please_wait = false;
         $rootScope.manage_album_still_same();
                 $rootScope.manage_album_my_world_wide_album =data;
                 $scope.close_modal(my_modal);
@@ -4449,7 +4522,8 @@ return false;
            
         }).
         error(function (data, status, headers, config) {
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                       $scope.please_wait = false;
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
     }
@@ -4611,11 +4685,11 @@ $scope.corresponding_indicators = [];
                
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+              
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+   
 
   }); 
     }
@@ -4786,11 +4860,11 @@ $scope.evidence_we_want.teacher_id = $rootScope.current_user.user_id;
               
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+           
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+    
 
   }); 
     }
@@ -5099,11 +5173,11 @@ $scope.corresponding_indicators = [];
              
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+                
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+
 
   }); 
     }
@@ -5268,7 +5342,7 @@ $scope.init =function() {
         }).
         error(function (data, status, headers, config) {
                       $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
     }
@@ -5397,12 +5471,13 @@ $rootScope.manage_research_fix_this_research.researcher = $rootScope.manage_lab_
 
                     $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                              placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-
+  $scope.please_wait = false;
                    
             }).
             error(function (data, status, headers, config) {
-                $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+                $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                              placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+                  $scope.please_wait = false;
             });
        
 
@@ -5543,11 +5618,11 @@ $scope.init =function() {
           
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+               
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
     }
@@ -5630,11 +5705,11 @@ $scope.init =function() {
           
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+               
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
     }
@@ -5765,11 +5840,11 @@ $scope.init =function() {
         
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+                
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
     }
@@ -5950,11 +6025,11 @@ $scope.delete_myself = false;
               
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+              
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
     }
@@ -6098,11 +6173,11 @@ $scope.title_choosen = {};
               
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+               
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
     }
@@ -6182,12 +6257,12 @@ $scope.save_to_server = function(my_modal){
             
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+            
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
    
- }
+ 
 });
 }
  
@@ -6260,12 +6335,12 @@ $scope.save_to_server = function(my_modal){
             
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+              
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
    
- }
+ 
 });
 }
 });
@@ -6488,7 +6563,7 @@ formData.append("file" , $scope.files[0]);
         }).
         error(function (data, status, headers, config) {
                       $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
     }
@@ -6684,11 +6759,10 @@ $scope.title_choosen = {};
               
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
-
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+              
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
     }
@@ -6826,11 +6900,10 @@ $scope.title_choosen = {};
               
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
-
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+               
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
     }
@@ -7011,11 +7084,11 @@ $rootScope.manage_research_still_same = function(){
               
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+                
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
     }
@@ -7102,11 +7175,11 @@ $scope.to_sent.aca_year = $rootScope.manage_committee_who_aca_year_now;
         
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+                
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
     }
@@ -7227,11 +7300,11 @@ $scope.corresponding_indicators = [];
               
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+          
 
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
     }
@@ -7348,15 +7421,15 @@ $scope.my_pictures.flow.files = [];
     });
 }
 
-$scope.modify_date = function(date){
-    console.log($scope.my_new_minute.date)
-    console.log()
-    if(parseInt($scope.my_new_minute.date.split("/")[2]) < 2500){
-        $scope.my_new_year = parseInt($scope.my_new_minute.date.split("/")[2])+543;
-    $scope.my_new_minute.date = $scope.my_new_minute.date.split("/")[0] +"/"+ $scope.my_new_minute.date.split("/")[1]+ "/"+$scope.my_new_year;
+// $scope.modify_date = function(date){
+//     console.log($scope.my_new_minute.date)
+//     console.log()
+//     if(parseInt($scope.my_new_minute.date.split("/")[2]) < 2500){
+//         $scope.my_new_year = parseInt($scope.my_new_minute.date.split("/")[2])+543;
+//     $scope.my_new_minute.date = $scope.my_new_minute.date.split("/")[0] +"/"+ $scope.my_new_minute.date.split("/")[1]+ "/"+$scope.my_new_year;
 
-    }
-    }
+//     }
+//     }
     $scope.$on("modal.hide", function (event, args) {
      $scope.init();
       
@@ -7521,7 +7594,7 @@ $scope.show_my_pictures=function(){
         }).
         error(function (data, status, headers, config) {
               $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
     }
@@ -7601,11 +7674,11 @@ app.controller('change_password_controller', function($scope, $http,$alert,$load
          
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+               
 
      $alert({title:'เกิดข้อผิดพลาด', content:'รหัสผ่านเก่าไม่ถูกต้อง',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
   }
@@ -7669,11 +7742,11 @@ $scope.error_msg = '';
          
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
+                
 
      $alert({title:'เกิดข้อผิดพลาด', content:'ชื่อผู้ใช้นี้มีอยู่แล้วในระบบ',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
   }
@@ -7874,6 +7947,7 @@ var index;
         $rootScope.manage_album_still_same();
                 $rootScope.manage_album_my_world_wide_album =data;
                 $scope.close_modal(my_modal);
+                     $scope.please_wait = false;
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
 
@@ -7882,7 +7956,7 @@ var index;
         }).
         error(function (data, status, headers, config) {
               $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
     }
@@ -8113,7 +8187,7 @@ $scope.show_my_pictures=function(){
         }).
         error(function (data, status, headers, config) {
               $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
     }
@@ -8308,11 +8382,10 @@ $rootScope.manage_minutes_still_same = function(){
                
          })
     .error(function(data, status, headers, config) {
-                  if(status==500){
-
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ',alertType:'danger',
+               
+     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+     
 
   }); 
     }

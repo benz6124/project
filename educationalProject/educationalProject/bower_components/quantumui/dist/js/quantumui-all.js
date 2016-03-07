@@ -3376,8 +3376,8 @@ angular.module('ngQuantum.datepicker', [
             defaultSelect: true, //to do
             allowBlank: false, //to do
             showYears: true,
-            minYear: 2500,
-            maxYear: 2580,
+            minYear: 1900,
+            maxYear: 2040,
             dayOfWeekStart: 1,
             disableWeekends: false,
             disableWeekdays: [],
@@ -4244,9 +4244,9 @@ angular.module('ngQuantum.datepicker', [
                       var my_month = scope.currentMonthTitle.split(" ")[0];
 
                       scope.currentYear = scope.currentDate.year();
-                        if(  scope.currentYear < 2500){
-                            scope.currentYear = scope.currentYear +543;
-                        }
+                        // if(  scope.currentYear < 2500){
+                        //     scope.currentYear = scope.currentYear +543;
+                        // }
                       scope.currentMonthTitle = my_month + " "+scope.currentYear;
                 
                       options.showYears && scrollYear();

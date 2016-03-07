@@ -1342,7 +1342,7 @@
                            
   <div class="input-group" style="margin-right:9px">
 
-  <input type="text" data-qo-format="DD/MM/YYYY" ng-model="my_new_minute.date" ng-change="modify_date()" data-qo-model-type="string"class="form-control" data-nq-datepicker="" placeholder="กรุณาเลือกวันที่ประชุม" data-qo-icon-id="#iconId" />
+  <input type="text" data-qo-format="DD/MM/YYYY" ng-model="my_new_minute.date" data-qo-model-type="string"class="form-control" data-nq-datepicker="" placeholder="กรุณาเลือกวันที่ประชุม" data-qo-icon-id="#iconId" />
 
 
       
@@ -3102,7 +3102,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="still_not_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
@@ -6583,7 +6583,7 @@ glyphicon glyphicon-bell"></i> </span>
                
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success "  ng-disabled="still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-success "  ng-disabled="still_not_complete() || please_wait" ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
