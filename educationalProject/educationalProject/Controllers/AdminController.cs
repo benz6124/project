@@ -55,7 +55,7 @@ namespace educationalProject.Controllers
                     return InternalServerError((Exception)sendresult);
             }
             else
-                return InternalServerError(new Exception(result.ToString()));
+                return BadRequest(result.ToString());
         }
     }
 }

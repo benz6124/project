@@ -13,7 +13,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Questionare_question_answer> result = new List<Questionare_question_answer>();
             d.iCommand.CommandText = string.Format("select * from {0} where {1} = {2}", FieldName.TABLE_NAME,
                 FieldName.QUESTIONARE_SET_ID, qid);
@@ -61,7 +61,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
 
             string insertintoquestionareresobj = string.Format("insert into {0} values ",Questionare_result_obj.FieldName.TABLE_NAME);
             

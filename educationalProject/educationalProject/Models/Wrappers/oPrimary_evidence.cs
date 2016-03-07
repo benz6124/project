@@ -13,7 +13,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oPrimary_evidence> result = new List<oPrimary_evidence>();
             d.iCommand.CommandText = string.Format("select * from {0}", FieldName.TABLE_NAME);
             try
@@ -59,7 +59,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oPrimary_evidence> result = new List<oPrimary_evidence>();
             d.iCommand.CommandText = string.Format("select * from {0} where {1}", FieldName.TABLE_NAME, wherecond);
             try
@@ -105,7 +105,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Primary_evidence_detail> result = new List<Primary_evidence_detail>();
             //Retrieve already define primary evidence
             d.iCommand.CommandText = 
@@ -205,7 +205,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             string insertintoprimaryevidencecmd = "";
             string insertintoprievistatuscmd = "";
             string updateprievistatuscmd = "";
@@ -277,8 +277,9 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
-            string insertintoprimaryevidencecmd = "";
+                return WebApiApplication.CONNECTDBERRSTRING;
+            string insertintoprimaryevidencecmd = string.Format("insert into {0} values ",FieldName.TABLE_NAME);
+            int inslength = insertintoprimaryevidencecmd.Length;
             string deletefromprievi_and_condition = "";
             string deletefromprimaryevidencecmd = "";
             string deletewhereclause = "";
@@ -305,8 +306,12 @@ namespace educationalProject.Models.Wrappers
                 {
                     if (item.primary_evidence_num == 0)
                     {
-                        insertintoprimaryevidencecmd += string.Format("insert into {0} values ({1},{2},'{3}','{4}') ",
-                            FieldName.TABLE_NAME, item.aca_year, item.indicator_num, 0, item.evidence_name);
+                        if(insertintoprimaryevidencecmd.Length <= inslength)
+                        insertintoprimaryevidencecmd += string.Format("({0},{1},'{2}','{3}') ",
+                            item.aca_year, item.indicator_num, 0, item.evidence_name);
+                        else
+                            insertintoprimaryevidencecmd += string.Format(",({0},{1},'{2}','{3}') ",
+                            item.aca_year, item.indicator_num, 0, item.evidence_name);
                     }
                     else
                     {
@@ -388,8 +393,9 @@ namespace educationalProject.Models.Wrappers
                                       Primary_evidence_status.FieldName.TEACHER_ID, Primary_evidence_status.FieldName.STATUS);
                 //droptemptable = string.Format("DROP TABLE {0} DROP TABLE {1} ", temp2tablename, temp1tablename);
             }
-            
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} {5} {6} {7} {8} END", createtabletemp1, insertintotemp1, createtabletemp2,
+            if (insertintoprimaryevidencecmd.Length <= inslength)
+                insertintoprimaryevidencecmd = "";
+                d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} {5} {6} {7} {8} END", createtabletemp1, insertintotemp1, createtabletemp2,
                 insertintotemp2, updatetemp2, insertintoprimaryevidencestatusfromdeleted,
                 updateevidence, deletefromprimaryevidencecmd, insertintoprimaryevidencecmd);
             try
@@ -397,10 +403,13 @@ namespace educationalProject.Models.Wrappers
                 await d.iCommand.ExecuteNonQueryAsync();
                 return null;
             }
-            catch (Exception ex)
+            catch (System.Data.SqlClient.SqlException ex)
             {
                 //Handle error from sql execution
-                return ex.Message;
+                if (ex.Number == 8152)
+                    return "ชื่อของหลักฐานพื้นฐานบางส่วนที่ต้องการเพิ่มมีขนาดที่ยาวเกินกำหนด";
+                else
+                    return ex.Message;
             }
             finally
             {
@@ -413,7 +422,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Primary_evidence_name_id_only> result = new List<Primary_evidence_name_id_only>();
             d.iCommand.CommandText = string.Format("select p1.{0},{1}.{2} from " +
                    "( select * from {3} where {4} = '{5}' and {6} = {7} and ({8} = '0' or {8} = '4') " +
@@ -467,7 +476,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             Evidence_with_teacher_curri_indicator_detail result = new Evidence_with_teacher_curri_indicator_detail();
             d.iCommand.CommandText = string.Format("select {0},{1},{2}.{3},{2}.{4},{5},{6},{7},{8} " +
             "from {9},{2},{10},{11},{12} " +
@@ -533,7 +542,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Personnel_with_pending_primary_evidence> result = new List<Personnel_with_pending_primary_evidence>();
             d.iCommand.CommandText = string.Format("select {0},{1}.{2},{3}.{4},{1}.{5},{6},{7},{8},{9} " +
             "from {3}, {1}, {10}, {11} " +

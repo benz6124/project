@@ -13,7 +13,7 @@ namespace educationalProject.Models.Wrappers
             string[] direction = { "ASC", "DESC" };
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oIndicator> result = new List<oIndicator>();
             d.iCommand.CommandText = string.Format("select * from {0} where {1} order by {2} {3}",
                 FieldName.TABLE_NAME, wherecond, orderbycol, ((dir != null) ? direction[dir.Value] : ""));
@@ -59,7 +59,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<int> result = new List<int>();
             d.iCommand.CommandText = string.Format("select distinct aca_year from {0}", FieldName.TABLE_NAME);
             try
@@ -98,7 +98,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
 
             //Delete from indicator will result in cascade delete in sub_indicator table
             d.iCommand.CommandText = string.Format("delete from {0} where {1}", FieldName.TABLE_NAME, wherecond);

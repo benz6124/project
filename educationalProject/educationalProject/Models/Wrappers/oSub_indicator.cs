@@ -12,7 +12,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oSub_indicator> result = new List<oSub_indicator>();
             d.iCommand.CommandText = string.Format("select * from {0}",FieldName.TABLE_NAME);
             try
@@ -57,7 +57,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oSub_indicator> result = new List<oSub_indicator>();
             d.iCommand.CommandText = string.Format("select * from {0} where {1}",FieldName.TABLE_NAME,wherecond);
             try
@@ -101,7 +101,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oSub_indicator> result = new List<oSub_indicator>();
             d.iCommand.CommandText = string.Format("select * from {0} where {1} = (select max(j.{1}) from {0} as j where j.{1} <= {2}) and {3} = {4}", 
                 FieldName.TABLE_NAME, FieldName.ACA_YEAR,inddata.aca_year,FieldName.INDICATOR_NUM,inddata.indicator_num);
@@ -146,7 +146,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
 
             d.iCommand.CommandText = string.Format("delete from {0} where {1}", FieldName.TABLE_NAME, wherecond);
             try

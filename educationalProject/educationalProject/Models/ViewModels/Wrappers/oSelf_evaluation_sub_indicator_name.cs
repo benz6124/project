@@ -14,7 +14,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oSelf_evaluation_sub_indicator_name> result = new List<oSelf_evaluation_sub_indicator_name>();
 
             string temp90tablename = "#temp90";

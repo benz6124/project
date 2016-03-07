@@ -94,7 +94,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Gallery_detail> result = new List<Gallery_detail>();
 
             d.iCommand.CommandText = getSelectByCurriculumAcademicCommand(false);
@@ -160,7 +160,7 @@ namespace educationalProject.Models.Wrappers
             DBConnector d = new DBConnector();
             List<string> file_to_delete = new List<string>();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             string deleteprecmd = string.Format("DELETE FROM {0} WHERE {1} = '{2}' and {3} = {4} ",
                 FieldName.TABLE_NAME, FieldName.CURRI_ID, list.First().curri_id, FieldName.ACA_YEAR, list.First().aca_year);
             string excludecond = "1=1 ";
@@ -231,7 +231,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Gallery_detail> result = new List<Gallery_detail>();
             string temp1tablename = "#temp1";
             string temp2tablename = "#temp2";
@@ -346,7 +346,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Gallery_detail> result = new List<Gallery_detail>();
             Gallery_detail dummyfordeletepictures = new Gallery_detail();
             string temp1tablename = "#temp1";

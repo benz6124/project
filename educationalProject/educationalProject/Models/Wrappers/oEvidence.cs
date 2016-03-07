@@ -13,7 +13,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oEvidence> result = new List<oEvidence>();
             d.iCommand.CommandText =  string.Format("select * from {0}", FieldName.TABLE_NAME);
             try
@@ -66,7 +66,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oEvidence> result = new List<oEvidence>();
             d.iCommand.CommandText = string.Format("select * from {0} where {1}", FieldName.TABLE_NAME, wherecond);
             try
@@ -118,7 +118,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oEvidence> result = new List<oEvidence>();
             d.iCommand.CommandText = string.Format("select * from {0} " + 
                 "where {1} = {2} and {3} = '{4}' and {5} = {6} order by {7} ", 
@@ -173,7 +173,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Evidence_with_t_name> result = new List<Evidence_with_t_name>();
             d.iCommand.CommandText = string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
                 "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join ({7}) as {13} on e.{8} = {13}.{9} order by e.{12}",
@@ -232,7 +232,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Evidence_with_t_name> result = new List<Evidence_with_t_name>();
             d.iCommand.CommandText = string.Format("select * from {0} where {1} = '{2}' and {3} = {4}",
                 FieldName.TABLE_NAME, FieldName.CURRI_ID,
@@ -286,7 +286,7 @@ namespace educationalProject.Models.Wrappers
             DBConnector d = new DBConnector();
             List<Evidence_with_t_name> result = new List<Evidence_with_t_name>();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
 
             d.iCommand.CommandText =
                 //Insert part    
@@ -355,7 +355,7 @@ namespace educationalProject.Models.Wrappers
             DBConnector d = new DBConnector();
             List<Evidence_with_t_name> result = new List<Evidence_with_t_name>();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
 
             d.iCommand.CommandText = string.Format("if not exists (select * from {0} where {1} = {2} and {3} = {4} and {5} = '{6}' and {7} = {8} ) ",
                 FieldName.TABLE_NAME, FieldName.PRIMARY_EVIDENCE_NUM, primary_evidence_num, FieldName.ACA_YEAR,aca_year, 
@@ -433,7 +433,7 @@ string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
 
             string updatecmd = "";
             string delete_and_condition = "";
@@ -518,7 +518,7 @@ string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
             DBConnector d = new DBConnector();
             List<Evidence_with_t_name> result = new List<Evidence_with_t_name>();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
 
             string updatecmd = "";
             string temp1tablename = "#temp1";

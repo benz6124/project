@@ -25,7 +25,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oResearch> result = new List<oResearch>();
             d.iCommand.CommandText = string.Format("select * from {0}", FieldName.TABLE_NAME);
             try
@@ -69,7 +69,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oResearch> result = new List<oResearch>();
             d.iCommand.CommandText = string.Format("select * from {0} where {1}", FieldName.TABLE_NAME, wherecond);
             try
@@ -113,7 +113,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Research_detail> result = new List<Research_detail>();
             curri_id = curri_id_data;
             d.iCommand.CommandText = getSelectByCurriculumCommand();
@@ -170,7 +170,7 @@ namespace educationalProject.Models.Wrappers
             DBConnector d = new DBConnector();
             List<string> file_to_delete = new List<string>();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             string deleteprecmd = string.Format("DELETE FROM {0} OUTPUT DELETED.{3} WHERE {1} = '{2}'",
                 FieldName.TABLE_NAME, FieldName.CURRI_ID, list.First().curri_id, FieldName.FILE_NAME);
             string excludecond = "1=1 ";
@@ -219,7 +219,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Research_detail> result = new List<Research_detail>();
             string temp1tablename = "#temp1";
             string temp2tablename = "#temp2";
@@ -308,7 +308,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Research_detail> result = new List<Research_detail>();
             string ifexistscond = string.Format("if exists (select * from {0} where {1} = {2}) ", FieldName.TABLE_NAME,
     FieldName.RESEARCH_ID, rdata.research_id);

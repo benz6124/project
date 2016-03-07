@@ -12,7 +12,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
 
             string insertcmd = string.Format("insert into {0} values ",FieldName.TABLE_NAME);
             //Loop each item to gather data to construct sql cmd

@@ -31,7 +31,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Teacher_with_t_name> result = new List<Teacher_with_t_name>();
             d.iCommand.CommandText = string.Format("select * from ({0}) as {6} where exists(select * from {1} where {6}.{2} = {1}.{3} and {4}='{5}')", 
                 getSelectTeacherByJoinCommand(), User_curriculum.FieldName.TABLE_NAME,FieldName.TEACHER_ID,User_curriculum.FieldName.USER_ID,User_curriculum.FieldName.CURRI_ID,curri_id,
@@ -77,7 +77,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<string> result = new List<string>();
 
             string temp5tablename = "#temp5";

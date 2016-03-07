@@ -12,7 +12,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oCu_curriculum> result = new List<oCu_curriculum>();
             d.iCommand.CommandText = string.Format("select * from {0}", FieldName.TABLE_NAME);
             try
@@ -63,7 +63,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             d.iCommand.CommandText = string.Format("select * from {0} where {1} = {2}",FieldName.TABLE_NAME,FieldName.CURRI_ID,ParameterName.CURRI_ID);
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURRI_ID, curri_id));
             try
@@ -86,13 +86,14 @@ namespace educationalProject.Models.Wrappers
                         period = Convert.ToChar(item.ItemArray[data.Columns[FieldName.PERIOD].Ordinal]);
                         year = item.ItemArray[data.Columns[FieldName.YEAR].Ordinal].ToString();
                     }
-                    res.Close();
                     data.Dispose();
                 }
                 else
                 {
-                    return "Error nor curriculum found.";
+                    res.Close();
+                    return "ไม่พบข้อมูลหลักสูตรที่ท่านเลือก";
                 }
+                res.Close();
             }
             catch (Exception ex)
             {
@@ -111,7 +112,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             
             d.iCommand.CommandText = string.Format("insert into {0} values ((select MAX({1})+1 FROM {0}),{2},{3},{4},{5},{6},{7},{8},{9},{10})",
                 FieldName.TABLE_NAME, FieldName.CURRI_ID, ParameterName.YEAR, ParameterName.CURR_TNAME, 
@@ -133,9 +134,11 @@ namespace educationalProject.Models.Wrappers
                 await d.iCommand.ExecuteNonQueryAsync();
                 return null;
             }
-            catch (Exception ex)
+            catch (System.Data.SqlClient.SqlException ex)
             {
                 //Handle error from sql execution
+                if (ex.Number == 8152)
+                    return "มีรายละเอียดของข้อมูลหลักสูตรบางส่วนที่ต้องการบันทึกมีขนาดที่ยาวเกินกำหนด";
                 return ex.Message;
             }
             finally

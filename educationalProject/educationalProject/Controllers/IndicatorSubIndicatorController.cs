@@ -20,6 +20,8 @@ namespace educationalProject.Controllers
         [ActionName("saveindicator")]
         public async Task<IHttpActionResult> PutForUpdateIndicatorSubIndicator(List<oIndicator_sub_indicator_list> list)
         {
+            if (list.Count == 0)
+                return BadRequest("กรุณาระบุปีการศึกษาที่ตัวบ่งชี้ที่สร้างจะเริ่มมีผลให้เป็นค่าที่เหมาะสม");
             object result;
             if (list.Count == 1 && list.First().indicator_name_t == null)
             {
@@ -31,7 +33,7 @@ namespace educationalProject.Controllers
             if (result == null)
                 return Ok();
             else
-                return InternalServerError(new Exception(result.ToString()));
+                return BadRequest(result.ToString());
         }
 
         [ActionName("savesubindicator")]

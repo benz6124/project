@@ -12,7 +12,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oAun_book> result = new List<oAun_book>();
             d.iCommand.CommandText = string.Format("select * from {0}", FieldName.TABLE_NAME);
             try
@@ -57,7 +57,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             d.iCommand.CommandText = string.Format("select {0} from {1} where {2} = {3} and {4} = {5}", 
                                      FieldName.FILE_NAME,FieldName.TABLE_NAME,
                                      FieldName.CURRI_ID,ParameterName.CURRI_ID,
@@ -93,7 +93,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
 
             d.iCommand.CommandText = string.Format("IF NOT EXISTS (select * from {0} where {1} = {2} and {3} = {4}) " +
                                        "BEGIN " +

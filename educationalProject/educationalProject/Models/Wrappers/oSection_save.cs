@@ -13,7 +13,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             d.iCommand.CommandText = string.Format("select * from {0} where {1} = {2} and {3} = {4} and {5} = {6} and {7} = {8}", FieldName.TABLE_NAME, 
                FieldName.INDICATOR_NUM,ParameterName.INDICATOR_NUM,FieldName.SUB_INDICATOR_NUM,ParameterName.SUB_INDICATOR_NUM,
                FieldName.ACA_YEAR,ParameterName.ACA_YEAR,FieldName.CURRI_ID,ParameterName.CURRI_ID);
@@ -69,7 +69,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             d.iCommand.CommandText = string.Format("if not exists(select * from {0} where {9} = {2} and {10} = {3} and {11} = {1} and {12} = {8}) " +
                 "insert into {0} values ({1},{2},{3},{4},{5},{6},{7},{8}) " +
                 "else " +

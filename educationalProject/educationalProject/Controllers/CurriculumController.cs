@@ -30,13 +30,17 @@ namespace educationalProject.Controllers
 
         public async Task<IHttpActionResult> PostNewCurriculum(oCu_curriculum data)
         {
+            if (data == null)
+                return BadRequest("กรุณากรอกข้อมูลหลักสูตรให้ถูกต้องและมีค่าที่เหมาะสม");
+            else if(!(data.period > 0 && data.period < 10))
+                return BadRequest("กรุณากรอกข้อมูลระยะเวลาการศึกษาตามหลักสูตรให้ถูกต้อง");
             data.year = (DateTime.Now.Year+543).ToString();
             data.period += (char)0x30;
             object result =  await data.Insert();
             if (result == null)
                 return Ok(await datacontext.Select());
             else
-                return InternalServerError(new Exception(result.ToString()));
+                return BadRequest(result.ToString());
         }
 
     }

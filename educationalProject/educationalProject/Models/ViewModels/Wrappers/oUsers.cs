@@ -202,7 +202,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             User_information_with_privilege_information result = new User_information_with_privilege_information();
 
             username = preferredusername;
@@ -440,7 +440,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
 
             d.iCommand.CommandText = string.Format("if not exists(select * from {0} where {1} = '{2}') " +
                 "update {0} set {1} = '{2}' where {3} = {4}",
@@ -470,7 +470,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
 
             d.iCommand.CommandText = string.Format("select {0} from {1} where {2} = {3}",
                 Teacher.FieldName.PASSWORD,User_list.FieldName.TABLE_NAME,User_list.FieldName.USER_ID,user_id);
@@ -516,7 +516,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             User_information_with_privilege_information result = new User_information_with_privilege_information();
 
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
 
             d.iCommand.CommandText = string.Format("if exists (select * from {0} where {1} = {2}) " +
             "{3} " +
@@ -743,7 +743,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             User_information_with_privilege_information result = new User_information_with_privilege_information();
 
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
 
             string temp80tablename = "#temp80";
             string createtabletemp80 = string.Format("create table {0}(" +

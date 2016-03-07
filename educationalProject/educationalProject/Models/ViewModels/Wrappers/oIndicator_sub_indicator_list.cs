@@ -12,7 +12,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oIndicator_sub_indicator_list> result = new List<oIndicator_sub_indicator_list>();
             string temp1tablename = "#temp1";
             string createtabletemp1 = string.Format("create table {0} (" +
@@ -101,7 +101,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             string delcmd = string.Format("delete from {0} where {1} = {2}", FieldName.TABLE_NAME, FieldName.ACA_YEAR, list.First().aca_year);
             string insertintoindicatorcmd = string.Format("insert into {0} values ", FieldName.TABLE_NAME);
             string insertintosubindicatorcmd = "";
@@ -127,10 +127,13 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 await d.iCommand.ExecuteNonQueryAsync();
                 return null;
             }
-            catch (Exception ex)
+            catch (System.Data.SqlClient.SqlException ex)
             {
                 //Handle error from sql execution
-                return ex.Message;
+                if (ex.Number == 8152)
+                    return "มีรายละเอียดของตัวบ่งชี้บางส่วนที่ต้องการบันทึกมีขนาดที่ยาวเกินกำหนด";
+                else
+                    return ex.Message;
             }
             finally
             {
@@ -143,7 +146,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             string delcmd = string.Format("delete from {0} where {1} = {2} and {3} = {4}", Sub_indicator.FieldName.TABLE_NAME, FieldName.ACA_YEAR, list.First().aca_year,Sub_indicator.FieldName.INDICATOR_NUM,list.First().indicator_num);
             string insertintosubindicatorcmd = string.Format("insert into {0} values ", Sub_indicator.FieldName.TABLE_NAME);
 

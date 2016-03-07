@@ -11,6 +11,7 @@ namespace educationalProject
         //This constant will affacted in file upload/delete feature
         //public static readonly string SERVERPATH = System.Web.HttpContext.Current.Server.MapPath("~/");
         public static readonly string SERVERPATH = "D:/";
+        public static readonly string CONNECTDBERRSTRING = "ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้";
         protected void Application_Start()
         {
             //AreaRegistration.RegisterAllAreas();

@@ -27,7 +27,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oQuestionare_set> result = new List<oQuestionare_set>();
             d.iCommand.CommandText = string.Format("select * from {0}", FieldName.TABLE_NAME);
             try
@@ -74,7 +74,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Questionare_set_detail> result = new List<Questionare_set_detail>();
 
             curri_id = curriacadata.curri_id;
@@ -143,7 +143,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             Questionare_set_sub_result result = new Questionare_set_sub_result();
             result.main_result_list = new List<Questionare_set_main_result>();
             string temp1tablename = "#temp1";
@@ -259,7 +259,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             string deleteprecmd = string.Format("DELETE FROM {0} WHERE {1} = '{2}' and {3} = {4}",
                 FieldName.TABLE_NAME,FieldName.CURRI_ID,list.First().curri_id,FieldName.ACA_YEAR, list.First().aca_year);
             string excludecond = "1=1 ";
@@ -290,7 +290,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Questionare_set_detail> result = new List<Questionare_set_detail>();
             string temp1tablename = "#temp1";
             string temp2tablename = "#temp2";

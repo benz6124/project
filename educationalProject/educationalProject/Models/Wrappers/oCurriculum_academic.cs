@@ -12,7 +12,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oCurriculum_academic> result = new List<oCurriculum_academic>();
             d.iCommand.CommandText = string.Format("select * from {0}",FieldName.TABLE_NAME);
             try
@@ -54,7 +54,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oCurriculum_academic> result = new List<oCurriculum_academic>();
             d.iCommand.CommandText = string.Format("select MAX({1})+1 from {0}", FieldName.TABLE_NAME,FieldName.ACA_YEAR);
             try
@@ -86,7 +86,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oCurriculum_academic> result = new List<oCurriculum_academic>();
             d.iCommand.CommandText = string.Format("select * from {0} where {1} = {2}", FieldName.TABLE_NAME,FieldName.CURRI_ID,ParameterName.CURRI_ID);
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURRI_ID, curri_id));
@@ -131,7 +131,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
 
             d.iCommand.CommandText = string.Format("insert into {0} values ({1},{2})",
                 FieldName.TABLE_NAME, ParameterName.CURRI_ID, ParameterName.ACA_YEAR);
@@ -161,7 +161,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<int> result = new List<int>();
             d.iCommand.CommandText = string.Format("select distinct {1} from {0}", FieldName.TABLE_NAME,FieldName.ACA_YEAR);
             try

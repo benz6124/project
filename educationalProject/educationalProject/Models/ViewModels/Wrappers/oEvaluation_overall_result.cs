@@ -14,7 +14,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             //System.Globalization.CultureInfo en = new System.Globalization.CultureInfo("en-US");
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Evaluation_overall_result> result = new List<Evaluation_overall_result>();
             string temp1tablename = "#temp1";
             string createtabletemp1 = string.Format("create table {0}(" +

@@ -13,7 +13,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oUser_type> result = new List<oUser_type>();
             if(mode == 0)
                 d.iCommand.CommandText = string.Format("select * from {0} where {1} != 'ผู้ดูแลระบบ'", FieldName.TABLE_NAME,FieldName.USER_TYPE);
@@ -58,7 +58,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oUser_type> result = new List<oUser_type>();
             d.iCommand.CommandText = string.Format("select * from {0} where {1}", FieldName.TABLE_NAME, wherecond);
             try

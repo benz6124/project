@@ -27,7 +27,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Personnel_with_t_name> result = new List<Personnel_with_t_name>();
 
             if(selectmode == 0)
@@ -114,7 +114,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Personnel_educational> result = new List<Personnel_educational>();
 
             string selpersonnel1 = string.Format("select {0}.*,{1},{2}.{3},{4},{5},{6},{7} " +
@@ -266,7 +266,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<User_curriculum_with_brief_detail> result = new List<User_curriculum_with_brief_detail>();
 
             d.iCommand.CommandText = GetSelectWithCurriculumCommand(curri_id);

@@ -13,7 +13,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Committee_with_detail> result = new List<Committee_with_detail>();
 
             d.iCommand.CommandText = string.Format("select {0}.*,{1},{2},{3},{12} from {0},({4}) as {13} where {5} = '{6}' and {7} = {8} and {0}.{9} = {13}.{10} order by {11}", 
@@ -66,7 +66,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Committee_with_detail> result = new List<Committee_with_detail>();
 
             string temp5tablename = "#temp5";
@@ -164,7 +164,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Committee_with_detail> result = new List<Committee_with_detail>();
 
             string insertcmd = "";
@@ -228,7 +228,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             string deletecmd = string.Format("delete from {0} where {1} = '{2}' and {3} = {4} ",
                 FieldName.TABLE_NAME, FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year);
             string excludecond = "1=1 ";

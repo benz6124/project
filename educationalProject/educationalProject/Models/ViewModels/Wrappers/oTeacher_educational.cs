@@ -14,7 +14,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             int president = -1;
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<oTeacher_educational> result = new List<oTeacher_educational>();
             result.Add(new oTeacher_educational());
 

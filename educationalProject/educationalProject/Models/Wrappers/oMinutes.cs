@@ -97,7 +97,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Minutes_detail> result = new List<Minutes_detail>();
 
             d.iCommand.CommandText = getSelectByCurriculumAcademicCommand(false);
@@ -181,7 +181,7 @@ namespace educationalProject.Models.Wrappers
             DBConnector d = new DBConnector();
             List<string> file_to_delete = new List<string>();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             string deleteprecmd = string.Format("DELETE FROM {0} OUTPUT DELETED.{5} WHERE {1} = '{2}' and {3} = {4} ",
                 FieldName.TABLE_NAME, FieldName.CURRI_ID, list.First().curri_id, FieldName.ACA_YEAR, list.First().aca_year, FieldName.FILE_NAME);
             string excludecond = "1=1 ";
@@ -256,7 +256,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Minutes_detail> result = new List<Minutes_detail>();
             string temp1tablename = "#temp1";
             string temp2tablename = "#temp2";
@@ -404,7 +404,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Minutes_detail> result = new List<Minutes_detail>();
             Minutes_detail dummyfordeleteminutes = new Minutes_detail();
             string ifexistscond = string.Format("if exists (select * from {0} where {1} = {2}) ", FieldName.TABLE_NAME,

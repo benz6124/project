@@ -99,7 +99,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Admin_with_creator> result = new List<Admin_with_creator>();
 
             d.iCommand.CommandText = getselectcmd();
@@ -150,7 +150,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Admin_with_creator> result = new List<Admin_with_creator>();
 
             string temp6tablename = "#temp6";
@@ -214,14 +214,18 @@ namespace educationalProject.Models.Wrappers
                 }
                 else
                 {
-                    return "มีชื่อผู้ใช้งานนี้แล้วในระบบ";
+                    res.Close();
+                    return "อีเมล์ดังกล่าวมีอยู่แล้วในระบบ";
                 }
                 res.Close();
             }
-            catch (Exception ex)
+            catch (System.Data.SqlClient.SqlException ex)
             {
                 //Handle error from sql execution
-                return ex.Message;
+                if (ex.Number == 8152)
+                    return "มีรายละเอียดของผู้ควบคุมระบบคนใหม่บางส่วนที่ต้องการเพิ่มมีขนาดที่ยาวเกินกำหนด";
+                else
+                    return ex.Message;
             }
             finally
             {

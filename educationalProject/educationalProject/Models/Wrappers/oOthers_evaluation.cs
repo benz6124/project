@@ -13,7 +13,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             Others_evaluation_s_indic_name_list_with_file_name result = new Others_evaluation_s_indic_name_list_with_file_name();
 
             string temp5tablename = "#temp5";
@@ -189,7 +189,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             //Others_evaluation_s_indic_name_list_with_file_name result = new Others_evaluation_s_indic_name_list_with_file_name();
 
             string temp5tablename = "#temp5";

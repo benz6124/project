@@ -13,7 +13,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<User_curriculum_with_brief_detail> result = new List<User_curriculum_with_brief_detail>();
 
             string insertifnotexistscmd = "";
@@ -88,7 +88,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
 
 
             string deletecmd = string.Format("delete from {0} where {1} = '{2}' ", FieldName.TABLE_NAME,

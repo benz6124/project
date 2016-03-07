@@ -14,7 +14,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             Extra_privilege_individual_list_with_privilege_choices result = new Extra_privilege_individual_list_with_privilege_choices();
 
             string temp5tablename = "#temp5";
@@ -211,7 +211,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
 
             string InsertOrUpdateCommand = "";
             foreach (Extra_privilege_with_brief_detail e in edata.list)

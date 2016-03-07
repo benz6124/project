@@ -17,7 +17,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Educational_teacher_staff> result = new List<Educational_teacher_staff>();
             string insertcmd = string.Format("if not exists(select * from {7} where {8} = {1} and {9} = 'นักศึกษา') BEGIN " +
                 "insert into {0} values ({1},{2},{3},{4},{5},{6}) ",
@@ -78,7 +78,7 @@ namespace educationalProject.Models.Wrappers
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
-                return "Cannot connect to database.";
+                return WebApiApplication.CONNECTDBERRSTRING;
             List<Educational_teacher_staff> result = new List<Educational_teacher_staff>();
             string updatecmd = string.Format("update {0} set {1} = {2},{3} = {4},{5} = {6},{7} = {8},{9} = {10} where {11} = {12} ",
                 FieldName.TABLE_NAME, FieldName.DEGREE, ParameterName.DEGREE, FieldName.PRE_MAJOR, ParameterName.PRE_MAJOR, FieldName.MAJOR, ParameterName.MAJOR, FieldName.GRAD_YEAR, ParameterName.GRAD_YEAR, FieldName.COLLEGE, ParameterName.COLLEGE, FieldName.EDUCATION_ID, ParameterName.EDUCATION_ID);
