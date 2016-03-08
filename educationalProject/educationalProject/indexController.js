@@ -6468,13 +6468,13 @@ $scope.same_interest = function(){
         $scope.$apply(function () {            
            var extension = args.file.name.split('.');
 
- if(args.file.size > 25000000){
+ if(args.file.size > 2000000){
                    angular.forEach(
     angular.element("input[type='file']"),
     function(inputElem) {
       angular.element(inputElem).val(null);
     });
-                $alert({title:'เกิดข้อผิดพลาด', content:'ไฟล์ที่เลือกมีขนาดมากกว่า 25 MB',alertType:'warning',
+                $alert({title:'เกิดข้อผิดพลาด', content:'ไฟล์ที่เลือกมีขนาดมากกว่า 2 MB',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
             }
             else        if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
