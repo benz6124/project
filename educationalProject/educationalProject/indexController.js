@@ -7586,6 +7586,13 @@ $scope.show_my_pictures=function(){
         success(function (data, status, headers, config) {
         $rootScope.manage_minutes_still_same();
                 $rootScope.manage_minutes_my_world_wide_minutes =data;
+
+                      $rootScope.manage_minutes_my_world_wide_minutes_fix_year = angular.copy( $rootScope.manage_minutes_my_world_wide_minutes );
+         var index;
+         for(index=0;index<$rootScope.manage_minutes_my_world_wide_minutes_fix_year.length;index++){
+          $rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date = $rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date.split("/")[0]  + "/" + $rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date.split("/")[1]+ "/" +( parseInt($rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date.split("/")[2])+543);
+         }
+
                 $scope.close_modal(my_modal);
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
@@ -8179,6 +8186,11 @@ $scope.show_my_pictures=function(){
         success(function (data, status, headers, config) {
         $rootScope.manage_minutes_still_same();
                 $rootScope.manage_minutes_my_world_wide_minutes =data;
+                      $rootScope.manage_minutes_my_world_wide_minutes_fix_year = angular.copy( $rootScope.manage_minutes_my_world_wide_minutes );
+         var index;
+         for(index=0;index<$rootScope.manage_minutes_my_world_wide_minutes_fix_year.length;index++){
+          $rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date = $rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date.split("/")[0]  + "/" + $rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date.split("/")[1]+ "/" +( parseInt($rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date.split("/")[2])+543);
+         }
                 $scope.close_modal(my_modal);
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
@@ -8255,7 +8267,7 @@ $rootScope.manage_minutes_still_same = function(){
 
     }
 
-    $scope.go_to_fix_minute = function(this_minute){
+    $scope.go_to_fix_minute = function(this_minute_index){
 
                $http.post(
              '/api/teacher/getname',
@@ -8270,7 +8282,7 @@ $rootScope.manage_minutes_still_same = function(){
               
         $rootScope.manage_minutes_curri_id = $scope.curri_choosen.curri_id;
         $rootScope.manage_minutes_aca_year = $scope.year_choosen.aca_year;
-        $rootScope.manage_minutes_fix_this_minute = angular.copy(this_minute);
+        $rootScope.manage_minutes_fix_this_minute = angular.copy($rootScope.manage_minutes_my_world_wide_minutes[this_minute_index]);
                 var index;
         var inside_index;
         $rootScope.manage_minutes_fix_minute_select_attendee = [];
@@ -8314,6 +8326,7 @@ $rootScope.manage_minutes_still_same = function(){
     $scope.remove_minute = function(index_to_remove){
         $scope.nothing_change = false;
         $rootScope.manage_minutes_my_world_wide_minutes.splice(index_to_remove, 1);   
+         $rootScope.manage_minutes_my_world_wide_minutes_fix_year.splice(index_to_remove, 1);   
     }
 
 
@@ -8336,7 +8349,13 @@ $rootScope.manage_minutes_still_same = function(){
             console.log($rootScope.manage_minutes_my_world_wide_minutes);
              $scope.nothing_change = true;
                $rootScope.manage_minutes_my_world_wide_minutes = data;
-         
+         $rootScope.manage_minutes_my_world_wide_minutes_fix_year = angular.copy( $rootScope.manage_minutes_my_world_wide_minutes );
+         var index;
+         for(index=0;index<$rootScope.manage_minutes_my_world_wide_minutes_fix_year.length;index++){
+            console.log("changeee")
+          $rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date = $rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date.split("/")[0]  + "/" + $rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date.split("/")[1]+ "/" +( parseInt($rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date.split("/")[2])+543);
+         }
+
              $scope.choose_not_complete = false;
              
             
@@ -8356,21 +8375,21 @@ $rootScope.manage_minutes_still_same = function(){
     $scope.save_to_server = function(my_modal){
 
 
-        if($rootScope.manage_minutes_my_world_wide_minutes.length == 0){
+        if($rootScope.manage_minutes_my_world_wide_minutes_fix_year.length == 0){
        
             $scope.to_sent  = {};
             $scope.to_sent.curri_id  = $scope.curri_choosen.curri_id;
             $scope.to_sent.aca_year = $scope.year_choosen.aca_year;
    
-            $rootScope.manage_minutes_my_world_wide_minutes.push($scope.to_sent);
+            $rootScope.manage_minutes_my_world_wide_minutes_fix_year.push($scope.to_sent);
 
         }
 
         console.log("save_to_server");
-        console.log($rootScope.manage_minutes_my_world_wide_minutes);
+        console.log($rootScope.manage_minutes_my_world_wide_minutes_fix_year);
         $http.put(
              '/api/minutes/delete',
-             JSON.stringify($rootScope.manage_minutes_my_world_wide_minutes),
+             JSON.stringify($rootScope.manage_minutes_my_world_wide_minutes_fix_year),
              {
                  headers: {
                      'Content-Type': 'application/json'
