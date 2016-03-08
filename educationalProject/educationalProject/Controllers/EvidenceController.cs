@@ -80,8 +80,11 @@ namespace educationalProject.Controllers
                 object resultfromdb = await datacontext.InsertNewEvidenceWithSelect();
                 if (resultfromdb.GetType().ToString() != "System.String")
                     return Ok(resultfromdb);
-                else
+                else {
+                    if (File.Exists(string.Format("{0}/{1}", savepath, newfilename)))
+                        File.Delete(string.Format("{0}/{1}", savepath, newfilename));
                     return BadRequest(resultfromdb.ToString());
+                }
             }
             catch (System.Exception e)
             {

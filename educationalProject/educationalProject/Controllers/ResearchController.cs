@@ -66,7 +66,11 @@ namespace educationalProject.Controllers
                 if (resultfromdb.GetType().ToString() != "System.String")
                     return Ok(resultfromdb);
                 else
+                {
+                    if (File.Exists(string.Format("{0}/{1}", savepath, newfilename)))
+                        File.Delete(string.Format("{0}/{1}", savepath, newfilename));
                     return InternalServerError(new Exception(resultfromdb.ToString()));
+                }
 
             }
             catch (System.Exception e)
