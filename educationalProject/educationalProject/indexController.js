@@ -4282,7 +4282,7 @@ $scope.right_target = function(targets){
             $rootScope.manage_survey_result = data;
          })   .error(function(data, status, headers, config) {
            $rootScope.no_open_result_survey = true;
-                       $alert({title:'เกิดข้อผิดพลาด', content:message.data,alertType:'danger',
+                       $alert({title:'เกิดข้อผิดพลาด', content:data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
                  
 
