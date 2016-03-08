@@ -4249,11 +4249,11 @@ $scope.right_target = function(targets){
          })        
          .error(function(data, status, headers, config) {
 
-                  if(status==400){
+     
             $rootScope.no_open_answer_survey =true;
      $alert({title:'เกิดข้อผิดพลาด', content:data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+    
 
   }); 
 
@@ -4281,12 +4281,13 @@ $scope.right_target = function(targets){
          ).success(function (data) {
             $rootScope.manage_survey_result = data;
          })   .error(function(data, status, headers, config) {
-                  if(status==400){
-                    $rootScope.no_open_result_survey = true;
-
-     $alert({title:'เกิดข้อผิดพลาด', content:message.data,alertType:'danger',
+           $rootScope.no_open_result_survey = true;
+                       $alert({title:'เกิดข้อผิดพลาด', content:message.data,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     }
+                 
+
+  
+    
 
   }); 
 
