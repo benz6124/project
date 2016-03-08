@@ -3834,7 +3834,7 @@ $scope.init =function() {
       if($rootScope.no_open_result_survey == true){
 
 
-        $rootScope.no_open_result_survey == false;
+        $rootScope.no_open_result_survey = false;
 
      args.hide()
         }
@@ -3882,7 +3882,7 @@ $scope.init =function() {
       if($rootScope.no_open_answer_survey == true){
 
 
-        $rootScope.no_open_answer_survey == false;
+        $rootScope.no_open_answer_survey =false;
 
      args.hide()
         }
