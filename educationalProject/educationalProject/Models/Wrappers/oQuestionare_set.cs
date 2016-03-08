@@ -239,6 +239,8 @@ namespace educationalProject.Models.Wrappers
                 else
                 {
                     //Reserved for return error string
+                    res.Close();
+                    return "ไม่พบข้อมูลของแบบสอบถามที่ต้องการดูผล";
                 }
                 res.Close();
             }
