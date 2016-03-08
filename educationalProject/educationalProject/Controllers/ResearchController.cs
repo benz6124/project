@@ -35,7 +35,6 @@ namespace educationalProject.Controllers
             try
             {
                 await Request.Content.ReadAsMultipartAsync(result);
-
                 //READ JSON DATA PART
                 JObject datareceive = JObject.Parse(result.FormData.GetValues(result.FormData.AllKeys[0])[0]);
                 data.curri_id  = datareceive["curri_id"].ToString();
@@ -138,7 +137,7 @@ namespace educationalProject.Controllers
                     return Ok(resultfromdb);
                 }
                 else
-                    return InternalServerError(new Exception(resultfromdb.ToString()));
+                    return BadRequest(resultfromdb.ToString());
                    
             }
             catch (Exception e)

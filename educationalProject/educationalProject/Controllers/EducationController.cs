@@ -12,19 +12,23 @@ namespace educationalProject.Controllers
     {
         public async Task<IHttpActionResult> Post(oEducation data)
         {
+            if (data == null)
+                return BadRequest("กรุณากรอกข้อมูลการศึกษาในแต่ละช่องให้เป็นค่าที่ถูกต้องและเหมาะสม");
             object result = await data.Insert();
             if (result.GetType().ToString() != "System.String")
                 return Ok(result);
             else
-                return InternalServerError(new Exception(result.ToString()));
+                return BadRequest(result.ToString());
         }
         public async Task<IHttpActionResult> Put(oEducation data)
         {
+            if (data == null)
+                return BadRequest("กรุณากรอกข้อมูลการศึกษาในแต่ละช่องให้เป็นค่าที่ถูกต้องและเหมาะสม");
             object result = await data.Update();
             if (result.GetType().ToString() != "System.String")
                 return Ok(result);
             else
-                return InternalServerError(new Exception(result.ToString()));
+                return BadRequest(result.ToString());
         }
     }
 }

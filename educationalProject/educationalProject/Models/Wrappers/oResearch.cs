@@ -391,7 +391,7 @@ namespace educationalProject.Models.Wrappers
                 {
                     //Reserved for return error string
                     res.Close();
-                    return "Target research is already deleted.";
+                    return "ไม่พบข้อมูลงานวิจัยที่ต้องการแก้ไขในระบบ";
                 }
                 res.Close();
             }

@@ -58,13 +58,15 @@ namespace educationalProject.Models.Wrappers
                 {
                     //Reserved for return error string
                     res.Close();
-                    return "Student cannot insert education data.";
+                    return "กลุ่มผู้ใช้งานของท่านไม่ได้รับอนุญาตให้เพิ่มข้อมูลการศึกษา";
                 }
                 res.Close();
             }
-            catch (Exception ex)
+            catch (System.Data.SqlClient.SqlException ex)
             {
                 //Handle error from sql execution
+                if (ex.Number == 8152)
+                    return "มีรายละเอียดของข้อมูลการศึกษาบางส่วนที่ต้องการบันทึกมีขนาดที่ยาวเกินกำหนด";
                 return ex.Message;
             }
             finally
@@ -119,9 +121,11 @@ namespace educationalProject.Models.Wrappers
                 }
                 res.Close();
             }
-            catch (Exception ex)
+            catch (System.Data.SqlClient.SqlException ex)
             {
                 //Handle error from sql execution
+                if (ex.Number == 8152)
+                    return "มีรายละเอียดของข้อมูลการศึกษาบางส่วนที่ต้องการบันทึกมีขนาดที่ยาวเกินกำหนด";
                 return ex.Message;
             }
             finally

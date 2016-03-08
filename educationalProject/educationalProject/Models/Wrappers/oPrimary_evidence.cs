@@ -244,6 +244,8 @@ namespace educationalProject.Models.Wrappers
                 }
                 else if(item.status == '2')
                 {
+                    if (item.evidence_name.Length > DBFieldDataType.EVIDENCE_NAME_LENGTH)
+                        return "ชื่อของหลักฐานพื้นฐานบางส่วนที่ต้องการบันทึกมีขนาดที่ยาวเกินกำหนด";
                     insertintoprimaryevidencecmd += string.Format("insert into {0} values ({1},{2},'{3}','{4}') ",
                         FieldName.TABLE_NAME, item.aca_year, item.indicator_num, item.curri_id, item.evidence_name);
                     insertintoprimaryevidencecmd += string.Format("insert into {0} values ({1},'{2}',{3},{4}) ",
@@ -263,7 +265,6 @@ namespace educationalProject.Models.Wrappers
             }
             catch (Exception ex)
             {
-                //Handle error from sql execution
                 return ex.Message;
             }
             finally

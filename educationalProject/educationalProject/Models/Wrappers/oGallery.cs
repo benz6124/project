@@ -464,7 +464,7 @@ namespace educationalProject.Models.Wrappers
                 {
                     //Reserved for return error string
                     res.Close();
-                    return "Target gallery is already deleted.";
+                    return "ไม่พบข้อมูลอัลบั้มรูปภาพที่ต้องการแก้ไขในระบบ";
                 }
                 res.Close();
             }

@@ -182,7 +182,7 @@ namespace educationalProject.Models.Wrappers
                 {
                     //Reserved for return error string
                     res.Close();
-                    return "The target lab is already deleted.";
+                    return "ไม่พบข้อมูลห้องปฏิบัติการที่ต้องการแก้ไขในระบบ";
                 }
                 res.Close();
             }

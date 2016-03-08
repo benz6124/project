@@ -43,7 +43,7 @@ namespace educationalProject.Controllers
             if (result == null)
                 return Ok();
             else
-                return InternalServerError(new Exception(result.ToString()));
+                return BadRequest(result.ToString());
         }
     }
 }

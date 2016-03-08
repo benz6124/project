@@ -39,11 +39,13 @@ namespace educationalProject.Controllers
         }
         public async Task<IHttpActionResult> PutStudentCount(oStudent_count data)
         {
+            if (data == null)
+                return BadRequest("กรุณากรอกข้อมูลสถิติจำนวนนักศึกษาให้เป็นค่าที่ถูกต้องและเหมาะสม");
             object result = await data.InsertOrUpdate();
             if (result == null)
                 return Ok();
             else
-                return InternalServerError(new Exception(result.ToString()));
+                return BadRequest(result.ToString());
         }
     }
 }

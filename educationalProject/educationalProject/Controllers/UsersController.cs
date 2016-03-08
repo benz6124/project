@@ -300,6 +300,13 @@ namespace educationalProject.Controllers
                 {
                     MultipartFileData file = result.FileData[0];
                     FileInfo fileInfo = new FileInfo(file.LocalFileName);
+                    if (!file.Headers.ContentType.ToString().Contains("image/"))
+                    {
+                        //Delete temp upload file
+                        if (File.Exists(string.Format("{0}/{1}", savepath, fileInfo.Name)))
+                            File.Delete(string.Format("{0}/{1}", savepath, fileInfo.Name));
+                        return BadRequest("ไฟล์รูปภาพที่ท่านอัพโหลดไมใช่ไฟล์รูปภาพที่ถูกต้อง");
+                    }
                     string newfilename = string.Format("{0}.{1}", fileInfo.Name.Substring(9), file.Headers.ContentDisposition.FileName.Split('.').LastOrDefault().Split('\"').FirstOrDefault());
                     userdata.information.file_name_pic = "myImages/profile_pic/" + newfilename;
                     File.Move(string.Format("{0}/{1}", savepath, fileInfo.Name), string.Format("{0}/{1}", savepath, newfilename));

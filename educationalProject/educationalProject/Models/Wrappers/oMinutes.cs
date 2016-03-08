@@ -128,7 +128,7 @@ namespace educationalProject.Models.Wrappers
                                     file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
                                     topic_name = item.ItemArray[data.Columns[FieldName.TOPIC_NAME].Ordinal].ToString(),
                                     minutes_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.MINUTES_ID].Ordinal]),
-                                    date = Convert.ToDateTime(item.ItemArray[data.Columns[FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3]
+                                    date = Convert.ToDateTime(item.ItemArray[data.Columns[FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats(new System.Globalization.CultureInfo("fr-FR"))[0]
                                 });
                                 result.FirstOrDefault(m => m.minutes_id == minutes_id).attendee.Add(new Teacher_with_t_name
                                 {
@@ -353,7 +353,7 @@ namespace educationalProject.Models.Wrappers
                                     file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
                                     topic_name = item.ItemArray[data.Columns[FieldName.TOPIC_NAME].Ordinal].ToString(),
                                     minutes_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.MINUTES_ID].Ordinal]),
-                                    date = Convert.ToDateTime(item.ItemArray[data.Columns[Self_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3]
+                                    date = Convert.ToDateTime(item.ItemArray[data.Columns[Self_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats(new System.Globalization.CultureInfo("fr-FR"))[0]
                                 });
                                 result.FirstOrDefault(m => m.minutes_id == minutes_id).attendee.Add(new Teacher_with_t_name
                                 {
@@ -525,7 +525,7 @@ namespace educationalProject.Models.Wrappers
                                     file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
                                     topic_name = item.ItemArray[data.Columns[FieldName.TOPIC_NAME].Ordinal].ToString(),
                                     minutes_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.MINUTES_ID].Ordinal]),
-                                    date = Convert.ToDateTime(item.ItemArray[data.Columns[Self_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3]
+                                    date = Convert.ToDateTime(item.ItemArray[data.Columns[Self_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats(new System.Globalization.CultureInfo("fr-FR"))[0]
                                 });
                                 result.FirstOrDefault(m => m.minutes_id == minutes_id).attendee.Add(new Teacher_with_t_name
                                 {
@@ -567,7 +567,7 @@ namespace educationalProject.Models.Wrappers
                 {
                     //Reserved for return error string
                     res.Close();
-                    return "The target minutes is already deleted.";
+                    return "ไม่พบข้อมูลรายงานการประชุมที่ต้องการแก้ไขในระบบ";
                 }
                 res.Close();
             }

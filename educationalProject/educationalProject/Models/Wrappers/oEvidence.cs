@@ -287,22 +287,22 @@ namespace educationalProject.Models.Wrappers
             List<Evidence_with_t_name> result = new List<Evidence_with_t_name>();
             if (!d.SQLConnect())
                 return WebApiApplication.CONNECTDBERRSTRING;
-
-            d.iCommand.CommandText =
-                //Insert part    
-                string.Format("INSERT INTO {0}({1},{2},{3},{4},{5},{6},{7},{8},{9}) VALUES " +
+            string ifexistscond = string.Format("if not exists (select * from {0} where {1} = {2} and {3} = '{4}' and {5} = {6} and {7} = {8}) ",
+                FieldName.TABLE_NAME, FieldName.INDICATOR_NUM, indicator_num, FieldName.CURRI_ID,
+                curri_id, FieldName.ACA_YEAR, aca_year, FieldName.EVIDENCE_REAL_CODE, evidence_real_code);
+                ;
+            string insertcmd = string.Format("INSERT INTO {0}({1},{2},{3},{4},{5},{6},{7},{8},{9}) VALUES " +
                       "(null, '{10}', '{11}', {12}, {13}, '{14}', '{15}', '{16}', {17}) ",
-                FieldName.TABLE_NAME, FieldName.PRIMARY_EVIDENCE_NUM,FieldName.TEACHER_ID,FieldName.CURRI_ID,FieldName.INDICATOR_NUM,FieldName.EVIDENCE_REAL_CODE,FieldName.FILE_NAME, FieldName.EVIDENCE_NAME,FieldName.SECRET,FieldName.ACA_YEAR,
-                teacher_id, curri_id, indicator_num, evidence_real_code, file_name, evidence_name, secret, aca_year) +
-                //Select part
-                string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
+                FieldName.TABLE_NAME, FieldName.PRIMARY_EVIDENCE_NUM, FieldName.TEACHER_ID, FieldName.CURRI_ID, FieldName.INDICATOR_NUM, FieldName.EVIDENCE_REAL_CODE, FieldName.FILE_NAME, FieldName.EVIDENCE_NAME, FieldName.SECRET, FieldName.ACA_YEAR,
+                teacher_id, curri_id, indicator_num, evidence_real_code, file_name, evidence_name, secret, aca_year);
+            string selectcmd = string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
                 "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join ({7}) as {13} on e.{8} = {13}.{9} order by e.{12}",
                 FieldName.TABLE_NAME, FieldName.INDICATOR_NUM, indicator_num, FieldName.CURRI_ID,
                 curri_id, FieldName.ACA_YEAR, aca_year, oTeacher.getSelectTeacherByJoinCommand(),
                 FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
-                FieldName.EVIDENCE_REAL_CODE,Teacher.FieldName.ALIAS_NAME
+                FieldName.EVIDENCE_REAL_CODE, Teacher.FieldName.ALIAS_NAME
                 );
-
+            d.iCommand.CommandText = string.Format("{0} BEGIN {1} {2} END ",ifexistscond, insertcmd,selectcmd);
             try
             {
                 System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
@@ -332,7 +332,8 @@ namespace educationalProject.Models.Wrappers
                 }
                 else
                 {
-                    //Reserved for return error string
+                    res.Close();
+                    return "รหัสหลักฐานดังกล่าวมีอยู่แล้วในระบบ";
                 }
                 res.Close();
             }
@@ -352,35 +353,56 @@ namespace educationalProject.Models.Wrappers
 
         public async Task<object> InsertNewPrimaryEvidenceWithSelect()
         {
+            int errcode = 0;
             DBConnector d = new DBConnector();
             List<Evidence_with_t_name> result = new List<Evidence_with_t_name>();
             if (!d.SQLConnect())
                 return WebApiApplication.CONNECTDBERRSTRING;
+            //The first condition check that is target primary evidence is already uploaded?
+            string ifexistscond1 = string.Format("if exists (select * from {0} where {1} = {2} and {3} = {4} and {5} = '{6}' and {7} = {8} ) select 1 as errcode ",
+                FieldName.TABLE_NAME, FieldName.PRIMARY_EVIDENCE_NUM, primary_evidence_num, FieldName.ACA_YEAR, aca_year,
+                FieldName.CURRI_ID, curri_id, FieldName.INDICATOR_NUM, indicator_num);
 
-            d.iCommand.CommandText = string.Format("if not exists (select * from {0} where {1} = {2} and {3} = {4} and {5} = '{6}' and {7} = {8} ) ",
-                FieldName.TABLE_NAME, FieldName.PRIMARY_EVIDENCE_NUM, primary_evidence_num, FieldName.ACA_YEAR,aca_year, 
-                FieldName.CURRI_ID,curri_id, FieldName.INDICATOR_NUM,indicator_num) +
-                "BEGIN " +
-                //Insert part    
-                string.Format("INSERT INTO {0}({1},{2},{3},{4},{5},{6},{7},{8},{9}) VALUES " +
+            //The second condition check that is evidence real code of to be add target primary evidence is aleady exists?
+            string ifexistscond2 = string.Format("if exists (select * from {0} where {1} = {2} and {3} = '{4}' and {5} = {6} and {7} = {8}) select 2 as errcode ",
+                FieldName.TABLE_NAME, FieldName.INDICATOR_NUM, indicator_num, FieldName.CURRI_ID,
+                curri_id, FieldName.ACA_YEAR, aca_year, FieldName.EVIDENCE_REAL_CODE, evidence_real_code);
+
+            //The third condition check that is primary target evidence is exist in primary evidence database
+            string ifexistscond3 = string.Format("if not exists (select * from {0} where {1} = {2}) select 3 as errcode ",
+                Primary_evidence.FieldName.TABLE_NAME, Primary_evidence.FieldName.PRIMARY_EVIDENCE_NUM, primary_evidence_num);
+
+            //The fourth condition check that is teacher(user) have responsibility to add target primary evidence?
+            string ifexistscond4 = string.Format("if not exists (select * from {0} where {1} = {2} and {3} = '{4}' and {5} = {6}) select 4 as errcode ",
+                Primary_evidence_status.FieldName.TABLE_NAME, Primary_evidence_status.FieldName.TEACHER_ID, teacher_id,
+                Primary_evidence_status.FieldName.CURRI_ID, curri_id, Primary_evidence_status.FieldName.PRIMARY_EVIDENCE_NUM, primary_evidence_num);
+
+
+            string insertintoevidencecmd = string.Format("INSERT INTO {0}({1},{2},{3},{4},{5},{6},{7},{8},{9}) VALUES " +
                       "({18}, '{10}', '{11}', {12}, {13}, '{14}', '{15}', '{16}', {17}) ",
                 FieldName.TABLE_NAME, FieldName.PRIMARY_EVIDENCE_NUM, FieldName.TEACHER_ID, FieldName.CURRI_ID, FieldName.INDICATOR_NUM, FieldName.EVIDENCE_REAL_CODE, FieldName.FILE_NAME, FieldName.EVIDENCE_NAME, FieldName.SECRET, FieldName.ACA_YEAR,
-                teacher_id, curri_id, indicator_num, evidence_real_code, file_name, evidence_name, secret, aca_year, primary_evidence_num) +
-                //Update primary_evidence_status part
-                string.Format("update {0} set {1} = '1' where {1} = '0' and {2} = {3} and {4} = '{5}' " +
+                teacher_id, curri_id, indicator_num, evidence_real_code, file_name, evidence_name, secret, aca_year, primary_evidence_num);
+
+            string updateprimaryevidencestatuscmd = string.Format("update {0} set {1} = '1' where {1} = '0' and {2} = {3} and {4} = '{5}' " +
                               "update {0} set {1} = '5' where {1} = '4' and {2} = {3} and {4} = '{5}' ",
                         Primary_evidence_status.FieldName.TABLE_NAME, Primary_evidence_status.FieldName.STATUS,
                         Primary_evidence_status.FieldName.PRIMARY_EVIDENCE_NUM, primary_evidence_num,
-                        Primary_evidence_status.FieldName.CURRI_ID, curri_id) +
-//Select part
-string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
-                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join ({7}) as {13} on e.{8} = {13}.{9} order by e.{12}",
+                        Primary_evidence_status.FieldName.CURRI_ID, curri_id);
+
+            string selectcmd = string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
+                "where {1} = {2} and {3} = '{4}' and {5} = {6}) as e inner join ({7}) as {13} on e.{8} = {13}.{9} order by e.{12} ",
                 FieldName.TABLE_NAME, FieldName.INDICATOR_NUM, indicator_num, FieldName.CURRI_ID,
                 curri_id, FieldName.ACA_YEAR, aca_year, oTeacher.getSelectTeacherByJoinCommand(),
                 FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
-                FieldName.EVIDENCE_REAL_CODE,Teacher.FieldName.ALIAS_NAME
-                ) + " END";
+                FieldName.EVIDENCE_REAL_CODE, Teacher.FieldName.ALIAS_NAME);
 
+            d.iCommand.CommandText = string.Format("{0} " +
+                "else {1} " +
+                "else {2} " +
+                "else {3} " +
+                "else begin " +
+                "{4} {5} {6} end", ifexistscond1, ifexistscond2, ifexistscond3,ifexistscond4, insertintoevidencecmd, updateprimaryevidencestatuscmd,
+                selectcmd);
             try
             {
                 System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
@@ -388,31 +410,34 @@ string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
                 {
                     DataTable data = new DataTable();
                     data.Load(res);
-                    foreach (DataRow item in data.Rows)
+                    if (data.Columns.Contains("errcode"))
+                        errcode = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns["errcode"].Ordinal]);
+                    else
                     {
-                        result.Add(new Evidence_with_t_name
+                        foreach (DataRow item in data.Rows)
                         {
-                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                            evidence_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_CODE].Ordinal]),
-                            evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
-                            file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
-                            secret = Convert.ToChar(item.ItemArray[data.Columns[FieldName.SECRET].Ordinal]),
-                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
-                            //DANGER NULLABLE ZONE
-                            primary_evidence_num = item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]) : 0,
-                            evidence_real_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal]),
-                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
-                            t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
-                        });
+                            result.Add(new Evidence_with_t_name
+                            {
+                                curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
+                                aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
+                                evidence_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_CODE].Ordinal]),
+                                evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
+                                file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
+                                secret = Convert.ToChar(item.ItemArray[data.Columns[FieldName.SECRET].Ordinal]),
+                                teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
+                                //DANGER NULLABLE ZONE
+                                primary_evidence_num = item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]) : 0,
+                                evidence_real_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal]),
+                                indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
+                                t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
+                            });
+                        }
                     }
                     data.Dispose();
                 }
                 else
                 {
                     //Reserved for return error string
-                    res.Close();
-                    return "หลักฐานพื้นฐานดังกล่าวได้ถูกอัพโหลดไปก่อนแล้ว";
                 }
                 res.Close();
             }
@@ -426,7 +451,16 @@ string.Format("select e.*,{13}.{10},{13}.{11} from (select * from {0} " +
                 //Whether it success or not it must close connection in order to end block
                 d.SQLDisconnect();
             }
-            return result;
+            if (errcode == 0)
+                return result;
+            else if (errcode == 1)
+                return "หลักฐานพื้นฐานดังกล่าวได้ถูกอัพโหลดไปก่อนแล้ว";
+            else if (errcode == 2)
+                return "รหัสหลักฐานดังกล่าวมีอยู่แล้วในระบบ";
+            else if (errcode == 3)
+                return "ไม่พบข้อมูลหลักฐานพื้นฐานดังกล่าวในระบบ";
+            else
+                return "ท่านไม่มีสิทธิในการอัพโหลดหลักฐานพื้นฐานดังกล่าว";
         }
 
         public async Task<object> Update(List<Evidence_with_t_name> list)

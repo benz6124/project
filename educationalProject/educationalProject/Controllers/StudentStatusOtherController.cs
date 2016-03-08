@@ -38,11 +38,13 @@ namespace educationalProject.Controllers
         }
         public async Task<IHttpActionResult> PutStudentStatusOther(oStudent_status_other data)
         {
+            if (data == null)
+                return BadRequest("กรุณากรอกข้อมูลสถิติการจบการศึกษาให้เป็นค่าที่ถูกต้องและเหมาะสม");
             object result = await data.InsertOrUpdate();
             if (result == null)
                 return Ok();
             else
-                return InternalServerError(new Exception(result.ToString()));
+                return BadRequest(result.ToString());
         }
     }
 }

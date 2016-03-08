@@ -20,6 +20,7 @@ namespace educationalProject.Controllers
             datacontext.curri_id = "21";
             datacontext.aca_year = 2558;
             return Ok(datacontext.SelectByCurriculumAcademic());
+            
         }
         [ActionName("getminutes")]
         public async Task<IHttpActionResult> PostForQueryMinutes(oCurriculum_academic data)
@@ -222,7 +223,7 @@ namespace educationalProject.Controllers
                     return Ok(resultfromdb);
                 }
                 else
-                    return InternalServerError(new Exception(resultfromdb.ToString()));
+                    return BadRequest(resultfromdb.ToString());
 
             }
             catch (Exception e)

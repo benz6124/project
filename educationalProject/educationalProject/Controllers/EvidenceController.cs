@@ -81,7 +81,7 @@ namespace educationalProject.Controllers
                 if (resultfromdb.GetType().ToString() != "System.String")
                     return Ok(resultfromdb);
                 else
-                    return InternalServerError(new Exception(resultfromdb.ToString()));
+                    return BadRequest(resultfromdb.ToString());
             }
             catch (System.Exception e)
             {
@@ -128,7 +128,7 @@ namespace educationalProject.Controllers
                 if (resultfromdb.GetType().ToString() != "System.String")
                     return Ok(resultfromdb);
                 else
-                    return InternalServerError(new Exception(resultfromdb.ToString()));
+                    return BadRequest(resultfromdb.ToString());
             }
             catch (System.Exception e)
             {
@@ -143,7 +143,7 @@ namespace educationalProject.Controllers
             if (result.GetType().ToString() != "System.String")
                 return Ok(result);
             else
-                return InternalServerError(new Exception(result.ToString()));
+                return BadRequest(result.ToString());
         }
 
         [ActionName("updateevidence")]

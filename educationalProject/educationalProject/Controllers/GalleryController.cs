@@ -176,7 +176,7 @@ namespace educationalProject.Controllers
                 }
 
                 else
-                    return InternalServerError(new Exception(resultfromdb.ToString()));
+                    return BadRequest(resultfromdb.ToString());
 
             }
             catch (System.Exception e)

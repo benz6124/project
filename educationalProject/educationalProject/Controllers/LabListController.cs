@@ -75,7 +75,7 @@ namespace educationalProject.Controllers
             if (result.GetType().ToString() != "System.String")
                 return Ok(result);
             else
-                return InternalServerError(new Exception(result.ToString()));
+                return BadRequest(result.ToString());
         }
 
         [ActionName("delete")]

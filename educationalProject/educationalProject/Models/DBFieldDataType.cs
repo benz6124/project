@@ -10,5 +10,6 @@ namespace educationalProject.Models
         public static readonly string USERNAME_TYPE = "VARCHAR(120)";
         public static readonly string CURRI_ID_TYPE = "VARCHAR(4)";
         public static readonly string FILE_NAME_TYPE = "VARCHAR(255)";
+        public static readonly int EVIDENCE_NAME_LENGTH = 200;
     }
 }

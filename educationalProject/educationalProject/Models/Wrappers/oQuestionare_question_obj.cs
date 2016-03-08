@@ -86,7 +86,7 @@ namespace educationalProject.Models.Wrappers
                 if (rowaffacted > 0)
                     return null;
                 else
-                    return "The to-be answer questionare is already deleted.";
+                    return "แบบสอบถามนี้ถูกลบแล้ว";
             }
             catch (Exception ex)
             {
