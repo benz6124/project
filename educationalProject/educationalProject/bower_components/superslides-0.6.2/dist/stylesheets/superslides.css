@@ -26,6 +26,7 @@
   top: 52%;
   width: 100%;
 }
+
 .slides-navigation a {
   position: absolute;
   display: block;
@@ -54,7 +55,7 @@
   width: 100%;
 }
 .slides-pagination a {
-  border: 1.5px solid #6F002B;
+/*  border: 1.5px solid #6F002B;*/
   border-radius: 10px;
   width: 10px;
   height: 10px;
@@ -68,6 +69,7 @@
   margin: 2px;
   overflow: hidden;
   text-indent: -100%;
+      background-color: rgba(111,0,43,0.4);
 }
 .slides-pagination a.current {
   background: #6F002B;

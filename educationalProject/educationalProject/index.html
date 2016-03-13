@@ -498,7 +498,10 @@
                 <ul class="nav navbar-nav navbar-right">
 
                     <li ng-show = "already_login" >
-                        <img src="{{current_user.information.file_name_pic}}" style="margin-right:23px;margin-top:1px;max-width:95px" class="img-circle profile_pic wow flipInY" data-wow-duration="2s" height="79"  />
+              <!--           <img src="{{current_user.information.file_name_pic}}" style="margin-right:23px;margin-top:1px;max-width:95px" class="img-circle profile_pic wow flipInY" height="79"  /> -->
+
+                        <div class="thumb_center_please_profile_pic wow flipInY"  style="background-image: url({{current_user.information.file_name_pic}});"></div>
+
                         <ul class="dropdownImg" >
                             <li class="profile_name">  {{current_user.username}}</li>
                             <li class="bull"><a href="" data-placement="right" data-effect="from-right" data-nq-toggle-modal="#manage_profile">แก้ไขข้อมูล</a></li>
@@ -2195,7 +2198,11 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
                                             <tr  ng-repeat="each_person in manage_privilege_president_person_result.list">
 
-                                              <td  ><img src="{{each_person.file_name_pic}}" class="img-circle" height="90"> </td>
+                                              <td  >
+
+                           <!--                    <img src="{{each_person.file_name_pic}}" class="img-circle" height="90">  -->
+<div class="thumb_center_please " style="background-image: url({{each_person.file_name_pic}});"></div>
+                                              </td>
                           <td  ><span style="font-size:21px;">{{each_person.t_name}}</span> </td>
                                            
                                            <td style="
@@ -2366,7 +2373,10 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
                                             <tr  ng-repeat="person in manage_bind_all_people_in_curri">
                           <td><span style="font-size:19px;"><input type="checkbox" data-ng-model="person.delete_me"></span> </td>
-                                              <td  ><img src="{{person.file_name_pic}}" class="img-circle" height="90"></td>
+                                              <td  >
+                                              <!-- <img src="{{person.file_name_pic}}" class="img-circle" height="90"   > -->
+<div class="thumb_center_please " style="background-image: url({{person.file_name_pic}});"></div>
+                                              </td>
                <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{person.t_name}}</span> </td>
                           
 
@@ -2455,7 +2465,11 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                           
 
                                             <tr  ng-repeat="person in result">
-                                             <td  style=" padding-left: 0px; padding-right: 0px;" class="show_lightbox"><span style="font-size:19px;"><img src="{{person.file_name_pic}}" ng-click="openLightboxModal(person)"  height="90"></span> </td>
+                                             <td  style=" padding-left: 0px; padding-right: 0px;" class="show_lightbox"><span style="font-size:19px;">
+
+<div class="thumb_center_please click_me" ng-click="openLightboxModal(person)"   style="background-image: url({{person.file_name_pic}});"></div>
+                                          <!--    <img src="{{person.file_name_pic}}" ng-click="openLightboxModal(person)"  height="90"> -->
+                                             </span> </td>
 
                           <td ><span style="font-size:19px;">{{person.t_name}}</span> </td>
 
@@ -2729,6 +2743,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
       <div class="thumbnail"   >
         <img src="{{pic.file_name}}" ng-click="openLightboxModal($index)" />
+
       </div>
       
  
@@ -3586,7 +3601,9 @@ glyphicon glyphicon-bell"></i> </span>
 </div>
 
 <div ng-hide="blank_please">
-      <img src="{{personnel_choose.file_name_pic}}" class="img-circle" width="240" style="float:right;margin-top:10px;margin-right:70px" />
+<!--       <img src="{{personnel_choose.file_name_pic}}" class="img-circle" width="240" style="" /> -->
+
+      <div class="thumb_center_please_show " style="background-image: url({{personnel_choose.file_name_pic}});"></div>
       <div style="margin-top:10px">
       <span class="topicHeader manage_president_in_hide" ><b>ชื่อผู้ใช้งาน:</b> {{personnel_choose.username}}</span><br/>
       <span class="topicHeader manage_president_in_hide"><b>ชื่อภาษาไทย:</b> {{personnel_choose.t_name}}   </span><br/>
@@ -3689,7 +3706,14 @@ glyphicon glyphicon-bell"></i> </span>
                                           
 
                                             <tr  ng-repeat="admin in all_admins">
-                                             <td  style=" padding-left: 0px; padding-right: 0px;" class="show_lightbox"><span style="font-size:19px;"><img src="{{admin.file_name_pic}}" ng-click="openLightboxModal(admin.file_name_pic)"  height="90"></span> </td>
+                                             <td  style=" padding-left: 0px; padding-right: 0px;" class="show_lightbox"><span style="font-size:19px;">
+
+                                            <div class="thumb_center_please click_me" ng-click="openLightboxModal(admin.file_name_pic)"   style="background-image: url({{admin.file_name_pic}});"></div>
+                         <!--                     <img src="{{admin.file_name_pic}}" ng-click="openLightboxModal(admin.file_name_pic)"  height="90"> -->
+                                             </span>
+
+
+                                              </td>
 
                           <td ><span style="font-size:19px;">{{admin.t_name}}</span> </td>
 
@@ -3814,7 +3838,11 @@ glyphicon glyphicon-bell"></i> </span>
                                           
 
                                             <tr  ng-repeat="committee in manage_committee_who_all_committees">
-                                             <td  ><img src="{{committee.file_name_pic}}" class="img-circle" height="90"> </td>
+                                             <td  >
+                                            <!--  <img src="{{committee.file_name_pic}}" class="img-circle" height="90"> -->
+
+                                             <div class="thumb_center_please " style="background-image: url({{committee.file_name_pic}});"></div>
+                                              </td>
                           <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{committee.t_name}}</span> </td>
                                               <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{committee.email}}</span> </td>
           <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{committee.date_promoted}}</span> </td>
@@ -3856,7 +3884,9 @@ glyphicon glyphicon-bell"></i> </span>
 <form name="create_curri_form" novalidate>
 
                           <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-4" style="
+    padding-left: 30px;
+">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อหลักสูตรภาษาไทย   </span></h3>
                             </div>
                             <div class="col-md-8">
@@ -3866,7 +3896,9 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
 
                   <div class="row">
-                 <div class="col-md-4">
+                 <div class="col-md-4" style="
+    padding-left: 30px;
+">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อหลักสูตรภาษาอังกฤษ   </span></h3>
                             </div>
                           
@@ -3879,7 +3911,9 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                     <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-4" style="
+    padding-left: 30px;
+">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(ย่อ)   </span></h3>
                             </div>
                           
@@ -3892,8 +3926,10 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
 
                       <div class="row">
-                  <div class="col-md-4">
-                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(ย่อ)   </span></h3>
+                  <div class="col-md-4" style="
+    padding-left: 30px;padding-right: 0px;
+">
+                                <h3 style="margin-top:3px; "><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(ย่อ)   </span></h3>
                             </div>
                     
 
@@ -3905,7 +3941,9 @@ glyphicon glyphicon-bell"></i> </span>
 
                         </div>
     <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4" style="
+    padding-left: 30px;
+">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(เต็ม)  </span></h3>
                             </div>
                      
@@ -3920,7 +3958,9 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
 
                       <div class="row">
-                   <div class="col-md-4">
+                   <div class="col-md-4" style="
+    padding-left: 30px; padding-right: 0px;
+">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(เต็ม)</span></h3>
                             </div>
                        
@@ -3935,7 +3975,9 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                      <div class="row">
-                       <div class="col-md-4">
+                       <div class="col-md-4" style="
+    padding-left: 30px;
+">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ระดับปริญญา </span></h3>
                             </div>
          
@@ -3947,7 +3989,9 @@ glyphicon glyphicon-bell"></i> </span>
                         </div> 
 
                         <div class="row">
-                       <div class="col-md-4">
+                       <div class="col-md-4" style="
+    padding-left: 30px;
+">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ระยะเวลาการเรียน </span></h3>
                             </div>
 
@@ -5757,9 +5801,9 @@ glyphicon glyphicon-bell"></i> </span>
 "><span class="headerModal">ส่วนจัดการผู้ใช้งาน</span></h1>
                     </div>
 
-                    <img src="{{current_user.information.file_name_pic}}" class="img-circle" style="float:left;margin-left:5%;height:410px">
-
-                    <div style="float:right;margin-left:5px;margin-right:13%">
+   <!--                  <img src="{{current_user.information.file_name_pic}}" class="img-circle" style="height:410px"> -->
+<div class="thumb_center_please_show_manage_profile " style="background-image: url({{current_user.information.file_name_pic}});"></div>
+                    <div style="float:right;margin-left:5px;margin-right:7%">
                 
 
                         <div class="row">
@@ -6237,7 +6281,7 @@ glyphicon glyphicon-bell"></i> </span>
 "><span style="font-size:19px;" class="show_lightbox">
 
  <img ng-repeat ="pic in album.pictures" ng-click="openLightboxModal($index,album.pictures)" ng-if="$index<4" src="{{pic.file_name}}" class="img-rounded" style="margin-left:1px;margin-right:1px;margin-top:3px;margin-bottom:3px" height = "50px"  />
-
+<!-- <div class="thumb_center_please_album_preview " ng-repeat ="pic in album.pictures" ng-click="openLightboxModal($index,album.pictures)" ng-if="$index<4" style="background-image: url({{pic.file_name}});"></div> -->
  </span> </td>
           <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year)==false && $root.current_user.privilege[curri_choosen.curri_id]['6'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4) == false"> <a href=""  style="margin-top:7px"data-nq-toggle-modal="#show_album" data-effect="from-left" data-ng-click="go_to_show_album(album)" class="hvr-pulse" >
                                         <span class="topic"><i style="color:#2980b9"class="glyphicon glyphicon-picture"></i> </span>
