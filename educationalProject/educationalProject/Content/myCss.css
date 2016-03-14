@@ -903,7 +903,7 @@ a{
     overflow-y: hidden;
 }*/
 
-textarea{
+textarea.form-control{
   font-family: "FreesiaUPC";
   font-size: 20px;
 }

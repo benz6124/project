@@ -315,11 +315,11 @@ for(index=0;index<$rootScope.all_curriculums.length;index++){
           var ever_been_committee = !!$rootScope.current_user.committee_in;
    var ever_been_president = !!$rootScope.current_user.president_in;
  
-  if(title_code=='16' || title_code=='21' || title_code=='22'|| title_code=='23'|| title_code=='25'|| title_code=='27'){
+  if(title_code=='16' || title_code=='21' || title_code=='22'|| title_code=='23'|| title_code=='25'|| title_code=='27' || title_code=='29' || title_code=='28' || title_code=='30'){
     if($rootScope.current_user.user_type == 'ผู้ดูแลระบบ'){
       return true;
     }
-    return false;
+
   }
 
   if(title_code=='18' || title_code=='19' || title_code=='20'|| title_code=='24'|| title_code=='26'){
@@ -357,7 +357,7 @@ var first = true;
      $rootScope.have_privilege_in_these_curri[title_code] = [];
 
 
-      if(title_code=='2' || title_code=='14' || title_code=='1' || title_code=='4' || title_code=='7' || title_code=='28'){
+      if(title_code=='2' || title_code=='14' || title_code=='1' || title_code=='4' || title_code=='7' || title_code=='28' || title_code=='30'){
         for(index=0;index<$rootScope.current_user.curri_id_in.length;index++){
           if($rootScope.current_user.privilege[$rootScope.current_user.curri_id_in[index]][title_code] ==2){
            

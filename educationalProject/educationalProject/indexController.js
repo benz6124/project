@@ -24,7 +24,66 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$cookies
 
     // console.log(select_nothing);
 
+   $scope.get_reason_other_evaluate = function(indicator_now){
+    console.log('get_reason_other_evaluate')
+        console.log($scope.indicator_choosen);
+        $scope.to_sent = {}
+        $scope.to_sent.indicator_num = indicator_now;
+        $scope.to_sent.curri_id = $scope.curri_choosen.curri_id ;
+          $scope.to_sent.aca_year = $scope.year_choosen.aca_year ;
+        $http.post(
+             '/api/othersevaluation',
+             JSON.stringify($scope.to_sent),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+                   console.log("wait results");
+            console.log(data);
 
+             $rootScope.reason_other_evaluate = data;
+             $scope.choose_not_complete = false;
+
+         
+     
+         });
+
+    }
+
+
+  $scope.get_reason_self_evaluate = function(indicator_now,sub_indicator_now){
+        $scope.section_save_to_send = new Object();
+             $scope.section_save_to_send.teacher_id = "";
+             $scope.section_save_to_send.detail  = "";
+             $scope.section_save_to_send.date  = "";
+             $scope.section_save_to_send.time  = "";
+
+             $scope.section_save_to_send.aca_year = $scope.year_choosen.aca_year;
+             $scope.section_save_to_send.indicator_num  = indicator_now;
+             $scope.section_save_to_send.sub_indicator_num   = sub_indicator_now;
+             $scope.section_save_to_send.curri_id = $scope.curri_choosen.curri_id;
+                $http.post(
+                     '/api/sectionsave',
+                     JSON.stringify($scope.section_save_to_send),
+                     {
+                         headers: {
+                             'Content-Type': 'application/json'
+                         }
+                     }
+                 ).success(function (data) {
+
+                    $rootScope.display_self_support= data;
+
+
+                 });
+
+    }
+
+        $rootScope.download_file_now = function(path) { 
+        window.open(path, '_blank', "");  
+    }
     $rootScope.clear_choosen = function(){
        $scope.not_select_curri_and_year = true;
         $scope.not_select_sub_indicator = true;
@@ -42,8 +101,33 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$cookies
          $scope.not_choose_year = true;
          $scope.corresponding_aca_years = [];
     }
-    $scope.can_edit_reason = function(){
 
+        $scope.can_watch_result = function(){
+
+    if($scope.$parent.already_login == true){
+        if($rootScope.current_user.user_type == 'ผู้ดูแลระบบ'){
+            return true;
+        }
+        if(!$rootScope.current_user.privilege[$scope.curri_choosen.curri_id]){
+            return false;
+        }
+        if( $rootScope.current_user.privilege[$scope.curri_choosen.curri_id]['30'] ==2){
+        return true;
+       }
+
+       if($rootScope.president_in_this_curri_and_year($scope.curri_choosen.curri_id,$scope.year_choosen.aca_year)==true){
+        return true;
+       }
+
+       if($rootScope.right_from_committee($scope.curri_choosen.curri_id,$scope.year_choosen.aca_year,30,2)==true){
+        return true;
+       }
+    }
+       return false;
+    }
+
+    $scope.can_edit_reason = function(){
+           
     if($scope.$parent.already_login == true){
         if(!$rootScope.current_user.privilege[$scope.curri_choosen.curri_id]){
             return false;
@@ -1653,6 +1737,69 @@ $scope.indicator_choosen = {};
 });
 
 
+// app.controller('see_evaluate_by_other_controller_sudden', function($scope,$rootScope, $alert,$http,request_years_from_curri_choosen_service) {
+//     $scope.init =function() {
+ 
+//      $scope.choose_not_complete = true;
+//            $scope.year_choosen = {};
+//               $scope.curri_choosen = {}
+//   $scope.files = [];
+//      $scope.year_choosen = {};
+//        $scope.please_wait = false;
+// $scope.indicator_choosen = {};
+//  $scope.corresponding_aca_years = [];
+//                  $scope.corresponding_indicators = [];
+//   $scope.disabled_search = false;
+//   $scope.all_curri_that_have_privileges = [];
+//        var index;
+//     var index2;
+
+//   $scope.$parent.scan_only_privilege_curri('28',$scope.all_curri_that_have_privileges);
+
+//    angular.forEach(
+//     angular.element("input[type='file']"),
+//     function(inputElem) {
+//       angular.element(inputElem).val(null);
+//     });
+// }
+
+
+
+
+//     $scope.download_file = function(path) { 
+//         window.open(path, '_blank', "");  
+//     }
+
+
+
+
+//     $scope.$on("modal.hide", function (event, args) {
+//      $scope.init();
+      
+//     });
+
+//   $scope.$on("modal.show", function (event, args) {
+
+
+    
+
+//               $scope.init();
+
+
+//     });
+
+
+ 
+
+
+//     $scope.close_modal = function(my_modal){
+//         $scope.init();
+//         my_modal.$hide();
+//     }
+
+
+
+// });
 
 app.controller('upload_aun_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service,$rootScope) {
 
@@ -5043,7 +5190,262 @@ $scope.init ();
         });
     });
 });
+app.controller('manage_user_type_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+   $scope.curri_choosen = [];
+   $scope.my_type = '';
+      $scope.files = [];
+$scope.choose_not_complete = true;
+        $scope.please_wait = false;
+        $scope.my_new_users = [];
+    $http.get('/api/usertype/getallusertype').success(function (data) {
+           
+                $scope.all_usertype = data;
 
+
+              });
+
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+    
+
+   $scope.init =function() {
+$scope.add_these_type= [];
+
+       $scope.files = [];
+   $scope.curri_choosen = [];
+   $scope.please_wait = false;
+      $scope.my_type = '';
+               $scope.please_wait = false;
+$scope.choose_not_complete = true;
+$scope.choose_type = false;
+// if($rootScope.current_user.user_type != 'ผู้ดูแลระบบ'){
+
+//   $scope.all_curri_that_have_privileges = [];
+//   $scope.$parent.scan_only_privilege_curri('1',$scope.all_curri_that_have_privileges);
+// }
+// else{
+//     $scope.all_curri_that_have_privileges = $rootScope.all_curriculums;
+// }
+
+
+          $http.get('/api/usertype/getallusertype').success(function (data) {
+              
+                $scope.all_usertype = data;
+
+
+              });
+
+   }
+
+   $scope.still_not_complete = function(){
+ 
+        // if(!$scope.my_type){
+        //             return true;
+        // }
+
+        if(!$scope.add_these_type){
+            return true;
+        }
+         if($scope.add_these_type.length ==0){
+            return true;
+        }
+        var index;
+        for(index=0;index<$scope.add_these_type.length;index++){
+            if(!$scope.add_these_type[index]){
+                return true;
+            }
+        }
+        return false;
+   }
+  $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+$scope.add_user_type = function(){
+        console.log( $scope.add_these_type)
+        console.log('push')
+    $scope.add_these_type.push("");
+    console.log( $scope.add_these_type)
+}
+
+$scope.remove_type = function(index_to_remove){
+          $scope.add_these_type.splice(index_to_remove, 1); 
+}
+  
+$scope.save_to_server = function(my_modal) {
+
+  $http.post(
+             '/api/usertype/add',
+             JSON.stringify($scope.add_these_type),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+
+                if(!data){
+            
+                  my_modal.$hide();
+$scope.init ();
+                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลสำเร็จ',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+            }
+            else{
+               
+                $rootScope.manage_user_email_duplicate  = data;
+                        $scope.init ();
+                  my_modal.$hide();
+              $alert({title:'ดำเนินการสำเร็จบางส่วน', template:'/alert/mycustomtemplate.html',alertType:'warning',duration:10000,
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+            }
+
+         })
+     .error(function (data, status, headers, config) {
+              $scope.please_wait = false;
+               $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ เนื่องจาก' + data.message,alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        });
+}
+
+   
+});
+app.controller('create_user_individual_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+   $scope.curri_choosen = [];
+   $scope.my_type = '';
+      $scope.files = [];
+$scope.choose_not_complete = true;
+        $scope.please_wait = false;
+        $scope.my_new_users = [];
+    $http.get('/api/usertype/getexcludeadmcom').success(function (data) {
+           
+                $scope.all_usertype = data;
+
+
+              });
+
+    $scope.$on("modal.hide", function (event, args) {
+     $scope.init();
+      
+    });
+
+  $scope.$on("modal.show", function (event, args) {
+              $scope.init();
+    });
+
+    
+
+   $scope.init =function() {
+        $scope.my_new_users = [];
+   angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+       $scope.files = [];
+   $scope.curri_choosen = [];
+      $scope.my_type = '';
+               $scope.please_wait = false;
+$scope.choose_not_complete = true;
+$scope.choose_type = false;
+if($rootScope.current_user.user_type != 'ผู้ดูแลระบบ'){
+
+  $scope.all_curri_that_have_privileges = [];
+  $scope.$parent.scan_only_privilege_curri('1',$scope.all_curri_that_have_privileges);
+}
+else{
+    $scope.all_curri_that_have_privileges = $rootScope.all_curriculums;
+}
+
+
+          $http.get('/api/usertype/getexcludeadmcom').success(function (data) {
+              
+                $scope.all_usertype = data;
+
+
+              });
+
+   }
+
+   $scope.still_not_complete = function(){
+ 
+        if(!$scope.my_type){
+                    return true;
+        }
+
+        var index;
+        for(index=0;index<$scope.my_new_users.length;index++){
+            if(!$scope.my_new_users[index]){
+                return true;
+            }
+        }
+        return false;
+   }
+  $scope.close_modal = function(my_modal){
+        $scope.init();
+        my_modal.$hide();
+    }
+$scope.add_user_email = function(){
+        console.log( $scope.my_new_users)
+        console.log('push')
+    $scope.my_new_users.push("");
+    console.log( $scope.my_new_users)
+}
+
+$scope.remove_email = function(index_to_remove){
+          $scope.my_new_users.splice(index_to_remove, 1); 
+}
+  
+$scope.save_to_server = function(my_modal) {
+          $scope.please_wait = true;
+
+$scope.my_new_user = {};
+$scope.my_new_user.curri = $scope.curri_choosen;
+$scope.my_new_user.type = $scope.my_type;
+$scope.my_new_user.new_emails = $scope.my_new_users;
+  $http.post(
+             '/api/users/createnewusersbytyping',
+             JSON.stringify($scope.my_new_user),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+
+                if(!data){
+            
+                  my_modal.$hide();
+$scope.init ();
+                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลสำเร็จ',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+            }
+            else{
+               
+                $rootScope.manage_user_email_duplicate  = data;
+                        $scope.init ();
+                  my_modal.$hide();
+              $alert({title:'ดำเนินการสำเร็จบางส่วน', template:'/alert/mycustomtemplate.html',alertType:'warning',duration:10000,
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+            }
+
+         })
+     .error(function (data, status, headers, config) {
+              $scope.please_wait = false;
+               $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ เนื่องจาก' + data.message,alertType:'danger',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        });
+}
+
+   
+});
 app.controller('create_survey_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;

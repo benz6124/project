@@ -6038,8 +6038,8 @@ if (/chrome/.test(navigator.userAgent.toLowerCase()))
 angular.module('ngQuantum.scrollbar', ['ngQuantum.services.helpers', 'ngQuantum.services.mouse'])
     .provider('$scrollbar', function () {
         var defaults = this.defaults = {
-            barSize: 'slimest', // number in pixel or slimmest|slim|normal|thick|thickest
-            barOffset: 10,
+            barSize: 'normal', // number in pixel or slimmest|slim|normal|thick|thickest
+            barOffset: 5,
             maxWidth: false,
             placementOffset: false,
             maxHeight: false,
