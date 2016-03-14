@@ -22,50 +22,31 @@ namespace educationalProject.Controllers
         private oAlumni alumnicontext = new oAlumni();
         private oAssessor assessorcontext = new oAssessor();
         private oCompany companycontext = new oCompany();
-        [ActionName("createnewusers")]
-        public async Task<IHttpActionResult> PostForCreateNewUsers()
+        [ActionName("createnewusersbytyping")]
+        public async Task<IHttpActionResult> PostForCreateNewUsersByTyping(JObject data)
         {
-            if (!Request.Content.IsMimeMultipartContent())
-            {
-                return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
-            }
-
-            string savepath = WebApiApplication.SERVERPATH + "temp";
-            var result = new MultipartFormDataStreamProvider(savepath);
             List<UsernamePassword> userlist = new List<UsernamePassword>();
             List<UsernamePassword> nonencryptuserlist = new List<UsernamePassword>();
             List<string> curri_list = new List<string>();
-            try
-            {
-                await Request.Content.ReadAsMultipartAsync(result);
                 
                 //1.READ JSON DATA PART (curri and type)
-                JObject datareceive = JObject.Parse(result.FormData.GetValues(result.FormData.AllKeys[0])[0]);
-                if(datareceive["curri"] != null)
+                if(data["curri"] != null)
                 {
-                    JArray jcurrilist = (JArray)datareceive["curri"];
+                    JArray jcurrilist = (JArray)data["curri"];
                     foreach(JValue value in jcurrilist)
                     {
                         curri_list.Add(value.ToString());
                     }
                 }
-                string select_user_type = datareceive["type"]["user_type"].ToString();
+                string select_user_type = data["type"].ToString();
 
 
-                //2.Read maillist file
-                
-                MultipartFileData file = result.FileData[0];
-                if (file.Headers.ContentType.ToString() != "text/plain")
-                    return BadRequest("ไฟล์ที่อัพโหลดไม่เป็นไฟล์ข้อความธรรมดา");
-
-                FileInfo fileInfo = new FileInfo(file.LocalFileName);
-
+                //2.Read maillist
                 const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
                 RNGCryptoServiceProvider gen = new RNGCryptoServiceProvider();
                 byte[] num = new byte[8];
-                string text = File.ReadAllText(string.Format("{0}/{1}", savepath, fileInfo.Name));
-                string [] emaillist = text.Split(' ','\r','\t','\n','\v','\f').Where(t => t != "").ToArray();
-                foreach(string str in emaillist)
+                JArray emaillist = (JArray)data["new_emails"];
+                foreach (JValue value in emaillist)
                 {
                     //GENERATE PASSWORD 8 CHARS
                     string password = "";
@@ -76,7 +57,7 @@ namespace educationalProject.Controllers
                         password += chars[num[j]];
                     }
                     //=========================
-                    string strlower = str.ToLower();
+                    string strlower = value.ToString().ToLower();
 
                     userlist.Add(new UsernamePassword(strlower, password));
                     nonencryptuserlist.Add(new UsernamePassword
@@ -86,12 +67,7 @@ namespace educationalProject.Controllers
                     });
                 }
 
-                //3.Delete temp email file
-                //Check whether file exists!
-                if (File.Exists(string.Format("{0}/{1}", savepath, fileInfo.Name)))
-                    File.Delete(string.Format("{0}/{1}", savepath, fileInfo.Name));
-
-                //4.Add user to database base on select_user_type
+                //3.Add user to database base on select_user_type
                 object resultfromdb = null;
                 if (select_user_type == "อาจารย์")
                     resultfromdb = await teachercontext.Insert(userlist, curri_list);
@@ -108,7 +84,7 @@ namespace educationalProject.Controllers
                 else
                     return BadRequest("กรุณาเลือกประเภทผู้ใช้งาน");
 
-                //5.If result is list,try to send mail (send only mail that not it resultfromdb)
+                //4.If result is list,try to send mail (send only mail that not it resultfromdb)
                 //Otherwise send errorresult back to user.
                 if (resultfromdb == null)
                 {
@@ -137,12 +113,6 @@ namespace educationalProject.Controllers
                 }
                 else
                     return InternalServerError(new Exception(resultfromdb.ToString()));
-
-            }
-            catch (Exception e)
-            {
-                return InternalServerError(e);
-            }
         }
 
         [ActionName("login")]

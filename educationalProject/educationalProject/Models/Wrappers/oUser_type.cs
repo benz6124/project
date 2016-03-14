@@ -17,8 +17,10 @@ namespace educationalProject.Models.Wrappers
             List<oUser_type> result = new List<oUser_type>();
             if(mode == 0)
                 d.iCommand.CommandText = string.Format("select * from {0} where {1} != 'ผู้ดูแลระบบ'", FieldName.TABLE_NAME,FieldName.USER_TYPE);
-            else
+            else if(mode == 1)
                 d.iCommand.CommandText = string.Format("select * from {0} where {1} != 'ผู้ดูแลระบบ' and {1} != 'กรรมการหลักสูตร'", FieldName.TABLE_NAME, FieldName.USER_TYPE);
+            else
+                d.iCommand.CommandText = string.Format("select * from {0} ", FieldName.TABLE_NAME);
             try
             {
                 System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();

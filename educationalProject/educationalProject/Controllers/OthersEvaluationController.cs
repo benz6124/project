@@ -51,10 +51,14 @@ namespace educationalProject.Controllers
                     o.assessor_id = Convert.ToInt32(obj["assessor_id"]);
                     o.date = d.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[5];
                     o.time = d.GetDateTimeFormats()[101];
-                    if (obj["suggestion"] != null)
-                        o.suggestion = obj["suggestion"].ToString();
+                    if (obj["strength"] != null)
+                        o.strength = obj["strength"].ToString();
                     else
-                        o.suggestion = "";
+                        o.strength = "";
+                    if (obj["improve"] != null)
+                        o.improve = obj["improve"].ToString();
+                    else
+                        o.improve = "";
                     o.indicator_num = Convert.ToInt32(obj["indicator_num"]);
                     o.sub_indicator_num = Convert.ToInt32(obj["sub_indicator_num"]);
                     o.evaluation_score = Convert.ToInt32(obj["evaluation_score"]);
@@ -83,9 +87,9 @@ namespace educationalProject.Controllers
                     {
                         string delpath = WebApiApplication.SERVERPATH;
                         //delete file that targeted (it has set via datacontext's [suggestion] property  
-                        if (datacontext.suggestion != "")
-                            if (File.Exists(string.Format("{0}{1}", delpath, datacontext.suggestion)))
-                                File.Delete(string.Format("{0}{1}", delpath, datacontext.suggestion));
+                        if (datacontext.strength != "")
+                            if (File.Exists(string.Format("{0}{1}", delpath, datacontext.strength)))
+                                File.Delete(string.Format("{0}{1}", delpath, datacontext.strength));
                     }
                     return Ok();
                 }
