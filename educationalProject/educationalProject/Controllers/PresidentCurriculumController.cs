@@ -49,6 +49,8 @@ namespace educationalProject.Controllers
             datacontext.aca_year = 2558;
             return Ok(await datacontext.SelectAllCurriculumsAndAllPresidents());
         }
+
+        [ActionName("saveindividualpres")]
         public async Task<IHttpActionResult> PutForUpdate(oPresident_curriculum data)
         {
             object result = await data.InsertOrUpdate();

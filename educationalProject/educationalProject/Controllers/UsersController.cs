@@ -38,11 +38,11 @@ namespace educationalProject.Controllers
                         curri_list.Add(value.ToString());
                     }
                 }
-                string select_user_type = data["type"].ToString();
+                string select_user_type = data["type"]["user_type"].ToString();
 
 
                 //2.Read maillist
-                const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
                 RNGCryptoServiceProvider gen = new RNGCryptoServiceProvider();
                 byte[] num = new byte[8];
                 JArray emaillist = (JArray)data["new_emails"];
