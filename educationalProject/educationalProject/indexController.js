@@ -2,7 +2,7 @@
 
 
 
-app.controller('choice_index_controller', function($scope, $http,$alert,$cookies,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
+app.controller('choice_index_controller', function($scope,$anchorScroll, $location,$http,$alert,$cookies,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
 
 
  
@@ -52,6 +52,17 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$cookies
 
     }
 
+$rootScope.go_to_edit_reason = function (my_modal,sub_indicator){
+     // $scope.sub_indicator_choosen = sub_indicator;
+        $scope.not_select_sub_indicator = false;
+        $scope.sendSectionSaveAndGetSupportText_to_link(sub_indicator);
+my_modal.$hide();
+console.log('$scope.sub_indicator_choosen')
+console.log($scope.sub_indicator_choosen)
+    console.log('in')
+$location.hash('edit_reason_now');
+$anchorScroll();
+}
 
   $scope.get_reason_self_evaluate = function(indicator_now,sub_indicator_now){
         $scope.section_save_to_send = new Object();
@@ -75,7 +86,7 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$cookies
                  ).success(function (data) {
 
                     $rootScope.display_self_support= data;
-
+                    $rootScope.sub_indicator_now_for_link = sub_indicator_now;
 
                  });
 
@@ -102,6 +113,17 @@ app.controller('choice_index_controller', function($scope, $http,$alert,$cookies
          $scope.corresponding_aca_years = [];
     }
 
+
+$rootScope.alread_select_indicator_to_link = function(){
+  
+    if(!$scope.indicator_choosen.indicator_num ){
+         return false;
+  
+    }
+     return true;
+   
+
+}
         $scope.can_watch_result = function(){
 
     if($scope.$parent.already_login == true){
@@ -580,6 +602,41 @@ $scope.send_support_text_change_to_server = function(){
     //     return $scope.year_choosen.aca_year != year.aca_year;
     // }
 
+        $scope.sendSectionSaveAndGetSupportText_to_link = function (number_of_sub) {
+
+var index;
+for(index=0;index<$scope.corresponding_sub_indicators.length;index++){
+    if( $scope.corresponding_sub_indicators[index].sub_indicator_num == number_of_sub ){
+            $scope.sub_indicator_choosen = $scope.corresponding_sub_indicators[index];
+    }
+
+}
+
+     $scope.section_save_to_send = new Object();
+     $scope.section_save_to_send.teacher_id = "";
+     $scope.section_save_to_send.detail  = "";
+     $scope.section_save_to_send.date  = "";
+     $scope.section_save_to_send.time  = "";
+     $scope.section_save_to_send.aca_year = $scope.year_choosen.aca_year;
+     $scope.section_save_to_send.indicator_num  = $scope.indicator_choosen.indicator_num;
+     $scope.section_save_to_send.sub_indicator_num   = $scope.sub_indicator_choosen.sub_indicator_num;
+     $scope.section_save_to_send.curri_id = $scope.curri_choosen.curri_id;
+        $http.post(
+             '/api/sectionsave',
+             JSON.stringify($scope.section_save_to_send),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+             console.log("sendSectionSaveAndGetSupportText");
+            console.log(data);
+            $scope.current_section_save = data;
+            CKEDITOR.instances['support_text'].setData(data.detail);
+
+         });
+    }
 
         $scope.sendSectionSaveAndGetSupportText = function () {
 

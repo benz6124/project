@@ -386,6 +386,7 @@
    <button class="btn hvr-wobble-vertical" type="button" style="background-color:#739900;margin-bottom:0px;margin-left:0px; color:white;" ng-click="download_aun_book()">
                     <span class="glyphicon glyphicon-download-alt"></span> ดาวน์โหลดเล่ม
                 </button>
+               
 
 </div>
 
@@ -908,7 +909,9 @@
 
     <hr ng-show="already_login" />
                       
-                      <div ng-show="can_edit_reason()">
+                      <div ng-show="can_edit_reason()" >
+                       <a name="edit_reason_now"></a>
+                     
                     <button class="btn editor hvr-wobble-vertical " type="button" data-nq-toggle-modal="#another_aca" data-qo-effect="flip-x" data-wow-duration="1s"  style="background-color:#6F002B;border:none;" ng-click="clear_select_year_support_text_choosen()"> <span class="glyphicon glyphicon-export" /><span class="normal"> ดึงข้อมูลจากปีการศึกษาอื่น</span></button>
 
   <br />  
@@ -4274,7 +4277,7 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
         <div id="see_evaluate_self_sudden" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode="true" data-qo-independent="true" >
                     <div class="custom-header">
-                        <h1 class="headerModalH1"><span class="headerModal">ข้อมูลสนับสนุนการประเมินหลักสูตรตนเอง</span></h1>
+                        <h1 class="headerModalH1"><span class="headerModal">ข้อมูลสนับสนุนการประเมินหลักสูตรตนเอง</span>  <a ng-if="alread_select_indicator_to_link()" ng-click="go_to_edit_reason(this,sub_indicator_now_for_link)" ></a></h1>
                     </div>
 
 
