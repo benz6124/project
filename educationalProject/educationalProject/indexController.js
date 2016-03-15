@@ -53,15 +53,23 @@ app.controller('choice_index_controller', function($scope,$anchorScroll, $locati
     }
 
 $rootScope.go_to_edit_reason = function (my_modal,sub_indicator){
+
+
+      console.log('go_to_edit_reason')
      // $scope.sub_indicator_choosen = sub_indicator;
         $scope.not_select_sub_indicator = false;
         $scope.sendSectionSaveAndGetSupportText_to_link(sub_indicator);
 my_modal.$hide();
-console.log('$scope.sub_indicator_choosen')
-console.log($scope.sub_indicator_choosen)
-    console.log('in')
+
+// console.log('$scope.sub_indicator_choosen')
+// console.log($scope.sub_indicator_choosen)
+
 $location.hash('edit_reason_now');
+
 $anchorScroll();
+$location.hash(null)
+
+
 }
 
   $scope.get_reason_self_evaluate = function(indicator_now,sub_indicator_now){
@@ -116,7 +124,8 @@ $anchorScroll();
 
 $rootScope.alread_select_indicator_to_link = function(){
   
-    if(!$scope.indicator_choosen.indicator_num ){
+    if(    $scope.select_overall == true){
+
          return false;
   
     }
@@ -148,7 +157,7 @@ $rootScope.alread_select_indicator_to_link = function(){
        return false;
     }
 
-    $scope.can_edit_reason = function(){
+    $rootScope.can_edit_reason = function(){
            
     if($scope.$parent.already_login == true){
         if(!$rootScope.current_user.privilege[$scope.curri_choosen.curri_id]){
@@ -327,6 +336,9 @@ $rootScope.alread_select_indicator_to_link = function(){
          ).success(function (data) {
              $scope.corresponding_sub_indicators = data;
              $scope.sendIndicatorCurriAndGetEvaluation();
+
+        $scope.not_select_sub_indicator = false;
+        $scope.sendSectionSaveAndGetSupportText_to_link(1);
          });
 
     }
@@ -2024,7 +2036,25 @@ $scope.init =function() {
                        $scope.personnel_choose = {};
                        $scope.current_president = {};
                        $scope.blank_please= false;
-                         $scope.corresponding_aca_years =[];
+                       $scope.choose_same_presidents();
+                 
+                               $http.get('/api/curriculumacademic/getdistinctacayear').success(function (data) {
+            
+           $scope.corresponding_aca_years =data;
+          });
+}
+
+$scope.add_president = function(curri_key){
+
+    $scope.results.all_presidents[curri_key].presidents.push({'tname':"",'pic':'','email':''});
+    
+}
+
+$scope.change = function(curri_key){
+    console.log( $scope.results.all_presidents[curri_key].presidents)
+}
+$scope.remove_president = function(curri_key,index_to_remove){
+     $scope.results.all_presidents[curri_key].presidents.splice(index_to_remove, 1);     
 }
 
   $scope.$on("modal.hide", function (event, args) {
@@ -2068,7 +2098,7 @@ $scope.corresponding_indicators = [];
         console.log($scope.year_choosen);
 
         $http.post(
-             '/api/PresidentCurriculum',
+             '/api/presidentcurriculum/getallpres',
              JSON.stringify($scope.year_choosen),
              {
                  headers: {
@@ -2076,22 +2106,41 @@ $scope.corresponding_indicators = [];
                  }
              }
          ).success(function (data) {
-                     console.log('hello it me')
+                  
               $scope.results = data;
             $scope.choose_not_complete = false;
-                     $scope.blank_please= false;
-            if(!$scope.results[0].username){
-          
-                $scope.results.splice(0,1);
-                 $scope.personnel_choose = [];
-            $scope.current_president = [];
- $scope.blank_please= true;
-            }
-            else{
 
-            $scope.personnel_choose = $scope.results[0];
-            $scope.current_president = $scope.results[0];
+            var index;
+            for(index=0;index<$scope.results.all_curri_id.length;index++){
+                var index2;
+       var new_presidents = [];
+                for(index2=0;index2<$scope.results.all_presidents[$scope.results.all_curri_id[index]].presidents.length;index2++){
+
+             
+                    var index3;
+                    for(index3=0;index3<$scope.results.all_presidents[$scope.results.all_curri_id[index]].candidates.length;index3++){
+                        if($scope.results.all_presidents[$scope.results.all_curri_id[index]].candidates[index3].tname == $scope.results.all_presidents[$scope.results.all_curri_id[index]].presidents[index2].tname){
+                            new_presidents.push($scope.results.all_presidents[$scope.results.all_curri_id[index]].candidates[index3]);
+                        }
+                    }
+                  
+                }
+
+                  $scope.results.all_presidents[$scope.results.all_curri_id[index]].presidents = new_presidents;
             }
+ //                     $scope.blank_please= false;
+ //            if(!$scope.results[0].username){
+          
+ //                $scope.results.splice(0,1);
+ //                 $scope.personnel_choose = [];
+ //            $scope.current_president = [];
+ // $scope.blank_please= true;
+ //            }
+ //            else{
+
+ //            $scope.personnel_choose = $scope.results[0];
+ //            $scope.current_president = $scope.results[0];
+ //            }
 
 
 
@@ -2115,6 +2164,42 @@ $scope.change_already = function(){
         else{
             return false;
         }
+    }
+
+
+    $scope.choose_same_presidents = function(){
+        if(!$scope.results){
+            return true;
+        }
+        
+           if(!$scope.results.all_curri_id){
+            return true;
+        }
+            var index;
+            for(index=0;index<$scope.results.all_curri_id.length;index++){
+                var index2;
+       var backup_presidents = [];
+                for(index2=0;index2<$scope.results.all_presidents[$scope.results.all_curri_id[index]].presidents.length;index2++){
+
+               if(backup_presidents.indexOf($scope.results.all_presidents[$scope.results.all_curri_id[index]].presidents[index2])==-1)
+               {
+                 backup_presidents.push($scope.results.all_presidents[$scope.results.all_curri_id[index]].presidents[index2]);
+               }
+               else{
+                return true;
+               }
+                    // var index3;
+                    // for(index3=0;index3<$scope.results.all_presidents[$scope.results.all_curri_id[index]].candidates.length;index3++){
+                    //     if($scope.results.all_presidents[$scope.results.all_curri_id[index]].candidates[index3].tname == $scope.results.all_presidents[$scope.results.all_curri_id[index]].presidents[index2].tname){
+                    //         new_presidents.push($scope.results.all_presidents[$scope.results.all_curri_id[index]].candidates[index3]);
+                    //     }
+                    // }
+                  
+                }
+
+               
+            }
+            return false;
     }
     $scope.close_modal = function(my_modal){
         $scope.init();
