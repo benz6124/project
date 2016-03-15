@@ -38,6 +38,9 @@ namespace educationalProject.Models.Wrappers
                         curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString();
                         aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]);
                         detail = item.ItemArray[data.Columns[FieldName.DETAIL].Ordinal].ToString();
+                        strength = item.ItemArray[data.Columns[FieldName.STRENGTH].Ordinal].ToString() != "" ? item.ItemArray[data.Columns[FieldName.STRENGTH].Ordinal].ToString() : null;
+                        weakness = item.ItemArray[data.Columns[FieldName.WEAKNESS].Ordinal].ToString() != "" ? item.ItemArray[data.Columns[FieldName.WEAKNESS].Ordinal].ToString() : null;
+                        improve = item.ItemArray[data.Columns[FieldName.IMPROVE].Ordinal].ToString() != "" ? item.ItemArray[data.Columns[FieldName.IMPROVE].Ordinal].ToString() : null;
                         indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]);
                         sub_indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.SUB_INDICATOR_NUM].Ordinal]);
                         teacher_id = item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]) : 0;
@@ -71,13 +74,15 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return WebApiApplication.CONNECTDBERRSTRING;
             d.iCommand.CommandText = string.Format("if not exists(select * from {0} where {9} = {2} and {10} = {3} and {11} = {1} and {12} = {8}) " +
-                "insert into {0} values ({1},{2},{3},{4},{5},{6},{7},{8}) " +
+                "insert into {0} values ({1},{2},{3},{4},{5},{17},{18},{19},{6},{7},{8}) " +
                 "else " +
-                "update {0} set {13}={7},{14}={6},{15}={4}, {16}={5} where {9} = {2} and {10} = {3} and {11} = {1} and {12} = {8} ",
+                "update {0} set {13}={7},{14}={6},{15}={4}, {16}={5},{20} = {17},{21} = {18},{22} = {19} where {9} = {2} and {10} = {3} and {11} = {1} and {12} = {8} ",
                 FieldName.TABLE_NAME, ParameterName.ACA_YEAR, ParameterName.INDICATOR_NUM, ParameterName.SUB_INDICATOR_NUM,
                 ParameterName.TEACHER_ID, ParameterName.DETAIL, ParameterName.DATE, ParameterName.TIME, ParameterName.CURRI_ID,
                 FieldName.INDICATOR_NUM,FieldName.SUB_INDICATOR_NUM,FieldName.ACA_YEAR,FieldName.CURRI_ID,
-                FieldName.TIME, FieldName.DATE,FieldName.TEACHER_ID, FieldName.DETAIL
+                FieldName.TIME, FieldName.DATE,FieldName.TEACHER_ID, FieldName.DETAIL,
+                /*17*/ParameterName.STRENGTH, ParameterName.WEAKNESS, ParameterName.IMPROVE,
+                /*20*/FieldName.STRENGTH, FieldName.WEAKNESS, FieldName.IMPROVE
                 );
 
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.ACA_YEAR, aca_year));
@@ -85,9 +90,13 @@ namespace educationalProject.Models.Wrappers
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.SUB_INDICATOR_NUM, sub_indicator_num));
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.TEACHER_ID, teacher_id));
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.DETAIL, detail));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.STRENGTH, strength));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.WEAKNESS, weakness));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.IMPROVE, improve));
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.DATE, date));
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.TIME, time));
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURRI_ID, curri_id));
+
             try
             {
                 await d.iCommand.ExecuteNonQueryAsync();

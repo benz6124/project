@@ -54,8 +54,12 @@ namespace educationalProject.Models.Wrappers
                 return WebApiApplication.CONNECTDBERRSTRING;
             Curriculums_presidents_detail result = new Curriculums_presidents_detail();
 
-            string selcurriculumdata = string.Format("select {0},{1} from {2} ", Cu_curriculum.FieldName.CURRI_ID, Cu_curriculum.FieldName.CURR_TNAME,
-                Cu_curriculum.FieldName.TABLE_NAME);
+            string selcurriculumdata = string.Format("select {0}.{1},{2} " +
+                                       "from {0},{3} " +
+                                       "where {0}.{1} = {3}.{4} and {5} = {6} ",
+                                       Cu_curriculum.FieldName.TABLE_NAME, Cu_curriculum.FieldName.CURRI_ID, Cu_curriculum.FieldName.CURR_TNAME,
+                                       Curriculum_academic.FieldName.TABLE_NAME, Curriculum_academic.FieldName.CURRI_ID,
+                                       Curriculum_academic.FieldName.ACA_YEAR, ParameterName.ACA_YEAR);
 
             string selallpresident = string.Format("select {0}.*,{1},{2},{3},{4} from {0},{5} " +
                                      "where {6} = {7} and {8} = {9} ",
@@ -64,10 +68,13 @@ namespace educationalProject.Models.Wrappers
                                      FieldName.ACA_YEAR,ParameterName.ACA_YEAR);
 
             string selallteacherwithcurri = string.Format("select {0}.*,{1},{2},{3},{4} from {0},{5} " +
-                                            "where {6} = 'อาจารย์' and {0}.{7} = {5}.{8} ",
+                                            "where {6} = 'อาจารย์' and {0}.{7} = {5}.{8} " +
+                                            "and {9} in (select {10} from {11} where {12} = {13}) ",
                                             User_curriculum.FieldName.TABLE_NAME, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, Teacher.FieldName.FILE_NAME_PIC,
-                                     Teacher.FieldName.EMAIL, User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_TYPE,
-                                     User_curriculum.FieldName.USER_ID, User_list.FieldName.USER_ID);
+                                            Teacher.FieldName.EMAIL, User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_TYPE,
+                                            User_curriculum.FieldName.USER_ID, User_list.FieldName.USER_ID,
+                                            User_curriculum.FieldName.CURRI_ID,Curriculum_academic.FieldName.CURRI_ID, Curriculum_academic.FieldName.TABLE_NAME,
+                                            Curriculum_academic.FieldName.ACA_YEAR,ParameterName.ACA_YEAR);
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.ACA_YEAR, aca_year));
             d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} END", selcurriculumdata,selallpresident,selallteacherwithcurri);
             try

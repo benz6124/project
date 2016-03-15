@@ -47,10 +47,10 @@ namespace educationalProject.Models.Wrappers
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN [{7}] VARCHAR(MAX) collate DATABASE_DEFAULT " +
-                                      
+
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN [{8}] VARCHAR(MAX) collate DATABASE_DEFAULT " +
-                                      
+
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN [{11}] {15} collate DATABASE_DEFAULT " +
 
@@ -66,8 +66,8 @@ namespace educationalProject.Models.Wrappers
                                       FieldName.OTHERS_EVALUATION_ID, FieldName.INDICATOR_NUM, FieldName.SUB_INDICATOR_NUM,
                                       FieldName.ASSESSOR_ID, FieldName.EVALUATION_SCORE, FieldName.STRENGTH, FieldName.IMPROVE,
                                       FieldName.DATE, FieldName.TIME, Evidence.FieldName.FILE_NAME, FieldName.CURRI_ID,
-                                      FieldName.ACA_YEAR,DBFieldDataType.CURRI_ID_TYPE,DBFieldDataType.FILE_NAME_TYPE,
-                                      DBFieldDataType.USERNAME_TYPE,Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME);
+                                      FieldName.ACA_YEAR, DBFieldDataType.CURRI_ID_TYPE, DBFieldDataType.FILE_NAME_TYPE,
+                                      DBFieldDataType.USERNAME_TYPE, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME);
 
             string insertintotemp5_1 = string.Format("insert into {13} " +
                                        "select {2}, {0}.*,{17},{18} " +
@@ -87,7 +87,7 @@ namespace educationalProject.Models.Wrappers
                                        Sub_indicator.FieldName.INDICATOR_NUM,
                                        Sub_indicator.FieldName.ACA_YEAR, aca_year,
                                        FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, temp5tablename,
-                                       User_list.FieldName.TABLE_NAME,User_list.FieldName.USER_ID,FieldName.ASSESSOR_ID,
+                                       User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_ID, FieldName.ASSESSOR_ID,
                                        Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME);
 
             string insertintotemp5_2 = string.Format("insert into {12} " +
@@ -104,78 +104,99 @@ namespace educationalProject.Models.Wrappers
                                        Sub_indicator.FieldName.INDICATOR_NUM, Sub_indicator.FieldName.SUB_INDICATOR_NUM,
                                        curri_id, Sub_indicator.FieldName.ACA_YEAR, aca_year, FieldName.TABLE_NAME,
                                        FieldName.CURRI_ID, FieldName.ACA_YEAR, FieldName.INDICATOR_NUM,
-                                       FieldName.SUB_INDICATOR_NUM, temp5tablename,indicator_num);
+                                       FieldName.SUB_INDICATOR_NUM, temp5tablename, indicator_num);
 
             string selectcmd = string.Format("select * from {0} order by {1} ", temp5tablename, FieldName.SUB_INDICATOR_NUM);
 
+            string selectselfscorecmd = string.Format("select {0},{1} " +
+                                        "from {2} " +
+                                        "where {3} = '{4}' and {5} = {6} and {7} = {8} ",
+                                        Self_evaluation.FieldName.SUB_INDICATOR_NUM, Self_evaluation.FieldName.EVALUATION_SCORE,
+                                        Self_evaluation.FieldName.TABLE_NAME, Self_evaluation.FieldName.CURRI_ID, curri_id,
+                                        Self_evaluation.FieldName.ACA_YEAR, aca_year, Self_evaluation.FieldName.INDICATOR_NUM, indicator_num);
 
-
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} END", createtabletemp5, insertintotemp5_1,
-                insertintotemp5_2, selectcmd);
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} END", createtabletemp5, insertintotemp5_1,
+                insertintotemp5_2, selectcmd, selectselfscorecmd);
 
             try
             {
                 System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
-                if (res.HasRows)
+                do
                 {
-                    DataTable data = new DataTable();
-                    data.Load(res);
-                    foreach (DataRow item in data.Rows)
+                    if (res.HasRows)
                     {
-                        if (Convert.ToInt32(item.ItemArray[data.Columns[FieldName.OTHERS_EVALUATION_ID].Ordinal]) != 0)
+                        DataTable data = new DataTable();
+                        data.Load(res);
+                        if (data.Columns.Count > 2)
                         {
-                            string h, m;
-                            DateTime timeofday = Convert.ToDateTime(item.ItemArray[data.Columns[FieldName.TIME].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture);
-                            h = timeofday.Hour.ToString();
-                            m = timeofday.Minute.ToString();
-
-                            result.evaluation_detail.Add(new Others_evaluation_sub_indicator_name
+                            foreach (DataRow item in data.Rows)
                             {
-                                curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                                others_evaluation_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.OTHERS_EVALUATION_ID].Ordinal]),
-                                aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                                assessor_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ASSESSOR_ID].Ordinal]),
-                                t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) +
-                                     item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
-                                date = Convert.ToDateTime(item.ItemArray[data.Columns[FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
-                                time = (timeofday.Hour > 9 ? "" : "0") + h + '.' + (timeofday.Minute > 9 ? "" : "0") + m,
-                                strength = item.ItemArray[data.Columns[FieldName.STRENGTH].Ordinal].ToString(),
-                                improve = item.ItemArray[data.Columns[FieldName.IMPROVE].Ordinal].ToString(),
-                                evaluation_score = item.ItemArray[data.Columns[FieldName.EVALUATION_SCORE].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVALUATION_SCORE].Ordinal]) : 0,
-                                indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
-                                sub_indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.SUB_INDICATOR_NUM].Ordinal]),
-                                sub_indicator_name = item.ItemArray[data.Columns[Sub_indicator.FieldName.SUB_INDICATOR_NAME].Ordinal].ToString()
-                            });
+                                if (Convert.ToInt32(item.ItemArray[data.Columns[FieldName.OTHERS_EVALUATION_ID].Ordinal]) != 0)
+                                {
+                                    string h, m;
+                                    DateTime timeofday = Convert.ToDateTime(item.ItemArray[data.Columns[FieldName.TIME].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture);
+                                    h = timeofday.Hour.ToString();
+                                    m = timeofday.Minute.ToString();
 
-                            if (item.ItemArray[data.Columns[Evidence.FieldName.FILE_NAME].Ordinal].ToString() != "")
-                                result.file_name = item.ItemArray[data.Columns[Evidence.FieldName.FILE_NAME].Ordinal].ToString();
+                                    result.evaluation_detail.Add(new Others_evaluation_sub_indicator_name
+                                    {
+                                        curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
+                                        others_evaluation_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.OTHERS_EVALUATION_ID].Ordinal]),
+                                        aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
+                                        assessor_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ASSESSOR_ID].Ordinal]),
+                                        t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) +
+                                             item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString(),
+                                        date = Convert.ToDateTime(item.ItemArray[data.Columns[FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
+                                        time = (timeofday.Hour > 9 ? "" : "0") + h + '.' + (timeofday.Minute > 9 ? "" : "0") + m,
+                                        strength = item.ItemArray[data.Columns[FieldName.STRENGTH].Ordinal].ToString(),
+                                        improve = item.ItemArray[data.Columns[FieldName.IMPROVE].Ordinal].ToString(),
+                                        evaluation_score = item.ItemArray[data.Columns[FieldName.EVALUATION_SCORE].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVALUATION_SCORE].Ordinal]) : 0,
+                                        indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
+                                        sub_indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.SUB_INDICATOR_NUM].Ordinal]),
+                                        sub_indicator_name = item.ItemArray[data.Columns[Sub_indicator.FieldName.SUB_INDICATOR_NAME].Ordinal].ToString()
+                                    });
+
+                                    if (item.ItemArray[data.Columns[Evidence.FieldName.FILE_NAME].Ordinal].ToString() != "")
+                                        result.file_name = item.ItemArray[data.Columns[Evidence.FieldName.FILE_NAME].Ordinal].ToString();
+                                }
+
+                                else
+                                {
+                                    result.evaluation_detail.Add(new Others_evaluation_sub_indicator_name
+                                    {
+                                        curri_id = this.curri_id,
+                                        others_evaluation_id = 0,
+                                        aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
+                                        assessor_id = 31,
+                                        date = "",
+                                        time = "",
+                                        strength = "",
+                                        improve = "",
+                                        evaluation_score = 0,
+                                        indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
+                                        sub_indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.SUB_INDICATOR_NUM].Ordinal]),
+                                        sub_indicator_name = item.ItemArray[data.Columns[Sub_indicator.FieldName.SUB_INDICATOR_NAME].Ordinal].ToString()
+                                    });
+                                }
+                            }
                         }
-
                         else
                         {
-                            result.evaluation_detail.Add(new Others_evaluation_sub_indicator_name
+                            foreach (DataRow item in data.Rows)
                             {
-                                curri_id = this.curri_id,
-                                others_evaluation_id = 0,
-                                aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                                assessor_id = 31,
-                                date = "",
-                                time = "",
-                                strength = "",
-                                improve = "",
-                                evaluation_score = 0,
-                                indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
-                                sub_indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.SUB_INDICATOR_NUM].Ordinal]),
-                                sub_indicator_name = item.ItemArray[data.Columns[Sub_indicator.FieldName.SUB_INDICATOR_NAME].Ordinal].ToString()
-                            });
+                                sub_indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[Self_evaluation.FieldName.SUB_INDICATOR_NUM].Ordinal]);
+                                result.evaluation_detail.First(t => t.sub_indicator_num == sub_indicator_num).self_score =
+                                    Convert.ToInt32(item.ItemArray[data.Columns[Self_evaluation.FieldName.EVALUATION_SCORE].Ordinal]);
+                            }
                         }
+                        data.Dispose();
                     }
-                    data.Dispose();
-                }
-                else
-                {
-                    //Reserved for return error string
-                }
+                    else if (!res.IsClosed)
+                    {
+                        if (!res.NextResult())
+                            break;
+                    }
+                } while (!res.IsClosed);
                 res.Close();
             }
             catch (Exception ex)
@@ -206,7 +227,7 @@ namespace educationalProject.Models.Wrappers
 
                                       "ALTER TABLE {0} " +
                                       "ALTER COLUMN [{1}] {2} collate DATABASE_DEFAULT ",
-                                      temp5tablename, Evidence.FieldName.FILE_NAME,DBFieldDataType.FILE_NAME_TYPE);
+                                      temp5tablename, Evidence.FieldName.FILE_NAME, DBFieldDataType.FILE_NAME_TYPE);
             string updatecmd = "";
 
             if (odata.file_name == "")
@@ -221,37 +242,37 @@ namespace educationalProject.Models.Wrappers
                                 "UPDATE {0} set {15} = '{9}',{16} = {10},{17} = '{11}',{18} = '{12}',{19} = '{13}',{20} = '{14}' where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8} " +
                                 "END ", FieldName.TABLE_NAME, FieldName.CURRI_ID, o.curri_id, FieldName.ACA_YEAR, o.aca_year,
                                 FieldName.INDICATOR_NUM, o.indicator_num, FieldName.SUB_INDICATOR_NUM, o.sub_indicator_num,
-                                o.assessor_id, o.evaluation_score > 0 ? "'" + o.evaluation_score.ToString() + "'" :"null", /*11*/ o.strength,/*12*/ o.improve
+                                o.assessor_id, o.evaluation_score > 0 ? "'" + o.evaluation_score.ToString() + "'" : "null", /*11*/ o.strength,/*12*/ o.improve
                                 , o.date, o.time,
                                 FieldName.ASSESSOR_ID, FieldName.EVALUATION_SCORE, FieldName.STRENGTH, FieldName.IMPROVE, FieldName.DATE, FieldName.TIME);
             }
 
-            
+
             else
             {
                 Others_evaluation_sub_indicator_name minobj = odata.evaluation_detail.Min();
-                    updatecmd += string.Format("if not exists (select * from {0} where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8}) " +
-                                "BEGIN " +
-                                "INSERT INTO {0} values ({6},{8},'{9}',{10},'{11}','{12}','{13}','{14}','{22}','{2}',{4}) " +
-                                "END " +
-                                "ELSE " +
-                                "BEGIN " +
+                updatecmd += string.Format("if not exists (select * from {0} where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8}) " +
+                            "BEGIN " +
+                            "INSERT INTO {0} values ({6},{8},'{9}',{10},'{11}','{12}','{13}','{14}','{22}','{2}',{4}) " +
+                            "END " +
+                            "ELSE " +
+                            "BEGIN " +
 
-                                "INSERT INTO #TEMP5 " +
-                                "select * from " +
-                                "(UPDATE {0} set {15} = '{9}',{16} = {10},{17} = '{11}',{18} = '{12}',{19} = '{13}',{20} = '{14}',{21} = '{22}' " +
-                                "output deleted.{21} " +
-                                "where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8}) as outputupdate " +
-                                "END ", FieldName.TABLE_NAME, FieldName.CURRI_ID, minobj.curri_id, FieldName.ACA_YEAR, minobj.aca_year,
-                                FieldName.INDICATOR_NUM, minobj.indicator_num, FieldName.SUB_INDICATOR_NUM, minobj.sub_indicator_num,
-                                minobj.assessor_id, minobj.evaluation_score > 0 ? "'" + minobj.evaluation_score.ToString() + "'" : "null",
-                                /*11*/ minobj.strength,/*12*/ minobj.improve, minobj.date, minobj.time,
-                                FieldName.ASSESSOR_ID, FieldName.EVALUATION_SCORE, FieldName.STRENGTH, FieldName.IMPROVE, FieldName.DATE, FieldName.TIME,
-                                Evidence.FieldName.FILE_NAME,odata.file_name);
+                            "INSERT INTO #TEMP5 " +
+                            "select * from " +
+                            "(UPDATE {0} set {15} = '{9}',{16} = {10},{17} = '{11}',{18} = '{12}',{19} = '{13}',{20} = '{14}',{21} = '{22}' " +
+                            "output deleted.{21} " +
+                            "where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8}) as outputupdate " +
+                            "END ", FieldName.TABLE_NAME, FieldName.CURRI_ID, minobj.curri_id, FieldName.ACA_YEAR, minobj.aca_year,
+                            FieldName.INDICATOR_NUM, minobj.indicator_num, FieldName.SUB_INDICATOR_NUM, minobj.sub_indicator_num,
+                            minobj.assessor_id, minobj.evaluation_score > 0 ? "'" + minobj.evaluation_score.ToString() + "'" : "null",
+                            /*11*/ minobj.strength,/*12*/ minobj.improve, minobj.date, minobj.time,
+                            FieldName.ASSESSOR_ID, FieldName.EVALUATION_SCORE, FieldName.STRENGTH, FieldName.IMPROVE, FieldName.DATE, FieldName.TIME,
+                            Evidence.FieldName.FILE_NAME, odata.file_name);
 
                 foreach (Others_evaluation_sub_indicator_name o in odata.evaluation_detail)
                 {
-                    if(o != minobj)
+                    if (o != minobj)
                     {
                         updatecmd += string.Format("if not exists (select * from {0} where {1} = '{2}' and {3} = {4} and {5} = {6} and {7} = {8}) " +
                                                         "BEGIN " +

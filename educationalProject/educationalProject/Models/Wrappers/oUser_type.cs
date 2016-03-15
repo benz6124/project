@@ -97,18 +97,42 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
-        //public async Task<object> insertNewUserType(List<string> usrtypedata)
-        //{
-        //    DBConnector d = new DBConnector();
-        //    if (!d.SQLConnect())
-        //        return WebApiApplication.CONNECTDBERRSTRING;
-        //    int oldlength = insertintousertype.Length;
-
-        //    foreach(string type in usrtypedata)
-        //    {
-        //        if(insertintousertype.Length <= oldlength)
-        //            insertintousertype += string.Format("('{0}'")
-        //    }
-        //}
+        public async Task<object> insertNewUserType(List<string> usrtypedata)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return WebApiApplication.CONNECTDBERRSTRING;
+            string insertintousrtypeanddefpriv = "";
+            foreach (string type in usrtypedata)
+            {
+                //check whether target user_type is already exists!
+                insertintousrtypeanddefpriv += string.Format("if not exists (select * from {0} where {1} = '{2}') ", FieldName.TABLE_NAME, FieldName.USER_TYPE, type);
+                insertintousrtypeanddefpriv += string.Format("BEGIN insert into {0} values ('{1}') ", FieldName.TABLE_NAME, type);
+                //insert default privilege as value 1 for every privilege to target user type
+                insertintousrtypeanddefpriv += string.Format("insert into {0} " +
+                                               "select * from " +
+                                               "(select * from {1} where {2} = '{3}') as targetusrtype, " +
+                                               "(select {4}, {5} from {6} where {5} = 1) as titleprivdefault END ",
+                                               Default_privilege_by_type.FieldName.TABLE_NAME, FieldName.TABLE_NAME,
+                                               FieldName.USER_TYPE, type, Title_privilege.FieldName.TITLE_CODE,
+                                               Title_privilege.FieldName.TITLE_PRIVILEGE_CODE, Title_privilege.FieldName.TABLE_NAME);
+            }
+            d.iCommand.CommandText = insertintousrtypeanddefpriv;
+            try
+            {
+                await d.iCommand.ExecuteNonQueryAsync();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+        }
     }
 }

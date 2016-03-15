@@ -42,7 +42,10 @@ namespace educationalProject.Controllers
             datacontext.time = d.GetDateTimeFormats()[101];
             datacontext.aca_year = data.aca_year;
             datacontext.curri_id = data.curri_id;
-            datacontext.detail = data.detail;
+            datacontext.detail = data.detail != null ? data.detail : ""; ;
+            datacontext.strength = data.strength != null ? data.strength : "";
+            datacontext.weakness = data.weakness != null ? data.weakness : "";
+            datacontext.improve = data.improve != null ? data.improve : "";
             datacontext.indicator_num = data.indicator_num;
             datacontext.sub_indicator_num = data.sub_indicator_num;
             datacontext.teacher_id = data.teacher_id;

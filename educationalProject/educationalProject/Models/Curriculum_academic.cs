@@ -6,7 +6,7 @@ namespace educationalProject.Models
 {
     public class Curriculum_academic
     {
-        protected struct FieldName
+        internal struct FieldName
         {
             public static readonly string CURRI_ID = "CURRI_ID";
             public static readonly string ACA_YEAR = "ACA_YEAR";

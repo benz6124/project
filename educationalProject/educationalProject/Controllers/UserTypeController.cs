@@ -34,17 +34,17 @@ namespace educationalProject.Controllers
             return Ok(result);
         }
 
-        /*[ActionName("add")]
+        [ActionName("add")]
         public async Task<IHttpActionResult> PostForAddUserType(List<string> usrtypelist)
         {
             if (usrtypelist.Count == 0)
                 return BadRequest("กรุณาระบุชื่อของชนิดผู้ใช้งานที่ต้องการเพิ่ม");
 
-            object result = await datacontext.UpdatePresidentData(cpdata);
+            object result = await datacontext.insertNewUserType(usrtypelist);
             if (result == null)
                 return Ok();
             else
                 return InternalServerError(new Exception(result.ToString()));
-        }*/
+        }
     }
 }
