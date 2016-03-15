@@ -97,5 +97,18 @@ namespace educationalProject.Models.Wrappers
             }
             return result;
         }
+        //public async Task<object> insertNewUserType(List<string> usrtypedata)
+        //{
+        //    DBConnector d = new DBConnector();
+        //    if (!d.SQLConnect())
+        //        return WebApiApplication.CONNECTDBERRSTRING;
+        //    int oldlength = insertintousertype.Length;
+
+        //    foreach(string type in usrtypedata)
+        //    {
+        //        if(insertintousertype.Length <= oldlength)
+        //            insertintousertype += string.Format("('{0}'")
+        //    }
+        //}
     }
 }

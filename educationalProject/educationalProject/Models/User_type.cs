@@ -11,6 +11,10 @@ namespace educationalProject.Models
             public static readonly string USER_TYPE = "USER_TYPE";
             public static readonly string TABLE_NAME = "USER_TYPE";
         }
+        protected struct ParameterName
+        {
+            public static readonly string USER_TYPE = "@" + FieldName.USER_TYPE;
+        }
         private string _user_type;
         public string user_type { get { return _user_type; } set { _user_type = value; } }
 
