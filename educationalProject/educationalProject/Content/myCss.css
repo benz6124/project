@@ -908,6 +908,8 @@ textarea.form-control{
   font-size: 20px;
 }
 
+
+
 h1.headerPanel{
   font-family: "FreesiaUPC" !important;
   font-weight: bold;
@@ -1465,4 +1467,25 @@ a.login_text:hover{
 
 .nav.select-render-nav{
   width:500px !important;
+}
+
+input[type='text'].cke_dialog_ui_input_text{
+    font-size: 18px!important;
+}
+span.select-option.option-label{
+  text-align: left;
+  padding-left: 20px;
+}
+
+.not_left span.select-option.option-label{
+  text-align: center !important;
+  padding-left: 0px !important;
+}
+
+.select-input.form-control{
+  font-size: 18px !important;
+}
+
+span.no-match {
+font-size: 18px !important;
 }

@@ -6788,11 +6788,11 @@ var selectApp = angular.module('ngQuantum.select', [
             html: true,
             clearIcon: '<span class="clear-icon fu-cross"></span>',
             spinner: '<span class="spin-icon fu-spinner-fan spin"></span>',
-            noMatch: 'No result found...',
+            noMatch: 'ไม่พบคำที่ค้นหา...',
             placeholder: 'Please select...',
-            filterText: 'search...',
+            filterText: 'ค้นหา...',
             charText: 'Please enter {{$remainingChar}} or more characters',
-            searchingText: 'Searching...',
+            searchingText: 'ค้นหา...',
             maxLength: 3,
             maxTextLength: 30,
             minTextLength: 3,
@@ -6921,7 +6921,7 @@ var selectApp = angular.module('ngQuantum.select', [
                           var barelement = $target.find('.scrollable');
                           var barOptions = {
                               keyword: false,
-                              barSize: 'slimmest',
+                              barSize: 'normal',
                               placementOffset: -2,
                               $scope: scope
                           }

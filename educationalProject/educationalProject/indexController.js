@@ -21,7 +21,7 @@ app.controller('choice_index_controller', function($scope,$anchorScroll, $locati
      $scope.current_section_save = [];
      $scope.not_choose_year = true;
        $rootScope.all_curriculums = [];
-
+$scope.send_please_wait = false;
     // console.log(select_nothing);
 
    $scope.get_reason_other_evaluate = function(indicator_now){
@@ -119,6 +119,7 @@ $location.hash(null)
          $scope.current_section_save = [];
          $scope.not_choose_year = true;
          $scope.corresponding_aca_years = [];
+         $scope.send_please_wait = false;
     }
 
 
@@ -178,6 +179,33 @@ $rootScope.alread_select_indicator_to_link = function(){
        return false;
     }
 
+
+    $rootScope.can_watch_reason = function(){
+           
+    if($scope.$parent.already_login == true){
+
+        if(!$rootScope.current_user.privilege[$scope.curri_choosen.curri_id]){
+            return false;
+        }
+
+        if($rootScope.current_user.user_type == 'ผู้ดูแลระบบ'){
+            return true;
+        }
+        if( $rootScope.current_user.privilege[$scope.curri_choosen.curri_id]['31'] ==2){
+        return true;
+       }
+
+       if($rootScope.president_in_this_curri_and_year($scope.curri_choosen.curri_id,$scope.year_choosen.aca_year)==true){
+        return true;
+       }
+
+       if($rootScope.right_from_committee($scope.curri_choosen.curri_id,$scope.year_choosen.aca_year,31,2)==true){
+        return true;
+       }
+    }
+       return false;
+    }
+
      $scope.init_var = function(){
 
     $scope.not_select_curri_and_year = true;
@@ -195,7 +223,7 @@ $rootScope.alread_select_indicator_to_link = function(){
      $scope.current_section_save = [];
      $scope.not_choose_year = true;
        $rootScope.all_curriculums = [];
-
+$scope.send_please_wait = false;
 
      }
 
@@ -335,16 +363,20 @@ $rootScope.alread_select_indicator_to_link = function(){
              }
          ).success(function (data) {
              $scope.corresponding_sub_indicators = data;
-             $scope.sendIndicatorCurriAndGetEvaluation();
+              $scope.sendIndicatorCurriAndGetEvaluation();
+             if($scope.can_watch_reason() == true){
+                 
 
-        $scope.not_select_sub_indicator = false;
-        $scope.sendSectionSaveAndGetSupportText_to_link(1);
+                $scope.not_select_sub_indicator = false;
+                $scope.sendSectionSaveAndGetSupportText_to_link(1);
+             }
+           
          });
 
     }
     
      $scope.get_all_evaluation = function (){
-
+console.log('get_all_evaluation')
          $http.post(
              '/api/evaluationresult/overall',
              JSON.stringify($scope.year_choosen),
@@ -546,6 +578,7 @@ $scope.download_aun_book = function(){
          }
 }
 $scope.send_support_text_change_to_server = function(){
+    $scope.send_please_wait = true;
     console.log("send_support_text_change_to_server");
 
 
@@ -563,10 +596,10 @@ $scope.send_support_text_change_to_server = function(){
     
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-
+                    $scope.send_please_wait = false;
          })
     .error(function(data, status, headers, config) {
-                
+                $scope.send_please_wait = false;
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
      
@@ -599,7 +632,8 @@ $scope.send_support_text_change_to_server = function(){
                  ).success(function (data) {
             console.log(data);
                     $scope.show_preview_support_text= data.detail;
-
+       window.all_curris = $rootScope.all_curriculums;
+       window.me = {'da':111,'aa':'qw','ww':[1,2,3]}
                  });
 
                  }
@@ -646,7 +680,8 @@ for(index=0;index<$scope.corresponding_sub_indicators.length;index++){
             console.log(data);
             $scope.current_section_save = data;
             CKEDITOR.instances['support_text'].setData(data.detail);
-
+                   window.all_curris = $rootScope.all_curriculums;
+       window.me = {'da':111,'aa':'qw','ww':[1,2,3]}
          });
     }
 
@@ -2036,8 +2071,8 @@ $scope.init =function() {
                        $scope.personnel_choose = {};
                        $scope.current_president = {};
                        $scope.blank_please= false;
-                       $scope.choose_same_presidents();
-                 
+                    
+                 $scope.old_pres_ob = {};
                                $http.get('/api/curriculumacademic/getdistinctacayear').success(function (data) {
             
            $scope.corresponding_aca_years =data;
@@ -2091,7 +2126,18 @@ $scope.corresponding_indicators = [];
 
     }
 
-
+$scope.nothing_change_object = function(){
+      if(!$scope.old_pres_ob){
+        return true;
+      }
+      if(!$scope.results){
+        return true;
+      }
+      if(angular.equals($scope.old_pres_ob,$scope.results)==true){
+        return true;
+      }
+      return false;
+}
     $scope.find_information = function(){
 
           console.log("find_information");
@@ -2143,7 +2189,7 @@ $scope.corresponding_indicators = [];
  //            }
 
 
-
+$scope.old_pres_ob = angular.copy($scope.results);
             
          });
 
@@ -2167,7 +2213,7 @@ $scope.change_already = function(){
     }
 
 
-    $scope.choose_same_presidents = function(){
+    $scope.choose_same_presidents_or_not_choose = function(){
         if(!$scope.results){
             return true;
         }
@@ -2180,7 +2226,9 @@ $scope.change_already = function(){
                 var index2;
        var backup_presidents = [];
                 for(index2=0;index2<$scope.results.all_presidents[$scope.results.all_curri_id[index]].presidents.length;index2++){
-
+                if(!$scope.results.all_presidents[$scope.results.all_curri_id[index]].presidents[index2].tname){
+                    return true;
+                }
                if(backup_presidents.indexOf($scope.results.all_presidents[$scope.results.all_curri_id[index]].presidents[index2])==-1)
                {
                  backup_presidents.push($scope.results.all_presidents[$scope.results.all_curri_id[index]].presidents[index2]);
@@ -2211,11 +2259,11 @@ $scope.change_already = function(){
         // console.log($scope.personnel_choose);
         $scope.new_obj_to_send ={};
 
-        $scope.new_obj_to_send.teacher_id = $scope.personnel_choose.teacher_id;
-        $scope.new_obj_to_send.curri_id = $scope.curri_choosen.curri_id;
-        $scope.new_obj_to_send.aca_year = $scope.year_choosen.aca_year;
+        $scope.new_obj_to_send.old_object = $scope.results;
+
+        $scope.new_obj_to_send.aca_year = $scope.year_choosen;
         $http.put(
-             '/api/PresidentCurriculum',
+             '/api/presidentcurriculum/saveallpres',
              JSON.stringify($scope.new_obj_to_send),
              {
                  headers: {
@@ -2822,8 +2870,10 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
       
         var index;
   $rootScope.my_evidence_real_code_we_have_now = [];
+  $rootScope.my_evidence_name_we_have_now =[];
              for(index=0;index<$rootScope.manage_evidences_world_evidences.length;index++){
                 $rootScope.my_evidence_real_code_we_have_now.push($rootScope.manage_evidences_world_evidences[index].evidence_real_code);
+                 $rootScope.my_evidence_name_we_have_now.push($rootScope.manage_evidences_world_evidences[index].evidence_name);
              }
 
               angular.forEach(
@@ -2889,9 +2939,22 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
                 return true;
         }
         else{
-             if ($scope.my_new_evidence.evidence_real_code <= 0 || $rootScope.my_evidence_real_code_we_have_now.indexOf($scope.my_new_evidence.evidence_real_code) != -1){
+             if ($scope.my_new_evidence.evidence_real_code <= 0 ){
                    return true;
+  $alert({title:'เกิดข้อผิดพลาด', content:'รหัสหลักฐานห้ามมีค่าน้อยกว่าศูนย์',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
                 }
+
+            if($rootScope.my_evidence_real_code_we_have_now.indexOf($scope.my_new_evidence.evidence_real_code) != -1){
+                   return true;
+                   $alert({title:'เกิดข้อผิดพลาด', content:'รหัสหลักฐานซ้ำกับรหัสหลักฐานที่มีอยู่แล้ว',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+            }
+            if($rootScope.my_evidence_name_we_have_now.indexOf($scope.my_new_evidence.evidence_name) != -1){
+                return true;
+                   $alert({title:'เกิดข้อผิดพลาด', content:'หลักฐานที่เลือกมีชื่อซ้ำกับหลักฐานที่มีอยู่แล้ว',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+            }
             return false;
         }
     }
@@ -3195,6 +3258,7 @@ $scope.still_not_choose_complete = function(){
 
   var index;
   $scope.all_evidence_real_code = [];
+    $scope.all_evidence_name = [];
   for(index = 0; index<$rootScope.manage_evidences_world_evidences.length ;index++){
     if(!$rootScope.manage_evidences_world_evidences[index].evidence_real_code ){
         return true;
@@ -3206,10 +3270,16 @@ $scope.still_not_choose_complete = function(){
         if( $scope.all_evidence_real_code.indexOf($rootScope.manage_evidences_world_evidences[index].evidence_real_code)!=-1){
             return true;
         }
+
+        if( $scope.all_evidence_name.indexOf($rootScope.manage_evidences_world_evidences[index].evidence_name)!=-1){
+            return true;
+        }
+
+        $scope.all_evidence_name.push($rootScope.manage_evidences_world_evidences[index].evidence_name);
         $scope.all_evidence_real_code.push($rootScope.manage_evidences_world_evidences[index].evidence_real_code);
     }
   }
-
+return false;
 
 
 
@@ -5011,11 +5081,18 @@ $scope.still_not_write_code = function() {
     else{
       
        if( $rootScope.my_evidence_real_code_we_have_now.indexOf($scope.code_we_want) != -1){
-           
             return true;
+                   $alert({title:'เกิดข้อผิดพลาด', content:'รหัสหลักฐานซ้ำกับรหัสหลักฐานที่มีอยู่แล้ว',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
         }
-         
-        return false;
+
+        if($rootScope.my_evidence_name_we_have_now.indexOf($scope.my_new_evidence.evidence_name) != -1){
+  return true;
+                   $alert({title:'เกิดข้อผิดพลาด', content:'หลักฐานที่เลือกมีชื่อซ้ำกับหลักฐานที่มีอยู่แล้ว',alertType:'warning',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+      
+        }
+          return false;
     }
 }
 $scope.watch_preview = function(){
@@ -5050,8 +5127,10 @@ $scope.all_evidences =[];
 
  var index;
   $rootScope.my_evidence_real_code_we_have_now = [];
+  $rootScope.my_evidence_name_we_have_now = [];
              for(index=0;index<$rootScope.manage_evidences_world_evidences.length;index++){
                 $rootScope.my_evidence_real_code_we_have_now.push($rootScope.manage_evidences_world_evidences[index].evidence_real_code);
+                $rootScope.my_evidence_name_we_have_now.push($rootScope.manage_evidences_world_evidences[index].evidence_name);
              }
                 }
   

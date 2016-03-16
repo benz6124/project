@@ -8,7 +8,7 @@ app.factory('request_all_curriculums_service_server', function($http,$rootScope)
 	       	
 	
 	        $rootScope.all_curriculums = response.data;
-	      
+
 	        return response.data;
 	      });
 	  
