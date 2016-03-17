@@ -1489,3 +1489,11 @@ span.select-option.option-label{
 span.no-match {
 font-size: 18px !important;
 }
+
+body > .inner {
+  display: none;
+}
+
+body.pg-loaded > .inner {
+  display: block;
+}

@@ -2,6 +2,7 @@
 
 
 
+
 app.controller('choice_index_controller', function($scope,$anchorScroll, $location,$http,$alert,$cookies,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
 
 
@@ -9032,4 +9033,6 @@ $rootScope.manage_minutes_still_same = function(){
 
   }); 
     }
+
+    window.loading_screen.finish();
 });
