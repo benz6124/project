@@ -14,6 +14,17 @@ namespace educationalProject.Controllers
     public class EvidenceController : ApiController
     {
         private oEvidence datacontext = new oEvidence();
+        [ActionName("getallevidence")]
+        public async Task<IHttpActionResult> PostToQueryAllEvidenceWithCurri([FromBody]int indicator_num)
+        {
+            datacontext.indicator_num = indicator_num;
+            object result = await datacontext.SelectAllEvidenceWithCurriculumList();
+            if (result.GetType().ToString() != "System.String")
+                return Ok(result);
+            else
+                return InternalServerError(new Exception(result.ToString()));
+        }
+
         [ActionName("getnormal")]
         public async Task<IHttpActionResult> PostByIndicatorAndCurriculum(JObject obj)
         {

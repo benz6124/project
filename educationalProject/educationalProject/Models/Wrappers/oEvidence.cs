@@ -281,6 +281,110 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
+        public async Task<object> SelectAllEvidenceWithCurriculumList()
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return WebApiApplication.CONNECTDBERRSTRING;
+            Dictionary<string, Curriculum_aca_year_evidence_list> result = new Dictionary<string, Curriculum_aca_year_evidence_list>();
+            string selectcurrinamewithacayear = string.Format("select {0}.{1},{2},{3} " +
+                                                "from {0},{4} " +
+                                                "where {0}.{1} = {4}.{5} ",
+                                                Cu_curriculum.FieldName.TABLE_NAME, Cu_curriculum.FieldName.CURRI_ID,
+                                                Cu_curriculum.FieldName.CURR_TNAME, Curriculum_academic.FieldName.ACA_YEAR,
+                                                Curriculum_academic.FieldName.TABLE_NAME, Curriculum_academic.FieldName.CURRI_ID);
+
+            string selectallevidence = string.Format("select {0}, {1}, {2}, {3}, {4}, {5} from {6} ",
+                                       FieldName.EVIDENCE_NAME, FieldName.INDICATOR_NUM, FieldName.EVIDENCE_REAL_CODE, FieldName.CURRI_ID, FieldName.ACA_YEAR,
+                                       FieldName.FILE_NAME, FieldName.TABLE_NAME);
+
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} END", selectcurrinamewithacayear, selectallevidence);
+            try
+            {
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
+                do
+                {
+                    if (res.HasRows)
+                    {
+                        DataTable data = new DataTable();
+                        data.Load(res);
+                        if (data.Columns.Count == 3) //read curriculum academic data
+                        {
+                            foreach (DataRow item in data.Rows)
+                            {
+                                string curr_tname = item.ItemArray[data.Columns[Cu_curriculum.FieldName.CURR_TNAME].Ordinal].ToString();
+
+                                //Add curriculum as key if not exists!
+                                if (!result.ContainsKey(curr_tname))
+                                {
+                                    result.Add(curr_tname, new Curriculum_aca_year_evidence_list());
+                                    result[curr_tname].curri_id = item.ItemArray[data.Columns[Cu_curriculum.FieldName.CURRI_ID].Ordinal].ToString();
+                                }
+
+                                //add curriculum aca_year to all_years list and create year key in 'in_year' property
+                                result[curr_tname].all_years.Add(item.ItemArray[data.Columns[Curriculum_academic.FieldName.ACA_YEAR].Ordinal].ToString());
+                                result[curr_tname].in_year.Add(result[curr_tname].all_years.Last(), new Evidence_in_year_list());
+
+                            }
+
+                        }
+                        else //read evidence data
+                        {
+                            foreach (DataRow item in data.Rows)
+                            {
+                                curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString();
+                                aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]);
+                                evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString();
+
+                                //Find the target curriculum which evidence will be add to
+                                Curriculum_aca_year_evidence_list c = result.First(t => t.Value.curri_id == curri_id).Value;
+                                //If evidence name is not exist in preferred aca_year => add it noww
+                                if (!c.in_year[aca_year.ToString()].detail_evidence.ContainsKey(evidence_name))
+                                {
+                                    c.in_year[aca_year.ToString()].all_evidences.Add(evidence_name);
+                                    c.in_year[aca_year.ToString()].detail_evidence.Add(evidence_name, new Evidence_tiny_detail
+                                    {
+                                        path = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
+                                        code = item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal].ToString() + "-" +
+                                        item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal].ToString()
+                                    });
+                                }
+                                else
+                                {
+                                    int readcode = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]);
+                                    //handling duplicate evidence name by use indicator num...
+                                    if (readcode == indicator_num)
+                                    {
+                                        c.in_year[aca_year.ToString()].detail_evidence[evidence_name].path = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString();
+                                        c.in_year[aca_year.ToString()].detail_evidence[evidence_name].code = readcode.ToString() + "-" +
+                                        item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal].ToString();
+                                    }
+                                }
+                            }
+                        }
+                        data.Dispose();
+                    }
+                    else if (!res.IsClosed)
+                    {
+                        if (!res.NextResult())
+                            break;
+                    }
+                } while (!res.IsClosed);
+                res.Close();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return result;
+        }
+
         public async Task<object> InsertNewEvidenceWithSelect()
         {
             DBConnector d = new DBConnector();
