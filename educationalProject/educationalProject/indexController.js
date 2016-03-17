@@ -633,8 +633,24 @@ $scope.send_support_text_change_to_server = function(){
                  ).success(function (data) {
             console.log(data);
                     $scope.show_preview_support_text= data.detail;
-       window.all_curris = $rootScope.all_curriculums;
-       window.me = {'da':111,'aa':'qw','ww':[1,2,3]}
+    
+
+
+           $http.post(
+             '/api/evidence/getallevidence',
+             JSON.stringify($scope.indicator_choosen.indicator_num),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+               
+       window.big_chunk = data;
+            window.all_curris = $rootScope.all_curriculums;
+     
+         });
+
                  });
 
                  }
@@ -681,8 +697,22 @@ for(index=0;index<$scope.corresponding_sub_indicators.length;index++){
             console.log(data);
             $scope.current_section_save = data;
             CKEDITOR.instances['support_text'].setData(data.detail);
-                   window.all_curris = $rootScope.all_curriculums;
-       window.me = {'da':111,'aa':'qw','ww':[1,2,3]}
+                   
+      
+           $http.post(
+             '/api/evidence/getallevidence',
+             JSON.stringify($scope.indicator_choosen.indicator_num),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+               
+       window.big_chunk = data;
+            window.all_curris = $rootScope.all_curriculums;
+     
+         });
          });
     }
 

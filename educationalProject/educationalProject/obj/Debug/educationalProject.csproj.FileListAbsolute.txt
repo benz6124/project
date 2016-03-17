@@ -195,5 +195,6 @@ C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\education
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\System.Web.Http.xml
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\System.Web.Http.WebHost.xml
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\obj\Debug\educationalProject.csprojResolveAssemblyReference.cache
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\obj\Debug\educationalProject.dll
 C:\Users\BENZ\Desktop\PROJECT_TERM2\project\project\educationalProject\educationalProject\obj\Debug\educationalProject.pdb

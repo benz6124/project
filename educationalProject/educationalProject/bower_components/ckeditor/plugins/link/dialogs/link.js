@@ -9,6 +9,13 @@
 
 	var items_curri_na = [];
 	var items_curri = [];
+	var curri_now = [];
+	var year_now =[];
+	var evidence_now = [];
+	var items_year_na =[];
+		var items_year = window.big_chunk['วิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์'].in_year['2558'].all_evidences;
+	var items_evidence_na =[];
+
 										var index ;
 									
 										for(index=0;index<window.all_curris.length;index++){
@@ -18,7 +25,7 @@
 											items_curri.push(each_item);
 									
 										}
-
+console.log(window.big_chunk)
 										items_curri_na = items_curri;
 							
 	CKEDITOR.dialog.add( 'link', function( editor ) {
@@ -172,6 +179,7 @@
 								if ( data.url )
 									this.setValue( data.url.protocol || '' );
 							},
+
 							commit: function( data ) {
 								if ( !data.url )
 									data.url = {};
@@ -260,9 +268,16 @@
 							{
 								id: 'choice_curri',
 								type: 'select',
-								label: 'กรุณาเลือกหลักสูตร',
+								label: 'กรุณาเลือกหลักฐาน',
 								// 'default': 'http://',
-								items: items_curri_na
+								items: 
+
+								[
+								['วิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมการวัดคุม, 2555, [เอกสารที่ 1-1], เงินงบประมาณหมวดค่าวัสดุปีงบประมาณ 2557 ',['path1','1-1']]
+								,['วิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์, 2557, [เอกสารที่ 4-1], คำอธิบายรายวิชาแต่ละวิชาในหลักสูตร',['path2','4-1']]
+								,['วิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์, 2557, [เอกสารที่ 8-3], หลักสูตรวิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์ (หลักสูตรปรับปรุง พ.ศ. 2554)',['path3','8-3']]
+								,['วิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์, 2558, [เอกสารที่ 11-4], บัณฑิตที่พึงประสงค์ของสถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง',['path4','11-4']]
+								]
 					
 								,
 								setup: function( data ) {
@@ -277,10 +292,64 @@
 								commit: function( data ) {
 									if ( !data.evidences )
 										data.evidences = {};
-
-									data.evidences.tname = this.getValue();
+													console.log('this')
+									console.log(this)
+									console.log(this.getElement())
+									console.log('-------')
+									data.evidences.path = this.getValue().split(',')[0];
+									data.evidences.code = this.getValue().split(',')[1];
+									console.log
 								}
+						// 		,
+						// onChange: function(){
+						// 		curri_now = this.getValue();
+						// 			console.log(curri_now)
+
+						// 		items_year_na = 		[	[ '525200E' ],
+						// 		[ '2525200E' ],
+						// 		[ '2500E'],
+						// 		[ '257200E' ]];
+						// 		console.log('items_year_na')
+						// 		console.log(items_year_na)
+
+						// 	}
 							},
+
+// 							{
+// 								id: 'choice_year',
+// 								type: 'select',
+// 								label: 'กรุณาเลือกปีการศึกษา',
+// 								// 'default': 'http://',
+// 								items: items_year
+// 								,
+// 								setup: function( data ) {
+					
+// console.log('setup')
+// 							var linkType = this.getDialog().getContentElement( 'info', 'linkType' );
+// 							if ( linkType && linkType.getValue() == 'evidences' ){
+// 								this.focus();
+								
+								
+// 							}
+// 						},
+// 								commit: function( data ) {
+// 									if ( !data.evidences )
+// 										data.evidences = {};
+
+// 									data.evidences.year = this.getValue();
+// 								}		,
+
+// 						onChange: function(){
+// 								year_now = this.getValue();
+
+// 							},
+// 							onFocus:function(){
+// 								console.log('onfocus')
+// items_year = items_year_na;
+// 	console.log(items_year)
+// 							}
+// 							},
+
 						 ],
 						setup: function() {
 
@@ -883,7 +952,7 @@
 							'status':"",
 							'toolbar':"",
 							'top':"0",
-							'type':"popup",
+							'type':"_blank",
 							'width':"800"
 						}
 						attributes = {'removed':["target","onclick","data-cke-pa-onclick","data-cke-saved-name",
@@ -892,17 +961,16 @@
 "tabindex",
 "title",
 "type","class","charset","style",
-"rel"],'set':{'data-cke-saved-href':data.evidences.tname,'href':data.evidences.tname}};
+"rel"],'set':{'data-cke-saved-href':data.evidences.path,'href':data.evidences.path,'target':'_blank'}};
 						
 						 
 					}
-				
+							
+	
 console.log(data)
-
-
 				if ( !this._.selectedElement ) {
 					var range = selection.getRanges()[ 0 ];
-
+					console.log(range)
 					// Use link URL as text with a collapsed cursor.
 					if ( range.collapsed ) {
 						// Short mailto link text view (#5736).
@@ -920,7 +988,9 @@ console.log(data)
 
 					style.type = CKEDITOR.STYLE_INLINE; // need to override... dunno why.
 					style.applyToRange( range, editor );
+
 					range.select();
+
 				} else {
 					// We're only editing an existing link, so just overwrite the attributes.
 					var element = this._.selectedElement,
