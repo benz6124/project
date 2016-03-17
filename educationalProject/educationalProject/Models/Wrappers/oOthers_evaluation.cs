@@ -106,6 +106,44 @@ namespace educationalProject.Models.Wrappers
                                        FieldName.CURRI_ID, FieldName.ACA_YEAR, FieldName.INDICATOR_NUM,
                                        FieldName.SUB_INDICATOR_NUM, temp5tablename, indicator_num);
 
+            string insertintotemp5_3truecase = string.Format("insert into {0} " +
+                                               "select {1}," +
+                                               "{2}.*," +
+                                               "{3}, {4} from {2}, {5}, {6} " +
+                                               "where {2}.{7} = {8} " +
+                                               "and {2}.{7} = {5}.{9} " +
+                                               "and {2}.{10} = 0 " +
+                                               "and {11} = {12} " +
+                                               "and {5}.{13} = " +
+                                               "(select max(s1.{13}) from {5} as s1 where s1.{13} <= {14}) " +
+                                               "and {2}.{15} = '{16}' and {2}.{17} = {14} ",
+                                               temp5tablename,Indicator.FieldName.INDICATOR_NAME_T, /*2 others*/ FieldName.TABLE_NAME,
+                                               Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
+                                               /*5 ind*/ Indicator.FieldName.TABLE_NAME,
+                                               /*6 usr*/ User_list.FieldName.TABLE_NAME,
+                                               FieldName.INDICATOR_NUM,indicator_num,Indicator.FieldName.INDICATOR_NUM,
+                                               FieldName.SUB_INDICATOR_NUM,User_list.FieldName.USER_ID,
+                                               FieldName.ASSESSOR_ID,Indicator.FieldName.ACA_YEAR,aca_year,
+                                               FieldName.CURRI_ID,curri_id,FieldName.ACA_YEAR
+                                               );
+
+            string insertintotemp5_3falsecase = string.Format("insert into {0} select " +
+                                                "{1}," +
+                                                "0,{2},0,'','0','','',null,null,'','{3}',{4},null,null " +
+                                                "from {5} " +
+                                                "where {6} = {2} " +
+                                                "and {5}.{7} = (select max({7}) from {5} where {7} <= {4}) ",
+                                                temp5tablename, Indicator.FieldName.INDICATOR_NAME_T, indicator_num, curri_id, aca_year,
+                                                Indicator.FieldName.TABLE_NAME, Indicator.FieldName.INDICATOR_NUM,
+                                                Indicator.FieldName.ACA_YEAR);
+
+            string insertintotemp5_3 = string.Format("if exists (select * from {0} where {1} = 0 and {2} = {3} and {4} = '{5}' and {6} = {7}) " +
+                            " BEGIN " + insertintotemp5_3truecase + " END " +
+                            " else " +
+                            " BEGIN " + insertintotemp5_3falsecase + " END ",
+                            FieldName.TABLE_NAME, FieldName.SUB_INDICATOR_NUM, FieldName.INDICATOR_NUM, indicator_num,
+                            FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year);
+
             string selectcmd = string.Format("select * from {0} order by {1} ", temp5tablename, FieldName.SUB_INDICATOR_NUM);
 
             string selectselfscorecmd = string.Format("select {0},{1} " +
@@ -115,8 +153,8 @@ namespace educationalProject.Models.Wrappers
                                         Self_evaluation.FieldName.TABLE_NAME, Self_evaluation.FieldName.CURRI_ID, curri_id,
                                         Self_evaluation.FieldName.ACA_YEAR, aca_year, Self_evaluation.FieldName.INDICATOR_NUM, indicator_num);
 
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} END", createtabletemp5, insertintotemp5_1,
-                insertintotemp5_2, selectcmd, selectselfscorecmd);
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} {5} END", createtabletemp5, insertintotemp5_1,
+                insertintotemp5_2, insertintotemp5_3, selectcmd, selectselfscorecmd);
 
             try
             {

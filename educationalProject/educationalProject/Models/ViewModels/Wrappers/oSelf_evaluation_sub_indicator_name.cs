@@ -75,8 +75,39 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                         FieldName.ACA_YEAR, FieldName.INDICATOR_NUM,
                                         FieldName.SUB_INDICATOR_NUM);
 
+            string insertintotemp90_3truecase = string.Format("insert into {0} " +
+                                                "select {1}.*,{2} " +
+                                                "from {1},{3} " +
+                                                "where {4} = 0 and {1}.{5} = {6} " +
+                                                "and {7} = '{8}' and {1}.{9} = {10} " +
+                                                "and {3}.{11} = {1}.{5} " +
+                                                "and {3}.{12} = " +
+                                                "(select max({12}) from {3} where {12} <= {10}) ",
+                                                temp90tablename, FieldName.TABLE_NAME, Indicator.FieldName.INDICATOR_NAME_T,
+                                                Indicator.FieldName.TABLE_NAME, FieldName.SUB_INDICATOR_NUM,
+                                                FieldName.INDICATOR_NUM, inddata.indicator_num,
+                                                FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, inddata.aca_year,
+                                                Indicator.FieldName.INDICATOR_NUM, Indicator.FieldName.ACA_YEAR);
+
+            string insertintotemp90_3falsecase = string.Format("insert into {0} " +
+                "select {1}, 0, 1, 0, NULL, NULL, '{2}', {3}, {4} " +
+                "from {5} " +
+                "where {6} = {1} " +
+                "and {5}.{7} = (select max({7}) from {5} where {7} <= {3}) ",
+                temp90tablename, inddata.indicator_num, curri_id, inddata.aca_year, Indicator.FieldName.INDICATOR_NAME_T,
+                Indicator.FieldName.TABLE_NAME, Indicator.FieldName.INDICATOR_NUM, Indicator.FieldName.ACA_YEAR
+                );
+
+            string insertintotemp90_3 = string.Format("if exists (select * from {0} where {1} = 0 and {2} = {3} and {4} = '{5}' and {6} = {7}) " +
+                                        " BEGIN " + insertintotemp90_3truecase + " END " +
+                                        " else " +
+                                        " BEGIN " + insertintotemp90_3falsecase + " END ",
+                                        FieldName.TABLE_NAME, FieldName.SUB_INDICATOR_NUM, FieldName.INDICATOR_NUM, inddata.indicator_num,
+                                        FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, inddata.aca_year);
+
+
             string selectcmd = string.Format("select * from {0} order by {1} ", temp90tablename,FieldName.SUB_INDICATOR_NUM);
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} END", createtabletemp90, insertintotemp90_1, insertintotemp90_2, selectcmd);
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} END", createtabletemp90, insertintotemp90_1, insertintotemp90_2, insertintotemp90_3, selectcmd);
             try
             {
                 System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
