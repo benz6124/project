@@ -717,35 +717,40 @@
 
 
    <tbody ng-repeat="each_evaluation_in_indicator in evaluation_overall"> 
-                <tr >
+     <!--            <tr >
 
-                     <td class="number"  style="background-color:#686868;color:white;text-align:center" ng-class="{resultGreenback: each_evaluation_in_indicator.indicator_result_other_average>each_evaluation_in_indicator.indicator_result_self_average  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.indicator_result_self_average>each_evaluation_in_indicator.indicator_result_other_average &&  each_evaluation_in_indicator.complete_both}"> {{each_evaluation_in_indicator.indicator_num}}</td>
-                      <td class="topic"   style="background-color:#686868;color:white;text-align:center" ng-class="{resultGreenback: each_evaluation_in_indicator.indicator_result_other_average>each_evaluation_in_indicator.indicator_result_self_average  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.indicator_result_self_average>each_evaluation_in_indicator.indicator_result_other_average &&  each_evaluation_in_indicator.complete_both}">{{each_evaluation_in_indicator.indicator_name}}   </td>
-
-                          <td class="result"  style="background-color:#686868;color:white;text-align:center"  ng-class="{resultGreenback: each_evaluation_in_indicator.indicator_result_other_average>each_evaluation_in_indicator.indicator_result_self_average  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.indicator_result_self_average>each_evaluation_in_indicator.indicator_result_other_average &&  each_evaluation_in_indicator.complete_both}" >{{each_evaluation_in_indicator.indicator_result_self_average | number : 2}}</td>
-
-                            <td class="result"  style="background-color:#686868;color:white;text-align:center" ng-class="{resultGreenback: each_evaluation_in_indicator.indicator_result_other_average>each_evaluation_in_indicator.indicator_result_self_average  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.indicator_result_self_average>each_evaluation_in_indicator.indicator_result_other_average &&  each_evaluation_in_indicator.complete_both}" > {{each_evaluation_in_indicator.indicator_result_other_average| number : 2}}</td>
-
+                
 
 
                   
-                </tr>
+                </tr> -->
 
 
                     <tr ng-repeat="each_evaluation_in_sub_indicator in each_evaluation_in_indicator.sub_indicator_result">
-                         <td class="number">{{each_evaluation_in_indicator.indicator_num}}.{{each_evaluation_in_sub_indicator.sub_indicator_num}}</td>
-                      <td class="topic" >{{each_evaluation_in_sub_indicator.sub_indicator_name}}</td>
+
+                         <td class="number" ng-if="$index==0" style="background-color:#686868;color:white;text-align:center" ng-class="{resultGreenback: each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result > each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result < each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result &&  each_evaluation_in_indicator.complete_both}"> {{each_evaluation_in_indicator.indicator_num}}</td>
+
+
+                      <td class="topic"     ng-if="$index==0" style="background-color:#686868;color:white;text-align:center" ng-class="{resultGreenback: each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result > each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result < each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result &&  each_evaluation_in_indicator.complete_both}">{{each_evaluation_in_indicator.indicator_name}}   </td>
+
+                          <td class="result"   ng-if="$index==0" style="background-color:#686868;color:white;text-align:center"  ng-class="{resultGreenback: each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result > each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result < each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result &&  each_evaluation_in_indicator.complete_both}" >{{each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result}}</td>
+
+                            <td class="result"  ng-if="$index==0"  style="background-color:#686868;color:white;text-align:center" ng-class="{resultGreenback: each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result > each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result < each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result &&  each_evaluation_in_indicator.complete_both}" > {{each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result}}</td>
+
+
+                         <td class="number"   ng-if="$index!=0" >{{each_evaluation_in_indicator.indicator_num}}.{{each_evaluation_in_sub_indicator.sub_indicator_num}}</td>
+                      <td class="topic" ng-if="$index!=0" >{{each_evaluation_in_sub_indicator.sub_indicator_name}}</td>
 
 
 
                 <!--         <td class="result"  ng-class="{resultGreen: each_evaluation_in_sub_indicator.sub_indicator_other_result>each_evaluation_in_sub_indicator.sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both , resultRed:each_evaluation_in_sub_indicator.sub_indicator_self_result>each_evaluation_in_sub_indicator.sub_indicator_other_result  &&  each_evaluation_in_indicator.complete_both }" >{{each_evaluation_in_sub_indicator.sub_indicator_self_result}}</td> -->
                                    
- <td class="result"  ><a href="" ng-class="{resultGreen: each_evaluation_in_sub_indicator.sub_indicator_other_result>each_evaluation_in_sub_indicator.sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both , resultRed:each_evaluation_in_sub_indicator.sub_indicator_self_result>each_evaluation_in_sub_indicator.sub_indicator_other_result  &&  each_evaluation_in_indicator.complete_both }"  ng-click="get_reason_self_evaluate(each_evaluation_in_indicator.indicator_num,each_evaluation_in_sub_indicator.sub_indicator_num)" data-nq-toggle-modal="#see_evaluate_self_sudden" data-effect="from-left" >{{each_evaluation_in_sub_indicator.sub_indicator_self_result}}</a></td>
+ <td class="result" ng-if="$index!=0" ><a href="" ng-class="{resultGreen: each_evaluation_in_sub_indicator.sub_indicator_other_result>each_evaluation_in_sub_indicator.sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both , resultRed:each_evaluation_in_sub_indicator.sub_indicator_self_result>each_evaluation_in_sub_indicator.sub_indicator_other_result  &&  each_evaluation_in_indicator.complete_both }"  ng-click="get_reason_self_evaluate(each_evaluation_in_indicator.indicator_num,each_evaluation_in_sub_indicator.sub_indicator_num)" data-nq-toggle-modal="#see_evaluate_self_sudden" data-effect="from-left" >{{each_evaluation_in_sub_indicator.sub_indicator_self_result}}</a></td>
 
 
-                                   <td class="result"  ng-show='have_privilege_to_open_modal("28")==false' ng-class="{resultGreen: each_evaluation_in_sub_indicator.sub_indicator_other_result>each_evaluation_in_sub_indicator.sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both , resultRed:each_evaluation_in_sub_indicator.sub_indicator_self_result>each_evaluation_in_sub_indicator.sub_indicator_other_result     &&  each_evaluation_in_indicator.complete_both}"  >{{each_evaluation_in_sub_indicator.sub_indicator_other_result}}</td>
+                                   <td class="result" ng-if="$index!=0" ng-show='have_privilege_to_open_modal("28")==false' ng-class="{resultGreen: each_evaluation_in_sub_indicator.sub_indicator_other_result>each_evaluation_in_sub_indicator.sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both , resultRed:each_evaluation_in_sub_indicator.sub_indicator_self_result>each_evaluation_in_sub_indicator.sub_indicator_other_result     &&  each_evaluation_in_indicator.complete_both}"  >{{each_evaluation_in_sub_indicator.sub_indicator_other_result}}</td>
 
-          <td class="result" ng-show='have_privilege_to_open_modal("28")'    ><a href="" ng-class="{resultGreen: each_evaluation_in_sub_indicator.sub_indicator_other_result>each_evaluation_in_sub_indicator.sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both , resultRed:each_evaluation_in_sub_indicator.sub_indicator_self_result>each_evaluation_in_sub_indicator.sub_indicator_other_result     &&  each_evaluation_in_indicator.complete_both}" ng-click="get_reason_other_evaluate(each_evaluation_in_indicator.indicator_num)" data-nq-toggle-modal="#see_evaluate_other_sudden" data-effect="from-right" data-placement="right">{{each_evaluation_in_sub_indicator.sub_indicator_other_result}}</a></td>
+          <td class="result" ng-if="$index!=0" ng-show='have_privilege_to_open_modal("28")'    ><a href="" ng-class="{resultGreen: each_evaluation_in_sub_indicator.sub_indicator_other_result>each_evaluation_in_sub_indicator.sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both , resultRed:each_evaluation_in_sub_indicator.sub_indicator_self_result>each_evaluation_in_sub_indicator.sub_indicator_other_result     &&  each_evaluation_in_indicator.complete_both}" ng-click="get_reason_other_evaluate(each_evaluation_in_indicator.indicator_num)" data-nq-toggle-modal="#see_evaluate_other_sudden" data-effect="from-right" data-placement="right">{{each_evaluation_in_sub_indicator.sub_indicator_other_result}}</a></td>
 
 
                                 
@@ -787,7 +792,8 @@
 
    
                 <tr ng-repeat="result in this_indicator_show.sub_indicator_result">
-                  <td class="number">{{indicator_choosen.indicator_num}}.{{result.sub_indicator_num}}</td>
+                <td class="number" ng-if="$index==0">{{indicator_choosen.indicator_num}}</td>
+                  <td class="number" ng-if="$index!=0">{{indicator_choosen.indicator_num}}.{{result.sub_indicator_num}}</td>
                   <td class="topic">{{result.sub_indicator_name}}</td>
               
                  
@@ -4684,7 +4690,8 @@ glyphicon glyphicon-bell"></i> </span>
                                           
 
                                             <tr data-ng-repeat="result in corresponding_results.evaluation_detail">
-                                                <td>{{result.indicator_num}}.{{result.sub_indicator_num}}</td>
+                                                <td ng-if="$index==0">{{result.indicator_num}}</td>
+                                                        <td  ng-if="$index!=0">{{result.indicator_num}}.{{result.sub_indicator_num}}</td>
                                                 <td class="left_column">{{result.sub_indicator_name}}
 
 <!--   <div class="row">
@@ -5045,7 +5052,8 @@ glyphicon glyphicon-bell"></i> </span>
                                           
 
                                             <tr data-ng-repeat="result in corresponding_results">
-                                                <td>{{result.indicator_num}}.{{result.sub_indicator_num}}</td>
+                                                <td ng-if="result.sub_indicator_num !=0">{{result.indicator_num}}.{{result.sub_indicator_num}}</td>
+                                                      <td ng-if="result.sub_indicator_num ==0">{{result.indicator_num}}</td>
                                                 <td class="left_column">{{result.sub_indicator_name}}</td>
 
 

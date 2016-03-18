@@ -7,26 +7,20 @@
 
 ( function() {
 
-	var items_curri_na = [];
-	var items_curri = [];
-	var curri_now = [];
-	var year_now =[];
-	var evidence_now = [];
-	var items_year_na =[];
-		var items_year = window.big_chunk['วิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์'].in_year['2558'].all_evidences;
-	var items_evidence_na =[];
 
-										var index ;
+	var items_evidence =window.big_chunk;
+
+// 										var index ;
 									
-										for(index=0;index<window.all_curris.length;index++){
-											var each_item = [];
-											each_item.push(window.all_curris[index].curr_tname);
+// 										for(index=0;index<window.all_curris.length;index++){
+// 											var each_item = [];
+// 											each_item.push(window.all_curris[index].curr_tname);
 											
-											items_curri.push(each_item);
+// 											items_curri.push(each_item);
 									
-										}
-console.log(window.big_chunk)
-										items_curri_na = items_curri;
+// 										}
+// console.log(window.big_chunk)
+// 										items_curri_na = items_curri;
 							
 	CKEDITOR.dialog.add( 'link', function( editor ) {
 		var plugin = CKEDITOR.plugins.link;
@@ -272,12 +266,7 @@ console.log(window.big_chunk)
 								// 'default': 'http://',
 								items: 
 
-								[
-								['วิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมการวัดคุม, 2555, [เอกสารที่ 1-1], เงินงบประมาณหมวดค่าวัสดุปีงบประมาณ 2557 ',['path1','1-1']]
-								,['วิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์, 2557, [เอกสารที่ 4-1], คำอธิบายรายวิชาแต่ละวิชาในหลักสูตร',['path2','4-1']]
-								,['วิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์, 2557, [เอกสารที่ 8-3], หลักสูตรวิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์ (หลักสูตรปรับปรุง พ.ศ. 2554)',['path3','8-3']]
-								,['วิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์, 2558, [เอกสารที่ 11-4], บัณฑิตที่พึงประสงค์ของสถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง',['path4','11-4']]
-								]
+								items_evidence
 					
 								,
 								setup: function( data ) {
@@ -936,6 +925,22 @@ console.log(window.big_chunk)
 				var selection = editor.getSelection(),
 					attributes = plugin.getLinkAttributes( editor, data );
 
+					 var selectedContent;
+
+    if (selection.getType() == CKEDITOR.SELECTION_ELEMENT) {
+        selectedContent = selection.getSelectedElement().getAttribute("alt");
+          
+  
+    }
+    else if (selection.getType() == CKEDITOR.SELECTION_TEXT) {
+        selectedContent = selection.getSelectedText();
+        
+    }
+
+
+
+// editor.getSelection().getSelectedElement().innerText = "hello me";
+
 
 
 						if(data.type=='evidences'){
@@ -967,10 +972,9 @@ console.log(window.big_chunk)
 					}
 							
 	
-console.log(data)
 				if ( !this._.selectedElement ) {
 					var range = selection.getRanges()[ 0 ];
-					console.log(range)
+					
 					// Use link URL as text with a collapsed cursor.
 					if ( range.collapsed ) {
 						// Short mailto link text view (#5736).

@@ -392,7 +392,7 @@ console.log('get_all_evaluation')
             var index;
             var inner_index;
             for(index=0;index<$scope.evaluation_overall.length;index++){
-                if(angular.isNumber($scope.evaluation_overall[index].indicator_result_self_average)==false || angular.isNumber($scope.evaluation_overall[index].indicator_result_other_average)==false){
+                if(!$scope.evaluation_overall[index].self_time || !$scope.evaluation_overall[index].other_time){
                     $scope.evaluation_overall[index].complete_both = false;
                 }
                 else{
@@ -400,18 +400,19 @@ console.log('get_all_evaluation')
                 }
 
             }
+console.log('evaluation_overall')
+console.log('evaluation_overall')
+//             var index;
+// var inner_index;
+// for(index=0;index<$scope.evaluation_overall.length;index++){
+//     if(angular.isNumber($scope.evaluation_overall[index].indicator_result_self_average)==false || angular.isNumber($scope.evaluation_overall[index].indicator_result_other_average)==false){
+//         $scope.evaluation_overall[index].complete_both = false;
+//     }
+//     else{
+//         $scope.evaluation_overall[index].complete_both = true;
+//     }
 
-            var index;
-var inner_index;
-for(index=0;index<$scope.evaluation_overall.length;index++){
-    if(angular.isNumber($scope.evaluation_overall[index].indicator_result_self_average)==false || angular.isNumber($scope.evaluation_overall[index].indicator_result_other_average)==false){
-        $scope.evaluation_overall[index].complete_both = false;
-    }
-    else{
-        $scope.evaluation_overall[index].complete_both = true;
-    }
-
-}
+// }
 
          });
 
