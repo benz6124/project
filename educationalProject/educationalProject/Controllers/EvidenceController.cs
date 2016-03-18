@@ -15,16 +15,15 @@ namespace educationalProject.Controllers
     {
         private oEvidence datacontext = new oEvidence();
         [ActionName("getallevidence")]
-        public async Task<IHttpActionResult> PostToQueryAllEvidenceWithCurri([FromBody]int indicator_num)
+        public async Task<IHttpActionResult> PostToQueryAllEvidenceWithCurri()
         {
-            datacontext.indicator_num = indicator_num;
-            object result = await datacontext.SelectAllEvidenceWithCurriculumList();
+            //datacontext.indicator_num = indicator_num;
+            object result = await datacontext.SelectAllEvidenceWithCurriculum2();
             if (result.GetType().ToString() != "System.String")
                 return Ok(result);
             else
                 return InternalServerError(new Exception(result.ToString()));
         }
-
         [ActionName("getnormal")]
         public async Task<IHttpActionResult> PostByIndicatorAndCurriculum(JObject obj)
         {

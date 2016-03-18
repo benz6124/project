@@ -385,6 +385,62 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
+        public async Task<object> SelectAllEvidenceWithCurriculum2()
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return WebApiApplication.CONNECTDBERRSTRING;
+            List<object> result = new List<object>();
+            d.iCommand.CommandText = string.Format("select {0},{1},{2},{3},{4},{5} " +
+                                     "from {6}, {7} " +
+                                     "where {7}.{8} = {6}.{9} " +
+                                     "order by {0},{1},{2},{3} ",
+                                     Cu_curriculum.FieldName.CURR_TNAME, FieldName.ACA_YEAR, FieldName.INDICATOR_NUM, FieldName.EVIDENCE_REAL_CODE,
+                                     FieldName.EVIDENCE_NAME, FieldName.FILE_NAME, FieldName.TABLE_NAME, Cu_curriculum.FieldName.TABLE_NAME,
+                                     Cu_curriculum.FieldName.CURRI_ID, FieldName.CURRI_ID);
+
+            try
+            {
+                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                if (res.HasRows)
+                {
+                    DataTable data = new DataTable();
+                    data.Load(res);
+                    foreach (DataRow item in data.Rows)
+                    {
+                        string indnum = item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal].ToString();
+                        string evicode = item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal].ToString();
+                        string evidencestr = string.Format("{0}, {1}, [เอกสารที่ {2}-{3}], {4}",
+                            item.ItemArray[data.Columns[Cu_curriculum.FieldName.CURR_TNAME].Ordinal].ToString(),
+                            item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal].ToString(),
+                            indnum,
+                            evicode,
+                            item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString()
+                            );
+                        List<string> pathanddocnumlist = new List<string> { item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(), indnum + "-" + evicode };
+                        result.Add(new List<object> { evidencestr, pathanddocnumlist });
+                    }
+                    data.Dispose();
+                }
+                else
+                {
+                    //Reserved for return error string
+                }
+                res.Close();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return result;
+
+        }
         public async Task<object> InsertNewEvidenceWithSelect()
         {
             DBConnector d = new DBConnector();
