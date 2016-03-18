@@ -59,7 +59,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                        "max({14}) as {14}," +
                                        "max({3})," +
                                        "max({4})," +
-                                       "AVG(cast({5} as int) * 1.0) as {5} " +
+                                       "null " +
                                        "from {6},{7} where {8} = '{9}' and {10} = {11} " +
                                        "and {12} = {13} " +
                                        "group by {1} ",
@@ -82,7 +82,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                        "max({14}) as {14}," +
                                        "max({3})," +
                                        "max({4})," +
-                                       "AVG(cast({5} as int) * 1.0) as {5} " +
+                                       "null " +
                                        "from {6},{7} where {8} = '{9}' and {10} = {11} " +
                                        "and {12} = {13} " +
                                        "group by {1} ",
@@ -148,7 +148,15 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                     indicator_num = indnum,
                                     indicator_name = item.ItemArray[data.Columns["caption1"].Ordinal].ToString(),
                                 });
+
+                                //Force add sub_indicator_num = 0 with sub_indicator_name as indicator_name
+                                result.First(t => t.indicator_num == indnum).sub_indicator_result.Add(new Sub_indicator_result
+                                {
+                                    sub_indicator_num = 0,
+                                    sub_indicator_name = item.ItemArray[data.Columns["caption1"].Ordinal].ToString()
+                                });
                             }
+
                             result.First(t => t.indicator_num == indnum).sub_indicator_result.Add(new Sub_indicator_result
                             {
                                 sub_indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[Sub_indicator.FieldName.SUB_INDICATOR_NUM].Ordinal]),
@@ -156,7 +164,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             });
                         }
 
-                        //Type 1:Retrieve overall average result of self evaluation
+                        //Type 1:Retrieve self assessment time and the name of assessor
                         else if (assess_type == 1)
                         {
 
@@ -168,10 +176,9 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             target.self_date = Convert.ToDateTime(item.ItemArray[data.Columns[Self_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3];
                             target.self_name = NameManager.GatherPreName(item.ItemArray[data.Columns["caption1"].Ordinal].ToString()) + item.ItemArray[data.Columns["caption2"].Ordinal].ToString();
                             target.self_time = (timeofday.Hour > 9 ? "" : "0") + h + '.' + (timeofday.Minute > 9 ? "" : "0") + m;
-                            target.indicator_result_self_average = Convert.ToDouble(item.ItemArray[data.Columns[Self_evaluation.FieldName.EVALUATION_SCORE].Ordinal]);
                         }
 
-                        //Type 2:Retrieve overall average result of other evaluation
+                        //Type 2:Retrieve other assessment time and the name of assessor
                         else if (assess_type == 2)
                         {
 
@@ -183,7 +190,6 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             target.other_date = Convert.ToDateTime(item.ItemArray[data.Columns[Self_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3];
                             target.other_name = NameManager.GatherPreName(item.ItemArray[data.Columns["caption1"].Ordinal].ToString()) + item.ItemArray[data.Columns["caption2"].Ordinal].ToString();
                             target.other_time = (timeofday.Hour > 9 ? "" : "0") + h + '.' + (timeofday.Minute > 9 ? "" : "0") + m;
-                            target.indicator_result_other_average = Convert.ToDouble(item.ItemArray[data.Columns[Self_evaluation.FieldName.EVALUATION_SCORE].Ordinal]);
                         }
 
                         //Type 3:Retrieve overall individual result of self evaluation
