@@ -735,7 +735,7 @@
 
                           <td class="result"   ng-if="$index==0" style="background-color:#686868;color:white;text-align:center"  ng-class="{resultGreenback: each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result > each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result < each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result &&  each_evaluation_in_indicator.complete_both}" >{{each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result}}</td>
 
-                            <td class="result"  ng-if="$index==0"  style="background-color:#686868;color:white;text-align:center" ng-class="{resultGreenback: each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result > each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result < each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result &&  each_evaluation_in_indicator.complete_both}" > {{each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result}}</td>
+                            <td class="result"  ng-if="$index==0"  style="background-color:#686868;color:white;text-align:center" ng-class="{resultGreenback: each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result > each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result < each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result &&  each_evaluation_in_indicator.complete_both}"     > <a style="color:white" href="" ng-click="get_reason_other_evaluate(each_evaluation_in_indicator.indicator_num)" data-nq-toggle-modal="#see_evaluate_other_sudden" data-effect="from-right" data-placement="right">{{each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result}}</a></td>
 
 
                          <td class="number"   ng-if="$index!=0" >{{each_evaluation_in_indicator.indicator_num}}.{{each_evaluation_in_sub_indicator.sub_indicator_num}}</td>
@@ -803,7 +803,7 @@
  --><!-- 
                     <td   class="result" ng-class="{resultGreen: result.sub_indicator_other_result>result.sub_indicator_self_result  , resultRed:result.sub_indicator_self_result>result.sub_indicator_other_result }" >{{result.sub_indicator_self_result}}</td> -->
 
-            <td   class="result" ><a href=""  ng-class="{resultGreen: result.sub_indicator_other_result>result.sub_indicator_self_result  , resultRed:result.sub_indicator_self_result>result.sub_indicator_other_result }"  ng-click="get_reason_self_evaluate(indicator_choosen.indicator_num,result.sub_indicator_num)" data-nq-toggle-modal="#see_evaluate_self_sudden" data-effect="from-left">{{result.sub_indicator_self_result}}</a></td>
+            <td   class="result" ><a href=""  ng-class="{resultGreen: result.sub_indicator_other_result>result.sub_indicator_self_result  , resultRed:result.sub_indicator_self_result>result.sub_indicator_other_result }"  ng-click="get_reason_self_evaluate(indicator_choosen.indicator_num,result.sub_indicator_num)" data-nq-toggle-modal="#see_evaluate_self_sudden_with_fix" data-effect="from-left">{{result.sub_indicator_self_result}}</a></td>
 
                     <td class="result"  ng-show='have_privilege_to_open_modal("28")==false'   ng-class="{resultGreen: result.sub_indicator_other_result>result.sub_indicator_self_result  , resultRed:result.sub_indicator_self_result>result.sub_indicator_other_result }" >{{result.sub_indicator_other_result}}</td>
 
@@ -844,7 +844,7 @@
 
 
                             </td>
-                            <td class="download"><a href="" ng-click="download_file(evidence.file_name)" ng-hide="evidence.secret==1"class=" hvr-wobble-vertical"><span class="glyphicon glyphicon-download-alt " /></a></td>
+                            <td class="download"><a href="" ng-click="download_file(evidence.file_name)" ng-hide="evidence.secret==1"class=" hvr-wobble-vertical"><span style="color:#739900" class="glyphicon glyphicon-download-alt " /></a></td>
                         </tr>
                  <!--        <tr>
                             <td class="code">1-02</td>
@@ -4319,6 +4319,78 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
                     </div>
+
+                      <div id="see_evaluate_self_sudden_with_fix" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode="true" data-qo-independent="true" >
+                    <div class="custom-header">
+                        <h1 class="headerModalH1"><span class="headerModal">ข้อมูลสนับสนุนการประเมินหลักสูตรตนเอง</span>  </h1>
+                    </div>
+
+
+                    <div class="container-fluid" >
+                       <button class="btn btn-warning hvr-pulse" ng-click="go_to_edit_reason(this,sub_indicator_now_for_link)" ><i class="glyphicon glyphicon-wrench"></i> แก้ไขข้อมูลสนับสนุนการประเมิน</button>
+
+                        <div class="clearfix">
+
+<br />
+
+                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
+                                 data-qo-selectable="true">
+              
+                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+
+
+                                <div class="topicHeader"  ng-if ="display_self_support.detail != '' && display_self_support.detail" data-ng-bind-html="display_self_support.detail"></div>
+                                      <div class="topicHeader"  ng-if ="!display_self_support.detail" align="center">---ไม่พบข้อมูลสนับสนุนการประเมินในตัวบ่งชี้นี้---</div>
+
+                                                         <div class="row"  >
+          <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicNewHeader">จุดแข็ง (Strength):   </span></h3>
+ </div>
+ <div class="row" style="
+    text-align: left;
+">
+         <span style="margin-left: 35px;" class="topicHeader"  ng-if="display_self_support.strength!='' && display_self_support.strength">  {{display_self_support.strength}}</span>
+               <span style="margin-left: 35px;" ng-if="!display_self_support.strength"class="topicHeader">--ไม่พบข้อมูล--</span> 
+ </div>
+ <div class="row" >
+          <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicNewHeader">จุดด้อย (Weakness):   </span></h3>
+ </div>
+ <div class="row" style="
+    text-align: left;
+" >
+   <span style="margin-left: 35px;" class="topicHeader" ng-if="display_self_support.weakness!=''  && display_self_support.weakness" >{{display_self_support.weakness}}</span>  
+         <span style="margin-left: 35px;" ng-if="!display_self_support.weakness" class="topicHeader">--ไม่พบข้อมูล--</span> 
+ </div>
+
+ <div class="row" >
+          <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicNewHeader">จุดที่ควรพัฒนา (Area of improve):   </span></h3>
+ </div>
+ <div class="row" style="
+    text-align: left;
+" >
+   <span style="margin-left: 35px;" ng-if="display_self_support.improve!=''  && display_self_support.improve" class="topicHeader">{{display_self_support.improve}}</span> 
+      <span style="margin-left: 35px;"ng-if="!display_self_support.improve"class="topicHeader">--ไม่พบข้อมูล--</span> 
+ </div>
+
+                                </div>
+
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                      <div class="custom-footer" >
+                        <div class="topicHeader pull-right">
+                         
+                           <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
+                        </div>
+                    </div>
+                </div>
+
         <div id="see_evaluate_self_sudden" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode="true" data-qo-independent="true" >
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal">ข้อมูลสนับสนุนการประเมินหลักสูตรตนเอง</span>  </h1>
@@ -4326,7 +4398,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                     <div class="container-fluid" >
-                       <button class="btn btn-warning hvr-pulse" ng-if="alread_select_indicator_to_link() && can_edit_reason()" ng-click="go_to_edit_reason(this,sub_indicator_now_for_link)" ><i class="glyphicon glyphicon-wrench"></i> แก้ไขข้อมูลสนับสนุนการประเมิน</button>
+                   
 
                         <div class="clearfix">
 
@@ -4421,7 +4493,8 @@ glyphicon glyphicon-bell"></i> </span>
                                           
 
                                             <tr data-ng-repeat="result in reason_other_evaluate.evaluation_detail">
-                                                <td>{{result.indicator_num}}.{{result.sub_indicator_num}}</td>
+                                                <td ng-if="$index==0"> {{result.indicator_num}}</td>
+                                                  <td ng-if="$index!=0">{{result.indicator_num}}.{{result.sub_indicator_num}}</td>
                                                 <td class="left_column topicNewHeader">{{result.sub_indicator_name}}
 
                                               <div class="row"  >

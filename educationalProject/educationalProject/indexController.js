@@ -127,7 +127,8 @@ $location.hash(null)
 $rootScope.alread_select_indicator_to_link = function(){
   
     if(    $scope.select_overall == true){
-
+      
+        
          return false;
   
     }
@@ -365,6 +366,7 @@ $scope.send_please_wait = false;
          ).success(function (data) {
              $scope.corresponding_sub_indicators = data;
               $scope.sendIndicatorCurriAndGetEvaluation();
+            
              if($scope.can_watch_reason() == true){
                  
 
