@@ -85,7 +85,7 @@ $location.hash(null)
              $scope.section_save_to_send.sub_indicator_num   = sub_indicator_now;
              $scope.section_save_to_send.curri_id = $scope.curri_choosen.curri_id;
                 $http.post(
-                     '/api/sectionsave',
+                     '/api/sectionsave/getsectionsave',
                      JSON.stringify($scope.section_save_to_send),
                      {
                          headers: {
@@ -154,6 +154,60 @@ $rootScope.alread_select_indicator_to_link = function(){
        }
 
        if($rootScope.right_from_committee($scope.curri_choosen.curri_id,$scope.year_choosen.aca_year,30,2)==true){
+        return true;
+       }
+    }
+       return false;
+    }
+
+
+$scope.download_plain_book = function(){
+
+    $scope.to_sent_to_get_plain = {};
+    $scope.to_sent_to_get_plain.curri_id = $scope.curri_choosen.curri_id;
+    $scope.to_sent_to_get_plain.aca_year = $scope.year_choosen.aca_year;
+
+     // $http.post(
+     //         '/api/sectionsave/genaunsar',
+     //         JSON.stringify($scope.to_sent_to_get_plain),
+     //         {
+     //             headers: {
+     //                 'Content-Type': 'application/json'
+     //             }
+     //         }
+     //     ).success(function (data) {
+           
+
+         
+     
+     //     });
+
+
+
+$http.get('/api/sectionsave?data='+$scope.to_sent_to_get_plain).success(function (data) {
+    
+      window.open(data, '_blank');  
+   });
+
+}
+        $scope.can_download_plain = function(){
+
+    if($scope.$parent.already_login == true){
+        if($rootScope.current_user.user_type == 'ผู้ดูแลระบบ'){
+            return true;
+        }
+        if(!$rootScope.current_user.privilege[$scope.curri_choosen.curri_id]){
+            return false;
+        }
+        if( $rootScope.current_user.privilege[$scope.curri_choosen.curri_id]['32'] ==2){
+        return true;
+       }
+
+       if($rootScope.president_in_this_curri_and_year($scope.curri_choosen.curri_id,$scope.year_choosen.aca_year)==true){
+        return true;
+       }
+
+       if($rootScope.right_from_committee($scope.curri_choosen.curri_id,$scope.year_choosen.aca_year,32,2)==true){
         return true;
        }
     }
@@ -589,7 +643,7 @@ $scope.send_support_text_change_to_server = function(){
     $scope.current_section_save.detail = CKEDITOR.instances['support_text'].getData();
     $scope.current_section_save.teacher_id = $rootScope.current_user.user_id;
       $http.put(
-             '/api/sectionsave',
+             '/api/sectionsave/getsectionsave',
              JSON.stringify( $scope.current_section_save),
              {
                  headers: {
@@ -626,7 +680,7 @@ $scope.send_support_text_change_to_server = function(){
              $scope.section_save_to_send.sub_indicator_num   = $scope.sub_indicator_choosen.sub_indicator_num;
              $scope.section_save_to_send.curri_id = $scope.curri_choosen.curri_id;
                 $http.post(
-                     '/api/sectionsave',
+                     '/api/sectionsave/getsectionsave',
                      JSON.stringify($scope.section_save_to_send),
                      {
                          headers: {
@@ -688,7 +742,7 @@ for(index=0;index<$scope.corresponding_sub_indicators.length;index++){
      $scope.section_save_to_send.sub_indicator_num   = $scope.sub_indicator_choosen.sub_indicator_num;
      $scope.section_save_to_send.curri_id = $scope.curri_choosen.curri_id;
         $http.post(
-             '/api/sectionsave',
+             '/api/sectionsave/getsectionsave',
              JSON.stringify($scope.section_save_to_send),
              {
                  headers: {
@@ -731,7 +785,7 @@ for(index=0;index<$scope.corresponding_sub_indicators.length;index++){
      $scope.section_save_to_send.sub_indicator_num   = $scope.sub_indicator_choosen.sub_indicator_num;
      $scope.section_save_to_send.curri_id = $scope.curri_choosen.curri_id;
         $http.post(
-             '/api/sectionsave',
+             '/api/sectionsave/getsectionsave',
              JSON.stringify($scope.section_save_to_send),
              {
                  headers: {

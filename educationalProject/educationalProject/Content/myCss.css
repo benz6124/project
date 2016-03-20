@@ -167,6 +167,10 @@ td.code{
     background-color:#484848 !important;
 }
 */
+
+.btn-warning {
+  background-color:  #eb9114;
+}
 .btn.editor{
   border:none;
   background-color:#909090   ; 

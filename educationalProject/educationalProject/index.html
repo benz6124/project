@@ -402,8 +402,8 @@
                 </button>
               
 
-              <span style="visibility:hidden" >daa</span>   
-   <button class="btn btn-primary hvr-wobble-vertical" type="button" style=";margin-bottom:0px;margin-left:0px; color:white;" ng-click="download_aun_book()">
+              <span style="visibility:hidden" ng-if="can_download_plain()">daa</span>   
+   <button ng-if="can_download_plain()" class="btn btn-warning hvr-wobble-vertical" type="button" style=";margin-bottom:0px;margin-left:0px; color:white;" ng-click="download_plain_book()">
                     <span class="glyphicon glyphicon-download-alt"></span> ดาวน์โหลดเล่มร่าง
                 </button>
 </div>
