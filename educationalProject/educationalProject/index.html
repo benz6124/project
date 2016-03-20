@@ -394,16 +394,16 @@
                <select data-qo-disable-clear="true" data-qo-button-class="mySelect_index_year not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="sendYearAndGetIndicators(year_choosen)" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" data-ng-click="check_curri()">
 <option style="display:none" value=""></option></select>  
 
-<span style="visibility:hidden" >dad</span>
+<span style="visibility:hidden"  ng-show="select_all_complete" >dad</span>
 
 
-   <button class="btn hvr-wobble-vertical" type="button" style="background-color:#739900;margin-bottom:0px;margin-left:0px; color:white;" ng-click="download_aun_book()">
+   <button class="btn hvr-wobble-vertical" type="button"  ng-show="select_all_complete"style="background-color:#739900;margin-bottom:0px;margin-left:0px; color:white;" ng-click="download_aun_book()">
                     <span class="glyphicon glyphicon-download-alt"></span> ดาวน์โหลดเล่ม
                 </button>
               
 
-              <span style="visibility:hidden" ng-if="can_download_plain()">daa</span>   
-   <button ng-if="can_download_plain()" class="btn btn-warning hvr-wobble-vertical" type="button" style=";margin-bottom:0px;margin-left:0px; color:white;" ng-click="download_plain_book()">
+              <span style="visibility:hidden" ng-show="select_all_complete"  ng-if="can_download_plain()">daa</span>   
+   <button ng-if="can_download_plain()"  ng-show="select_all_complete" class="btn btn-warning hvr-wobble-vertical" type="button" style=";margin-bottom:0px;margin-left:0px; color:white;" ng-click="download_plain_book()">
                     <span class="glyphicon glyphicon-download-alt"></span> ดาวน์โหลดเล่มร่าง
                 </button>
 </div>
