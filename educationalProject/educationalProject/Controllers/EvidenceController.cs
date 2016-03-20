@@ -15,9 +15,10 @@ namespace educationalProject.Controllers
     {
         private oEvidence datacontext = new oEvidence();
         [ActionName("getallevidence")]
-        public async Task<IHttpActionResult> PostToQueryAllEvidenceWithCurri()
+        public async Task<IHttpActionResult> PostToQueryAllEvidenceWithCurri([FromBody]string curri_id)
         {
             //datacontext.indicator_num = indicator_num;
+            datacontext.curri_id = curri_id;
             object result = await datacontext.SelectAllEvidenceWithCurriculum2();
             if (result.GetType().ToString() != "System.String")
                 return Ok(result);

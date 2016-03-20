@@ -393,15 +393,16 @@ namespace educationalProject.Models.Wrappers
             List<object> result = new List<object>();
             d.iCommand.CommandText = string.Format("select {0},{1},{2},{3},{4},{5} " +
                                      "from {6}, {7} " +
-                                     "where {7}.{8} = {6}.{9} " +
+                                     "where {7}.{8} = {6}.{9} and {6}.{9} = {10} " +
                                      "order by {0},{1},{2},{3} ",
                                      Cu_curriculum.FieldName.CURR_TNAME, FieldName.ACA_YEAR, FieldName.INDICATOR_NUM, FieldName.EVIDENCE_REAL_CODE,
                                      FieldName.EVIDENCE_NAME, FieldName.FILE_NAME, FieldName.TABLE_NAME, Cu_curriculum.FieldName.TABLE_NAME,
-                                     Cu_curriculum.FieldName.CURRI_ID, FieldName.CURRI_ID);
+                                     Cu_curriculum.FieldName.CURRI_ID, FieldName.CURRI_ID,ParameterName.CURRI_ID);
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURRI_ID, curri_id));
 
             try
             {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
                 if (res.HasRows)
                 {
                     DataTable data = new DataTable();

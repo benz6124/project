@@ -20,6 +20,21 @@ namespace educationalProject.Models
             public static readonly string PRIMARY_EVIDENCE_NUM = "PRIMARY_EVIDENCE_NUM";
             public static readonly string TABLE_NAME = "EVIDENCE";
         }
+
+        protected struct ParameterName
+        {
+            public static readonly string EVIDENCE_CODE = "@" + FieldName.EVIDENCE_CODE;
+            public static readonly string FILE_NAME = "@" + FieldName.FILE_NAME;
+            public static readonly string EVIDENCE_NAME = "@" + FieldName.EVIDENCE_NAME;
+            public static readonly string TEACHER_ID = "@" + FieldName.TEACHER_ID;
+            public static readonly string SECRET = "@" + FieldName.SECRET;
+            public static readonly string EVIDENCE_REAL_CODE = "@" + FieldName.EVIDENCE_REAL_CODE;
+            public static readonly string INDICATOR_NUM = "@" + FieldName.INDICATOR_NUM;
+            public static readonly string PRIMARY_EVIDENCE_NUM = "@" + FieldName.PRIMARY_EVIDENCE_NUM;
+            public static readonly string CURRI_ID = "@" + FieldName.CURRI_ID;
+            public static readonly string ACA_YEAR = "@" + FieldName.ACA_YEAR;
+        }
+
         private int _evidence_code;
         private string _file_name;
         private string _evidence_name;
