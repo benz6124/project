@@ -14,11 +14,8 @@ namespace educationalProject.Controllers
     public class SectionSaveController : ApiController
     {
         private oSection_save datacontext = new oSection_save();
-        public async Task<IHttpActionResult> Get([FromUri]JObject data)
+        public async Task<IHttpActionResult> Get()
         {
-            if (data == null)
-                return BadRequest("กรุณาระบุหลักสูตรและปีการศึกษาที่ต้องการดาวน์โหลดร่างรายงาน");
-
             object res = await datacontext.getHtmlSectionSave();
             string htmlres = res.ToString();
             var strBody = new System.Text.StringBuilder("");
@@ -117,6 +114,9 @@ namespace educationalProject.Controllers
         [ActionName("genaunsar")]
         public async Task<IHttpActionResult> PostForGenAunSAR(oCurriculum_academic data)
         {
+            if (data == null)
+                return BadRequest("กรุณาระบุหลักสูตรและปีการศึกษาที่ต้องการดาวน์โหลดร่างรายงาน");
+
             object res = await datacontext.getHtmlSectionSave();
             if (res != null)
             {
