@@ -4,6 +4,7 @@ using System.Linq;
 using System.Data;
 using System.Threading.Tasks;
 using educationalProject.Utils;
+using educationalProject.Models.ViewModels;
 namespace educationalProject.Models.Wrappers
 {
     public class oSection_save : Section_save
@@ -123,6 +124,152 @@ namespace educationalProject.Models.Wrappers
             object res = await d.iCommand.ExecuteScalarAsync();
             d.SQLDisconnect();
             return res;
+        }
+
+        public async Task<object> getSectionSaveDataForSAR()
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return WebApiApplication.CONNECTDBERRSTRING;
+            SAR result = new SAR();
+            string selectindicator = string.Format("select {0}, {1} " +
+                                     "from {2} " +
+                                     "where {3} = (select max({3}) from {2} where {3} <= {4}) order by {0} ",
+                                     Indicator.FieldName.INDICATOR_NUM, Indicator.FieldName.INDICATOR_NAME_T, Indicator.FieldName.TABLE_NAME,
+                                     Indicator.FieldName.ACA_YEAR, aca_year);
+
+            string selectsubindicator = string.Format("select {0},{1},{2} " +
+                                        "from {3} " +
+                                        "where {4} = (select max({4}) from {3} where {4} <= {5}) order by {0},{1} ",
+                                        Sub_indicator.FieldName.INDICATOR_NUM, Sub_indicator.FieldName.SUB_INDICATOR_NUM, Sub_indicator.FieldName.SUB_INDICATOR_NAME,
+                                        Sub_indicator.FieldName.TABLE_NAME, Sub_indicator.FieldName.ACA_YEAR, aca_year);
+
+            string selectsectionsave = string.Format("select {0},{1},{2},{3},{4},{5} " +
+                                       "from {6} " +
+                                       "where {7} = '{8}' and {9} = {10} order by {0},{1} ",
+                                       FieldName.INDICATOR_NUM, FieldName.SUB_INDICATOR_NUM, FieldName.DETAIL, FieldName.STRENGTH, FieldName.IMPROVE, FieldName.WEAKNESS,
+                                       FieldName.TABLE_NAME, FieldName.CURRI_ID, curri_id,
+                                       FieldName.ACA_YEAR, aca_year);
+
+            string selectevidence = string.Format("select {0},{1},{2} " +
+                                    "from {3} " +
+                                    "where {4} = '{5}' and {6} = {7} order by {0},{1} ",
+                                    Evidence.FieldName.INDICATOR_NUM, Evidence.FieldName.EVIDENCE_REAL_CODE, Evidence.FieldName.EVIDENCE_NAME,
+                                    Evidence.FieldName.TABLE_NAME, Evidence.FieldName.CURRI_ID, curri_id,
+                                    Evidence.FieldName.ACA_YEAR, aca_year);
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} END", selectindicator, selectsubindicator, selectsectionsave, selectevidence);
+            try
+            {
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
+                do
+                {
+                    if (res.HasRows)
+                    {
+                        DataTable data = new DataTable();
+                        data.Load(res);
+                        
+                        //Case current resultset is indicator table
+                        if (data.Columns.Contains("indicator_name_t"))
+                        {
+                            foreach (DataRow item in data.Rows)
+                            {
+                                result.indicator_list.Add(new Indicator_with_section_save_list
+                                {
+                                    indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[Indicator.FieldName.INDICATOR_NUM].Ordinal]),
+                                    indicator_name = item.ItemArray[data.Columns[Indicator.FieldName.INDICATOR_NAME_T].Ordinal].ToString()
+                                });
+                            }
+                        }
+
+                        //Case current resultset is sub_indicator table
+                        else if (data.Columns.Contains("sub_indicator_name"))
+                        {
+                            foreach (DataRow item in data.Rows)
+                            {
+                                int indnum = Convert.ToInt32(item.ItemArray[data.Columns[Sub_indicator.FieldName.INDICATOR_NUM].Ordinal]);
+                                result.indicator_list.First(t => t.indicator_num == indnum).section_save_list.Add(new Section_save_with_sub_indicator_detail
+                                {
+                                    detail = "--ไม่พบข้อมูล--",
+                                    strength = "--ไม่พบข้อมูล--",
+                                    weakness = "--ไม่พบข้อมูล--",
+                                    improve = "--ไม่พบข้อมูล--",
+                                    sub_indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[Sub_indicator.FieldName.SUB_INDICATOR_NUM].Ordinal]),
+                                    indicator_num = indnum,
+                                    sub_indicator_name = item.ItemArray[data.Columns[Sub_indicator.FieldName.SUB_INDICATOR_NAME].Ordinal].ToString()
+                                });
+                            }
+                        }
+
+                        //Case current resultset is section_save table
+                        else if (data.Columns.Contains("detail"))
+                        {
+                            foreach (DataRow item in data.Rows)
+                            {
+                                int indnum = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]);
+                                int subindnum = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.SUB_INDICATOR_NUM].Ordinal]);
+                                Section_save_with_sub_indicator_detail target = result.indicator_list.First(t => t.indicator_num == indnum).
+                                    section_save_list.First(u => u.sub_indicator_num == subindnum);
+
+                                string readdetail = item.ItemArray[data.Columns[FieldName.DETAIL].Ordinal].ToString();
+                                if(readdetail != "")
+                                {
+                                    target.detail = readdetail;
+                                }
+
+                                string readstrength = item.ItemArray[data.Columns[FieldName.STRENGTH].Ordinal].ToString();
+                                if (readstrength != "")
+                                {
+                                    target.strength = readstrength;
+                                }
+
+                                string readweak = item.ItemArray[data.Columns[FieldName.WEAKNESS].Ordinal].ToString();
+                                if (readweak != "")
+                                {
+                                    target.weakness = readweak;
+                                }
+
+                                string readimprove = item.ItemArray[data.Columns[FieldName.IMPROVE].Ordinal].ToString();
+                                if (readimprove != "")
+                                {
+                                    target.improve = readimprove;
+                                }
+                            }
+                        }
+                        //Case current resultset is evidence table
+                        else
+                        {
+                            foreach (DataRow item in data.Rows)
+                            {
+                                int indnum = Convert.ToInt32(item.ItemArray[data.Columns[Evidence.FieldName.INDICATOR_NUM].Ordinal]);
+                                result.indicator_list.First(t => t.indicator_num == indnum).evidence_list.Add(new Evidence_detail_for_SAR {
+                                    indicator_num = indnum.ToString(),
+                                    evidence_real_code = item.ItemArray[data.Columns[Evidence.FieldName.EVIDENCE_REAL_CODE].Ordinal].ToString(),
+                                    evidence_name = item.ItemArray[data.Columns[Evidence.FieldName.EVIDENCE_NAME].Ordinal].ToString()
+                                });
+                            }
+                        }
+                        data.Dispose();
+                    }
+                    else if (!res.IsClosed)
+                    {
+                        if (!res.NextResult())
+                            break;
+                    }
+                } while (!res.IsClosed);
+                res.Close();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return result;
+
         }
     }
 }
