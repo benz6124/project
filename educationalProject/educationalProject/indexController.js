@@ -189,15 +189,30 @@ $scope.download_plain_book = function(){
 //       window.open(data, '_blank');  
 //    });
 
-$http.get('/api/sectionsave?data='+$scope.to_sent_to_get_plain, {responseType: 'arraybuffer'})
-       .success(function (data) {
-           var file = new Blob([data], {type: 'application/msword'});
+// $http.get('/api/sectionsave?data='+$scope.to_sent_to_get_plain, {responseType: 'arraybuffer'})
+//        .success(function (data) {
+//            var file = new Blob([data], {type: 'application/msword'});
+//            var fileURL = URL.createObjectURL(file);
+
+//            window.open(fileURL);
+//     });
+
+   $http.post(
+             '/api/sectionsave/genaunsar',
+             JSON.stringify($scope.to_sent_to_get_plain),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             },
+             {responseType: 'arraybuffer'}
+         ).success(function (data) {
+            var file = new Blob([data], {type: 'application/msword'});
            var fileURL = URL.createObjectURL(file);
-       
+
            window.open(fileURL);
-    });
-
-
+       
+         });
 
 }
         $scope.can_download_plain = function(){
