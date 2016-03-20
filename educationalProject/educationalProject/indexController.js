@@ -641,7 +641,7 @@ $scope.send_support_text_change_to_server = function(){
 
            $http.post(
              '/api/evidence/getallevidence',
-             JSON.stringify($scope.indicator_choosen.indicator_num),
+             JSON.stringify($scope.curri_choosen.curri_id),
              {
                  headers: {
                      'Content-Type': 'application/json'
@@ -704,7 +704,7 @@ for(index=0;index<$scope.corresponding_sub_indicators.length;index++){
       
            $http.post(
              '/api/evidence/getallevidence',
-             JSON.stringify($scope.indicator_choosen.indicator_num),
+             JSON.stringify($scope.curri_choosen.curri_id),
              {
                  headers: {
                      'Content-Type': 'application/json'

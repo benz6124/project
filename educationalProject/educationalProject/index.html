@@ -390,18 +390,22 @@
     margin-top: 5px;
 " type="button" data-nq-toggle-modal="#watch_curri" ng-click="find_curri_information()" ng-show="already_select_curri"><i style="font-size:1.5em;color:#00386B" class="glyphicon glyphicon-info-sign"></i></button>
 
-<span style="visibility:hidden" >daad</span>
+<span style="visibility:hidden" >daa</span>
                <select data-qo-disable-clear="true" data-qo-button-class="mySelect_index_year not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="sendYearAndGetIndicators(year_choosen)" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" data-ng-click="check_curri()">
 <option style="display:none" value=""></option></select>  
 
-<span style="visibility:hidden" >daad</span>
+<span style="visibility:hidden" >dad</span>
 
 
    <button class="btn hvr-wobble-vertical" type="button" style="background-color:#739900;margin-bottom:0px;margin-left:0px; color:white;" ng-click="download_aun_book()">
                     <span class="glyphicon glyphicon-download-alt"></span> ดาวน์โหลดเล่ม
                 </button>
-                 
+              
 
+              <span style="visibility:hidden" >daa</span>   
+   <button class="btn btn-primary hvr-wobble-vertical" type="button" style=";margin-bottom:0px;margin-left:0px; color:white;" ng-click="download_aun_book()">
+                    <span class="glyphicon glyphicon-download-alt"></span> ดาวน์โหลดเล่มร่าง
+                </button>
 </div>
 
     <!--     <div class="row wow flipInX"data-wow-duration="2s" data-wow-delay="1s"ng-class="{'not_login_index_select_button_row': already_login == false }" style="position:absolute;z-index:1;top:100px;width:100%;margin-left: 25px;">
@@ -679,8 +683,8 @@
 
 
                     <tr ng-repeat="each_evaluation_in_sub_indicator in each_evaluation_in_indicator.sub_indicator_result">
-                         <td class="number">{{each_evaluation_in_indicator.indicator_num}}.{{each_evaluation_in_sub_indicator.sub_indicator_num}}</td>
-                      <td class="topic" >{{each_evaluation_in_sub_indicator.sub_indicator_name}}</td>
+                         <td class="number" ng-if="$index!=0">{{each_evaluation_in_indicator.indicator_num}}.{{each_evaluation_in_sub_indicator.sub_indicator_num}}</td>
+                      <td class="topic" ng-if="$index!=0" >{{each_evaluation_in_sub_indicator.sub_indicator_name}}</td>
                       <!--   <td class="result"  ng-class="{resultGreen: each_evaluation_in_sub_indicator.sub_indicator_other_result>each_evaluation_in_sub_indicator.sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both , resultRed:each_evaluation_in_sub_indicator.sub_indicator_self_result>each_evaluation_in_sub_indicator.sub_indicator_other_result  &&  each_evaluation_in_indicator.complete_both }" >{{each_evaluation_in_sub_indicator.sub_indicator_self_result}}</td>
                                    <td class="result"  ng-class="{resultGreen: each_evaluation_in_sub_indicator.sub_indicator_other_result>each_evaluation_in_sub_indicator.sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both , resultRed:each_evaluation_in_sub_indicator.sub_indicator_self_result>each_evaluation_in_sub_indicator.sub_indicator_other_result   &&  each_evaluation_in_indicator.complete_both}"  >{{each_evaluation_in_sub_indicator.sub_indicator_other_result}}</td> -->
                          </tr>
