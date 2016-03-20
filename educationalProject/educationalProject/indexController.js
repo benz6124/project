@@ -668,7 +668,7 @@ $scope.send_support_text_change_to_server = function(){
     $scope.current_section_save.detail = CKEDITOR.instances['support_text'].getData();
     $scope.current_section_save.teacher_id = $rootScope.current_user.user_id;
       $http.put(
-             '/api/sectionsave/getsectionsave',
+             '/api/sectionsave',
              JSON.stringify( $scope.current_section_save),
              {
                  headers: {
