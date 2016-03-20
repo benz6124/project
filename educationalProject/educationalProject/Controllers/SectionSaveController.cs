@@ -7,14 +7,18 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.IO;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using educationalProject.Models.Wrappers;
 namespace educationalProject.Controllers
 {
     public class SectionSaveController : ApiController
     {
         private oSection_save datacontext = new oSection_save();
-        public async Task<IHttpActionResult> Get()
+        public async Task<IHttpActionResult> Get([FromUri]JObject data)
         {
+            if (data == null)
+                return BadRequest("กรุณาระบุหลักสูตรและปีการศึกษาที่ต้องการดาวน์โหลดร่างรายงาน");
+
             object res = await datacontext.getHtmlSectionSave();
             string htmlres = res.ToString();
             var strBody = new System.Text.StringBuilder("");
