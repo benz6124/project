@@ -113,5 +113,16 @@ namespace educationalProject.Models.Wrappers
                 d.SQLDisconnect();
             }
         }
+
+        public async Task<object> getHtmlSectionSave()
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return WebApiApplication.CONNECTDBERRSTRING;
+            d.iCommand.CommandText = "select detail from section_save where curri_id = '21' and aca_year = 2558 and indicator_num = 1 and sub_indicator_num = 1";
+            object res = await d.iCommand.ExecuteScalarAsync();
+            d.SQLDisconnect();
+            return res;
+        }
     }
 }
