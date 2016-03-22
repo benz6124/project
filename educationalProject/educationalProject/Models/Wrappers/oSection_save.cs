@@ -157,7 +157,16 @@ namespace educationalProject.Models.Wrappers
                                     Evidence.FieldName.INDICATOR_NUM, Evidence.FieldName.EVIDENCE_REAL_CODE, Evidence.FieldName.EVIDENCE_NAME,
                                     Evidence.FieldName.TABLE_NAME, Evidence.FieldName.CURRI_ID, curri_id,
                                     Evidence.FieldName.ACA_YEAR, aca_year);
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} END", selectindicator, selectsubindicator, selectsectionsave, selectevidence);
+
+            string selectselfevaluation = string.Format("select {0},{1},{2} " +
+                                          "from {3} " +
+                                          "where {4} = '{5}' and {6} = {7} order by {0},{1} ",
+                                          Self_evaluation.FieldName.INDICATOR_NUM, Self_evaluation.FieldName.SUB_INDICATOR_NUM,
+                                          Self_evaluation.FieldName.EVALUATION_SCORE, Self_evaluation.FieldName.TABLE_NAME,
+                                          Self_evaluation.FieldName.CURRI_ID, curri_id, Self_evaluation.FieldName.ACA_YEAR, aca_year);
+
+
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} END", selectindicator, selectsubindicator, selectsectionsave, selectevidence, selectselfevaluation);
             try
             {
                 System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
@@ -167,16 +176,29 @@ namespace educationalProject.Models.Wrappers
                     {
                         DataTable data = new DataTable();
                         data.Load(res);
-                        
+
                         //Case current resultset is indicator table
                         if (data.Columns.Contains("indicator_name_t"))
                         {
                             foreach (DataRow item in data.Rows)
                             {
-                                result.indicator_list.Add(new Indicator_with_section_save_list
+
+                                result.indicator_section_save_list.Add(new Indicator_with_section_save_list
                                 {
                                     indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[Indicator.FieldName.INDICATOR_NUM].Ordinal]),
                                     indicator_name = item.ItemArray[data.Columns[Indicator.FieldName.INDICATOR_NAME_T].Ordinal].ToString()
+                                });
+
+                                result.indicator_self_evaluation_list.Add(new Indicator_with_self_evaluation_tiny_obj_list
+                                {
+                                    indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[Indicator.FieldName.INDICATOR_NUM].Ordinal])
+                                });
+
+                                //Force to add self_evaluation with sub_indicator_num = 0 (overall result for each indicator)
+                                result.indicator_self_evaluation_list.Last().self_evaluation_list.Add(new Self_evaluation_tiny_detail
+                                {
+                                    sub_indicator_num = 0,
+                                    evaluation_score = 0 //Default score
                                 });
                             }
                         }
@@ -187,7 +209,7 @@ namespace educationalProject.Models.Wrappers
                             foreach (DataRow item in data.Rows)
                             {
                                 int indnum = Convert.ToInt32(item.ItemArray[data.Columns[Sub_indicator.FieldName.INDICATOR_NUM].Ordinal]);
-                                result.indicator_list.First(t => t.indicator_num == indnum).section_save_list.Add(new Section_save_with_sub_indicator_detail
+                                result.indicator_section_save_list.First(t => t.indicator_num == indnum).section_save_list.Add(new Section_save_with_sub_indicator_detail
                                 {
                                     detail = "--ไม่พบข้อมูล--",
                                     strength = "--ไม่พบข้อมูล--",
@@ -197,6 +219,14 @@ namespace educationalProject.Models.Wrappers
                                     indicator_num = indnum,
                                     sub_indicator_name = item.ItemArray[data.Columns[Sub_indicator.FieldName.SUB_INDICATOR_NAME].Ordinal].ToString()
                                 });
+
+                                //Force to add self_evaluation with sub_indicator_num equal to => current read value
+                                result.indicator_self_evaluation_list.First(t => t.indicator_num == indnum).self_evaluation_list.Add(new Self_evaluation_tiny_detail
+                                {
+                                    sub_indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[Sub_indicator.FieldName.SUB_INDICATOR_NUM].Ordinal]),
+                                    evaluation_score = 0 //Default score
+                                });
+
                             }
                         }
 
@@ -207,11 +237,11 @@ namespace educationalProject.Models.Wrappers
                             {
                                 int indnum = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]);
                                 int subindnum = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.SUB_INDICATOR_NUM].Ordinal]);
-                                Section_save_with_sub_indicator_detail target = result.indicator_list.First(t => t.indicator_num == indnum).
+                                Section_save_with_sub_indicator_detail target = result.indicator_section_save_list.First(t => t.indicator_num == indnum).
                                     section_save_list.First(u => u.sub_indicator_num == subindnum);
 
                                 string readdetail = item.ItemArray[data.Columns[FieldName.DETAIL].Ordinal].ToString();
-                                if(readdetail != "")
+                                if (readdetail != "")
                                 {
                                     target.detail = readdetail;
                                 }
@@ -236,16 +266,30 @@ namespace educationalProject.Models.Wrappers
                             }
                         }
                         //Case current resultset is evidence table
-                        else
+                        else if (data.Columns.Contains(Evidence.FieldName.EVIDENCE_NAME))
                         {
                             foreach (DataRow item in data.Rows)
                             {
                                 int indnum = Convert.ToInt32(item.ItemArray[data.Columns[Evidence.FieldName.INDICATOR_NUM].Ordinal]);
-                                result.indicator_list.First(t => t.indicator_num == indnum).evidence_list.Add(new Evidence_detail_for_SAR {
+                                result.indicator_section_save_list.First(t => t.indicator_num == indnum).evidence_list.Add(new Evidence_detail_for_SAR
+                                {
                                     indicator_num = indnum.ToString(),
                                     evidence_real_code = item.ItemArray[data.Columns[Evidence.FieldName.EVIDENCE_REAL_CODE].Ordinal].ToString(),
                                     evidence_name = item.ItemArray[data.Columns[Evidence.FieldName.EVIDENCE_NAME].Ordinal].ToString()
                                 });
+                            }
+                        }
+
+                        //Case current resultset is self_evaluation
+                        else
+                        {
+                            foreach (DataRow item in data.Rows)
+                            {
+                                int indnum = Convert.ToInt32(item.ItemArray[data.Columns[Self_evaluation.FieldName.INDICATOR_NUM].Ordinal]);
+                                int subindnum = Convert.ToInt32(item.ItemArray[data.Columns[Self_evaluation.FieldName.SUB_INDICATOR_NUM].Ordinal]);
+                                result.indicator_self_evaluation_list.First(t => t.indicator_num == indnum).
+                                    self_evaluation_list.First(u => u.sub_indicator_num == subindnum).
+                                    evaluation_score = Convert.ToInt32(item.ItemArray[data.Columns[Self_evaluation.FieldName.EVALUATION_SCORE].Ordinal]);
                             }
                         }
                         data.Dispose();

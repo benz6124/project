@@ -199,10 +199,12 @@
     <Compile Include="Models\ViewModels\Evidence_with_teacher_curri_indicator_detail.cs" />
     <Compile Include="Models\ViewModels\Extra_privilege_by_type_with_name.cs" />
     <Compile Include="Models\ViewModels\Indicator_with_section_save_list.cs" />
+    <Compile Include="Models\ViewModels\Indicator_with_self_evaluation_tiny_obj_list.cs" />
     <Compile Include="Models\ViewModels\Personnel_brief_detail.cs" />
     <Compile Include="Models\ViewModels\Personnel_with_pending_primary_evidence.cs" />
     <Compile Include="Models\ViewModels\SAR.cs" />
     <Compile Include="Models\ViewModels\Section_save_with_sub_indicator_detail.cs" />
+    <Compile Include="Models\ViewModels\Self_evaluation_tiny_detail.cs" />
     <Compile Include="Models\ViewModels\Sub_indicator_result.cs" />
     <Compile Include="Models\ViewModels\User_curriculum_with_brief_detail.cs" />
     <Compile Include="Models\ViewModels\Default_privilege_by_type_list_with_privilege_choices.cs" />
