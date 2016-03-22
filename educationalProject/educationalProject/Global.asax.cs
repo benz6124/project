@@ -12,6 +12,7 @@ namespace educationalProject
         //public static readonly string SERVERPATH = System.Web.HttpContext.Current.Server.MapPath("~/");
         public static readonly string SERVERPATH = "D:/";
         public static readonly string CONNECTDBERRSTRING = "ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้";
+        public static readonly string SERVERURL = "http://161.246.6.38/";
         protected void Application_Start()
         {
             //AreaRegistration.RegisterAllAreas();

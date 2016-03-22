@@ -418,7 +418,7 @@ namespace educationalProject.Models.Wrappers
                             evicode,
                             item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString()
                             );
-                        List<string> pathanddocnumlist = new List<string> { item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(), indnum + "-" + evicode };
+                        List<string> pathanddocnumlist = new List<string> { WebApiApplication.SERVERURL + item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(), indnum + "-" + evicode };
                         result.Add(new List<object> { evidencestr, pathanddocnumlist });
                     }
                     data.Dispose();
