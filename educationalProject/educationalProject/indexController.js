@@ -469,10 +469,17 @@ console.log('get_all_evaluation')
              }
          ).success(function (data) {
             $scope.evaluation_overall = data;
+        $scope.self_evaluated = true;
+        $scope.others_evaluated = true;
 
+        $scope.self_sum_overall = 0;
+        $scope.self_count_overall = 0;
+            $scope.others_count_overall = 0;
+         $scope.others_sum_overall = 0;
             var index;
             var inner_index;
             for(index=0;index<$scope.evaluation_overall.length;index++){
+
                 if(!$scope.evaluation_overall[index].self_time || !$scope.evaluation_overall[index].other_time){
                     $scope.evaluation_overall[index].complete_both = false;
                 }
@@ -480,7 +487,26 @@ console.log('get_all_evaluation')
                     $scope.evaluation_overall[index].complete_both = true;
                 }
 
+                 if(!$scope.evaluation_overall[index].self_time){
+                   $scope.self_evaluated = false;
+                }else{
+                     $scope.self_count_overall =  $scope.self_count_overall +1;
+                    $scope.self_sum_overall = $scope.self_sum_overall +$scope.evaluation_overall[index].sub_indicator_result[0].sub_indicator_self_result;
+                }
+
+                if(!$scope.evaluation_overall[index].other_time){
+                       $scope.others_evaluated = false;
+                }else{
+                      $scope.others_sum_overall = $scope.others_sum_overall +$scope.evaluation_overall[index].sub_indicator_result[0].sub_indicator_other_result;
+                    $scope.others_count_overall = $scope.others_count_overall +1;
+
+                }
+
             }
+
+            $scope.others_final_overall = $scope.others_sum_overall / $scope.others_count_overall;
+           $scope.self_final_overall   = $scope.self_sum_overall/$scope.self_count_overall ;
+
 console.log('evaluation_overall')
 console.log('evaluation_overall')
 //             var index;
@@ -503,20 +529,20 @@ console.log('evaluation_overall')
     $scope.sendIndicatorCurriAndGetEvaluation = function () {
         console.log($scope.indicator_choosen)
         $scope.this_indicator_show = {};
-        $scope.self_evaluated = true;
-        $scope.others_evaluated = true;
+        // $scope.self_evaluated = true;
+        // $scope.others_evaluated = true;
         var index;
         for(index=0;index<$scope.evaluation_overall.length;index++){
             if($scope.evaluation_overall[index].indicator_num == $scope.indicator_choosen.indicator_num){
                 $scope.this_indicator_show = $scope.evaluation_overall[index];
             }
         }
-        if(!$scope.this_indicator_show.indicator_result_self_average){
-                   $scope.self_evaluated = false;
-        }
-        if(!$scope.this_indicator_show.indicator_result_other_average){
-               $scope.others_evaluated = false;
-        }
+        // if(!$scope.this_indicator_show.self_time){
+        //            $scope.self_evaluated = false;
+        // }
+        // if(!$scope.this_indicator_show.other){
+        //        $scope.others_evaluated = false;
+        // }
 
         $scope.sendIndicatorCurriAndGetEvidence();
         // // $scope.loading = new $loading();
@@ -1518,6 +1544,7 @@ $scope.indicator_choosen = {};
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
               my_modal.$hide();
               $scope.init();
+              $rootScope.clear_choosen();
          })
          .error(function (data, status, headers, config) {
             $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
