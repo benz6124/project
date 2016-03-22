@@ -157,20 +157,22 @@ namespace educationalProject.Models.Wrappers
             string deletefrompresident = string.Format("delete from {0} where {1} = {2} ", FieldName.TABLE_NAME,
                 FieldName.ACA_YEAR, ParameterName.ACA_YEAR
                 );
-            string insertintopresident = string.Format("insert into {0} values ", FieldName.TABLE_NAME);
-            int oldlength = insertintopresident.Length;
+            string insertintopresidentwithdeletefromcommittee = "";
+
             foreach(KeyValuePair<string,Curri_with_pres_and_cand> kv in data.all_presidents)
             {
                 foreach(Personnel_brief_detail p in kv.Value.presidents)
                 {
-                    if (insertintopresident.Length <= oldlength)
-                        insertintopresident += string.Format("({0},'{1}',{2}) ", p.user_id, kv.Key, ParameterName.ACA_YEAR);
-                    else
-                        insertintopresident += string.Format(",({0},'{1}',{2}) ", p.user_id, kv.Key, ParameterName.ACA_YEAR);
+                    //DELETE FROM COMMITTEE
+                    insertintopresidentwithdeletefromcommittee += string.Format("delete from {0} where {1} = '{2}' and {3} = {4} and {5} = {6} ",
+                                                                  Committee.FieldName.TABLE_NAME, FieldName.CURRI_ID, kv.Key, FieldName.ACA_YEAR, ParameterName.ACA_YEAR,
+                                                                  FieldName.TEACHER_ID, p.user_id);
+                    //INSERT INTO PRESIDENT
+                    insertintopresidentwithdeletefromcommittee += string.Format("insert into {0} values ({1},'{2}',{3}) ", FieldName.TABLE_NAME, p.user_id, kv.Key, ParameterName.ACA_YEAR);
                 }
             }
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.ACA_YEAR, aca_year));
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} END", deletefrompresident, insertintopresident);
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} END", deletefrompresident, insertintopresidentwithdeletefromcommittee);
             try
             {
                 await d.iCommand.ExecuteNonQueryAsync();
