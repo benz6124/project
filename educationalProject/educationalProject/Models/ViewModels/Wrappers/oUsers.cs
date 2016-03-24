@@ -1049,6 +1049,138 @@ namespace educationalProject.Models.ViewModels.Wrappers
             }
             return result;
         }
+
+        public async Task<object> InsertWithUserType(List<UsernamePassword> list, List<string> target_curri_id_list,string usrtype)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return WebApiApplication.CONNECTDBERRSTRING;
+            List<string> result = new List<string>();
+
+            string temp5tablename = "#temp5";
+            string temp6tablename = "#temp6";
+            string temp7tablename = "#temp7";
+
+            //This temptable keep duplicates email
+            string createtabletemp5 = string.Format("CREATE TABLE {0}(" +
+                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
+                                      "[{1}] VARCHAR(60) NULL," +
+                                      "PRIMARY KEY ([row_num])) " +
+                                      "ALTER TABLE {0} " +
+                                      "ALTER COLUMN {1} VARCHAR(60) COLLATE DATABASE_DEFAULT ",
+                                      temp5tablename, Teacher.FieldName.EMAIL);
+
+            //This table keep the latest user id which is inserted
+            string createtabletemp6 = string.Format("CREATE TABLE {0}(" +
+                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
+                                      "[{1}] INT NULL," +
+                                      "PRIMARY KEY ([row_num])) ",
+                                      temp6tablename, User_list.FieldName.USER_ID);
+
+            //This table keep curri_id which will join to latest user id inserted table 
+            string createtabletemp7 = string.Format("CREATE TABLE {0}(" +
+                          "[row_num] INT IDENTITY(1, 1) NOT NULL," +
+                          "[{1}] {2} NULL," +
+                          "PRIMARY KEY ([row_num])) " +
+                          "ALTER TABLE {0} " +
+                          "ALTER COLUMN {1} {2} COLLATE DATABASE_DEFAULT ",
+                          temp7tablename, User_curriculum.FieldName.CURRI_ID, DBFieldDataType.CURRI_ID_TYPE);
+
+            string insertintotemp7 = string.Format("insert into {0} values ", temp7tablename);
+
+            int len = insertintotemp7.Length;
+
+            foreach (string curriitem in target_curri_id_list)
+            {
+                if (insertintotemp7.Length <= len)
+                    insertintotemp7 += string.Format("('{0}')", curriitem);
+                else
+                    insertintotemp7 += string.Format(",('{0}')", curriitem);
+            }
+
+            string insertintousercurri = "";
+            if (insertintotemp7.Length > len)
+                insertintousercurri = string.Format("insert into {0} " +
+                                      "select {1},{2} from {3},{4} ",
+                                      User_curriculum.FieldName.TABLE_NAME,
+                                      User_curriculum.FieldName.USER_ID,
+                                      User_curriculum.FieldName.CURRI_ID, temp6tablename, temp7tablename);
+            else
+                insertintotemp7 = "";
+
+            string insertcmd = "";
+
+            foreach (UsernamePassword item in list)
+            {
+                string ts = DateTime.Now.GetDateTimeFormats(new System.Globalization.CultureInfo("en-US"))[93];
+
+                insertcmd += string.Format(
+                                   "IF NOT EXISTS(select * from {0} where {1} = '{2}' or {3} = '{2}') " +
+                                   "begin " +
+                                   "insert into {4} " +
+                                   "select * from (insert into {0} ({5}, {1}, {6}, {3}, {7}) output inserted.{8} " +
+                                   "values ('{9}', '{2}', '{10}', '{2}', '{11}')) as outputinsert " +
+
+                                   insertintousercurri + " " +
+
+                                   "delete from {4} " +
+                                   "end " +
+                                   "else " +
+                                   "begin " +
+                                   "insert into {12} values ('{2}') " +
+                                   "end ", User_list.FieldName.TABLE_NAME, Personnel.FieldName.USERNAME, item.username,
+                                   Personnel.FieldName.EMAIL, temp6tablename,
+                                   User_list.FieldName.USER_TYPE, Teacher.FieldName.PASSWORD, Teacher.FieldName.TIMESTAMP,
+                                   User_list.FieldName.USER_ID,
+                                   /*****9****/ usrtype, item.password, ts,
+                                   /****12****/ temp5tablename
+                                   );
+
+            }
+
+            string selectcmd = string.Format("select {1} from {0} ", temp5tablename, Teacher.FieldName.EMAIL);
+
+
+
+
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} {5} END ", createtabletemp5, createtabletemp6, createtabletemp7,
+                insertintotemp7, insertcmd, selectcmd);
+            try
+            {
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
+                if (res.HasRows)
+                {
+                    DataTable data = new DataTable();
+                    data.Load(res);
+                    foreach (DataRow item in data.Rows)
+                    {
+                        result.Add(
+                            item.ItemArray[data.Columns[Teacher.FieldName.EMAIL].Ordinal].ToString()
+                        );
+                    }
+                    data.Dispose();
+                }
+                else
+                {
+                    //Reserved for return error string
+                }
+                res.Close();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            if (result.Count != 0)
+                return result;
+            else
+                return null;
+        }
     }
 }
 

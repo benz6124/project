@@ -22,6 +22,7 @@ namespace educationalProject.Controllers
         private oAlumni alumnicontext = new oAlumni();
         private oAssessor assessorcontext = new oAssessor();
         private oCompany companycontext = new oCompany();
+        private oUsers userscontext = new oUsers();
         [ActionName("createnewusersbytyping")]
         public async Task<IHttpActionResult> PostForCreateNewUsersByTyping(JObject data)
         {
@@ -81,12 +82,14 @@ namespace educationalProject.Controllers
                     resultfromdb = await companycontext.Insert(userlist, curri_list);
                 else if (select_user_type == "ผู้ประเมินจากภายนอก")
                     resultfromdb = await assessorcontext.Insert(userlist, curri_list);
+                else if (select_user_type != "")
+                    resultfromdb = await userscontext.InsertWithUserType(userlist, curri_list, select_user_type);
                 else
                     return BadRequest("กรุณาเลือกประเภทผู้ใช้งาน");
 
-                //4.If result is list,try to send mail (send only mail that not it resultfromdb)
-                //Otherwise send errorresult back to user.
-                if (resultfromdb == null)
+            //4.If result is list,try to send mail (send only mail that not it resultfromdb)
+            //Otherwise send errorresult back to user.
+            if (resultfromdb == null)
                 {
                     foreach (UsernamePassword item in nonencryptuserlist)
                     {
@@ -114,6 +117,132 @@ namespace educationalProject.Controllers
                 else
                     return InternalServerError(new Exception(resultfromdb.ToString()));
         }
+
+        [ActionName("createnewusers")]
+        public async Task<IHttpActionResult> PostForCreateNewUsersByFile()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
+            }
+
+            string savepath = WebApiApplication.SERVERPATH + "temp";
+            var result = new MultipartFormDataStreamProvider(savepath);
+            List<UsernamePassword> userlist = new List<UsernamePassword>();
+            List<UsernamePassword> nonencryptuserlist = new List<UsernamePassword>();
+            List<string> curri_list = new List<string>();
+            try
+            {
+                await Request.Content.ReadAsMultipartAsync(result);
+
+                //1.READ JSON DATA PART (curri and type)
+                JObject datareceive = JObject.Parse(result.FormData.GetValues(result.FormData.AllKeys[0])[0]);
+                if (datareceive["curri"] != null)
+                {
+                    JArray jcurrilist = (JArray)datareceive["curri"];
+                    foreach (JValue value in jcurrilist)
+                    {
+                        curri_list.Add(value.ToString());
+                    }
+                }
+                string select_user_type = datareceive["type"]["user_type"].ToString();
+
+
+                //2.Read maillist file
+
+                MultipartFileData file = result.FileData[0];
+                if (file.Headers.ContentType.ToString() != "text/plain")
+                    return BadRequest("ไฟล์ที่อัพโหลดไม่เป็นไฟล์ข้อความธรรมดา");
+
+                FileInfo fileInfo = new FileInfo(file.LocalFileName);
+
+                const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                RNGCryptoServiceProvider gen = new RNGCryptoServiceProvider();
+                byte[] num = new byte[8];
+                string text = File.ReadAllText(string.Format("{0}/{1}", savepath, fileInfo.Name));
+                string[] emaillist = text.Split(' ', '\r', '\t', '\n', '\v', '\f').Where(t => t != "").ToArray();
+                foreach (string str in emaillist)
+                {
+                    //GENERATE PASSWORD 8 CHARS
+                    string password = "";
+                    gen.GetBytes(num);
+                    for (int j = 0; j < 8; j++)
+                    {
+                        num[j] %= (byte)chars.Length;
+                        password += chars[num[j]];
+                    }
+                    //=========================
+                    string strlower = str.ToLower();
+
+                    userlist.Add(new UsernamePassword(strlower, password));
+                    nonencryptuserlist.Add(new UsernamePassword
+                    {
+                        username = strlower,
+                        password = password
+                    });
+                }
+
+                //3.Delete temp email file
+                //Check whether file exists!
+                if (File.Exists(string.Format("{0}/{1}", savepath, fileInfo.Name)))
+                    File.Delete(string.Format("{0}/{1}", savepath, fileInfo.Name));
+
+                //4.Add user to database base on select_user_type
+                object resultfromdb = null;
+                if (select_user_type == "อาจารย์")
+                    resultfromdb = await teachercontext.Insert(userlist, curri_list);
+                else if (select_user_type == "เจ้าหน้าที่")
+                    resultfromdb = await staffcontext.Insert(userlist, curri_list);
+                else if (select_user_type == "นักศึกษา")
+                    resultfromdb = await studentcontext.Insert(userlist, curri_list);
+                else if (select_user_type == "ศิษย์เก่า")
+                    resultfromdb = await alumnicontext.Insert(userlist, curri_list);
+                else if (select_user_type == "บริษัท")
+                    resultfromdb = await companycontext.Insert(userlist, curri_list);
+                else if (select_user_type == "ผู้ประเมินจากภายนอก")
+                    resultfromdb = await assessorcontext.Insert(userlist, curri_list);
+                else if (select_user_type != "")
+                    resultfromdb = await userscontext.InsertWithUserType(userlist, curri_list, select_user_type);
+                else
+                    return BadRequest("กรุณาเลือกประเภทผู้ใช้งาน");
+
+                //5.If result is list,try to send mail (send only mail that not it resultfromdb)
+                //Otherwise send errorresult back to user.
+                if (resultfromdb == null)
+                {
+                    foreach (UsernamePassword item in nonencryptuserlist)
+                    {
+                        //send mail!
+                        await MailingUtils.sendUsernamePasswordMail(item.username, item.password);
+                    }
+                    return Ok();
+                }
+                else if (resultfromdb.GetType().ToString() != "System.String")
+                {
+                    List<string> erroremail = (List<string>)resultfromdb;
+                    if (userlist.Count == erroremail.Count)
+                        return BadRequest("ทุกอีเมล์ในไฟล์ดังกล่าวมีอยู่แล้วในระบบ");
+                    foreach (UsernamePassword item in nonencryptuserlist)
+                    {
+                        //If current mail is not in erroremail => SEND!
+                        if (erroremail.FirstOrDefault(t => t == item.username) == null)
+                        {
+                            //send mail!
+                            await MailingUtils.sendUsernamePasswordMail(item.username, item.password);
+                        }
+                    }
+                    return Ok(resultfromdb);
+                }
+                else
+                    return InternalServerError(new Exception(resultfromdb.ToString()));
+
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+        }
+
 
         [ActionName("login")]
         public async Task<IHttpActionResult> PostForLogin(JObject usrpwdata)
