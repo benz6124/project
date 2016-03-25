@@ -19,7 +19,7 @@ namespace educationalProject.Utils
                 MailMessage mailMsg = new MailMessage();
 
                 // To
-                mailMsg.To.Add(new MailAddress("benchbb01@hotmail.com"));
+                mailMsg.To.Add(new MailAddress(username));
 
                 // From
                 mailMsg.From = new MailAddress(smtpSection.Network.UserName, "Educationalproject");
@@ -55,7 +55,7 @@ namespace educationalProject.Utils
                 MailMessage mailMsg = new MailMessage();
 
                 // To
-                mailMsg.To.Add(new MailAddress("benchbb01@hotmail.com"));
+                mailMsg.To.Add(new MailAddress(username));
 
                 // From
                 mailMsg.From = new MailAddress(smtpSection.Network.UserName, "Educationalproject");

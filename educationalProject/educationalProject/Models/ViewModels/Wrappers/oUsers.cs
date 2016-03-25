@@ -111,7 +111,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             //4 stand for company
             //5 stand for assessor
             //6 stand for admin
-
+            //7 stand for other user_type
 
             string mainusrdataselect = "";
             if (usrtype == 0)
@@ -135,10 +135,12 @@ namespace educationalProject.Models.ViewModels.Wrappers
             else if (usrtype == 6)
                 mainusrdataselect = string.Format("select * from ({0}) as sres where {1} = {2} ",
                 oAdmin.getSelectAdminByJoinCommand(), Admin.FieldName.ADMIN_ID, user_id);
-
+            else
+                mainusrdataselect = string.Format("select * from {0} where {1} = {2} ",
+                User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_ID, user_id);
             //1 select user_data from pre-defined select table command => mainusrdataselect
 
-            //2 select education data(teacher and staff only) => selecteducation
+            //2 select education data(every user_type except student) => selecteducation
             string selecteducation = "";
             if (usrtype != 2)
                 selecteducation = string.Format("select * from {0} where {1} = {2} ",
@@ -193,8 +195,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             if (usrtype != 6)
                 selectprivilege = getSelectPrivilegeCommand(user_id,tablename);
 
-
-
+            
             return string.Format(" BEGIN {0} {1} {2} {3} {4} {5} {6} {7} END ", mainusrdataselect, selecteducation, selectcurri, selectpresin,
                    selectcommitteein, selecttopic, selectnotsendprimary, selectprivilege);
         }
@@ -230,7 +231,10 @@ namespace educationalProject.Models.ViewModels.Wrappers
            "{18} " +
 
            "else if exists (select * from {19} where {20} = {2}) " +
-           "{21} ",
+           "{21} " +
+
+           "else if exists (select * from {23} where {22} = {2}) " +
+           "{26} ",
            Teacher.FieldName.TABLE_NAME, Teacher.FieldName.TEACHER_ID, usridvar,
            getSelectUserDataCommand(usridvar, 0, "#temp99"), Staff.FieldName.TABLE_NAME, Staff.FieldName.STAFF_ID,
            getSelectUserDataCommand(usridvar, 1, "#temp98"), Student.FieldName.TABLE_NAME, Student.FieldName.USER_ID,
@@ -239,8 +243,10 @@ namespace educationalProject.Models.ViewModels.Wrappers
            getSelectUserDataCommand(usridvar, 4, "#temp95"), Assessor.FieldName.TABLE_NAME, Assessor.FieldName.ASSESSOR_ID,
            getSelectUserDataCommand(usridvar, 5, "#temp94"), Admin.FieldName.TABLE_NAME, Admin.FieldName.ADMIN_ID,
            getSelectUserDataCommand(usridvar, 6, "#temp93"),User_list.FieldName.USER_ID,User_list.FieldName.TABLE_NAME,
-           Teacher.FieldName.USERNAME, Teacher.ParameterName.USERNAME);
-            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(Teacher.ParameterName.USERNAME, username));
+           Teacher.FieldName.USERNAME, Teacher.ParameterName.USERNAME,
+           getSelectUserDataCommand(usridvar, 7, "#temp92"));
+           d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(Teacher.ParameterName.USERNAME, username));
+
             result.user_id = 0;
 
             try
@@ -269,8 +275,10 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                     result.user_id = Convert.ToInt32(item.ItemArray[tabledata.Columns[Company.FieldName.COMPANY_ID].Ordinal]);
                                 else if (usrtype == "ผู้ประเมินจากภายนอก")
                                     result.user_id = Convert.ToInt32(item.ItemArray[tabledata.Columns[Assessor.FieldName.ASSESSOR_ID].Ordinal]);
-                                else
+                                else if (usrtype == "ผู้ดูแลระบบ")
                                     result.user_id = Convert.ToInt32(item.ItemArray[tabledata.Columns[Admin.FieldName.ADMIN_ID].Ordinal]);
+                                else
+                                    result.user_id = Convert.ToInt32(item.ItemArray[tabledata.Columns[User_list.FieldName.USER_ID].Ordinal]);
 
                                 result.username = item.ItemArray[tabledata.Columns[Teacher.FieldName.USERNAME].Ordinal].ToString();
                                 result.user_type = usrtype;
@@ -537,7 +545,10 @@ namespace educationalProject.Models.ViewModels.Wrappers
             "{18} " +
 
             "else if exists (select * from {19} where {20} = {2}) " +
-            "{21} ",
+            "{21} " +
+
+            "else if exists (select * from {22} where {23} = {2}) " +
+            "{24} ",
             Teacher.FieldName.TABLE_NAME, Teacher.FieldName.TEACHER_ID, usrid,
             getSelectUserDataCommand(usrid.ToString(), 0,"#temp99"), Staff.FieldName.TABLE_NAME, Staff.FieldName.STAFF_ID,
             getSelectUserDataCommand(usrid.ToString(), 1,"#temp98"), Student.FieldName.TABLE_NAME, Student.FieldName.USER_ID,
@@ -545,7 +556,8 @@ namespace educationalProject.Models.ViewModels.Wrappers
             getSelectUserDataCommand(usrid.ToString(), 3,"#temp96"), Company.FieldName.TABLE_NAME, Company.FieldName.COMPANY_ID,
             getSelectUserDataCommand(usrid.ToString(), 4,"#temp95"), Assessor.FieldName.TABLE_NAME, Assessor.FieldName.ASSESSOR_ID,
             getSelectUserDataCommand(usrid.ToString(), 5,"#temp94"), Admin.FieldName.TABLE_NAME, Admin.FieldName.ADMIN_ID,
-            getSelectUserDataCommand(usrid.ToString(), 6,"#temp93"));
+            getSelectUserDataCommand(usrid.ToString(), 6,"#temp93"), User_list.FieldName.TABLE_NAME,User_list.FieldName.USER_ID,
+            getSelectUserDataCommand(usrid.ToString(), 7, "#temp92"));
 
             try
             {
@@ -573,8 +585,10 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                     result.user_id = Convert.ToInt32(item.ItemArray[tabledata.Columns[Company.FieldName.COMPANY_ID].Ordinal]);
                                 else if (usrtype == "ผู้ประเมินจากภายนอก")
                                     result.user_id = Convert.ToInt32(item.ItemArray[tabledata.Columns[Assessor.FieldName.ASSESSOR_ID].Ordinal]);
-                                else
+                                else if (usrtype == "ผู้ดูแลระบบ")
                                     result.user_id = Convert.ToInt32(item.ItemArray[tabledata.Columns[Admin.FieldName.ADMIN_ID].Ordinal]);
+                                else
+                                    result.user_id = Convert.ToInt32(item.ItemArray[tabledata.Columns[User_list.FieldName.USER_ID].Ordinal]);
 
                                 result.username = item.ItemArray[tabledata.Columns[Teacher.FieldName.USERNAME].Ordinal].ToString();
                                 result.user_type = usrtype;
@@ -846,6 +860,8 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 selectuserdatacmd = getSelectUserDataCommand(userdata.user_id.ToString(), 5, "#temp94");
             else if (userdata.user_type == "ผู้ดูแลระบบ")
                 selectuserdatacmd = getSelectUserDataCommand(userdata.user_id.ToString(), 6, "#temp93");
+            else
+                selectuserdatacmd = getSelectUserDataCommand(userdata.user_id.ToString(), 7, "#temp92");
 
             string selectfiletodelcmd = string.Format("select * from {0} ", temp80tablename);
 
@@ -881,8 +897,10 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                     result.user_id = Convert.ToInt32(item.ItemArray[tabledata.Columns[Company.FieldName.COMPANY_ID].Ordinal]);
                                 else if (usrtype == "ผู้ประเมินจากภายนอก")
                                     result.user_id = Convert.ToInt32(item.ItemArray[tabledata.Columns[Assessor.FieldName.ASSESSOR_ID].Ordinal]);
-                                else
+                                else if (usrtype == "ผู้ดูแลระบบ")
                                     result.user_id = Convert.ToInt32(item.ItemArray[tabledata.Columns[Admin.FieldName.ADMIN_ID].Ordinal]);
+                                else
+                                    result.user_id = Convert.ToInt32(item.ItemArray[tabledata.Columns[User_list.FieldName.USER_ID].Ordinal]);
 
                                 result.username = item.ItemArray[tabledata.Columns[Teacher.FieldName.USERNAME].Ordinal].ToString();
                                 result.user_type = usrtype;
