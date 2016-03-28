@@ -53,17 +53,48 @@ $scope.send_please_wait = false;
 
     }
 
+
+$rootScope.selectThisSub = function(sub_indicator){
+      $scope.not_select_sub_indicator = false;
+        $scope.sendSectionSaveAndGetSupportText_to_link(sub_indicator);
+    var my_pattern = [];
+    var index;
+
+
+    for(index=1;index< sub_indicator ;index++){
+    my_pattern.push(0);
+    }
+    my_pattern.push(1);
+
+    for(index=sub_indicator;index< $rootScope.length_of_sub_indicators_now;index++){
+    my_pattern.push(0)
+    }
+
+    $rootScope.active_sub_like_this(my_pattern);
+
+}
 $rootScope.go_to_edit_reason = function (my_modal,sub_indicator){
 
 
-      console.log('go_to_edit_reason')
      // $scope.sub_indicator_choosen = sub_indicator;
         $scope.not_select_sub_indicator = false;
         $scope.sendSectionSaveAndGetSupportText_to_link(sub_indicator);
 my_modal.$hide();
+var my_pattern = [];
+var index;
 
-// console.log('$scope.sub_indicator_choosen')
-// console.log($scope.sub_indicator_choosen)
+for(index=1;index< sub_indicator ;index++){
+my_pattern.push(0);
+}
+my_pattern.push(1);
+
+for(index=sub_indicator;index< $rootScope.length_of_sub_indicators_now;index++){
+my_pattern.push(0)
+}
+
+$rootScope.active_sub_like_this(my_pattern);
+console.log('$scope.sub_indicator_choosen')
+console.log($scope.sub_indicator_choosen)
 
 $location.hash('edit_reason_now');
 
@@ -245,7 +276,7 @@ $scope.download_plain_book = function(){
         if(!$rootScope.current_user.privilege[$scope.curri_choosen.curri_id]){
             return false;
         }
-        if( $rootScope.current_user.privilege[$scope.curri_choosen.curri_id]['15'] ==2){
+        if( $rootScope.current_user.privilege[$scope.curri_choosen.curri_id]['15'] ==3){
         return true;
        }
 
@@ -253,7 +284,7 @@ $scope.download_plain_book = function(){
         return true;
        }
 
-       if($rootScope.right_from_committee($scope.curri_choosen.curri_id,$scope.year_choosen.aca_year,15,2)==true){
+       if($rootScope.right_from_committee($scope.curri_choosen.curri_id,$scope.year_choosen.aca_year,15,3)==true){
         return true;
        }
     }
@@ -272,7 +303,7 @@ $scope.download_plain_book = function(){
         if($rootScope.current_user.user_type == 'ผู้ดูแลระบบ'){
             return true;
         }
-        if( $rootScope.current_user.privilege[$scope.curri_choosen.curri_id]['31'] ==2){
+        if( $rootScope.current_user.privilege[$scope.curri_choosen.curri_id]['15'] >=2){
         return true;
        }
 
@@ -280,7 +311,7 @@ $scope.download_plain_book = function(){
         return true;
        }
 
-       if($rootScope.right_from_committee($scope.curri_choosen.curri_id,$scope.year_choosen.aca_year,31,2)==true){
+       if($rootScope.right_from_committee($scope.curri_choosen.curri_id,$scope.year_choosen.aca_year,15,2)==true){
         return true;
        }
     }
@@ -376,6 +407,12 @@ $scope.send_please_wait = false;
                 
         }
     }
+
+    $rootScope.active_sub_like_this = function(pattern){
+$scope.which_active_sub = pattern;
+
+
+    }
      $scope.sendYearAndGetIndicators = function (year) {
          $scope.select_all_complete = true;
         if ($scope.select_all_complete  == true){
@@ -397,7 +434,14 @@ $scope.send_please_wait = false;
            $scope.choose_overall();
             $scope.not_select_sub_indicator = true;
                    $scope.not_choose_year = false;
-
+                   $scope.which_active = [];
+                   $scope.which_active.push(1);
+                   var index;
+                   for(index = 0;index<$scope.corresponding_indicators.length;index++){
+                         $scope.which_active.push(0);
+                   }
+                   console.log('which_active')
+                       console.log($scope.which_active)
                    $scope.$parent.not_choose_curri_and_year_yet = false;
              });
 
@@ -445,7 +489,13 @@ $scope.send_please_wait = false;
          ).success(function (data) {
              $scope.corresponding_sub_indicators = data;
               $scope.sendIndicatorCurriAndGetEvaluation();
-            
+              $scope.which_active_sub = [];
+              $rootScope.length_of_sub_indicators_now =$scope.corresponding_sub_indicators.length;
+                $scope.which_active_sub.push(1);
+              var index;
+                   for(index = 1;index<$scope.corresponding_sub_indicators.length;index++){
+                         $scope.which_active_sub.push(0);
+                   }
              if($scope.can_watch_reason() == true){
                  
 
@@ -582,7 +632,17 @@ console.log('evaluation_overall')
             console.log("/api/evidence/getnormal");
             console.log(data);
             $scope.corresponding_evidences = data;
-       
+            if($scope.corresponding_evidences.length==0){
+                       console.log('$scope.have_evidences = false;')
+                       console.log($scope.corresponding_evidences)
+                 $scope.have_evidences = false;
+            }
+        else{
+            console.log('$scope.have_evidences = true;')
+              console.log($scope.corresponding_evidences)
+             $scope.have_evidences = true;
+        }
+
          });
     }
 
@@ -801,8 +861,7 @@ for(index=0;index<$scope.corresponding_sub_indicators.length;index++){
                  }
              }
          ).success(function (data) {
-             console.log("sendSectionSaveAndGetSupportText");
-            console.log(data);
+          
             $scope.current_section_save = data;
             CKEDITOR.instances['support_text'].setData(data.detail);
                    

@@ -11,7 +11,7 @@
 * {
   font-family:"FreesiaUPC" ;
 
- /* font-size: 20px;*/
+ /* font-size: 21px;*/
 }
 
 .aside-body {
@@ -272,7 +272,7 @@ optgroup {
 .topicHeader {
   font-family:  "FreesiaUPC";
 
-  font-size: 20px !important;
+  font-size: 21px !important;
 
 }
 
@@ -287,7 +287,7 @@ optgroup {
 span.topic{
   font-family:  "FreesiaUPC";
 
-  font-size: 20px !important;
+  font-size: 21px !important;
 }
 .headerModal {
   font-family:  "FreesiaUPC";
@@ -319,7 +319,7 @@ input[type='file']{
  input[type='text'] { 
 
   font-family:  "FreesiaUPC";
-  font-size: 20px !important;
+  font-size: 21px !important;
 
 
 }
@@ -328,7 +328,7 @@ input[type='file']{
  input[type='email'] { 
 
   font-family:  "FreesiaUPC";
-  font-size: 20px !important;
+  font-size: 21px !important;
 
 
 }
@@ -357,7 +357,7 @@ input.form-control[placeholder]{
 .select-option{
   text-align: center;
   font-family: "FreesiaUPC";
-  font-size: 20px;
+  font-size: 21px;
 
 }
 
@@ -370,13 +370,13 @@ input.form-control[placeholder]{
 
 
 button[data-toggle="dropdown"]{
-    font-size: 20px;
+    font-size: 21px;
    font-family:  "FreesiaUPC";
 
 }
 
 button ul li label{
-      font-size: 20px;
+      font-size: 21px;
    font-family:  "FreesiaUPC";
    color: green;
 }
@@ -392,6 +392,40 @@ opacity: 0.9 !important;
   max-width: 900px !important;
 }
 
+table.plain,table.plain th,table.plain td{
+  border: 1px solid #cccccc;
+padding:5px;
+}
+
+table.plain {
+  border-collapse: collapse;
+}
+
+
+
+table.plain tr {
+  color: #484848;;
+}
+
+
+
+table.plain th{
+ text-align: center;
+ font-size: 22px;
+}
+
+table.plain td{
+ text-align: left;
+ font-size: 20px;
+}
+
+table.plain td.ppoint {
+  text-align: center;;
+}
+
+table.plain th {
+  color: #6F002B;;
+}
 
 .hvr-pulse{
    transition-duration: 20s;
@@ -399,7 +433,7 @@ opacity: 0.9 !important;
 }
 
 td button li label{
-     font-size: 20px;
+     font-size: 21px;
    font-family:  "FreesiaUPC";
 }
 
@@ -651,7 +685,7 @@ table.table_modal th{
 
 table.table_modal td,table.table_modal td div{
   font-family:  "FreesiaUPC" !important;
-  font-size: 20px ;
+  font-size: 21px ;
   text-align: center;
   vertical-align: middle;
 }
@@ -711,7 +745,7 @@ div.aside-body ul.nav.nav-stacked li a i {
 }
 
 .just_alert .modal-body {
-  font-size: 20px!important;
+  font-size: 21px!important;
 }
 .just_alert .modal-footer{
  
@@ -909,7 +943,7 @@ a{
 
 textarea.form-control{
   font-family: "FreesiaUPC";
-  font-size: 20px;
+  font-size: 21px;
 }
 
 
@@ -994,7 +1028,7 @@ table.evaluation{
 
 /*.myTip{
   font-family: "FreesiaUPC" !important;
-  font-size: 20px !important;
+  font-size: 21px !important;
  
 }*/
 

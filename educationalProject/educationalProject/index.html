@@ -458,7 +458,7 @@
       <ul class="slides-container">
         <li>
           <img src="/myImages/slide/IMG_7834.jpg" width="4272" height="2848">
-          <div class="container_each" class="wow bounceInDown"data-wow-duration="2s">
+          <div class="container_each" >
           <h1 style="margin-top:5px;margin-bottom:0px;" >CUPT QA</h1>
           <p class="topicNewHeader">The Council of the University Presidents of Thailand Quality Assurance</p>
           </div>
@@ -497,7 +497,7 @@
        
       </ul>
 
-      <nav class="slides-navigation wow bounceInDown"  data-wow-duration="3s">
+      <nav class="slides-navigation"  >
       <a href="" class="next hvr-bob"><i class="fa fa-chevron-circle-right fa-3x"></i></a>
       <a href="" class="hvr-bob" ng-class="{prev_login: already_login == true , prev: already_login == false}" class="prev"><i class="fa fa-chevron-circle-left fa-3x"></i></a>
     </nav>
@@ -528,7 +528,7 @@
                     <li ng-show = "already_login" >
               <!--           <img src="{{current_user.information.file_name_pic}}" style="margin-right:23px;margin-top:1px;max-width:95px" class="img-circle profile_pic wow flipInY" height="79"  /> -->
 
-                        <div class="thumb_center_please_profile_pic wow flipInY"  style="background-image: url({{current_user.information.file_name_pic}});"></div>
+                        <div class="thumb_center_please_profile_pic"  style="background-image: url({{current_user.information.file_name_pic}});"></div>
 
                         <ul class="dropdownImg" >
                             <li class="profile_name">  {{current_user.username}}</li>
@@ -636,14 +636,14 @@
 <div align="center" ng-hide="not_select_curri_and_year" style="
     margin-top: 163px;
 ">
-  <div class="wow flipInX" data-wow-delay="0.3s" data-wow-duration="3s"  >
+  <div  >
         <div class="big-nav" ng-class="{'login_indicator_row': already_login == true }" >
             <ul class="nav nav-tabs">
-                <li class="active in">
+                <li ng-class="{'active': which_active[0] == 1 }" >
                 <a data-toggle="tab" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="ภาพรวมการประเมิน" ng-click="choose_overall()" >overall</a></li>
 
 
-                <li  data-ng-repeat="indicator in corresponding_indicators">
+                <li  ng-class="{'active': which_active[$index+1] == 1 }" data-ng-repeat="indicator in corresponding_indicators">
                 <a data-toggle="tab"  data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="{{indicator.indicator_name_t}}" ng-click="sendIndicatorAndGetSubIndicators(indicator)">AUN {{indicator.indicator_num}}</a></li>
 
             </ul>
@@ -657,8 +657,9 @@
         <div class="tab-pane fade active in" >
  <div ng-show="select_overall && (can_watch_result() == false) ">
     
-         <h3 class="headerPanel wow flipInX" data-wow-duration="2s" style="text-align:left">ตัวบ่งชี้ในการประเมินผล</h3>
-              <table class="table table-bordered table-hover table_modal  evaluation wow bounceInDown" data-wow-duration="2s" style="width:100%">
+         <h3 class="headerPanel " style="text-align:left">ตัวบ่งชี้ในการประเมินผล</h3>
+           <button class="btn btn-warning hvr-pulse pull-left" style="margin-bottom:10px;background-color:#00386B;border:#00284d" data-nq-toggle-modal="#criteria_seven" data-effect="from-left" data-placement="left"><i class="glyphicon glyphicon-check"></i> เกณฑ์การประเมิน</button>
+              <table class="table table-bordered table-hover table_modal  evaluation "  style="width:100%">
 
                 <thead>
 
@@ -694,12 +695,13 @@
 
             </table>
 
+ 
         </div>
         <div ng-show="select_overall && can_watch_result()">
     
-         <h3 class="headerPanel wow flipInX" data-wow-duration="2s" style="text-align:left">ผลการประเมินในภาพรวม</h3>
-      
-              <table class="table table-bordered table-hover table_modal  evaluation wow bounceInDown" data-wow-duration="2s" style="width:100%">
+         <h3 class="headerPanel " style="text-align:left">ผลการประเมินในภาพรวม</h3>
+    <button class="btn btn-warning hvr-pulse pull-left" style="margin-bottom:10px;background-color:#00386B;border:#00284d" data-nq-toggle-modal="#criteria_seven" data-effect="from-left" data-placement="left"><i class="glyphicon glyphicon-check"></i> เกณฑ์การประเมิน</button>
+              <table class="table table-bordered table-hover table_modal  evaluation" style="width:100%">
 
                 <thead>
 
@@ -782,13 +784,17 @@
 
             </table>
 
+ 
         </div>
         <div ng-hide="select_overall" >
-            <h2 class="headerPanel wow flipInX" data-wow-duration="3s" style="text-align:center">AUN {{indicator_choosen.indicator_num}} {{indicator_choosen.indicator_name_t}} ({{indicator_choosen.indicator_name_e}})</h2>
+            <h2 class="headerPanel " style="text-align:center">AUN {{indicator_choosen.indicator_num}} {{indicator_choosen.indicator_name_t}} {{indicator_choosen.indicator_name_e}}</h2>
 
 
-           
-            <table ng-if="can_watch_result()" class="table table-bordered table-hover table_modal  evaluation wow bounceInDown" style="width:100%" data-wow-duration="2s">
+            <button ng-if="can_watch_result()" class="btn btn-warning hvr-pulse pull-left" style="margin-bottom:10px;background-color:#00386B;border:#00284d" data-nq-toggle-modal="#criteria_seven" data-effect="from-left" data-placement="left"><i class="glyphicon glyphicon-check"></i> เกณฑ์การประเมิน</button>
+
+
+
+            <table ng-if="can_watch_result()" class="table table-bordered table-hover table_modal  evaluation " style="width:100%">
 
                 <thead>
 
@@ -846,8 +852,9 @@
 </div> -->
 
 <br ng-if="can_watch_result()" />
-   <h3 class="headerPanel wow flipInX"data-wow-delay="1s" data-wow-duration="2s" style="text-align:left">หลักฐานสนับสนุนการประเมิน</h3>
-              <table class="table table-bordered table-hover table_modal evidence wow bounceInLeft" data-wow-delay="2s" data-wow-duration="3s">
+<div ng-show="have_evidences==true">
+   <h3 class="headerPanel"style="text-align:left">หลักฐานสนับสนุนการประเมิน</h3>
+              <table class="table table-bordered table-hover table_modal evidence" >
 
                         <tr>
                             <th class="code">รหัสหลักฐาน</th>
@@ -886,13 +893,15 @@
 
 
                     </table>
-           <div class="wow flipInX" data-wow-delay="1.3s" ng-show="can_watch_reason()">
+
+                    </div>
+           <div ng-show="can_watch_reason()">
                 <div class="small-nav">
                     <div class="tabbable">
                         <ul class="nav nav-tabs">
 
-                            <li data-ng-repeat="sub_indicator in corresponding_sub_indicators" ng-class="{'active': $index == 0 }" >
-                                <a data-toggle="tab"   data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="{{sub_indicator.sub_indicator_name}}"  ng-click="send_sub_indicator(sub_indicator)">AUN {{indicator_choosen.indicator_num}}.{{sub_indicator.sub_indicator_num}} </a>
+                            <li data-ng-repeat="sub_indicator in corresponding_sub_indicators" ng-class="{'active': which_active_sub[$index]==1 }" >
+                                <a data-toggle="tab" ng-click="selectThisSub(sub_indicator.sub_indicator_num)"   data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="{{sub_indicator.sub_indicator_name}}"  ng-click="send_sub_indicator(sub_indicator)">AUN {{indicator_choosen.indicator_num}}.{{sub_indicator.sub_indicator_num}} </a>
                             </li>
                            
                         </ul>
@@ -908,14 +917,14 @@
                 <div class="tab-pane fade active in" id="sub11" style="text-align:initial">
                 
 
-              <h2 class="headerPanel wow flipInX" data-wow-duration="3s" style="text-align:center">AUN {{indicator_choosen.indicator_num}}.{{sub_indicator_choosen.sub_indicator_num}} {{sub_indicator_choosen.sub_indicator_name}}</h2>
+              <h2 class="headerPanel " style="text-align:center">AUN {{indicator_choosen.indicator_num}}.{{sub_indicator_choosen.sub_indicator_num}} {{sub_indicator_choosen.sub_indicator_name}}</h2>
                  
                     <hr / >
 
                  <!--    <h3>ข้อมูลสนับสนุนการประเมินตนเอง</h3> -->
 
 
-                    <span class="topicHeader wow bounceInUp" data-wow-duration="3s" ng-bind-html="current_section_save.detail"></span>
+                    <span class="topicHeader" ng-bind-html="current_section_save.detail"></span>
 
                            <div class="row"  >
           <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicNewHeader">จุดแข็ง (Strength):   </span></h3>
@@ -952,7 +961,7 @@
                       <div ng-show="can_edit_reason()" >
                        <a name="edit_reason_now"></a>
                      
-                    <button class="btn editor hvr-wobble-vertical " type="button" data-nq-toggle-modal="#another_aca" data-qo-effect="flip-x" data-wow-duration="1s"  style="background-color:#6F002B;border:none;" ng-click="clear_select_year_support_text_choosen()"> <span class="glyphicon glyphicon-export" /><span class="normal"> ดึงข้อมูลจากปีการศึกษาอื่น</span></button>
+                    <button class="btn editor hvr-wobble-vertical " type="button" data-nq-toggle-modal="#another_aca" data-qo-effect="flip-x"   style="background-color:#6F002B;border:none;" ng-click="clear_select_year_support_text_choosen()"> <span class="glyphicon glyphicon-export" /><span class="normal"> ดึงข้อมูลจากปีการศึกษาอื่น</span></button>
 
   <br />  
 
@@ -999,7 +1008,7 @@
          </div>
                     <br />
                      
-                        <button class="btn editor hvr-wobble-vertical pull-right " ng-disabled="send_please_wait"type="button" ng-click="send_support_text_change_to_server()" data-wow-duration="1s"  style="background-color:#6F002B;border:none;margin-right:0px;"> <span class="glyphicon glyphicon-ok-sign" /><span class="normal"> ยืนยันการเปลี่ยนแปลง</span></button>
+                        <button class="btn editor hvr-wobble-vertical pull-right " ng-disabled="send_please_wait"type="button" ng-click="send_support_text_change_to_server()" style="background-color:#6F002B;border:none;margin-right:0px;"> <span class="glyphicon glyphicon-ok-sign" /><span class="normal"> ยืนยันการเปลี่ยนแปลง</span></button>
 
                        
 
@@ -1295,8 +1304,8 @@
                             <h1 class="headerModalH1">สร้างบัญชีรายชื่อ</h1>
                         </div>
    <div align="center">
-                           <button class="btn btn-primary  hvr-wobble-vertical " type="button" data-nq-toggle-modal="#create_user_individual" data-qo-effect="flip-x" data-wow-duration="1s"  data-placement="top" ><span class="glyphicon glyphicon-list" /><span class="normal"> สร้างบัญชีรายชื่อโดยการกรอกอีเมล์</span></button>
-     <button class="btn btn-success  hvr-wobble-vertical " type="button" data-nq-toggle-modal="#create_user" data-qo-effect="flip-x" data-wow-duration="1s"  > <span class="glyphicon glyphicon-file" /><span class="normal"> สร้างบัญชีรายชื่อโดยการนำเข้าไฟล์ .txt</span></button>
+                           <button class="btn btn-primary  hvr-wobble-vertical " type="button" data-nq-toggle-modal="#create_user_individual" data-qo-effect="flip-x"  data-placement="top" ><span class="glyphicon glyphicon-list" /><span class="normal"> สร้างบัญชีรายชื่อโดยการกรอกอีเมล์</span></button>
+     <button class="btn btn-success  hvr-wobble-vertical " type="button" data-nq-toggle-modal="#create_user" data-qo-effect="flip-x"  > <span class="glyphicon glyphicon-file" /><span class="normal"> สร้างบัญชีรายชื่อโดยการนำเข้าไฟล์ .txt</span></button>
 
 </div>
                     <div class="custom-footer">
@@ -4594,6 +4603,78 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
                 </div>
+
+                 <div id="criteria_seven" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-independent="true">
+                   <div class="custom-header">
+                        <h1 class="headerModalH1"><span class="headerModal">เกณฑ์การประเมิน 7 ระดับ</span></h1>
+                    </div>
+        <table  class="plain" >
+        <thead>
+            <th  >คะแนน</th>
+               <th >ความหมาย</th>
+                  <th>คุณภาพและระดับความต้องการในการพัฒนา</th>
+            </thead>
+            <tbody>
+                <tr>
+                <td class="ppoint">1</td>
+                <td  >ไม่ปรากฏการดำเนินการ (ไม่มีเอกสาร ไม่มีแผน หรือไม่มีหลักฐาน)</td>
+                <td  >คุณภาพไม่เพียงพออย่างชัดเจน ต้องปรับปรุงแก้ไข หรือพัฒนาโดยเร่งด่วน</td>
+                </tr>
+
+                <tr>
+                <td class="ppoint">2</td>
+                <td  >มีการวางแผนแต่ยังไม่ได้เริ่มดำเนินการ</td>
+                <td  >คุณภาพไม่เพียงพอ จำเป็นต้องมีการปรับปรุง
+แก้ไข หรือ พัฒนา</td>
+                </tr>
+
+        <tr>
+                <td class="ppoint">3</td>
+                <td  >มีเอกสารแต่ไม่เชื่อมโยงกับการปฏิบัติ หรือมี
+การดำเนินการแต่ยังไม่ครบถ้วน</td>
+                <td  >คุณภาพไม่เพียงพอ แต่การปรับปรุง แก้ไข หรือ
+พัฒนาเพียงเล็กน้อยสามารถทำให้มีคุณภาพ
+เพียงพอได้</td>
+                </tr>
+
+                      <tr>
+                <td class="ppoint">4</td>
+                <td  >มีเอกสารและหลักฐานการดำเนินการตาม
+เกณฑ์</td>
+                <td  >มีคุณภาพของการดำเนินการของหลักสูตรตาม
+เกณฑ์</td>
+                </tr>
+
+                      <tr>
+                <td class="ppoint">5</td>
+                <td  >มีเอกสารและหลักฐานชัดเจนที่แสดงถึงการ
+ดำเนินการที่มีประสิทธิภาพดีกว่าเกณฑ์</td>
+                <td  >มีคุณภาพของการดำเนินการของหลักสูตรดีกว่า
+เกณฑ์</td>
+                </tr>
+
+                      <tr>
+                <td class="ppoint">6</td>
+                <td  >ตัวอย่างของแนวปฏิบัติที่ดี</td>
+                <td  >ตัวอย่างของแนวปฏิบัติที่ดี</td>
+                </tr>
+
+                      <tr>
+                <td class="ppoint">7</td>
+                <td  >ดีเยี่ยม เป็นแนวปฏิบัติในระดับโลก
+หรือแนวปฏิบัติชั้นนำ</td>
+                <td  >ดีเยี่ยม เป็นแนวปฏิบัติในระดับโลก
+หรือแนวปฏิบัติชั้นนำ</td>
+                </tr>
+            </tbody>
+        </table>
+                     <div class="custom-footer" >
+                        <div class="topicHeader pull-right">
+                         
+                           <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
+                        </div>
+                    </div>
+</div>
          <div id="see_evaluate_other" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="see_evaluate_by_other_controller"data-qo-screen-mode="true" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ผลการประเมินหลักสูตร</span></h1>
@@ -4754,8 +4835,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                     <div class="container-fluid" ng-hide="choose_not_complete">
                         <div class="clearfix">
-<br />
-
+  <button class="btn btn-warning hvr-pulse" style="margin-top:10px;margin-bottom:10px;background-color:#00386B;border:#00284d" data-nq-toggle-modal="#criteria_seven" data-effect="from-left" data-placement="left"><i class="glyphicon glyphicon-check"></i> เกณฑ์การประเมิน</button>
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
                                  data-qo-selectable="true">
               
@@ -5115,8 +5195,10 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
 
                     <div class="container-fluid" ng-hide="choose_not_complete">
+
                         <div class="clearfix">
-<br />
+
+    <button class="btn btn-warning hvr-pulse" style="margin-top:10px;margin-bottom:10px;background-color:#00386B;border:#00284d" data-nq-toggle-modal="#criteria_seven" data-effect="from-left" data-placement="left"><i class="glyphicon glyphicon-check"></i> เกณฑ์การประเมิน</button>
 
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
                                  data-qo-selectable="true">

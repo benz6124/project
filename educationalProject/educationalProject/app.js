@@ -365,7 +365,7 @@ var first = true;
      $rootScope.have_privilege_in_these_curri[title_code] = [];
 
 
-      if(title_code=='2' || title_code=='14' || title_code=='1' || title_code=='4' || title_code=='7' || title_code=='28' || title_code=='30' || title_code=='31'  || title_code=='32'){
+      if(title_code=='2' || title_code=='14' || title_code=='1' || title_code=='4' || title_code=='7' || title_code=='28' || title_code=='30'  || title_code=='32'){
         for(index=0;index<$rootScope.current_user.curri_id_in.length;index++){
           if($rootScope.current_user.privilege[$rootScope.current_user.curri_id_in[index]][title_code] ==2){
            
