@@ -18,12 +18,14 @@ var app = angular.module('myProject', [
 
 
 
-        window.loading_screen = pleaseWait({
+//         window.loading_screen = pleaseWait({
 
 
-  backgroundColor: '#6F002B',
-  loadingHtml: " <div style='color:white' class='sk-chasing-dots'><div class='sk-child sk-dot1'></div><div class='sk-child sk-dot2'></div></div><p style='font-size:30px;color:#E0E0E0;font-family:FreesiaUPC' class='loading-message'>กำลังนำท่านเข้าสู่ระบบ...</p>"
-});
+//   backgroundColor: '#6F002B',
+//   loadingHtml: " <div style='color:white' class='sk-chasing-dots'><div class='sk-child sk-dot1'></div><div class='sk-child sk-dot2'></div></div><p style='font-size:30px;color:#E0E0E0;font-family:FreesiaUPC' class='loading-message'>กำลังนำท่านเข้าสู่ระบบ...</p>"
+// });
+
+
 //  app.config(function($stateProvider){
 
 // $stateProvider.state('protected-route', {
@@ -318,7 +320,9 @@ for(index=0;index<$rootScope.all_curriculums.length;index++){
   }
 
     $scope.have_privilege_to_open_modal = function(title_code){
-
+if( $scope.already_login == false){
+  return false;
+}
 
           var ever_been_committee = !!$rootScope.current_user.committee_in;
    var ever_been_president = !!$rootScope.current_user.president_in;

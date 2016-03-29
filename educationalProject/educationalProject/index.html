@@ -12,19 +12,14 @@
     <meta name="viewport" content="width=device-width" />
     <title>KMITL CUPT-QA ONLINE</title>
 
-    
-     
-   <!--  // <script src="/app/app.js"></script>
-    // <script src="/app/controllers/indexController.js"></script> -->
-<!--     // <script type="text/javascript" src="/app/app.js"></script>
-    // <script type="text/javascript" src="/app/controllers/indexController.js"></script> -->
-
-
- <link rel="stylesheet"  type="text/css"  href="//fonts.googleapis.com/css?family=Quicksand"/>
+      <link rel="stylesheet"  type="text/css"  href="//fonts.googleapis.com/css?family=Quicksand"/>
 <!--  // <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script> -->
 <link rel="stylesheet" type="text/css" href="/bower_components/SpinKit/css/spinkit.css">
   <!--   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+
+
 <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+
 
     <link rel="icon" href="/myImages/logo_kmitl.gif" type="image/x-icon">
     <!-- <link rel="icon" href="/bower_components/quantumui/images/favicon.ico" type="image/x-icon"> -->
@@ -35,40 +30,21 @@
 <!--   // <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script> -->
   <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <link href="/bower_components/quantumui/dist/css/addon/effect-light.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/bower_components/wow/css/libs/animate.css">
+            <script src="/bower_components/ckeditor/ckeditor.js"></script>
+<!--     <link rel="stylesheet" href="/bower_components/wow/css/libs/animate.css"> -->
+     
+   <!--  // <script src="/app/app.js"></script>
+    // <script src="/app/controllers/indexController.js"></script> -->
+<!--     // <script type="text/javascript" src="/app/app.js"></script>
+    // <script type="text/javascript" src="/app/controllers/indexController.js"></script> -->
 
 
-    <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
+
+
+    <!--  script src="/bower_components/wow/dist/wow.min.js"></script> -->
+
+         <!--   new WOW().init(); -->
  
-
-
-         <script src="/bower_components/angular/angular.js"></script>
-         <script src="/bower_components/angular-animate/angular-animate.js"></script>
-            <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
-<script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-
-<script src="/bower_components/ng-flow/dist/ng-flow-standalone.min.js"></script>
-        <script src="/bower_components/ckeditor/ckeditor.js"></script>
-<!--     // <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> -->
-  
-    <script src="/bower_components/quantumui/dist/js/quantumui-all.js"></script>
-
-    <script src="/bower_components/quantumui/config/icons.js"></script>
-    <script src="/bower_components/ng-dialog/js/ngDialog.js"></script>
-
-    <link href="/Content/dropdowns-enhancement.css" rel="stylesheet" />
-
-<link href="/bower_components/quantumui/dist/css/quantumui.css" rel="stylesheet" />
-    <link href="/bower_components/superslides-0.6.2/dist/stylesheets/superslides.css" rel="stylesheet" />
-    <script type="text/javascript" src="/bower_components/dropdowns-enhancement/dropdowns-enhancement.js"></script>
-
-     <script src="/bower_components/wow/dist/wow.min.js"></script>
-
-    
-
-              <script>
-              new WOW().init();
-              </script>
 </head>
 
 
@@ -639,12 +615,12 @@
   <div  >
         <div class="big-nav" ng-class="{'login_indicator_row': already_login == true }" >
             <ul class="nav nav-tabs">
-                <li ng-class="{'active': which_active[0] == 1 }" >
+                <li ng-class="{'active': which_active[0] == 1 ,'not_active': which_active[0] == 0  }" >
                 <a data-toggle="tab" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="ภาพรวมการประเมิน" ng-click="choose_overall()" >overall</a></li>
 
 
-                <li  ng-class="{'active': which_active[$index+1] == 1 }" data-ng-repeat="indicator in corresponding_indicators">
-                <a data-toggle="tab"  data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="{{indicator.indicator_name_t}}" ng-click="sendIndicatorAndGetSubIndicators(indicator)">AUN {{indicator.indicator_num}}</a></li>
+                <li  ng-class="{'active': which_active[$index+1] == 1 }"  data-ng-repeat="indicator in corresponding_indicators">
+                <a data-toggle="tab"  data-qo-effect="flip-x" ng-click="go_to_indicator(indicator)"  data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="{{indicator.indicator_name_t}}" >AUN {{indicator.indicator_num}}</a></li>
 
             </ul>
 
@@ -673,8 +649,11 @@
    <tbody ng-repeat="each_evaluation_in_indicator in evaluation_overall"> 
                 <tr >
 
-                     <td class="number"  style="background-color:#686868;color:white;text-align:center" > {{each_evaluation_in_indicator.indicator_num}}</td>
-                      <td class="topic"   style="background-color:#686868;color:white;text-align:center">{{each_evaluation_in_indicator.indicator_name}}   </td>
+                     <td class="number"  style="background-color:#686868;color:white;text-align:center" >
+                     <a href=""  style="color:white;text-align:center" ng-click="go_to_indicator_by_number(each_evaluation_in_indicator.indicator_num)"> {{each_evaluation_in_indicator.indicator_num}} </a> 
+
+                     </td>
+                      <td class="topic" style="background-color:#686868;color:white;text-align:center" ><a href=""  style="color:white;text-align:center" ng-click="go_to_indicator_by_number(each_evaluation_in_indicator.indicator_num)">{{each_evaluation_in_indicator.indicator_name}} </a>  </td>
 
                         
 
@@ -738,7 +717,13 @@
                          <td class="number" ng-if="$index==0" style="background-color:#686868;color:white;text-align:center" ng-class="{resultGreenback: each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result > each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result < each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result &&  each_evaluation_in_indicator.complete_both}"> {{each_evaluation_in_indicator.indicator_num}}</td>
 
 
-                      <td class="topic"     ng-if="$index==0" style="background-color:#686868;color:white;text-align:center" ng-class="{resultGreenback: each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result > each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result < each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result &&  each_evaluation_in_indicator.complete_both}">{{each_evaluation_in_indicator.indicator_name}}   </td>
+                      <td class="topic"   ng-if="$index==0" style="background-color:#686868;color:white;text-align:center" ng-class="{resultGreenback: each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result > each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result < each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result &&  each_evaluation_in_indicator.complete_both}">
+
+                      <a style="color:white" href="" ng-click="go_to_indicator_by_number(each_evaluation_in_indicator.indicator_num)">
+                      {{each_evaluation_in_indicator.indicator_name}}   
+</a>
+
+                      </td>
 
                           <td class="result"   ng-if="$index==0 && self_evaluated==false" style="background-color:#686868;color:white;text-align:center"  ng-class="{resultGreenback: each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result > each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result  &&  each_evaluation_in_indicator.complete_both, resultRedback:each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_other_result < each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result &&  each_evaluation_in_indicator.complete_both}" >{{each_evaluation_in_indicator.sub_indicator_result[0].sub_indicator_self_result}}</td>
 
@@ -752,7 +737,11 @@
 
 
                          <td class="number"   ng-if="$index!=0" >{{each_evaluation_in_indicator.indicator_num}}.{{each_evaluation_in_sub_indicator.sub_indicator_num}}</td>
-                      <td class="topic" ng-if="$index!=0" >{{each_evaluation_in_sub_indicator.sub_indicator_name}}</td>
+                      <td class="topic" ng-if="$index!=0" >
+ <a  href="" ng-click="go_to_indicator_and_sub_by_number(each_evaluation_in_indicator.indicator_num,each_evaluation_in_sub_indicator)" >
+                      {{each_evaluation_in_sub_indicator.sub_indicator_name}}
+</a>
+                      </td>
 
 
 
@@ -790,7 +779,7 @@
             <h2 class="headerPanel " style="text-align:center">AUN {{indicator_choosen.indicator_num}} {{indicator_choosen.indicator_name_t}} {{indicator_choosen.indicator_name_e}}</h2>
 
 
-            <button ng-if="can_watch_result()" class="btn btn-warning hvr-pulse pull-left" style="margin-bottom:10px;background-color:#00386B;border:#00284d" data-nq-toggle-modal="#criteria_seven" data-effect="from-left" data-placement="left"><i class="glyphicon glyphicon-check"></i> เกณฑ์การประเมิน</button>
+            <button ng-show="can_watch_result()" class="btn btn-warning hvr-pulse pull-left" style="margin-bottom:10px;background-color:#00386B;border:#00284d" data-nq-toggle-modal="#criteria_seven" data-effect="from-left" data-placement="left"><i class="glyphicon glyphicon-check"></i> เกณฑ์การประเมิน</button>
 
 
 
@@ -820,7 +809,11 @@
                 <tr ng-repeat="result in this_indicator_show.sub_indicator_result">
                 <td class="number" ng-if="$index==0">{{indicator_choosen.indicator_num}}</td>
                   <td class="number" ng-if="$index!=0">{{indicator_choosen.indicator_num}}.{{result.sub_indicator_num}}</td>
-                  <td class="topic">{{result.sub_indicator_name}}</td>
+                  <td class="topic">
+
+                  <a href="" ng-if="$index!=0 && can_watch_reason()==true" ng-click="selectThisSub_and_move(result.sub_indicator_num)" >{{result.sub_indicator_name}}</a>
+                  <span ng-if="$index==0 || can_watch_reason()==false">{{result.sub_indicator_name}}</span>
+                  </td>
               
                  
 <!-- 
@@ -895,13 +888,15 @@
                     </table>
 
                     </div>
+
            <div ng-show="can_watch_reason()">
                 <div class="small-nav">
                     <div class="tabbable">
+                     <a name="link_sub_reason"></a>
                         <ul class="nav nav-tabs">
 
                             <li data-ng-repeat="sub_indicator in corresponding_sub_indicators" ng-class="{'active': which_active_sub[$index]==1 }" >
-                                <a data-toggle="tab" ng-click="selectThisSub(sub_indicator.sub_indicator_num)"   data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="{{sub_indicator.sub_indicator_name}}"  ng-click="send_sub_indicator(sub_indicator)">AUN {{indicator_choosen.indicator_num}}.{{sub_indicator.sub_indicator_num}} </a>
+                                <a data-toggle="tab" ng-click="selectThisSub(sub_indicator.sub_indicator_num)"   data-qo-type-class="myTip" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="{{sub_indicator.sub_indicator_name}}">AUN {{indicator_choosen.indicator_num}}.{{sub_indicator.sub_indicator_num}} </a>
                             </li>
                            
                         </ul>
@@ -7213,9 +7208,41 @@ glyphicon glyphicon-bell"></i> </span>
 
                 </div>
 
+     <script type="text/javascript">
+
+  var loading_screen = pleaseWait({
 
 
+  backgroundColor: '#6F002B',
+  loadingHtml: " <div style='color:white' class='sk-chasing-dots'><div class='sk-child sk-dot1'></div><div class='sk-child sk-dot2'></div></div><p style='font-size:30px;color:#E0E0E0;font-family:FreesiaUPC' class='loading-message'>กำลังนำท่านเข้าสู่ระบบ...</p>"
+});
+  </script>
+ 
 
+
+    <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
+ 
+
+
+         <script src="/bower_components/angular/angular.js"></script>
+         <script src="/bower_components/angular-animate/angular-animate.js"></script>
+            <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+<script src="/bower_components/ng-flow/dist/ng-flow-standalone.min.js"></script>
+
+<!--     // <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> -->
+  
+    <script src="/bower_components/quantumui/dist/js/quantumui-all.js"></script>
+
+    <script src="/bower_components/quantumui/config/icons.js"></script>
+    <script src="/bower_components/ng-dialog/js/ngDialog.js"></script>
+
+    <link href="/Content/dropdowns-enhancement.css" rel="stylesheet" />
+
+<link href="/bower_components/quantumui/dist/css/quantumui.css" rel="stylesheet" />
+    <link href="/bower_components/superslides-0.6.2/dist/stylesheets/superslides.css" rel="stylesheet" />
+    <script type="text/javascript" src="/bower_components/dropdowns-enhancement/dropdowns-enhancement.js"></script>
 <script src="/bower_components/angular-cookies/angular-cookies.min.js"></script>
         
                   <script type="text/javascript" src="app.js"></script>
@@ -7265,7 +7292,9 @@ glyphicon glyphicon-bell"></i> </span>
 
         </script>
 
-
+ <script type="text/javascript">
+     loading_screen.finish();
+  </script>
 
 </body>
 </html>

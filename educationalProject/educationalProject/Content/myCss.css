@@ -8,6 +8,10 @@
           border-bottom-color: transparent;
           } 
 
+          .not_active{
+            background-color: #484848 !important;
+          }
+
 * {
   font-family:"FreesiaUPC" ;
 
