@@ -6038,7 +6038,7 @@ if (/chrome/.test(navigator.userAgent.toLowerCase()))
 angular.module('ngQuantum.scrollbar', ['ngQuantum.services.helpers', 'ngQuantum.services.mouse'])
     .provider('$scrollbar', function () {
         var defaults = this.defaults = {
-            barSize: 'normal', // number in pixel or slimmest|slim|normal|thick|thickest
+            barSize: 8, // number in pixel or slimmest|slim|normal|thick|thickest
             barOffset: 5,
             maxWidth: false,
             placementOffset: false,
@@ -6048,7 +6048,7 @@ angular.module('ngQuantum.scrollbar', ['ngQuantum.services.helpers', 'ngQuantum.
             hideRail: false,
             padHorizontal: false,
             allDigest: false,
-            step: 30,
+            step: 20,
             duration: 200,
             theme: false,
             allTags: true, // if set false tags like table, ul, ol would be ignored for scrolling,
@@ -6921,8 +6921,7 @@ var selectApp = angular.module('ngQuantum.select', [
                           var barelement = $target.find('.scrollable');
                           var barOptions = {
                               keyword: false,
-                              barSize: 'normal',
-                              placementOffset: -2,
+                   
                               $scope: scope
                           }
                           scrollbar = $scrollbar(barelement, barOptions);
