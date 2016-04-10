@@ -889,7 +889,15 @@ $scope.download_aun_book = function(){
              }
          ).success(function (data) {
    
-            $scope.download_file(data);
+            if(!data){
+                    $alert({title:'เกิดข้อผิดพลาด', content:'เล่มรายงานยังไม่ถูกอัพโหลด',alertType:'success',
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+
+            }
+            else{
+                $scope.download_file(data);
+            }
+            
 
 
          })
@@ -904,7 +912,7 @@ $scope.download_aun_book = function(){
           
     }
     else{
-    $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกหลักสูตรและปีการศึกษาก่อน',alertType:'success',
+    $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกหลักสูตรและปีการศึกษาก่อน'+data.message,alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
 
          }
