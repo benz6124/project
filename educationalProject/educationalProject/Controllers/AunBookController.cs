@@ -47,7 +47,7 @@ namespace educationalProject.Controllers
             if (result == null)
                 return Ok(datacontext.file_name);
             else if (result.ToString().Contains("notfound"))
-                return BadRequest("ไม่พบข้อมูลเล่ม AUN ในหลักสูตร-ปีการศึกษาที่เลือก");
+                return Ok("");
             else
                 return InternalServerError(new Exception(result.ToString()));
         }
