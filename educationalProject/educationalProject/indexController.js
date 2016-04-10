@@ -888,7 +888,7 @@ $scope.download_aun_book = function(){
                  }
              }
          ).success(function (data) {
-   
+
             if(!data){
                     $alert({title:'เกิดข้อผิดพลาด', content:'เล่มรายงานยังไม่ถูกอัพโหลด',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
@@ -903,7 +903,7 @@ $scope.download_aun_book = function(){
          })
          .error(function (data) {
             
-                $alert({title:'เกิดข้อผิดพลาด', content:'ไม่สามารถดาวน์โหลดได้',alertType:'success',
+                $alert({title:'เกิดข้อผิดพลาด', content:'ไม่สามารถดาวน์โหลดได้ '+data.message,alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
 
 
