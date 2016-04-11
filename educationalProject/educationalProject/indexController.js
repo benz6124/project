@@ -8881,7 +8881,7 @@ $scope.my_pictures = {};
         if(!$rootScope.manage_minutes_fix_this_minute){
             return true;
         }
-        if(!$rootScope.manage_minutes_fix_this_minute.topic_name || !$rootScope.manage_minutes_fix_this_minute.date || $rootScope.manage_minutes_fix_this_minute.attendee.length ==0 ){
+        if(!$rootScope.manage_minutes_fix_this_minute.topic_name || !$rootScope.manage_minutes_fix_this_minute.date || $rootScope.manage_minutes_fix_minute_select_attendee.length ==0 ){
             return true;
         }
         else{
