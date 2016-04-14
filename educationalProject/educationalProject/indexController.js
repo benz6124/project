@@ -4021,7 +4021,7 @@ $scope.start_ka = function(){
          })
     .error(function(data, status, headers, config) {
                
-
+$scope.please_wait = false;
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
    
