@@ -83,7 +83,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                                 "and {3}.{11} = {1}.{5} " +
                                                 "and {3}.{12} = " +
                                                 "(select max({12}) from {3} where {12} <= {10}) ",
-                                                temp90tablename, FieldName.TABLE_NAME, Indicator.FieldName.INDICATOR_NAME_T,
+                                                temp90tablename, FieldName.TABLE_NAME, Indicator.FieldName.INDICATOR_NAME_E,
                                                 Indicator.FieldName.TABLE_NAME, FieldName.SUB_INDICATOR_NUM,
                                                 FieldName.INDICATOR_NUM, inddata.indicator_num,
                                                 FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, inddata.aca_year,
@@ -94,7 +94,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 "from {5} " +
                 "where {6} = {1} " +
                 "and {5}.{7} = (select max({7}) from {5} where {7} <= {3}) ",
-                temp90tablename, inddata.indicator_num, curri_id, inddata.aca_year, Indicator.FieldName.INDICATOR_NAME_T,
+                temp90tablename, inddata.indicator_num, curri_id, inddata.aca_year, Indicator.FieldName.INDICATOR_NAME_E,
                 Indicator.FieldName.TABLE_NAME, Indicator.FieldName.INDICATOR_NUM, Indicator.FieldName.ACA_YEAR
                 );
 

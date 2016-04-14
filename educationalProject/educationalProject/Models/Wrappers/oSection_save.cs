@@ -132,10 +132,11 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return WebApiApplication.CONNECTDBERRSTRING;
             SAR result = new SAR();
-            string selectindicator = string.Format("select {0}, {1} " +
-                                     "from {2} " +
-                                     "where {3} = (select max({3}) from {2} where {3} <= {4}) order by {0} ",
-                                     Indicator.FieldName.INDICATOR_NUM, Indicator.FieldName.INDICATOR_NAME_T, Indicator.FieldName.TABLE_NAME,
+            string selectindicator = string.Format("select {0}, {1}, {2} " +
+                                     "from {3} " +
+                                     "where {4} = (select max({4}) from {3} where {4} <= {5}) order by {0} ",
+                                     Indicator.FieldName.INDICATOR_NUM, Indicator.FieldName.INDICATOR_NAME_T, Indicator.FieldName.INDICATOR_NAME_E,
+                                     Indicator.FieldName.TABLE_NAME,
                                      Indicator.FieldName.ACA_YEAR, aca_year);
 
             string selectsubindicator = string.Format("select {0},{1},{2} " +
@@ -182,12 +183,27 @@ namespace educationalProject.Models.Wrappers
                         {
                             foreach (DataRow item in data.Rows)
                             {
+                                string indicator_namet = item.ItemArray[data.Columns[Indicator.FieldName.INDICATOR_NAME_T].Ordinal].ToString();
 
-                                result.indicator_section_save_list.Add(new Indicator_with_section_save_list
+                                //Use thai indicator name if it exists
+                                if (indicator_namet != "")
                                 {
-                                    indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[Indicator.FieldName.INDICATOR_NUM].Ordinal]),
-                                    indicator_name = item.ItemArray[data.Columns[Indicator.FieldName.INDICATOR_NAME_T].Ordinal].ToString()
-                                });
+                                    result.indicator_section_save_list.Add(new Indicator_with_section_save_list
+                                    {
+                                        indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[Indicator.FieldName.INDICATOR_NUM].Ordinal]),
+                                        indicator_name = item.ItemArray[data.Columns[Indicator.FieldName.INDICATOR_NAME_T].Ordinal].ToString()
+                                    });
+                                }
+
+                                //Otherwise use engish normally
+                                else
+                                {
+                                    result.indicator_section_save_list.Add(new Indicator_with_section_save_list
+                                    {
+                                        indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[Indicator.FieldName.INDICATOR_NUM].Ordinal]),
+                                        indicator_name = item.ItemArray[data.Columns[Indicator.FieldName.INDICATOR_NAME_E].Ordinal].ToString()
+                                    });
+                                }
 
                                 result.indicator_self_evaluation_list.Add(new Indicator_with_self_evaluation_tiny_obj_list
                                 {

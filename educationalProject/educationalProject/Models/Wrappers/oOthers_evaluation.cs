@@ -117,7 +117,7 @@ namespace educationalProject.Models.Wrappers
                                                "and {5}.{13} = " +
                                                "(select max(s1.{13}) from {5} as s1 where s1.{13} <= {14}) " +
                                                "and {2}.{15} = '{16}' and {2}.{17} = {14} ",
-                                               temp5tablename,Indicator.FieldName.INDICATOR_NAME_T, /*2 others*/ FieldName.TABLE_NAME,
+                                               temp5tablename,Indicator.FieldName.INDICATOR_NAME_E, /*2 others*/ FieldName.TABLE_NAME,
                                                Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
                                                /*5 ind*/ Indicator.FieldName.TABLE_NAME,
                                                /*6 usr*/ User_list.FieldName.TABLE_NAME,
@@ -133,7 +133,7 @@ namespace educationalProject.Models.Wrappers
                                                 "from {5} " +
                                                 "where {6} = {2} " +
                                                 "and {5}.{7} = (select max({7}) from {5} where {7} <= {4}) ",
-                                                temp5tablename, Indicator.FieldName.INDICATOR_NAME_T, indicator_num, curri_id, aca_year,
+                                                temp5tablename, Indicator.FieldName.INDICATOR_NAME_E, indicator_num, curri_id, aca_year,
                                                 Indicator.FieldName.TABLE_NAME, Indicator.FieldName.INDICATOR_NUM,
                                                 Indicator.FieldName.ACA_YEAR);
 

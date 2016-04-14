@@ -46,7 +46,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                        "and {1}.{7} = {6}.{9} " +
                                        "and {1}.{2} = {6}.{10} order by {1}.{2} ",
                                        temp1tablename, Indicator.FieldName.TABLE_NAME, Indicator.FieldName.INDICATOR_NUM,
-                                       Sub_indicator.FieldName.SUB_INDICATOR_NUM, Indicator.FieldName.INDICATOR_NAME_T,
+                                       Sub_indicator.FieldName.SUB_INDICATOR_NUM, Indicator.FieldName.INDICATOR_NAME_E,
                                        Sub_indicator.FieldName.SUB_INDICATOR_NAME, Sub_indicator.FieldName.TABLE_NAME,
                                        Indicator.FieldName.ACA_YEAR, curriacadata.aca_year, Sub_indicator.FieldName.ACA_YEAR,
                                        Sub_indicator.FieldName.INDICATOR_NUM);
