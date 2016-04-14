@@ -15,6 +15,14 @@ namespace educationalProject.Models
             public static readonly string TABLE_NAME = "INDICATOR";
         }
 
+        internal struct ParameterName
+        {
+            public static readonly string INDICATOR_NUM = "@" + FieldName.INDICATOR_NUM;
+            public static readonly string INDICATOR_NAME_T = "@" + FieldName.INDICATOR_NAME_T;
+            public static readonly string INDICATOR_NAME_E = "@" + FieldName.INDICATOR_NAME_E;
+            public static readonly string ACA_YEAR = "@" + FieldName.ACA_YEAR;
+        }
+
         private int _aca_year;
         private int _indicator_num;
         private string _indicator_name_t;

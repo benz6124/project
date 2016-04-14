@@ -105,10 +105,15 @@ namespace educationalProject.Models.ViewModels.Wrappers
             string delcmd = string.Format("delete from {0} where {1} = {2}", FieldName.TABLE_NAME, FieldName.ACA_YEAR, list.First().aca_year);
             string insertintoindicatorcmd = string.Format("insert into {0} values ", FieldName.TABLE_NAME);
             string insertintosubindicatorcmd = "";
-            int isFirst = 1;
+            int isFirst = 1,indicatorcount = 0,subindicatorcount = 0;
             foreach (oIndicator_sub_indicator_list item in list)
             {
-                insertintoindicatorcmd += string.Format("({0},{1},'{2}','{3}')", item.aca_year, item.indicator_num, item.indicator_name_t, item.indicator_name_e);
+                insertintoindicatorcmd += string.Format("({0},{1},{2},{3})", item.aca_year, item.indicator_num, 
+                    ParameterName.INDICATOR_NAME_T + indicatorcount, 
+                    ParameterName.INDICATOR_NAME_E + indicatorcount);
+                d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.INDICATOR_NAME_T + indicatorcount, item.indicator_name_t));
+                d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.INDICATOR_NAME_E + indicatorcount, item.indicator_name_e));
+
                 if (item != list.Last()) insertintoindicatorcmd += ",";
                 foreach(Sub_indicator sub_item in item.sub_indicator_list)
                 {
@@ -117,8 +122,12 @@ namespace educationalProject.Models.ViewModels.Wrappers
                         isFirst = 0;
                         insertintosubindicatorcmd += string.Format("insert into {0} values ", Sub_indicator.FieldName.TABLE_NAME);
                     }
-                        insertintosubindicatorcmd += string.Format("({0},{1},{2},'{3}')", sub_item.aca_year, item.indicator_num, sub_item.sub_indicator_num, sub_item.sub_indicator_name);
+                        insertintosubindicatorcmd += string.Format("({0},{1},{2},{3})", sub_item.aca_year, item.indicator_num, sub_item.sub_indicator_num, 
+                            Sub_indicator.ParameterName.SUB_INDICATOR_NAME + subindicatorcount);
+                    d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(Sub_indicator.ParameterName.SUB_INDICATOR_NAME + subindicatorcount, sub_item.sub_indicator_name));
+                    subindicatorcount++;
                 }
+                indicatorcount++;
             }
 
             d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} END",delcmd,insertintoindicatorcmd,insertintosubindicatorcmd);

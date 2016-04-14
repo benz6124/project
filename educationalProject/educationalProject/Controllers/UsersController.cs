@@ -256,6 +256,13 @@ namespace educationalProject.Controllers
             UsernamePassword data = new UsernamePassword();
             data.username = usrpwdata["username"].ToString();
             data.password = usrpwdata["password"].ToString();
+
+            if (data.username == "" && data.password == "")
+                return BadRequest("กรุณาใส่ชื่อผู้ใช้และรหัสผ่านที่ต้องการเข้าสู่ระบบ");
+            else if (data.username == "")
+                return BadRequest("กรุณาใส่ชื่อผู้ใช้งานที่ต้องการเข้าสู่ระบบ");
+            else if (data.password == "")
+                return BadRequest("กรุณาใส่รหัสผ่านที่ใช้ในการเข้าสู่ระบบ");
             oUsers context = new oUsers();
             data.username = data.username.ToLower();
             object result = await context.SelectUser(data.username);
