@@ -2817,7 +2817,7 @@ $scope.init = function(){
       $scope.please_wait = false;
 $scope.nothing_change = true;
       $scope.curri_choosen = {};
-
+$scope.have_thai_name = false;
     $rootScope.my_backup_indicators = {};
 $rootScope.manage_indicators_year_to_create = "";
     $scope.year_to_create = "";
@@ -2900,6 +2900,7 @@ if( $scope.validate_year_to_create() != true){
        
          
          $rootScope.manage_indicators_year_to_create = $scope.year_to_create;
+         $rootScope.world_have_thai_name = $scope.have_thai_name;
 
          }
          else{
@@ -2917,6 +2918,7 @@ if( $scope.validate_year_to_create() != true){
 
 
                   if(!$rootScope.manage_indicators_and_sub_result){
+
                 return true;
             }
 
@@ -2924,8 +2926,17 @@ if( $scope.validate_year_to_create() != true){
                 var index;
                 $scope.my_num_indicators = [];
                 for (index =0;index<  $rootScope.manage_indicators_and_sub_result.length ; index++){
-                    if (!$rootScope.manage_indicators_and_sub_result[index].indicator_num || !$rootScope.manage_indicators_and_sub_result[index].indicator_name_e || !$rootScope.manage_indicators_and_sub_result[index].indicator_name_t){
+                    if (!$rootScope.manage_indicators_and_sub_result[index].indicator_num || !$rootScope.manage_indicators_and_sub_result[index].indicator_name_e ){
+
                         return true;
+                    }
+
+                    if($scope.have_thai_name==true){
+                                console.log('have_thai_name')
+                        if(!$rootScope.manage_indicators_and_sub_result[index].indicator_name_t){
+                            console.log('blank')
+                            return true;
+                        }
                     }
                 }
 
@@ -2987,6 +2998,22 @@ $scope.choose_not_complete = false;
             $scope.nothing_change = true;
              $rootScope.my_backup_indicators = angular.copy(data);
             $rootScope.manage_indicators_and_sub_result =data;
+
+             var index;
+                $scope.my_num_indicators = [];
+                var not_have_thai = true;
+                for (index =0;index<  $rootScope.manage_indicators_and_sub_result.length ; index++){
+                     if($rootScope.manage_indicators_and_sub_result[index].indicator_name_t!=""){
+                            not_have_thai = false;
+                        }
+                }
+
+                if(not_have_thai == false){
+                    $scope.have_thai_name =true; 
+                }
+                else{
+                    $scope.have_thai_name =false; 
+                }
          });
     }
 
@@ -3014,6 +3041,10 @@ $scope.choose_not_complete = false;
 
     for(sub_index =0; sub_index < $rootScope.manage_indicators_and_sub_result[index].sub_indicator_list.length ; sub_index++ ){
         $rootScope.manage_indicators_and_sub_result[index].sub_indicator_list[sub_index].aca_year =$scope.year_to_create; 
+    }
+
+    if($scope.have_thai_name ==false){
+        $rootScope.manage_indicators_and_sub_result[index].indicator_name_t = "";
     }
  }
 
@@ -3957,10 +3988,15 @@ $scope.start_ka = function(){
     if(angular.isUndefined($scope.to_sent[index].sub_indicator_list)){
         $scope.to_sent[index].sub_indicator_list = [];
     }
-
+    
+    if($rootScope.world_have_thai_name == false){
+        $scope.to_sent[index].indicator_name_t = "";
+    }
     for(sub_index =0; sub_index < $scope.to_sent[index].sub_indicator_list.length ; sub_index++ ){
         $scope.to_sent[index].sub_indicator_list[sub_index].aca_year =$rootScope.manage_indicators_year_to_create; 
     }
+
+
  }
 
 
@@ -6725,7 +6761,12 @@ $scope.init =function() {
     $scope.result = {};
       $scope.all_curri_that_have_privileges = [];
       $rootScope.curri_that_be_president_in($scope.all_curri_that_have_privileges);
-
+      $scope.all_curri_that_have_privileges = [];
+      if($rootScope.current_user.user_type == 'ผู้ดูแลระบบ'){
+        $scope.all_curri_that_have_privileges = $rootScope.all_curriculums;
+      }else{
+         $scope.$parent.scan_only_privilege_curri('2',$scope.all_curri_that_have_privileges);
+      }
 }
 
 $rootScope.manage_bind_still_same = function(){

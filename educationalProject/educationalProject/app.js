@@ -327,7 +327,7 @@ if( $scope.already_login == false){
           var ever_been_committee = !!$rootScope.current_user.committee_in;
    var ever_been_president = !!$rootScope.current_user.president_in;
  
-  if(title_code=='16' || title_code=='21' || title_code=='22'|| title_code=='23'|| title_code=='25'|| title_code=='27' || title_code=='29' || title_code=='28' || title_code=='30'){
+  if(title_code=='18' || title_code=='16' || title_code=='21' || title_code=='22'|| title_code=='23'|| title_code=='25'|| title_code=='27' || title_code=='29' || title_code=='28' || title_code=='30'){
     if($rootScope.current_user.user_type == 'ผู้ดูแลระบบ'){
       return true;
     }

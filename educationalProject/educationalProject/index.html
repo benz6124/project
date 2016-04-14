@@ -620,7 +620,7 @@
 
 
                 <li  ng-class="{'active': which_active[$index+1] == 1 }"  data-ng-repeat="indicator in corresponding_indicators">
-                <a data-toggle="tab"  data-qo-effect="flip-x" ng-click="go_to_indicator(indicator)"  data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="{{indicator.indicator_name_t}}" >AUN {{indicator.indicator_num}}</a></li>
+                <a data-toggle="tab"  data-qo-effect="flip-x" ng-click="go_to_indicator(indicator)"  data-qo-speed="fastest" data-nq-tooltip="" data-qs-title="{{indicator.indicator_name_e}}" >AUN {{indicator.indicator_num}}</a></li>
 
             </ul>
 
@@ -776,7 +776,7 @@
  
         </div>
         <div ng-hide="select_overall" >
-            <h2 class="headerPanel " style="text-align:center">AUN {{indicator_choosen.indicator_num}} {{indicator_choosen.indicator_name_t}} {{indicator_choosen.indicator_name_e}}</h2>
+            <h2 class="headerPanel " style="text-align:center">AUN {{indicator_choosen.indicator_num}} {{indicator_choosen.indicator_name_e}} {{indicator_choosen.indicator_name_t}}</h2>
 
 
             <button ng-show="can_watch_result()" class="btn btn-warning hvr-pulse pull-left" style="margin-bottom:10px;background-color:#00386B;border:#00284d" data-nq-toggle-modal="#criteria_seven" data-effect="from-left" data-placement="left"><i class="glyphicon glyphicon-check"></i> เกณฑ์การประเมิน</button>
@@ -3443,7 +3443,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                         </div>
 
   <div class="col-md-5" >
- <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators track by indicator" data-qo-effect="flip-x" data-ng-change="find_primary_evidences()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+ <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators track by indicator" data-qo-effect="flip-x" data-ng-change="find_primary_evidences()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
   </div>
 </div>
@@ -3565,7 +3565,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
 
   <div class="col-md-4" >
- <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+ <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
   </div>
 
@@ -3744,7 +3744,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                         </div>
 
   <div class="col-md-4" >
- <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+ <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
   </div>
 
@@ -4693,7 +4693,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
   <div class="col-md-4">
 
-      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
 
 
@@ -4818,7 +4818,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
   <div class="col-md-4">
 
-      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
 
 
@@ -5025,16 +5025,19 @@ glyphicon glyphicon-bell"></i> </span>
                                 <button class="btn btn-warning hvr-pulse"style="margin-bottom:5px;padding-top:4px;padding-bottom:4px" ng-click="recover_indicator_all()"><i class="glyphicon glyphicon-wrench"></i> ดึงข้อมูลตั้งต้นใหม่</button>
 
 
+                        <input type="checkbox" style="margin-left:20px" data-ng-model="$parent.have_thai_name" > <span style="font-size:21px" > &nbsp;มีชื่อตัวบ่งชี้ภาษาไทย</span></input>
+              
+
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun">
                                       
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
                                              
-                                                <th class="number_indicator">ข้อที่</th>
+                                                <th style="width:10%">ข้อที่</th>
 
-                                                <th class="topic_indicator">ชื่อตัวบ่งชี้ (ภาษาไทย)</th>
                                                 <th class="topic_indicator">ชื่อตัวบ่งชี้ (ภาษาอังกฤษ)</th>
-                                                <th class="number_indicator">ข้อย่อย</th>
+                                                <th class="topic_indicator" ng-show="have_thai_name">ชื่อตัวบ่งชี้ (ภาษาไทย)</th>
+                                                <th class="number_indicator" >ข้อย่อย</th>
                                                  <th class="number_indicator">ลบ</th>
                                             
                                             </tr>
@@ -5045,13 +5048,13 @@ glyphicon glyphicon-bell"></i> </span>
 
                                             <tr data-ng-repeat="indicator in manage_indicators_and_sub_result">
                                            
-                                                 <td class="number_indicator"><input data-ng-change="something_change()" style="margin-right:10px" type="number" ng-pattern="/^[0-9]*$/"  ng-model="indicator.indicator_num " required/></td>
+                                                 <td ><input data-ng-change="something_change()"  type="number" ng-pattern="/^[0-9]*$/" class="form-control"  ng-model="indicator.indicator_num "  required/></td>
 
 
 
-                                                <td class="topic_indicator left_column"><input data-ng-change="something_change()" class="form-control"size="64" type="text" ng-model="indicator.indicator_name_t " required/>
+                                                <td class="topic_indicator left_column"><input data-ng-change="something_change()" class="form-control"size="64" type="text" ng-model="indicator.indicator_name_e " required/>
                                                 </td>
-                                                 <td class="topic_indicator left_column"><input data-ng-change="something_change()" class="form-control"size="64" type="text" ng-model="indicator.indicator_name_e " required/></td>
+                                                 <td ng-show="have_thai_name" class="topic_indicator left_column"><input data-ng-change="something_change()" class="form-control"size="64" type="text" ng-model="indicator.indicator_name_t " required/></td>
 
                                      <td class="number_indicator"> <button style="background-color:transparent;border:none"href="" data-ng-click="choose_indicator(indicator)" class="hvr-pulse" data-nq-toggle-modal="#manage_sub_indicators"  ng-disabled="still_not_choose_complete() || validate_year_to_create()  || manage_indicators_form.$invalid || choose_not_complete" data-effect="slide-left">
                                         <span class="topic"><i class="glyphicon glyphicon-zoom-in"></i> </span>
@@ -5078,7 +5081,7 @@ glyphicon glyphicon-bell"></i> </span>
  <div class="custom-footer">
      
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="still_not_choose_complete() || validate_year_to_create()  || manage_indicators_form.$invalid || choose_not_complete || please_wait " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="still_not_choose_complete() || validate_year_to_create()  ||  choose_not_complete || please_wait " ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div> 
@@ -5091,7 +5094,7 @@ glyphicon glyphicon-bell"></i> </span>
                         <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการตัวบ่งชี้ย่อย</span></h1>
                     </div>
 
-                     <h2 class="headerPanel" style="text-align:center;margin-top:0px;margin-bottom:0px">AUN {{manage_indicators_indicator_choosen.indicator_num}} {{manage_indicators_indicator_choosen.indicator_name_t}} ({{manage_indicators_indicator_choosen.indicator_name_e}})</h2>
+                     <h2 class="headerPanel" style="text-align:center;margin-top:0px;margin-bottom:0px">AUN {{manage_indicators_indicator_choosen.indicator_num}} {{manage_indicators_indicator_choosen.indicator_name_e}} {{manage_indicators_indicator_choosen.indicator_name_t}}</h2>
     <div class="container-fluid" >
                         <div class="clearfix">
 
@@ -5107,7 +5110,7 @@ glyphicon glyphicon-bell"></i> </span>
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
                                              
-                                                <th class="number_sub_indicator" >ข้อย่อยที่</th>
+                                                <th class="number_sub_indicator" style="width:10%" >ข้อย่อยที่</th>
 
                                                 <th class="topic_evaluation">ชื่อตัวบ่งชี้</th>
                                            <!--      <th class="topic_evaluation">ชื่อตัวบ่งชี้ (ภาษาอังกฤษ)</th> -->
@@ -5119,7 +5122,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                                             <tr data-ng-repeat="sub_indicator in manage_indicators_indicator_choosen.sub_indicator_list">
                                            
-                                                 <td class="number_sub_indicator"><input style="margin-right:10px" type="number" ng-pattern="/^[0-9]*$/"   ng-model="sub_indicator.sub_indicator_num " /></td>
+                                                 <td  style="text-align:center"><input  class="form-control" type="number" ng-pattern="/^[0-9]*$/"   ng-model="sub_indicator.sub_indicator_num " /></td>
 
 
 
@@ -5179,7 +5182,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
   <div class="col-md-4">
 
-      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_t for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
 
 
