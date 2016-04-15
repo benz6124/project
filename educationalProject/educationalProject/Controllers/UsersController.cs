@@ -267,7 +267,7 @@ namespace educationalProject.Controllers
             data.username = data.username.ToLower();
             object result = await context.SelectUser(data.username);
 
-            //Check whether preferred user is exists?
+            //Check whether login is success?
             if (result.GetType().ToString() != "System.String")
             {
                 User_information_with_privilege_information u = (User_information_with_privilege_information)result;
@@ -279,12 +279,12 @@ namespace educationalProject.Controllers
                 }
                 else
                 {
-                    return BadRequest("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
+                    return BadRequest("ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง");
                 }
             }
             else
             {
-                return InternalServerError(new Exception(result.ToString()));
+                return BadRequest("ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง");
             }
         }
 
