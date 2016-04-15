@@ -7503,12 +7503,14 @@ app.controller('login_controller', function($scope, $http,$alert,$loading,$timeo
          }
         
 
-        }, function () {
+        }, function (something) {
 
+            console.log('something')
 
+            console.log(something)
           $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
       $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'ชื่อผู้ใช้และรหัสผ่านไม่ถูกต้อง',alertType:'danger',
+            $alert({title:'เกิดข้อผิดพลาด', content:'เข้าสู่ระบบไม่สำเร็จ '+something.data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
 
         });
