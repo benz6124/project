@@ -5419,7 +5419,7 @@ glyphicon glyphicon-bell"></i> </span>
                   
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="files.length ==0" ng-click="save_to_server(this)" >ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="files.length ==0 || please_wait" ng-click="save_to_server(this)" >ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>

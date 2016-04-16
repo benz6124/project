@@ -1859,6 +1859,13 @@ for(index=0;index<$rootScope.all_curriculums.length;index++){
         return true;
     }
 
+    if($scope.disabled_search==true){
+        if($scope.files.length ==0){
+            return true;
+        }
+
+    }
+
     if($scope.corresponding_results.evaluation_detail.length == 0){
         return true;
     }
@@ -3097,7 +3104,7 @@ app.controller('change_evidence_file_controller', function($scope, $alert,$http,
       
 
        $scope.init =function() {
-    
+    $scope.please_wait = false;
        $scope.my_temp_secret = false;
              
       $scope.files = [];
@@ -3191,6 +3198,7 @@ $rootScope.only_object_want_to_change.file_name = $scope.files[0].name;
 
         }).
         success(function (data, status, headers, config) {
+              $scope.please_wait = false;
     $rootScope.manage_evidences_still_same();
             $rootScope.manage_evidences_world_evidences = data;
             $scope.close_modal(this_modal);
@@ -3344,14 +3352,21 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
 
 
       var formData = new FormData();
+    
+
 $scope.my_new_evidence.file_name = $scope.my_new_evidence_file[0].name;
 $scope.my_new_evidence.curri_id =   $rootScope.manage_evidence_curri_id_now;
 $scope.my_new_evidence.aca_year = $rootScope.manage_evidence_year_now;
 $scope.my_new_evidence.indicator_num = $rootScope.manage_evidence_indicator_num;
 $scope.my_new_evidence.teacher_id = $rootScope.current_user.user_id;
 
+
+  $scope.to_sent = {};
+$scope.to_sent.my_new_evidence = $scope.my_new_evidence;
+
+$scope.to_sent.all_evidences = $rootScope.manage_evidences_world_evidences;
     
-    formData.append("model", angular.toJson($scope.my_new_evidence));
+    formData.append("model", angular.toJson(  $scope.to_sent));
     formData.append("file" , $scope.my_new_evidence_file[0]);
 
 
@@ -3401,6 +3416,13 @@ $scope.primary_choosen = {};
 
         $scope.please_wait = false;
     $scope.init =function() {
+
+           angular.forEach(
+    angular.element("input[type='file']"),
+    function(inputElem) {
+      angular.element(inputElem).val(null);
+    });
+           
                 $scope.please_wait = false;
          $scope.my_temp_secret_new = false;
    $scope.my_new_evidence = {};
@@ -3519,8 +3541,11 @@ $scope.primary_choosen.secret = $scope.my_new_evidence.secret;
 $scope.primary_choosen.evidence_real_code =   $scope.my_new_evidence.evidence_real_code;
 $scope.primary_choosen.teacher_id = $rootScope.current_user.user_id;
 
+$scope.to_sent = {};
+$scope.to_sent.primary_choose = $scope.primary_choosen;
+$scope.to_sent.all_evidences = $rootScope.manage_evidences_world_evidences;
 
-    formData.append("model", angular.toJson( $scope.primary_choosen));
+    formData.append("model", angular.toJson($scope.to_sent));
     formData.append("file" , $scope.my_new_evidence_file[0]);
 
         $http({
@@ -5375,7 +5400,7 @@ $scope.still_not_write_code = function() {
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
         }
 
-        if($rootScope.my_evidence_name_we_have_now.indexOf($scope.my_new_evidence.evidence_name) != -1){
+        if($rootScope.my_evidence_name_we_have_now.indexOf($scope.evidence_we_want.evidence_name) != -1){
   return true;
                    $alert({title:'เกิดข้อผิดพลาด', content:'หลักฐานที่เลือกมีชื่อซ้ำกับหลักฐานที่มีอยู่แล้ว',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
@@ -5498,10 +5523,13 @@ $scope.evidence_we_want.indicator_num = $rootScope.manage_evidence_indicator_num
 $scope.evidence_we_want.evidence_real_code = $scope.code_we_want;
 $scope.evidence_we_want.teacher_id = $rootScope.current_user.user_id;
 
-        
+        $scope.to_sent = {};
+        $scope.to_sent.evidence_import = $scope.evidence_we_want;
+        $scope.to_sent.all_evidences = $rootScope.manage_evidences_world_evidences;
+
         $http.put(
              '/api/evidence/newevidencefromothers',
-             JSON.stringify($scope.evidence_we_want),
+             JSON.stringify( $scope.to_sent ),
              {
                  headers: {
                      'Content-Type': 'application/json'
@@ -6283,6 +6311,11 @@ $scope.init =function() {
             return true;
         }
         if(!$rootScope.manage_research_fix_this_research.name || !$rootScope.manage_research_fix_this_research.year_publish ){
+            return true;
+        }
+        
+
+        if($rootScope.manage_lab_research_this_research_init.length ==0){
             return true;
         }
 
