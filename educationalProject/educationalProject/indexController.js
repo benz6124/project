@@ -1775,7 +1775,7 @@ $scope.indicator_choosen = {};
 
 app.controller('evaluate_by_other_controller', function($scope,$rootScope, $alert,$http,request_years_from_curri_choosen_service) {
     $scope.init =function() {
- 
+  $scope.please_wait = false;
      $scope.choose_not_complete = true;
            $scope.year_choosen = {};
               $scope.curri_choosen = {}
