@@ -55,6 +55,7 @@ namespace educationalProject.Controllers
             return Ok(await datacontext.SelectByCurriculumAcademic());
         }
 
+
         [ActionName("newevidence")]
         public async Task<IHttpActionResult> PutNewEvidence()
         {
@@ -64,6 +65,7 @@ namespace educationalProject.Controllers
             }
 
             string savepath = WebApiApplication.SERVERPATH + "download/evidence";
+            string delpath = WebApiApplication.SERVERPATH;
             var result = new MultipartFormDataStreamProvider(savepath);
 
             try
@@ -71,14 +73,40 @@ namespace educationalProject.Controllers
                 await Request.Content.ReadAsMultipartAsync(result);
 
                 //READ JSON DATA PART
-                JObject datareceive = JObject.Parse(result.FormData.GetValues(result.FormData.AllKeys[0])[0]);
-                datacontext.aca_year = Convert.ToInt32(datareceive["aca_year"]);
-                datacontext.curri_id = datareceive["curri_id"].ToString();
-                datacontext.evidence_real_code = Convert.ToInt32(datareceive["evidence_real_code"]);
-                datacontext.evidence_name = datareceive["evidence_name"].ToString();
-                datacontext.indicator_num = Convert.ToInt32(datareceive["indicator_num"]);
-                datacontext.secret = datareceive["secret"].ToString()[0];
-                datacontext.teacher_id = Convert.ToInt32(datareceive["teacher_id"]);
+                JObject datamodelreceive = JObject.Parse(result.FormData.GetValues(result.FormData.AllKeys[0])[0]);
+
+                //New evidence PART
+                JObject newevidencedata = (JObject)datamodelreceive["my_new_evidence"];
+
+                datacontext.aca_year = Convert.ToInt32(newevidencedata["aca_year"]);
+                datacontext.curri_id = newevidencedata["curri_id"].ToString();
+                datacontext.evidence_real_code = Convert.ToInt32(newevidencedata["evidence_real_code"]);
+                datacontext.evidence_name = newevidencedata["evidence_name"].ToString();
+                datacontext.indicator_num = Convert.ToInt32(newevidencedata["indicator_num"]);
+                datacontext.secret = newevidencedata["secret"].ToString()[0];
+                datacontext.teacher_id = Convert.ToInt32(newevidencedata["teacher_id"]);
+
+                //EXISTS Evidence PART
+                JArray existsevidence = (JArray)datamodelreceive["all_evidences"];
+
+                List<oEvidence> existsevidencelist = new List<oEvidence>();
+                foreach (JObject eitem in existsevidence)
+                {
+                    oEvidence obj = new oEvidence();
+                    obj.evidence_code = Convert.ToInt32(eitem["evidence_code"]);
+                    obj.file_name = eitem["file_name"].ToString();
+                    obj.evidence_name = eitem["evidence_name"].ToString();
+                    obj.teacher_id = Convert.ToInt32(eitem["teacher_id"]);
+                    obj.secret = eitem["secret"].ToString()[0];
+                    obj.curri_id = eitem["curri_id"].ToString();
+                    obj.aca_year = Convert.ToInt32(eitem["aca_year"]);
+                    obj.evidence_real_code = Convert.ToInt32(eitem["evidence_real_code"]);
+                    obj.indicator_num = Convert.ToInt32(eitem["indicator_num"]);
+                    obj.primary_evidence_num = Convert.ToInt32(eitem["primary_evidence_num"]);
+                    existsevidencelist.Add(obj);
+                }
+
+    
 
                 //evidence_real_code evidence_name secret teacher_id
                 //GET FILENAME WITH CHANGE FILENAME TO HAVE ITS EXTENSION
@@ -88,21 +116,40 @@ namespace educationalProject.Controllers
                 datacontext.file_name = "download/evidence/" + newfilename;
                 File.Move(string.Format("{0}/{1}", savepath, fileInfo.Name), string.Format("{0}/{1}", savepath, newfilename));
 
-                object resultfromdb = await datacontext.InsertNewEvidenceWithSelect();
+                object resultfromdb = await datacontext.InsertNewEvidenceWithSelect(existsevidencelist);
                 if (resultfromdb.GetType().ToString() != "System.String")
-                    return Ok(resultfromdb);
-                else {
+                {
+                    BulkEvidenceTransactionResult bresult = (BulkEvidenceTransactionResult)resultfromdb;
+
+                    //Delete the file which belong to the deleted evidences
+                    foreach (string file_name_to_delete in bresult.filenametodellist)
+                    {
+                        if (File.Exists(string.Format("{0}{1}", delpath, file_name_to_delete)))
+                            File.Delete(string.Format("{0}{1}", delpath, file_name_to_delete));
+                    }
+
+                    //Check whether insert result is success? If not => delete the uploaded file permanently and return error.
+                    if(bresult.message != null)
+                    {
+                        if (File.Exists(string.Format("{0}/{1}", savepath, newfilename)))
+                            File.Delete(string.Format("{0}/{1}", savepath, newfilename));
+                        return BadRequest(bresult.message);
+                    }
+
+                    return Ok(bresult.mainresult);
+                }
+                else //ERROR case
+                {
                     if (File.Exists(string.Format("{0}/{1}", savepath, newfilename)))
                         File.Delete(string.Format("{0}/{1}", savepath, newfilename));
                     return BadRequest(resultfromdb.ToString());
                 }
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 return InternalServerError(e);
             }
         }
-
 
         [ActionName("newprimaryevidence")]
         public async Task<IHttpActionResult> PutNewPrimaryEvidence()
@@ -113,6 +160,7 @@ namespace educationalProject.Controllers
             }
 
             string savepath = WebApiApplication.SERVERPATH + "download/evidence";
+            string delpath = WebApiApplication.SERVERPATH;
             var result = new MultipartFormDataStreamProvider(savepath);
 
             try
@@ -120,16 +168,41 @@ namespace educationalProject.Controllers
                 await Request.Content.ReadAsMultipartAsync(result);
 
                 //READ JSON DATA PART
-                JObject datareceive = JObject.Parse(result.FormData.GetValues(result.FormData.AllKeys[0])[0]);
-                datacontext.aca_year = Convert.ToInt32(datareceive["aca_year"]);
-                datacontext.curri_id = datareceive["curri_id"].ToString();
-                datacontext.evidence_real_code = Convert.ToInt32(datareceive["evidence_real_code"]);
-                datacontext.evidence_name = datareceive["evidence_name"].ToString();
-                datacontext.indicator_num = Convert.ToInt32(datareceive["indicator_num"]);
-                datacontext.secret = datareceive["secret"].ToString()[0];
-                datacontext.teacher_id = Convert.ToInt32(datareceive["teacher_id"]);
-                datacontext.primary_evidence_num = Convert.ToInt32(datareceive["primary_evidence_num"]);
+                JObject datamodelreceive = JObject.Parse(result.FormData.GetValues(result.FormData.AllKeys[0])[0]);
 
+                //New evidence PART
+                JObject newprimaryevidencedata = (JObject)datamodelreceive["primary_choose"];
+
+                datacontext.aca_year = Convert.ToInt32(newprimaryevidencedata["aca_year"]);
+                datacontext.curri_id = newprimaryevidencedata["curri_id"].ToString();
+                datacontext.evidence_real_code = Convert.ToInt32(newprimaryevidencedata["evidence_real_code"]);
+                datacontext.evidence_name = newprimaryevidencedata["evidence_name"].ToString();
+                datacontext.indicator_num = Convert.ToInt32(newprimaryevidencedata["indicator_num"]);
+                datacontext.secret = newprimaryevidencedata["secret"].ToString()[0];
+                datacontext.teacher_id = Convert.ToInt32(newprimaryevidencedata["teacher_id"]);
+                datacontext.primary_evidence_num = Convert.ToInt32(newprimaryevidencedata["primary_evidence_num"]);
+
+                //EXISTS Evidence PART
+                JArray existsevidence = (JArray)datamodelreceive["all_evidences"];
+
+                List<oEvidence> existsevidencelist = new List<oEvidence>();
+                foreach (JObject eitem in existsevidence)
+                {
+                    oEvidence obj = new oEvidence();
+                    obj.evidence_code = Convert.ToInt32(eitem["evidence_code"]);
+                    obj.file_name = eitem["file_name"].ToString();
+                    obj.evidence_name = eitem["evidence_name"].ToString();
+                    obj.teacher_id = Convert.ToInt32(eitem["teacher_id"]);
+                    obj.secret = eitem["secret"].ToString()[0];
+                    obj.curri_id = eitem["curri_id"].ToString();
+                    obj.aca_year = Convert.ToInt32(eitem["aca_year"]);
+                    obj.evidence_real_code = Convert.ToInt32(eitem["evidence_real_code"]);
+                    obj.indicator_num = Convert.ToInt32(eitem["indicator_num"]);
+                    obj.primary_evidence_num = Convert.ToInt32(eitem["primary_evidence_num"]);
+                    existsevidencelist.Add(obj);
+                }
+
+                
                 //evidence_real_code evidence_name secret teacher_id
                 //GET FILENAME WITH CHANGE FILENAME TO HAVE ITS EXTENSION
                 MultipartFileData file = result.FileData[0];
@@ -138,26 +211,94 @@ namespace educationalProject.Controllers
                 datacontext.file_name = "download/evidence/" + newfilename;
                 File.Move(string.Format("{0}/{1}", savepath, fileInfo.Name), string.Format("{0}/{1}", savepath, newfilename));
 
-                object resultfromdb = await datacontext.InsertNewPrimaryEvidenceWithSelect();
+                object resultfromdb = await datacontext.InsertNewPrimaryEvidenceWithSelect(existsevidencelist);
+
                 if (resultfromdb.GetType().ToString() != "System.String")
-                    return Ok(resultfromdb);
-                else
+                {
+                    BulkEvidenceTransactionResult bresult = (BulkEvidenceTransactionResult)resultfromdb;
+
+                    //Delete the file which belong to the deleted evidences
+                    foreach (string file_name_to_delete in bresult.filenametodellist)
+                    {
+                        if (File.Exists(string.Format("{0}{1}", delpath, file_name_to_delete)))
+                            File.Delete(string.Format("{0}{1}", delpath, file_name_to_delete));
+                    }
+                    
+                    return Ok(bresult.mainresult);
+                }
+                else //ERROR case
+                {
+                    if (File.Exists(string.Format("{0}/{1}", savepath, newfilename)))
+                        File.Delete(string.Format("{0}/{1}", savepath, newfilename));
                     return BadRequest(resultfromdb.ToString());
+                }
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 return InternalServerError(e);
             }
         }
 
         [ActionName("newevidencefromothers")]
-        public async Task<IHttpActionResult> PutNewEvidenceFromOthers(oEvidence data)
+        public async Task<IHttpActionResult> PutNewEvidenceFromOthers(JObject datamodelreceive)
         {
-            object result = await data.InsertNewEvidenceWithSelect();
-            if (result.GetType().ToString() != "System.String")
-                return Ok(result);
-            else
-                return BadRequest(result.ToString());
+
+            //New evidence PART
+            JObject newevidenceimportdata = (JObject)datamodelreceive["evidence_import"];
+
+            datacontext.aca_year = Convert.ToInt32(newevidenceimportdata["aca_year"]);
+            datacontext.curri_id = newevidenceimportdata["curri_id"].ToString();
+            datacontext.evidence_real_code = Convert.ToInt32(newevidenceimportdata["evidence_real_code"]);
+            datacontext.evidence_name = newevidenceimportdata["evidence_name"].ToString();
+            datacontext.indicator_num = Convert.ToInt32(newevidenceimportdata["indicator_num"]);
+            datacontext.secret = newevidenceimportdata["secret"].ToString()[0];
+            datacontext.teacher_id = Convert.ToInt32(newevidenceimportdata["teacher_id"]);
+            datacontext.file_name = newevidenceimportdata["file_name"].ToString();
+
+            //EXISTS Evidence PART
+            JArray existsevidence = (JArray)datamodelreceive["all_evidences"];
+
+            List<oEvidence> existsevidencelist = new List<oEvidence>();
+            foreach (JObject eitem in existsevidence)
+            {
+                oEvidence obj = new oEvidence();
+                obj.evidence_code = Convert.ToInt32(eitem["evidence_code"]);
+                obj.file_name = eitem["file_name"].ToString();
+                obj.evidence_name = eitem["evidence_name"].ToString();
+                obj.teacher_id = Convert.ToInt32(eitem["teacher_id"]);
+                obj.secret = eitem["secret"].ToString()[0];
+                obj.curri_id = eitem["curri_id"].ToString();
+                obj.aca_year = Convert.ToInt32(eitem["aca_year"]);
+                obj.evidence_real_code = Convert.ToInt32(eitem["evidence_real_code"]);
+                obj.indicator_num = Convert.ToInt32(eitem["indicator_num"]);
+                obj.primary_evidence_num = Convert.ToInt32(eitem["primary_evidence_num"]);
+                existsevidencelist.Add(obj);
+            }
+
+            object resultfromdb = await datacontext.InsertNewEvidenceWithSelect(existsevidencelist);
+            if (resultfromdb.GetType().ToString() != "System.String")
+            {
+                BulkEvidenceTransactionResult bresult = (BulkEvidenceTransactionResult)resultfromdb;
+                string delpath = WebApiApplication.SERVERPATH;
+                //Delete the file which belong to the deleted evidences
+                foreach (string file_name_to_delete in bresult.filenametodellist)
+                {
+                    if (File.Exists(string.Format("{0}{1}", delpath, file_name_to_delete)))
+                        File.Delete(string.Format("{0}{1}", delpath, file_name_to_delete));
+                }
+
+                //Check whether insert result is success?
+                if (bresult.message != null)
+                {
+                    return BadRequest(bresult.message);
+                }
+
+                return Ok(bresult.mainresult);
+            }
+            else //ERROR case
+            {
+                return BadRequest(resultfromdb.ToString());
+            }
         }
 
         [ActionName("updateevidence")]

@@ -442,16 +442,71 @@ namespace educationalProject.Models.Wrappers
             return result;
 
         }
-        public async Task<object> InsertNewEvidenceWithSelect()
+
+
+        public async Task<object> InsertNewEvidenceWithSelect(List<oEvidence> existslist)
         {
             DBConnector d = new DBConnector();
-            List<Evidence_with_t_name> result = new List<Evidence_with_t_name>();
+            List<Evidence_with_t_name> evidencelistresult = new List<Evidence_with_t_name>();
+            List<string> filenametodellist = new List<string>();
+            BulkEvidenceTransactionResult result = new BulkEvidenceTransactionResult();
+            result.mainresult = evidencelistresult;
+            result.filenametodellist = filenametodellist;
+
             if (!d.SQLConnect())
                 return WebApiApplication.CONNECTDBERRSTRING;
+
+            //UPDATE PART
+            string updatecmd = "";
+            string delete_and_condition = "";
+            string deletewhereclause = "";
+            string temp1tablename = "#temp1";
+            string createtabletemp1 = "";
+            string insertintotemp1 = "";
+            string getfilenamefromtemp1 = "";
+
+            if (existslist.Count != 0)
+            {
+                foreach (oEvidence item in existslist)
+                {
+                    updatecmd += string.Format("update {0} set {1} = {2},{3} = '{4}' where {5} = {6} ",
+                        FieldName.TABLE_NAME, FieldName.EVIDENCE_REAL_CODE, item.evidence_real_code, FieldName.EVIDENCE_NAME,
+                        item.evidence_name, FieldName.EVIDENCE_CODE, item.evidence_code);
+                    //Generate delete cmd
+                    delete_and_condition += string.Format("and {0} != {1} ", FieldName.EVIDENCE_CODE, item.evidence_code);
+                }
+            }
+            deletewhereclause = string.Format("{0} = '{1}' and {2} = {3} and {4} = {5} and (1 = 1 {6})",
+                                FieldName.CURRI_ID, curri_id,
+                                FieldName.ACA_YEAR, aca_year, FieldName.INDICATOR_NUM, indicator_num,
+                                delete_and_condition);
+
+            createtabletemp1 = string.Format("create table {0} (" +
+                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
+                                      "[{1}] {2} NOT NULL," +
+                                      "PRIMARY KEY([row_num])) " +
+                                      /*Alter column in temp table to make table accept Thai data*/
+                                      "ALTER TABLE {0} " +
+                                      "ALTER COLUMN {1} {2} COLLATE DATABASE_DEFAULT ",
+                                      temp1tablename, FieldName.FILE_NAME, DBFieldDataType.FILE_NAME_TYPE);
+
+            insertintotemp1 = string.Format("insert into {0}({1}) " +
+                                     "select * from (delete from {2} output Deleted.{1} where {3}) " +
+                                     "as outputdelete ", temp1tablename, FieldName.FILE_NAME, FieldName.TABLE_NAME,
+                                     deletewhereclause);
+
+            //Query to-be delete file name from db
+            getfilenamefromtemp1 = string.Format("select {1} as FILE_NAME_TO_DELETE from {0} where {1} not in (select {1} from {2}) ",
+                temp1tablename, FieldName.FILE_NAME, FieldName.TABLE_NAME);
+
+            string updateevidencetransactcmd = string.Format("BEGIN {0} {1} {2} {3} END", updatecmd, createtabletemp1, insertintotemp1, getfilenamefromtemp1);
+
+
+            //INSERT PART
             string ifexistscond = string.Format("if not exists (select * from {0} where {1} = {2} and {3} = '{4}' and {5} = {6} and {7} = {8}) ",
                 FieldName.TABLE_NAME, FieldName.INDICATOR_NUM, indicator_num, FieldName.CURRI_ID,
                 curri_id, FieldName.ACA_YEAR, aca_year, FieldName.EVIDENCE_REAL_CODE, evidence_real_code);
-                ;
+            ;
             string insertcmd = string.Format("INSERT INTO {0}({1},{2},{3},{4},{5},{6},{7},{8},{9}) VALUES " +
                       "(null, '{10}', '{11}', {12}, {13}, '{14}', '{15}', '{16}', {17}) ",
                 FieldName.TABLE_NAME, FieldName.PRIMARY_EVIDENCE_NUM, FieldName.TEACHER_ID, FieldName.CURRI_ID, FieldName.INDICATOR_NUM, FieldName.EVIDENCE_REAL_CODE, FieldName.FILE_NAME, FieldName.EVIDENCE_NAME, FieldName.SECRET, FieldName.ACA_YEAR,
@@ -463,39 +518,68 @@ namespace educationalProject.Models.Wrappers
                 FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
                 FieldName.EVIDENCE_REAL_CODE, Teacher.FieldName.ALIAS_NAME
                 );
-            d.iCommand.CommandText = string.Format("{0} BEGIN {1} {2} END ",ifexistscond, insertcmd,selectcmd);
+
+            string selecterrormsg = "select 'inserterror' as errormsg";
+            d.iCommand.CommandText = string.Format("{4} {0} BEGIN {1} END ELSE BEGIN {3} END {2}", ifexistscond, insertcmd, selectcmd, selecterrormsg, updateevidencetransactcmd);
+            
             try
             {
                 System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
-                if (res.HasRows)
+
+                do
                 {
-                    DataTable data = new DataTable();
-                    data.Load(res);
-                    foreach (DataRow item in data.Rows)
+                    if (res.HasRows)
                     {
-                        result.Add(new Evidence_with_t_name
+                        DataTable data = new DataTable();
+                        data.Load(res);
+
+                        //Case current resultset is evidence(with teacher name) table
+                        if (data.Columns.Contains("evidence_name"))
                         {
-                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                            evidence_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_CODE].Ordinal]),
-                            evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
-                            file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
-                            secret = Convert.ToChar(item.ItemArray[data.Columns[FieldName.SECRET].Ordinal]),
-                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
-                            //DANGER NULLABLE ZONE
-                            primary_evidence_num = item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]) : 0,
-                            evidence_real_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal]),
-                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
-                            t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
-                        });
+                            foreach (DataRow item in data.Rows)
+                            {
+                                evidencelistresult.Add(new Evidence_with_t_name
+                                {
+                                    curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
+                                    aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
+                                    evidence_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_CODE].Ordinal]),
+                                    evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
+                                    file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
+                                    secret = Convert.ToChar(item.ItemArray[data.Columns[FieldName.SECRET].Ordinal]),
+                                    teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
+                                    //DANGER NULLABLE ZONE
+                                    primary_evidence_num = item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]) : 0,
+                                    evidence_real_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal]),
+                                    indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
+                                    t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
+                                });
+                            }
+                        }
+
+                        //Case current resultset is temp1 table (file_name_to_delete list)
+                        else if (data.Columns.Contains("FILE_NAME_TO_DELETE"))
+                        {
+                            foreach (DataRow item in data.Rows)
+                            {
+                                filenametodellist.Add(
+                                item.ItemArray[data.Columns["FILE_NAME_TO_DELETE"].Ordinal].ToString()
+                                );
+                            }
+                        }
+
+                        //Case current resultset is inserterror
+                        else
+                        {
+                            result.message = "รหัสหลักฐานดังกล่าวมีอยู่แล้วในระบบ";
+                        }
+                        data.Dispose();
                     }
-                    data.Dispose();
-                }
-                else
-                {
-                    res.Close();
-                    return "รหัสหลักฐานดังกล่าวมีอยู่แล้วในระบบ";
-                }
+                    else if (!res.IsClosed)
+                    {
+                        if (!res.NextResult())
+                            break;
+                    }
+                } while (!res.IsClosed);
                 res.Close();
             }
             catch (Exception ex)
@@ -512,13 +596,67 @@ namespace educationalProject.Models.Wrappers
         }
 
 
-        public async Task<object> InsertNewPrimaryEvidenceWithSelect()
+        public async Task<object> InsertNewPrimaryEvidenceWithSelect(List<oEvidence> existslist)
         {
             int errcode = 0;
             DBConnector d = new DBConnector();
-            List<Evidence_with_t_name> result = new List<Evidence_with_t_name>();
+
+            List<Evidence_with_t_name> evidencelistresult = new List<Evidence_with_t_name>();
+            List<string> filenametodellist = new List<string>();
+            BulkEvidenceTransactionResult result = new BulkEvidenceTransactionResult();
+            result.mainresult = evidencelistresult;
+            result.filenametodellist = filenametodellist;
+
             if (!d.SQLConnect())
                 return WebApiApplication.CONNECTDBERRSTRING;
+
+            //UPDATE PART
+            string updatecmd = "";
+            string delete_and_condition = "";
+            string deletewhereclause = "";
+            string temp1tablename = "#temp1";
+            string createtabletemp1 = "";
+            string insertintotemp1 = "";
+            string getfilenamefromtemp1 = "";
+
+            if (existslist.Count != 0)
+            {
+                foreach (oEvidence item in existslist)
+                {
+                    updatecmd += string.Format("update {0} set {1} = {2},{3} = '{4}' where {5} = {6} ",
+                        FieldName.TABLE_NAME, FieldName.EVIDENCE_REAL_CODE, item.evidence_real_code, FieldName.EVIDENCE_NAME,
+                        item.evidence_name, FieldName.EVIDENCE_CODE, item.evidence_code);
+                    //Generate delete cmd
+                    delete_and_condition += string.Format("and {0} != {1} ", FieldName.EVIDENCE_CODE, item.evidence_code);
+                }
+            }
+            deletewhereclause = string.Format("{0} = '{1}' and {2} = {3} and {4} = {5} and (1 = 1 {6})",
+                                FieldName.CURRI_ID, curri_id,
+                                FieldName.ACA_YEAR, aca_year, FieldName.INDICATOR_NUM, indicator_num,
+                                delete_and_condition);
+
+            createtabletemp1 = string.Format("create table {0} (" +
+                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
+                                      "[{1}] {2} NOT NULL," +
+                                      "PRIMARY KEY([row_num])) " +
+                                      /*Alter column in temp table to make table accept Thai data*/
+                                      "ALTER TABLE {0} " +
+                                      "ALTER COLUMN {1} {2} COLLATE DATABASE_DEFAULT ",
+                                      temp1tablename, FieldName.FILE_NAME, DBFieldDataType.FILE_NAME_TYPE);
+
+            insertintotemp1 = string.Format("insert into {0}({1}) " +
+                                     "select * from (delete from {2} output Deleted.{1} where {3}) " +
+                                     "as outputdelete ", temp1tablename, FieldName.FILE_NAME, FieldName.TABLE_NAME,
+                                     deletewhereclause);
+
+            //Query to-be delete file name from db
+            getfilenamefromtemp1 = string.Format("select {1} as FILE_NAME_TO_DELETE from {0} where {1} not in (select {1} from {2}) ",
+                temp1tablename, FieldName.FILE_NAME, FieldName.TABLE_NAME);
+
+            string updateevidencetransactcmd = string.Format("BEGIN {0} {1} {2} {3} END", updatecmd, createtabletemp1, insertintotemp1, getfilenamefromtemp1);
+
+
+            //INSERT PRIMARY EVIDENCE PART
             //The first condition check that is target primary evidence is already uploaded?
             string ifexistscond1 = string.Format("if exists (select * from {0} where {1} = {2} and {3} = {4} and {5} = '{6}' and {7} = {8} ) select 1 as errcode ",
                 FieldName.TABLE_NAME, FieldName.PRIMARY_EVIDENCE_NUM, primary_evidence_num, FieldName.ACA_YEAR, aca_year,
@@ -557,49 +695,73 @@ namespace educationalProject.Models.Wrappers
                 FieldName.TEACHER_ID, Teacher.FieldName.TEACHER_ID, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
                 FieldName.EVIDENCE_REAL_CODE, Teacher.FieldName.ALIAS_NAME);
 
-            d.iCommand.CommandText = string.Format("{0} " +
+            d.iCommand.CommandText = string.Format("{7} {0} " +
                 "else {1} " +
                 "else {2} " +
                 "else {3} " +
                 "else begin " +
-                "{4} {5} {6} end", ifexistscond1, ifexistscond2, ifexistscond3,ifexistscond4, insertintoevidencecmd, updateprimaryevidencestatuscmd,
-                selectcmd);
+                "{4} {5} {6} end", ifexistscond1, ifexistscond2, ifexistscond3, ifexistscond4, insertintoevidencecmd, updateprimaryevidencestatuscmd,
+                selectcmd,updateevidencetransactcmd);
+
             try
             {
                 System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
-                if (res.HasRows)
+
+                do
                 {
-                    DataTable data = new DataTable();
-                    data.Load(res);
-                    if (data.Columns.Contains("errcode"))
-                        errcode = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns["errcode"].Ordinal]);
-                    else
+                    if (res.HasRows)
                     {
-                        foreach (DataRow item in data.Rows)
+                        DataTable data = new DataTable();
+                        data.Load(res);
+
+                        //Case current resultset is evidence(with teacher name) table
+                        if (data.Columns.Contains("evidence_name"))
                         {
-                            result.Add(new Evidence_with_t_name
+                            foreach (DataRow item in data.Rows)
                             {
-                                curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                                aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                                evidence_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_CODE].Ordinal]),
-                                evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
-                                file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
-                                secret = Convert.ToChar(item.ItemArray[data.Columns[FieldName.SECRET].Ordinal]),
-                                teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
-                                //DANGER NULLABLE ZONE
-                                primary_evidence_num = item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]) : 0,
-                                evidence_real_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal]),
-                                indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
-                                t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
-                            });
+                                evidencelistresult.Add(new Evidence_with_t_name
+                                {
+                                    curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
+                                    aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
+                                    evidence_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_CODE].Ordinal]),
+                                    evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
+                                    file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
+                                    secret = Convert.ToChar(item.ItemArray[data.Columns[FieldName.SECRET].Ordinal]),
+                                    teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
+                                    //DANGER NULLABLE ZONE
+                                    primary_evidence_num = item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]) : 0,
+                                    evidence_real_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal]),
+                                    indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal]),
+                                    t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
+                                });
+                            }
                         }
+
+                        //Case current resultset is temp1 table (file_name_to_delete list)
+                        else if (data.Columns.Contains("FILE_NAME_TO_DELETE"))
+                        {
+                            foreach (DataRow item in data.Rows)
+                            {
+                                filenametodellist.Add(
+                                item.ItemArray[data.Columns["FILE_NAME_TO_DELETE"].Ordinal].ToString()
+                                );
+                            }
+                        }
+
+                        //Case current resultset is errcode
+                        else
+                        {
+                            errcode = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns["errcode"].Ordinal]);
+                        }
+
+                        data.Dispose();
                     }
-                    data.Dispose();
-                }
-                else
-                {
-                    //Reserved for return error string
-                }
+                    else if (!res.IsClosed)
+                    {
+                        if (!res.NextResult())
+                            break;
+                    }
+                } while (!res.IsClosed);
                 res.Close();
             }
             catch (Exception ex)
