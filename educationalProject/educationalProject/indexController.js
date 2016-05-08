@@ -8628,6 +8628,7 @@ $scope.error_msg = '';
              }
          ).success(function (data) {
               $rootScope.current_user.username = $scope.to_sent.username;
+              $rootScope.save_obj.username = $scope.to_sent.username;
                   $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
