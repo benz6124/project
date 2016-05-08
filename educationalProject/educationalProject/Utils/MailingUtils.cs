@@ -26,10 +26,10 @@ namespace educationalProject.Utils
 
                 mailMsg.Subject = "Educational Project - ชื่อผู้ใช้งานและรหัสผ่านสำหรับการเข้าสู่ระบบ";
                 mailMsg.IsBodyHtml = true;
-                mailMsg.Body = "<h4>ขอแจ้งรายละเอียด username และ password ที่ใช้ในการเข้าสู่เว็บแอพพลิเคชันของเราดังนี้</h4> <br>" +
+                mailMsg.Body = "<h4>ขอแจ้งรายละเอียด username และ password ที่ใช้ในการเข้าสู่เว็บแอพพลิเคชั่นของเราดังนี้</h4> <br>" +
                                "<b>ชื่อผู้ใช้งาน</b>:"+username+"<br> " +
                                "<b>รหัสผ่าน</b>:"+password+"<br><br><br>" +
-                               "หากอีเมล์ของท่านถูกแอบอ้างสร้างบัญชี หรือ ไม่ได้จงใจที่จะใช้งานเว็บแอพพลิเคชันของเราจริงๆ ท่านสามารถข้ามอีเมล์นี้ หรือ <b>ลบทิ้ง</b>ได้ทันที";
+                               "หากอีเมล์ของท่านถูกแอบอ้างสร้างบัญชี หรือ ไม่ได้จงใจที่จะใช้งานเว็บแอพพลิเคชั่นของเราจริงๆ ท่านสามารถข้ามอีเมล์นี้ หรือ ลบทิ้งได้ทันที";
                 mailMsg.Priority = MailPriority.High;
 
                 // Init SmtpClient and send
@@ -62,11 +62,11 @@ namespace educationalProject.Utils
 
                 mailMsg.Subject = "Educational Project - ชื่อผู้ใช้งานและรหัสผ่านสำหรับการเข้าสู่ระบบ";
                 mailMsg.IsBodyHtml = true;
-                mailMsg.Body = "<h4>ขอแจ้งรายละเอียด username และ password ที่ใช้ในการเข้าสู่เว็บแอพพลิเคชันของเราดังนี้</h4> <br>" +
+                mailMsg.Body = "<h4>ขอแจ้งรายละเอียด username และ password ที่ใช้ในการเข้าสู่เว็บแอพพลิเคชั่นของเราดังนี้</h4> <br>" +
                                "<b>ชื่อผู้ใช้งาน</b>:" + username + "<br> " +
                                "<b>รหัสผ่าน</b>:" + password + "<br>" +
                                "<b>ชื่อ-นามสกุล</b>:" + t_name +"<br><br><br>" +
-                               "หากอีเมล์ของท่านถูกแอบอ้างสร้างบัญชี หรือ ไม่ได้จงใจที่จะใช้งานเว็บแอพพลิเคชันของเราจริงๆ ท่านสามารถข้ามอีเมล์นี้ หรือ <b>ลบทิ้ง</b>ได้ทันที";
+                               "หากอีเมล์ของท่านถูกแอบอ้างสร้างบัญชี หรือ ไม่ได้จงใจที่จะใช้งานเว็บแอพพลิเคชั่นของเราจริงๆ ท่านสามารถข้ามอีเมล์นี้ หรือ ลบทิ้งได้ทันที";
                 mailMsg.Priority = MailPriority.High;
 
                 // Init SmtpClient and send
@@ -91,21 +91,21 @@ namespace educationalProject.Utils
             try
             {
                 MailMessage mailMsg = new MailMessage();
-
                 // To
-                mailMsg.To.Add(new MailAddress("benchbb01@hotmail.com"));
+                mailMsg.To.Add(new MailAddress(data.email));
+                //mailMsg.To.Add(new MailAddress("benchbb01@hotmail.com"));
 
                 // From
                 mailMsg.From = new MailAddress(smtpSection.Network.UserName, "Educationalproject");
 
                 mailMsg.Subject = string.Format("Educational Project - แจ้งเตือนหลักฐานค้างส่งของ {0}",data.t_name);
                 mailMsg.IsBodyHtml = true;
-                mailMsg.Body = string.Format("<h3>เรียน {0}</h3> <br>", data.t_name) +
+                mailMsg.Body = string.Format("เรียน {0} <br>", data.t_name) +
                                "ท่านมีหลักฐานที่ค้างส่งอยู่ โดยหลักฐานที่จะให้ท่านรีบดำเนินการส่งโดยเร็วที่สุดคือ <br>" +
                                string.Format("<ul><li>{0} <b>หลักสูตร</b> {1} <b>ปีการศึกษา</b> {2}</li></ul><br>", data.evidence_name, data.curr_tname, data.aca_year) +
                                "ขอบคุณครับ/ค่ะ<br><br><br><br>" +
 
-                               "หากอีเมล์ของท่านถูกแอบอ้างสร้างบัญชี หรือ ไม่ได้จงใจที่จะใช้งานเว็บแอพพลิเคชันของเราจริงๆ ท่านสามารถข้ามอีเมล์นี้ หรือ <b>ลบทิ้ง</b>ได้ทันที";
+                               "หากอีเมล์ของท่านถูกแอบอ้างสร้างบัญชี หรือ ไม่ได้จงใจที่จะใช้งานเว็บแอพพลิเคชั่นของเราจริงๆ ท่านสามารถข้ามอีเมล์นี้ หรือ ลบทิ้งได้ทันที";
                 mailMsg.Priority = MailPriority.High;
                 
                 // Init SmtpClient and send
@@ -130,6 +130,7 @@ namespace educationalProject.Utils
                 MailMessage mailMsg = new MailMessage();
 
                 // To
+                //mailMsg.To.Add(new MailAddress(p.email));
                 mailMsg.To.Add(new MailAddress("benchbb01@hotmail.com"));
 
                 // From
@@ -142,13 +143,13 @@ namespace educationalProject.Utils
                 foreach(Evidence_brief_detail e in p.pendinglist)
                     pendingliststr += string.Format("<li>{0} <b>หลักสูตร</b> {1} <b>ปีการศึกษา</b> {2}</li>", e.evidence_name, e.curr_tname, e.aca_year);
 
-                mailMsg.Body = string.Format("<h3>เรียน {0}</h3> <br>", p.t_name) +
+                mailMsg.Body = string.Format("เรียน {0} <br>", p.t_name) +
                                "ท่านมีหลักฐานที่ค้างส่งอยู่ โดยหลักฐานที่ท่านค้างส่งทั้งหมดมีดังนี้ <br>" +
                                "<ul>" +
                                pendingliststr +
                                "</ul><br>" +
                                "ขอบคุณครับ/ค่ะ<br><br><br><br>" +
-                               "หากอีเมล์ของท่านถูกแอบอ้างสร้างบัญชี หรือ ไม่ได้จงใจที่จะใช้งานเว็บแอพพลิเคชันของเราจริงๆ ท่านสามารถข้ามอีเมล์นี้ หรือ <b>ลบทิ้ง</b>ได้ทันที";
+                               "หากอีเมล์ของท่านถูกแอบอ้างสร้างบัญชี หรือ ไม่ได้จงใจที่จะใช้งานเว็บแอพพลิเคชั่นของเราจริงๆ ท่านสามารถข้ามอีเมล์นี้ หรือ ลบทิ้งได้ทันที";
                 mailMsg.Priority = MailPriority.High;
 
                 // Init SmtpClient and send

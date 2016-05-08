@@ -164,7 +164,7 @@ namespace educationalProject.Models.Wrappers
                                     name = item.ItemArray[data.Columns[Title.FieldName.NAME].Ordinal].ToString(),
                                     my_privilege = new Title_privilege(Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_CODE].Ordinal]), Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_PRIVILEGE_CODE].Ordinal]),
                                     item.ItemArray[data.Columns[Title_privilege.FieldName.PRIVILEGE].Ordinal].ToString()),
-                                    file_name_pic = item.ItemArray[data.Columns[Teacher.FieldName.FILE_NAME_PIC].Ordinal].ToString(),
+                                    file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[Teacher.FieldName.FILE_NAME_PIC].Ordinal].ToString()),
                                     personnel_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal]),
                                     t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString() +
                                                  item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
@@ -176,7 +176,7 @@ namespace educationalProject.Models.Wrappers
                                     name = item.ItemArray[data.Columns[Title.FieldName.NAME].Ordinal].ToString(),
                                     my_privilege = new Title_privilege(Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_CODE].Ordinal]), Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_PRIVILEGE_CODE].Ordinal]),
                                     item.ItemArray[data.Columns[Title_privilege.FieldName.PRIVILEGE].Ordinal].ToString()),
-                                    file_name_pic = item.ItemArray[data.Columns[Teacher.FieldName.FILE_NAME_PIC].Ordinal].ToString(),
+                                    file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[Teacher.FieldName.FILE_NAME_PIC].Ordinal].ToString()),
                                     personnel_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal]),
                                     t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) +
                                              item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
