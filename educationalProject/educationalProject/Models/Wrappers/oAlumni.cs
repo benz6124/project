@@ -92,8 +92,8 @@ namespace educationalProject.Models.Wrappers
                                    "IF NOT EXISTS(select * from {0} where {1} = '{2}' or {3} = '{2}') " +
                                    "begin " +
                                    "insert into {4} " +
-                                   "select * from (insert into {0} ({5}, {1}, {6}, {3}, {7}) output inserted.{8} " +
-                                   "values ('{9}', '{2}', '{10}', '{2}', '{11}')) as outputinsert " +
+                                   "select * from (insert into {0} ({5}, {1}, {6}, {3}, {7}, {15}) output inserted.{8} " +
+                                   "values ('{9}', '{2}', '{10}', '{2}', '{11}', '{2}')) as outputinsert " +
 
                                    "insert into {12} ({13}) select {8} from {4} " +
                                    insertintousercurri + " " +
@@ -108,7 +108,8 @@ namespace educationalProject.Models.Wrappers
                                    User_list.FieldName.USER_TYPE, FieldName.PASSWORD, FieldName.TIMESTAMP,
                                    User_list.FieldName.USER_ID,
                                    /*****9****/ "ศิษย์เก่า", item.password, ts,
-                                   /****12****/ ExtraFieldName.TABLE_NAME, FieldName.USER_ID, temp5tablename
+                                   /****12****/ ExtraFieldName.TABLE_NAME, FieldName.USER_ID, temp5tablename,
+                                   Personnel.FieldName.T_NAME
                                    );
 
             }

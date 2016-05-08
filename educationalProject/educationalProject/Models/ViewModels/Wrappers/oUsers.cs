@@ -1136,8 +1136,8 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                    "IF NOT EXISTS(select * from {0} where {1} = '{2}' or {3} = '{2}') " +
                                    "begin " +
                                    "insert into {4} " +
-                                   "select * from (insert into {0} ({5}, {1}, {6}, {3}, {7}) output inserted.{8} " +
-                                   "values ('{9}', '{2}', '{10}', '{2}', '{11}')) as outputinsert " +
+                                   "select * from (insert into {0} ({5}, {1}, {6}, {3}, {7}, {13}) output inserted.{8} " +
+                                   "values ('{9}', '{2}', '{10}', '{2}', '{11}', '{2}')) as outputinsert " +
 
                                    insertintousercurri + " " +
 
@@ -1151,7 +1151,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                    User_list.FieldName.USER_TYPE, Teacher.FieldName.PASSWORD, Teacher.FieldName.TIMESTAMP,
                                    User_list.FieldName.USER_ID,
                                    /*****9****/ usrtype, item.password, ts,
-                                   /****12****/ temp5tablename
+                                   /****12****/ temp5tablename,Personnel.FieldName.T_NAME
                                    );
 
             }
