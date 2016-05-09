@@ -103,7 +103,7 @@ namespace educationalProject.Utils
                 mailMsg.Body = string.Format("เรียน {0} <br>", data.t_name) +
                                "ท่านมีหลักฐานที่ค้างส่งอยู่ โดยหลักฐานที่จะให้ท่านรีบดำเนินการส่งโดยเร็วที่สุดคือ <br>" +
                                string.Format("<ul><li>{0} <b>หลักสูตร</b> {1} <b>ปีการศึกษา</b> {2}</li></ul><br>", data.evidence_name, data.curr_tname, data.aca_year) +
-                               "ขอบคุณครับ/ค่ะ<br><br><br><br>" +
+                               "จึงเรียนมาเพื่อทราบ<br><br><br><br>" +
 
                                "หากอีเมล์ของท่านถูกแอบอ้างสร้างบัญชี หรือ ไม่ได้จงใจที่จะใช้งานเว็บแอพพลิเคชั่นของเราจริงๆ ท่านสามารถข้ามอีเมล์นี้ หรือ ลบทิ้งได้ทันที";
                 mailMsg.Priority = MailPriority.High;
@@ -148,7 +148,7 @@ namespace educationalProject.Utils
                                "<ul>" +
                                pendingliststr +
                                "</ul><br>" +
-                               "ขอบคุณครับ/ค่ะ<br><br><br><br>" +
+                               "จึงเรียนมาเพื่อทราบ<br><br><br><br>" +
                                "หากอีเมล์ของท่านถูกแอบอ้างสร้างบัญชี หรือ ไม่ได้จงใจที่จะใช้งานเว็บแอพพลิเคชั่นของเราจริงๆ ท่านสามารถข้ามอีเมล์นี้ หรือ ลบทิ้งได้ทันที";
                 mailMsg.Priority = MailPriority.High;
 
