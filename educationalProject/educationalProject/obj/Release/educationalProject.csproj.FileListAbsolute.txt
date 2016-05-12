@@ -14,9 +14,11 @@ D:\4D\project\educationalProject\educationalProject\bin\educationalProject.dll.c
 D:\4D\project\educationalProject\educationalProject\bin\educationalProject.dll
 D:\4D\project\educationalProject\educationalProject\bin\educationalProject.pdb
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AspNet.Identity.Core.dll
+D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AspNet.WebApi.Extensions.Compression.Server.dll
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.Web.Infrastructure.dll
 D:\4D\project\educationalProject\educationalProject\bin\Newtonsoft.Json.dll
+D:\4D\project\educationalProject\educationalProject\bin\System.Net.Http.Extensions.Compression.Core.dll
 D:\4D\project\educationalProject\educationalProject\bin\System.Net.Http.Formatting.dll
 D:\4D\project\educationalProject\educationalProject\bin\System.Web.Http.dll
 D:\4D\project\educationalProject\educationalProject\bin\System.Web.Http.WebHost.dll
@@ -28,5 +30,3 @@ D:\4D\project\educationalProject\educationalProject\bin\System.Web.Http.WebHost.
 D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AspNet.Identity.Core.xml
 D:\4D\project\educationalProject\educationalProject\obj\Release\educationalProject.dll
 D:\4D\project\educationalProject\educationalProject\obj\Release\educationalProject.pdb
-D:\4D\project\educationalProject\educationalProject\bin\Microsoft.AspNet.WebApi.Extensions.Compression.Server.dll
-D:\4D\project\educationalProject\educationalProject\bin\System.Net.Http.Extensions.Compression.Core.dll
