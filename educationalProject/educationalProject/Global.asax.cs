@@ -14,7 +14,7 @@ namespace educationalProject
         public static readonly string CONNECTDBERRSTRING = "ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้";
 
         //REAL RUNNING WEB SERVER BASE URL (USE FOR EVIDENCE FILE LOCATION REFERENCE)
-        public static readonly string SERVERURL = "http://161.246.6.38/";
+        public static readonly string SERVERURL = System.Configuration.ConfigurationManager.AppSettings["serverurl"].ToString();
         protected void Application_Start()
         {
             //AreaRegistration.RegisterAllAreas();
