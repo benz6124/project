@@ -1605,7 +1605,7 @@ iframe::-webkit-scrollbar-button,
   z-index: 9;
 }
 .scrollable:not(.bar-visible) .scrollbar {
-  visibility: hidden;
+  visibility: visible;
 }
 .scrollable:hover .scrollbar,
 .scrollable:active .scrollbar,
