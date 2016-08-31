@@ -9,7 +9,6 @@ var app = angular.module('myProject', [
         ,'ui.bootstrap'
         ,'bootstrapLightbox'
         ,'flow'
-        ,'ui.router'
         ,'ngCookies'
        
    
