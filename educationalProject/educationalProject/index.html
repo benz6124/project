@@ -868,25 +868,6 @@
                             </td>
                             <td class="download"><a href="" ng-click="download_file(evidence.file_name)" ng-hide="evidence.secret==1"class=" hvr-wobble-vertical"><span style="color:#739900" class="glyphicon glyphicon-download-alt " /></a></td>
                         </tr>
-                 <!--        <tr>
-                            <td class="code">1-02</td>
-                            <td class="larger">มาตรฐานคุณวุฒิระดับอุดมศึกษาแห่งชาติ</td>
-                            <td class="download hvr-wobble-vertical"><a href=""><span class="glyphicon glyphicon-download-alt" /></a></td>
-                        </tr>
-
-                        <tr>
-                            <td class="code">1-03</td>
-                            <td class="larger">มาตรฐานคุณวุฒิระดับปริญญาตรี สาขาคอมพิวเตอร์</td>
-                            <td class="download hvr-wobble-vertical"><a href=""><span class="glyphicon glyphicon-download-alt" /></a></td>
-                        </tr>
-
-                        <tr>
-                            <td class="code">1-04</td>
-                            <td class="larger">เอกลักษณ์,อัตลักษณ์พร้อมตัวบ่งชี้ของสถาบัน</td>
-                            <td class="download hvr-wobble-vertical"><a href=""><span class="glyphicon glyphicon-download-alt" /></a></td>
-                        </tr> -->
-
-
                     </table>
 
                     </div>
@@ -2336,15 +2317,6 @@
                                     <th class="col-xs-3 " colspan="3"> 
                                    
 
-                                       <!--    <select name="staticSelectModel" data-qo-effect="flip-x" data-nq-select="" data-qo-placeholder="" data-qo-filterable="false" data-qo-disable-clear="true" data-ng-model="staticSelectModel" >
-                                            <option>สร้างบัญชี</option>
-                                            <option>สร้างหลักสูตร</option>
-                                             <option>เพิ่มปีการศึกษา</option>
-
-
-                                        </select>
- -->
-
     <select data-qo-disable-clear="true" data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title.name for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.$parent.title_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
 
@@ -3074,42 +3046,6 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
                 <div id="manage_minutes" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" ng-controller="manage_minutes_controller" data-qo-independent="true">
 
-<!-- <h3>
-
-<div flow-init
-     flow-files-submitted="di()"
-     flow-name="obj.flow"
-     flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]">
-  <div class="drop" flow-drop ng-class="dropClass">
-    <span class="btn btn-default" flow-btn>อัพโหลดอัลบั้มรูป</span>
-   
-  
-
-  </div>
-
-  <br/>
-
-  <div>
-
-
-    <div ng-repeat="file in $flow.files" class="gallery-box">
-      <span class="title">{{file.name}}</span>
-      <div class="thumbnail" ng-show="$flow.files.length"  >
-        <img flow-img="file" />
-      </div>
-      
-      <div class="btn-group">
-        <a class="btn btn-xs btn-danger" ng-click="file.cancel()">
-          Remove
-        </a>
-      </div>
-    </div>
-    <div class="clear"></div>
-  </div>
-
-</div> -->
-
-
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">ส่วนการจัดการรายงานการประชุม</h1>
@@ -3491,32 +3427,12 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
                                                 <span class="topicHeader" ng-show="primary_evidence.just_create"> <input class="form-control"  type="text" ng-model="primary_evidence.evidence_name " required/></span>
 
-
-                                            
-
-
                                                 </td>
-                                            <!--      <td class="assign_man left_column">
-
-                                                       <select data-qo-disable-clear="true" data-qo-button-class="mySelect_teacher" data-qo-speed="fastest" data-nq-select="" data-ng-options="teacher.teacher_id as teacher.t_name for teacher in all_teachers" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกผู้รับผิดชอบ"  data-ng-init="primary_evidence.teacher_id" data-ng-model="primary_evidence.teacher_id" data-qo-disable-clear="true" required>
-            <option style="display:none" value=""></option></select>
-
-        
-                                                </td> -->
-
-  <!--  <td class="number_indicator"> <a style="margin-right:10px"href=""  class="hvr-pulse" data-ng-click="send_email(primary_evidence.teacher_id)">
-                                        <span class="topic"><i style="color:#eea236"class="
-glyphicon glyphicon-bell"></i> </span>
-                                    </a></td> -->
+                                        
                                     
    <td > <a href=""  class="hvr-pulse" data-ng-click="remove_primary_evidence($index)">
                                         <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td>
-
-                                 <!--               <td class="number_indicator"> <a style="margin-right:10px"href="" data-ng-click="choose_indicator(indicator)" data-nq-toggle-modal="#manage_sub_indicators" data-effect="slide-left">
-                                                  <span class="topic"><i class="glyphicon glyphicon-zoom-in"></i> </span>
-                                              </a></td> -->
-
 
 
                                             </tr>
@@ -4545,14 +4461,6 @@ glyphicon glyphicon-bell"></i> </span>
  
 
 
-                                          <!--       <td><input type="radio"  value="7" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio"  value="6" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio" value="5" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio"  value="4" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio"  value="3" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio" value="2" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio" value="1" data-ng-model="result.evaluation_score"> </td> -->
-
                                             </tr>
 
                                             </form>
@@ -4738,13 +4646,6 @@ glyphicon glyphicon-bell"></i> </span>
        <td ><span ng-show="result.evaluation_score !=0">{{result.evaluation_score}} </span></td>
   <td >{{result.suggestion}}</td>
 
-                                          <!--       <td><input type="radio"  value="7" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio"  value="6" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio" value="5" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio"  value="4" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio"  value="3" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio" value="2" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio" value="1" data-ng-model="result.evaluation_score"> </td> -->
 
                                             </tr>
 
@@ -4864,19 +4765,6 @@ glyphicon glyphicon-bell"></i> </span>
                                                         <td  ng-if="$index!=0">{{result.indicator_num}}.{{result.sub_indicator_num}}</td>
                                                 <td class="left_column">{{result.sub_indicator_name}}
 
-<!--   <div class="row">
-                        <div class="col-md-3" style="
-    padding-left: 7px;
-    padding-right: 5px;
-" >
-                            <h3 style="margin-top:5px;color:#6F002B;"><span class="topicHeader">จุดแข็ง (Strength):   </span></h3>
-                        </div>
-                        <div class="col-md-8" style="
-    padding-left: 0px;
-">
-                            <textarea class="form-control" name="message" rows="2" cols="65" data-ng-model="result.suggestion"></textarea>
-                        </div>
-                    </div> -->
  <div class="row" >
           <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicHeader">จุดแข็ง (Strength):   </span></h3>
  </div>
@@ -4981,10 +4869,6 @@ glyphicon glyphicon-bell"></i> </span>
                          
                     </div>
 <div class="row">
-                          <!--   <div class="col-md-4">
-                                <h3 ><span class="topicHeader" style="margin-left:15px;margin-top:0px;paddle:0px">ตัวบ่งชี้ดั้งเดิมตั้งแต่ปีการศึกษา:  </span></h3>
-
-                            </div> -->
 
 <div class="col-md-6" style="margin-bottom:15px;margin-left:45px">
 
@@ -5264,69 +5148,6 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div> 
                 </div>
-
- <!-- 
-       <div id="upload_primary_evidence" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="add_new_primary_controller" data-qo-size="md" data-qo-independent="true">
-                    <div class="custom-header">
-
-                        <h1 class="headerModalH1"><span class="headerModal"> เพิ่มหลักฐานพื้นฐาน</span></h1>
-                    </div>
-
-
- <div class="row">
-                        <div class="col-md-4" > 
-                            <h3 style="margin-left:20px;margin-top:2px;"><span class="topicHeader">รหัสหลักฐาน:  </span></h3>
-                        </div>
-                        <div class="col-md-1" style="padding-right:0px">
-                        <span class="topicHeader" >{{manage_evidence_indicator_num}} -  </span>
-                        
-                        </div>
- <div class="col-md-2" style="padding-left:0px">
-                            <input type="number" ng-pattern="/^[0-9]*$/"  style="padding-top:3px" class="form-control" min="1" placeholder="รหัส" data-ng-model="my_new_evidence.evidence_real_code"><span class="normal">  </span>
-</div>
-                    </div>
-
-
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">ชื่อหลักฐาน:   </span></h3>
-                        </div>
-                        <div class="col-md-8">
-                                   <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-effect="flip-x" data-qo-speed="fastest" data-nq-select="" data-qo-placeholder="รายชื่อหลักฐานพื้นฐาน" data-ng-model="staticSelectModel">
-                                <option>คำอธิบายรายวิชาแต่ละวิชาในหลักสูตร</option>
-                                <option>มาตรฐานคุณวุฒิระดับอุดมศึกษาแห่งชาติ</option>
-                                <option>มาตรฐานคุณวุฒิระดับปริญญาตรี สาขาคอมพิวเตอร์</option>
-                                <option>เอกลักษณ์,อัตลักษณ์พร้อมตัวบ่งชี้ของสถาบัน</option>
-
-
-                            <option style="display:none" value=""></option></select>
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">ไฟล์หลักฐาน:  </span></h3>
-                        </div>
-                        <div class="col-md-8">
-                            <input type="file" class="form-control" placeholder="Password">
-                        </div>
-
-                    </div>
-
-                
-
-                    <div class="topicHeader" style="margin-left:20px;">
-                        <input type="checkbox" /> &nbsp;หลักฐานนี้เป็นความลับ (ระบบจะไม่เผยแพร่หลักฐานต่อบุคคลภายนอก)
-                    </div>
-                  
-                    <div class="custom-footer">
-                        <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click="$hide()">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
-                        </div>
-                    </div>
-                </div> -->
 
 
                 <div id="upload_primary_evidence" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="add_new_primary_controller" data-qo-size="md" data-qo-independent="true">
@@ -7109,14 +6930,7 @@ glyphicon glyphicon-bell"></i> </span>
                                     <li ng-repeat="sug in manage_survey_result.suggestion track by $index" class="topicHeader" style="color:#6F002B;margin-left:40px" >{{sug}}</li>
 
                                     </ul>
-                   <!--  <div class="row">
-                        <div class="col-md-4">
-                            <h3 style="margin-left:20px;margin-top:0px;"><span class="topicHeader">ข้อเสนอแนะเพิ่มเติม:   </span></h3>
-                        </div>
-                        <div class="col-md-8">
-                            <textarea class="form-control" name="message" rows="3" cols="70"></textarea>
-                        </div>
-                    </div> -->
+
                    <div class="custom-footer">
                                   <button style="margin-top:4px" class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
 
@@ -7266,7 +7080,6 @@ glyphicon glyphicon-bell"></i> </span>
 <noscript>Not seeing a <a href="http://www.scrolltotop.com/">Scroll to Top Button</a>? Go to our FAQ page for more info.</noscript>
 
  <script src="/bower_components/superslides-0.6.2/examples/javascripts/jquery.easing.1.3.js"></script>
-  <script src="/bower_components/superslides-0.6.2/examples/javascripts/javascripts/jquery.animate-enhanced.min.js"></script>
   <script src="/bower_components/superslides-0.6.2/dist/jquery.superslides.js" type="text/javascript" charset="utf-8"></script>
   <script>
     $(function() {
