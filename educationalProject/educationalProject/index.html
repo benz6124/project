@@ -32,13 +32,6 @@
     <link href="/bower_components/quantumui/dist/css/addon/effect-light.min.css" rel="stylesheet" />
             <script src="/bower_components/ckeditor/ckeditor.js"></script>
 
-     
-   <!--  // <script src="/app/app.js"></script>
-    // <script src="/app/controllers/indexController.js"></script> -->
-<!--     // <script type="text/javascript" src="/app/app.js"></script>
-    // <script type="text/javascript" src="/app/controllers/indexController.js"></script> -->
-
-
 </head>
 
 
@@ -46,8 +39,6 @@
 
 <div>
  
-
-
     <section  ng-if = "already_login" >
         <div style="width:100%; " ng-init="asideSettings={enlargeHover:true, offCanvas:'mobile'}">
             <div id="leftMenuAside" data-nq-aside="myLeftAside" class="aside aside-with-menu"
@@ -184,17 +175,6 @@
                                         <span class="topic">รายงานการประชุม</span>
                                     </a>
                                 </li>
-
-                            
-  
-                  
-
-                             
-
-
-                               
-
-
                             </ul>
 
 
@@ -378,49 +358,6 @@
                     <span class="glyphicon glyphicon-download-alt"></span> ดาวน์โหลดเล่มร่าง
                 </button>
 </div>
-
-    <!--     <div class="row wow flipInX"data-wow-duration="2s" data-wow-delay="1s"ng-class="{'not_login_index_select_button_row': already_login == false }" style="position:absolute;z-index:1;top:100px;width:100%;margin-left: 25px;">
-    
-           
-            <div class="col-sm-6" >
-
-                 <select data-qo-disable-clear="true" data-qo-button-class="mySelect_index" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
-            <option style="display:none" value=""></option></select>
-            </div>
-
-            <div class="col-sm-3">
-
-        <select data-qo-disable-clear="true" data-qo-button-class="mySelect_index" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="sendYearAndGetIndicators(year_choosen)" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" data-ng-click="check_curri()">
-<option style="display:none" value=""></option></select>    
-
-
-            </div>
-
-      
-
-            <div class="col-sm-1">
-
-                <button class="btn hvr-wobble-vertical" type="button" style="background-color:#739900;margin-bottom:10px;margin-left:0px; color:white;" ng-click="download_aun_book()">
-                    <span class="glyphicon glyphicon-download-alt"></span> ดาวน์โหลดเล่ม
-                </button>
-
-            </div>
-
-
-
-        </div> -->
-
-<!-- 
-<div id="slides" style="position:relative;z-index:0" ng-show='not_choose_year'>
-
-
-
-    <div class="slides-container">
-     
-    </div>
-
-   
-  </div> -->
 
 
   <div class="wide-container" style="position:relative;z-index:0" ng-show='not_choose_year'>
@@ -697,14 +634,6 @@
 
 
    <tbody ng-repeat="each_evaluation_in_indicator in evaluation_overall"> 
-     <!--            <tr >
-
-                
-
-
-                  
-                </tr> -->
-
 
                     <tr ng-repeat="each_evaluation_in_sub_indicator in each_evaluation_in_indicator.sub_indicator_result">
 
@@ -1549,63 +1478,6 @@
                     </div>
 </div>
 
-<!-- 
-<div id="fix_lab" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="fix_lab_controller">
-       <div class="custom-header">
-                        <h1 class="headerModalH1">แก้ไขข้อมูลห้องปฏิบัติการ</h1>
-                    </div>
-
-
-
-
-                                     
-  <div class="row">
-                            <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่อห้องปฏิบัติการ   </span></h3>
-                            </div>
-                            <div class="col-md-9">
-                                <input  type="text" class="form-control" placeholder="" ng-model="manage_lab_fix_this_lab.name" required><span class="normal">  </span>
-
-                            </div>
-                        </div>
-
-  <div class="row">
-  <div class="col-md-3" >
-
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">เจ้าหน้าที่/อาจารย์ที่ปรึกษา   </span></h3>
-                            </div>
- <div class="col-md-9" style="padding-right:22px;">
-           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_personnel.t_name for each_personnel in manage_lab_all_personnels_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา"  data-ng-model="manage_lab_fix_this_lab.officer" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
-<option style="display:none" value=""></option></select>    
-</div>
-
-</div>
-
-                                     
-  <div class="row">
-                            <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">เลขห้อง   </span></h3>
-                            </div>
-                            <div class="col-md-9">
-                                <input  type="text" class="form-control" placeholder="" ng-model="manage_lab_fix_this_lab.room" required><span class="normal">  </span>
-
-                            </div>
-                        </div>
-
-
-
-           <div class="custom-footer">
-                        <div class="topicHeader pull-right">
-                            <button ng-disabled="still_not_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
-                        </div>
-                    </div>
-</div>
-
- -->
-
-
-
 
 <div id="create_minute" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_minute_controller">
        <div class="custom-header">
@@ -1787,20 +1659,6 @@
     <ul ng-show="manage_minutes_fix_minute_select_attendee.length!=0">
                            <span class="topicHeader"> <li style="color:#6F002B;margin-left:10px" ng-repeat="each in manage_minutes_fix_minute_select_attendee">{{each.t_name}}</li></span>
                         </ul>
-
-
-<!-- <div class="row">
-                            <div class="col-md-3">
-                               <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ไฟล์รายงานการประชุม   </span></h3>
-                            </div>
-                            <div class="col-md-9" style="
-    padding-right: 6px;
-">
-                              
-                                <input type="file" name="upload_file_input" class="form-control" placeholder="ไฟล์รายงานการประชุม" file-upload  data-ng-model="my_file" required/>
-                            </div>
-
-                        </div> -->
 
                           <div class="row">
                             <div class="col-md-3">
@@ -3116,15 +2974,6 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
 
 <span style="padding-left:0px;font-size:19px">{{minute.date}}</span>  </td>
-
-               <!--       <td  >
-
-
-<span ng-repeat="each_officer in lab.officer" style="padding-left:0px;font-size:19px">{{each_officer.t_name}}<br/></span>
-
-
-  </td>       -->
-
 
           <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#minute_attendees" data-ng-click="go_to_see_attendee(minute)" >
                                         <span class="topic"><i style="color:#484848"class="glyphicon glyphicon-user"></i> </span>
@@ -6079,14 +5928,6 @@ glyphicon glyphicon-bell"></i> </span>
                        </select>    
                          <!--    <option style="display:none" value=""></option> -->
 
-
-
-
-
-
-
-
-
                             </div>
                         </div>
 
@@ -6172,15 +6013,6 @@ glyphicon glyphicon-bell"></i> </span>
                               <option value="3">ปริญญาเอก</option>
                        </select>    
                          <!--    <option style="display:none" value=""></option> -->
-
-
-
-
-
-
-
-
-
                             </div>
                         </div>
 
@@ -6710,7 +6542,6 @@ glyphicon glyphicon-bell"></i> </span>
 
                                     </table>
 
-                                     <!--     <button type="button" style="margin-top:5px;margin-left:520px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_primary_evidence()"style="color:green;font-size:30px"></i> </span></button> -->
          </div>         </div>        
 
           </div>         </div>
@@ -6830,7 +6661,6 @@ glyphicon glyphicon-bell"></i> </span>
 
                                     </table>
 
-                                     <!--     <button type="button" style="margin-top:5px;margin-left:520px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_primary_evidence()"style="color:green;font-size:30px"></i> </span></button> -->
          </div>         </div>        
 
           </div>         </div>

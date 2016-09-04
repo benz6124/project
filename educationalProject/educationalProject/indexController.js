@@ -239,35 +239,6 @@ $scope.download_plain_book = function(){
     $scope.to_sent_to_get_plain.curri_id = $scope.curri_choosen.curri_id;
     $scope.to_sent_to_get_plain.aca_year = $scope.year_choosen.aca_year;
 
-     // $http.post(
-     //         '/api/sectionsave/genaunsar',
-     //         JSON.stringify($scope.to_sent_to_get_plain),
-     //         {
-     //             headers: {
-     //                 'Content-Type': 'application/json'
-     //             }
-     //         }
-     //     ).success(function (data) {
-           
-
-         
-     
-     //     });
-
-
-
-// $http.get('/api/sectionsave?data='+$scope.to_sent_to_get_plain).success(function (data) {
-    
-//       window.open(data, '_blank');  
-//    });
-
-// $http.get('/api/sectionsave?data='+$scope.to_sent_to_get_plain, {responseType: 'arraybuffer'})
-//        .success(function (data) {
-//            var file = new Blob([data], {type: 'application/msword'});
-//            var fileURL = URL.createObjectURL(file);
-
-//            window.open(fileURL);
-//     });
 
    $http.post(
              '/api/sectionsave/genaunsar',
@@ -279,7 +250,9 @@ $scope.download_plain_book = function(){
              },
              {responseType: 'arraybuffer'}
          ).success(function (data) {
-            var file = new Blob([data], {type: 'application/msword'});
+
+           var file = new Blob([data], {type: 'application/msword'});
+
            var fileURL = URL.createObjectURL(file);
 
            window.open(fileURL);
