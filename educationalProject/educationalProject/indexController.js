@@ -3,7 +3,7 @@
 
 
 
-app.controller('choice_index_controller', function($scope,$anchorScroll, $location,$http,$alert,$cookies,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
+app.controller('choice_index_controller', function($scope,$anchorScroll, $location,$http,$alert,$cookies,$loading,ngDialog,request_all_curriculums_service_server,$rootScope) {
 
 
  
@@ -1081,7 +1081,7 @@ for(index=0;index<$scope.corresponding_sub_indicators.length;index++){
          });
     }
 });
-app.controller('add_aca_year', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
+app.controller('add_aca_year', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope) {
     $scope.init = function(){
         $scope.curri_choosen = {};
                $scope.new_curri_academic = {};
@@ -1177,7 +1177,7 @@ if( $scope.curri_choosen!= "none" && $scope.new_curri_academic.aca_year != ""){
      }
     }
 });
-app.controller('create_curriculum_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
+app.controller('create_curriculum_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope) {
     $scope.init = function(){
         $scope.new_curri = {}
  $scope.please_wait = false;
@@ -1283,20 +1283,8 @@ $scope.still_not_complete = function(){
     // }
 }
 });
-// app.controller('watch_curri_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope) {
 
-
-
-
-//   $scope.$on("modal.show", function (event, args) {
-//              $scope.find_information();
-//     });
-
-    
-
-// });
-
-app.controller('stat_graduated_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('stat_graduated_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -1402,7 +1390,7 @@ $scope.corresponding_indicators = [];
 
 
 
-app.controller('stat_student_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('stat_student_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
         $scope.year_choosen = {};
@@ -1509,7 +1497,7 @@ $scope.corresponding_indicators = [];
 
 
 
-app.controller('stat_new_student_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('stat_new_student_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
        $scope.year_choosen = {};
@@ -2199,71 +2187,6 @@ $scope.indicator_choosen = {};
 
 
 });
-
-
-// app.controller('see_evaluate_by_other_controller_sudden', function($scope,$rootScope, $alert,$http,request_years_from_curri_choosen_service) {
-//     $scope.init =function() {
- 
-//      $scope.choose_not_complete = true;
-//            $scope.year_choosen = {};
-//               $scope.curri_choosen = {}
-//   $scope.files = [];
-//      $scope.year_choosen = {};
-//        $scope.please_wait = false;
-// $scope.indicator_choosen = {};
-//  $scope.corresponding_aca_years = [];
-//                  $scope.corresponding_indicators = [];
-//   $scope.disabled_search = false;
-//   $scope.all_curri_that_have_privileges = [];
-//        var index;
-//     var index2;
-
-//   $scope.$parent.scan_only_privilege_curri('28',$scope.all_curri_that_have_privileges);
-
-//    angular.forEach(
-//     angular.element("input[type='file']"),
-//     function(inputElem) {
-//       angular.element(inputElem).val(null);
-//     });
-// }
-
-
-
-
-//     $scope.download_file = function(path) { 
-//         window.open(path, '_blank', "");  
-//     }
-
-
-
-
-//     $scope.$on("modal.hide", function (event, args) {
-//      $scope.init();
-      
-//     });
-
-//   $scope.$on("modal.show", function (event, args) {
-
-
-    
-
-//               $scope.init();
-
-
-//     });
-
-
- 
-
-
-//     $scope.close_modal = function(my_modal){
-//         $scope.init();
-//         my_modal.$hide();
-//     }
-
-
-
-// });
 
 app.controller('upload_aun_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service,$rootScope) {
 
@@ -4055,7 +3978,7 @@ $scope.please_wait = false;
     }
 });
 
-app.controller('manage_primary_evidences_admin_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_primary_evidences_admin_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 
       $http.get('/api/curriculumacademic/getdistinctacayear').success(function (data) {
             
@@ -4216,7 +4139,7 @@ if($scope.go_request == true){
 
 
 
-app.controller('manage_primary_evidences_president_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_primary_evidences_president_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
         $scope.year_choosen = {};
@@ -4519,7 +4442,7 @@ $scope.dont_show_me =function(my_obj){
 });
 
 
-app.controller('result_survey_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('result_survey_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -4558,7 +4481,7 @@ $scope.init =function() {
 });
 
 
-app.controller('answer_survey_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('answer_survey_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
 
 
@@ -4654,7 +4577,7 @@ $scope.init =function() {
 });
 
 
-app.controller('manage_lab_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_lab_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -4844,7 +4767,7 @@ $scope.corresponding_indicators = [];
     }
 });
 
-app.controller('manage_survey_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_survey_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -5074,7 +4997,7 @@ $scope.right_target = function(targets){
     }
 });
 
-app.controller('show_edit_album_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
+app.controller('show_edit_album_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
   $scope.openLightboxModal = function (index) {
 
     Lightbox.openModal($rootScope.manage_album_show_this_album.pictures, index);
@@ -5209,7 +5132,7 @@ return false;
 
 
 
-app.controller('show_album_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
+app.controller('show_album_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
   $scope.openLightboxModal = function (index) {
 
     Lightbox.openModal($rootScope.manage_album_show_this_album.pictures, index);
@@ -5222,7 +5145,7 @@ app.controller('show_album_controller', function($scope, $http,$alert,$loading,$
 
 });
 
-app.controller('manage_album_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
+app.controller('manage_album_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -5371,7 +5294,7 @@ $scope.corresponding_indicators = [];
 
 
 
-app.controller('import_evidence_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('import_evidence_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 
    $scope.watch_file = function(path) { 
         window.open(path, '_blank', "width=800, left=230,top=0,height=700");  
@@ -5558,7 +5481,7 @@ $scope.evidence_we_want.teacher_id = $rootScope.current_user.user_id;
 
 
 
-app.controller('create_user_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('create_user_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
    $scope.curri_choosen = [];
    $scope.my_type = '';
       $scope.files = [];
@@ -5726,7 +5649,7 @@ $scope.init ();
         });
     });
 });
-app.controller('manage_user_type_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_user_type_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
    $scope.curri_choosen = [];
    $scope.my_type = '';
       $scope.files = [];
@@ -5852,7 +5775,7 @@ $scope.init ();
 
    
 });
-app.controller('create_user_individual_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('create_user_individual_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
    $scope.curri_choosen = [];
    $scope.my_type = '';
       $scope.files = [];
@@ -5980,7 +5903,7 @@ $scope.init ();
 
    
 });
-app.controller('create_survey_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('create_survey_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -6119,7 +6042,7 @@ $scope.corresponding_indicators = [];
 });
 
 
-app.controller('create_research_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('create_research_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
        $scope.please_wait = false;
      $scope.choose_not_complete = true;
@@ -6284,7 +6207,7 @@ $scope.init =function() {
 
 });
 
-app.controller('fix_research_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('fix_research_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -6470,7 +6393,7 @@ $rootScope.manage_research_fix_this_research.researcher = $rootScope.manage_lab_
 
 
 
-app.controller('fix_lab_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('fix_lab_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -6570,7 +6493,7 @@ $scope.init =function() {
 
 
 
-app.controller('create_lab_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('create_lab_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
     $scope.my_new_lab = {};
     $scope.my_new_lab.name = "";
@@ -6653,7 +6576,7 @@ $scope.init =function() {
   
 
 });
-app.controller('import_to_curri_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('import_to_curri_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -6783,7 +6706,7 @@ $scope.init =function() {
   }); 
     }
 });
-app.controller('manage_bind_person_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_bind_person_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -6973,7 +6896,7 @@ $scope.delete_myself = false;
 
 
 
-app.controller('change_priviledge_by_type_president_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('change_priviledge_by_type_president_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
 
@@ -7120,7 +7043,7 @@ $scope.title_choosen = {};
 
 
 
-app.controller('create_new_education_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
+app.controller('create_new_education_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
   
 $scope.create_not_complete = function(){
 
@@ -7205,7 +7128,7 @@ $scope.save_to_server = function(my_modal){
 });
 
 
-app.controller('fix_education_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
+app.controller('fix_education_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
   $scope.close_modal = function(my_modal){
         $scope.init();
         my_modal.$hide();
@@ -7281,7 +7204,7 @@ $scope.save_to_server = function(my_modal){
 });
 
 
-app.controller('manage_profile_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
+app.controller('manage_profile_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
 
 
 
@@ -7506,7 +7429,7 @@ formData.append("file" , $scope.files[0]);
 
 
  });
-app.controller('login_controller', function($scope, $http,$alert,$loading,$timeout,$rootScope,ngDialog,request_all_curriculums_service_server,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
+app.controller('login_controller', function($scope, $http,$alert,$loading,$rootScope,ngDialog,request_all_curriculums_service_server,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
     $scope.credentials = {
         username: '',
         password: ''
@@ -7556,7 +7479,7 @@ app.controller('login_controller', function($scope, $http,$alert,$loading,$timeo
 });
 
 
-app.controller('change_priviledge_person_president_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('change_priviledge_person_president_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
 
@@ -7702,7 +7625,7 @@ $scope.title_choosen = {};
 
 
 
-app.controller('change_priviledge_by_type_admin_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('change_priviledge_by_type_admin_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
 
     $scope.not_choose_title_yet = true;
@@ -7840,7 +7763,7 @@ $scope.title_choosen = {};
   }); 
     }
 });
-app.controller('manage_research_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_research_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -8008,7 +7931,7 @@ $rootScope.manage_research_still_same = function(){
     }
 });
 
-app.controller('add_committee_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('add_committee_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
 
               
@@ -8095,7 +8018,7 @@ $scope.to_sent.aca_year = $rootScope.manage_committee_who_aca_year_now;
     }
 });
 
-app.controller('manage_committee_who_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_committee_who_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
    
@@ -8218,7 +8141,7 @@ $scope.corresponding_indicators = [];
 });
 
 
-app.controller('show_education_personnel_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
+app.controller('show_education_personnel_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -8295,12 +8218,12 @@ $scope.init =function() {
 
 
 
-// app.controller('manage_minutes_minute_attendees_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+// app.controller('manage_minutes_minute_attendees_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 
 // });
 
 
-app.controller('create_minute_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('create_minute_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -8499,7 +8422,7 @@ $scope.show_my_pictures=function(){
 });
 
 
-app.controller('change_password_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('change_password_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 
        $scope.$on("modal.hide", function (event, args) {
      $scope.init();
@@ -8579,7 +8502,7 @@ app.controller('change_password_controller', function($scope, $http,$alert,$load
 });
 
 
-app.controller('change_username_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('change_username_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 
        $scope.$on("modal.hide", function (event, args) {
      $scope.init();
@@ -8646,7 +8569,7 @@ $scope.error_msg = '';
 });
 
 
-app.controller('create_album_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('create_album_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
    $scope.please_wait = false;
       
@@ -8847,7 +8770,7 @@ var index;
 
 });
 
-app.controller('fix_minute_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
+app.controller('fix_minute_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
  
 $scope.init =function() {
      $scope.choose_not_complete = true;
@@ -9072,12 +8995,12 @@ $scope.show_my_pictures=function(){
     }
 
  });
-app.controller('manage_minutes_show_images_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
+app.controller('manage_minutes_show_images_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
  $scope.openLightboxModal = function (index) {
     Lightbox.openModal($rootScope.manage_minutes_show_images_of_this_minute.pictures, index);
   };
 });
-app.controller('manage_minutes_controller', function($scope, $http,$alert,$loading,$timeout,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_minutes_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 
 $scope.init =function() {
      $scope.choose_not_complete = true;
