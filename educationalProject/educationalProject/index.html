@@ -1038,16 +1038,11 @@
 
                     </div>
 
-
-
                     <div id="add_aca_year" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-ng-controller="add_aca_year" data-ng-init="init()">
                         <div class="custom-header">
                             <h1 class="headerModalH1"> เพิ่มปีการศึกษา </h1>
                         </div>
-                   <!--      <form name="add_aca_year_form"> -->
-                <!--          <h3 ng-show='add_aca_year_form.$error.required && error_leaw ' style="color:red;margin-top:0px">
-        *กรุณาเลือกหลักสูตร และ กรอกปีการศึกษา
-      </h3> -->
+
                        <form name="add_year_form" novalidate>
                         <div class="row">
                             <div class="col-md-2">
@@ -2203,15 +2198,7 @@
 <option style="display:none" value=""></option></select>   
                                          
                                            </td>
-
-
-                                    
-
-                                      
-
                                             </tr>
-
-                                  
                                         </tbody>
 
                                     </table>
@@ -2229,15 +2216,11 @@
 
 
 
-
-
  <div id="login_form"  data-nq-modal="" data-qo-fire-emit = "true"  data-qo-independent="true" data-ng-controller="login_controller" >
 
   <div class="custom-header">
                         <h1 class="headerModalH1">เข้าสู่ระบบ</h1>
                     </div>
-
-             
 
                         <div style="margin-left:80px;margin-right:80px;">
                            
@@ -2262,13 +2245,9 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
                         </div>
                     </div>
-    
-                         
 
                         </div>
               
-
-
                      <div class="custom-footer">
                         <div class="topicHeader pull-right">
                             <button class="btn btn-success  " ng-disabled="please_wait" ng-click="login(this)">ยืนยัน</button>
@@ -2431,15 +2410,8 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 <option style="display:none" value=""></option></select>   
                                          
                                            </td>
-
-
-                                    
-
-                                      
-
                                             </tr>
 
-                                  
                                         </tbody>
 
                                     </table>
@@ -2525,8 +2497,6 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                      
                        
     
-                                    
-
                                           <td > <a  style="margin-top:7px" data-ng-click="remove_person($index,person)" href=""  class="hvr-pulse" >
                                         <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td> 
@@ -2601,9 +2571,6 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                             </tr>
                                         </thead>
                                         <tbody class="flattened">
-                                        <form name="manage_survey_form" novalidate>
-                                          
-
                                             <tr  ng-repeat="person in result">
                                              <td  style=" padding-left: 0px; padding-right: 0px;" class="show_lightbox"><span style="font-size:19px;">
 
@@ -2631,11 +2598,8 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
                          <td  style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{person.tel}}</span> </td>
                           
-                                             
-
                                             </tr>
 
-                                            </form>
                                         </tbody>
 
                                     </table>
@@ -2672,15 +2636,8 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                         </div>
-<!-- 
-                        <div class="col-md-1">
-                            <button class="btn btn-primary hvr-rotate" style="margin-bottom:10px" ng-click="find_information()"><i class="glyphicon glyphicon-search"></i> ค้นหา</button>
-                        </div> -->
                     </div>
 
-               <!--      <div style="background-color:#484848">
-                        <h3 class="topicHeader" style="text-align:center;color:#FFFFFF;font-style:italic;"> &nbsp; &nbsp; </h3>
-                    </div> -->
                     <div ng-show= "choose_not_complete">
                         <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> 
                     </div>
