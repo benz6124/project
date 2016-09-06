@@ -1440,7 +1440,7 @@ angular.module('ngQuantum.services.mouse', [])
                 return callback ? element.off(toBind, callback) : element.off(toBind);
             }
             function wheelHandler(element, orgEvent, callback) {
-                var orgEvent = orgEvent || window.event,
+                var orgEvent = orgEvent.originalEvent || window.event,
                     args = [].slice.call(arguments, 1),
                     delta = 0,
                     deltaX = 0,
@@ -6921,7 +6921,7 @@ var selectApp = angular.module('ngQuantum.select', [
                           var barelement = $target.find('.scrollable');
                           var barOptions = {
                               keyword: false,
-                   
+                              visible:true,
                               $scope: scope
                           }
                           scrollbar = $scrollbar(barelement, barOptions);
