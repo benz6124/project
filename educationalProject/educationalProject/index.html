@@ -1085,67 +1085,59 @@
                     </div>
 
 <!-- create_curriculum controller -->
-                    <div id="create_curri" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-ng-controller="create_curriculum_controller" data-ng-init="init()">
+                    <div id="create_curri" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-ng-controller="create_curriculum_controller as create_curri_ctrl">
                         <div class="custom-header">
                             <h1 class="headerModalH1">สร้างหลักสูตร</h1>
                         </div>
 
-<form name="create_curri_form" novalidate>
+<form name="create_curri_ctrl.create_curri_form" novalidate>
                           <div class="row">
                             <div class="col-md-4">
-                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อหลักสูตรภาษาไทย   </span></h3>
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อหลักสูตรภาษาไทย</span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input ng-class="{ little_danger: create_curri_form.curr_tname.$invalid && create_curri_form.$dirty }" type="text" name="curr_tname" class="form-control" placeholder="" ng-model="new_curri.curr_tname" required><span class="normal">  </span>
+                                <input ng-class="{ little_danger: create_curri_ctrl.create_curri_form.curr_tname.$invalid && create_curri_ctrl.create_curri_form.curr_tname.$dirty }" type="text" name="curr_tname" class="form-control" placeholder="" ng-model="new_curri.curr_tname" required>
 
                             </div>
                         </div>
 
                   <div class="row">
                  <div class="col-md-4">
-                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อหลักสูตรภาษาอังกฤษ   </span></h3>
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อหลักสูตรภาษาอังกฤษ</span></h3>
                             </div>
                                <div class="col-md-8">
-                                <input ng-class="{ little_danger: create_curri_form.curr_ename.$invalid && create_curri_form.$dirty }" type="text" name="curr_ename" class="form-control" placeholder="" ng-model="new_curri.curr_ename" required><span class="normal">  </span>
+                                <input ng-class="{ little_danger: create_curri_ctrl.create_curri_form.curr_ename.$invalid && create_curri_ctrl.create_curri_form.curr_ename.$dirty }" type="text" name="curr_ename" class="form-control" placeholder="" ng-model="new_curri.curr_ename" required>
 
-                            </div>
-
-                          
+                            </div>   
                         </div>
 
 
                     <div class="row">
                   <div class="col-md-4">
-                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(ย่อ)   </span></h3>
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(ย่อ)</span></h3>
                             </div>
                           
-
                                 <div class="col-md-8">
-                                <input ng-class="{ little_danger: create_curri_form.degree_t_bf.$invalid && create_curri_form.$dirty }" type="text" name="degree_t_bf" class="form-control" placeholder="" ng-model="new_curri.degree_t_bf" required><span class="normal">  </span>
+                                <input ng-class="{ little_danger: create_curri_ctrl.create_curri_form.degree_t_bf.$invalid && create_curri_ctrl.create_curri_form.degree_t_bf.$dirty }" type="text" name="degree_t_bf" class="form-control" placeholder="" ng-model="new_curri.degree_t_bf" required>
 
                             </div>
                         </div>
 
                       <div class="row">
                   <div class="col-md-4">
-                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(ย่อ)   </span></h3>
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(ย่อ)</span></h3>
                             </div>
-                    
-
                              <div class="col-md-8">
-                                <input ng-class="{ little_danger: create_curri_form.degree_e_bf.$invalid && create_curri_form.$dirty }" type="text" name="degree_e_bf" class="form-control" placeholder="" ng-model="new_curri.degree_e_bf" required><span class="normal">  </span>
+                                <input ng-class="{ little_danger: create_curri_ctrl.create_curri_form.degree_e_bf.$invalid && create_curri_ctrl.create_curri_form.degree_e_bf.$dirty }" type="text" name="degree_e_bf" class="form-control" placeholder="" ng-model="new_curri.degree_e_bf" required>
 
                             </div>
                         </div>
     <div class="row">
                     <div class="col-md-4">
-                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(เต็ม)  </span></h3>
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(เต็ม)</span></h3>
                             </div>
-                     
-
                               <div class="col-md-8">
-                                <input ng-class="{ little_danger: create_curri_form.degree_t_full.$invalid && create_curri_form.$dirty }" type="text" name="degree_t_full" class="form-control" placeholder="" ng-model="new_curri.degree_t_full" required><span class="normal">  </span>
-
+                                <input ng-class="{ little_danger: create_curri_ctrl.create_curri_form.degree_t_full.$invalid && create_curri_ctrl.create_curri_form.degree_t_full.$dirty }" type="text" name="degree_t_full" class="form-control" placeholder="" ng-model="new_curri.degree_t_full" required>
                             </div>
                         </div>
 
@@ -1153,23 +1145,17 @@
                    <div class="col-md-4">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(เต็ม)</span></h3>
                             </div>
-                       
-
                                <div class="col-md-8">
-                                <input ng-class="{ little_danger: create_curri_form.degree_e_full.$invalid && create_curri_form.$dirty }" type="text" name="degree_e_full" class="form-control" placeholder="" ng-model="new_curri.degree_e_full" required><span class="normal">  </span>
-
+                                <input ng-class="{ little_danger: create_curri_ctrl.create_curri_form.degree_e_full.$invalid && create_curri_ctrl.create_curri_form.degree_e_full.$dirty }" type="text" name="degree_e_full" class="form-control" placeholder="" ng-model="new_curri.degree_e_full" required>
                             </div>
                         </div>
 
-
                      <div class="row">
                        <div class="col-md-4">
-                                <h3 style="margin-top:3px;"><span class="topicHeader">ระดับปริญญา </span></h3>
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ระดับปริญญา</span></h3>
                             </div>
-                       <div class="col-md-8" style="
-    padding-right: 22px;
-">
-                             <select ng-class="{ little_danger: create_curri_form.level.$untouched && create_curri_form.$dirty }" name="level" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา" data-ng-model="new_curri.level" data-qo-disable-clear="true" required>
+                       <div class="col-md-8" style="padding-right: 22px;">
+                             <select ng-class="{ little_danger: create_curri_ctrl.create_curri_form.level.$untouched && create_curri_ctrl.create_curri_form.level.$dirty }" name="level" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา" data-ng-model="new_curri.level" data-qo-disable-clear="true" required>
                               <option value="1">ปริญญาตรี</option>
                               <option  value="2">ปริญญาโท</option>
                               <option value="3">ปริญญาเอก</option>
@@ -1180,19 +1166,15 @@
 
                         <div class="row">
                        <div class="col-md-4">
-                                <h3 style="margin-top:3px;"><span class="topicHeader">ระยะเวลาการเรียน </span></h3>
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ระยะเวลาการเรียน(ปี)</span></h3>
                             </div>
-
-                     
-
                                   <div class="col-md-8">
-                                <input ng-class="{ little_danger: create_curri_form.period.$invalid && create_curri_form.$dirty }" type="number" ng-pattern="/^[0-9]*$/"  name="period" class="form-control" placeholder="" ng-model="new_curri.period" min="0" required><span class="normal">  </span>
+                                <input ng-class="{ little_danger: create_curri_ctrl.create_curri_form.period.$invalid && create_curri_ctrl.create_curri_form.period.$dirty }" type="number" ng-pattern="/^[0-9]*$/"  name="period" class="form-control" placeholder="" ng-model="new_curri.period" min="0" required>
 
                             </div>
                         </div>
 </form>
                         <div class="custom-footer">
-
                             <div class="topicHeader pull-right">
                                 <button class="btn btn-success  hvr-wobble-vertical" ng-disabled="still_not_complete() || please_wait" ng-click="create_curri(this)">ยืนยัน</button>
                                 <button class="btn btn-default hvr-wobble-vertical" ng-click="close_modal(this)">ยกเลิก</button>
@@ -3936,9 +3918,6 @@ glyphicon glyphicon-bell"></i> </span>
                         <div class="custom-header">
                             <h1 class="headerModalH1">ข้อมูลหลักสูตร</h1>
                         </div>
-
-<form name="create_curri_form" novalidate>
-
                           <div class="row">
                             <div class="col-md-4" style="
     padding-left: 30px;
@@ -4060,7 +4039,6 @@ glyphicon glyphicon-bell"></i> </span>
 
                             </div>
                         </div>
-</form>
                             <div class="custom-footer">
                         <div class="topicHeader pull-right">
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>

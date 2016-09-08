@@ -1154,39 +1154,24 @@ if( $scope.curri_choosen!= "none" && $scope.new_curri_academic.aca_year != ""){
     }
 });
 app.controller('create_curriculum_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope) {
+    var thisctrl = this;
     $scope.init = function(){
         $scope.new_curri = {}
  $scope.please_wait = false;
   $scope.new_curri.level = {};
-
     }
-
+$scope.init();
        $scope.$on("modal.hide", function (event, args) {
+           thisctrl.create_curri_form.$setPristine();
      $scope.init();
-      
     });
 
   $scope.$on("modal.show", function (event, args) {
+      thisctrl.create_curri_form.$setPristine();
               $scope.init();
     });
-
-    
-
- $scope.new_curri = {}
-  $scope.new_curri.level = {};
-     $scope.$on("modal.hide", function (event, args) {
-     $scope.init();
-      
-    });
-
-  $scope.$on("modal.show", function (event, args) {
-              $scope.init();
-    });
-
-    
 
     $scope.close_modal = function(my_modal){
-        $scope.init();
         my_modal.$hide();
     }
 
@@ -1208,16 +1193,6 @@ $scope.still_not_complete = function(){
     $scope.create_curri = function(my_modal){
      
  $scope.please_wait = true;
-       
-        // "year":"2546",
-        // "curr_tname":"วิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์ฉบับ พ.ศ.2546",
-        // "curr_ename":"Curriculum for Bachelor of Engineering Program in Computer",
-        // "degree_t_full":"วิศวกรรมศาสตรบัณฑิต (วิศวกรรมคอมพิวเตอร์)",
-        // "degree_t_bf":"วศ.บ. (วิศวกรรมคอมพิวเตอร์)",
-        // "degree_e_full":"Bachelor of Engineering (Computer Engineering)",
-        // "degree_e_bf":"B.Eng. (Computer Engineering)",
-        // "level":"1",
-        // "period":"4")
 
         $scope.new_curri.year= "";
          $http.post(
@@ -1237,12 +1212,6 @@ $scope.still_not_complete = function(){
                    $alert({title:'ดำเนินการสำเร็จ', content:'สร้างหลักสูตรเรียบร้อยแล้ว',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
                    my_modal.$hide();
-                    $scope.please_wait = false;
-                    $scope.new_curri = {};
-
-         //เรียกฟังชั่นใน servce ให้อัพเดทค่า
-
-
          })
       .error(function(data, status, headers, config) {
         
@@ -1250,13 +1219,7 @@ $scope.still_not_complete = function(){
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
     
-
-  }); 
-    // else{
-    //      $scope.please_wait = false;
-    //       $alert({title:'เกิดข้อผิดพลาด', content:'กรุณากรอกข้อมูลให้ครบถ้วน',alertType:'danger',
-    //                      placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-    // }
+  });
 }
 });
 
@@ -7420,7 +7383,6 @@ app.controller('login_controller', function($scope, $http,$alert,$loading,$rootS
  
   $scope.credentials.username.toLowerCase();
         AuthService.login($scope.credentials).then(function (user) {
-            $rootScope.have_privilege_in_these_curri = {};
           $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);  
           $scope.setcurrent_user(user);
              my_modal.$hide();

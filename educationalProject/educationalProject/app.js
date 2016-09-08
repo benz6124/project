@@ -161,6 +161,7 @@ $scope.not_choose_curri_and_year_yet = true;
         console.log("log out")
         $cookies.remove('mymy');
          $rootScope.current_user ={};
+         $rootScope.have_privilege_in_these_curri = {};
           $scope.already_login = false;
           $rootScope.clear_choosen();
     }
@@ -217,13 +218,6 @@ $rootScope.president_in_this_curri = function(curri_id){
         return false;
     }
 
-     // var index;
-     // for(index =0;index<$rootScope.current_user.president_in[curri_id].length;index++ ){
-     
-     //    if($rootScope.current_user.president_in[curri_id][index] == aca_year){
-     //        return true;
-     //    }
-     // }
      return true;
 }
 
@@ -312,7 +306,7 @@ for(index=0;index<$rootScope.all_curriculums.length;index++){
     for(index2 = 0;index2<$rootScope.have_privilege_in_these_curri[title_code].length ;index2++){
       
         if($rootScope.all_curriculums[index].curri_id ==$rootScope.have_privilege_in_these_curri[title_code][index2] ){
-            obj_privilege_curri.push($rootScope.all_curriculums[index]);
+            obj_privilege_curri.push($rootScope.all_curriculums[index]);break;
         }
     }
 }
@@ -360,14 +354,11 @@ if( $scope.already_login == false){
        return true;
     }
       }
-   
-      var should_see = false;
+
       var index;
-      var index2;
-var first = true;
      $rootScope.have_privilege_in_these_curri[title_code] = [];
 
-
+//Handle privilege with only 2 option (1 = not permitted,2 = permitted)
       if(title_code=='2' || title_code=='14' || title_code=='1' || title_code=='4' || title_code=='7' || title_code=='28' || title_code=='30'  || title_code=='32'){
         for(index=0;index<$rootScope.current_user.curri_id_in.length;index++){
           if($rootScope.current_user.privilege[$rootScope.current_user.curri_id_in[index]][title_code] ==2){
@@ -378,6 +369,7 @@ var first = true;
             
           }
 
+//If user is committee in any curriculum ,the priviledge to open modal will overridden
            if (ever_been_committee == true){
             if(!!$rootScope.current_user.committee_in[$rootScope.current_user.curri_id_in[index]]){
 
@@ -390,22 +382,19 @@ var first = true;
               }
             }
           }
-
+//If user is president in any curriculum ,the priviledge to open modal will overridden
                 if (ever_been_president == true){
             if(!!$rootScope.current_user.president_in[$rootScope.current_user.curri_id_in[index]]){
-
-           
                   if($rootScope.have_privilege_in_these_curri[title_code].indexOf($rootScope.current_user.curri_id_in[index])==-1){
                  $rootScope.have_privilege_in_these_curri[title_code].push($rootScope.current_user.curri_id_in[index]);
                } 
-            
-            
             }
           }
 
         }
       }
 
+//Handle privilege with 3-5 options
       else if(title_code=='3' || title_code=='5' || title_code=='6'|| title_code=='8'|| title_code=='9'|| title_code=='10' || title_code=='11'|| title_code=='12'|| title_code=='13'){
        
         for(index=0;index<$rootScope.current_user.curri_id_in.length;index++){
