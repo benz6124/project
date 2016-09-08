@@ -250,13 +250,16 @@ $scope.download_plain_book = function(){
              },
              {responseType: 'arraybuffer'}
          ).success(function (data) {
-
            var file = new Blob([data], {type: 'application/msword'});
-
+           if(window.navigator.msSaveOrOpenBlob) 
+                {
+                    window.navigator.msSaveOrOpenBlob(file, 'generateSAR.doc');
+                }
+           else{
            var fileURL = URL.createObjectURL(file);
 
            window.open(fileURL);
-       
+           }
          });
 
 }
