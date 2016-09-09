@@ -109,7 +109,7 @@
                             </a>
                         </li>
                         <li ng-show='have_privilege_to_open_modal("5") || have_privilege_to_open_modal("6") || have_privilege_to_open_modal("7")|| have_privilege_to_open_modal("8")|| have_privilege_to_open_modal("9")|| have_privilege_to_open_modal("10")|| have_privilege_to_open_modal("11")|| have_privilege_to_open_modal("12")|| have_privilege_to_open_modal("13")' class="hierarchy">
-                            <a href="" data-nq-collapse="" data-target-id="#collapseStat">
+                            <a href="">
                                 <i class="glyphicon glyphicon-folder-open"></i>
                                 <span ng-hide="$aside.$collapsed"><span class="topic"> &nbsp;&nbsp;จัดการข้อมูล</span></span>
                             </a>
@@ -178,11 +178,7 @@
                             </ul>
 
 
-                            <ul id="collapseStat" class="nav nav-stacked" ng-hide="$aside.$collapsed">
-                                <li>
-                                    <ul id="collapseStat" class="nav nav-stacked" ng-hide="$aside.$collapsed" style="padding-left:15px;"></ul>
 
-                            </ul>
 
 
                         </li>
@@ -330,7 +326,7 @@
 <div align="center" style="z-index:1;top:99px;position:absolute;width:100%" ng-class="{'login_index_select_button_row': already_login == true }">
 
 
-    <select data-qo-disable-clear="true" data-qo-button-class="mySelect_index" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" dir="ltr" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+    <select data-qo-button-class="mySelect_index" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" dir="ltr" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
 
@@ -342,7 +338,7 @@
 
 <span style="visibility:hidden" ng-hide="already_select_curri">dada</span>
 <span style="visibility:hidden" ng-show="already_select_curri"></span>
-               <select data-qo-disable-clear="true" data-qo-button-class="mySelect_index_year not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="sendYearAndGetIndicators(year_choosen)" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" data-ng-click="check_curri()">
+               <select data-qo-button-class="mySelect_index_year not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="sendYearAndGetIndicators(year_choosen)" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" data-ng-click="check_curri()">
 <option style="display:none" value=""></option></select>  
 
 <span style="visibility:hidden"  ng-show="select_all_complete" >da</span>
@@ -960,8 +956,7 @@
                             <div class="col-md-6">
                                 <div class="topicHeader">
                              
-
-                                      <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years_except_us" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="prepare_to_watch_support_text()"data-ng-model="$parent.$parent.select_year_support_text " data-qo-disable-clear="true"  required>
+                                      <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years_except_us" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="prepare_to_watch_support_text()" data-ng-model="$parent.$parent.select_year_support_text " data-qo-disable-clear="true"  required>
 <option style="display:none" value=""></option></select>    
                                 </div>
                             </div>
@@ -998,7 +993,7 @@
 
 
                             <div class="col-md-8">
-                             <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
+                             <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears($parent.curri_choosen)"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
             <option style="display:none" value=""></option></select>
 
                         
@@ -1006,7 +1001,7 @@
                         <div class="col-md-4">
                          
 
-                                     <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" name="choose_year_select"  required>
+                                     <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" name="choose_year_select"  required>
 <option style="display:none" value=""></option></select>    
                            </div>
                         </div>
@@ -1053,7 +1048,7 @@
     padding-right: 25px;
 ">
                                 <div class="topicHeader">
-                                   <select data-qo-disable-clear="true" name = "choose_curri" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true"  >
+                                   <select name = "choose_curri" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true"  >
                                   <option style="display:none" value=""></option></select>
                                 </div>
                             </div>
@@ -1266,7 +1261,7 @@
 
                             <div class="col-md-9" style="padding-left:0px;margin-top:0px;padding-right:20px">
                                 <div class="topicHeader">
-                                     <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="user.user_type for user in all_usertype" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกประเภทของบุคลากร"  data-ng-model="$parent.my_type" data-qo-disable-clear="true"  >
+                                     <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="user.user_type for user in all_usertype" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกประเภทของบุคลากร"  data-ng-model="$parent.my_type" data-qo-disable-clear="true"  >
 <option style="display:none" value=""></option></select>    
                                 </div>
                             </div>
@@ -1276,7 +1271,7 @@
 
 
   <div class="row" style="margin-left:10px;margin-top:0px;margin-right:5px;" >
-    <select  data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curri_id as curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตรที่ต้องการโยงบุคลากร" data-qo-max-length ="0"  data-qo-multiple="true" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
+    <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curri_id as curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตรที่ต้องการโยงบุคลากร" data-qo-max-length ="0"  data-qo-multiple="true" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
             <option style="display:none" value=""></option></select>
 </div>
  <div class="panel panel-default"  data-nq-pageable=""
@@ -1323,7 +1318,7 @@
 
                             <div class="col-md-9" style="padding-left:0px;margin-top:0px;padding-right:20px">
                                 <div class="topicHeader">
-                                     <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="user.user_type for user in all_usertype" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกประเภทของบุคลากร"  data-ng-model="$parent.my_type" data-qo-disable-clear="true"  >
+                                     <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="user.user_type for user in all_usertype" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกประเภทของบุคลากร"  data-ng-model="$parent.my_type" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>    
                                 </div>
                             </div>
@@ -1346,7 +1341,7 @@
                         </div>
 
   <div class="row" style="margin-left:10px;margin-top:0px;margin-right:5px;" >
-    <select  data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curri_id as curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตรที่ต้องการโยงบุคลากร" data-qo-max-length ="0"  data-qo-multiple="true" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
+    <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curri_id as curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตรที่ต้องการโยงบุคลากร" data-qo-max-length ="0"  data-qo-multiple="true" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
             <option style="display:none" value=""></option></select>
 </div>
 
@@ -1413,7 +1408,7 @@
 
 
  <div class="col-md-9" style="padding-right:22px;">
-           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_personnel.t_name for each_personnel in manage_lab_all_personnels_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา"  data-ng-model="$root.manage_lab_fix_this_lab_init" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true" >
+           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_personnel.t_name for each_personnel in manage_lab_all_personnels_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา"  data-ng-model="$root.manage_lab_fix_this_lab_init" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
 <option style="display:none" value=""></option></select>    
 
 
@@ -1503,7 +1498,7 @@
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ผู้เข้าร่วมประชุม   </span></h3>
                             </div>
  <div class="col-md-9" style="padding-right: 24px;">
-           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_minutes_all_teachers_in_curri track by each_teacher" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้เข้าร่วมประชุม"  data-ng-model="my_new_minute.attendee" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
+           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_minutes_all_teachers_in_curri track by each_teacher" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้เข้าร่วมประชุม"  data-ng-model="my_new_minute.attendee" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
 <option style="display:none" value=""></option></select>    
 </div>
 
@@ -1625,7 +1620,7 @@
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ผู้เข้าร่วมประชุม   </span></h3>
                             </div>
  <div class="col-md-9" style="padding-right: 24px;" >
-           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_minutes_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้เข้าร่วมประชุม"   data-ng-model="$root.manage_minutes_fix_minute_select_attendee" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
+           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_minutes_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้เข้าร่วมประชุม"   data-ng-model="$root.manage_minutes_fix_minute_select_attendee" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
 <option style="display:none" value=""></option></select>    
 </div>
 
@@ -1758,7 +1753,7 @@
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">เจ้าหน้าที่/อาจารย์ที่ปรึกษา   </span></h3>
                             </div>
  <div class="col-md-9" style="padding-right:22px;">
-           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_lab_all_personnels_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา"  data-ng-model="my_new_lab.officer" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
+           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_lab_all_personnels_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกเจ้าหน้าที่/อาจารย์ที่ปรึกษา"  data-ng-model="my_new_lab.officer" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
 <option style="display:none" value=""></option></select>    
 </div>
 
@@ -1810,7 +1805,7 @@
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ผู้วิจัย   </span></h3>
                             </div>
  <div class="col-md-9" style="padding-right:22px;">
-           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_research_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้วิจัย"  data-ng-model="$root.manage_lab_research_this_research_init"  data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
+           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_research_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้วิจัย"  data-ng-model="$root.manage_lab_research_this_research_init"  data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
 <option style="display:none" value=""></option></select>    
 
 
@@ -1881,12 +1876,12 @@
 
 
                         <div class="col-md-8" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-4" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
                         </div>
 
@@ -1998,7 +1993,7 @@
 
 
                       
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
             <option style="display:none" value=""></option></select>
 
                      
@@ -2122,7 +2117,7 @@
 
 
                       
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="choose_curri()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="choose_curri()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                      
@@ -2152,7 +2147,7 @@
                                     <th class="col-xs-3 " colspan="3"> 
                                    
 
-    <select data-qo-disable-clear="true" data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title.name for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.$parent.title_choosen" data-qo-disable-clear="true" >
+    <select data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title.name for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.$parent.title_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
 
                                         </th>
@@ -2253,7 +2248,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
 
                       
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="choose_curri()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="choose_curri()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
             <option style="display:none" value=""></option></select>
 
                      
@@ -2284,14 +2279,11 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                    
 
                                    
-    <select data-qo-disable-clear="true" data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title.name for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.$parent.title_choosen" data-qo-disable-clear="true" >
+    <select data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title.name for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.$parent.title_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
 
                                         </th>
-                  
-
-                                              
-                                            
+                                
                                             </tr>
                                         </thead>
                                         <tbody class="flattened" ng-hide="not_choose_title_yet"> 
@@ -2310,18 +2302,12 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
     padding-left: 0px;
     padding-right: 0px;
 ">
-    <select data-qo-disable-clear="true" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_president_person_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.each_person.my_privilege" data-qo-disable-clear="true" >
+    <select data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_president_person_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.each_person.my_privilege" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                                          
                                            </td>
 
-
-                                    
-
-                                      
-
                                             </tr>
-
                                   
                                         </tbody>
 
@@ -2368,14 +2354,11 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                    
 
 
-    <select data-qo-disable-clear="true" data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title.name for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.$parent.title_choosen" data-qo-disable-clear="true" >
+    <select data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title.name for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.$parent.title_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
 
                                         </th>
-                  
-
-                                              
-                                            
+                                
                                             </tr>
                                         </thead>
                                         <tbody class="flattened" ng-hide="not_choose_title_yet"> 
@@ -2388,7 +2371,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
     padding-left: 0px;
     padding-right: 0px;
 ">
-    <select data-qo-disable-clear="true" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_admin_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง"  data-ng-model="each_type.my_privilege" data-qo-disable-clear="true" >
+    <select data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_admin_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง"  data-ng-model="each_type.my_privilege" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                                          
                                            </td>
@@ -2422,11 +2405,8 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
 
                       
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
             <option style="display:none" value=""></option></select>
-
-                     
-                      
 
                     </div>
 <br />
@@ -2507,14 +2487,8 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                         <h1 class="headerModalH1">ข้อมูลบุคลากรทางการศึกษา</h1>
                     </div>
 
-          <div class="row" style="
-    margin-left: 0px;
-    margin-right: 0px;
-">
-
-
-                      
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+          <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
             <option style="display:none" value=""></option></select>
 
                      
@@ -2610,12 +2584,12 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
 
                         <div class="col-md-8" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-4" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                         </div>
                     </div>
@@ -2855,12 +2829,12 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
 
                         <div class="col-md-8" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-4" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                         </div>
 
@@ -3157,19 +3131,19 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                     </div>
 </div>
 
- <div id="manage_primary_evidences_admin" data-ng-controller="manage_primary_evidences_admin_controller" data-ng-init="init()"data-nq-modal="" data-qo-fire-emit = "true"  data-qo-size ="lg" data-qo-independent="true">
+ <div id="manage_primary_evidences_admin" data-ng-controller="manage_primary_evidences_admin_controller" data-ng-init="init()" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-size ="lg" data-qo-independent="true">
       <div class="custom-header">
           <h1 class="headerModalH1"><span class="headerModal">หลักฐานพื้นฐาน</span></h1>
       </div>
 <div class="row" >
 
          <div class="col-md-5" style="margin-left:72px" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in corresponding_aca_years track by year" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in corresponding_aca_years track by year" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                         </div>
 
   <div class="col-md-5" >
- <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators track by indicator" data-qo-effect="flip-x" data-ng-change="find_primary_evidences()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+ <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators track by indicator" data-qo-effect="flip-x" data-ng-change="find_primary_evidences()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
   </div>
 </div>
@@ -3260,18 +3234,18 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
 
                         <div class="col-md-6" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
                         
             <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-2" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                         </div>
 
   <div class="col-md-4" >
- <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+ <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
   </div>
 
@@ -3440,17 +3414,17 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
 
 
                         <div class="col-md-6" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-2" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                         </div>
 
   <div class="col-md-4" >
- <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+ <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
   </div>
 
@@ -3514,7 +3488,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                                 </td>
                                                  <td class="assign_man" ><!-- {{primary_evidence.teacher_id}} -->
 <span ng-hide="just_show_responsible(primary_evidence.status)">
-                                                       <select data-qo-disable-clear="true" data-qo-button-class="mySelect_teacher" data-qo-speed="fastest" data-nq-select="" data-ng-options="teacher.teacher_id as teacher.t_name for teacher in all_teachers" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกผู้รับผิดชอบ" data-ng-change="choose_teacher(primary_evidence)" data-ng-init="primary_evidence.teacher_id" data-ng-model="primary_evidence.teacher_id" data-qo-disable-clear="true"  >
+                                                       <select data-qo-button-class="mySelect_teacher" data-qo-speed="fastest" data-nq-select="" data-ng-options="teacher.teacher_id as teacher.t_name for teacher in all_teachers" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกผู้รับผิดชอบ" data-ng-change="choose_teacher(primary_evidence)" data-ng-init="primary_evidence.teacher_id" data-ng-model="primary_evidence.teacher_id" data-qo-disable-clear="true"  >
             <option style="display:none" value=""></option></select></span>
 
 <span class="topicHeader"  ng-show="just_show_responsible(primary_evidence.status)">{{name_of_teacher_id(primary_evidence.teacher_id)}}</span>
@@ -3586,7 +3560,7 @@ glyphicon glyphicon-bell"></i> </span>
                       
                          
 
-                                     <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" name="choose_year_select"  required>
+                                     <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" name="choose_year_select"  required>
 <option style="display:none" value=""></option></select>    
                         
                         </div>
@@ -3794,7 +3768,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                     <div class="row" style="margin-left:0px;margin-right:0px;margin-top:8px">
                       
-                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="person.t_name for person in people_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกบุคลากร"  data-ng-model="$parent.choose_people"  data-qo-max-length ="0" data-qo-multiple="true"  data-qo-disable-clear="true" >
+                               <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="person.t_name for person in people_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกบุคลากร"  data-ng-model="$parent.choose_people"  data-qo-max-length ="0" data-qo-multiple="true"  data-qo-disable-clear="true" >
                                  
             <option style="display:none" value=""></option>
 
@@ -3830,12 +3804,12 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                         <div class="col-md-8" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-4" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                         </div>
 
@@ -4377,17 +4351,17 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                           <div class="col-md-6" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-2" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                         </div>
   <div class="col-md-4">
 
-      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+      <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
 
 
@@ -4495,17 +4469,17 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                           <div class="col-md-6" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-2" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                         </div>
   <div class="col-md-4">
 
-      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+      <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
 
 
@@ -4656,7 +4630,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 <div class="col-md-6" style="margin-bottom:15px;margin-left:45px">
 
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in all_indicator_years" data-qo-effect="flip-x" data-ng-change="get_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษาที่ต้องการดึงเทมเพลท" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in all_indicator_years" data-qo-effect="flip-x" data-ng-change="get_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษาที่ต้องการดึงเทมเพลท" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
 
 
@@ -4674,10 +4648,6 @@ glyphicon glyphicon-bell"></i> </span>
 <div class="col-md-2" style="margin-left:0px">
   <input style="margin-left:0px"type="number" ng-pattern="/^[0-9]*$/" class="form-control" ng-model="year_to_create" placeholder="กรุณากรอกปีการศึกษา"  min="max_year_curri_have" data-nq-tooltip="" data-qs-title="ค่าขั้นต่ำคือ {{max_year_curri_have}}" required><span class="normal">  </span>
 </div>
-
-                           <!--    <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in all_indicator_years" data-qo-effect="flip-x" data-ng-change="get_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษาที่ต้องการดึงเทมเพลท" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
-<option style="display:none" value=""></option></select>    -->
-
 
 
 </div>
@@ -4842,17 +4812,17 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                           <div class="col-md-6" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-2" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                         </div>
   <div class="col-md-4">
 
-      <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+      <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
 
 
@@ -4872,8 +4842,7 @@ glyphicon glyphicon-bell"></i> </span>
                                  data-qo-selectable="true">
               
                                 <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
-  <!--     <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="result.evaluation_score for result in corresponding_results" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร"  data-ng-init="$parent.mock_result" data-ng-model="$parent.mock_result" data-qo-disable-clear="true">
-            <option style="display:none" value=""></option></select> -->
+
                                     <table class="table table-bordered table-hover bg-white table_modal evaluate_aun">
                                       
                                         <thead class="nq-fix-table-scroll">
@@ -4963,7 +4932,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                         <div class="col-md-8">
                                  
-                             <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="evidence.evidence_name for evidence in my_all_primary_evidences_responsible" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักฐาน"  data-ng-model="$parent.primary_choosen" data-qo-disable-clear="true">
+                             <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="evidence.evidence_name for evidence in my_all_primary_evidences_responsible" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักฐาน"  data-ng-model="$parent.primary_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
@@ -5102,12 +5071,12 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                         <div class="col-md-8" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-4" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_all_evidences_in_curri_and_year()"  data-qo-placeholder="ปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_all_evidences_in_curri_and_year()"  data-qo-placeholder="ปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                         </div>
 
@@ -5130,7 +5099,7 @@ glyphicon glyphicon-bell"></i> </span>
                         
 
 
-                                 <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-change = "choose_evidence()" data-ng-options="evidence.evidence_name for evidence in all_evidences" data-qo-effect="flip-x"data-qo-placeholder="หลักฐานที่พบในหลักสูตรและปีการศึกษาดังกล่าว" data-ng-model="$parent.evidence_we_want" data-qo-disable-clear="true" >
+                                 <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-change = "choose_evidence()" data-ng-options="evidence.evidence_name for evidence in all_evidences" data-qo-effect="flip-x"data-qo-placeholder="หลักฐานที่พบในหลักสูตรและปีการศึกษาดังกล่าว" data-ng-model="$parent.evidence_we_want" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
 
 
@@ -5179,12 +5148,12 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                         <div class="col-md-8" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-4" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                         </div>
 
@@ -5457,7 +5426,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                 
 
-                <div id="import_to_curri" data-nq-modal="" data-ng-controller="import_to_curri_controller"data-qo-fire-emit = "true" data-qo-independent="true">
+                <div id="import_to_curri" data-nq-modal="" data-ng-controller="import_to_curri_controller" data-qo-fire-emit = "true" data-qo-independent="true">
 
                     <div class="custom-header">
 
@@ -5467,7 +5436,7 @@ glyphicon glyphicon-bell"></i> </span>
                     <div class="row" style="margin-left:0px;margin-right:0px">
                       
       
-                           <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in $root.all_curri_except_us" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in $root.all_curri_except_us" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
                                  
             <option style="display:none" value=""></option>
 
@@ -5479,7 +5448,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                     <div class="row" style="margin-left:0px;margin-right:0px;margin-top:8px">
                     
-                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="person.t_name for person in result" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกบุคลากร"  data-ng-model="$parent.choose_people"  data-qo-max-length ="0" data-qo-multiple="true"  data-qo-disable-clear="true" >
+                               <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="person.t_name for person in result" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกบุคลากร"  data-ng-model="$parent.choose_people"  data-qo-max-length ="0" data-qo-multiple="true"  data-qo-disable-clear="true" >
                                  
             <option style="display:none" value=""></option>
 
@@ -5524,12 +5493,12 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                         <div class="col-md-8" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-4" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                         </div>
 
@@ -5855,7 +5824,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-     <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา"  data-ng-model="$parent.new_grad.degree" data-qo-disable-clear="true" >
+     <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา"  data-ng-model="$parent.new_grad.degree" data-qo-disable-clear="true" >
 
                                 <option value="1">ปริญญาตรี</option>
                               <option  value="2">ปริญญาโท</option>
@@ -5941,7 +5910,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-     <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา"  data-ng-model="$parent.fix_this_edu.degree" data-qo-disable-clear="true" >
+     <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา"  data-ng-model="$parent.fix_this_edu.degree" data-qo-disable-clear="true" >
 
                                 <option value="1">ปริญญาตรี</option>
                               <option  value="2">ปริญญาโท</option>
@@ -6118,14 +6087,11 @@ glyphicon glyphicon-bell"></i> </span>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">เบอร์โทร:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" data-ng-change = "something_change()"class="full form-control" placeholder=""  data-ng-model="current_user.information.tel"><span class="normal">  </span>
+                                <input type="text" data-ng-change = "something_change()" class="full form-control" placeholder=""  data-ng-model="current_user.information.tel"><span class="normal">  </span>
 
                             </div>
                         </div>
 
-
-
-                      
                         <div class="row" ng-show="$root.current_user.user_type=='อาจารย์'">
                             <div class="col-md-4" style="margin-left:0px ;margin-top:2px ">
                                 <h3 style="margin-top:0px;"><span class="topicHeader">สถานะ:   </span></h3>
@@ -6136,13 +6102,10 @@ glyphicon glyphicon-bell"></i> </span>
                                     <option>ศึกษาต่อ</option>
                                     <option>ลาคลอด</option>
 
-
 </select>
                             
                             </div>
                         </div>
-
-
 
                         <div class="row">
                             <div class="col-md-4" style="margin-left:0px ;margin-top:2px ">
@@ -6265,7 +6228,7 @@ glyphicon glyphicon-bell"></i> </span>
  <div class="col-md-9" style="padding-right:22px;">
 
 
-                                               <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_researcher.t_name for each_researcher in manage_research_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้วิจัย"  data-ng-model="$parent.new_research.researcher" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
+                                               <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_researcher.t_name for each_researcher in manage_research_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้วิจัย"  data-ng-model="$parent.new_research.researcher" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
 <option style="display:none" value=""></option></select>    
 
 </div>
@@ -6336,7 +6299,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 
 
-                                                 <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="user.user_type for user in all_usertype" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกกลุ่มเป้าหมาย"  data-ng-model="$parent.my_target" data-qo-disable-clear="true"  data-qo-max-length ="0"  data-qo-multiple="true">
+                                                 <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="user.user_type for user in all_usertype" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกกลุ่มเป้าหมาย"  data-ng-model="$parent.my_target" data-qo-disable-clear="true"  data-qo-max-length ="0"  data-qo-multiple="true">
 <option style="display:none" value=""></option></select>    
 
 </div>
@@ -6390,12 +6353,12 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                         <div class="col-md-8" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-4" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                         </div>
 
@@ -6516,12 +6479,12 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                         <div class="col-md-8" >
-                          <select data-qo-disable-clear="true" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
                         <div class="col-md-4" >
-                              <select data-qo-disable-clear="true" data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                         </div>
 
