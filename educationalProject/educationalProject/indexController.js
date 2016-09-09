@@ -7826,7 +7826,6 @@ $rootScope.manage_research_still_same = function(){
     
          });
 
-//  $rootScope.manage_research_my_research_now  =[{"researcher":[{"teacher_id":"00009","t_name":"รศ.ดร.ศุภมิตร จิตตะยโศธร"}],"research_id":1,"name":"An Extended NIAM Conceptual Schema Model for Object Databases","curri_id":"21","file_name":"download/research/file1.pdf","year_publish":2002},{"researcher":[{"teacher_id":"00009","t_name":"รศ.ดร.ศุภมิตร จิตตะยโศธร"}],"research_id":2,"name":"A temporal object relational SQL language with attribute timestamping in a temporal transparency environment","curri_id":"21","file_name":"download/research/file2.pdf","year_publish":2008},{"researcher":[{"teacher_id":"00007","t_name":"อาจารย์บัณฑิต พัสยา"},{"teacher_id":"00009","t_name":"รศ.ดร.ศุภมิตร จิตตะยโศธร"}],"research_id":3,"name":"A temporal object oriented conceptual schema model","curri_id":"21","file_name":"download/research/file3.pdf","year_publish":2001},{"researcher":[{"teacher_id":"00009","t_name":"รศ.ดร.ศุภมิตร จิตตะยโศธร"}],"research_id":4,"name":"The design and implementation of an ORM-based information warehouse","curri_id":"21","file_name":"download/research/file4.pdf","year_publish":2006},{"researcher":[{"teacher_id":"00007","t_name":"อาจารย์บัณฑิต พัสยา"}],"research_id":5,"name":"Feature Extraction from Retinal Fundus Image for Early Detection of Diabetic Retinopathy","curri_id":"21","file_name":"download/research/file5.pdf","year_publish":2013},{"researcher":[{"teacher_id":"00003","t_name":"รศ.ดร.อรฉัตร จิตต์โสภักตร์"}],"research_id":6,"name":"An Improvement of PDLZW implementation with a Modified WSC Updating Technique on FPGA","curri_id":"21","file_name":"download/research/file6.pdf","year_publish":2009},{"researcher":[{"teacher_id":"00003","t_name":"รศ.ดร.อรฉัตร จิตต์โสภักตร์"},{"teacher_id":"00013","t_name":"ดร.อำนาจ ขาวเน"}],"research_id":7,"name":"A Study of using L1-norm with Image Watermarking on SVD Domain","curri_id":"21","file_name":"download/research/file7.pdf","year_publish":2007},{"researcher":[{"teacher_id":"00006","t_name":"รศ.ดร.บุญธีร์ เครือตราชู"}],"research_id":8,"name":"Static task scheduling and grain packing in parallel-processing systems","curri_id":"21","file_name":"download/research/file8.pdf","year_publish":1986}]
 // ;
 // $scope.choose_not_complete = false;
 
@@ -8082,33 +8081,23 @@ $scope.corresponding_indicators = [];
 app.controller('show_education_personnel_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
-         $scope.nothing_change = true;
-                $rootScope.manage_research_my_research_now = {};
+              $scope.curri_choosen = {};
                  $scope.all_curri_that_have_privileges = [];
+                 $scope.result = {};
   $scope.$parent.scan_only_privilege_curri('7',$scope.all_curri_that_have_privileges);
 }
 
-
-  
     $scope.$on("modal.hide", function (event, args) {
      $scope.init();
-      
     });
 
   $scope.$on("modal.show", function (event, args) {
-              $scope.init();
+        $scope.init();
     });
 
 
-     $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
-                    $scope.result = {};
-  $scope.nothing_change = true;
+$scope.init();
+
 
    $scope.openLightboxModal = function (pic) {
     $scope.fake_array = [];
@@ -8116,24 +8105,11 @@ $scope.init =function() {
     Lightbox.openModal($scope.fake_array, 0);
   };
 
-
-    $scope.download_research = function(path_research){
-        $scope.download_file(path_research);
-    }
-
-    $scope.download_file = function(path) { 
-        window.open(path, '_blank', "");  
-    }
-
     $scope.close_modal = function(my_modal){
-             $scope.choose_not_complete = true;
-        $scope.curri_choosen = {};
         my_modal.$hide();
-    }
+    };
 
     $scope.find_information = function(){
-
-     
         $http.post(
              '/api/personnel/getwitheducation',
              JSON.stringify($scope.curri_choosen.curri_id),
@@ -8143,22 +8119,13 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
-           
-              $scope.result =data;
+            $scope.result =data;
              $scope.choose_not_complete = false;
-              
-            
-    
          });
 
 }
 });
 
-
-
-// app.controller('manage_minutes_minute_attendees_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
-
-// });
 
 
 app.controller('create_minute_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
