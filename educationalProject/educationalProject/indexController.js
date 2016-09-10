@@ -1063,7 +1063,6 @@ app.controller('add_aca_year', function($scope, $http,$alert,$loading,ngDialog,r
                $scope.new_curri_academic = {};
         $scope.new_curri_academic.aca_year = ""
  $scope.please_wait = false;
-        $scope.error_leaw = false;
       $scope.all_curri_that_have_privileges = [];
       if($rootScope.current_user.user_type == 'ผู้ดูแลระบบ'){
         $scope.all_curri_that_have_privileges = $rootScope.all_curriculums;
@@ -1103,7 +1102,6 @@ app.controller('add_aca_year', function($scope, $http,$alert,$loading,ngDialog,r
                $scope.new_curri_academic = {};
         $scope.new_curri_academic.aca_year = ""
  
-        $scope.error_leaw = false;
     $scope.close_modal = function(my_modal){
         $scope.init();
         my_modal.$hide();
@@ -1227,8 +1225,7 @@ app.controller('stat_graduated_controller', function($scope, $http,$alert,$loadi
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
+              $scope.curri_choosen = {};
                     $scope.result = {};
                      $scope.all_curri_that_have_privileges = [];
                            $scope.corresponding_aca_years = [];
@@ -1238,8 +1235,7 @@ $scope.init =function() {
   
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
-        $scope.year_choosen = {}
-        $scope.indicator_choosen= {};
+        $scope.year_choosen = {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen,11,2).then(function(data) {
 $scope.corresponding_indicators = [];
@@ -1259,12 +1255,7 @@ $scope.corresponding_indicators = [];
               $scope.init();
     });
 
-    
-
     $scope.find_information = function(){
-
-
-
         $http.post(
              '/api/studentstatusother',
              JSON.stringify($scope.year_choosen),
@@ -1322,7 +1313,6 @@ $scope.corresponding_indicators = [];
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
      
-
   }); 
     }
 });
@@ -1333,8 +1323,7 @@ app.controller('stat_student_controller', function($scope, $http,$alert,$loading
 $scope.init =function() {
      $scope.choose_not_complete = true;
         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-               $scope.indicator_choosen= {};
+              $scope.curri_choosen = {};
                   $scope.result ={};
                    $scope.all_curri_that_have_privileges = [];
                          $scope.corresponding_aca_years = [];
@@ -1350,25 +1339,18 @@ $scope.init =function() {
               $scope.init();
     });
 
-
-   
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
-        $scope.year_choosen = {}
-        $scope.indicator_choosen= {};
+        $scope.year_choosen = {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen,13,2).then(function(data) {
 $scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
 
           });
-
-
     }
 
     $scope.find_information = function(){
-
-
 
         $http.post(
              '/api/studentcount',
@@ -1441,7 +1423,6 @@ $scope.init =function() {
      $scope.choose_not_complete = true;
        $scope.year_choosen = {};
               $scope.curri_choosen = {};
-                 $scope.indicator_choosen= {};
                    $scope.result = {};
                     $scope.all_curri_that_have_privileges = [];
                           $scope.corresponding_aca_years = [];
@@ -1451,16 +1432,13 @@ $scope.init =function() {
     
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
-        $scope.year_choosen = {}
-        $scope.indicator_choosen= {};
+        $scope.year_choosen = {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen,12,2).then(function(data) {
 $scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
 
           });
-
-
     }
 
 
@@ -1475,8 +1453,6 @@ $scope.corresponding_indicators = [];
 
 
     $scope.find_information = function(){
-
-      
 
         $http.post(
              '/api/newstudentcount',
@@ -1625,13 +1601,9 @@ $scope.corresponding_indicators = [];
             $scope.choose_not_complete = true;
 
           });
-
-
     }
 
-
     $scope.find_indicators = function(){
-
 
 $scope.indicator_choosen = {};
         $http.post(
@@ -1751,9 +1723,7 @@ for(index=0;index<$rootScope.all_curriculums.length;index++){
     $scope.watch_file = function() { 
     
                 window.open($scope.corresponding_results.file_name, '_blank', "width=800, left=230,top=0,height=700");  
-      
-       
-      
+
     }
 
      $scope.back_to_default = function(){
@@ -1805,9 +1775,6 @@ for(index=0;index<$rootScope.all_curriculums.length;index++){
             return true;
         }
     }
-
-
-
     return false;
    }
 
@@ -2143,16 +2110,11 @@ app.controller('upload_aun_controller', function($scope, $alert,$http,request_ye
     });
   $scope.please_wait = false;
 
-
-
-
 $scope.all_curri_that_have_privileges = [];
 $scope.$parent.scan_only_privilege_curri('14',$scope.all_curri_that_have_privileges);
 
 }
   $scope.please_wait = false;
-
-
 
     $scope.$on("modal.hide", function (event, args) {
      $scope.init();
@@ -2164,8 +2126,6 @@ $scope.$parent.scan_only_privilege_curri('14',$scope.all_curri_that_have_privile
     });
 
   $scope.find_information = function(){
-
-      
           $scope.choose_not_complete = false;
     }
 
@@ -2176,7 +2136,6 @@ $scope.$parent.scan_only_privilege_curri('14',$scope.all_curri_that_have_privile
        $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
-        $scope.indicator_choosen= {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen,14,2).then(function(data) {
 $scope.corresponding_indicators = [];
@@ -2184,22 +2143,15 @@ $scope.corresponding_indicators = [];
 
           });
 
-
     }
 
 
     //a simple model to bind to and send to the server
 
-
-
-
     //listen for the file selected event
    $scope.$on("fileSelected", function (event, args) {
-
      
         var extension = args.file.name.split('.');
-
-   
 
 
         $scope.$apply(function () {    
@@ -2233,12 +2185,10 @@ $scope.corresponding_indicators = [];
         });
     });
     
-
         $scope.close_modal = function(my_modal){
         $scope.init();
         my_modal.$hide();
     }
-
 
     $scope.save_to_server = function(my_modal) {
    $scope.please_wait = true;
@@ -2259,15 +2209,12 @@ $scope.corresponding_indicators = [];
 
             headers: { 'Content-Type': undefined },
 
-
             data:formData,
             transformRequest: angular.indentity 
 
         }).
         success(function (data, status, headers, config) {
     
-             
-
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
 
@@ -2286,8 +2233,7 @@ app.controller('manage_president_controller', function($scope, $alert,$http,requ
 $scope.init =function() {
      $scope.choose_not_complete = true;
         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
+              $scope.curri_choosen = {};
                 $scope.results={};
                 $scope.my_president ={};
                        $scope.personnel_choose = {};
@@ -2326,8 +2272,7 @@ $scope.remove_president = function(curri_key,index_to_remove){
 
         $scope.choose_not_complete = true;
         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
+              $scope.curri_choosen = {};
                 $scope.results={};
                 $scope.my_president ={};
                 $scope.personnel_choose = {};
@@ -2336,15 +2281,13 @@ $scope.remove_president = function(curri_key,index_to_remove){
 
   $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
-        $scope.year_choosen = {}
-        $scope.indicator_choosen= {};
+        $scope.year_choosen = {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
 $scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
 
           });
-
 
     }
 
@@ -2361,8 +2304,6 @@ $scope.nothing_change_object = function(){
       return false;
 }
     $scope.find_information = function(){
-
-   
 
         $http.post(
              '/api/presidentcurriculum/getallpres',
@@ -2505,9 +2446,6 @@ $scope.change_already = function(){
     }
 });
  
-
-
-
 app.controller('manage_admin_add_admin_controller', function($scope, $rootScope,$alert,$http,request_years_from_curri_choosen_service) {
 $scope.init =function() {
     $scope.new_admin = {};
@@ -2578,14 +2516,11 @@ $scope.init =function() {
         
     })
              .error(function(data, status, headers, config) {
-        
 
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
      
-
   }); 
-
     }
 
 });
@@ -2594,18 +2529,13 @@ app.controller('manage_admin_who_controller', function($scope, $rootScope,$alert
 $scope.init =function() {
      $scope.choose_not_complete = true;
         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
+              $scope.curri_choosen = {};
                 $scope.results={};
-                $scope.my_president ={};
                        $scope.personnel_choose = {};
                        $scope.current_president = {};
                   
                        $scope.email_new_admin = "";
                        $scope.add_admin_mode = false;
-
-
-
 
    $http.get('/api/admin').success(function (data) {
   
@@ -2613,21 +2543,16 @@ $scope.init =function() {
            
            });
 
-
 }
         $scope.choose_not_complete = true;
         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
+              $scope.curri_choosen = {};
                 $scope.results={};
-                $scope.my_president ={};
                 $scope.personnel_choose = {};
                 $scope.current_president= {};
          
    $scope.add_admin_mode = false;
 $scope.email_new_admin = "";
-
- 
 
    $http.get('/api/admin').success(function (data) {
        
@@ -2644,12 +2569,7 @@ $scope.email_new_admin = "";
 
    $scope.add_admin = function(){
    $scope.add_admin_mode = true;
-
-
    }
-
-
-    
 
     $scope.$on("modal.hide", function (event, args) {
      $scope.init();
@@ -2664,24 +2584,15 @@ $scope.email_new_admin = "";
         $scope.init();
         my_modal.$hide();
     }
-
-
 });
 
 app.controller('manage_indicators_controller', function($scope, $alert,$http,$rootScope,$modal){
-  
 
-
-      // $rootScope.manage_indicators_and_sub_result = [{"sub_indicator_list":[{"aca_year":2559,"indicator_num":1,"sub_indicator_num":1,"sub_indicator_name":"ข้อย่อย 1"}
-      // ,{"aca_year":2559,"indicator_num":1,"sub_indicator_num":2,"sub_indicator_name":"ข้อย่อย 2"}
-      // ,{"aca_year":2559,"indicator_num":1,"sub_indicator_num":3,"sub_indicator_name":"ข้อย่อย 3"}]
-      // ,"aca_year":2559,"indicator_num":1,"indicator_name_t":"ชื่อไทย","indicator_name_e":"Eng name"}
-      // ,{"sub_indicator_list":[{"aca_year":2559,"indicator_num":2,"sub_indicator_num":1,"sub_indicator_name":"ข้อย่อย 1"},{"aca_year":2559,"indicator_num":2,"sub_indicator_num":2,"sub_indicator_name":"ข้อย่อย 2"}],"aca_year":2559,"indicator_num":2,"indicator_name_t":"ชื่อไทย2","indicator_name_e":"Eng name2"}];
 $scope.init = function(){
      $scope.choose_not_complete = true;
      $scope.year_choosen = 0;
 
-         $scope.choose_not_complete = true;
+    $scope.choose_not_complete = true;
       $rootScope.manage_indicators_and_subs_year_choosen = 0;
       $scope.please_wait = false;
 $scope.nothing_change = true;
@@ -2697,13 +2608,10 @@ $rootScope.manage_indicators_year_to_create = "";
             
            });
    $http.get('/api/indicator').success(function (data) {
-           
-
             $scope.all_indicator_years = data;
           });
 
  }
-
 
     $scope.$on("modal.hide", function (event, args) {
      $scope.init();
@@ -2714,13 +2622,9 @@ $rootScope.manage_indicators_year_to_create = "";
               $scope.init();
     });
 
-
-
 $scope.please_wait = false;
 $scope.nothing_change = true;
    $http.get('/api/indicator').success(function (data) {
-       
-
             $scope.all_indicator_years = data;
           });
 
@@ -2730,7 +2634,6 @@ $scope.nothing_change = true;
            
            });
 
-
     $scope.year_to_create = ""; 
     $scope.choose_not_complete = true;
     $scope.year_choosen = 0;
@@ -2738,7 +2641,6 @@ $scope.nothing_change = true;
     $rootScope.manage_indicators_and_subs_year_choosen = 0;
     $scope.curri_choosen = {};
     $rootScope.my_backup_indicators = {};
-
 
     $rootScope.manage_indicators_year_to_create = "";
       $scope.recover_indicator_all =function(){
@@ -3067,9 +2969,6 @@ $rootScope.only_object_want_to_change.file_name = $scope.files[0].name;
 
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-
-                
-           
         }).
         error(function (data, status, headers, config) {
                       $scope.please_wait = false;
@@ -3159,12 +3058,8 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
                    $scope.my_new_evidence_file.push(args.file);
             }
 
-         
-      
         });
     });
-
-
 
     $scope.new_evidence_still_not_complete =  function(){
         if (!$scope.my_new_evidence.evidence_real_code || !$scope.my_new_evidence.evidence_name|| $scope.my_new_evidence_file.length ==0){
@@ -3192,11 +3087,6 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
         }
     }
 
-
-
-
-
-
  $scope.close_modal = function(my_modal){
         $scope.init();
         my_modal.$hide();
@@ -3211,11 +3101,8 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
             $scope.my_new_evidence.secret = "1";
         }
 
-
-
       var formData = new FormData();
     
-
 $scope.my_new_evidence.file_name = $scope.my_new_evidence_file[0].name;
 $scope.my_new_evidence.curri_id =   $rootScope.manage_evidence_curri_id_now;
 $scope.my_new_evidence.aca_year = $rootScope.manage_evidence_year_now;
@@ -3237,8 +3124,6 @@ $scope.to_sent.all_evidences = $rootScope.manage_evidences_world_evidences;
             url: "/api/evidence/newevidence",
 
             headers: { 'Content-Type': undefined },
-
-
             data:formData,
             transformRequest: angular.indentity 
 
@@ -3250,10 +3135,7 @@ $scope.to_sent.all_evidences = $rootScope.manage_evidences_world_evidences;
            
                $scope.close_modal(my_modal);
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-
-               
-           
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});       
         }).
         error(function (data, status, headers, config) {
                       $scope.please_wait = false;
@@ -3447,8 +3329,6 @@ app.controller('manage_evidences_controller', function($scope, $alert,$http,$roo
               $scope.curri_choosen = {}
                 $scope.indicator_choosen= {};
                 $scope.result={};
-                $scope.my_president ={};
-                $scope.personnel_choose = {};
 $rootScope.my_evidence_real_code_we_have_now =[];
 
 $rootScope.my_all_primary_evidences_responsible = [];
@@ -3606,12 +3486,10 @@ $scope.init =function() {
               $scope.curri_choosen = {}
                 $scope.indicator_choosen= {};
                 $scope.result={};
-                $scope.my_president ={};
-                       $scope.personnel_choose = {};
-                       $rootScope.my_evidence_real_code_we_have_now =[];
-                       $scope.nothing_change =true;
-                         $scope.all_curri_that_have_privileges = [];
-                                         $scope.corresponding_aca_years = [];
+                    $rootScope.my_evidence_real_code_we_have_now =[];
+                    $scope.nothing_change =true;
+                    $scope.all_curri_that_have_privileges = [];
+                    $scope.corresponding_aca_years = [];
                  $scope.corresponding_indicators = [];
   $scope.$parent.scan_only_privilege_curri('3',$scope.all_curri_that_have_privileges);
 }
@@ -3729,8 +3607,6 @@ $scope.choose_not_complete =true;
 
 app.controller('manage_sub_indicators_controller', function($scope, $alert,$http,$rootScope,ngDialog,$modalBox){
 $scope.please_wait = false;
-  
-
     $scope.nothing_change = true;
 
              $scope.still_not_choose_complete_sub =function(){
@@ -3783,14 +3659,9 @@ $scope.please_wait = false;
       
        $rootScope.manage_indicators_indicator_choosen = angular.copy($rootScope.manage_indicators_and_sub_save_indicator.save_content);
          $rootScope.manage_indicators_and_sub_result[$rootScope.manage_indicators_and_sub_save_indicator.save_index] =  angular.copy($rootScope.manage_indicators_indicator_choosen);
-    
-
-    
+        
    $scope.nothing_change = true;
     }
-
-
-
 
     $scope.$on("modal.hide", function (event, args) {
 
@@ -3803,10 +3674,7 @@ $scope.please_wait = false;
                  $scope.start_ka();
     });
 
-
-
      $scope.add_sub_indicator = function(){
-
          $rootScope.manage_indicators_indicator_choosen.sub_indicator_list.push({
             "aca_year":$rootScope.manage_indicators_and_subs_year_choosen
             ,"indicator_num":$rootScope.manage_indicators_indicator_choosen.indicator_num,
@@ -3814,7 +3682,6 @@ $scope.please_wait = false;
 
         $scope.nothing_change = false;
       }
-
 
       $scope.remove_sub_indicator = function(index_sub_indicator_to_remove) { 
           $scope.nothing_change = false;
@@ -3911,8 +3778,6 @@ $scope.start_ka = function(){
 $scope.please_wait = false;
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-   
-
   }); 
     }
 });
@@ -3920,26 +3785,20 @@ $scope.please_wait = false;
 app.controller('manage_primary_evidences_admin_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 
       $http.get('/api/curriculumacademic/getdistinctacayear').success(function (data) {
-            
            $scope.corresponding_aca_years =data;
           });
-// $scope.corresponding_aca_years = [2551,2553,2555,2558];
  $scope.choose_not_complete = true;
         $scope.year_choosen = {};
-              $scope.curri_choosen = {};
                $scope.indicator_choosen= {};
         $scope.go_request = false;
                  $scope.corresponding_indicators = {};
                  $scope.nothing_change = true;
+
 $scope.init =function() {
      $scope.choose_not_complete = true;
         $scope.year_choosen = {};
-              $scope.curri_choosen = {};
                $scope.indicator_choosen= {};
-
-       
                  $scope.corresponding_indicators = [];
-
                  $scope.nothing_change = true;
                    $scope.go_request = false;
 }
@@ -3965,23 +3824,14 @@ var index;
 for (index =0;index< $scope.result.length ; index++){
      if(!$scope.result[index].evidence_name ){
           return true;
-
               }
-
 }
-          
-
        }
-
         return false;
       }
 
-
-
-
 $scope.add_primary_evidence = function(){
       $scope.nothing_change = false;
- 
 
          $scope.result.push({ "evidence_name":"","just_create":true,"curri_id":"0","aca_year":$scope.year_choosen,"indicator_num":$scope.indicator_choosen.indicator_num
 });
@@ -4016,8 +3866,6 @@ $scope.indicator_choosen = {};
 
   $scope.find_primary_evidences = function(){
 
-         
-
 if($scope.go_request == true){
         $http.post(
              '/api/primaryevidence/adminget',
@@ -4031,8 +3879,6 @@ if($scope.go_request == true){
               $scope.result = data;
             $scope.choose_not_complete = false;
             $scope.nothing_change = true;
-
-
          });
 
     }
@@ -4044,8 +3890,6 @@ if($scope.go_request == true){
         my_modal.$hide();
     }
       $scope.save_to_server = function(my_modal){
-    
-
         if ($scope.result.length == 0){
              $scope.result.push({'primary_evidence_num':-1,'aca_year':$scope.year_choosen,"curri_id":"0",'indicator_num':$scope.indicator_choosen.indicator_num,"evidence_name":""});
         }
@@ -4061,21 +3905,13 @@ if($scope.go_request == true){
              $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-              
          })
     .error(function(data, status, headers, config) {
-                
-
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-    
-
   }); 
     }
-
-
 });
-
 
 
 app.controller('manage_primary_evidences_president_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
@@ -4380,58 +4216,21 @@ $scope.dont_show_me =function(my_obj){
 
 });
 
-
 app.controller('result_survey_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
-$scope.init =function() {
-     $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
-                    $scope.result = {};
-                    $scope.suggestion = "";
-}
-
   $scope.$on("modal.show", function (event, args) {
 
-
       if($rootScope.no_open_result_survey == true){
-
-
         $rootScope.no_open_result_survey = false;
 
      args.hide()
-        }
-        else{
-            $scope.init();
-        }
-              
+        }              
     });
-
-
-  
-     $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
-                    $scope.result = {};
- $scope.suggestion = "";
-
-
 });
-
 
 app.controller('answer_survey_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
-
-
-     $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
-                    $scope.result = {};
                     $scope.suggestion = "";
                     $scope.please_wait = false;
-    
 }
        $scope.$on("modal.hide", function (event, args) {
           
@@ -4443,8 +4242,6 @@ $scope.init =function() {
 
 
       if($rootScope.no_open_answer_survey == true){
-
-
         $rootScope.no_open_answer_survey =false;
 
      args.hide()
@@ -4454,15 +4251,7 @@ $scope.init =function() {
         }
               
     });
-     $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
-                    $scope.result = {};
  $scope.suggestion = "";
-
-
-
  $scope.still_not_complete=function(){
     if(! $scope.suggestion){
         return true;
@@ -4481,8 +4270,6 @@ $scope.init =function() {
     }
   $scope.save_to_server = function(my_modal){
      $scope.please_wait = true;
-
-
         $scope.to_sent = angular.copy( $rootScope.manage_survey_questionare_set);
          $scope.to_sent.push({"suggestion":$scope.suggestion}) ;
         $http.put(
@@ -4502,17 +4289,10 @@ $scope.init =function() {
          })
     .error(function(data, status, headers, config) {
          $scope.please_wait = false;
-             
-
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     
-
   }); 
     }
-
-
-
 });
 
 
@@ -4520,8 +4300,7 @@ app.controller('manage_lab_controller', function($scope, $http,$alert,$loading,n
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
+              $scope.curri_choosen = {};
                     $scope.result = {};
                           $rootScope.manage_lab_my_world_wide_labs = [];
                     $scope.nothing_change = true;
@@ -4546,26 +4325,20 @@ $rootScope.manage_lab_still_same = function(){
   
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
+              $scope.curri_choosen = {};
                     $scope.result = {};
   $scope.nothing_change = true;
 
  $rootScope.manage_lab_my_world_wide_labs = [];
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
-        $scope.year_choosen = {}
+        $scope.year_choosen = {};
          $scope.nothing_change = true;
-        $scope.indicator_choosen= {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen,10,2).then(function(data) {
 $scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
-
-
           });
-
-
     }
 
     $scope.go_to_create_lab =function(){
@@ -4593,8 +4366,6 @@ $scope.corresponding_indicators = [];
     }
       $scope.go_to_fix_lab = function(lab_to_fix){
      
-       
-      
               $http.post(
              '/api/personnel/gettnameandid',
              JSON.stringify($scope.curri_choosen.curri_id),
@@ -4604,14 +4375,12 @@ $scope.corresponding_indicators = [];
                  }
              }
          ).success(function (data) {
-        
-       
+               
             $rootScope.manage_lab_all_personnels_in_curri = data;
  
              $rootScope.manage_lab_fix_this_lab = angular.copy(lab_to_fix);
              $rootScope.manage_lab_fix_this_lab_init = [];
          
-
              var index;
              var inside_index;
 
@@ -4628,22 +4397,12 @@ $scope.corresponding_indicators = [];
 
     }
 
-
-
-
-
-
-
     $scope.remove_lab = function(index_to_remove){
         $scope.nothing_change = false;
         $rootScope.manage_lab_my_world_wide_labs.splice(index_to_remove, 1);   
     }
 
-
-
     $scope.find_information = function(){
-
-        
         $http.post(
              '/api/lablist/getlablist',
              JSON.stringify($scope.year_choosen),
@@ -4700,8 +4459,6 @@ $scope.corresponding_indicators = [];
 
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-  
-
   }); 
     }
 });
@@ -4710,8 +4467,7 @@ app.controller('manage_survey_controller', function($scope, $http,$alert,$loadin
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
+              $scope.curri_choosen = {};
                     $scope.result = {};
                     $scope.nothing_change = true;
                       $rootScope.manage_survey_my_world_wide_surveys = [];
@@ -4735,29 +4491,21 @@ $rootScope.manage_survey_still_same = function(){
     });
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
+              $scope.curri_choosen = {};
                     $scope.result = {};
   $scope.nothing_change = true;
 
   $rootScope.manage_survey_my_world_wide_surveys = [];
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
-        $scope.year_choosen = {}
+        $scope.year_choosen = {};
          $scope.nothing_change = true;
-        $scope.indicator_choosen= {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen,5,2).then(function(data) {
 $scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
-
-
           });
-
-
     }
-
-
 
 $scope.right_target = function(targets){
     var i;
@@ -4803,19 +4551,9 @@ $scope.right_target = function(targets){
             $rootScope.no_open_answer_survey =true;
      $alert({title:'เกิดข้อผิดพลาด', content:data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-    
-
   }); 
 
-
-
         $rootScope.manage_survey_questionare_to_answer = this_survey;
-//         $rootScope.manage_survey_questionare_set = [{"answer":"","aquestionare_set_id":1,"questionare_question_id":1,"detail":"ความน่าสนใจของเนื้อหารายวิชา"},{"answer":"","questionare_set_id":1,"questionare_question_id":2,"detail":"อาจารย์ผู้สอน สอนสบายๆ"},{"answer":"","questionare_set_id":1,"questionare_question_id":3,"detail":"งานที่มอบหมาย มีความเหมาะสมต่อภาระของนักศึกษา"},{"answer":"","questionare_set_id":1,"questionare_question_id":4,"detail":"ระยะเวลาที่สอนต่อครั้งมีความเหมาสม"},{"answer":"","questionare_set_id":1,"questionare_question_id":5,"detail":"ความยากของข้อสอบ Final"}]
-
-// ;
-
-
-
     }
 
        $scope.go_to_result = function(this_survey){
@@ -4834,27 +4572,9 @@ $scope.right_target = function(targets){
            $rootScope.no_open_result_survey = true;
                        $alert({title:'เกิดข้อผิดพลาด', content:data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-                 
-
-  
-    
-
   }); 
 
-
         $rootScope.manage_survey_questionare_of_result = this_survey;
-//         $rootScope.manage_survey_result= {"suggestion":["อยากให้ลดปริมาณงานน้อยๆ ลง","เพิ่มคะแนนเก็บเยอะๆค่ะ","อยากให้อาจารย์สอนแล้วเลิกเร็วแบบนี้ไปตลอด","คิดไม่ออก","ไม่มีความคิดเห็น"],
-// "main_result_list":[{"name":"ความน่าสนใจของเนื้อหารายวิชา","answer":[11,0,0,0,2,0,3]},
-// {"name":"อาจารย์ผู้สอน สอนสบายๆ","answer":[10,2,0,0,0,1,3]},
-// {"name":"งานที่มอบหมาย มีความเหมาะสมต่อภาระของนักศึกษา","answer":[10,0,3,0,0,0,3]},
-// {"name":"ระยะเวลาที่สอนต่อครั้งมีความเหมาสม","answer":[11,0,0,1,0,1,3]},
-// {"name":"ความยากของข้อสอบ Final","answer":[10,2,0,0,0,1,3]}]};
-
-
-
-
-
-
     }
 
     $scope.remove_qestionare = function(index_to_remove){
@@ -4870,7 +4590,6 @@ $scope.right_target = function(targets){
 
     $scope.find_information = function(){
 
-      
         $http.post(
              '/api/questionare/getquestionareset',
              JSON.stringify($scope.year_choosen),
@@ -5069,27 +4788,17 @@ return false;
 
 });
 
-
-
 app.controller('show_album_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
   $scope.openLightboxModal = function (index) {
-
     Lightbox.openModal($rootScope.manage_album_show_this_album.pictures, index);
   }
-
- 
-
-
-
-
 });
 
 app.controller('manage_album_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
+              $scope.curri_choosen = {};
                     $scope.result = {};
                     $scope.nothing_change = true;
                       $rootScope.manage_survey_my_world_wide_surveys = [];
@@ -5124,44 +4833,30 @@ $rootScope.manage_album_still_same = function(){
 
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
+              $scope.curri_choosen = {};
                     $scope.result = {};
   $scope.nothing_change = true;
 
 
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
-        $scope.year_choosen = {}
+        $scope.year_choosen = {};
          $scope.nothing_change = true;
-        $scope.indicator_choosen= {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen,6,2).then(function(data) {
 $scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
-
-
           });
-
-
     }
-
     $scope.go_to_show_album = function(this_album){
-
-
         $rootScope.manage_album_curri_id = $scope.curri_choosen.curri_id;
         $rootScope.manage_album_aca_year = $scope.year_choosen.aca_year;
         $rootScope.manage_album_show_this_album = angular.copy(this_album);
-
-
-
     }
 
   $scope.go_to_create_album = function(){
  $rootScope.manage_album_curri_id = $scope.curri_choosen.curri_id;
         $rootScope.manage_album_aca_year = $scope.year_choosen.aca_year;
-    
-
   }
 
     $scope.find_information = function(){
@@ -5180,13 +4875,7 @@ $scope.corresponding_indicators = [];
                $rootScope.manage_album_my_world_wide_album = data;
          
              $scope.choose_not_complete = false;
-             
-            
-    
          });
-// $scope.result=[{"target":["นักศึกษา"],"t_name":"อาจารย์บัณฑิต พัสยา","questionare_set_id":1,"name":"ความคิดเห็นต่อเนื้อหารายวิชา 01076573 Information Storage and Retrieval","curri_id":"21","aca_year":2558,"date":"20/11/2558","personnel_id":"00007"},{"target":["นักศึกษา"],"t_name":"อาจารย์วิบูลย์ พร้อมพานิชย์","questionare_set_id":3,"name":"ความคิดเห็นต่อการเรียนการสอนวิชา 01076234 Computer programming 1","curri_id":"21","aca_year":2558,"date":"30/11/2558","personnel_id":"00001"},{"target":["นักศึกษา","บริษัท","ศิษย์เก่า","อาจารย์"],"t_name":"รศ.ดร.ศุภมิตร จิตตะยโศธร","questionare_set_id":4,"name":"แบบสำรวจความต้องการในการจัดสัมมนาเกี่ยวกับเรื่องฐานข้อมูลเชิงเวลาแบบไม่แน่นอน","curri_id":"21","aca_year":2558,"date":"01/01/2559","personnel_id":"00009"},{"target":["เจ้าหน้าที่","นักศึกษา","บริษัท","ศิษย์เก่า","อาจารย์"],"t_name":"รศ.ดร.เกียรติกูล เจียรนัยธนะกิจ","questionare_set_id":5,"name":"แบบสำรวจสภาพการใช้งานของสุขภัณฑ์ในภาควิชา","curri_id":"21","aca_year":2558,"date":"02/12/2558","personnel_id":"00002"},{"target":["นักศึกษา","อาจารย์"],"t_name":"ผศ.ดร.ชุติเมษฏ์ ศรีนิลทา","questionare_set_id":6,"name":"แบบสำรวจความต้องการในการจัดให้มีกิจกรรมปัจฉิมนิเทศของภาค","curri_id":"21","aca_year":2558,"date":"22/12/2558","personnel_id":"00004"}];
-//  $scope.choose_not_complete = false;
-
     }
     $scope.close_modal = function(my_modal){
         $scope.init();
@@ -5221,12 +4910,8 @@ $scope.corresponding_indicators = [];
                
          })
     .error(function(data, status, headers, config) {
-              
-
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-   
-
   }); 
     }
 });
@@ -5238,12 +4923,6 @@ app.controller('import_evidence_controller', function($scope, $http,$alert,$load
    $scope.watch_file = function(path) { 
         window.open(path, '_blank', "width=800, left=230,top=0,height=700");  
     }
-
-
- 
-
-
-       
 
 $scope.still_not_write_code = function() {
   
@@ -5507,12 +5186,8 @@ $scope.my_new_user.curri = $scope.curri_choosen;
 $scope.my_new_user.type = $scope.my_type;
 
     formData.append("model", angular.toJson($scope.my_new_user));
-
-      
         
             formData.append("file" , $scope.files[0]);
-     
-
         $http({
             method: 'POST',
             url: "/api/users/createnewusers",
@@ -5589,65 +5264,41 @@ $scope.init ();
     });
 });
 app.controller('manage_user_type_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
-   $scope.curri_choosen = [];
    $scope.my_type = '';
       $scope.files = [];
 $scope.choose_not_complete = true;
         $scope.please_wait = false;
         $scope.my_new_users = [];
     $http.get('/api/usertype/getallusertype').success(function (data) {
-           
                 $scope.all_usertype = data;
-
-
               });
 
     $scope.$on("modal.hide", function (event, args) {
      $scope.init();
-      
     });
 
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
     });
-
     
-
-   $scope.init =function() {
+$scope.init =function() {
 $scope.add_these_type= [];
 
        $scope.files = [];
-   $scope.curri_choosen = [];
    $scope.please_wait = false;
       $scope.my_type = '';
                $scope.please_wait = false;
 $scope.choose_not_complete = true;
 $scope.choose_type = false;
-// if($rootScope.current_user.user_type != 'ผู้ดูแลระบบ'){
-
-//   $scope.all_curri_that_have_privileges = [];
-//   $scope.$parent.scan_only_privilege_curri('1',$scope.all_curri_that_have_privileges);
-// }
-// else{
-//     $scope.all_curri_that_have_privileges = $rootScope.all_curriculums;
-// }
-
 
           $http.get('/api/usertype/getallusertype').success(function (data) {
-              
                 $scope.all_usertype = data;
-
-
               });
 
    }
 
    $scope.still_not_complete = function(){
  
-        // if(!$scope.my_type){
-        //             return true;
-        // }
-
         if(!$scope.add_these_type){
             return true;
         }
@@ -5687,23 +5338,10 @@ $scope.save_to_server = function(my_modal) {
                  }
              }
          ).success(function (data) {
-
-                if(!data){
-            
                   my_modal.$hide();
 $scope.init ();
                  $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลสำเร็จ',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-            }
-            else{
-               
-                $rootScope.manage_user_email_duplicate  = data;
-                        $scope.init ();
-                  my_modal.$hide();
-              $alert({title:'ดำเนินการสำเร็จบางส่วน', template:'/alert/mycustomtemplate.html',alertType:'warning',duration:10000,
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
-            }
-
          })
      .error(function (data, status, headers, config) {
               $scope.please_wait = false;
@@ -5711,13 +5349,10 @@ $scope.init ();
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
 }
-
-   
 });
 app.controller('create_user_individual_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
    $scope.curri_choosen = [];
    $scope.my_type = '';
-      $scope.files = [];
 $scope.choose_not_complete = true;
         $scope.please_wait = false;
         $scope.my_new_users = [];
@@ -5746,7 +5381,6 @@ $scope.choose_not_complete = true;
     function(inputElem) {
       angular.element(inputElem).val(null);
     });
-       $scope.files = [];
    $scope.curri_choosen = [];
       $scope.my_type = '';
                $scope.please_wait = false;
@@ -5845,27 +5479,18 @@ $scope.init ();
 app.controller('create_survey_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
                     $scope.result = {};
                     $scope.my_target = [];
                     $scope.questions =[];
                     $scope.my_survey_name ="";
 
                 $http.get('/api/usertype/getexcludeadmin').success(function (data) {
-              
-              
                 $scope.all_usertype = data;
-
-
               });
-            
 }
   
       $scope.$on("modal.hide", function (event, args) {
      $scope.init();
-      
     });
 
   $scope.$on("modal.show", function (event, args) {
@@ -5874,9 +5499,6 @@ $scope.init =function() {
 
     
     $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
                     $scope.result = {};
                     $scope.my_target = [];
                     $scope.questions =[];
@@ -5886,21 +5508,6 @@ $scope.init =function() {
                  
                 $scope.all_usertype = data;
               });
-
-
-        $scope.sendCurriAndGetYears = function () {
-        $scope.choose_not_complete =true;
-        $scope.year_choosen = {}
-        $scope.indicator_choosen= {};
-      $scope.my_survey_name ="";
-              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
-$scope.corresponding_indicators = [];
-            $scope.corresponding_aca_years = data;
-
-          });
-
-
-    }
 
     $scope.still_not_complete = function(){
                 if($scope.questions.length == 0) {
@@ -5925,8 +5532,7 @@ $scope.corresponding_indicators = [];
                 return false;
 
 }
-   $scope.add_question = function(){
-      
+   $scope.add_question = function(){      
        $scope.questions.push({detail:""});
      }
 
@@ -5934,8 +5540,6 @@ $scope.corresponding_indicators = [];
        
        $scope.questions.splice(question_index, 1);   
      }
-
-
   
     $scope.close_modal = function(my_modal){
         $scope.init();
@@ -5951,8 +5555,6 @@ $scope.corresponding_indicators = [];
         $scope.my_new_survey.my_questions  =$scope.questions;
         $scope.my_new_survey.name  = $scope.my_survey_name;
 
-
-      
         $http.put(
              '/api/questionare/add',
              JSON.stringify($scope.my_new_survey),
@@ -5970,12 +5572,8 @@ $scope.corresponding_indicators = [];
              
          })
     .error(function(data, status, headers, config) {
-                
-
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-
-
   }); 
     }
 });
@@ -5985,10 +5583,6 @@ app.controller('create_research_controller', function($scope, $http,$alert,$load
 $scope.init =function() {
        $scope.please_wait = false;
      $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
-                    $scope.result = {};
                    $scope.new_research = {};
   $scope.new_research.name = "";
   $scope.new_research.researcher =[];
@@ -6012,13 +5606,7 @@ $scope.init =function() {
               $scope.init();
     });
 
-    
-
   $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
-                    $scope.result = {};
   $scope.new_research = {};
   $scope.new_research.name = "";
   $scope.new_research.researcher =[];
@@ -6081,8 +5669,6 @@ $scope.init =function() {
         else{
             if(angular.isNumber($scope.new_research.year_publish)==false){
                 return true;
-
-
             }
 
              if($scope.new_research.year_publish <= 0){
@@ -6090,9 +5676,6 @@ $scope.init =function() {
                 }
              return false;
         }
-
-
-       
      }
     
     $scope.close_modal = function(my_modal){
@@ -6132,9 +5715,6 @@ $scope.init =function() {
                 $scope.close_modal(my_modal);
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-
-              
-           
         }).
         error(function (data, status, headers, config) {
                       $scope.please_wait = false;
@@ -6148,24 +5728,13 @@ $scope.init =function() {
 
 app.controller('fix_research_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
-     $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
-                    $scope.result = {};
                                $scope.new_file = [];
                                $scope.disabled_search = false;
   $scope.please_wait = false;
 
 }
-  $scope.please_wait = false;
-     $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
-                    $scope.result = {};
-                     $scope.new_file = [];
-                        $scope.disabled_search = false;
+
+$scope.init();
 
     $scope.still_not_complete = function(){
 
@@ -6279,15 +5848,10 @@ $rootScope.manage_research_fix_this_research.researcher = $rootScope.manage_lab_
                              placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
                   $scope.please_wait = false;
             });
-       
-
-            
-     
     }
 
         $scope.$on("fileSelected", function (event, args) {
 
-     
         var extension = args.file.name.split('.');
 
         $scope.$apply(function () {            
@@ -6317,34 +5881,16 @@ $rootScope.manage_research_fix_this_research.researcher = $rootScope.manage_lab_
        }
             else{
                   $scope.new_file.push(args.file);
-
             }
-          
-
-
-            // $rootScope.manage_research_fix_this_research.file_name = $scope.new_file[0].name;
-         
-
         });
     });
 
 });
 
-
-
 app.controller('fix_lab_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
-     $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
-                    $scope.result = {};
-                               $scope.new_file = [];
-                               $scope.disabled_search = false;
-
 }
-            
-         
+
     $scope.$on("modal.hide", function (event, args) {
      $scope.init();
       
@@ -6353,14 +5899,6 @@ $scope.init =function() {
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
     });
-
-     $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
-                    $scope.result = {};
-                     $scope.new_file = [];
-                        $scope.disabled_search = false;
 
     $scope.still_not_complete = function(){
 
@@ -6371,33 +5909,16 @@ $scope.init =function() {
             return true;
         }
 
-
-
         if($rootScope.manage_lab_fix_this_lab_init.length == 0){
             return true;
-        }
-
-     
+        }     
     }
 
-
-   
     $scope.close_modal = function(my_modal){
         $scope.init();
         my_modal.$hide();
     }
-
-
-
      $scope.save_to_server = function(my_modal){
- 
-
-        // var index;
-        // for(index =0;index<$rootScope.manage_lab_all_personnels_in_curri.length;index++){
-        //     if($rootScope.manage_lab_fix_this_lab_init.indexOf($rootScope.manage_lab_all_personnels_in_curri[index].personnel_id) != -1){
-        //         $rootScope.manage_lab_fix_this_lab.officer.push($rootScope.manage_lab_all_personnels_in_curri[index]);
-        //     }
-        // }
         $rootScope.manage_lab_fix_this_lab.officer = $rootScope.manage_lab_fix_this_lab_init;
     
         $http.put(
@@ -6417,19 +5938,11 @@ $scope.init =function() {
           
          })
     .error(function(data, status, headers, config) {
-               
-
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     
-
   }); 
     }
-
-  
-
 });
-
 
 
 app.controller('create_lab_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
@@ -6438,18 +5951,12 @@ $scope.init =function() {
     $scope.my_new_lab.name = "";
     $scope.my_new_lab.room = "";
     $scope.my_new_lab.officer = [];
-              
 }
 
-   
-    $scope.my_new_lab = {};
-    $scope.my_new_lab.name = "";
-    $scope.my_new_lab.room = "";
-    $scope.my_new_lab.officer = [];
+$scope.init();
               
     $scope.$on("modal.hide", function (event, args) {
      $scope.init();
-      
     });
 
   $scope.$on("modal.show", function (event, args) {
@@ -6465,21 +5972,15 @@ $scope.init =function() {
             return true;
         }
 
-
-
         if( $scope.my_new_lab.officer.length == 0){
             return true;
-        }
-
-     
+        }     
     }
 
     $scope.close_modal = function(my_modal){
         $scope.init();
         my_modal.$hide();
     }
- 
-
 
      $scope.save_to_server = function(my_modal){
       
@@ -6503,38 +6004,25 @@ $scope.init =function() {
           
          })
     .error(function(data, status, headers, config) {
-               
-
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     
-
   }); 
     }
 
   
-
 });
 app.controller('import_to_curri_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
               $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
          $scope.nothing_change = true;
-                $rootScope.manage_research_my_research_now = {};
                 $scope.choose_people = [];
              $scope.result= [];
-          
 }
  $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
               $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
          $scope.nothing_change = true;
-                $rootScope.manage_research_my_research_now = {};
                 $scope.choose_people = [];
-
 
   $scope.close_modal = function(my_modal){
         $scope.init();
@@ -6565,10 +6053,6 @@ $scope.init =function() {
     });
 
      $scope.find_information = function(){
-
-      
-   
-
         $http.post(
              'api/personnel/getalltnameandid',
              JSON.stringify($scope.curri_choosen.curri_id),
@@ -6598,18 +6082,11 @@ $scope.init =function() {
                      $scope.result.push($scope.result_to_del[index]);
                 }
                }
-            
-
              $scope.choose_not_complete = false;
-              
-            
-    
          });
 
 }
  $scope.save_to_server = function(my_modal){
- 
-     
         $scope.to_sent = {};
         $scope.to_sent.these_people = $scope.choose_people;
         $scope.to_sent.curri_id = $rootScope.manage_bind_curri_id_now;
@@ -6633,24 +6110,17 @@ $scope.init =function() {
                    $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-        
          })
     .error(function(data, status, headers, config) {
-                
-
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     
-
   }); 
     }
 });
 app.controller('manage_bind_person_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
+              $scope.curri_choosen = {};
          $scope.nothing_change = true;
            
     $scope.result = {};
@@ -6676,8 +6146,6 @@ $rootScope.manage_bind_still_same = function(){
                     if($scope.curri_choosen.curri_id != $rootScope.all_curriculums[index].curri_id){
                         $rootScope.all_curri_except_us.push($rootScope.all_curriculums[index]);
                     }
-
-
                 }
     $rootScope.all_curri_except_us.push({curr_tname:"บุคคลที่ไม่มีหลักสูตร",curri_id:999})
     $rootScope.all_id_we_have_now_in_curri = [];
@@ -6690,13 +6158,10 @@ $rootScope.manage_bind_still_same = function(){
 
 
      $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
+              $scope.curri_choosen = {};
                     $scope.result = {};
   $scope.nothing_change = true;
    
-
         $scope.$on("modal.hide", function (event, args) {
      $scope.init();
       
@@ -7018,8 +6483,6 @@ $scope.init = function(){
     $scope.new_grad.degree = "";
 }   
 
-
-
   $scope.$on("modal.hide", function (event, args) {
      $scope.init();
       
@@ -7033,7 +6496,6 @@ $scope.init = function(){
         $scope.init();
         my_modal.$hide();
     }
-
 
 $scope.save_to_server = function(my_modal){
     $scope.new_grad.personnel_id = $rootScope.current_user.user_id;
@@ -7051,15 +6513,10 @@ $scope.save_to_server = function(my_modal){
                $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-            
          })
     .error(function(data, status, headers, config) {
-            
-
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-   
- 
 });
 }
  
@@ -7145,8 +6602,6 @@ $scope.save_to_server = function(my_modal){
 
 app.controller('manage_profile_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
 
-
-
 $scope.back_to_default = function(){
        angular.forEach(
     angular.element("input[type='file']"),
@@ -7165,8 +6620,6 @@ $scope.fix_not_complete = function(){
               
         return true;
     }
-
-  
        
         if($rootScope.current_user.information.e_prename.length == 14 && $rootScope.current_user.information.e_prename  != 'Assoc.Prof.Dr.'){
                return true;
@@ -7392,13 +6845,9 @@ app.controller('login_controller', function($scope, $http,$alert,$loading,$rootS
                $rootScope.clear_choosen();
                      $scope.please_wait = false;
    if(!!$rootScope.current_user.not_send_primary){
-         
               $rootScope.open_modal_primary_not_send();
          }
-        
-
         }, function (something) {
-
             console.log('something')
 
             console.log(something)
@@ -7406,14 +6855,8 @@ app.controller('login_controller', function($scope, $http,$alert,$loading,$rootS
       $scope.please_wait = false;
             $alert({title:'เกิดข้อผิดพลาด', content:'เข้าสู่ระบบไม่สำเร็จ '+something.data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-
         });
-
-
       };
-
-
-   
 });
 
 
@@ -7696,17 +7139,13 @@ $scope.title_choosen = {};
                
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     
-
   }); 
     }
 });
 app.controller('manage_research_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
+              $scope.curri_choosen = {};
          $scope.nothing_change = true;
                 $rootScope.manage_research_my_research_now = {};
                  $scope.all_curri_that_have_privileges = [];
@@ -7719,9 +7158,7 @@ $rootScope.manage_research_still_same = function(){
 
   
      $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
+              $scope.curri_choosen = {};
                     $scope.result = {};
   $scope.nothing_change = true;
 
@@ -7759,10 +7196,6 @@ $rootScope.manage_research_still_same = function(){
      
         $rootScope.manage_research_fix_this_research = angular.copy(this_research);
        
-
-
-
-
                 var index;
         var inside_index;
         $rootScope.manage_lab_research_this_research_init = [];
@@ -7807,8 +7240,6 @@ $rootScope.manage_research_still_same = function(){
 
     }
     $scope.find_information = function(){
-
-     
         $http.post(
              '/api/research/getresearch',
              JSON.stringify($scope.curri_choosen.curri_id),
@@ -7822,13 +7253,7 @@ $rootScope.manage_research_still_same = function(){
               $rootScope.manage_research_my_research_now = data;
              $scope.choose_not_complete = false;
                $scope.nothing_change = true;
-            
-    
          });
-
-// ;
-// $scope.choose_not_complete = false;
-
     }
     $scope.close_modal = function(my_modal){
         $scope.init();
@@ -7870,10 +7295,7 @@ $rootScope.manage_research_still_same = function(){
 
 app.controller('add_committee_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
-
-              
                 $scope.choose_people = [];
-
    $http.post(
              '/api/committee/getnoncommittee',
              JSON.stringify({'aca_year':$rootScope.manage_committee_who_aca_year_now,'curri_id':$rootScope.manage_committee_who_curri_id_now,'these_people':$rootScope.manage_committee_who_all_committees}),
@@ -7888,9 +7310,6 @@ $scope.init =function() {
          });
           
 }
-
-    
-            
 
   $scope.close_modal = function(my_modal){
         $scope.init();
@@ -7913,11 +7332,9 @@ $scope.init =function() {
     }
     $scope.$on("modal.hide", function (event, args) {
      $scope.init();
-      
     });
 
   $scope.$on("modal.show", function (event, args) {
-
               $scope.init();
     });
 
@@ -7968,8 +7385,6 @@ $scope.init =function() {
       $rootScope.curri_that_be_president_in($scope.all_curri_that_have_privileges);
 }
 
-
-  
      $scope.choose_not_complete = true;
    
                $scope.year_choosen = {};
@@ -8130,11 +7545,6 @@ $scope.init();
 
 app.controller('create_minute_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
-     $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-              
-                    $scope.result = {};
                    $scope.my_new_minute = {};
                       $scope.please_wait = false;
 
@@ -8165,12 +7575,7 @@ $scope.my_pictures.flow.files = [];
 
 
  $scope.show_gallery = false;
-  $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
             $scope.please_wait = false;
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
-                    $scope.result = {};
                    $scope.my_new_minute = {};
 
   $scope.my_new_minute.date = "";
@@ -8182,10 +7587,8 @@ $scope.my_pictures = {};
       
 $scope.my_pictures.flow.files = [];
     $scope.$on("fileSelected", function (event, args) {
-
      
         var extension = args.file.name.split('.');
-
 
         $scope.$apply(function () {            
             $scope.my_file = [];
@@ -8219,8 +7622,6 @@ $scope.my_pictures.flow.files = [];
         });
     });
 
-
-
      $scope.still_not_complete = function(){
         if(!$scope.my_pictures.flow){
             return true;
@@ -8232,9 +7633,6 @@ $scope.my_pictures.flow.files = [];
       
              return false;
         }
-
-
-       
      }
     
     $scope.close_modal = function(my_modal){
@@ -8273,9 +7671,6 @@ $scope.show_my_pictures=function(){
   $scope.my_new_minute.file_name =  $scope.my_file[0].name;
   $scope.my_new_minute.pictures =  [];
       var formData = new FormData();
-
-
-  
         var index = 0;
         for (index = 0 ;index< $scope.my_pictures.flow.files.length;index++){
                 $scope.my_obj = {};
@@ -8311,10 +7706,7 @@ $scope.show_my_pictures=function(){
 
                 $scope.close_modal(my_modal);
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-
-              
-           
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});      
         }).
         error(function (data, status, headers, config) {
               $scope.please_wait = false;
@@ -8322,8 +7714,6 @@ $scope.show_my_pictures=function(){
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
         });
     }
-
-
 });
 
 
@@ -8331,7 +7721,6 @@ app.controller('change_password_controller', function($scope, $http,$alert,$load
 
        $scope.$on("modal.hide", function (event, args) {
      $scope.init();
-      
     });
 
   $scope.$on("modal.show", function (event, args) {
@@ -8410,8 +7799,7 @@ app.controller('change_password_controller', function($scope, $http,$alert,$load
 app.controller('change_username_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 
        $scope.$on("modal.hide", function (event, args) {
-     $scope.init();
-      
+     $scope.init();     
     });
 
   $scope.$on("modal.show", function (event, args) {
@@ -8463,29 +7851,18 @@ $scope.error_msg = '';
          
          })
     .error(function(data, status, headers, config) {
-                
-
      $alert({title:'เกิดข้อผิดพลาด', content:'ชื่อผู้ใช้นี้มีอยู่แล้วในระบบ',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     
-
   }); 
   }
 });
 
-
 app.controller('create_album_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
    $scope.please_wait = false;
-      
-             
-                   $scope.my_new_album = {};
+        $scope.my_new_album = {};
       $scope.my_new_album.name = "";
 $scope.my_pictures.flow.files = [];
-
- 
-
-
    angular.forEach(
     angular.element("input[type='file']"),
     function(inputElem) {
@@ -8678,11 +8055,6 @@ var index;
 app.controller('fix_minute_controller', function($scope, $http,$alert,$loading,ngDialog,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
  
 $scope.init =function() {
-     $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
-                    $scope.result = {};
                    $scope.my_new_minute = {};
 
   $scope.my_new_minute.date = "";
@@ -8701,11 +8073,6 @@ $scope.init =function() {
 }
    $scope.please_wait = false;
  $scope.show_gallery = false;
-  $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
-                    $scope.result = {};
                    $scope.my_new_minute = {};
 
   $scope.my_new_minute.date = "";
@@ -8757,10 +8124,6 @@ $scope.my_pictures = {};
        
      }
      $scope.test = function(){
-       
-     
-
-       
      }
      $scope.return_just_name = function(full_name){
         var set = full_name.split('/');
@@ -8772,11 +8135,7 @@ $scope.my_pictures = {};
     }
 
     $scope.watch_file = function() { 
-    
                 window.open($rootScope.manage_minutes_fix_this_minute.file_name, '_blank', "width=800, left=230,top=0,height=700");  
-      
-       
-      
     }
      $scope.still_not_complete = function(){
         if(!$scope.my_pictures.flow){
@@ -8887,10 +8246,7 @@ $scope.show_my_pictures=function(){
          }
                 $scope.close_modal(my_modal);
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-
-              
-           
+                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});           
         }).
         error(function (data, status, headers, config) {
               $scope.please_wait = false;
@@ -8910,8 +8266,7 @@ app.controller('manage_minutes_controller', function($scope, $http,$alert,$loadi
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
+              $scope.curri_choosen = {};
                     $scope.result = {};
                     $scope.nothing_change = true;
                       $rootScope.manage_minutes_my_world_wide_minutes = [];
@@ -8931,8 +8286,7 @@ $scope.init =function() {
 
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
-              $scope.curri_choosen = {}
-                $scope.indicator_choosen= {};
+              $scope.curri_choosen = {};
                     $scope.result = {};
   $scope.nothing_change = true;
 
@@ -8949,16 +8303,11 @@ $rootScope.manage_minutes_still_same = function(){
         $scope.choose_not_complete =true;
        
          $scope.nothing_change = true;
-        $scope.indicator_choosen= {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen,8,2).then(function(data) {
  $scope.year_choosen = {};
             $scope.corresponding_aca_years = data;
-
-
           });
-
-
     }
 
     $scope.go_to_fix_minute = function(this_minute_index){
@@ -8989,10 +8338,7 @@ $rootScope.manage_minutes_still_same = function(){
           
             }
         }
-});
-
-
-       
+});  
     }
     $scope.go_to_see_attendee = function(this_minute){
         $rootScope.manage_minutes_see_this_attendee = this_minute.attendee;
@@ -9015,16 +8361,11 @@ $rootScope.manage_minutes_still_same = function(){
 });
 
     }
- 
-
     $scope.remove_minute = function(index_to_remove){
         $scope.nothing_change = false;
         $rootScope.manage_minutes_my_world_wide_minutes.splice(index_to_remove, 1);   
          $rootScope.manage_minutes_my_world_wide_minutes_fix_year.splice(index_to_remove, 1);   
     }
-
-
-
     $scope.find_information = function(){
 
         
@@ -9048,9 +8389,6 @@ $rootScope.manage_minutes_still_same = function(){
          }
 
              $scope.choose_not_complete = false;
-             
-            
-    
          });
 
     }
@@ -9064,8 +8402,6 @@ $rootScope.manage_minutes_still_same = function(){
     }
 
     $scope.save_to_server = function(my_modal){
-
-
         if($rootScope.manage_minutes_my_world_wide_minutes_fix_year.length == 0){
        
             $scope.to_sent  = {};
@@ -9073,10 +8409,7 @@ $rootScope.manage_minutes_still_same = function(){
             $scope.to_sent.aca_year = $scope.year_choosen.aca_year;
    
             $rootScope.manage_minutes_my_world_wide_minutes_fix_year.push($scope.to_sent);
-
-        }
-
-     
+        }    
         $http.put(
              '/api/minutes/delete',
              JSON.stringify($rootScope.manage_minutes_my_world_wide_minutes_fix_year),
