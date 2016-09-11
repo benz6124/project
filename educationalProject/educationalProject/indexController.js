@@ -2339,7 +2339,6 @@ $rootScope.only_object_want_to_change.file_name = $scope.files[0].name;
     $rootScope.manage_evidences_still_same();
             $rootScope.manage_evidences_world_evidences = data;
             $scope.close_modal(this_modal);
-
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
         }).
@@ -2997,7 +2996,6 @@ $scope.start_ka = function(){
                 $rootScope.my_backup_indicators= angular.copy( $scope.to_sent);
                 $rootScope.manage_indicators_and_sub_save_indicator.save_content = angular.copy($rootScope.manage_indicators_indicator_choosen);
                 $scope.close_modal(my_modal);
-
          })
     .error(function(data, status, headers, config) {
 $scope.please_wait = false;
@@ -3386,7 +3384,6 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
-             $scope.please_wait = false;
             $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
@@ -4645,10 +4642,8 @@ $rootScope.manage_research_fix_this_research.researcher = $rootScope.manage_lab_
                 $rootScope.manage_research_still_same();
                      $rootScope.manage_research_my_research_now = data;
                      $scope.close_modal(my_modal);
-
                     $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                             placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-  $scope.please_wait = false;                   
+                             placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});               
             }).
             error(function (data, status, headers, config) {
                 $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
@@ -5033,7 +5028,6 @@ $scope.delete_myself = false;
              $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-              
          })
     .error(function(data, status, headers, config) {
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
@@ -6400,7 +6394,6 @@ var index;
         $rootScope.manage_album_still_same();
                 $rootScope.manage_album_my_world_wide_album =data;
                 $scope.close_modal(my_modal);
-                     $scope.please_wait = false;
                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});      
         }).
