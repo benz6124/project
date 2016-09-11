@@ -4247,15 +4247,10 @@ glyphicon glyphicon-bell"></i> </span>
 </div>
 
                             </div>
-
                         </div>
-
                     </div>
-
-
                       <div class="custom-footer" >
                         <div class="topicHeader pull-right">
-                         
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
                         </div>
                     </div>
@@ -4336,14 +4331,10 @@ glyphicon glyphicon-bell"></i> </span>
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ผลการประเมินหลักสูตร</span></h1>
                     </div>
-
-
                 <div class="row" style="
     margin-left: 0px;
     margin-right: 0px;
 ">
-
-
                           <div class="col-md-6" >
                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
@@ -4357,12 +4348,7 @@ glyphicon glyphicon-bell"></i> </span>
 
       <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
-
-
                         </div>
-
-
-
                         </div>
 
                     <div class="container-fluid" ng-hide="choose_not_complete">
@@ -4417,31 +4403,19 @@ glyphicon glyphicon-bell"></i> </span>
                  
 <a href="" ng-click="download_file(corresponding_results.file_name)" class=" hvr-wobble-vertical"><span style="
     font-size: 30px;color: #739900; " class="glyphicon glyphicon-download-alt " /></a>
-  
-
-
-
-
-</div>
-       
-       <div class="row" >   
+</div> 
+       <div class="row" >
        <span class="topicNewHeader"><span style="margin-left:35px;margin-top:5px;color:#6F002B;font-weight:bold">ประเมินโดย</span>  {{corresponding_results.evaluation_detail[0].t_name}} </span> 
        </div>   
              <div class="row">   
        <span class="topicNewHeader"><span style="margin-left:35px;color:#6F002B;font-weight:bold">ประเมิน ณ วันที่</span>  {{corresponding_results.evaluation_detail[0].date}}<span style="color:#6F002B;font-weight:bold"> เวลา</span> {{corresponding_results.evaluation_detail[0].time}} </span> 
        </div> 
 </div>
-
                             </div>
-
                         </div>
-
                     </div>
-
-
                       <div class="custom-footer" >
                         <div class="topicHeader pull-right">
-                         
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
                         </div>
                     </div>

@@ -993,7 +993,6 @@ $scope.init =function() {
         $scope.year_choosen = {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen,11,2).then(function(data) {
-$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
    $scope.choose_not_complete = true;
           });
@@ -1080,7 +1079,6 @@ $scope.init =function() {
         $scope.year_choosen = {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen,13,2).then(function(data) {
-$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
           });
     }
@@ -1150,7 +1148,6 @@ $scope.init =function() {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {};
               request_years_from_curri_choosen_service.async($scope.curri_choosen,12,2).then(function(data) {
-$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
           });
     }
@@ -1698,7 +1695,6 @@ $scope.$parent.scan_only_privilege_curri('14',$scope.all_curri_that_have_privile
           $scope.choose_not_complete = false;
     }
     $scope.file_not_already_upload = function(){
-
         return $scope.files.length==0;
     }
        $scope.sendCurriAndGetYears = function () {
@@ -1706,7 +1702,6 @@ $scope.$parent.scan_only_privilege_curri('14',$scope.all_curri_that_have_privile
         $scope.year_choosen = {}
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen,14,2).then(function(data) {
-$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
           });
     }
@@ -1813,7 +1808,6 @@ $scope.remove_president = function(curri_key,index_to_remove){
   $scope.$on("modal.hide", function (event, args) {
      $scope.init();      
     });
-
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
     });
@@ -1832,7 +1826,6 @@ $scope.remove_president = function(curri_key,index_to_remove){
         $scope.year_choosen = {};
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
-$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
           });
     }
@@ -1889,7 +1882,6 @@ $scope.nothing_change_object = function(){
  //            $scope.current_president = $scope.results[0];
  //            }
 $scope.old_pres_ob = angular.copy($scope.results);
-            
          });
     }
 $scope.change_already = function(){
@@ -1957,7 +1949,6 @@ $scope.change_already = function(){
     .error(function(data, status, headers, config) {             
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-     
   }); 
     }
 });
@@ -2820,7 +2811,6 @@ $scope.go_to_import = function(){
     $rootScope.manage_evidence_indicator_num = $scope.indicator_choosen.indicator_num;
         $rootScope.manage_evidence_curri_id_now = $scope.curri_choosen.curri_id;
     $rootScope.manage_evidence_year_now = $scope.year_choosen.aca_year;
-
 }
 $scope.init =function() {
      $scope.choose_not_complete = true;
@@ -2871,11 +2861,7 @@ $scope.init =function() {
              for(index=0;index<$rootScope.manage_evidences_world_evidences.length;index++){
                 $rootScope.my_evidence_real_code_we_have_now.push($rootScope.manage_evidences_world_evidences[index].evidence_real_code);
              }
-             
-
          });
-
-
    }
 
       $scope.find_indicators = function(){
@@ -2893,10 +2879,7 @@ $scope.choose_not_complete =true;
          ).success(function (data) {
             $scope.nothing_change =true;
               $scope.corresponding_indicators = data;
-            // $scope.get_all_teachers();
-
          });
-
     }
 
     //   $scope.remove_evidence = function(index_evidence_to_remove) { 
@@ -3099,12 +3082,6 @@ app.controller('manage_primary_evidences_admin_controller', function($scope, $ht
       $http.get('/api/curriculumacademic/getdistinctacayear').success(function (data) {
            $scope.corresponding_aca_years =data;
           });
- $scope.choose_not_complete = true;
-        $scope.year_choosen = {};
-               $scope.indicator_choosen= {};
-        $scope.go_request = false;
-                 $scope.corresponding_indicators = {};
-                 $scope.nothing_change = true;
 
 $scope.init =function() {
      $scope.choose_not_complete = true;
@@ -3115,6 +3092,7 @@ $scope.init =function() {
                    $scope.go_request = false;
 }
 
+$scope.init();
     $scope.$on("modal.hide", function (event, args) {
      $scope.init();
     });
@@ -3554,7 +3532,6 @@ $rootScope.manage_lab_still_same = function(){
          $scope.nothing_change = true;
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen,10,2).then(function(data) {
-$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
           });
     }
@@ -3570,20 +3547,16 @@ $scope.corresponding_indicators = [];
              }
          ).success(function (data) {
             $rootScope.manage_lab_all_personnels_in_curri = data;
-              
         $rootScope.manage_lab_curri_id = $scope.curri_choosen.curri_id;
         $rootScope.manage_lab_aca_year = $scope.year_choosen.aca_year;
 
 });
-
     }
 
-    $scope.initial_my_selected = function(){
-    
+    $scope.initial_my_selected = function(){ 
         $scope.my_manage_lab = $rootScope.manage_lab_fix_this_lab.officer;
     }
       $scope.go_to_fix_lab = function(lab_to_fix){
-     
               $http.post(
              '/api/personnel/gettnameandid',
              JSON.stringify($scope.curri_choosen.curri_id),
@@ -3607,12 +3580,9 @@ $scope.corresponding_indicators = [];
                 if($rootScope.manage_lab_all_personnels_in_curri[inside_index].user_id  == $rootScope.manage_lab_fix_this_lab.officer[index].user_id){
                           $rootScope.manage_lab_fix_this_lab_init.push($rootScope.manage_lab_all_personnels_in_curri[inside_index]);
                 }
-          
             }
         }
-
          });
-
     }
 
     $scope.remove_lab = function(index_to_remove){
@@ -3701,7 +3671,6 @@ $rootScope.manage_survey_still_same = function(){
          $scope.nothing_change = true;
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen,5,2).then(function(data) {
-$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
           });
     }
@@ -3723,13 +3692,11 @@ $scope.right_target = function(targets){
                 }
             }
         }
-       
     }
     return false;
 }
 
     $scope.go_to_answer = function(this_survey){
-
            $http.post(
              '/api/questionareanswer',
              JSON.stringify(this_survey.questionare_set_id),
@@ -3739,17 +3706,13 @@ $scope.right_target = function(targets){
                  }
              }
          ).success(function (data) {
-          
              $rootScope.manage_survey_questionare_set = data;
          })        
          .error(function(data, status, headers, config) {
-
-     
             $rootScope.no_open_answer_survey =true;
      $alert({title:'เกิดข้อผิดพลาด', content:data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
   }); 
-
         $rootScope.manage_survey_questionare_to_answer = this_survey;
     }
 
@@ -3769,7 +3732,6 @@ $scope.right_target = function(targets){
                        $alert({title:'เกิดข้อผิดพลาด', content:data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
   }); 
-
         $rootScope.manage_survey_questionare_of_result = this_survey;
     }
 
@@ -3778,14 +3740,11 @@ $scope.right_target = function(targets){
         $rootScope.manage_survey_my_world_wide_surveys.splice(index_to_remove, 1);   
     }
     $scope.go_to_create_survey = function(){
-
         $rootScope.manage_survey_curri_id_now = $scope.curri_choosen.curri_id;
         $rootScope.manage_survey_aca_year_now = $scope.year_choosen.aca_year;
-
     }
 
     $scope.find_information = function(){
-
         $http.post(
              '/api/questionare/getquestionareset',
              JSON.stringify($scope.year_choosen),
@@ -3799,20 +3758,17 @@ $scope.right_target = function(targets){
                $rootScope.manage_survey_my_world_wide_surveys = data;               
              $scope.choose_not_complete = false;
          });
-
     }
     $scope.close_modal = function(my_modal){
         my_modal.$hide();
     }
     $scope.save_to_server = function(my_modal){
         if($rootScope.manage_survey_my_world_wide_surveys.length == 0){
-           
             $scope.to_sent  = {};
             $scope.to_sent.curri_id  = $scope.curri_choosen.curri_id;
             $scope.to_sent.aca_year = $scope.year_choosen.aca_year;
             $scope.to_sent.questionare_set_id = 0;
             $rootScope.manage_survey_my_world_wide_surveys.push($scope.to_sent);
-
         }
 
         $http.put(
@@ -3827,15 +3783,10 @@ $scope.right_target = function(targets){
             $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-               
          })
     .error(function(data, status, headers, config) {
-     
-
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-    
-
   }); 
     }
 });
@@ -3997,7 +3948,6 @@ $rootScope.manage_album_still_same = function(){
          $scope.nothing_change = true;
       
               request_years_from_curri_choosen_service.async($scope.curri_choosen,6,2).then(function(data) {
-$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
           });
     }
@@ -6083,7 +6033,6 @@ $scope.init =function() {
          $scope.nothing_change = true;
     
               request_years_from_curri_choosen_service.async($scope.curri_choosen,999).then(function(data) {
-$scope.corresponding_indicators = [];
             $scope.corresponding_aca_years = data;
           });
     }
