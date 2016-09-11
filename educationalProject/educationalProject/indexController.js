@@ -1804,15 +1804,6 @@ $scope.remove_president = function(curri_key,index_to_remove){
                 $scope.current_president= {};
   $scope.blank_please= false;
 
-  $scope.sendCurriAndGetYears = function () {
-        $scope.choose_not_complete =true;
-        $scope.year_choosen = {};
-      
-              request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
-            $scope.corresponding_aca_years = data;
-          });
-    }
-
 $scope.nothing_change_object = function(){
       if(!$scope.old_pres_ob){
         return true;
@@ -2015,10 +2006,6 @@ $scope.init =function() {
    $scope.add_admin_mode = false;
 $scope.email_new_admin = "";
 
-   $http.get('/api/admin').success(function (data) {
-             $rootScope.all_admins = data;           
-           });
-
  $scope.openLightboxModal = function (to_open) {
     $scope.fake_array = [];
     $scope.fake_array.push(to_open);
@@ -2044,7 +2031,6 @@ app.controller('manage_indicators_controller', function($scope, $alert,$http,$ro
 $scope.init = function(){
      $scope.choose_not_complete = true;
      $scope.year_choosen = 0;
-
     $scope.choose_not_complete = true;
       $rootScope.manage_indicators_and_subs_year_choosen = 0;
       $scope.please_wait = false;
@@ -2066,19 +2052,12 @@ $rootScope.manage_indicators_year_to_create = "";
     $scope.$on("modal.hide", function (event, args) {
      $scope.init();
     });
-
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
     });
 
 $scope.please_wait = false;
 $scope.nothing_change = true;
-   $http.get('/api/indicator').success(function (data) {
-            $scope.all_indicator_years = data;
-          });
-     $http.get('/api/curriculumacademic/getmaxacayear').success(function (data) {
-             $scope.max_year_curri_have = data;
-           });
 
     $scope.year_to_create = ""; 
     $scope.choose_not_complete = true;
@@ -3006,9 +2985,6 @@ $scope.please_wait = false;
 });
 
 app.controller('manage_primary_evidences_admin_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
-      $http.get('/api/curriculumacademic/getdistinctacayear').success(function (data) {
-           $scope.corresponding_aca_years =data;
-          });
 
 $scope.init =function() {
      $scope.choose_not_complete = true;
@@ -3017,8 +2993,10 @@ $scope.init =function() {
                  $scope.corresponding_indicators = [];
                  $scope.nothing_change = true;
                    $scope.go_request = false;
+        $http.get('/api/curriculumacademic/getdistinctacayear').success(function (data) {
+           $scope.corresponding_aca_years =data;
+          });
 }
-
 $scope.init();
     $scope.$on("modal.hide", function (event, args) {
      $scope.init();
@@ -4053,9 +4031,6 @@ app.controller('create_user_controller', function($scope, $http,$alert,$loading,
       $scope.files = [];
 $scope.choose_not_complete = true;
         $scope.please_wait = false;
-    $http.get('/api/usertype/getexcludeadmcom').success(function (data) {
-                $scope.all_usertype = data;
-              });
 angular.forEach(
     angular.element("input[type='file']"),
     function(inputElem) {
@@ -4183,9 +4158,6 @@ $scope.my_new_user.type = $scope.my_type;
 app.controller('manage_user_type_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
    $scope.my_type = '';
         $scope.please_wait = false;
-    $http.get('/api/usertype/getallusertype').success(function (data) {
-                $scope.all_usertype = data;
-              });
     $scope.$on("modal.hide", function (event, args) {
      $scope.init();
     });
@@ -4198,7 +4170,6 @@ $scope.add_these_type= [];
       $scope.my_type = '';
     $scope.please_wait = false;
 $scope.choose_type = false;
-
           $http.get('/api/usertype/getallusertype').success(function (data) {
                 $scope.all_usertype = data;
               });
@@ -4256,14 +4227,10 @@ app.controller('create_user_individual_controller', function($scope, $http,$aler
 $scope.choose_not_complete = true;
         $scope.please_wait = false;
         $scope.my_new_users = [];
-    $http.get('/api/usertype/getexcludeadmcom').success(function (data) {           
-                $scope.all_usertype = data;
-              });
 
     $scope.$on("modal.hide", function (event, args) {
      $scope.init();
     });
-
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
     });
@@ -4374,10 +4341,6 @@ $scope.init =function() {
                     $scope.my_target = [];
                     $scope.questions =[];
                     $scope.my_survey_name ="";
-
-                $http.get('/api/usertype/getexcludeadmin').success(function (data) {
-                $scope.all_usertype = data;
-              });
 
     $scope.still_not_complete = function(){
                 if($scope.questions.length == 0) {
@@ -5051,9 +5014,6 @@ $scope.title_choosen = {};
            });
 }
 
-     $http.get('/api/title').success(function (data) {
-             $scope.all_title = data;
-           });
     $scope.not_choose_title_yet = true;
 $scope.title_choosen = {};
      $scope.choose_not_complete = true;
@@ -5490,9 +5450,6 @@ $scope.title_choosen = {};
            });
 }
 
-     $http.get('/api/title').success(function (data) {
-             $scope.all_title = data;
-           });
     $scope.not_choose_title_yet = true;
 $scope.title_choosen = {};
      $scope.choose_not_complete = true;
@@ -5501,7 +5458,6 @@ $scope.title_choosen = {};
       $scope.$on("modal.hide", function (event, args) {
      $scope.init();
     });
-
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
     });
@@ -5592,9 +5548,7 @@ $scope.title_choosen = {};
            });
 }
 
-     $http.get('/api/title').success(function (data) {
-             $scope.all_title = data;
-           });
+
     $scope.not_choose_title_yet = true;
 $scope.title_choosen = {};
                  $scope.manage_privilege_admin_result = {};
@@ -5602,7 +5556,6 @@ $scope.title_choosen = {};
       $scope.$on("modal.hide", function (event, args) {
      $scope.init();
     });
-
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
     });
