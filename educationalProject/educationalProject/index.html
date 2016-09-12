@@ -2114,15 +2114,9 @@
     margin-left: 14px;
     margin-right: 16px;
 ">
-
-
-                      
+   
                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="choose_curri()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
-
-                     
-                      
-
                     </div>
 <br />
   <div class="container-fluid" ng-hide="choose_not_complete">
@@ -2131,9 +2125,6 @@
 
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
                                  data-qo-selectable="true">
-              
-
-              
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
                           
@@ -2326,8 +2317,6 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                             </tr>
                                         </thead>
                                         <tbody class="flattened" ng-hide="not_choose_title_yet"> 
-                                   
-
                                             <tr  ng-repeat="each_type in manage_privilege_admin_result.list">
                           <td  ><span style="font-size:21px;">{{each_type.user_type}}</span> </td>
                                            
@@ -3533,19 +3522,13 @@ glyphicon glyphicon-bell"></i> </span>
                               <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                         </div>
-
                     </div>
 <br />
 
   <div class="container-fluid" ng-hide="choose_not_complete">
                         <div class="clearfix">
-
-
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
-                                 data-qo-selectable="true">
-              
-
-              
+                                 data-qo-selectable="true">              
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
                                   <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="from-left" data-nq-toggle-modal="#add_committee" data-ng-click="go_to_add_committee()"><i class="fic glyphicon glyphicon-plus-sign"></i> แต่งตั้งกรรมการหลักสูตร</button>
@@ -3555,21 +3538,14 @@ glyphicon glyphicon-bell"></i> </span>
                                       
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
-                          
                                                 <th style="width:70px">รูป</th>
                                                 <th style="width:300px">ชื่อ-นามสกุล</th>
                       <th style="width:70px;padding-left: 0px;padding-right: 0px;">อีเมล์</th>
                                                 <th style="width:70px">วันที่แต่งตั้ง</th>
-                
                                                 <th style="width:30px">ลบ</th>
-                                              
-                                            
                                             </tr>
                                         </thead>
                                         <tbody class="flattened">
-                                     
-                                          
-
                                             <tr  ng-repeat="committee in manage_committee_who_all_committees">
                                              <td  >
                                             <!--  <img src="{{committee.file_name_pic}}" class="img-circle" height="90"> -->
@@ -3579,21 +3555,14 @@ glyphicon glyphicon-bell"></i> </span>
                           <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{committee.t_name}}</span> </td>
                                               <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{committee.email}}</span> </td>
           <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{committee.date_promoted}}</span> </td>
-                          
-                                             
-        
 
                                           <td > <a  style="margin-top:7px" data-ng-click="remove_committee($index)" href=""  class="hvr-pulse" >
                                         <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td> 
 
-                                            </tr>
-
-                                           
+                                            </tr>                                           
                                         </tbody>
-
                                     </table>
-
          </div>         </div>        
 
           </div>         </div>
@@ -3604,9 +3573,6 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
    </div>
-
-
-
 
 
                     <div id="watch_curri" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true"  >
@@ -3634,11 +3600,8 @@ glyphicon glyphicon-bell"></i> </span>
                           
     <div class="col-md-8">
                          <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.curr_ename}}
-
-                            </div>
-                          
+                            </div>                          
                         </div>
-
 
                     <div class="row">
                   <div class="col-md-4" style="
@@ -3646,9 +3609,7 @@ glyphicon glyphicon-bell"></i> </span>
 ">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(ย่อ)   </span></h3>
                             </div>
-                          
 
-                             
                                 <div class="col-md-8">
                          <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.degree_t_bf}}
 
@@ -3676,11 +3637,6 @@ glyphicon glyphicon-bell"></i> </span>
 ">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(เต็ม)  </span></h3>
                             </div>
-                     
-
-                          
-
-
    <div class="col-md-8">
                          <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.degree_t_full}}
 
@@ -3693,16 +3649,11 @@ glyphicon glyphicon-bell"></i> </span>
 ">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(เต็ม)</span></h3>
                             </div>
-                       
-
-                            
-
                              <div class="col-md-8">
                          <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.degree_e_full}}
 
                             </div>
                         </div>
-
 
                      <div class="row">
                        <div class="col-md-4" style="
@@ -3710,8 +3661,6 @@ glyphicon glyphicon-bell"></i> </span>
 ">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ระดับปริญญา </span></h3>
                             </div>
-         
-
                                 <div class="col-md-8">
                          <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.level}} 
 
@@ -3724,10 +3673,6 @@ glyphicon glyphicon-bell"></i> </span>
 ">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ระยะเวลาการเรียน </span></h3>
                             </div>
-
-                     
-
-                            
 
                                  <div class="col-md-8">
                          <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.period}} ปี
@@ -3746,17 +3691,15 @@ glyphicon glyphicon-bell"></i> </span>
                         <h1 class="headerModalH1"><span class="headerModal">ข้อมูลสนับสนุนการประเมินหลักสูตรตนเอง</span>  </h1>
                     </div>
 
-
                     <div class="container-fluid" >
                        <button class="btn btn-warning hvr-pulse" ng-click="go_to_edit_reason(this,sub_indicator_now_for_link)" ><i class="glyphicon glyphicon-wrench"></i> แก้ไขข้อมูลสนับสนุนการประเมิน</button>
 
                         <div class="clearfix">
-
 <br />
 
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
                                  data-qo-selectable="true">
-              
+
                                 <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
 
@@ -3793,16 +3736,9 @@ glyphicon glyphicon-bell"></i> </span>
  </div>
 
                                 </div>
-
-
-
-
                             </div>
-
                         </div>
-
                     </div>
-
 
                       <div class="custom-footer" >
                         <div class="topicHeader pull-right">
@@ -3819,12 +3755,8 @@ glyphicon glyphicon-bell"></i> </span>
 
 
                     <div class="container-fluid" >
-                   
-
                         <div class="clearfix">
-
 <br />
-
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
                                  data-qo-selectable="true">
               
@@ -3864,20 +3796,11 @@ glyphicon glyphicon-bell"></i> </span>
  </div>
 
                                 </div>
-
-
-
-
                             </div>
-
                         </div>
-
                     </div>
-
-
                       <div class="custom-footer" >
                         <div class="topicHeader pull-right">
-                         
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
                         </div>
                     </div>
@@ -3886,8 +3809,6 @@ glyphicon glyphicon-bell"></i> </span>
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal">ข้อมูลสนับสนุนการประเมินหลักสูตรจากผู้ประเมินภายนอก</span></h1>
                     </div>
-
-
                     <div class="container-fluid" >
                         <div class="clearfix">
 <br />
@@ -3937,18 +3858,11 @@ glyphicon glyphicon-bell"></i> </span>
 </td>
 
        <td ><span ng-show="result.evaluation_score !=0" class="topicNewHeader">{{result.evaluation_score}} </span></td>
- 
-
-
                                             </tr>
-
                                             </form>
                                         </tbody>
-
                                     </table>
                                 </div>
-
-
 
 <div ng-show="reason_other_evaluate.evaluation_detail[0].evaluation_score != 0">
 <div class="row" ng-show="reason_other_evaluate.file_name != ''">
@@ -3958,10 +3872,6 @@ glyphicon glyphicon-bell"></i> </span>
                  
 <a href="" ng-click="download_file_now(reason_other_evaluate.file_name)" class=" hvr-wobble-vertical"><span style="
     font-size: 30px;color: #739900; " class="glyphicon glyphicon-download-alt " /></a>
-  
-
-
-
 
 </div>
        
@@ -3972,7 +3882,6 @@ glyphicon glyphicon-bell"></i> </span>
        <span class="topicNewHeader"><span style="margin-left:35px;color:#6F002B;font-weight:bold">ประเมิน ณ วันที่</span>  {{reason_other_evaluate.evaluation_detail[0].date}}<span style="color:#6F002B;font-weight:bold"> เวลา</span> {{reason_other_evaluate.evaluation_detail[0].time}} </span> 
        </div> 
 </div>
-
                             </div>
                         </div>
                     </div>
@@ -3989,67 +3898,51 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
         <table  class="plain" >
         <thead>
-            <th  >คะแนน</th>
-               <th >ความหมาย</th>
+            <th>คะแนน</th>
+               <th>ความหมาย</th>
                   <th>คุณภาพและระดับความต้องการในการพัฒนา</th>
             </thead>
             <tbody>
                 <tr>
                 <td class="ppoint">1</td>
-                <td  >ไม่ปรากฏการดำเนินการ (ไม่มีเอกสาร ไม่มีแผน หรือไม่มีหลักฐาน)</td>
-                <td  >คุณภาพไม่เพียงพออย่างชัดเจน ต้องปรับปรุงแก้ไข หรือพัฒนาโดยเร่งด่วน</td>
+                <td>ไม่ปรากฏการดำเนินการ (ไม่มีเอกสาร ไม่มีแผน หรือไม่มีหลักฐาน)</td>
+                <td>คุณภาพไม่เพียงพออย่างชัดเจน ต้องปรับปรุงแก้ไข หรือพัฒนาโดยเร่งด่วน</td>
                 </tr>
-
                 <tr>
                 <td class="ppoint">2</td>
-                <td  >มีการวางแผนแต่ยังไม่ได้เริ่มดำเนินการ</td>
-                <td  >คุณภาพไม่เพียงพอ จำเป็นต้องมีการปรับปรุง
-แก้ไข หรือ พัฒนา</td>
+                <td>มีการวางแผนแต่ยังไม่ได้เริ่มดำเนินการ</td>
+                <td>คุณภาพไม่เพียงพอ จำเป็นต้องมีการปรับปรุงแก้ไข หรือ พัฒนา</td>
                 </tr>
-
         <tr>
                 <td class="ppoint">3</td>
-                <td  >มีเอกสารแต่ไม่เชื่อมโยงกับการปฏิบัติ หรือมี
-การดำเนินการแต่ยังไม่ครบถ้วน</td>
-                <td  >คุณภาพไม่เพียงพอ แต่การปรับปรุง แก้ไข หรือ
-พัฒนาเพียงเล็กน้อยสามารถทำให้มีคุณภาพ
-เพียงพอได้</td>
+                <td>มีเอกสารแต่ไม่เชื่อมโยงกับการปฏิบัติ หรือมีการดำเนินการแต่ยังไม่ครบถ้วน</td>
+                <td>คุณภาพไม่เพียงพอ แต่การปรับปรุง แก้ไข หรือพัฒนาเพียงเล็กน้อยสามารถทำให้มีคุณภาพเพียงพอได้</td>
                 </tr>
-
                       <tr>
                 <td class="ppoint">4</td>
-                <td  >มีเอกสารและหลักฐานการดำเนินการตาม
-เกณฑ์</td>
-                <td  >มีคุณภาพของการดำเนินการของหลักสูตรตาม
-เกณฑ์</td>
+                <td>มีเอกสารและหลักฐานการดำเนินการตามเกณฑ์</td>
+                <td>มีคุณภาพของการดำเนินการของหลักสูตรตามเกณฑ์</td>
                 </tr>
-
                       <tr>
                 <td class="ppoint">5</td>
-                <td  >มีเอกสารและหลักฐานชัดเจนที่แสดงถึงการ
-ดำเนินการที่มีประสิทธิภาพดีกว่าเกณฑ์</td>
-                <td  >มีคุณภาพของการดำเนินการของหลักสูตรดีกว่า
-เกณฑ์</td>
+                <td>มีเอกสารและหลักฐานชัดเจนที่แสดงถึงการดำเนินการที่มีประสิทธิภาพดีกว่าเกณฑ์</td>
+                <td>มีคุณภาพของการดำเนินการของหลักสูตรดีกว่าเกณฑ์</td>
                 </tr>
-
                       <tr>
                 <td class="ppoint">6</td>
-                <td  >ตัวอย่างของแนวปฏิบัติที่ดี</td>
-                <td  >ตัวอย่างของแนวปฏิบัติที่ดี</td>
+                <td>ตัวอย่างของแนวปฏิบัติที่ดี</td>
+                <td>ตัวอย่างของแนวปฏิบัติที่ดี</td>
                 </tr>
 
                       <tr>
                 <td class="ppoint">7</td>
-                <td  >ดีเยี่ยม เป็นแนวปฏิบัติในระดับโลก
-หรือแนวปฏิบัติชั้นนำ</td>
-                <td  >ดีเยี่ยม เป็นแนวปฏิบัติในระดับโลก
-หรือแนวปฏิบัติชั้นนำ</td>
+                <td>ดีเยี่ยม เป็นแนวปฏิบัติในระดับโลก หรือแนวปฏิบัติชั้นนำ</td>
+                <td>ดีเยี่ยม เป็นแนวปฏิบัติในระดับโลก หรือแนวปฏิบัติชั้นนำ</td>
                 </tr>
             </tbody>
         </table>
                      <div class="custom-footer" >
                         <div class="topicHeader pull-right">
-                         
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
                         </div>
                     </div>
