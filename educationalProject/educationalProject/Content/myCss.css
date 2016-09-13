@@ -1539,3 +1539,14 @@ body > .inner {
 body.pg-loaded > .inner {
   display: block;
 }
+
+/*===Below style define by ce51benz===*/
+.txt-title{
+  font-size:21px !important;
+  font-weight: 400;
+  color:#6F002B;
+}
+
+.txt-normal{
+  font-size:21px !important;
+}

@@ -298,18 +298,22 @@
                         </li>
 
             <li ng-show='have_privilege_to_open_modal("29") || fix_mode'>
-     <!--    <li> -->
                             <a href="" data-nq-toggle-modal="#manage_user_type" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-tags"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการประเภทบุคลากร</span></span>
                             </a>
                         </li>
-
+            <li>
+                <a href="" data-nq-toggle-modal="#about_app" data-effect="fall">
+                    <i class="glyphicon glyphicon-modal-window"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;Application version</span></span>
+                            </a>
+                        </li>
                     </ul>
 
 
-                    </li>
-                    </ul>
+                    <!--/li>
+                    </ul-->
                 </div>
     </section>
    
@@ -6305,22 +6309,10 @@ glyphicon glyphicon-bell"></i> </span>
 
                                             </tr>
 
-
-
-
                                         </tbody>
-
                                     </table>
-
                                 </div>
-
-
-
-
-
-
                             </div>
-
                         </div>
 
                     </div>
@@ -6343,6 +6335,36 @@ glyphicon glyphicon-bell"></i> </span>
 
                 </div>
 
+<div id='about_app' nq-modal='' qo-independent='true'>
+    <div class="custom-header">
+        <h1 class="headerModalH1">เกี่ยวกับเวอร์ชั่นของเว็บแอพพลิเคชั่น</h1>
+        </div>
+        <div class='container-fluid'>
+            <div class='clearfix'>
+            <div class='row'>
+                <div class='col-xs-3 txt-title text-right'>
+                    <p>Build:</p>
+                </div>
+                <div class='col-xs-9 txt-normal'>
+                    <p>447</p>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-xs-3 txt-title text-right'>
+                    <p>ปรับปรุงล่าสุด:</p>
+                </div>
+                <div class='col-xs-9 txt-normal'>
+                    <p>13 กันยายน 2559</p>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="custom-footer">
+            <div class="topicHeader pull-right">
+                <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
+            </div>
+        </div>
+</div>
      <script type="text/javascript">
 
   var loading_screen = pleaseWait({
@@ -6354,10 +6376,8 @@ glyphicon glyphicon-bell"></i> </span>
   </script>
  
 
-
     <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
  
-
 
          <script src="/bower_components/angular/angular.js"></script>
          <script src="/bower_components/angular-animate/angular-animate.js"></script>
