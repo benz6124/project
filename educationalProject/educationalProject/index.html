@@ -828,20 +828,18 @@
                         </div>
                     </div>
 
-                    <div id="add_aca_year" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-ng-controller="add_aca_year" data-ng-init="init()">
+                    <div id="add_aca_year" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-ng-controller="add_aca_year as add_aca_year_ctrl">
                         <div class="custom-header">
-                            <h1 class="headerModalH1"> เพิ่มปีการศึกษา </h1>
+                            <h1 class="headerModalH1">เพิ่มปีการศึกษา</h1>
                         </div>
-                       <form name="add_year_form" novalidate>
+                       <form name="add_aca_year_ctrl.add_year_form" novalidate>
                         <div class="row">
                             <div class="col-md-2">
                                 <h3 style="margin-top:5px;"><span class="topicHeader">หลักสูตร:   </span></h3>
                             </div>
-                            <div class="col-md-10" style="
-    padding-right: 25px;
-">
+                            <div class="col-md-10" style="padding-right: 25px;">
                                 <div class="topicHeader">
-                                   <select name = "choose_curri" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true"  >
+                                   <select name = "choose_curri" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
                                   <option style="display:none" value=""></option></select>
                                 </div>
                             </div>
@@ -852,16 +850,15 @@
                             </div>
                             <div class="col-md-10">
                                 <div class="topicHeader">
-                                    <input type="number" ng-pattern="/^[0-9]*$/"  ng-class="{ little_danger: add_year_form.choose_aca_year.$invalid && add_year_form.$dirty }" name ="choose_aca_year" class="form-control" ng-model="new_curri_academic.aca_year" placeholder="กรุณากรอกปีการศึกษา"  min="0" required><span class="normal">  </span>
+                                    <input type="number" ng-pattern="/^[0-9]*$/"  ng-class="{ little_danger: add_aca_year_ctrl.add_year_form.choose_aca_year.$invalid && add_aca_year_ctrl.add_year_form.$dirty && add_aca_year_ctrl.add_year_form.choose_aca_year.$dirty }" name ="choose_aca_year" class="form-control" ng-model="new_curri_academic.aca_year" placeholder="กรุณากรอกปีการศึกษา"  min="0" required><span class="normal">  </span>
                                 </div>
                             </div>
                         </div>
-                    <!--   </form> -->
                     </form>
                         <div class="custom-footer">
                             <div class="topicHeader pull-right">
-                                <button class="btn btn-success  " ng-disabled="still_not_complete() || please_wait" ng-click="add_aca_year_to_server(this)">ยืนยัน</button>
-                                <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                                <button class="btn btn-success" ng-disabled="still_not_complete() || please_wait" ng-click="add_aca_year_to_server(this)">ยืนยัน</button>
+                                <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                             </div>
                         </div>
                     </div>

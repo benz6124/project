@@ -852,6 +852,7 @@ for(index=0;index<$scope.corresponding_sub_indicators.length;index++){
     }
 });
 app.controller('add_aca_year', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope) {
+    var thisctrl = this;
     $scope.init = function(){
         $scope.curri_choosen = {};
                $scope.new_curri_academic = {};
@@ -864,28 +865,30 @@ app.controller('add_aca_year', function($scope, $http,$alert,$loading,request_al
          $scope.$parent.scan_only_privilege_curri('2',$scope.all_curri_that_have_privileges);
       }
     }
+
+$scope.init();
+
        $scope.$on("modal.hide", function (event, args) {
-     $scope.init();
+           thisctrl.add_year_form.$setPristine();
+           $scope.init();
     });
   $scope.$on("modal.show", function (event, args) {
-              $scope.init();
+      thisctrl.add_year_form.$setPristine();
+      $scope.init();
     });
-
   $scope.still_not_complete = function(){
     if(!$scope.new_curri_academic){
         return true;
     }
-    if(!  $scope.curri_choosen || !$scope.new_curri_academic.aca_year){
+    if(angular.equals({},$scope.curri_choosen) || !$scope.new_curri_academic.aca_year){
         return true;
-    } 
+    }
     if(angular.isNumber($scope.new_curri_academic.aca_year)==false || $scope.new_curri_academic.aca_year <= 0){
            return true;
     }
     return false;
   }
-    $scope.curri_choosen = {};
-               $scope.new_curri_academic = {};
-        $scope.new_curri_academic.aca_year = "";
+
     $scope.close_modal = function(my_modal){
         my_modal.$hide();
     }
@@ -913,11 +916,10 @@ if( $scope.curri_choosen!= "none" && $scope.new_curri_academic.aca_year != ""){
      $alert({title:'เกิดข้อผิดพลาด', content:data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
      }
-  }); 
-
+  });
      }else{
          $scope.please_wait = false;
-       $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกหลักสูตรและปีการศึกษา',alertType:'danger',
+       $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกหลักสูตรและระบุปีการศึกษา',alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
      }
     }
