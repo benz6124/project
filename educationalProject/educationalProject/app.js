@@ -4,17 +4,13 @@ var app = angular.module('myProject', [
         'ngSanitize',
         'ngAnimate',
         'ngQuantum',
-        'ngDialog'
         // ,'ngRoute'
-        ,'ui.bootstrap'
+        'ui.bootstrap'
         ,'bootstrapLightbox'
         ,'flow'
         ,'ngCookies'
-       
-   
+
 ]);
-
-
 
 
 //         window.loading_screen = pleaseWait({

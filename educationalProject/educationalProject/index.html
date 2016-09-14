@@ -705,12 +705,11 @@
     <hr ng-show="already_login" />
                       <div ng-show="can_edit_reason()" >
                        <a name="edit_reason_now"></a>
-                    <button class="btn editor hvr-wobble-vertical " type="button" data-nq-toggle-modal="#another_aca" data-qo-effect="flip-x"   style="background-color:#6F002B;border:none;" ng-click="clear_select_year_support_text_choosen()"> <span class="glyphicon glyphicon-export" /><span class="normal"> ดึงข้อมูลจากปีการศึกษาอื่น</span></button>
+                    <button class="btn editor hvr-wobble-vertical" type="button" data-nq-toggle-modal="#another_aca" data-qo-effect="flip-x"   style="background-color:#6F002B;border:none;" ng-click="clear_select_year_support_text_choosen()"> <span class="glyphicon glyphicon-import" /><span class="normal"> ดึงข้อมูลจากปีการศึกษาอื่น</span></button>
   <br />
          <br />
                         <form>
                         <textarea class="form-control" name="editor1" id="support_text" rows="10" cols="80"></textarea>
-
                         <script type="text/javascript">
                       CKEDITOR.replace("editor1");
                         </script>
@@ -759,7 +758,7 @@
 </div>
 </div>
 
-     <div id="another_aca" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-qo-effect="flip-x">
+     <div id="another_aca" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-qo-effect="flip-x" qo-keyboard='false'>
                         <div class="custom-header">
                             <h1 class="headerModalH1">ดึงข้อมูลจากปีการศึกษาอื่น</h1>
                         </div>
@@ -768,23 +767,21 @@
                             <div class="col-md-4">
                                 <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">ปีการศึกษา:   </span></h3>
                             </div>
-
                             <div class="col-md-6">
                                 <div class="topicHeader">
-                             
-                                      <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years_except_us" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="prepare_to_watch_support_text()" data-ng-model="$parent.$parent.select_year_support_text " data-qo-disable-clear="true"  required>
+                                      <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years_except_us" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-change="prepare_to_watch_support_text()" data-ng-model="$parent.$parent.select_year_support_text" data-qo-disable-clear="true"  required>
 <option style="display:none" value=""></option></select>    
                                 </div>
                             </div>
                             <div class="col-md-2">
-                             <h3 style="margin-top:5px" class="hvr-wobble-vertical"><a  ng-disabled="select_year_support_text==0"  href="" ng-click="watch_support_text_from_other_year()"><i class="glyphicon glyphicon-search"></i> </a>  </h3>
+                             <h3 style="margin-top:5px" class="hvr-wobble-vertical"><a href="" ng-click="watch_support_text_from_other_year()"><i class="glyphicon glyphicon-search"></i> </a>  </h3>
                           </div>
                         </div>
 </form>
                         <div class="custom-footer">
                             <div class="topicHeader pull-right">
-                                <button class="btn btn-success  " ng-disabled="select_year_support_text==0" ng-click="get_support_content_from_other_year(this)">ยืนยัน</button>
-                                <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                                <button class="btn btn-success" ng-disabled="select_year_support_text==0" ng-click="get_support_content_from_other_year(this)">ยืนยัน</button>
+                                <button class="btn btn-default" ng-click="$hide()">ยกเลิก</button>
                             </div>
                         </div>
                     </div>
@@ -5182,7 +5179,6 @@ glyphicon glyphicon-bell"></i> </span>
     <script src="/bower_components/quantumui/dist/js/quantumui-all.js"></script>
 
     <script src="/bower_components/quantumui/config/icons.js"></script>
-    <script src="/bower_components/ng-dialog/js/ngDialog.js"></script>
 
     <link href="/Content/dropdowns-enhancement.css" rel="stylesheet" />
 
@@ -5195,8 +5191,6 @@ glyphicon glyphicon-bell"></i> </span>
 <script type="text/javascript" src="indexController.js"></script> 
 <script type="text/javascript" src="all_curriculums_service.js"></script> 
                 <link href="/Content/myCss.css" rel="stylesheet" />
-<link href="/bower_components/ng-dialog/css/ngDialog.css" rel="stylesheet" />
-<link href="/bower_components/ng-dialog/css/ngDialog-theme-default.css" rel="stylesheet" />
 <link rel="stylesheet" href="/bower_components/angular-bootstrap/ui-bootstrap-csp.css">
 
 <link rel="stylesheet" href="/bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.css">
@@ -5230,8 +5224,23 @@ glyphicon glyphicon-bell"></i> </span>
                      <li ng-repeat="each in $root.manage_user_email_duplicate track by $index">{{each}}</li>
                         </ul>    
           </div>
-        </script>
-
+</script>
+ <script type="text/ng-template" id="/template/previewsectionsave.html">
+    <div class="custom-header">
+        <h1 class="headerModalH1">ข้อมูลจากปีการศึกษาอื่น</h1>
+        </div>
+        <div class='container-fluid'>
+            <div class='clearfix txt-normal'>
+                <div class='well' ng-bind-html='content'>
+                </div>
+            </div>
+        </div>
+        <div class="custom-footer">
+            <div class="topicHeader pull-right">
+                <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
+            </div>
+        </div>
+</script>
  <script type="text/javascript">
      loading_screen.finish();
   </script>

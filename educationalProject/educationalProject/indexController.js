@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('choice_index_controller', function($scope,$anchorScroll, $location,$http,$alert,$cookies,$loading,ngDialog,request_all_curriculums_service_server,$rootScope) {
+app.controller('choice_index_controller', function($scope,$anchorScroll, $location,$http,$alert,$cookies,$loading,request_all_curriculums_service_server,$rootScope,$modal) {
 
     $scope.not_select_curri_and_year = true;
     $scope.not_select_sub_indicator = true;
@@ -633,14 +633,24 @@ $scope.select_this_indi = function(indicator){
 $scope.watch_support_text_from_other_year= function(){
 
 if($scope.select_year_support_text != 0){
-      ngDialog.open({
-    template:$scope.show_preview_support_text,
-    plain: true,
-    className: 'ngdialog-theme-default',
-    showClose :true,
-
+    if(!!$scope.show_preview_support_text){
+$modal({
+    size:'lg',
+    keyboard:false,
+    content:$scope.show_preview_support_text,
+    contentTemplate:'/template/previewsectionsave.html',
+    autoDestroy:true
 });
-
+    }
+    else{
+     $modal({
+    size:'lg',
+    keyboard:false,
+    content:'ไม่พบข้อมูลสนับสนุนการประเมินตนเองในปีการศึกษาดังกล่าว',
+    contentTemplate:'/template/previewsectionsave.html',
+    autoDestroy:true
+});   
+    }
   }
   else{
      $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกปีการศึกษา',alertType:'danger',
@@ -651,10 +661,8 @@ $scope.get_support_content_from_other_year = function (my_modal) {
     CKEDITOR.instances['support_text'].setData($scope.show_preview_support_text);
 
  my_modal.$hide();
-     $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
+     $alert({title:'ดำเนินการสำเร็จ', content:'ดึงข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-    // alert( CKEDITOR.instances['support_text'].getData());
-    // CKEDITOR.instances['support_text'].setData("cheese pizza");
 }
 
     $scope.find_curri_information = function(){
@@ -766,7 +774,6 @@ $scope.send_support_text_change_to_server = function(){
        window.big_chunk = data;
             window.all_curris = $rootScope.all_curriculums;
          });
-
                  });
                  }
                  else{
