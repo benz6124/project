@@ -1507,10 +1507,10 @@
          
   
                                    <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['10'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,10,4)"> <a  style="margin-top:7px"  href=""  class="hvr-pulse"  data-ng-click="go_to_fix_lab(lab)" data-nq-toggle-modal="#fix_lab">
-                                        <span class="topic"><i style="color:#eea236;margin0"class="glyphicon glyphicon-wrench"></i> </span>
+                                        <span class="topic"><i style="color:#eea236;margin0" class="glyphicon glyphicon-wrench"></i> </span>
                                     </a></td> 
                                           <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['10'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,10,4)"> <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_lab($index)" >
-                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                        <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td> 
                                             </tr>
                                             </form>
@@ -1526,14 +1526,8 @@
                         </div>
                     </div>
 
-                         <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['10'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,10,4) == false ">
+                         <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['10'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,10,4) == false) || choose_not_complete == true">
                         <div class="topicHeader pull-right">
-                           <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
-                        </div>
-                    </div>
-                  <div class="custom-footer" ng-show="choose_not_complete == true">
-                        <div class="topicHeader pull-right">
-                         
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
                         </div>
                     </div>
@@ -1603,13 +1597,7 @@
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
-                         <div class="custom-footer" ng-show="$root.president_in_this_curri(curri_choosen.curri_id)==false  && $root.current_user.privilege[curri_choosen.curri_id]['9'] <5 && $root.right_from_committee_just_curri(curri_choosen.curri_id,9,5) == false">
-                        <div class="topicHeader pull-right">
-                         
-                           <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
-                        </div>
-                    </div>
-                  <div class="custom-footer" ng-show="choose_not_complete == true">
+                         <div class="custom-footer" ng-show="($root.president_in_this_curri(curri_choosen.curri_id)==false  && $root.current_user.privilege[curri_choosen.curri_id]['9'] <5 && $root.right_from_committee_just_curri(curri_choosen.curri_id,9,5) == false) || choose_not_complete == true">
                         <div class="topicHeader pull-right">
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
                         </div>
@@ -2058,14 +2046,9 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                         </div>
                     </div>
 
-                    <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['11'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,11,3) == false   && choose_not_complete == false">
+                    <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['11'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,11,3) == false   && choose_not_complete == false) || choose_not_complete == true">
                         <div class="topicHeader pull-right">
                          
-                           <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
-                        </div>
-                    </div>
-                  <div class="custom-footer" ng-show="choose_not_complete == true">
-                        <div class="topicHeader pull-right">
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
                         </div>
                     </div>
@@ -2192,15 +2175,8 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                         </div>
                     </div>
 
-                         <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['8'] <5 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,5) == false ">
+                         <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['8'] <5 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,5) == false) || choose_not_complete == true">
                         <div class="topicHeader pull-right">
-                         
-                           <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
-                        </div>
-                    </div>
-                  <div class="custom-footer" ng-show="choose_not_complete == true">
-                        <div class="topicHeader pull-right">
-                         
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
                         </div>
                     </div>
@@ -2526,20 +2502,14 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                         </div>
                     </div>
 
-                         <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['3'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) == false ">
+                         <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['3'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) == false) || choose_not_complete == true">
                         <div class="topicHeader pull-right">
-                         
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
                         </div>
                     </div>
-                  <div class="custom-footer" ng-show="choose_not_complete == true">
-                        <div class="topicHeader pull-right">
-                           <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
-                        </div>
-                    </div>   
       </div>
 
- <div id="manage_primary_evidences_president" data-ng-controller="manage_primary_evidences_president_controller" data-ng-init="init()"data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode ="true" data-qo-independent="true">
+ <div id="manage_primary_evidences_president" data-ng-controller="manage_primary_evidences_president_controller" data-ng-init="init()" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode ="true" data-qo-independent="true">
       <div class="custom-header">
           <h1 class="headerModalH1"><span class="headerModal">ส่วนจัดการหลักฐานพื้นฐาน</span></h1>
       </div>
@@ -3093,7 +3063,7 @@ glyphicon glyphicon-bell"></i> </span>
     text-align: left;
 " >
    <span style="margin-left: 35px;" ng-if="display_self_support.improve!=''  && display_self_support.improve" class="topicHeader">{{display_self_support.improve}}</span> 
-      <span style="margin-left: 35px;"ng-if="!display_self_support.improve"class="topicHeader">--ไม่พบข้อมูล--</span> 
+      <span style="margin-left: 35px;" ng-if="!display_self_support.improve" class="topicHeader">--ไม่พบข้อมูล--</span> 
  </div>
                                 </div>
                             </div>
@@ -3243,7 +3213,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
 </div>
-         <div id="see_evaluate_other" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="see_evaluate_by_other_controller"data-qo-screen-mode="true" data-qo-independent="true">
+         <div id="see_evaluate_other" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="see_evaluate_by_other_controller" data-qo-screen-mode="true" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ผลการประเมินหลักสูตร</span></h1>
                     </div>
@@ -4035,13 +4005,8 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
 
-                    <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['12'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,12,3) == false   && choose_not_complete == false">
+                    <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['12'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,12,3) == false   && choose_not_complete == false) || choose_not_complete == true">
                         <div class="topicHeader pull-right">   
-                           <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
-                        </div>
-                    </div>
-                  <div class="custom-footer" ng-show="choose_not_complete == true">
-                        <div class="topicHeader pull-right">
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
                         </div>
                     </div>
@@ -4219,13 +4184,8 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
 
-                    <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['13'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,13,3) == false   && choose_not_complete == false">
+                    <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['13'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,13,3) == false   && choose_not_complete == false) || choose_not_complete == true">
                         <div class="topicHeader pull-right">
-                           <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
-                        </div>
-                    </div>
-                  <div class="custom-footer" ng-show="choose_not_complete == true">
-                        <div class="topicHeader pull-right">   
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
                         </div>
                     </div>
@@ -4874,12 +4834,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
 
-                         <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['6'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4) == false ">
-                        <div class="topicHeader pull-right">
-                           <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
-                        </div>
-                    </div>
-                  <div class="custom-footer" ng-show="choose_not_complete == true">
+                         <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['6'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4) == false) || choose_not_complete == true">
                         <div class="topicHeader pull-right">
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
                         </div>
@@ -4982,13 +4937,8 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
 
-                         <div class="custom-footer" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['5'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,5,4) == false ">
+                         <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['5'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,5,4) == false) || choose_not_complete == true">
                         <div class="topicHeader pull-right">
-                           <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
-                        </div>
-                    </div>
-                  <div class="custom-footer" ng-show="choose_not_complete == true">
-                        <div class="topicHeader pull-right">         
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
                         </div>
                     </div>
@@ -5049,7 +4999,6 @@ glyphicon glyphicon-bell"></i> </span>
 
                    <div class="custom-footer">
                                   <button style="margin-top:4px" class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
-
                                   </div>
 
                 </div>
@@ -5138,7 +5087,7 @@ glyphicon glyphicon-bell"></i> </span>
                     <p>Build:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>447</p>
+                    <p>451</p>
                 </div>
             </div>
             <div class='row'>
@@ -5146,7 +5095,7 @@ glyphicon glyphicon-bell"></i> </span>
                     <p>ปรับปรุงล่าสุด:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>13 กันยายน 2559</p>
+                    <p>15 กันยายน 2559</p>
                 </div>
             </div>
             </div>
