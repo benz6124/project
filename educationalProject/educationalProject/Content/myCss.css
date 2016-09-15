@@ -1550,3 +1550,13 @@ body.pg-loaded > .inner {
 .txt-normal{
   font-size:21px !important;
 }
+
+/*set fix-height(via line-height) of main menu*/
+ul.nav-aside > li{
+  line-height:25px;
+}
+
+/*Set height of aside sub-menu*/
+ul.nav-aside ul.sub-menu{
+  line-height:29px !important;
+}

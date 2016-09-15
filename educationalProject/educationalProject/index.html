@@ -51,10 +51,9 @@
                  data-ng-swipe-right="$aside.toggleCollapse(false);">
 
                 <div class="aside-header">
-                    <div class="aside-buttons" style="padding-top: 5px;">
                   <!--       <span ng-show="myLeftAside.$collapsed" ng-click="$aside.toggleCollapse()"><i class="glyphicon glyphicon-arrow-right"></i></span>
                         <span ng-hide="myLeftAside.$collapsed" ng-click="$aside.toggleCollapse()"><i class="glyphicon glyphicon-arrow-left"></i></span> -->
-                    </div>
+
                    <!--  <span ng-hide="$aside.$collapsed" class="aside-title" style="margin-left:7px;margin-top:10px;font-size:25px;font-weight:bold;color:#E8C8D7"><i class="glyphicon glyphicon-wrench"></i> &nbsp;แถบเครื่องมือ</span> -->
 
                 </div>
@@ -67,7 +66,7 @@
                             </span>
                         </span>
                     </p> -->
-                    <ul class="nav nav-stacked">
+                    <ul class="nav nav-stacked nav-aside">
                         <li ng-show="watch_only_admin() || have_privilege_to_open_modal('1') || fix_mode" >
 
 
@@ -107,8 +106,7 @@
                                 <i class="glyphicon glyphicon-folder-open"></i>
                                 <span ng-hide="$aside.$collapsed"><span class="topic"> &nbsp;&nbsp;จัดการข้อมูล</span></span>
                             </a>
-
-                            <ul class="dropdown">
+                            <ul class="dropdown sub-menu">
                               <li  ng-show='have_privilege_to_open_modal("7") || fix_mode'>
                                     <a href="" data-nq-toggle-modal="#show_education_personnel" data-screenMode="true" data-effect="slide-left" data-placement="right">
                                         <span class="topic"> ข้อมูลบุคลากร</span>
@@ -228,7 +226,7 @@
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic">&nbsp;&nbsp;แก้ไขระดับการเข้าถึง</span></span>
                             </a>
 
-                            <ul class="dropdown">
+                            <ul class="dropdown sub-menu">
                                 <li ng-show='have_privilege_to_open_modal("19") || fix_mode' >
                                     <a href="" data-nq-toggle-modal="#change_priviledge_by_type_president" data-effect="slide-left">
                                         <span class="topic">แก้ไขตามประเภทบุคลากร</span>
@@ -5087,7 +5085,7 @@ glyphicon glyphicon-bell"></i> </span>
                     <p>Build:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>451</p>
+                    <p>452</p>
                 </div>
             </div>
             <div class='row'>
