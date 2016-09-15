@@ -4248,6 +4248,8 @@ else{
         if(!$scope.my_type){
             return true;
         }
+        if(!$scope.my_new_users.length)
+        return true;
         var index;
         for(index=0;index<$scope.my_new_users.length;index++){
             if(!$scope.my_new_users[index]){

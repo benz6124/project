@@ -1035,10 +1035,10 @@
   <div ng-repeat="user_email in my_new_users track by $index"   >
          <div class="row" >
                                         <div class="col-md-11" style="padding-right:0px">
-                                          <input  class="form-control" type="email"  placeholder="กรุณากรอกอีเมล์ของบุคคลที่ต้องสร้างบัญชี" ng-model="my_new_users[$index]" />
+                                          <input  class="form-control" type="email"  placeholder="กรุณากรอกอีเมล์ของบุคคลที่ต้องการสร้างบัญชี" ng-model="my_new_users[$index]" />
                                         </div>
                                         <div class="col-md-1" style="padding-left:0px">
-                                          <button type="button" ng-click="remove_email($index)"class="btn" style="background-color:transparent;color:#d9534f;border:none;padding-left: 0px;" ><span style="
+                                          <button type="button" ng-click="remove_email($index)" class="btn" style="background-color:transparent;color:#d9534f;border:none;padding-left: 0px;" ><span style="
 
 " class="glyphicon glyphicon-minus-sign"></span></button>
                                         </div>
@@ -2647,7 +2647,7 @@ glyphicon glyphicon-bell"></i> </span>
             <tr ng-repeat="each_president in each_curri.presidents track by $index">
                 <td>    <div class="thumb_center_please " style="background-image: url({{each_president.pic}});"></div>  </td>
 
- <td> <select data-qo-disable-clear="true" data-ng-change="change(key)" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_candidate as each_candidate.tname for each_candidate in each_curri.candidates" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกบุคลากรที่ต้องการเลือก" data-ng-model="$parent.results.all_presidents[key].presidents[$index]" >
+ <td> <select data-qo-disable-clear="true" data-ng-change="change(key)" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_candidate as each_candidate.tname for each_candidate in each_curri.candidates" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกบุคลากรที่ต้องการแต่งตั้ง" data-ng-model="$parent.results.all_presidents[key].presidents[$index]" >
 <option style="display:none" value=""></option>
 </select> </td>
 
@@ -5085,7 +5085,7 @@ glyphicon glyphicon-bell"></i> </span>
                     <p>Build:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>452</p>
+                    <p>453</p>
                 </div>
             </div>
             <div class='row'>
