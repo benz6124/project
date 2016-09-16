@@ -6175,7 +6175,6 @@ angular.module('ngQuantum.scrollbar', ['ngQuantum.services.helpers', 'ngQuantum.
                           findSizes();
                           watchResult();
                       }, timeout)
-                      
                   };
                   function optimize() {
                       if (!/y|x|both/.test(options.axis))
@@ -6657,12 +6656,20 @@ angular.module('ngQuantum.scrollbar', ['ngQuantum.services.helpers', 'ngQuantum.
                   }
                   function applyY(newval) {
                       newval = newval || $container[0].scrollHeight;
-                      
                       var maxtop = $container[0].scrollHeight - $container.outerHeight();
                       if (maxtop < scope.scrollTop)
                           scope.scrollTop = maxtop;
                       if (newval && /y|both/.test(options.axis)) {
-                          var h = $container.outerHeight(true);
+                          
+                          /*scrollbar height fix*/
+                          var h;
+                          /*case element that have well class*/
+                          if($container.hasClass('well'))
+                            h = $container.innerHeight() - 6;
+                          else
+                            h = $container.outerHeight(true);
+                          /*end edit*/
+
                           $y = barSizes($y, newval, h);
                           if (!$bar || !$bar.$templateReady)
                               buildTemplate();

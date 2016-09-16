@@ -1012,42 +1012,36 @@
                         <div class="custom-header">
                             <h1 class="headerModalH1">สร้างบัญชีรายชื่อ</h1>
                         </div>
-                        <div class="row">
+                        <div class="row" style="margin-left:0px;margin-right:0px;">
                             <div class="col-md-3">
-                                <h3 style="margin-left:10px;margin-top:3px;"><span class="topicHeader">ประเภทของบัญชี:   </span></h3>
+                                <h3 style="margin-top:3px;"><span class="topicHeader">ประเภทของบัญชี:   </span></h3>
                             </div>
-                            <div class="col-md-9" style="padding-left:0px;margin-top:0px;padding-right:20px">
+                            <div class="col-md-9" style="padding-left:0px;margin-top:0px;padding-right:0px">
                                 <div class="topicHeader">
-                                     <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="user.user_type for user in all_usertype" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกประเภทของบุคลากร"  data-ng-model="$parent.my_type" data-qo-disable-clear="true"  >
+                                     <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="user.user_type for user in all_usertype" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกประเภทของบุคลากร"  data-ng-model="$parent.my_type" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>    
                                 </div>
                             </div>
                         </div>
 
-  <div class="row" style="margin-left:10px;margin-top:0px;margin-right:5px;" >
+  <div class="row" style="margin-left:0px;margin-top:0px;margin-right:0px;">
     <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curri_id as curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตรที่ต้องการโยงบุคลากร" data-qo-max-length ="0"  data-qo-multiple="true" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
             <option style="display:none" value=""></option></select>
 </div>
- <div class="panel panel-default"  data-nq-pageable=""
-                                 data-qo-selectable="true" style="background-color:#E4E4E4;margin-bottom:0px;    margin-top: 6px">
- <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="220px"  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
-
-  <div ng-repeat="user_email in my_new_users track by $index"   >
-         <div class="row" >
+ <div class='well well-scrollable' data-nq-scroll="" data-qo-max-height="220px" qo-visible='true' bar-model='wellbar' style="height:220px;background-color:#E4E4E4;margin-bottom:0px;margin-top: 6px;">
+         <div class="row" ng-repeat="user_email in my_new_users track by $index">
                                         <div class="col-md-11" style="padding-right:0px">
                                           <input  class="form-control" type="email"  placeholder="กรุณากรอกอีเมล์ของบุคคลที่ต้องการสร้างบัญชี" ng-model="my_new_users[$index]" />
                                         </div>
                                         <div class="col-md-1" style="padding-left:0px">
-                                          <button type="button" ng-click="remove_email($index)" class="btn" style="background-color:transparent;color:#d9534f;border:none;padding-left: 0px;" ><span style="
+                                          <button type="button" ng-click="remove_email($index);wellbar.refresh(40);" class="btn" style="background-color:transparent;color:#d9534f;border:none;padding-left: 0px;" ><span style="
 
 " class="glyphicon glyphicon-minus-sign"></span></button>
                                         </div>
                                       </div>
                                       </div>
-                                      </div>
-                                      </div>
      <div align="center">
-                                         <button type="button" style="margin-top:5px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_user_email()"style="color:green;font-size:30px"></i> </span></button>
+                                         <button type="button" style="margin-top:5px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_user_email();wellbar.refresh(40);" style="color:green;font-size:30px"></i> </span></button>
 </div>
                         <div class="custom-footer">
                             <div class="topicHeader pull-right">

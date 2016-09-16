@@ -1560,3 +1560,12 @@ ul.nav-aside > li{
 ul.nav-aside ul.sub-menu{
   line-height:29px !important;
 }
+
+/*Fix IE/Firefox/Edge cannot see the padding-bottom area when content is larger than its container*/
+.well-scrollable{
+padding-bottom:0px !important;
+}
+.well-scrollable > *:nth-last-child(2) {
+    padding-bottom: 19px;
+}
+/*End fix*/
