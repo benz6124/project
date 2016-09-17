@@ -294,12 +294,12 @@
 
 <span style="visibility:hidden"  ng-show="select_all_complete" >da</span>
 
-   <button class="btn hvr-wobble-vertical" type="button"  ng-show="select_all_complete"style="background-color:#739900;margin-bottom:0px;margin-left:0px; color:white;" ng-click="download_aun_book()">
+   <button class="btn hvr-wobble-vertical" type="button"  ng-show="select_all_complete" style="background-color:#739900;margin-bottom:0px;margin-left:0px; color:white;" ng-click="download_aun_book()">
                     <span class="glyphicon glyphicon-download-alt"></span> ดาวน์โหลดเล่ม
                 </button>
 
               <span style="visibility:hidden" ng-show="select_all_complete"  ng-if="can_download_plain()">da</span>   
-   <button ng-if="can_download_plain()"  ng-show="select_all_complete" class="btn btn-warning hvr-wobble-vertical" type="button" style=";margin-bottom:0px;margin-left:0px; color:white;" ng-click="download_plain_book()">
+   <button ng-if="can_download_plain()"  ng-show="select_all_complete" class="btn btn-warning hvr-wobble-vertical" type="button" style="margin-bottom:0px;margin-left:0px; color:white;" ng-click="download_plain_book()">
                     <span class="glyphicon glyphicon-download-alt"></span> ดาวน์โหลดเล่มร่าง
                 </button>
 </div>
@@ -521,7 +521,7 @@
                 <th class="col-md-1 number">ข้อที่</th>
                 <th class="col-md-7 topic">หัวข้อการประเมิน</th>
                 <th class="col-md-2 result">
-                <a  href="" data-qo-html="true"data-qo-type-class="tool_tip_evaluation"   style="color:white;cursor:default;"> ผลการประเมินตนเอง</a>
+                <a  href="" data-qo-html="true" data-qo-type-class="tool_tip_evaluation"   style="color:white;cursor:default;"> ผลการประเมินตนเอง</a>
                 </th>
 
                 <th class="col-md-2 result">
@@ -741,7 +741,7 @@
 " name="message" rows="2" cols="65" data-ng-model="current_section_save.improve"></textarea>
          </div>
                     <br />
-                        <button class="btn editor hvr-wobble-vertical pull-right " ng-disabled="send_please_wait"type="button" ng-click="send_support_text_change_to_server()" style="background-color:#6F002B;border:none;margin-right:0px;"> <span class="glyphicon glyphicon-ok-sign" /><span class="normal"> ยืนยันการเปลี่ยนแปลง</span></button>
+                        <button class="btn editor hvr-wobble-vertical pull-right " ng-disabled="send_please_wait" type="button" ng-click="send_support_text_change_to_server()" style="background-color:#6F002B;border:none;margin-right:0px;"> <span class="glyphicon glyphicon-ok-sign" /><span class="normal"> ยืนยันการเปลี่ยนแปลง</span></button>
                    <br />
   </div>
                <p style="font-size:20px;margin-left:727px" >
@@ -985,13 +985,13 @@
                                         </div>
                                       </div>
                                       <div align="center">
-                                         <button type="button" style="margin-top:5px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_user_type();wellbar.refresh(40);" style="color:green;font-size:30px"></i> </span></button>
+                                         <button type="button" style="margin-top:5px;background-color:transparent;border:none" class="hvr-pulse" ng-click="add_user_type();wellbar.refresh(40);"><span class="topic"><i class="glyphicon glyphicon-plus-sign" style="color:green;font-size:30px"></i> </span></button>
 </div>
                                       </div>
                    <div class="custom-footer">
                             <div class="topicHeader pull-right">
-                                <button class="btn btn-success  " ng-disabled="please_wait || still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
-                                <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                                <button class="btn btn-success" ng-disabled="please_wait || still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                                <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                             </div>
                         </div>
 
@@ -1031,12 +1031,12 @@
                                       </div>
                                       </div>
      <div align="center">
-                                         <button type="button" style="margin-top:5px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_user_email();wellbar.refresh(40);" style="color:green;font-size:30px"></i> </span></button>
+                                         <button type="button" style="margin-top:5px;background-color:transparent;border:none" class="hvr-pulse" ng-click="add_user_email();wellbar.refresh(40);"><span class="topic"><i class="glyphicon glyphicon-plus-sign" style="color:green;font-size:30px"></i> </span></button>
 </div>
                         <div class="custom-footer">
                             <div class="topicHeader pull-right">
-                                <button class="btn btn-success  " ng-disabled="please_wait || still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
-                                <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                                <button class="btn btn-success" ng-disabled="please_wait || still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                                <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                             </div>
                         </div>
                     </div>
@@ -1120,7 +1120,7 @@
 
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="still_not_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button ng-disabled="still_not_complete()" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
@@ -1367,8 +1367,8 @@
 
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="still_not_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="still_not_complete()" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 </div>
@@ -1428,7 +1428,7 @@
 
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
@@ -1529,7 +1529,7 @@
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
                                  data-qo-selectable="true">              
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
-                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="flip-x" data-nq-toggle-modal="#create_new_research" data-ng-click="go_to_create_research()"  ng-show="$root.president_in_this_curri(curri_choosen.curri_id) ||$root.current_user.privilege[curri_choosen.curri_id]['9'] >=4 || $root.right_from_committee_just_curri(curri_choosen.curri_id,9,4)"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลงานวิจัย</button>
+                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;" data-effect="flip-x" data-nq-toggle-modal="#create_new_research" data-ng-click="go_to_create_research()"  ng-show="$root.president_in_this_curri(curri_choosen.curri_id) ||$root.current_user.privilege[curri_choosen.curri_id]['9'] >=4 || $root.right_from_committee_just_curri(curri_choosen.curri_id,9,4)"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลงานวิจัย</button>
 
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
                                       
@@ -1793,7 +1793,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                  data-qo-selectable="true">
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
-                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="flip-x" data-nq-toggle-modal="#import_to_curri" data-ng-click="go_to_import()"><i class="fic glyphicon glyphicon-plus-sign"></i> นำเข้าบุคลากร</button>
+                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;" data-effect="flip-x" data-nq-toggle-modal="#import_to_curri" data-ng-click="go_to_import()"><i class="fic glyphicon glyphicon-plus-sign"></i> นำเข้าบุคลากร</button>
 
    <button type="button" class="btn btn-xs btn-danger  hvr-buzz"  style="margin-bottom:15px;margin-left:20px" data-effect="flip-x" data-ng-click="delete_checked()"><i class="fic glyphicon glyphicon-minus-sign"></i> นำออกจากหลักสูตร</button>
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
@@ -2124,19 +2124,19 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 <span style="padding-left:0px;font-size:19px">{{minute.date}}</span>  </td>
 
           <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#minute_attendees" data-ng-click="go_to_see_attendee(minute)" >
-                                        <span class="topic"><i style="color:#484848"class="glyphicon glyphicon-user"></i> </span>
+                                        <span class="topic"><i style="color:#484848" class="glyphicon glyphicon-user"></i> </span>
                                     </a></td> 
   
                                    <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse"  data-nq-toggle-modal="#manage_minutes_show_images" data-ng-click="show_picture_minute(minute)">
-                                        <span class="topic"><i style="color:#2980b9"class="glyphicon glyphicon-picture"></i> </span>
+                                        <span class="topic"><i style="color:#2980b9" class="glyphicon glyphicon-picture"></i> </span>
                                     </a></td> 
 
 
                                           <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['8'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,3)"> <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="download_file(minute.file_name)" >
-                                        <span class="topic"><i style="color:#00802b"class="glyphicon glyphicon-download-alt"></i> </span>
+                                        <span class="topic"><i style="color:#00802b" class="glyphicon glyphicon-download-alt"></i> </span>
                                     </a></td> 
     <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['8'] >=5 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,5)"   > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_minute" data-ng-click="go_to_fix_minute($index)">
-                                        <span class="topic"><i style="color:#eea236;"class="glyphicon glyphicon-wrench"></i> </span>
+                                        <span class="topic"><i style="color:#eea236;" class="glyphicon glyphicon-wrench"></i> </span>
                                     </a></td> 
                                           <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['8'] >=5 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,5)"> <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_minute($index)" >
                                         <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
@@ -2353,7 +2353,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                         </tbody>
                                     </table>
                                     <div align="center">
-                                         <button type="button" style="margin-top:5px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_primary_evidence()" style="color:green;font-size:30px"></i> </span></button>
+                                         <button type="button" style="margin-top:5px;background-color:transparent;border:none" class="hvr-pulse" ng-click="add_primary_evidence()"><span class="topic"><i class="glyphicon glyphicon-plus-sign" style="color:green;font-size:30px"></i> </span></button>
                                          </div>
          </div>         </div>        
 
@@ -2403,14 +2403,14 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                             <div class="panel panel-default"  data-nq-pageable=""
                                  data-qo-selectable="true">
                           <div align="center">
-                                        <button type="button" style="margin-top:16px;margin-bottom:0px"class="btn btn-xs btn-success  hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#upload_evidence" data-ng-click="choose_to_add_new_file()" ng-show='$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,3) ||$root.current_user.privilege[curri_choosen.curri_id]["3"] >=3 '><i class="fic glyphicon glyphicon-plus-sign" ></i> เพิ่มหลักฐานใหม่</button>
+                                        <button type="button" style="margin-top:16px;margin-bottom:0px" class="btn btn-xs btn-success  hvr-buzz" data-effect="flip-x" data-nq-toggle-modal="#upload_evidence" data-ng-click="choose_to_add_new_file()" ng-show='$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,3) ||$root.current_user.privilege[curri_choosen.curri_id]["3"] >=3 '><i class="fic glyphicon glyphicon-plus-sign" ></i> เพิ่มหลักฐานใหม่</button>
   &nbsp; &nbsp;
 
                                         <button type="button" style="margin-top:16px;margin-bottom:0px;" class="btn btn-xs btn-warning hvr-buzz" data-effect="flip-x"  data-ng-click="choose_to_add_new_primary_file()" data-nq-toggle-modal="#upload_primary_evidence" ng-show='!!$root.current_user.not_send_primary'><i class="fic glyphicon glyphicon-plus-sign"></i> อัพโหลดหลักฐานพื้นฐาน</button>
 
 
                                         &nbsp; &nbsp;
-                                        <button type="button"  style="margin-top:16px;margin-bottom:0px;" class="btn btn-xs btn-info hvr-buzz" data-ng-click="go_to_import()"data-effect="flip-x" data-nq-toggle-modal="#import_evidence" ng-show='$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,3) ||$root.current_user.privilege[curri_choosen.curri_id]["3"] >=3 '><i class="fic glyphicon glyphicon-plus-sign"></i> นำเข้าหลักฐานที่มีอยู่</button>
+                                        <button type="button"  style="margin-top:16px;margin-bottom:0px;" class="btn btn-xs btn-info hvr-buzz" data-ng-click="go_to_import()" data-effect="flip-x" data-nq-toggle-modal="#import_evidence" ng-show='$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,3) ||$root.current_user.privilege[curri_choosen.curri_id]["3"] >=3 '><i class="fic glyphicon glyphicon-plus-sign"></i> นำเข้าหลักฐานที่มีอยู่</button>
 </div>
 
                               
@@ -2457,16 +2457,16 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
        <td ><span style="margin-right:15px;font-size:19px">{{evidence.t_name}}</span> </td>
                                                <!--  <span class="topicHeader" ng-show="primary_evidence.just_create"> <input class="form-control"  type="text" ng-model="primary_evidence.evidence_name " required/></span> -->
 
-   <td > <a style="margin-left:1.5px;margin-top:3.5px"href=""  class="hvr-pulse" ng-click="watch_file(evidence.file_name)">
+   <td > <a style="margin-left:1.5px;margin-top:3.5px" href=""  class="hvr-pulse" ng-click="watch_file(evidence.file_name)">
                                         <span class="topicHeader"><i class="
 glyphicon glyphicon-eye-open" style="color:darkcyan" ></i> </span></a></td>
 
-                 <td ng-show='$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) ||$root.current_user.privilege[curri_choosen.curri_id]["3"] >=4 '> <a style="margin-left:1.5px;margin-top:3.5px"href=""  class="hvr-pulse" data-ng-click="choose_to_change_file(evidence)" >
+                 <td ng-show='$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) ||$root.current_user.privilege[curri_choosen.curri_id]["3"] >=4 '> <a style="margin-left:1.5px;margin-top:3.5px" href=""  class="hvr-pulse" data-ng-click="choose_to_change_file(evidence)" >
                                         <span class="topicHeader"><i style="color:#eea236" data-nq-toggle-modal="#fix_evidence" class="
 glyphicon glyphicon-wrench"></i> </span></a></td>  
 
 
-   <td ng-show='$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) ||$root.current_user.privilege[curri_choosen.curri_id]["3"] >=4 '> <a style="margin-left:1.5px;margin-top:3.5px"href=""  class="hvr-pulse" data-ng-click="remove_evidence($index)">
+   <td ng-show='$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) ||$root.current_user.privilege[curri_choosen.curri_id]["3"] >=4 '> <a style="margin-left:1.5px;margin-top:3.5px" href=""  class="hvr-pulse" data-ng-click="remove_evidence($index)">
                                         <span class="topicHeader"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td>
                                             </tr>
@@ -2577,7 +2577,7 @@ glyphicon glyphicon-bell"></i> </span>
                                         </tbody>
                                     </table>
                                     <div align="center">
-                                         <button type="button" style="margin-top:5px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_primary_evidence()" style="color:green;font-size:30px"></i> </span></button>
+                                         <button type="button" style="margin-top:5px;background-color:transparent;border:none" class="hvr-pulse" ng-click="add_primary_evidence()"><span class="topic"><i class="glyphicon glyphicon-plus-sign" style="color:green;font-size:30px"></i> </span></button>
                                          </div>
          </div>         </div>        
 
@@ -2642,7 +2642,7 @@ glyphicon glyphicon-bell"></i> </span>
             <tr>
             <td colspan="4">
   <div align="center">
-                                         <button type="button" style="margin-top:5px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_president(key)" style="color:green;font-size:30px"></i> </span></button>
+                                         <button type="button" style="margin-top:5px;background-color:transparent;border:none" class="hvr-pulse" ng-click="add_president(key)"><span class="topic"><i class="glyphicon glyphicon-plus-sign" style="color:green;font-size:30px"></i> </span></button>
                                          </div>
                                          </td>
                                          </tr>
@@ -2800,7 +2800,7 @@ glyphicon glyphicon-bell"></i> </span>
                                  data-qo-selectable="true">              
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
-                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="from-left" data-nq-toggle-modal="#add_committee" data-ng-click="go_to_add_committee()"><i class="fic glyphicon glyphicon-plus-sign"></i> แต่งตั้งกรรมการหลักสูตร</button>
+                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;" data-effect="from-left" data-nq-toggle-modal="#add_committee" data-ng-click="go_to_add_committee()"><i class="fic glyphicon glyphicon-plus-sign"></i> แต่งตั้งกรรมการหลักสูตร</button>
 
 
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
@@ -2825,7 +2825,7 @@ glyphicon glyphicon-bell"></i> </span>
           <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{committee.date_promoted}}</span> </td>
 
                                           <td > <a  style="margin-top:7px" data-ng-click="remove_committee($index)" href=""  class="hvr-pulse" >
-                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                        <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td> 
 
                                             </tr>                                           
@@ -2923,15 +2923,12 @@ glyphicon glyphicon-bell"></i> </span>
                         </div> 
 
                         <div class="row">
-                       <div class="col-md-4" style="
-    padding-left: 30px;
-">
+                       <div class="col-md-4" style="padding-left: 30px;">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ระยะเวลาการเรียน </span></h3>
                             </div>
 
                                  <div class="col-md-8">
                          <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.period}} ปี
-
                             </div>
                         </div>
                             <div class="custom-footer">
@@ -2943,7 +2940,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                       <div id="see_evaluate_self_sudden_with_fix" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode="true" data-qo-independent="true" >
                     <div class="custom-header">
-                        <h1 class="headerModalH1"><span class="headerModal">ข้อมูลสนับสนุนการประเมินหลักสูตรตนเอง</span>  </h1>
+                        <h1 class="headerModalH1"><span class="headerModal">ข้อมูลสนับสนุนการประเมินหลักสูตรตนเอง</span></h1>
                     </div>
 
                     <div class="container-fluid" >
@@ -3196,7 +3193,7 @@ glyphicon glyphicon-bell"></i> </span>
 </div>
          <div id="see_evaluate_other" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="see_evaluate_by_other_controller" data-qo-screen-mode="true" data-qo-independent="true">
                     <div class="custom-header">
-                        <h1 class="headerModalH1"><span class="headerModal"> ผลการประเมินหลักสูตร</span></h1>
+                        <h1 class="headerModalH1"><span class="headerModal">ผลการประเมินหลักสูตร</span></h1>
                     </div>
                 <div class="row" style="
     margin-left: 0px;
@@ -3372,17 +3369,15 @@ glyphicon glyphicon-bell"></i> </span>
     <span class="btn btn-success  " ng-click="set_disabled_search()" style="font-size:18px;"><i style="margin-top:3px" class="glyphicon glyphicon-plus-sign"></i> อัพโหลดไฟล์ใหม่</span>
                             </div>
 
-    <div class="col-md-8" ng-show="disabled_search" style="
-    padding-right: 6px;
-">
+    <div class="col-md-8" ng-show="disabled_search" style="padding-right: 6px;">
                               
                                 <input type="file" name="upload_file_input" class="form-control full" placeholder="ไฟล์รายงานการประชุม" file-upload  data-ng-model="my_file"  required/>
                             </div>
 
-<div class="col-md-1"style="margin-top:5px" ng-show="disabled_search" >
+<div class="col-md-1" style="margin-top:5px" ng-show="disabled_search" >
 
 <a href=""   data-ng-click="back_to_default()" class="hvr-pulse" >
-                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-remove"></i> </span>
+                                        <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-remove"></i> </span>
                                     </a>
                         </div>
 </div>
@@ -3450,23 +3445,23 @@ glyphicon glyphicon-bell"></i> </span>
                                             <tr data-ng-repeat="indicator in manage_indicators_and_sub_result">                                           
                                                  <td ><input data-ng-change="something_change()"  type="number" ng-pattern="/^[0-9]*$/" class="form-control"  ng-model="indicator.indicator_num "  required/></td>
 
-                                                <td class="topic_indicator left_column"><input data-ng-change="something_change()" class="form-control"size="64" type="text" ng-model="indicator.indicator_name_e " required/>
+                                                <td class="topic_indicator left_column"><input data-ng-change="something_change()" class="form-control" size="64" type="text" ng-model="indicator.indicator_name_e " required/>
                                                 </td>
                                                  <td ng-show="have_thai_name" class="topic_indicator left_column"><input data-ng-change="something_change()" class="form-control" size="64" type="text" ng-model="indicator.indicator_name_t " required/></td>
 
-                                     <td class="number_indicator"> <button style="background-color:transparent;border:none"href="" data-ng-click="choose_indicator(indicator)" class="hvr-pulse" data-nq-toggle-modal="#manage_sub_indicators"  ng-disabled="still_not_choose_complete() || validate_year_to_create()  || manage_indicators_form.$invalid || choose_not_complete" data-effect="slide-left">
+                                     <td class="number_indicator"> <button style="background-color:transparent;border:none" data-ng-click="choose_indicator(indicator)" class="hvr-pulse" data-nq-toggle-modal="#manage_sub_indicators"  ng-disabled="still_not_choose_complete() || validate_year_to_create()  || manage_indicators_form.$invalid || choose_not_complete" data-effect="slide-left">
                                         <span class="topic"><i class="glyphicon glyphicon-zoom-in"></i> </span>
                                     </button></td>
 
                                        <td class="number_indicator"> <a href="" data-ng-click="remove_indicator($index)" class="hvr-pulse">
-                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                        <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td>
                                             </tr>
                                             </form>
                                         </tbody>
                                     </table>
                                     <div align="center">
-                                      <button type="button" style="margin-top:5px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_indicator()" style="color:green;font-size:30px"></i> </span></button>
+                                      <button type="button" style="margin-top:5px;background-color:transparent;border:none" class="hvr-pulse" ng-click="add_indicator()"><span class="topic"><i class="glyphicon glyphicon-plus-sign" style="color:green;font-size:30px"></i> </span></button>
                                       </div>
          </div>         </div>         </div>         </div>
 
@@ -3492,7 +3487,7 @@ glyphicon glyphicon-bell"></i> </span>
               
                                 <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
- <button class="btn btn-warning hvr-pulse"style="margin-bottom:5px;padding-top:4px;padding-bottom:4px" ng-click="recover_indicator()"><i class="glyphicon glyphicon-wrench"></i> ดึงข้อมูลตั้งต้นใหม่</button>
+ <button class="btn btn-warning hvr-pulse" style="margin-bottom:5px;padding-top:4px;padding-bottom:4px" ng-click="recover_indicator()"><i class="glyphicon glyphicon-wrench"></i> ดึงข้อมูลตั้งต้นใหม่</button>
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun">
                                       
                                         <thead class="nq-fix-table-scroll">
@@ -3515,8 +3510,8 @@ glyphicon glyphicon-bell"></i> </span>
                                                 </td>
                                               <!--    <td class="topic_evaluation left_column"><input size="70" type="text" ng-model="indicator.indicator_name_e " /></td> -->
 
-                                      <td class="number_indicator"> <a style="margin-right:10px"href="" data-ng-click="remove_sub_indicator($index)" class="hvr-pulse">
-                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                      <td class="number_indicator"> <a style="margin-right:10px" href="" data-ng-click="remove_sub_indicator($index)" class="hvr-pulse">
+                                        <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td>
                                             </tr>
                                             </form>
@@ -3524,7 +3519,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                                     </table>
                                     <div align="center">
-   <button type="button" style="margin-top:5px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_sub_indicator()" style="color:green;font-size:30px"></i> </span></button>
+   <button type="button" style="margin-top:5px;background-color:transparent;border:none" class="hvr-pulse" ng-click="add_sub_indicator()"><span class="topic"><i class="glyphicon glyphicon-plus-sign" style="color:green;font-size:30px"></i> </span></button>
    </div>
 
          </div>         </div>         </div>         </div>
@@ -3731,7 +3726,7 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
                 </div>
 
-                <div id="import_evidence" data-ng-controller="import_evidence_controller"data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="lg" data-qo-independent="true">
+                <div id="import_evidence" data-ng-controller="import_evidence_controller" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="lg" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> นำเข้าหลักฐานที่มีอยู่</span></h1>
                     </div>
@@ -3753,11 +3748,11 @@ glyphicon glyphicon-bell"></i> </span>
                       <h2 style="margin-top:15px" class="myColorBold"> เลือกหลักฐานที่ต้องการ:</h2>
                     <div class="row">
                         <div class="col-md-11">
-                                 <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-change = "choose_evidence()" data-ng-options="evidence.evidence_name for evidence in all_evidences" data-qo-effect="flip-x"data-qo-placeholder="หลักฐานที่พบในหลักสูตรและปีการศึกษาดังกล่าว" data-ng-model="$parent.evidence_we_want" data-qo-disable-clear="true" >
+                                 <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-change = "choose_evidence()" data-ng-options="evidence.evidence_name for evidence in all_evidences" data-qo-effect="flip-x" data-qo-placeholder="หลักฐานที่พบในหลักสูตรและปีการศึกษาดังกล่าว" data-ng-model="$parent.evidence_we_want" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>
                         </div>
                         <div class="col-md-1" style="padding-left:0px" >
-                        <a href="" class="hvr-buzz topicHeader" ng-click="watch_preview()">  <i style="font-size:25px;margin-top:3px"class="glyphicon glyphicon-search" ></i>   </a>
+                        <a href="" class="hvr-buzz topicHeader" ng-click="watch_preview()">  <i style="font-size:25px;margin-top:3px" class="glyphicon glyphicon-search" ></i>   </a>
 </div>
                     </div>
 
@@ -3775,7 +3770,7 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>          
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click ="save_to_server(this)"ng-disabled="choose_not_complete || still_not_write_code()" ng-click="$hide()">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-click ="save_to_server(this)" ng-disabled="choose_not_complete || still_not_write_code()">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
@@ -4424,7 +4419,7 @@ glyphicon glyphicon-bell"></i> </span>
                             </div>
                                       <div class="col-md-1" style="padding-left: 0px;padding-top: 6px;">
 <a href=""   data-ng-click="back_to_default()" class="hvr-pulse" >
-                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-remove"></i> </span>
+                                        <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-remove"></i> </span>
                                     </a>
                                     </div>
                         </div>
@@ -4578,7 +4573,7 @@ glyphicon glyphicon-bell"></i> </span>
                                     <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{each_education.grad_year}}</span> </td>           
                        
                                     
-   <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_education" ng-click="go_to_fix(each_education)">
+   <td> <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_education" ng-click="go_to_fix(each_education)">
                                         <span class="topic"><i style="color:#eea236;margin0" class="glyphicon glyphicon-wrench"></i> </span>
                                     </a></td> 
 
@@ -4596,7 +4591,7 @@ glyphicon glyphicon-bell"></i> </span>
 </div>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="nothing_really_change() || please_wait || fix_not_complete()"ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-success  " ng-disabled="nothing_really_change() || please_wait || fix_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default " ng-click="back_close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
@@ -4702,7 +4697,7 @@ glyphicon glyphicon-bell"></i> </span>
                                         </div>
                                     </div>
                                     <div align="center">
-                                         <button type="button" style="margin-top:5px;background-color:transparent;border:none" class="hvr-pulse"><span class="topic"><i class="glyphicon glyphicon-plus-sign" ng-click="add_question();wellbar.refresh(40);" style="color:green;font-size:30px"></i> </span></button>
+                                         <button type="button" style="margin-top:5px;background-color:transparent;border:none" class="hvr-pulse" ng-click="add_question();wellbar.refresh(40);"><span class="topic"><i class="glyphicon glyphicon-plus-sign" style="color:green;font-size:30px"></i> </span></button>
 </div>
                                </div>
                                </div>
@@ -4747,7 +4742,7 @@ glyphicon glyphicon-bell"></i> </span>
               
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
-                                  <button type="button" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['6'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,3)" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;" data-nq-toggle-modal="#create_album" data-ng-click="go_to_create_album()" data-effect="from-right" data-ng-click="go_to_create_survey()"><i class="fic glyphicon glyphicon-plus-sign" ></i> สร้างอัลบั้มรูป</button>
+                                  <button type="button" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['6'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,3)" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;" data-nq-toggle-modal="#create_album" data-ng-click="go_to_create_album()" data-effect="from-right"><i class="fic glyphicon glyphicon-plus-sign" ></i> สร้างอัลบั้มรูป</button>
 
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
                                       
@@ -4780,19 +4775,19 @@ glyphicon glyphicon-bell"></i> </span>
  <img ng-repeat ="pic in album.pictures" ng-click="openLightboxModal($index,album.pictures)" ng-if="$index<4" src="{{pic.file_name}}" class="img-rounded" style="margin-left:1px;margin-right:1px;margin-top:3px;margin-bottom:3px" height = "50px"  />
 <!-- <div class="thumb_center_please_album_preview " ng-repeat ="pic in album.pictures" ng-click="openLightboxModal($index,album.pictures)" ng-if="$index<4" style="background-image: url({{pic.file_name}});"></div> -->
  </span> </td>
-          <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year)==false && $root.current_user.privilege[curri_choosen.curri_id]['6'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4) == false"> <a href=""  style="margin-top:7px"data-nq-toggle-modal="#show_album" data-effect="from-left" data-ng-click="go_to_show_album(album)" class="hvr-pulse" >
-                                        <span class="topic"><i style="color:#2980b9"class="glyphicon glyphicon-picture"></i> </span>
+          <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year)==false && $root.current_user.privilege[curri_choosen.curri_id]['6'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4) == false"> <a href=""  style="margin-top:7px" data-nq-toggle-modal="#show_album" data-effect="from-left" data-ng-click="go_to_show_album(album)" class="hvr-pulse" >
+                                        <span class="topic"><i style="color:#2980b9" class="glyphicon glyphicon-picture"></i> </span>
                                     </a></td> 
 
 
-     <td  ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['6'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4)"> <a href=""  style="margin-top:7px"data-nq-toggle-modal="#show_edit_album" data-effect="from-left" data-ng-click="go_to_show_album(album)" class="hvr-pulse" >
-                                        <span class="topic"><i style="color:#2980b9"class="glyphicon glyphicon-picture"></i> </span>
+     <td  ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['6'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4)"> <a href=""  style="margin-top:7px" data-nq-toggle-modal="#show_edit_album" data-effect="from-left" data-ng-click="go_to_show_album(album)" class="hvr-pulse" >
+                                        <span class="topic"><i style="color:#2980b9" class="glyphicon glyphicon-picture"></i> </span>
                                     </a></td> 
 
                       <td style="padding-left:0px;padding-right:0px"><span style="font-size:19px">{{album.date_created}}</span> </td>              
                                                               <td ><span style="font-size:19px">{{album.t_name}}</span> </td>
                                           <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['6'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4)"> <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_album($index)" >
-                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                        <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td> 
                                             </tr>
                                             </form>
@@ -4847,7 +4842,7 @@ glyphicon glyphicon-bell"></i> </span>
                                  data-qo-selectable="true">
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
-                                  <button ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['5'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,5,3)"type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="flip-x" data-nq-toggle-modal="#create_survey" data-ng-click="go_to_create_survey()"><i class="fic glyphicon glyphicon-plus-sign"></i> สร้างแบบสอบถาม</button>
+                                  <button ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['5'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,5,3)" type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;" data-effect="flip-x" data-nq-toggle-modal="#create_survey" data-ng-click="go_to_create_survey()"><i class="fic glyphicon glyphicon-plus-sign"></i> สร้างแบบสอบถาม</button>
 
 
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
@@ -4886,15 +4881,15 @@ glyphicon glyphicon-bell"></i> </span>
                                                               <td ><span style="font-size:19px">{{survey.t_name}}</span> </td>
                                  
    <td ng-show=" ($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['5'] >=2 ) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,5,2)"> <a ng-show="right_target(survey.target)" href="" style="margin-top:7px" class="hvr-pulse" data-nq-toggle-modal="#do_survey" data-effect="from-left" data-ng-click="go_to_answer(survey)">
-                                        <span class="topic"><i style="color:#204d74;margin0"class="glyphicon glyphicon-hand-up"></i> </span>
+                                        <span class="topic"><i style="color:#204d74;margin0" class="glyphicon glyphicon-hand-up"></i> </span>
                                     </a></td> 
 
                                        <td > <a href="" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||survey.personnel_id == current_user.user_id" style="margin-top:7px" data-nq-toggle-modal="#result_survey" data-effect="from-left" data-ng-click="go_to_result(survey)" class="hvr-pulse" >
-                                        <span class="topic"><i style="color:#4cae4c"class="glyphicon glyphicon-stats"></i> </span>
+                                        <span class="topic"><i style="color:#4cae4c" class="glyphicon glyphicon-stats"></i> </span>
                                     </a></td> 
 
                                           <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['5'] ==4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,5,4)"> <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_qestionare($index)" >
-                                        <span class="topic"><i style="color:#d9534f"class="glyphicon glyphicon-minus-sign"></i> </span>
+                                        <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td> 
                                             </tr>
                                             </form>
@@ -4975,7 +4970,6 @@ glyphicon glyphicon-bell"></i> </span>
                    <div class="custom-footer">
                                   <button style="margin-top:4px" class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
                                   </div>
-
                 </div>
 
 
@@ -5062,7 +5056,7 @@ glyphicon glyphicon-bell"></i> </span>
                     <p>Build:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>453</p>
+                    <p>456</p>
                 </div>
             </div>
             <div class='row'>
@@ -5070,7 +5064,7 @@ glyphicon glyphicon-bell"></i> </span>
                     <p>ปรับปรุงล่าสุด:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>15 กันยายน 2559</p>
+                    <p>18 กันยายน 2559</p>
                 </div>
             </div>
             </div>
