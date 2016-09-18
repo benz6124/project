@@ -345,7 +345,7 @@
        
       </ul>
 
-      <nav class="slides-navigation"  >
+      <nav class="slides-navigation">
       <a href="" class="next hvr-bob"><i class="fa fa-chevron-circle-right fa-3x"></i></a>
       <a href="" class="hvr-bob" ng-class="{prev_login: already_login == true , prev: already_login == false}" class="prev"><i class="fa fa-chevron-circle-left fa-3x"></i></a>
     </nav>
@@ -521,11 +521,11 @@
                 <th class="col-md-1 number">ข้อที่</th>
                 <th class="col-md-7 topic">หัวข้อการประเมิน</th>
                 <th class="col-md-2 result">
-                <a  href="" data-qo-html="true" data-qo-type-class="tool_tip_evaluation"   style="color:white;cursor:default;"> ผลการประเมินตนเอง</a>
+                <a href="" data-qo-html="true" data-qo-type-class="tool_tip_evaluation"   style="color:white;cursor:default;"> ผลการประเมินตนเอง</a>
                 </th>
 
                 <th class="col-md-2 result">
-<a  href="" data-qo-html="true" data-qo-type-class="tool_tip_evaluation"   style="color:white;cursor:default;" >ผลการประเมิน<br />จากภายนอก</a>
+<a href="" data-qo-html="true" data-qo-type-class="tool_tip_evaluation"   style="color:white;cursor:default;" >ผลการประเมิน<br />จากภายนอก</a>
                 </th>
                 </thead>
 
@@ -554,7 +554,7 @@
 
                          <td class="number"   ng-if="$index!=0" >{{each_evaluation_in_indicator.indicator_num}}.{{each_evaluation_in_sub_indicator.sub_indicator_num}}</td>
                       <td class="topic" ng-if="$index!=0" >
- <a  href="" ng-click="go_to_indicator_and_sub_by_number(each_evaluation_in_indicator.indicator_num,each_evaluation_in_sub_indicator)" >
+ <a href="" ng-click="go_to_indicator_and_sub_by_number(each_evaluation_in_indicator.indicator_num,each_evaluation_in_sub_indicator)" >
                       {{each_evaluation_in_sub_indicator.sub_indicator_name}}
 </a>
                       </td>
@@ -596,15 +596,15 @@
 
                 <th class="col-md-1 number">ข้อที่</th>
                 <th class="col-md-7 topic">หัวข้อการประเมิน</th>
-                <th class="col-md-2 result"><a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ประเมินโดย {{this_indicator_show.self_name}} <br/> วันที่ {{this_indicator_show.self_date}} เวลา {{this_indicator_show.self_time}}" style="color:white;cursor:default;" ng-show="self_evaluated"> ผลการประเมินตนเอง</a>
+                <th class="col-md-2 result"><a href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ประเมินโดย {{this_indicator_show.self_name}} <br/> วันที่ {{this_indicator_show.self_date}} เวลา {{this_indicator_show.self_time}}" style="color:white;cursor:default;" ng-show="self_evaluated"> ผลการประเมินตนเอง</a>
 
-                <a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ยังไม่มีการประเมิน" style="color:white;cursor:default;" ng-hide="self_evaluated"> ผลการประเมินตนเอง</a>
+                <a href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ยังไม่มีการประเมิน" style="color:white;cursor:default;" ng-hide="self_evaluated"> ผลการประเมินตนเอง</a>
                 </th>
 
-                <th class="col-md-2 result"><a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ประเมินโดย {{this_indicator_show.other_name}} <br/> วันที่ {{this_indicator_show.other_date}} เวลา {{this_indicator_show.other_time}}" style="color:white;cursor:default;" ng-show="others_evaluated">ผลการประเมิน<br />จากภายนอก</a>
+                <th class="col-md-2 result"><a href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ประเมินโดย {{this_indicator_show.other_name}} <br/> วันที่ {{this_indicator_show.other_date}} เวลา {{this_indicator_show.other_time}}" style="color:white;cursor:default;" ng-show="others_evaluated">ผลการประเมิน<br />จากภายนอก</a>
 
 
-<a  href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ยังไม่มีการประเมิน" style="color:white;cursor:default;" ng-hide="others_evaluated">ผลการประเมิน<br />จากภายนอก</a>
+<a href="" data-qo-html="true" data-nq-tooltip="" data-qo-type-class="tool_tip_evaluation"  data-qs-title="ยังไม่มีการประเมิน" style="color:white;cursor:default;" ng-hide="others_evaluated">ผลการประเมิน<br />จากภายนอก</a>
                 </th>
                 </thead>
                 <tr ng-repeat="result in this_indicator_show.sub_indicator_result">
@@ -677,14 +677,14 @@
                     <hr / >
                  <!--    <h3>ข้อมูลสนับสนุนการประเมินตนเอง</h3> -->
                     <span class="topicHeader" ng-bind-html="current_section_save.detail"></span>
-                           <div class="row"  >
+                           <div class="row">
           <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicNewHeader">จุดแข็ง (Strength):   </span></h3>
  </div>
  <div class="row" style="text-align: left;">
          <span style="margin-left: 35px;" class="topicHeader"  ng-if="current_section_save.strength!='' && current_section_save.strength">  {{current_section_save.strength}}</span>
                <span style="margin-left: 35px;" ng-if="!current_section_save.strength"class="topicHeader">--ไม่พบข้อมูล--</span> 
  </div>
- <div class="row" >
+ <div class="row">
           <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicNewHeader">จุดด้อย (Weakness):   </span></h3>
  </div>
  <div class="row" style="text-align: left;">
@@ -692,12 +692,12 @@
          <span style="margin-left: 35px;" ng-if="!current_section_save.weakness" class="topicHeader">--ไม่พบข้อมูล--</span> 
  </div>
 
- <div class="row" >
+ <div class="row">
           <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicNewHeader">จุดที่ควรพัฒนา (Area of improve):   </span></h3>
  </div>
  <div class="row" style="text-align: left;">
    <span style="margin-left: 35px;" ng-if="current_section_save.improve!=''  && current_section_save.improve" class="topicHeader">{{current_section_save.improve}}</span> 
-      <span style="margin-left: 35px;"ng-if="!current_section_save.improve"class="topicHeader">--ไม่พบข้อมูล--</span> 
+      <span style="margin-left: 35px;" ng-if="!current_section_save.improve"class="topicHeader">--ไม่พบข้อมูล--</span> 
  </div>
 
     <hr ng-show="already_login" />
@@ -712,7 +712,7 @@
                       CKEDITOR.replace("editor1");
                         </script>
                     </form>    
-  <div class="row" >
+  <div class="row">
                   <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicNewHeader">จุดแข็ง (Strength):   </span></h3>
          </div>
          <div class="row">
@@ -721,7 +721,7 @@
     width: 97%;
 " name="message" rows="2" cols="65" data-ng-model="current_section_save.strength"></textarea>
          </div>
-                 <div class="row" >
+                 <div class="row">
                   <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicNewHeader">จุดด้อย (Weakness):   </span></h3>
          </div>
          <div class="row">
@@ -756,7 +756,7 @@
 </div>
 </div>
 
-     <div id="another_aca" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-qo-effect="flip-x" qo-keyboard='false'>
+     <div id="another_aca" data-nq-modal="" data-qo-fire-emit="true" data-qo-independent="true" data-qo-effect="flip-x" qo-keyboard='false'>
                         <div class="custom-header">
                             <h1 class="headerModalH1">ดึงข้อมูลจากปีการศึกษาอื่น</h1>
                         </div>
@@ -784,7 +784,7 @@
                         </div>
                     </div>
    </div>       
-                    <div id="upload_aun" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="upload_aun_controller" data-qo-size="lg" data-qo-independent="true" data-ng-init="init()">
+                    <div id="upload_aun" data-nq-modal="" data-qo-fire-emit="true" data-ng-controller="upload_aun_controller" data-qo-size="lg" data-qo-independent="true" data-ng-init="init()">
 
 <!--     <input type="file" file-upload multiple/>
     <ul>
@@ -820,13 +820,13 @@
 </form>
                         <div class="custom-footer">
                             <div class="topicHeader pull-right">
-                                <button class="btn btn-success  " ng-disabled="please_wait || file_not_already_upload() || choose_not_complete  " ng-click="save_to_server(this)">ยืนยัน</button>
-                                <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                                <button class="btn btn-success" ng-disabled="please_wait || file_not_already_upload() || choose_not_complete  " ng-click="save_to_server(this)">ยืนยัน</button>
+                                <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                             </div>
                         </div>
                     </div>
 
-                    <div id="add_aca_year" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-ng-controller="add_aca_year as add_aca_year_ctrl">
+                    <div id="add_aca_year" data-nq-modal="" data-qo-fire-emit="true" data-qo-independent="true" data-ng-controller="add_aca_year as add_aca_year_ctrl">
                         <div class="custom-header">
                             <h1 class="headerModalH1">เพิ่มปีการศึกษา</h1>
                         </div>
@@ -862,7 +862,7 @@
                     </div>
 
 <!-- create_curriculum controller -->
-                    <div id="create_curri" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-ng-controller="create_curriculum_controller as create_curri_ctrl">
+                    <div id="create_curri" data-nq-modal="" data-qo-fire-emit="true" data-qo-independent="true" data-ng-controller="create_curriculum_controller as create_curri_ctrl">
                         <div class="custom-header">
                             <h1 class="headerModalH1">สร้างหลักสูตร</h1>
                         </div>
@@ -950,13 +950,13 @@
                         </div>
                     </div>
 
-                    <div id="create_user_choose" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" >
+                    <div id="create_user_choose" data-nq-modal="" data-qo-fire-emit="true" data-qo-independent="true">
       <div class="custom-header">
                             <h1 class="headerModalH1">สร้างบัญชีรายชื่อ</h1>
                         </div>
    <div align="center">
                            <button class="btn btn-primary  hvr-wobble-vertical " type="button" data-nq-toggle-modal="#create_user_individual" data-qo-effect="flip-x"  data-placement="top" ><span class="glyphicon glyphicon-list" /><span class="normal"> สร้างบัญชีรายชื่อโดยการกรอกอีเมล์</span></button>
-     <button class="btn btn-success  hvr-wobble-vertical " type="button" data-nq-toggle-modal="#create_user" data-qo-effect="flip-x"  > <span class="glyphicon glyphicon-file" /><span class="normal"> สร้างบัญชีรายชื่อโดยการนำเข้าไฟล์ .txt</span></button>
+     <button class="btn btn-success  hvr-wobble-vertical" type="button" data-nq-toggle-modal="#create_user" data-qo-effect="flip-x"> <span class="glyphicon glyphicon-file" /><span class="normal"> สร้างบัญชีรายชื่อโดยการนำเข้าไฟล์ .txt</span></button>
 </div>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
@@ -965,7 +965,7 @@
                     </div>
                     </div>
 
-  <div id="manage_user_type" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-ng-controller="manage_user_type_controller">
+  <div id="manage_user_type" data-nq-modal="" data-qo-fire-emit="true" data-qo-independent="true" data-ng-controller="manage_user_type_controller">
       <div class="custom-header">
                             <h1 class="headerModalH1">จัดการประเภทบุคลากร</h1>
                         </div>
@@ -998,7 +998,7 @@
                     </div>
 
 
-                    <div id="create_user_individual" data-nq-modal="" data-placement="top" data-qo-fire-emit = "true" data-qo-independent="true" data-ng-controller="create_user_individual_controller">
+                    <div id="create_user_individual" data-nq-modal="" data-placement="top" data-qo-fire-emit="true" data-qo-independent="true" data-ng-controller="create_user_individual_controller">
                         <div class="custom-header">
                             <h1 class="headerModalH1">สร้างบัญชีรายชื่อ</h1>
                         </div>
@@ -1041,7 +1041,7 @@
                         </div>
                     </div>
 
-                    <div id="create_user" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-ng-controller="create_user_controller">
+                    <div id="create_user" data-nq-modal="" data-qo-fire-emit="true" data-qo-independent="true" data-ng-controller="create_user_controller">
                         <div class="custom-header">
                             <h1 class="headerModalH1">สร้างบัญชีรายชื่อ</h1>
                         </div>
@@ -1066,21 +1066,21 @@
                             </div>
                         </div>
 
-  <div class="row" style="margin-left:10px;margin-top:0px;margin-right:5px;" >
+  <div class="row" style="margin-left:10px;margin-top:0px;margin-right:5px;">
     <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curri_id as curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตรที่ต้องการโยงบุคลากร" data-qo-max-length ="0"  data-qo-multiple="true" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" name="choose_curri_select" required>
             <option style="display:none" value=""></option></select>
 </div>
 
                         <div class="custom-footer">
                             <div class="topicHeader pull-right">
-                                <button class="btn btn-success  " ng-disabled="please_wait || still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
-                                <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                                <button class="btn btn-success" ng-disabled="please_wait || still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                                <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-<div id="fix_lab" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="fix_lab_controller">
+<div id="fix_lab" data-nq-modal="" data-qo-fire-emit="true" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="fix_lab_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">แก้ไขข้อมูลห้องปฏิบัติการ</h1>
                     </div>
@@ -1095,7 +1095,7 @@
                         </div>
 
   <div class="row">
-  <div class="col-md-3" >
+  <div class="col-md-3">
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">เจ้าหน้าที่/อาจารย์ที่ปรึกษา   </span></h3>
                             </div>
 
@@ -1121,13 +1121,13 @@
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
                             <button ng-disabled="still_not_complete()" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 </div>
 
 
-<div id="create_minute" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_minute_controller">
+<div id="create_minute" data-nq-modal="" data-qo-fire-emit="true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_minute_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">เพิ่มข้อมูลรายงานการประชุม</h1>
                     </div>
@@ -1156,7 +1156,7 @@
                         </div>
  
   <div class="row">
-  <div class="col-md-3" >
+  <div class="col-md-3">
 
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ผู้เข้าร่วมประชุม   </span></h3>
                             </div>
@@ -1213,13 +1213,13 @@
 
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 </div>
 
-<div id="fix_minute" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="fix_minute_controller">
+<div id="fix_minute" data-nq-modal="" data-qo-fire-emit="true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="fix_minute_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">แก้ไขข้อมูลรายงานการประชุม</h1>
                     </div>
@@ -1249,7 +1249,7 @@
                         </div>
 
   <div class="row">
-  <div class="col-md-3" >
+  <div class="col-md-3">
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ผู้เข้าร่วมประชุม   </span></h3>
                             </div>
  <div class="col-md-9" style="padding-right: 24px;" >
@@ -1268,9 +1268,9 @@
                                 <h3 style="margin-left:10px;margin-top:5px;"><span class="topicNewHeader">ไฟล์รายงานการประชุม:  </span></h3>
                             </div>
                             <div class="col-md-8"  ng-hide="disabled_search" style="margin-bottom:5px">
-  <span class="btn btn-danger  " ng-click="watch_file()"  style="font-size:18px;"><i style="margin-top:3px" class="glyphicon glyphicon-search" ></i>  ดูไฟล์รายงานการประชุมเดิม</span>
+  <span class="btn btn-danger" ng-click="watch_file()"  style="font-size:18px;"><i style="margin-top:3px" class="glyphicon glyphicon-search" ></i>  ดูไฟล์รายงานการประชุมเดิม</span>
                           <span  class="topicHeader" style="margin-left: 20px;margin-right: 20px;">หรือ</span>
-    <span class="btn btn-success  " ng-click="set_disabled_search()" style="font-size:18px;"><i style="margin-top:3px" class="glyphicon glyphicon-plus-sign"></i> อัพโหลดไฟล์ใหม่</span>
+    <span class="btn btn-success" ng-click="set_disabled_search()" style="font-size:18px;"><i style="margin-top:3px" class="glyphicon glyphicon-plus-sign"></i> อัพโหลดไฟล์ใหม่</span>
                             </div>
 
     <div class="col-md-9" ng-show="disabled_search" style="padding-right: 6px;">
@@ -1326,12 +1326,12 @@
 
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 </div>
-<div id="create_lab" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_lab_controller">
+<div id="create_lab" data-nq-modal="" data-qo-fire-emit="true" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_lab_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">เพิ่มข้อมูลห้องปฏิบัติการ</h1>
                     </div>
@@ -1346,7 +1346,7 @@
                         </div>
 
   <div class="row">
-  <div class="col-md-3" >
+  <div class="col-md-3">
 
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">เจ้าหน้าที่/อาจารย์ที่ปรึกษา   </span></h3>
                             </div>
@@ -1373,7 +1373,7 @@
                     </div>
 </div>
 
-<div id="fix_research" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="fix_research_controller">
+<div id="fix_research" data-nq-modal="" data-qo-fire-emit="true" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="fix_research_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">แก้ไขข้อมูลงานวิจัย</h1>
                     </div>
@@ -1386,7 +1386,7 @@
                             </div>
                         </div>
   <div class="row">
-  <div class="col-md-3" >
+  <div class="col-md-3">
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ผู้วิจัย   </span></h3>
                             </div>
  <div class="col-md-9" style="padding-right:22px;">
@@ -1415,10 +1415,10 @@
                             </div>
                             <div class="col-md-8" style="margin-left:20px" ng-hide="disabled_search">
 
-  <button class="btn btn-danger  " ng-click="watch_file(manage_research_fix_this_research.file_name)" ><i style="font-size:20px;margin-top:3px" class="glyphicon glyphicon-search" ></i>  ดูไฟล์งานวิจัยเดิม</button>
+  <button class="btn btn-danger" ng-click="watch_file(manage_research_fix_this_research.file_name)" ><i style="font-size:20px;margin-top:3px" class="glyphicon glyphicon-search" ></i>  ดูไฟล์งานวิจัยเดิม</button>
                           <span  class="topicHeader" style="margin-left: 20px;margin-right: 20px;">หรือ</span>
 
-    <button class="btn btn-primary  " ng-click="set_disabled_search()"><i style="font-size:20px;margin-top:3px" class="glyphicon glyphicon-plus-sign"></i> อัพโหลดไฟล์ใหม่</button>
+    <button class="btn btn-primary" ng-click="set_disabled_search()"><i style="font-size:20px;margin-top:3px" class="glyphicon glyphicon-plus-sign"></i> อัพโหลดไฟล์ใหม่</button>
                             </div>
 
      <div class="col-md-9" ng-show="disabled_search">
@@ -1429,24 +1429,24 @@
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
                             <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 </div>
 
 
-<div id="manage_lab" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_lab_controller">
+<div id="manage_lab" data-nq-modal="" data-qo-fire-emit="true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_lab_controller">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">ส่วนการจัดการห้องปฏิบัติการ</h1>
                     </div>
 
           <div class="row" style="margin-left: 0px;margin-right: 0px;">
-                        <div class="col-md-8" >
+                        <div class="col-md-8">
                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
                         </div>
-                        <div class="col-md-4" >
+                        <div class="col-md-4">
                               <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
                         </div>
@@ -1476,19 +1476,16 @@
                                             <tr  ng-repeat="lab in manage_lab_my_world_wide_labs">                                           
  <td style=" padding-left: 10px ;"><span style="font-size:21px;">{{lab.name}}</span> </td>
                                         
-        <td  >
-
-
+        <td>
 <span style="padding-left:0px;font-size:19px">{{lab.room}}</span>
 
-                     <td  >
-
+                     <td>
 <span ng-repeat="each_officer in lab.officer" style="padding-left:0px;font-size:19px">{{each_officer.t_name}}<br/></span>
   </td>
   </td>
          
   
-                                   <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['10'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,10,4)"> <a  style="margin-top:7px"  href=""  class="hvr-pulse"  data-ng-click="go_to_fix_lab(lab)" data-nq-toggle-modal="#fix_lab">
+                                   <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['10'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,10,4)"> <a style="margin-top:7px"  href=""  class="hvr-pulse"  data-ng-click="go_to_fix_lab(lab)" data-nq-toggle-modal="#fix_lab">
                                         <span class="topic"><i style="color:#eea236;margin0" class="glyphicon glyphicon-wrench"></i> </span>
                                     </a></td> 
                                           <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['10'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,10,4)"> <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_lab($index)" >
@@ -1503,8 +1500,8 @@
           </div>         </div>
      <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['10'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,10,4)) && choose_not_complete == false">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 
@@ -1515,12 +1512,12 @@
                     </div>
    </div>
 
- <div id="manage_research" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_research_controller">
+ <div id="manage_research" data-nq-modal="" data-qo-fire-emit="true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_research_controller">
                     <div class="custom-header">
                         <h1 class="headerModalH1">งานวิจัย</h1>
                     </div>
           <div class="row" style="margin-left: 14px;margin-right: 16px;">
-                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
                     </div>
 <br />
@@ -1551,19 +1548,19 @@
                                             <tr  ng-repeat="research in manage_research_my_research_now">
                           <td class="left_column" style=" padding-left: 10px ;"><span style="font-size:19px;">{{research.name}}</span> </td>
                                               <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{research.year_publish}}</span> </td>
-                          <td  >
+                          <td>
 
 <span ng-repeat="teacher in research.researcher" style="padding-left:0px;font-size:19px">{{teacher.t_name}}<br/></span>
   </td>
                           
-     <td ng-show="$root.president_in_this_curri(curri_choosen.curri_id) ||$root.current_user.privilege[curri_choosen.curri_id]['9'] >=3 || $root.right_from_committee_just_curri(curri_choosen.curri_id,9,3)"> <a style="margin-top:7px" href="" data-ng-click="download_research(research.file_name)" class="hvr-pulse" >
+     <td ng-show="$root.president_in_this_curri(curri_choosen.curri_id) ||$root.current_user.privilege[curri_choosen.curri_id]['9'] >=3 || $root.right_from_committee_just_curri(curri_choosen.curri_id,9,3)"> <a style="margin-top:7px" href="" data-ng-click="download_research(research.file_name)" class="hvr-pulse">
                                         <span class="topic"><i style="color:#4cae4c" class="glyphicon glyphicon-download-alt"></i> </span>
                                     </a></td> 
                                     
-   <td ng-show="$root.president_in_this_curri(curri_choosen.curri_id) ||$root.current_user.privilege[curri_choosen.curri_id]['9'] >=5 || $root.right_from_committee_just_curri(curri_choosen.curri_id,9,5)"> <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_research" data-ng-click="go_to_fix_research(research)">
+   <td ng-show="$root.president_in_this_curri(curri_choosen.curri_id) ||$root.current_user.privilege[curri_choosen.curri_id]['9'] >=5 || $root.right_from_committee_just_curri(curri_choosen.curri_id,9,5)"> <a style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_research" data-ng-click="go_to_fix_research(research)">
                                         <span class="topic"><i style="color:#eea236;margin0" class="glyphicon glyphicon-wrench"></i> </span>
                                     </a></td>
-                                          <td ng-show="$root.president_in_this_curri(curri_choosen.curri_id) ||$root.current_user.privilege[curri_choosen.curri_id]['9'] >=5 || $root.right_from_committee_just_curri(curri_choosen.curri_id,9,5)"> <a  style="margin-top:7px" data-ng-click="remove_research($index)" href=""  class="hvr-pulse" >
+                                          <td ng-show="$root.president_in_this_curri(curri_choosen.curri_id) ||$root.current_user.privilege[curri_choosen.curri_id]['9'] >=5 || $root.right_from_committee_just_curri(curri_choosen.curri_id,9,5)"> <a style="margin-top:7px" data-ng-click="remove_research($index)" href=""  class="hvr-pulse">
                                         <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td> 
                                             </tr>
@@ -1575,8 +1572,8 @@
 
                       <div class="custom-footer" ng-show="($root.president_in_this_curri(curri_choosen.curri_id) ||$root.current_user.privilege[curri_choosen.curri_id]['9'] >=5 || $root.right_from_committee_just_curri(curri_choosen.curri_id,9,5)) && choose_not_complete==false">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
                          <div class="custom-footer" ng-show="($root.president_in_this_curri(curri_choosen.curri_id)==false  && $root.current_user.privilege[curri_choosen.curri_id]['9'] <5 && $root.right_from_committee_just_curri(curri_choosen.curri_id,9,5) == false) || choose_not_complete == true">
@@ -1586,7 +1583,7 @@
                     </div>
    </div>
 
- <div id="change_priviledge_by_type_president" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="change_priviledge_by_type_president_controller">
+ <div id="change_priviledge_by_type_president" data-nq-modal="" data-qo-fire-emit="true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="change_priviledge_by_type_president_controller">
                     <div class="custom-header">
                         <h1 class="headerModalH1">แก้ไขระดับการเข้าถึงของบุคลากรแต่ละประเภท</h1>
                     </div>
@@ -1607,14 +1604,14 @@
                                             <tr>
                                                   <th class="col-xs-1 " rowspan="2">ประเภทบุคลากร</th>
                                     <th class="col-xs-3 " colspan="3">
-    <select data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title.name for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.$parent.title_choosen" data-qo-disable-clear="true" >
+    <select data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title.name for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.$parent.title_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>
                                         </th>
                                             </tr>
                                         </thead>
                                         <tbody class="flattened" ng-hide="not_choose_title_yet"> 
                                             <tr  ng-repeat="each_type in manage_privilege_president_result.list">
-                          <td  ><span style="font-size:21px;">{{each_type.user_type}}</span> </td>
+                          <td><span style="font-size:21px;">{{each_type.user_type}}</span> </td>
                                            
                                            <td style="padding-left: 0px;padding-right: 0px;">
     <select data-qo-disable-clear="true" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_president_result.choices track by choice.title_privilege_code" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกระดับการเข้าถึง" data-ng-model="$parent.each_type.my_privilege" >
@@ -1628,13 +1625,13 @@
           </div>         </div>
      <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="choose_not_complete || not_choose_title_yet || still_not_complete() "  class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="choose_not_complete || not_choose_title_yet || still_not_complete() "  class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
    </div>
 
- <div id="login_form"  data-nq-modal="" data-qo-fire-emit = "true"  data-qo-independent="true" data-ng-controller="login_controller" >
+ <div id="login_form"  data-nq-modal="" data-qo-fire-emit="true"  data-qo-independent="true" data-ng-controller="login_controller" >
 
   <div class="custom-header">
                         <h1 class="headerModalH1">เข้าสู่ระบบ</h1>
@@ -1646,9 +1643,7 @@
                             <h3 style="margin-left:20px;margin-top:2px;"><span class="topicNewHeader"><i class="glyphicon glyphicon-user" ></i> ชื่อผู้ใช้:   </span></h3>
                         </div>
                         <div class="col-md-8">
-                           <input type="text" ng-model="credentials.username" 
-class="form-control" placeholder="ชื่อผู้ใช้"  />
-
+                           <input type="text" ng-model="credentials.username" class="form-control" placeholder="ชื่อผู้ใช้"  />
                         </div>
                     </div>
                            <div class="row">
@@ -1664,20 +1659,20 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
               
                      <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="please_wait" ng-click="login(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button class="btn btn-success" ng-disabled="please_wait" ng-click="login(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
                     </div>
 
- <div id="change_priviledge_person_president" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="change_priviledge_person_president_controller">
+ <div id="change_priviledge_person_president" data-nq-modal="" data-qo-fire-emit="true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="change_priviledge_person_president_controller">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">แก้ไขระดับการเข้าถึงของบุคลากรแต่ละบุคคล</h1>
                     </div>
 
           <div class="row" style="margin-left: 14px;margin-right: 16px;">
-                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="choose_curri()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="choose_curri()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
                     </div>
 <br />
@@ -1694,7 +1689,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                                   <th class="col-xs-2 " >ชื่อ-นามสกุล</th>
                                     <th class="col-xs-3 " > 
 
-    <select data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title.name for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.$parent.title_choosen" data-qo-disable-clear="true" >
+    <select data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title.name for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.$parent.title_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
                                         </th>
                                             </tr>
@@ -1702,18 +1697,18 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                         <tbody class="flattened" ng-hide="not_choose_title_yet"> 
                                             <tr  ng-repeat="each_person in manage_privilege_president_person_result.list">
 
-                                              <td  >
+                                              <td>
 
                            <!--                    <img src="{{each_person.file_name_pic}}" class="img-circle" height="90">  -->
 <div class="thumb_center_please " style="background-image: url({{each_person.file_name_pic}});"></div>
                                               </td>
-                          <td  ><span style="font-size:21px;">{{each_person.t_name}}</span> </td>
+                          <td><span style="font-size:21px;">{{each_person.t_name}}</span> </td>
                                            
                                            <td style="
     padding-left: 0px;
     padding-right: 0px;
 ">
-    <select data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_president_person_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.each_person.my_privilege" data-qo-disable-clear="true" >
+    <select data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_president_person_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.each_person.my_privilege" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>
                                            </td>
                                             </tr>
@@ -1724,14 +1719,14 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
           </div>         </div>
      <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="choose_not_complete || not_choose_title_yet || still_not_complete() "  class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="choose_not_complete || not_choose_title_yet || still_not_complete() "  class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
    </div>
 
 
- <div id="change_priviledge_by_type_admin" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="change_priviledge_by_type_admin_controller">
+ <div id="change_priviledge_by_type_admin" data-nq-modal="" data-qo-fire-emit="true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="change_priviledge_by_type_admin_controller">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">แก้ไขระดับการเข้าถึงของบุคลากรแต่ละประเภท</h1>
@@ -1748,7 +1743,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                                   <th class="col-xs-1 " rowspan="2">ประเภทบุคลากร</th>
                                     <th class="col-xs-3 " colspan="3"> 
 
-    <select data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title.name for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.$parent.title_choosen" data-qo-disable-clear="true" >
+    <select data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title.name for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.$parent.title_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
 
                                         </th>
@@ -1756,10 +1751,10 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                         </thead>
                                         <tbody class="flattened" ng-hide="not_choose_title_yet"> 
                                             <tr  ng-repeat="each_type in manage_privilege_admin_result.list">
-                          <td  ><span style="font-size:21px;">{{each_type.user_type}}</span> </td>
+                          <td><span style="font-size:21px;">{{each_type.user_type}}</span> </td>
                                            
                                            <td style="padding-left: 0px;padding-right: 0px;">
-    <select data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_admin_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง"  data-ng-model="each_type.my_privilege" data-qo-disable-clear="true" >
+    <select data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_admin_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง"  data-ng-model="each_type.my_privilege" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>
                                            </td>
                                             </tr>
@@ -1770,20 +1765,20 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
           </div>         </div>
      <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="not_choose_title_yet || still_not_complete()"  class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="not_choose_title_yet || still_not_complete()"  class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
    </div>
 
-<div id="manage_bind_person" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_bind_person_controller">
+<div id="manage_bind_person" data-nq-modal="" data-qo-fire-emit="true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_bind_person_controller">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">ส่วนการโยงบัญชีผู้ใช้งาน</h1>
                     </div>
 
           <div class="row" style="margin-left: 14px;margin-right: 16px;">
-                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
                     </div>
 <br />
@@ -1811,14 +1806,14 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                         <form name="manage_survey_form" novalidate>
                                             <tr  ng-repeat="person in manage_bind_all_people_in_curri">
                           <td><span style="font-size:19px;"><input type="checkbox" data-ng-model="person.delete_me"></span> </td>
-                                              <td  >
+                                              <td>
                                               <!-- <img src="{{person.file_name_pic}}" class="img-circle" height="90"   > -->
 <div class="thumb_center_please " style="background-image: url({{person.file_name_pic}});"></div>
                                               </td>
                <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{person.t_name}}</span> </td>
                              <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{person.type}}</span> </td>
 
-                                          <td > <a  style="margin-top:7px" data-ng-click="remove_person($index,person)" href=""  class="hvr-pulse" >
+                                          <td> <a style="margin-top:7px" data-ng-click="remove_person($index,person)" href=""  class="hvr-pulse">
                                         <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td> 
 
@@ -1831,20 +1826,20 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
           </div>         </div>
      <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="choose_not_complete || nothing_change"  class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="choose_not_complete || nothing_change"  class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
    </div>
 
- <div id="show_education_personnel" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="show_education_personnel_controller">
+ <div id="show_education_personnel" data-nq-modal="" data-qo-fire-emit="true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="show_education_personnel_controller">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">ข้อมูลบุคลากรทางการศึกษา</h1>
                     </div>
 
           <div class="row" style="margin-left: 0px;margin-right: 0px;">
-                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+                          <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
                     </div>
 <br />
@@ -1872,7 +1867,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 <div class="thumb_center_please click_me" ng-click="openLightboxModal(person)" style="background-image: url({{person.file_name_pic}});"></div>
                                           <!--    <img src="{{person.file_name_pic}}" ng-click="openLightboxModal(person)"  height="90"> -->
                                               </td>
-                          <td ><span style="font-size:19px;">{{person.t_name}}</span> </td>
+                          <td><span style="font-size:19px;">{{person.t_name}}</span> </td>
                                 <td>
 <span ng-repeat="each_edu in person.history" style="font-size:19px">{{each_edu.pre_major}} {{each_edu.major}} {{each_edu.college}}<br/></span>
 </td>
@@ -1894,19 +1889,19 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                     </div>
    </div>
 
-                <div id="stat_grad" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="lg" data-qo-independent="true" data-ng-controller="stat_graduated_controller" data-ng-init="init()" >
+                <div id="stat_grad" data-nq-modal="" data-qo-fire-emit="true" data-qo-size="lg" data-qo-independent="true" data-ng-controller="stat_graduated_controller" data-ng-init="init()" >
                     <div class="custom-header">
                         <h1 class="headerModalH1">สถิติการจบการศึกษา</h1>
                     </div>
 
                     <div class="row" style="margin-left: 0px;margin-right: 0px;">
 
-                        <div class="col-md-8" >
+                        <div class="col-md-8">
                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
                         </div>
-                        <div class="col-md-4" >
-                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                        <div class="col-md-4">
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
                         </div>
                     </div>
@@ -2023,8 +2018,8 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                           </div>
                     <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['11'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,11,3)) && choose_not_complete == false">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="graduated_form.$invalid" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="graduated_form.$invalid" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 
@@ -2036,7 +2031,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                     </div>
                 </div>
 
-                <div id="minute_attendees" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="sm" data-qo-independent="true" >
+                <div id="minute_attendees" data-nq-modal="" data-qo-fire-emit="true" data-qo-size="sm" data-qo-independent="true" >
                     <div class="custom-header" >
                         <h1 class="headerModalH1">ผู้เข้าร่วมประชุม</h1>
                     </div>
@@ -2046,7 +2041,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                     </div>
                 </div>
                 
-                <div id="manage_minutes_show_images" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="manage_minutes_show_images_controller"data-qo-screen-mode="true"  data-qo-independent="true">
+                <div id="manage_minutes_show_images" data-nq-modal="" data-qo-fire-emit="true" data-ng-controller="manage_minutes_show_images_controller" data-qo-screen-mode="true"  data-qo-independent="true">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">{{manage_minutes_show_images_of_this_minute.topic_name}}</h1>
@@ -2068,7 +2063,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                         </div>
                     </div>
                 </div>
-                <div id="manage_minutes" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" ng-controller="manage_minutes_controller" data-qo-independent="true">
+                <div id="manage_minutes" data-nq-modal="" data-qo-fire-emit="true" data-qo-screen-mode="true" ng-controller="manage_minutes_controller" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1">ส่วนการจัดการรายงานการประชุม</h1>
                     </div>
@@ -2076,12 +2071,12 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
           <div class="row" style="margin-left: 0px;margin-right: 0px;">
 
 
-                        <div class="col-md-8" >
+                        <div class="col-md-8">
                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
                         </div>
-                        <div class="col-md-4" >
-                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                        <div class="col-md-4">
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
                         </div>
                     </div>
@@ -2123,11 +2118,11 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
 <span style="padding-left:0px;font-size:19px">{{minute.date}}</span>  </td>
 
-          <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#minute_attendees" data-ng-click="go_to_see_attendee(minute)" >
+          <td> <a style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#minute_attendees" data-ng-click="go_to_see_attendee(minute)" >
                                         <span class="topic"><i style="color:#484848" class="glyphicon glyphicon-user"></i> </span>
                                     </a></td> 
   
-                                   <td > <a  style="margin-top:7px"  href=""  class="hvr-pulse"  data-nq-toggle-modal="#manage_minutes_show_images" data-ng-click="show_picture_minute(minute)">
+                                   <td> <a style="margin-top:7px"  href=""  class="hvr-pulse"  data-nq-toggle-modal="#manage_minutes_show_images" data-ng-click="show_picture_minute(minute)">
                                         <span class="topic"><i style="color:#2980b9" class="glyphicon glyphicon-picture"></i> </span>
                                     </a></td> 
 
@@ -2135,7 +2130,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                           <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['8'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,3)"> <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="download_file(minute.file_name)" >
                                         <span class="topic"><i style="color:#00802b" class="glyphicon glyphicon-download-alt"></i> </span>
                                     </a></td> 
-    <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['8'] >=5 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,5)"   > <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_minute" data-ng-click="go_to_fix_minute($index)">
+    <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['8'] >=5 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,5)"   > <a style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_minute" data-ng-click="go_to_fix_minute($index)">
                                         <span class="topic"><i style="color:#eea236;" class="glyphicon glyphicon-wrench"></i> </span>
                                     </a></td> 
                                           <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['8'] >=5 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,5)"> <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_minute($index)" >
@@ -2152,8 +2147,8 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
    
                      <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['8'] >=5 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,5)) && choose_not_complete == false">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 
@@ -2165,7 +2160,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                 </div>
 
              
-<div id="show_edit_album" data-ng-controller="show_edit_album_controller" data-ng-init="init()"data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode="true" data-qo-independent="true">
+<div id="show_edit_album" data-ng-controller="show_edit_album_controller" data-ng-init="init()"data-nq-modal="" data-qo-fire-emit="true"  data-qo-screen-mode="true" data-qo-independent="true">
       <div class="custom-header">
           <h1 class="headerModalH1"><span class="headerModal">{{manage_album_show_this_album.name}}</span></h1>
       </div>
@@ -2224,14 +2219,14 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
      <div class="custom-footer">
           <div class="topicHeader pull-right">
-              <button class="btn btn-success  " ng-disabled="still_not_choose_complete() || please_wait" ng-click="save_to_server(this)">    ยืนยัน</button>
-              <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+              <button class="btn btn-success" ng-disabled="still_not_choose_complete() || please_wait" ng-click="save_to_server(this)">    ยืนยัน</button>
+              <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
           </div>
       </div>   
       </div>
 
 
-<div id="show_album" data-ng-controller="show_album_controller" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode="true" data-qo-independent="true">
+<div id="show_album" data-ng-controller="show_album_controller" data-nq-modal="" data-qo-fire-emit="true"  data-qo-screen-mode="true" data-qo-independent="true">
       <div class="custom-header">
           <h1 class="headerModalH1"><span class="headerModal">{{manage_album_show_this_album.name}}</span></h1>
       </div>
@@ -2259,7 +2254,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                   </div>
       </div>
 
-<div id="create_album" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_album_controller">
+<div id="create_album" data-nq-modal="" data-qo-fire-emit="true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_album_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">เพิ่มอัลบั้มรูปภาพ</h1>
                     </div>       
@@ -2301,23 +2296,23 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
   </div>
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 </div>
 
- <div id="manage_primary_evidences_admin" data-ng-controller="manage_primary_evidences_admin_controller" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-size ="lg" data-qo-independent="true">
+ <div id="manage_primary_evidences_admin" data-ng-controller="manage_primary_evidences_admin_controller" data-nq-modal="" data-qo-fire-emit="true"  data-qo-size ="lg" data-qo-independent="true">
       <div class="custom-header">
           <h1 class="headerModalH1"><span class="headerModal">หลักฐานพื้นฐาน</span></h1>
       </div>
-<div class="row" >
+<div class="row">
          <div class="col-md-5" style="margin-left:72px" >
-                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in corresponding_aca_years track by year" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in corresponding_aca_years track by year" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
                         </div>
   <div class="col-md-5" >
- <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators track by indicator" data-qo-effect="flip-x" data-ng-change="find_primary_evidences()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+ <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators track by indicator" data-qo-effect="flip-x" data-ng-change="find_primary_evidences()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
   </div>
 </div>
@@ -2325,7 +2320,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                         <div ng-show="choose_not_complete">
                         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                         </div>
-    <div class="container-fluid" ng-hide="choose_not_complete" >
+    <div class="container-fluid" ng-hide="choose_not_complete">
                         <div class="clearfix">
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
                                  data-qo-selectable="true">
@@ -2345,7 +2340,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                                 <span class="topicHeader" ng-show="primary_evidence.just_create"> <input class="form-control"  type="text" ng-model="primary_evidence.evidence_name " required/></span>
                                                 </td>
                                                                             
-   <td > <a href=""  class="hvr-pulse" data-ng-click="remove_primary_evidence($index)">
+   <td> <a href=""  class="hvr-pulse" data-ng-click="remove_primary_evidence($index)">
                                         <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td>
                                             </tr>
@@ -2361,13 +2356,13 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
        <div class="custom-footer">
           <div class="topicHeader pull-right">
-              <button class="btn btn-success  " ng-disabled="choose_not_complete ||  still_not_choose_complete() || nothing_change" ng-click="save_to_server(this)">ยืนยัน</button>
-              <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+              <button class="btn btn-success" ng-disabled="choose_not_complete ||  still_not_choose_complete() || nothing_change" ng-click="save_to_server(this)">ยืนยัน</button>
+              <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
           </div>
       </div>   
     </div>
 
- <div id="manage_evidences" data-ng-controller="manage_evidences_controller" data-ng-init="init()"data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode ="true" data-qo-independent="true">
+ <div id="manage_evidences" data-ng-controller="manage_evidences_controller" data-ng-init="init()"data-nq-modal="" data-qo-fire-emit="true"  data-qo-screen-mode ="true" data-qo-independent="true">
       <div class="custom-header">
           <h1 class="headerModalH1"><span class="headerModal">ส่วนจัดการหลักฐาน</span></h1>
       </div>
@@ -2384,18 +2379,18 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
                         </div>
                         <div class="col-md-2" >
-                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
                         </div>
 
-  <div class="col-md-4" >
- <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+  <div class="col-md-4">
+ <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
   </div>
 
 </div>
 
-                           <div class="container-fluid" ng-hide="choose_not_complete" >
+                           <div class="container-fluid" ng-hide="choose_not_complete">
                         <div class="clearfix">
      <div class="panel-heading clearfix">
                                 </div>
@@ -2438,7 +2433,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                         <form name="manage_evidences_form" novalidate>
                                             <tr data-ng-repeat="evidence in manage_evidences_world_evidences">
 
-                                                 <td  >
+                                                 <td>
                                                  <span  style="padding-left:0px;font-size:19px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['3'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4)" >{{indicator_choosen.indicator_num}}-      <input class="form-control" type="number" ng-pattern="/^[0-9]*$/" style=" display: inline-block;margin-top:2px;margin-bottom:2px;width:50px;padding-top:2px;padding-left:4px;padding-right:2px;padding-bottom:5px"  ng-model="evidence.evidence_real_code" data-ng-change="something_change()" required/></span>
 
                                                       <span  style="text-align:center;font-size:19px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['3'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) == false" >{{indicator_choosen.indicator_num}}-{{evidence.evidence_real_code}}</span>
@@ -2454,10 +2449,10 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                                   <span  style="text-align:center;font-size:19px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['3'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) == false" >{{evidence.evidence_name}}</span>
                                                 </td>
 
-       <td ><span style="margin-right:15px;font-size:19px">{{evidence.t_name}}</span> </td>
+       <td><span style="margin-right:15px;font-size:19px">{{evidence.t_name}}</span> </td>
                                                <!--  <span class="topicHeader" ng-show="primary_evidence.just_create"> <input class="form-control"  type="text" ng-model="primary_evidence.evidence_name " required/></span> -->
 
-   <td > <a style="margin-left:1.5px;margin-top:3.5px" href=""  class="hvr-pulse" ng-click="watch_file(evidence.file_name)">
+   <td> <a style="margin-left:1.5px;margin-top:3.5px" href=""  class="hvr-pulse" ng-click="watch_file(evidence.file_name)">
                                         <span class="topicHeader"><i class="
 glyphicon glyphicon-eye-open" style="color:darkcyan" ></i> </span></a></td>
 
@@ -2479,8 +2474,8 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
 
            <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['3'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4)) && choose_not_complete == false">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="nothing_change || choose_not_complete ||  still_not_choose_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="nothing_change || choose_not_complete ||  still_not_choose_complete()" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 
@@ -2491,7 +2486,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     </div>
       </div>
 
- <div id="manage_primary_evidences_president" data-ng-controller="manage_primary_evidences_president_controller" data-ng-init="init()" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode ="true" data-qo-independent="true">
+ <div id="manage_primary_evidences_president" data-ng-controller="manage_primary_evidences_president_controller" data-ng-init="init()" data-nq-modal="" data-qo-fire-emit="true"  data-qo-screen-mode ="true" data-qo-independent="true">
       <div class="custom-header">
           <h1 class="headerModalH1"><span class="headerModal">ส่วนจัดการหลักฐานพื้นฐาน</span></h1>
       </div>
@@ -2501,17 +2496,17 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
             <option style="display:none" value=""></option></select>
                         </div>
                         <div class="col-md-2" >
-                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
                         </div>
 
-  <div class="col-md-4" >
- <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+  <div class="col-md-4">
+ <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
   </div>
 </div>
 <br />
-                           <div class="container-fluid" data-ng-hide="choose_not_complete" >
+                           <div class="container-fluid" data-ng-hide="choose_not_complete">
                         <div class="clearfix">
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
                                  data-qo-selectable="true">
@@ -2586,13 +2581,13 @@ glyphicon glyphicon-bell"></i> </span>
                     
         <div class="custom-footer">
           <div class="topicHeader pull-right">
-              <button class="btn btn-success  " ng-disabled="choose_not_complete ||  still_not_choose_complete() || nothing_change " ng-click="save_to_server(this)">    ยืนยัน</button>
-              <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+              <button class="btn btn-success" ng-disabled="choose_not_complete ||  still_not_choose_complete() || nothing_change " ng-click="save_to_server(this)">    ยืนยัน</button>
+              <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
           </div>
       </div>   
  </div>
 
-     <div id="manage_president" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-placement="top" data-ng-controller="manage_president_controller" data-ng-init="init()" data-qo-screen-mode="true" data-qo-independent="true">
+     <div id="manage_president" data-nq-modal="" data-qo-fire-emit="true"  data-qo-placement="top" data-ng-controller="manage_president_controller" data-ng-init="init()" data-qo-screen-mode="true" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> แต่งตั้งประธานหลักสูตร</span></h1>
                     </div>
@@ -2655,14 +2650,14 @@ glyphicon glyphicon-bell"></i> </span>
      </div>
              <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="choose_not_complete || choose_same_presidents_or_not_choose() || nothing_change_object()" ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button class="btn btn-success" ng-disabled="choose_not_complete || choose_same_presidents_or_not_choose() || nothing_change_object()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>   
 </div>
    
 
-<div id="manage_admin_add_admin" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-placement="left"  data-ng-controller="manage_admin_add_admin_controller" data-qo-size="md" data-qo-independent="true">
+<div id="manage_admin_add_admin" data-nq-modal="" data-qo-fire-emit="true"  data-qo-placement="left"  data-ng-controller="manage_admin_add_admin_controller" data-qo-size="md" data-qo-independent="true">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">ข้อมูลผู้ควบคุมระบบคนใหม่</h1>
@@ -2689,13 +2684,13 @@ glyphicon glyphicon-bell"></i> </span>
 
      <div class="custom-footer">
                            <div class="topicHeader pull-right">
-                            <button ng-disabled="still_not_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="still_not_complete()" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 
 </div>
-<div id="manage_admin_who" data-nq-modal="" data-qo-fire-emit = "true"  data-ng-controller="manage_admin_who_controller" data-qo-screen-mode="true" data-qo-independent="true">
+<div id="manage_admin_who" data-nq-modal="" data-qo-fire-emit="true"  data-ng-controller="manage_admin_who_controller" data-qo-screen-mode="true" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1">แต่งตั้งผู้ควบคุมระบบ</h1>
                     </div>
@@ -2726,8 +2721,8 @@ glyphicon glyphicon-bell"></i> </span>
                                              </span>
                                               </td>
 
-                          <td ><span style="font-size:19px;">{{admin.t_name}}</span> </td>
-                          <td ><span style="font-size:19px;">{{admin.email}}</span> </td>
+                          <td><span style="font-size:19px;">{{admin.t_name}}</span> </td>
+                          <td><span style="font-size:19px;">{{admin.email}}</span> </td>
   <td style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{admin.creator_name}}</span> </td>
 <td  style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{admin.timestamp}}</span> </td>
                                             
@@ -2744,7 +2739,7 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
    </div>
 
-        <div id="add_committee" data-nq-modal="" data-ng-controller="add_committee_controller" data-qo-fire-emit = "true" data-qo-independent="true">
+        <div id="add_committee" data-nq-modal="" data-ng-controller="add_committee_controller" data-qo-fire-emit="true" data-qo-independent="true">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> แต่งตั้งกรรมการหลักสูตร</span></h1>
@@ -2752,7 +2747,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                     <div class="row" style="margin-left:0px;margin-right:0px;margin-top:8px">
                       
-                               <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="person.t_name for person in people_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกบุคลากร"  data-ng-model="$parent.choose_people"  data-qo-max-length ="0" data-qo-multiple="true"  data-qo-disable-clear="true" >
+                               <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="person.t_name for person in people_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกบุคลากร"  data-ng-model="$parent.choose_people"  data-qo-max-length ="0" data-qo-multiple="true"  data-qo-disable-clear="true">
                                  
             <option style="display:none" value=""></option>
             </select>
@@ -2765,13 +2760,13 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button class="btn btn-success" ng-disabled="still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
                 </div>
 
- <div id="manage_committee_who" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_committee_who_controller">
+ <div id="manage_committee_who" data-nq-modal="" data-qo-fire-emit="true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_committee_who_controller">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">แต่งตั้งกรรมการหลักสูตร</h1>
@@ -2779,13 +2774,13 @@ glyphicon glyphicon-bell"></i> </span>
 
        <div class="row" style="margin-left: 0px;">
 
-                        <div class="col-md-8" >
+                        <div class="col-md-8">
                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
-                        <div class="col-md-4" >
-                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                        <div class="col-md-4">
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
                         </div>
                     </div>
@@ -2812,16 +2807,15 @@ glyphicon glyphicon-bell"></i> </span>
                                         </thead>
                                         <tbody class="flattened">
                                             <tr  ng-repeat="committee in manage_committee_who_all_committees">
-                                             <td  >
+                                             <td>
                                             <!--  <img src="{{committee.file_name_pic}}" class="img-circle" height="90"> -->
-
                                              <div class="thumb_center_please " style="background-image: url({{committee.file_name_pic}});"></div>
                                               </td>
                           <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{committee.t_name}}</span> </td>
                                               <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{committee.email}}</span> </td>
           <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{committee.date_promoted}}</span> </td>
 
-                                          <td > <a  style="margin-top:7px" data-ng-click="remove_committee($index)" href=""  class="hvr-pulse" >
+                                          <td> <a style="margin-top:7px" data-ng-click="remove_committee($index)" href=""  class="hvr-pulse">
                                         <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td> 
                                             </tr>                                           
@@ -2832,14 +2826,12 @@ glyphicon glyphicon-bell"></i> </span>
           </div>         </div>
      <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="choose_not_complete || nothing_change"  class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="choose_not_complete || nothing_change"  class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
    </div>
-
-
-                    <div id="watch_curri" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true"  >
+                    <div id="watch_curri" data-nq-modal="" data-qo-fire-emit="true" data-qo-independent="true"  >
                         <div class="custom-header">
                             <h1 class="headerModalH1">ข้อมูลหลักสูตร</h1>
                         </div>
@@ -2851,32 +2843,26 @@ glyphicon glyphicon-bell"></i> </span>
                          <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.curr_tname}}
                             </div>
                         </div>
-
                   <div class="row">
                  <div class="col-md-4" style="padding-left: 30px;">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อหลักสูตรภาษาอังกฤษ   </span></h3>
                             </div>
-                          
     <div class="col-md-8">
                          <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.curr_ename}}
                             </div>                          
                         </div>
-
                     <div class="row">
                   <div class="col-md-4" style="padding-left: 30px;">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(ย่อ)   </span></h3>
                             </div>
-
                                 <div class="col-md-8">
                          <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.degree_t_bf}}
                             </div>
                         </div>
-
                       <div class="row">
                   <div class="col-md-4" style="padding-left: 30px;padding-right: 0px;">
                                 <h3 style="margin-top:3px; "><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(ย่อ)   </span></h3>
                             </div>
-
    <div class="col-md-8">
                          <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.degree_e_bf}}
                             </div>
@@ -2889,7 +2875,6 @@ glyphicon glyphicon-bell"></i> </span>
                          <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.degree_t_full}}
                             </div>
                         </div>
-
                       <div class="row">
                    <div class="col-md-4" style="padding-left: 30px; padding-right: 0px;">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(เต็ม)</span></h3>
@@ -2898,17 +2883,14 @@ glyphicon glyphicon-bell"></i> </span>
                          <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.degree_e_full}}
                             </div>
                         </div>
-
                      <div class="row">
                        <div class="col-md-4" style="padding-left: 30px;">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ระดับปริญญา </span></h3>
                             </div>
                                 <div class="col-md-8">
-                         <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.level}} 
-
+                         <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.level}}
                             </div>
-                        </div> 
-
+                        </div>
                         <div class="row">
                        <div class="col-md-4" style="padding-left: 30px;">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ระยะเวลาการเรียน </span></h3>
@@ -2924,11 +2906,10 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
                     </div>
 
-                      <div id="see_evaluate_self_sudden_with_fix" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode="true" data-qo-independent="true" >
+                      <div id="see_evaluate_self_sudden_with_fix" data-nq-modal="" data-qo-fire-emit="true"  data-qo-screen-mode="true" data-qo-independent="true" >
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal">ข้อมูลสนับสนุนการประเมินหลักสูตรตนเอง</span></h1>
                     </div>
-
                     <div class="container-fluid" >
                        <button class="btn btn-warning hvr-pulse" ng-click="go_to_edit_reason(this,sub_indicator_now_for_link)" ><i class="glyphicon glyphicon-wrench"></i> แก้ไขข้อมูลสนับสนุนการประเมิน</button>
 
@@ -2937,26 +2918,22 @@ glyphicon glyphicon-bell"></i> </span>
                                 <div class="topicHeader"  ng-if ="display_self_support.detail != '' && display_self_support.detail" data-ng-bind-html="display_self_support.detail"></div>
                                       <div class="topicHeader"  ng-if ="!display_self_support.detail" align="center">---ไม่พบข้อมูลสนับสนุนการประเมินในตัวบ่งชี้นี้---</div>
 
-                                                         <div class="row"  >
+                                                         <div class="row">
           <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicNewHeader">จุดแข็ง (Strength):   </span></h3>
  </div>
- <div class="row" style="
-    text-align: left;
-">
+ <div class="row" style="text-align: left;">
          <span style="margin-left: 35px;" class="topicHeader"  ng-if="display_self_support.strength!='' && display_self_support.strength">  {{display_self_support.strength}}</span>
                <span style="margin-left: 35px;" ng-if="!display_self_support.strength" class="topicHeader">--ไม่พบข้อมูล--</span> 
  </div>
- <div class="row" >
+ <div class="row">
           <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicNewHeader">จุดด้อย (Weakness):   </span></h3>
  </div>
- <div class="row" style="
-    text-align: left;
-" >
+ <div class="row" style="text-align: left;">
    <span style="margin-left: 35px;" class="topicHeader" ng-if="display_self_support.weakness!=''  && display_self_support.weakness" >{{display_self_support.weakness}}</span>  
          <span style="margin-left: 35px;" ng-if="!display_self_support.weakness" class="topicHeader">--ไม่พบข้อมูล--</span> 
  </div>
 
- <div class="row" >
+ <div class="row">
           <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicNewHeader">จุดที่ควรพัฒนา (Area of improve):   </span></h3>
  </div>
  <div class="row" style="
@@ -2965,7 +2942,6 @@ glyphicon glyphicon-bell"></i> </span>
    <span style="margin-left: 35px;" ng-if="display_self_support.improve!=''  && display_self_support.improve" class="topicHeader">{{display_self_support.improve}}</span> 
       <span style="margin-left: 35px;" ng-if="!display_self_support.improve" class="topicHeader">--ไม่พบข้อมูล--</span> 
  </div>
-
                                 </div>
                         </div>
                     </div>
@@ -2977,7 +2953,7 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
                 </div>
 
-        <div id="see_evaluate_self_sudden" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode="true" data-qo-independent="true" >
+        <div id="see_evaluate_self_sudden" data-nq-modal="" data-qo-fire-emit="true"  data-qo-screen-mode="true" data-qo-independent="true" >
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal">ข้อมูลสนับสนุนการประเมินหลักสูตรตนเอง</span></h1>
                     </div>
@@ -2985,20 +2961,17 @@ glyphicon glyphicon-bell"></i> </span>
                         <div class="clearfix">        
                                 <div class="well" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="margin-bottom:0px;margin-top:19px;">
 
-
                                 <div class="topicHeader"  ng-if ="display_self_support.detail != '' && display_self_support.detail" data-ng-bind-html="display_self_support.detail"></div>
                                       <div class="topicHeader"  ng-if ="!display_self_support.detail" align="center">---ไม่พบข้อมูลสนับสนุนการประเมินในตัวบ่งชี้นี้---</div>
 
-                                                         <div class="row"  >
+                                                         <div class="row">
           <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicNewHeader">จุดแข็ง (Strength):   </span></h3>
  </div>
- <div class="row" style="
-    text-align: left;
-">
+ <div class="row" style="text-align: left;">
          <span style="margin-left: 35px;" class="topicHeader"  ng-if="display_self_support.strength!='' && display_self_support.strength">  {{display_self_support.strength}}</span>
                <span style="margin-left: 35px;" ng-if="!display_self_support.strength"class="topicHeader">--ไม่พบข้อมูล--</span> 
  </div>
- <div class="row" >
+ <div class="row">
           <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicNewHeader">จุดด้อย (Weakness):   </span></h3>
  </div>
  <div class="row" style="
@@ -3008,7 +2981,7 @@ glyphicon glyphicon-bell"></i> </span>
          <span style="margin-left: 35px;" ng-if="!display_self_support.weakness" class="topicHeader">--ไม่พบข้อมูล--</span> 
  </div>
 
- <div class="row" >
+ <div class="row">
           <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicNewHeader">จุดที่ควรพัฒนา (Area of improve):   </span></h3>
  </div>
  <div class="row" style="
@@ -3026,7 +2999,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
                 </div>
-         <div id="see_evaluate_other_sudden" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode="true" data-qo-independent="true" >
+         <div id="see_evaluate_other_sudden" data-nq-modal="" data-qo-fire-emit="true"  data-qo-screen-mode="true" data-qo-independent="true" >
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal">ข้อมูลสนับสนุนการประเมินหลักสูตรจากผู้ประเมินภายนอก</span></h1>
                     </div>
@@ -3057,7 +3030,7 @@ glyphicon glyphicon-bell"></i> </span>
                                                   <td ng-if="$index!=0">{{result.indicator_num}}.{{result.sub_indicator_num}}</td>
                                                 <td class="left_column topicNewHeader">{{result.sub_indicator_name}}
 
-                                              <div class="row"  >
+                                              <div class="row">
           <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicHeader">จุดแข็ง (Strength):   </span></h3>
  </div>
  <div class="row" style="
@@ -3065,7 +3038,7 @@ glyphicon glyphicon-bell"></i> </span>
 ">
          <span style="margin-left: 35px;" >  {{result.strength}}</span>
  </div>
- <div class="row" >
+ <div class="row">
           <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicHeader">จุดที่ควรพัฒนา (Area of improve):   </span></h3>
  </div>
  <div class="row" style="
@@ -3075,7 +3048,7 @@ glyphicon glyphicon-bell"></i> </span>
  </div>
 </td>
 
-       <td ><span ng-show="result.evaluation_score !=0" class="topicNewHeader">{{result.evaluation_score}} </span></td>
+       <td><span ng-show="result.evaluation_score !=0" class="topicNewHeader">{{result.evaluation_score}} </span></td>
                                             </tr>
                                             </form>
                                         </tbody>
@@ -3092,7 +3065,7 @@ glyphicon glyphicon-bell"></i> </span>
     font-size: 30px;color: #739900; " class="glyphicon glyphicon-download-alt " /></a>
 </div>
        
-       <div class="row" >   
+       <div class="row">   
        <span class="topicNewHeader"><span style="margin-left:35px;margin-top:5px;color:#6F002B;font-weight:bold">ประเมินโดย</span>  {{reason_other_evaluate.evaluation_detail[0].t_name}} </span> 
        </div>   
              <div class="row">   
@@ -3109,7 +3082,7 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
                 </div>
 
-                 <div id="criteria_seven" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-independent="true">
+                 <div id="criteria_seven" data-nq-modal="" data-qo-fire-emit="true" data-qo-screen-mode="true" data-qo-independent="true">
                    <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal">เกณฑ์การประเมิน 7 ระดับ</span></h1>
                     </div>
@@ -3164,7 +3137,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
 </div>
-         <div id="see_evaluate_other" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="see_evaluate_by_other_controller" data-qo-screen-mode="true" data-qo-independent="true">
+         <div id="see_evaluate_other" data-nq-modal="" data-qo-fire-emit="true" data-ng-controller="see_evaluate_by_other_controller" data-qo-screen-mode="true" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal">ผลการประเมินหลักสูตร</span></h1>
                     </div>
@@ -3177,12 +3150,12 @@ glyphicon glyphicon-bell"></i> </span>
             <option style="display:none" value=""></option></select>
                         </div>
                         <div class="col-md-2" >
-                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
                         </div>
   <div class="col-md-4">
 
-      <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+      <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
                         </div>
                         </div>
@@ -3208,8 +3181,8 @@ glyphicon glyphicon-bell"></i> </span>
                                                 <td>{{result.indicator_num}}.{{result.sub_indicator_num}}</td>
                                                 <td class="left_column">{{result.sub_indicator_name}}
 </td>
-       <td ><span ng-show="result.evaluation_score !=0">{{result.evaluation_score}} </span></td>
-  <td >{{result.suggestion}}</td>
+       <td><span ng-show="result.evaluation_score !=0">{{result.evaluation_score}} </span></td>
+  <td>{{result.suggestion}}</td>
 
                                             </tr>
                                             </form>
@@ -3226,7 +3199,7 @@ glyphicon glyphicon-bell"></i> </span>
 <a href="" ng-click="download_file(corresponding_results.file_name)" class=" hvr-wobble-vertical"><span style="
     font-size: 30px;color: #739900; " class="glyphicon glyphicon-download-alt " /></a>
 </div> 
-       <div class="row" >
+       <div class="row">
        <span class="topicNewHeader"><span style="margin-left:35px;margin-top:5px;color:#6F002B;font-weight:bold">ประเมินโดย</span>  {{corresponding_results.evaluation_detail[0].t_name}} </span> 
        </div>   
              <div class="row">   
@@ -3243,7 +3216,7 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
                 </div>
 
-              <div id="evaluate_other" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="evaluate_by_other_controller" data-ng-init = "init()"data-qo-screen-mode="true" data-qo-independent="true">
+              <div id="evaluate_other" data-nq-modal="" data-qo-fire-emit="true" data-ng-controller="evaluate_by_other_controller" data-ng-init = "init()"data-qo-screen-mode="true" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตร</span></h1>
                     </div>
@@ -3256,12 +3229,12 @@ glyphicon glyphicon-bell"></i> </span>
 
                         </div>
                         <div class="col-md-2" >
-                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
                         </div>
   <div class="col-md-4">
 
-      <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+      <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>
                         </div>
                         </div>
@@ -3296,7 +3269,7 @@ glyphicon glyphicon-bell"></i> </span>
                                                         <td  ng-if="$index!=0">{{result.indicator_num}}.{{result.sub_indicator_num}}</td>
                                                 <td class="left_column">{{result.sub_indicator_name}}
 
- <div class="row" >
+ <div class="row">
           <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicHeader">จุดแข็ง (Strength):   </span></h3>
  </div>
  <div class="row">
@@ -3339,7 +3312,7 @@ glyphicon glyphicon-bell"></i> </span>
                           <span  class="topicHeader" style="margin-left: 20px;margin-right: 20px;">หรือ</span>
 
 
-    <span class="btn btn-success  " ng-click="set_disabled_search()" style="font-size:18px;"><i style="margin-top:3px" class="glyphicon glyphicon-plus-sign"></i> อัพโหลดไฟล์ใหม่</span>
+    <span class="btn btn-success" ng-click="set_disabled_search()" style="font-size:18px;"><i style="margin-top:3px" class="glyphicon glyphicon-plus-sign"></i> อัพโหลดไฟล์ใหม่</span>
                             </div>
 
     <div class="col-md-8" ng-show="disabled_search" style="padding-right: 6px;">
@@ -3349,7 +3322,7 @@ glyphicon glyphicon-bell"></i> </span>
 
 <div class="col-md-1" style="margin-top:5px" ng-show="disabled_search" >
 
-<a href=""   data-ng-click="back_to_default()" class="hvr-pulse" >
+<a href=""   data-ng-click="back_to_default()" class="hvr-pulse">
                                         <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-remove"></i> </span>
                                     </a>
                         </div>
@@ -3365,21 +3338,21 @@ glyphicon glyphicon-bell"></i> </span>
 
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="choose_not_complete || still_not_complete() || please_wait" ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button class="btn btn-success" ng-disabled="choose_not_complete || still_not_complete() || please_wait" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div> 
                 </div>
 
 
-  <div id="manage_indicators" data-ng-controller="manage_indicators_controller" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode="true"  data-qo-independent="true">
+  <div id="manage_indicators" data-ng-controller="manage_indicators_controller" data-nq-modal="" data-qo-fire-emit="true"  data-qo-screen-mode="true"  data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการตัวบ่งชี้</span></h1>
                     </div>
 <div class="row">
 
 <div class="col-md-6" style="margin-bottom:15px;margin-left:45px">
-                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in all_indicator_years" data-qo-effect="flip-x" data-ng-change="get_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษาที่ต้องการดึงเทมเพลท" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year for year in all_indicator_years" data-qo-effect="flip-x" data-ng-change="get_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษาที่ต้องการดึงเทมเพลท" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>
 </div>
 
@@ -3416,7 +3389,7 @@ glyphicon glyphicon-bell"></i> </span>
                                         <tbody class="flattened">
                                         <form name="manage_indicators_form" novalidate>
                                             <tr data-ng-repeat="indicator in manage_indicators_and_sub_result">                                           
-                                                 <td ><input data-ng-change="something_change()"  type="number" ng-pattern="/^[0-9]*$/" class="form-control"  ng-model="indicator.indicator_num "  required/></td>
+                                                 <td><input data-ng-change="something_change()"  type="number" ng-pattern="/^[0-9]*$/" class="form-control"  ng-model="indicator.indicator_num "  required/></td>
 
                                                 <td class="topic_indicator left_column"><input data-ng-change="something_change()" class="form-control" size="64" type="text" ng-model="indicator.indicator_name_e " required/>
                                                 </td>
@@ -3440,13 +3413,13 @@ glyphicon glyphicon-bell"></i> </span>
 
  <div class="custom-footer">     
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="still_not_choose_complete() || validate_year_to_create()  ||  choose_not_complete || please_wait " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button class="btn btn-success" ng-disabled="still_not_choose_complete() || validate_year_to_create()  ||  choose_not_complete || please_wait " ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div> 
                     </div>
 
-  <div id="manage_sub_indicators" data-ng-controller="manage_sub_indicators_controller" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode="true"  data-ng-init ="init()" data-qo-independent="true">
+  <div id="manage_sub_indicators" data-ng-controller="manage_sub_indicators_controller" data-nq-modal="" data-qo-fire-emit="true"  data-qo-screen-mode="true"  data-ng-init ="init()" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ส่วนจัดการตัวบ่งชี้ย่อย</span></h1>
                     </div>
@@ -3500,13 +3473,13 @@ glyphicon glyphicon-bell"></i> </span>
 
  <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="still_not_choose_complete_sub()  || please_wait" ng-click="ask_to_save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button class="btn btn-success" ng-disabled="still_not_choose_complete_sub()  || please_wait" ng-click="ask_to_save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div> 
                     </div>
 
-                <div id="evaluate_me" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="evaluate_by_me_controller" data-ng-init = "init()"data-qo-screen-mode="true" data-qo-independent="true">
+                <div id="evaluate_me" data-nq-modal="" data-qo-fire-emit="true" data-ng-controller="evaluate_by_me_controller" data-ng-init = "init()"data-qo-screen-mode="true" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> ประเมินหลักสูตรตนเอง</span></h1>
                     </div>
@@ -3518,12 +3491,12 @@ glyphicon glyphicon-bell"></i> </span>
 
                         </div>
                         <div class="col-md-2" >
-                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_indicators()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
                         </div>
   <div class="col-md-4">
 
-      <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true" >
+      <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in corresponding_indicators" data-qo-effect="flip-x" data-ng-change="get_results()"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>
                         </div>
                         </div>
@@ -3573,20 +3546,20 @@ glyphicon glyphicon-bell"></i> </span>
 
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="evaluate_by_me_form.$invalid || choose_not_complete || still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button class="btn btn-success" ng-disabled="evaluate_by_me_form.$invalid || choose_not_complete || still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div> 
                 </div>
 
-                <div id="upload_primary_evidence" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="add_new_primary_controller" data-qo-size="md" data-qo-independent="true">
+                <div id="upload_primary_evidence" data-nq-modal="" data-qo-fire-emit="true" data-ng-controller="add_new_primary_controller" data-qo-size="md" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> อัพโหลดหลักฐานพื้นฐาน</span></h1>
                     </div>
 
                      <form name="upload_evidence_form" novalidate>
  <div class="row">
-                        <div class="col-md-4" > 
+                        <div class="col-md-4"> 
                             <h3 style="margin-left:20px;margin-top:2px;"><span class="topicHeader">รหัสหลักฐาน:  </span></h3>
                         </div>
                         <div class="col-md-1" style="padding-right:0px">
@@ -3622,13 +3595,13 @@ glyphicon glyphicon-bell"></i> </span>
                   
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="new_evidence_still_not_complete() || please_wait" ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                            <button class="btn btn-success" ng-disabled="new_evidence_still_not_complete() || please_wait" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="$hide()">ยกเลิก</button>
                         </div>
                     </div>
                 </div>
 
-       <div id="fix_evidence" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="sm" data-qo-independent="true" data-ng-controller="change_evidence_file_controller" data-qo-effect="flip-x">
+       <div id="fix_evidence" data-nq-modal="" data-qo-fire-emit="true" data-qo-size="sm" data-qo-independent="true" data-ng-controller="change_evidence_file_controller" data-qo-effect="flip-x">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> แก้ไขหลักฐาน</span></h1>
                     </div>
@@ -3645,20 +3618,20 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>                  
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="files.length ==0 || please_wait" ng-click="save_to_server(this)" >ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button class="btn btn-success" ng-disabled="files.length ==0 || please_wait" ng-click="save_to_server(this)" >ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
                 </div>
 
-                <div id="upload_evidence" data-nq-modal="" data-qo-fire-emit = "true"  data-ng-controller="add_new_evidence_controller" data-qo-size="md" data-qo-independent="true">
+                <div id="upload_evidence" data-nq-modal="" data-qo-fire-emit="true"  data-ng-controller="add_new_evidence_controller" data-qo-size="md" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal">เพิ่มหลักฐานใหม่</span></h1>
                     </div>
 
                      <form name="upload_evidence_form" novalidate>
  <div class="row">
-                        <div class="col-md-4" > 
+                        <div class="col-md-4"> 
                             <h3 style="margin-left:20px;margin-top:2px;"><span class="topicHeader">รหัสหลักฐาน:  </span></h3>
                         </div>
                         <div class="col-md-1" style="padding-right:0px">
@@ -3693,13 +3666,13 @@ glyphicon glyphicon-bell"></i> </span>
                   
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="upload_evidence_form.$invalide || new_evidence_still_not_complete() || please_wait" ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="$hide()">ยกเลิก</button>
+                            <button class="btn btn-success" ng-disabled="upload_evidence_form.$invalide || new_evidence_still_not_complete() || please_wait" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="$hide()">ยกเลิก</button>
                         </div>
                     </div>
                 </div>
 
-                <div id="import_evidence" data-ng-controller="import_evidence_controller" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="lg" data-qo-independent="true">
+                <div id="import_evidence" data-ng-controller="import_evidence_controller" data-nq-modal="" data-qo-fire-emit="true" data-qo-size="lg" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> นำเข้าหลักฐานที่มีอยู่</span></h1>
                     </div>
@@ -3707,13 +3680,13 @@ glyphicon glyphicon-bell"></i> </span>
                     <h2 style="margin-top:0px" class="myColorBold"> นำเข้าจาก:</h2>
 
                     <div class="row">
-                        <div class="col-md-8" >
+                        <div class="col-md-8">
                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
-                        <div class="col-md-4" >
-                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_all_evidences_in_curri_and_year()"  data-qo-placeholder="ปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                        <div class="col-md-4">
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_all_evidences_in_curri_and_year()"  data-qo-placeholder="ปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
                         </div>
                     </div>
@@ -3721,7 +3694,7 @@ glyphicon glyphicon-bell"></i> </span>
                       <h2 style="margin-top:15px" class="myColorBold"> เลือกหลักฐานที่ต้องการ:</h2>
                     <div class="row">
                         <div class="col-md-11">
-                                 <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-change = "choose_evidence()" data-ng-options="evidence.evidence_name for evidence in all_evidences" data-qo-effect="flip-x" data-qo-placeholder="หลักฐานที่พบในหลักสูตรและปีการศึกษาดังกล่าว" data-ng-model="$parent.evidence_we_want" data-qo-disable-clear="true" >
+                                 <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-change = "choose_evidence()" data-ng-options="evidence.evidence_name for evidence in all_evidences" data-qo-effect="flip-x" data-qo-placeholder="หลักฐานที่พบในหลักสูตรและปีการศึกษาดังกล่าว" data-ng-model="$parent.evidence_we_want" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>
                         </div>
                         <div class="col-md-1" style="padding-left:0px" >
@@ -3730,7 +3703,7 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
 
  <div class="row">
-                        <div class="col-md-4" > 
+                        <div class="col-md-4"> 
                             <h3 style="margin-left:30px;margin-top:15px;"><span class="topicHeader"><b>รหัสหลักฐาน:</b>  </span></h3>
                         </div>
                         <div class="col-md-1" style="padding-right:0px;margin-top:14px;">
@@ -3743,24 +3716,24 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>          
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-click ="save_to_server(this)" ng-disabled="choose_not_complete || still_not_write_code()">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button class="btn btn-success" ng-click ="save_to_server(this)" ng-disabled="choose_not_complete || still_not_write_code()">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
                 </div>
 
-                <div id="new_students" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="lg" data-qo-independent="true" data-ng-controller="stat_new_student_controller" data-ng-init = "init()">
+                <div id="new_students" data-nq-modal="" data-qo-fire-emit="true" data-qo-size="lg" data-qo-independent="true" data-ng-controller="stat_new_student_controller" data-ng-init = "init()">
                     <div class="custom-header">
                         <h1 class="headerModalH1">สถิติการรับนักศึกษาใหม่</h1>
                     </div>
                     <div class="row" style="margin-left: 0px;margin-right: 0px;">
-                        <div class="col-md-8" >
+                        <div class="col-md-8">
                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
 
                         </div>
-                        <div class="col-md-4" >
-                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                        <div class="col-md-4">
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
                         </div>
                     </div>
@@ -3771,7 +3744,7 @@ glyphicon glyphicon-bell"></i> </span>
 <div ng-hide="choose_not_complete">
                <form name="new_student_stat_form" novalidate>
           
-                    <div class="row" >
+                    <div class="row">
                         <div class="col-md-2">
                             <h3 style="margin-left:350px;margin-top:0px"><span class="topicHeader">ชาย</span></h3>
                         </div>
@@ -3850,7 +3823,7 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4" >
+                        <div class="col-md-4">
                             <h3 style="margin-left:150px;margin-top:0px"><span class="topicHeader">สอบตรง:   </span></h3>
                         </div>
                         <div class="col-md-2" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['12'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,12,3)">
@@ -3949,8 +3922,8 @@ glyphicon glyphicon-bell"></i> </span>
 </div>
                              <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['12'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,12,3)) && choose_not_complete == false">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="new_student_stat_form.$invalid" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="new_student_stat_form.$invalid" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 
@@ -3960,17 +3933,17 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
                 </div>
-                <div id="import_to_curri" data-nq-modal="" data-ng-controller="import_to_curri_controller" data-qo-fire-emit = "true" data-qo-independent="true">
+                <div id="import_to_curri" data-nq-modal="" data-ng-controller="import_to_curri_controller" data-qo-fire-emit="true" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal"> นำเข้าบุคลากร</span></h1>
                     </div>
                     <div class="row" style="margin-left:0px;margin-right:0px">
-                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in $root.all_curri_except_us" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true" >
+                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in $root.all_curri_except_us" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="find_information()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option>
             </select>
                     </div>
                     <div class="row" style="margin-left:0px;margin-right:0px;margin-top:8px">
-                               <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="person.t_name for person in result" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกบุคลากร"  data-ng-model="$parent.choose_people"  data-qo-max-length ="0" data-qo-multiple="true"  data-qo-disable-clear="true" >
+                               <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="person.t_name for person in result" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกบุคลากร"  data-ng-model="$parent.choose_people"  data-qo-max-length ="0" data-qo-multiple="true"  data-qo-disable-clear="true">
             <option style="display:none" value=""></option>
             </select>
                     </div>
@@ -3981,22 +3954,22 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                       <div class="custom-footer" >
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="still_not_complete() || choose_not_complete" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="still_not_complete() || choose_not_complete" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
                 </div>
-                <div id="student_amount" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="lg" data-qo-independent="true" data-ng-controller="stat_student_controller" data-ng-init = "init()">
+                <div id="student_amount" data-nq-modal="" data-qo-fire-emit="true" data-qo-size="lg" data-qo-independent="true" data-ng-controller="stat_student_controller" data-ng-init = "init()">
                     <div class="custom-header">
                         <h1 class="headerModalH1">สถิติจำนวนนักศึกษา</h1>
                     </div>
                        <div class="row" style="margin-left: 0px;margin-right: 0px;">
-                        <div class="col-md-8" >
+                        <div class="col-md-8">
                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
                         </div>
-                        <div class="col-md-4" >
-                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                        <div class="col-md-4">
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
                         </div>
                     </div>
@@ -4126,8 +4099,8 @@ glyphicon glyphicon-bell"></i> </span>
 </div>
                    <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['13'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,13,3))&& choose_not_complete == false">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="student_stat_form.$invalid" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="student_stat_form.$invalid" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 
@@ -4137,7 +4110,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
                 </div>
-                       <div id="change_username" data-nq-modal="" data-ng-controller="change_username_controller" data-qo-fire-emit = "true" data-qo-independent="true">
+                       <div id="change_username" data-nq-modal="" data-ng-controller="change_username_controller" data-qo-fire-emit="true" data-qo-independent="true">
                     <div class="custom-header" >
                         <h1 class="headerModalH1"><span class="headerModal">เปลี่ยนชื่อผู้ใช้งาน</span></h1>
                     </div>
@@ -4162,13 +4135,13 @@ glyphicon glyphicon-bell"></i> </span>
       <h3 style="margin-left:20px;margin-top:4px;color:#bc2e29;margin-bottom:0px" ng-show='show_error'><span class="topicHeader">{{error_msg}}</span></h3>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button class="btn btn-success" ng-disabled="still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
                 </div>
 
-                <div id="change_password" data-ng-controller="change_password_controller" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true">
+                <div id="change_password" data-ng-controller="change_password_controller" data-nq-modal="" data-qo-fire-emit="true" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal">เปลี่ยนรหัสผ่าน</span></h1>
                     </div>
@@ -4203,13 +4176,13 @@ glyphicon glyphicon-bell"></i> </span>
               <h3 style="margin-left:20px;margin-top:4px;color:#bc2e29;margin-bottom:0px" ng-show='show_error'><span class="topicHeader">{{error_msg}}</span></h3>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button class="btn btn-success" ng-disabled="still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
                 </div>
 
-      <div id="create_new_education" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="create_new_education_controller" data-qo-independent="true" data-qo-max-height="100%">
+      <div id="create_new_education" data-nq-modal="" data-qo-fire-emit="true" data-ng-controller="create_new_education_controller" data-qo-independent="true" data-qo-max-height="100%">
 
        <div class="custom-header">
                         <h1 class="headerModalH1">เพิ่มข้อมูลการศึกษา</h1>
@@ -4224,7 +4197,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
 
   <div class="row">
-  <div class="col-md-3" >
+  <div class="col-md-3">
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">สถาบัน   </span></h3>
                             </div>
  <div class="col-md-9">
@@ -4254,10 +4227,8 @@ glyphicon glyphicon-bell"></i> </span>
                             <div class="col-md-3">
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ระดับปริญญา   </span></h3>
                             </div>
-                            <div class="col-md-9" style="
-    padding-right: 23px;
-">
-     <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา"  data-ng-model="$parent.new_grad.degree" data-qo-disable-clear="true" >
+                            <div class="col-md-9" style="padding-right: 23px;">
+     <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา"  data-ng-model="$parent.new_grad.degree" data-qo-disable-clear="true">
 
                                 <option value="1">ปริญญาตรี</option>
                               <option  value="2">ปริญญาโท</option>
@@ -4269,13 +4240,13 @@ glyphicon glyphicon-bell"></i> </span>
 
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="create_not_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="create_not_complete()" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 </div>
 
-      <div id="fix_education" data-nq-modal="" data-qo-fire-emit = "true" data-ng-controller="fix_education_controller" data-qo-independent="true" data-qo-max-height="100%">
+      <div id="fix_education" data-nq-modal="" data-qo-fire-emit="true" data-ng-controller="fix_education_controller" data-qo-independent="true" data-qo-max-height="100%">
        <div class="custom-header">
                         <h1 class="headerModalH1">แก้ไขข้อมูลการศึกษา</h1>
                     </div>
@@ -4289,7 +4260,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
 
   <div class="row">
-  <div class="col-md-3" >
+  <div class="col-md-3">
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">สถาบัน   </span></h3>
                             </div>
  <div class="col-md-9">
@@ -4323,7 +4294,7 @@ glyphicon glyphicon-bell"></i> </span>
                             </div>
                             <div class="col-md-9" style="padding-right: 23px;">
                           
-     <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา"  data-ng-model="$parent.fix_this_edu.degree" data-qo-disable-clear="true" >
+     <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา"  data-ng-model="$parent.fix_this_edu.degree" data-qo-disable-clear="true">
 
                                 <option value="1">ปริญญาตรี</option>
                               <option  value="2">ปริญญาโท</option>
@@ -4335,13 +4306,13 @@ glyphicon glyphicon-bell"></i> </span>
 
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="create_not_complete()" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="create_not_complete()" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 </div>
 
-                <div id="manage_profile" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-qo-screen-mode="true" ng-controller="manage_profile_controller">
+                <div id="manage_profile" data-nq-modal="" data-qo-fire-emit="true" data-qo-independent="true" data-qo-screen-mode="true" ng-controller="manage_profile_controller">
                     <div class="custom-header">
 
                         <h1 class="headerModalH1" style="
@@ -4385,7 +4356,7 @@ glyphicon glyphicon-bell"></i> </span>
 
                             </div>
                                       <div class="col-md-1" style="padding-left: 0px;padding-top: 6px;">
-<a href=""   data-ng-click="back_to_default()" class="hvr-pulse" >
+<a href=""   data-ng-click="back_to_default()" class="hvr-pulse">
                                         <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-remove"></i> </span>
                                     </a>
                                     </div>
@@ -4524,11 +4495,11 @@ glyphicon glyphicon-bell"></i> </span>
                                     <td  style=" padding-left: 10px ;"><span style="font-size:19px;">{{each_education.grad_year}}</span> </td>           
                        
                                     
-   <td> <a  style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_education" ng-click="go_to_fix(each_education)">
+   <td> <a style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_education" ng-click="go_to_fix(each_education)">
                                         <span class="topic"><i style="color:#eea236;margin0" class="glyphicon glyphicon-wrench"></i> </span>
                                     </a></td> 
 
-                                          <td > <a  style="margin-top:7px" data-ng-click="remove_education($index)" href=""  class="hvr-pulse" >
+                                          <td> <a style="margin-top:7px" data-ng-click="remove_education($index)" href=""  class="hvr-pulse">
                                         <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td> 
 
@@ -4542,14 +4513,14 @@ glyphicon glyphicon-bell"></i> </span>
 </div>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success  " ng-disabled="nothing_really_change() || please_wait || fix_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="back_close_modal(this)">ยกเลิก</button>
+                            <button class="btn btn-success" ng-disabled="nothing_really_change() || please_wait || fix_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="back_close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
                 </div>
 
               
-<div id="create_new_research" data-nq-modal="" data-qo-fire-emit = "true" data-qo-fire-emit = "true" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_research_controller">
+<div id="create_new_research" data-nq-modal="" data-qo-fire-emit="true" data-qo-fire-emit="true" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_research_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">เพิ่มข้อมูลงานวิจัย</h1>
                     </div>
@@ -4564,7 +4535,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
 
   <div class="row">
-  <div class="col-md-3" >
+  <div class="col-md-3">
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ผู้วิจัย   </span></h3>
                             </div>
  <div class="col-md-9" style="padding-right:22px;">
@@ -4595,13 +4566,13 @@ glyphicon glyphicon-bell"></i> </span>
 
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 </div>
 
-<div id="create_survey" data-nq-modal="" data-qo-fire-emit = "true" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_survey_controller">
+<div id="create_survey" data-nq-modal="" data-qo-fire-emit="true" data-qo-size="md" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_survey_controller">
        <div class="custom-header">
                         <h1 class="headerModalH1">สร้างแบบสอบถาม</h1>
                     </div>
@@ -4619,15 +4590,13 @@ glyphicon glyphicon-bell"></i> </span>
                             </div>
                         </div>
   <div class="row">
-  <div class="col-md-3" >
+  <div class="col-md-3">
 
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">กลุ่มเป้าหมาย   </span></h3>
                             </div>
  <div class="col-md-9" style="padding-right:22px;">
-
                                                  <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="user.user_type for user in all_usertype" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกกลุ่มเป้าหมาย"  data-ng-model="$parent.my_target" data-qo-disable-clear="true"  data-qo-max-length ="0"  data-qo-multiple="true">
-<option style="display:none" value=""></option></select>    
-
+<option style="display:none" value=""></option></select>
 </div>
 
 </div>
@@ -4655,12 +4624,12 @@ glyphicon glyphicon-bell"></i> </span>
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
                             <button ng-disabled="still_not_complete()" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 </div>
 
- <div id="manage_album" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_album_controller">
+ <div id="manage_album" data-nq-modal="" data-qo-fire-emit="true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_album_controller">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">ส่วนการจัดการอัลบั้มรูปภาพ</h1>
@@ -4668,17 +4637,17 @@ glyphicon glyphicon-bell"></i> </span>
 
           <div class="row" style="margin-left: 0px;margin-right: 0px;">
 
-                        <div class="col-md-8" >
+                        <div class="col-md-8">
                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
                         </div>
-                        <div class="col-md-4" >
-                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                        <div class="col-md-4">
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
                         </div>
                     </div>
 <br />
-  <div class="container-fluid" ng-hide="choose_not_complete" >
+  <div class="container-fluid" ng-hide="choose_not_complete">
                         <div class="clearfix">
 
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
@@ -4714,17 +4683,17 @@ glyphicon glyphicon-bell"></i> </span>
  <img ng-repeat ="pic in album.pictures" ng-click="openLightboxModal($index,album.pictures)" ng-if="$index<4" src="{{pic.file_name}}" class="img-rounded" style="margin-left:1px;margin-right:1px;margin-top:3px;margin-bottom:3px" height = "50px"  />
 <!-- <div class="thumb_center_please_album_preview " ng-repeat ="pic in album.pictures" ng-click="openLightboxModal($index,album.pictures)" ng-if="$index<4" style="background-image: url({{pic.file_name}});"></div> -->
  </span> </td>
-          <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year)==false && $root.current_user.privilege[curri_choosen.curri_id]['6'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4) == false"> <a href=""  style="margin-top:7px" data-nq-toggle-modal="#show_album" data-effect="from-left" data-ng-click="go_to_show_album(album)" class="hvr-pulse" >
+          <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year)==false && $root.current_user.privilege[curri_choosen.curri_id]['6'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4) == false"> <a href=""  style="margin-top:7px" data-nq-toggle-modal="#show_album" data-effect="from-left" data-ng-click="go_to_show_album(album)" class="hvr-pulse">
                                         <span class="topic"><i style="color:#2980b9" class="glyphicon glyphicon-picture"></i> </span>
                                     </a></td> 
 
 
-     <td  ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['6'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4)"> <a href=""  style="margin-top:7px" data-nq-toggle-modal="#show_edit_album" data-effect="from-left" data-ng-click="go_to_show_album(album)" class="hvr-pulse" >
+     <td  ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['6'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4)"> <a href=""  style="margin-top:7px" data-nq-toggle-modal="#show_edit_album" data-effect="from-left" data-ng-click="go_to_show_album(album)" class="hvr-pulse">
                                         <span class="topic"><i style="color:#2980b9" class="glyphicon glyphicon-picture"></i> </span>
                                     </a></td> 
 
                       <td style="padding-left:0px;padding-right:0px"><span style="font-size:19px">{{album.date_created}}</span> </td>              
-                                                              <td ><span style="font-size:19px">{{album.t_name}}</span> </td>
+                                                              <td><span style="font-size:19px">{{album.t_name}}</span> </td>
                                           <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['6'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4)"> <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_album($index)" >
                                         <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td> 
@@ -4737,8 +4706,8 @@ glyphicon glyphicon-bell"></i> </span>
           </div>         </div>
      <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['6'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4)) && choose_not_complete == false">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 
@@ -4749,7 +4718,7 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
    </div>
 
- <div id="manage_survey" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_survey_controller">
+ <div id="manage_survey" data-nq-modal="" data-qo-fire-emit="true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_survey_controller">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">แบบสอบถาม</h1>
@@ -4757,12 +4726,12 @@ glyphicon glyphicon-bell"></i> </span>
 
           <div class="row" style="margin-left: 0px;margin-right: 0px;">
 
-                        <div class="col-md-8" >
+                        <div class="col-md-8">
                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
                         </div>
-                        <div class="col-md-4" >
-                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
+                        <div class="col-md-4">
+                              <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>   
                         </div>
                     </div>
@@ -4793,22 +4762,20 @@ glyphicon glyphicon-bell"></i> </span>
                                         </thead>
                                         <tbody class="flattened">
                                         <form name="manage_survey_form" novalidate>
-                                          
-
                                             <tr  ng-repeat="survey in manage_survey_my_world_wide_surveys">                               
  <td class="left_column" style=" padding-left: 10px ;"><span style="font-size:19px;">{{survey.name}}</span> </td>
                                         
         <td>
 <span ng-repeat="each_target in survey.target" style="padding-left:0px;font-size:19px">{{each_target}}<br/></span>
   </td>
-                      <td ><span style="font-size:19px">{{survey.date}}</span> </td>              
-                                                              <td ><span style="font-size:19px">{{survey.t_name}}</span> </td>
+                      <td><span style="font-size:19px">{{survey.date}}</span> </td>              
+                                                              <td><span style="font-size:19px">{{survey.t_name}}</span> </td>
                                  
    <td ng-show=" ($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['5'] >=2 ) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,5,2)"> <a ng-show="right_target(survey.target)" href="" style="margin-top:7px" class="hvr-pulse" data-nq-toggle-modal="#do_survey" data-effect="from-left" data-ng-click="go_to_answer(survey)">
                                         <span class="topic"><i style="color:#204d74;margin0" class="glyphicon glyphicon-hand-up"></i> </span>
                                     </a></td> 
 
-                                       <td > <a href="" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||survey.personnel_id == current_user.user_id" style="margin-top:7px" data-nq-toggle-modal="#result_survey" data-effect="from-left" data-ng-click="go_to_result(survey)" class="hvr-pulse" >
+                                       <td> <a href="" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||survey.personnel_id == current_user.user_id" style="margin-top:7px" data-nq-toggle-modal="#result_survey" data-effect="from-left" data-ng-click="go_to_result(survey)" class="hvr-pulse">
                                         <span class="topic"><i style="color:#4cae4c" class="glyphicon glyphicon-stats"></i> </span>
                                     </a></td> 
 
@@ -4826,8 +4793,8 @@ glyphicon glyphicon-bell"></i> </span>
  
                        <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['5'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,5,4)) && choose_not_complete == false">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success  " ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button ng-disabled="nothing_change || choose_not_complete" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 
@@ -4838,7 +4805,7 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
    </div>
 
-                <div id="result_survey" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-qo-screen-mode="true" data-ng-controller="result_survey_controller" >
+                <div id="result_survey" data-nq-modal="" data-qo-fire-emit="true" data-qo-independent="true" data-qo-screen-mode="true" data-ng-controller="result_survey_controller" >
                     <div class="custom-header">
                         <h2 class="headerModaltemp">{{manage_survey_questionare_of_result.name}}</h2>
                     </div>
@@ -4852,7 +4819,6 @@ glyphicon glyphicon-bell"></i> </span>
                                         <!--nq-fix-table-scroll class would fix thead always visible at top of the table if you put the table into a scrollable container-->
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
-                                                
                                                 <th style="width:700px">หัวข้อการประเมิน</th>
                                                 <th  style="width:70px">7</th>
                                                 <th style="width:70px">6</th>
@@ -4896,7 +4862,7 @@ glyphicon glyphicon-bell"></i> </span>
                 </div>
 
 
-                <div id="do_survey" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-qo-screen-mode="true" data-ng-controller="answer_survey_controller">
+                <div id="do_survey" data-nq-modal="" data-qo-fire-emit="true" data-qo-independent="true" data-qo-screen-mode="true" data-ng-controller="answer_survey_controller">
                     <div class="custom-header">
                         <h2 class="headerModaltemp">{{manage_survey_questionare_to_answer.name}}</h2>
                     </div>
@@ -4957,8 +4923,8 @@ glyphicon glyphicon-bell"></i> </span>
                
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success "  ng-disabled="still_not_complete() || please_wait" ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default " ng-click="close_modal(this)">ยกเลิก</button>
+                            <button class="btn btn-success"  ng-disabled="still_not_complete() || please_wait" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
                 </div>
