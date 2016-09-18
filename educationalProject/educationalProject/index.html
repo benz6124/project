@@ -2777,10 +2777,7 @@ glyphicon glyphicon-bell"></i> </span>
                         <h1 class="headerModalH1">แต่งตั้งกรรมการหลักสูตร</h1>
                     </div>
 
-       <div class="row" style="
-    margin-left: 0px;
-    margin-right: 0px;
-">
+       <div class="row" style="margin-left: 0px;">
 
                         <div class="col-md-8" >
                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
@@ -2827,7 +2824,6 @@ glyphicon glyphicon-bell"></i> </span>
                                           <td > <a  style="margin-top:7px" data-ng-click="remove_committee($index)" href=""  class="hvr-pulse" >
                                         <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-minus-sign"></i> </span>
                                     </a></td> 
-
                                             </tr>                                           
                                         </tbody>
                                     </table>
@@ -2848,9 +2844,7 @@ glyphicon glyphicon-bell"></i> </span>
                             <h1 class="headerModalH1">ข้อมูลหลักสูตร</h1>
                         </div>
                           <div class="row">
-                            <div class="col-md-4" style="
-    padding-left: 30px;
-">
+                            <div class="col-md-4" style="padding-left: 30px;">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อหลักสูตรภาษาไทย   </span></h3>
                             </div>
                             <div class="col-md-8">
@@ -2869,9 +2863,7 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
 
                     <div class="row">
-                  <div class="col-md-4" style="
-    padding-left: 30px;
-">
+                  <div class="col-md-4" style="padding-left: 30px;">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(ย่อ)   </span></h3>
                             </div>
 
@@ -2887,7 +2879,6 @@ glyphicon glyphicon-bell"></i> </span>
 
    <div class="col-md-8">
                          <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.degree_e_bf}}
-
                             </div>
                         </div>
     <div class="row">
@@ -2896,7 +2887,6 @@ glyphicon glyphicon-bell"></i> </span>
                             </div>
    <div class="col-md-8">
                          <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.degree_t_full}}
-
                             </div>
                         </div>
 
@@ -2906,14 +2896,11 @@ glyphicon glyphicon-bell"></i> </span>
                             </div>
                              <div class="col-md-8">
                          <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.degree_e_full}}
-
                             </div>
                         </div>
 
                      <div class="row">
-                       <div class="col-md-4" style="
-    padding-left: 30px;
-">
+                       <div class="col-md-4" style="padding-left: 30px;">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ระดับปริญญา </span></h3>
                             </div>
                                 <div class="col-md-8">
@@ -2926,7 +2913,6 @@ glyphicon glyphicon-bell"></i> </span>
                        <div class="col-md-4" style="padding-left: 30px;">
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ระยะเวลาการเรียน </span></h3>
                             </div>
-
                                  <div class="col-md-8">
                          <span class="topicHeader" style="color:#6F002B" >       {{$root.result_curri_info.period}} ปี
                             </div>
@@ -2947,14 +2933,7 @@ glyphicon glyphicon-bell"></i> </span>
                        <button class="btn btn-warning hvr-pulse" ng-click="go_to_edit_reason(this,sub_indicator_now_for_link)" ><i class="glyphicon glyphicon-wrench"></i> แก้ไขข้อมูลสนับสนุนการประเมิน</button>
 
                         <div class="clearfix">
-<br />
-
-                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
-                                 data-qo-selectable="true">
-
-                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
-
-
+                                <div class="well" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="margin-bottom:0px;margin-top:19px">
                                 <div class="topicHeader"  ng-if ="display_self_support.detail != '' && display_self_support.detail" data-ng-bind-html="display_self_support.detail"></div>
                                       <div class="topicHeader"  ng-if ="!display_self_support.detail" align="center">---ไม่พบข้อมูลสนับสนุนการประเมินในตัวบ่งชี้นี้---</div>
 
@@ -2965,7 +2944,7 @@ glyphicon glyphicon-bell"></i> </span>
     text-align: left;
 ">
          <span style="margin-left: 35px;" class="topicHeader"  ng-if="display_self_support.strength!='' && display_self_support.strength">  {{display_self_support.strength}}</span>
-               <span style="margin-left: 35px;" ng-if="!display_self_support.strength"class="topicHeader">--ไม่พบข้อมูล--</span> 
+               <span style="margin-left: 35px;" ng-if="!display_self_support.strength" class="topicHeader">--ไม่พบข้อมูล--</span> 
  </div>
  <div class="row" >
           <h3 style="margin-top:5px;color:#6F002B;text-align: left;margin-left: 15px;margin-bottom: 0px;"><span class="topicNewHeader">จุดด้อย (Weakness):   </span></h3>
@@ -2988,7 +2967,6 @@ glyphicon glyphicon-bell"></i> </span>
  </div>
 
                                 </div>
-                            </div>
                         </div>
                     </div>
 
@@ -3001,15 +2979,11 @@ glyphicon glyphicon-bell"></i> </span>
 
         <div id="see_evaluate_self_sudden" data-nq-modal="" data-qo-fire-emit = "true"  data-qo-screen-mode="true" data-qo-independent="true" >
                     <div class="custom-header">
-                        <h1 class="headerModalH1"><span class="headerModal">ข้อมูลสนับสนุนการประเมินหลักสูตรตนเอง</span>  </h1>
+                        <h1 class="headerModalH1"><span class="headerModal">ข้อมูลสนับสนุนการประเมินหลักสูตรตนเอง</span></h1>
                     </div>
                     <div class="container-fluid" >
-                        <div class="clearfix">
-<br />
-                            <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
-                                 data-qo-selectable="true">
-              
-                                <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
+                        <div class="clearfix">        
+                                <div class="well" data-nq-scroll="" data-qo-max-height="100%" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="margin-bottom:0px;margin-top:19px;">
 
 
                                 <div class="topicHeader"  ng-if ="display_self_support.detail != '' && display_self_support.detail" data-ng-bind-html="display_self_support.detail"></div>
@@ -3044,7 +3018,6 @@ glyphicon glyphicon-bell"></i> </span>
       <span style="margin-left: 35px;" ng-if="!display_self_support.improve" class="topicHeader">--ไม่พบข้อมูล--</span> 
  </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
                       <div class="custom-footer" >
@@ -3416,7 +3389,7 @@ glyphicon glyphicon-bell"></i> </span>
 
   
 <div class="col-md-2" style="margin-left:0px">
-  <input style="margin-left:0px"type="number" ng-pattern="/^[0-9]*$/" class="form-control" ng-model="year_to_create" placeholder="กรุณากรอกปีการศึกษา"  min="max_year_curri_have" data-nq-tooltip="" data-qs-title="ค่าขั้นต่ำคือ {{max_year_curri_have}}" required><span class="normal">  </span>
+  <input style="margin-left:0px" type="number" ng-pattern="/^[0-9]*$/" class="form-control" ng-model="year_to_create" placeholder="กรุณากรอกปีการศึกษา"  min="max_year_curri_have" data-nq-tooltip="" data-qs-title="ค่าขั้นต่ำคือ {{max_year_curri_have}}" required><span class="normal">  </span>
 </div>
 </div>
 
@@ -4017,7 +3990,6 @@ glyphicon glyphicon-bell"></i> </span>
                     <div class="custom-header">
                         <h1 class="headerModalH1">สถิติจำนวนนักศึกษา</h1>
                     </div>
-
                        <div class="row" style="margin-left: 0px;margin-right: 0px;">
                         <div class="col-md-8" >
                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
@@ -4098,7 +4070,6 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                         <div class="col-md-2" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['13'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,13,3)">
                                <input style="margin-left:10px;" ng-class="{ danger: student_stat_form.ny5.$invalid && student_stat_form.ny5.$dirty }"name ="ny5" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" ng-model="result.ny5" ng-disabled="choose_not_complete" min="0" required /><span class="normal">  </span>
-
                         </div>
                          <div class="col-md-2" style="text-align:center" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false  && $root.current_user.privilege[curri_choosen.curri_id]['13'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,13,3) == false ">
              
@@ -4334,7 +4305,6 @@ glyphicon glyphicon-bell"></i> </span>
                             </div>
                             <div class="col-md-9">
                                 <input  type="number" ng-pattern="/^[0-9]*$/"  class="form-control" placeholder="" ng-model="fix_this_edu.grad_year" required><span class="normal">  </span>
-
                             </div>
                         </div>
 
@@ -4351,9 +4321,7 @@ glyphicon glyphicon-bell"></i> </span>
                             <div class="col-md-3">
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ระดับปริญญา   </span></h3>
                             </div>
-                            <div class="col-md-9" style="
-    padding-right: 23px;
-">
+                            <div class="col-md-9" style="padding-right: 23px;">
                           
      <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา"  data-ng-model="$parent.fix_this_edu.degree" data-qo-disable-clear="true" >
 
@@ -4372,7 +4340,6 @@ glyphicon glyphicon-bell"></i> </span>
                         </div>
                     </div>
 </div>
-
 
                 <div id="manage_profile" data-nq-modal="" data-qo-fire-emit = "true" data-qo-independent="true" data-qo-screen-mode="true" ng-controller="manage_profile_controller">
                     <div class="custom-header">
@@ -4496,7 +4463,6 @@ glyphicon glyphicon-bell"></i> </span>
                             </div>
                             <div class="col-md-8">
                                 <input type="text" data-ng-change = "something_change()" class="full form-control" placeholder=""  data-ng-model="current_user.information.tel"><span class="normal">  </span>
-
                             </div>
                         </div>
 
@@ -4509,9 +4475,7 @@ glyphicon glyphicon-bell"></i> </span>
                                     <option>ทำงาน</option>
                                     <option>ศึกษาต่อ</option>
                                     <option>ลาคลอด</option>
-
 </select>
-                            
                             </div>
                         </div>
 
@@ -4529,38 +4493,25 @@ glyphicon glyphicon-bell"></i> </span>
                
  <h3 style="margin-top:0px;"><span class="topicHeader">หัวข้อที่สนใจ:   </span></h3>
                             <input type="text" data-nq-tags-input="" data-qo-nav-class= "nav-make" data-ng-model="current_user.information.interest" data-qo-max-text-length="70"  data-qo-placeholder="กรอกหัวข้อที่สนใจ" data-ng-change = "something_change()">
-
                     </div>
                     </div>
 
    <div class="clearfix">
-
-
                             <div class="panel panel-default" style="margin-bottom:0px;clear:both" data-nq-pageable=""
-                                 data-qo-selectable="true" >
-              
-
-              
+                                 data-qo-selectable="true">
                                   <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
-                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;"data-effect="flip-x" data-nq-toggle-modal="#create_new_education" > <i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลการศึกษา</button>
-
+                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;" data-effect="flip-x" data-nq-toggle-modal="#create_new_education" > <i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลการศึกษา</button>
 
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
-                                      
                                         <thead class="nq-fix-table-scroll">
-                                            <tr>
-                          
+                                            <tr>                          
                                                 <th style="width:200px">ชื่อคณะ</th>
  <th style="width:200px;padding-left: 0px;padding-right: 0px;">ชื่อสถาบัน</th>
                                                 <th style="width:70px">ปริญญา</th>
-                                     
-                                                
                                                 <th style="width:40px;padding-left: 0px;padding-right: 0px;">ปีที่จบ</th>
                                                 <th style="width:30px">แก้ไข</th>
                                                 <th style="width:30px">ลบ</th>
-                                              
-                                            
                                             </tr>
                                         </thead>
                                         <tbody class="flattened">
@@ -4629,7 +4580,6 @@ glyphicon glyphicon-bell"></i> </span>
                             </div>
                             <div class="col-md-9">
                                 <input  type="number" ng-pattern="/^[0-9]*$/"  class="form-control" placeholder="" ng-model="new_research.year_publish" required><span class="normal">  </span>
-
                             </div>
                         </div>
 
@@ -4641,7 +4591,6 @@ glyphicon glyphicon-bell"></i> </span>
                               
                                 <input type="file" name="upload_file_input" class="form-control" placeholder="ไฟล์งานวิจัย" file-upload  data-ng-model="new_research.file" required/>
                             </div>
-
                         </div>
 
            <div class="custom-footer">
@@ -4717,21 +4666,16 @@ glyphicon glyphicon-bell"></i> </span>
                         <h1 class="headerModalH1">ส่วนการจัดการอัลบั้มรูปภาพ</h1>
                     </div>
 
-          <div class="row" style="
-    margin-left: 0px;
-    margin-right: 0px;
-">
+          <div class="row" style="margin-left: 0px;margin-right: 0px;">
 
                         <div class="col-md-8" >
                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
-
                         </div>
                         <div class="col-md-4" >
                               <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
 <option style="display:none" value=""></option></select>   
                         </div>
-
                     </div>
 <br />
   <div class="container-fluid" ng-hide="choose_not_complete" >
@@ -4748,7 +4692,6 @@ glyphicon glyphicon-bell"></i> </span>
                                       
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
-                          
                                                 <th style="width:135px">ชื่ออัลบั้ม</th>
                                                 <th style="width:115px">รูปตัวอย่าง</th>
                                                   <th style="width:30px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year)==false && $root.current_user.privilege[curri_choosen.curri_id]['6'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4) == false">ดู</th>
@@ -4757,7 +4700,6 @@ glyphicon glyphicon-bell"></i> </span>
                                                 <th style="width:70px">ผู้สร้าง</th>
                                             
                                                 <th style="width:30px"  ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['6'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4)">ลบ</th>
-                                         
                                             </tr>
                                         </thead>
                                         <tbody class="flattened">
@@ -4767,10 +4709,7 @@ glyphicon glyphicon-bell"></i> </span>
  <td class="left_column" style=" padding-left: 10px ;"><span style="font-size:19px;">{{album.name}}</span> </td>
                                         
                                         
- <td style="
-    padding-left: 0px;
-    padding-right: 0px;
-"><span style="font-size:19px;" class="show_lightbox">
+ <td style="padding-left: 0px;padding-right: 0px;"><span style="font-size:19px;" class="show_lightbox">
 
  <img ng-repeat ="pic in album.pictures" ng-click="openLightboxModal($index,album.pictures)" ng-if="$index<4" src="{{pic.file_name}}" class="img-rounded" style="margin-left:1px;margin-right:1px;margin-top:3px;margin-bottom:3px" height = "50px"  />
 <!-- <div class="thumb_center_please_album_preview " ng-repeat ="pic in album.pictures" ng-click="openLightboxModal($index,album.pictures)" ng-if="$index<4" style="background-image: url({{pic.file_name}});"></div> -->
@@ -4793,7 +4732,6 @@ glyphicon glyphicon-bell"></i> </span>
                                             </form>
                                         </tbody>
                                     </table>
-
          </div>         </div>        
 
           </div>         </div>
@@ -4811,24 +4749,17 @@ glyphicon glyphicon-bell"></i> </span>
                     </div>
    </div>
 
-
-
  <div id="manage_survey" data-nq-modal="" data-qo-fire-emit = "true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="manage_survey_controller">
 
                     <div class="custom-header">
                         <h1 class="headerModalH1">แบบสอบถาม</h1>
                     </div>
 
-          <div class="row" style="
-    margin-left: 0px;
-    margin-right: 0px;
-">
-
+          <div class="row" style="margin-left: 0px;margin-right: 0px;">
 
                         <div class="col-md-8" >
                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
             <option style="display:none" value=""></option></select>
-
                         </div>
                         <div class="col-md-4" >
                               <select data-qo-button-class="mySelect not_left" data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in corresponding_aca_years" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.year_choosen" data-qo-disable-clear="true" >
@@ -4858,24 +4789,17 @@ glyphicon glyphicon-bell"></i> </span>
                                                 <th style="width:30px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['5'] >=2 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,5,2)">ตอบ</th>
                                                 <th style="width:30px" >ผล</th>
                                                 <th style="width:30px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['5'] ==4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,5,4)">ลบ</th>
-                                              
-                                            
                                             </tr>
                                         </thead>
                                         <tbody class="flattened">
                                         <form name="manage_survey_form" novalidate>
                                           
 
-                                            <tr  ng-repeat="survey in manage_survey_my_world_wide_surveys">
-                                           
+                                            <tr  ng-repeat="survey in manage_survey_my_world_wide_surveys">                               
  <td class="left_column" style=" padding-left: 10px ;"><span style="font-size:19px;">{{survey.name}}</span> </td>
                                         
         <td>
-
-
 <span ng-repeat="each_target in survey.target" style="padding-left:0px;font-size:19px">{{each_target}}<br/></span>
-
-
   </td>
                       <td ><span style="font-size:19px">{{survey.date}}</span> </td>              
                                                               <td ><span style="font-size:19px">{{survey.t_name}}</span> </td>
@@ -4928,7 +4852,6 @@ glyphicon glyphicon-bell"></i> </span>
                                         <!--nq-fix-table-scroll class would fix thead always visible at top of the table if you put the table into a scrollable container-->
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
-                                                <!--nq-column-sort directive would bind sorting handler to the element-->
                                                 
                                                 <th style="width:700px">หัวข้อการประเมิน</th>
                                                 <th  style="width:70px">7</th>
@@ -4981,20 +4904,15 @@ glyphicon glyphicon-bell"></i> </span>
                     <div class="container-fluid">
                         <div class="clearfix">
 
-
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
                                  data-qo-selectable="true">
-                         
 
                                 <div class="panel-body table-responsive" data-nq-scroll="" data-qo-max-height="350px" data-qo-min-height="200px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
-
-
                                     <!--          <div  data-qo-min-height="200px" data-nq-scroll="" data-qo-max-height="350px" data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden;"> -->
                                     <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
                                         <!--nq-fix-table-scroll class would fix thead always visible at top of the table if you put the table into a scrollable container-->
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
-                                                <!--nq-column-sort directive would bind sorting handler to the element-->
                                                 <th style="width:70px">ข้อที่</th>
                                                 <th style="width:700px">หัวข้อการประเมิน</th>
                                                 <th style="width:70px">7</th>
@@ -5056,7 +4974,7 @@ glyphicon glyphicon-bell"></i> </span>
                     <p>Build:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>456</p>
+                    <p>457</p>
                 </div>
             </div>
             <div class='row'>
