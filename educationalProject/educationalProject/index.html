@@ -4031,117 +4031,49 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     </div>
                 </div>
 
-      <div id="create_new_education" data-nq-modal="" data-qo-fire-emit="true" data-ng-controller="create_new_education_controller" data-qo-independent="true" data-qo-max-height="100%">
-
+      <div id="education_modal" data-nq-modal="" data-qo-fire-emit="true" data-ng-controller="education_controller" data-qo-independent="true">
        <div class="custom-header">
-                        <h1 class="headerModalH1">เพิ่มข้อมูลการศึกษา</h1>
+                        <h1 class="headerModalH1">{{mode_txt}}ข้อมูลการศึกษา</h1>
                     </div>
   <div class="row">
                             <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่อภาควิชา   </span></h3>
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่อภาควิชา</span></h3>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" placeholder="" ng-model="new_grad.major" required><span class="normal">  </span>
+                                <input type="text" class="form-control" placeholder="" ng-model="edu_obj.major" required>
                             </div>
                         </div>
-
   <div class="row">
   <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">สถาบัน   </span></h3>
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">สถาบัน</span></h3>
                             </div>
  <div class="col-md-9">
-
-  <input type="text" class="form-control" placeholder="" ng-model="new_grad.college" required><span class="normal">  </span>
+  <input type="text" class="form-control" placeholder="" ng-model="edu_obj.college" required>
 </div>
 </div>
-
   <div class="row">
                             <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ปีที่จบการศึกษา   </span></h3>
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ปีที่จบการศึกษา</span></h3>
                             </div>
                             <div class="col-md-9">
-                                <input type="number" ng-pattern="/^[0-9]*$/"  class="form-control" placeholder="" ng-model="new_grad.grad_year" required><span class="normal">  </span>
+                                <input type="number" ng-pattern="/^[0-9]*$/"  class="form-control" placeholder="" ng-model="edu_obj.grad_year" required>
                             </div>
                         </div>
   <div class="row">
                             <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ตัวย่อปริญญา   </span></h3>
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ตัวย่อปริญญา</span></h3>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" placeholder="" ng-model="new_grad.pre_major" required><span class="normal">  </span>
+                                <input type="text" class="form-control" placeholder="" ng-model="edu_obj.pre_major" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ระดับปริญญา   </span></h3>
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ระดับปริญญา</span></h3>
                             </div>
                             <div class="col-md-9" style="padding-right: 23px;">
-     <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา"  data-ng-model="$parent.new_grad.degree" data-qo-disable-clear="true">
-
-                                <option value="1">ปริญญาตรี</option>
-                              <option  value="2">ปริญญาโท</option>
-                              <option value="3">ปริญญาเอก</option>
-                       </select>    
-                         <!--    <option style="display:none" value=""></option> -->
-                            </div>
-                        </div>
-
-           <div class="custom-footer">
-                        <div class="topicHeader pull-right">
-                            <button ng-disabled="create_not_complete()" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
-                        </div>
-                    </div>
-</div>
-
-      <div id="fix_education" data-nq-modal="" data-qo-fire-emit="true" data-ng-controller="fix_education_controller" data-qo-independent="true" data-qo-max-height="100%">
-       <div class="custom-header">
-                        <h1 class="headerModalH1">แก้ไขข้อมูลการศึกษา</h1>
-                    </div>
-  <div class="row">
-                            <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่อภาควิชา   </span></h3>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" placeholder="" ng-model="fix_this_edu.major" required><span class="normal">  </span>
-                            </div>
-                        </div>
-
-  <div class="row">
-  <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">สถาบัน   </span></h3>
-                            </div>
- <div class="col-md-9">
-  <input type="text" class="form-control" placeholder="" ng-model="fix_this_edu.college" required><span class="normal">  </span>
-</div>
-</div>
-              
-  <div class="row">
-                            <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ปีที่จบการศึกษา   </span></h3>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="number" ng-pattern="/^[0-9]*$/"  class="form-control" placeholder="" ng-model="fix_this_edu.grad_year" required><span class="normal">  </span>
-                            </div>
-                        </div>
-  <div class="row">
-                            <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ตัวย่อปริญญา   </span></h3>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" placeholder="" ng-model="fix_this_edu.pre_major" required><span class="normal">  </span>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ระดับปริญญา   </span></h3>
-                            </div>
-                            <div class="col-md-9" style="padding-right: 23px;">
-                          
-     <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา"  data-ng-model="$parent.fix_this_edu.degree" data-qo-disable-clear="true">
-
-                                <option value="1">ปริญญาตรี</option>
+     <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกระดับปริญญา"  data-ng-model="$parent.edu_obj.degree" data-qo-disable-clear="true">
+                              <option value="1">ปริญญาตรี</option>
                               <option  value="2">ปริญญาโท</option>
                               <option value="3">ปริญญาเอก</option>
                        </select>    
@@ -4150,11 +4082,12 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                         </div>
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button ng-disabled="create_not_complete()" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button ng-disabled="is_not_complete()" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
 </div>
+
                 <div id="manage_profile" data-nq-modal="" data-qo-fire-emit="true" data-qo-independent="true" data-qo-screen-mode="true" ng-controller="manage_profile_controller">
                     <div class="custom-header">
                         <h1 class="headerModalH1" style="margin-top: 0px;"><span class="headerModal">ส่วนจัดการผู้ใช้งาน</span></h1>
@@ -4297,7 +4230,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                  data-qo-selectable="true">
                                   <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
-                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;" data-effect="flip-x" data-nq-toggle-modal="#create_new_education" > <i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลการศึกษา</button>
+                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;" data-effect="flip-x" data-nq-toggle-modal="#education_modal" ng-click="go_to_add_edu()"> <i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลการศึกษา</button>
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
                                         <thead class="nq-fix-table-scroll">
                                             <tr>                          
@@ -4316,8 +4249,8 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
             
                             <td style="padding-left:10px;"><span style="font-size:19px;">{{each_education.pre_major}}</span> </td>
                                     <td style="padding-left:10px;"><span style="font-size:19px;">{{each_education.grad_year}}</span> </td>
-   <td> <a style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_education" ng-click="go_to_fix(each_education)">
-                                        <span class="topic"><i style="color:#eea236;margin0" class="glyphicon glyphicon-wrench"></i> </span>
+   <td> <a style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#education_modal" ng-click="go_to_fix(each_education)">
+                                        <span class="topic"><i style="color:#eea236;margin0" class="glyphicon glyphicon-wrench"></i></span>
                                     </a></td>
                                           <td> <a style="margin-top:7px" data-ng-click="remove_education($index)" href=""  class="hvr-pulse">
                                         <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-minus-sign"></i> </span>
@@ -4715,7 +4648,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>Build:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>459</p>
+                    <p>463</p>
                 </div>
             </div>
             <div class='row'>
@@ -4723,7 +4656,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>ปรับปรุงล่าสุด:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>18 กันยายน 2559</p>
+                    <p>19 กันยายน 2559</p>
                 </div>
             </div>
             </div>

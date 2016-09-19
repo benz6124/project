@@ -5069,39 +5069,41 @@ $scope.title_choosen = {};
     }
 });
 
-app.controller('create_new_education_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
-  
-$scope.create_not_complete = function(){
-    if(!$scope.new_grad){
+app.controller('education_controller', function($scope, $http,$alert,$loading,$rootScope,AUTH_EVENTS, AuthService) {
+$scope.init = function(){
+    if($rootScope.edu_ctrl_mode === 1){
+        $scope.mode_txt = 'เพิ่ม';
+        $scope.edu_obj = {};
+        $scope.edu_obj.major = "";
+        $scope.edu_obj.college = "";
+        $scope.edu_obj.grad_year = "";
+        $scope.edu_obj.pre_major = "";
+        $scope.edu_obj.degree = "";
+    }
+    else{
+        $scope.mode_txt = 'แก้ไข';
+        $scope.edu_obj = $rootScope.manage_profile_fix_this_edu;
+    }
+}  
+
+$scope.is_not_complete = function(){
+    if(!$scope.edu_obj){
         return true;
     }
-    if( !$scope.new_grad.major || !$scope.new_grad.college || !$scope.new_grad.grad_year || !$scope.new_grad.pre_major || !$scope.new_grad.degree ){
+    if( !$scope.edu_obj.major || !$scope.edu_obj.college || !$scope.edu_obj.grad_year || !$scope.edu_obj.pre_major || !$scope.edu_obj.degree ){
         return true;
     }
-    if(isNaN($scope.new_grad.degree)==true){
+    if(isNaN($scope.edu_obj.degree)==true){
         return true;
     }
-    if(angular.isNumber($scope.new_grad.grad_year) == false){
+    if(angular.isNumber($scope.edu_obj.grad_year) == false){
         return true;
     }
-    if($scope.new_grad.grad_year<=0){
+    if($scope.edu_obj.grad_year<=0){
         return true;
     }
     return false;
 }
-
-$scope.init = function(){
-    $scope.new_grad = {};
-    $scope.new_grad.major = "";
-    $scope.new_grad.college = "";
-    $scope.new_grad.grad_year = "";
-    $scope.new_grad.pre_major = "";
-    $scope.new_grad.degree = "";
-}
-
-  $scope.$on("modal.hide", function (event, args) {
-     $scope.init();
-    });
 
   $scope.$on("modal.show", function (event, args) {
       $scope.init();
@@ -5112,83 +5114,29 @@ $scope.init = function(){
     }
 
 $scope.save_to_server = function(my_modal){
-    $scope.new_grad.personnel_id = $rootScope.current_user.user_id;
-     $http.post(
-             '/api/education',
-             JSON.stringify($scope.new_grad),
-             {
-                 headers: {
-                     'Content-Type': 'application/json'
-                 }
-             }
-         ).success(function (data) {
+    var action;
+    if($rootScope.edu_ctrl_mode === 1){
+    $scope.edu_obj.personnel_id = $rootScope.current_user.user_id;
+    action = 'POST';
+    }
+    else{
+      action = 'PUT';
+    }
+            $http({
+            method: action,
+            url: '/api/education',
+            headers: {'Content-Type': 'application/json'},
+            data:JSON.stringify($scope.edu_obj)
+        }).success(function (data) {
             $rootScope.current_user.information.education = data;
             $rootScope.save_obj.information.education = data;
                $scope.close_modal(my_modal);
                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-         })
-    .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-});
-}
-});
-
-
-app.controller('fix_education_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
-  $scope.close_modal = function(my_modal){
-        my_modal.$hide();
-    }
-
-$scope.create_not_complete = function(){
-    if(!$scope.fix_this_edu){
-        return true;
-    }
-    if( !$scope.fix_this_edu.major || !$scope.fix_this_edu.college || !$scope.fix_this_edu.grad_year || !$scope.fix_this_edu.pre_major || !$scope.fix_this_edu.degree ){
-        return true;
-    }
-    if(isNaN($scope.fix_this_edu.degree)==true){
-        return true;
-    }
-    if(angular.isNumber($scope.fix_this_edu.grad_year) == false){
-        return true;
-    }
-    if($scope.fix_this_edu.grad_year<=0){
-        return true;
-    }
-    return false;
-}
-
-$scope.init = function(){
-    $scope.fix_this_edu = $rootScope.manage_profile_fix_this_edu;
-}
-  $scope.$on("modal.hide", function (event, args) {
-     $scope.init();
-    });
-  $scope.$on("modal.show", function (event, args) {
-              $scope.init();
-    });
-$scope.save_to_server = function(my_modal){
-     $http.put(
-             '/api/education',
-             JSON.stringify($scope.fix_this_edu),
-             {
-                 headers: {
-                     'Content-Type': 'application/json'
-                 }
-             }
-         ).success(function (data) {
-            $rootScope.current_user.information.education = data;
-            $rootScope.save_obj.information.education =data;
-               $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-         })
-    .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-});
+         }).error(function(data, status, headers, config) {
+             $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
+                    placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+                });
 }
 });
 
@@ -5319,9 +5267,12 @@ $scope.same_interest = function(){
             }        
         });
     });
-
+$scope.go_to_add_edu = function(){
+    $rootScope.edu_ctrl_mode = 1;
+}
 $scope.go_to_fix = function(fix_this_obj){
     $rootScope.manage_profile_fix_this_edu = angular.copy(fix_this_obj);
+    $rootScope.edu_ctrl_mode = 2;
 }
 $scope.remove_education = function(index_to_remove){
     $rootScope.current_user.information.education.splice(index_to_remove,1);
