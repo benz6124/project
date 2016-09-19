@@ -4380,148 +4380,45 @@ $scope.init =function() {
     }
 });
 
-
-app.controller('create_research_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('create_edit_research_controller', function($scope, $http,$alert,$loading,$rootScope) {
 $scope.init =function() {
-       $scope.please_wait = false;
-                   $scope.new_research = {};
-  $scope.new_research.name = "";
-  $scope.new_research.researcher =[];
-  $scope.new_research.year_publish = "";
-  $scope.new_research.file = "";
+    $scope.new_file = [];
+    $scope.disabled_search = true;
+    $scope.please_wait = false;
 
+    if($rootScope.research_ctrl_mode === 1){
+        $scope.mode_txt = "เพิ่ม";
+        $scope.research_obj = {};
+        $scope.research_obj.curri_id = $rootScope.manage_reseach_my_curri_id_now;
+        $scope.research_obj.name = "";
+        $scope.research_obj.researcher =[];
+        $scope.research_obj.year_publish = "";
+    }
+    else{
+        $scope.disabled_search = false;
+        $scope.mode_txt = "แก้ไข";
+        $scope.research_obj = $rootScope.manage_research_fix_this_research;
+    }
    angular.forEach(
     angular.element("input[type='file']"),
     function(inputElem) {
       angular.element(inputElem).val(null);
     });
 }
-
-    $scope.$on("modal.hide", function (event, args) {
-     $scope.init();
-    });
-
-  $scope.$on("modal.show", function (event, args) {
-              $scope.init();
-    });
-
-  $scope.new_research = {};
-  $scope.new_research.name = "";
-  $scope.new_research.researcher =[];
-  $scope.new_research.year_publish = "";
-  $scope.new_research.file = "";
-   $scope.please_wait = false;
-    $scope.$on("fileSelected", function (event, args) {
-        var extension = args.file.name.split('.');
-        $scope.$apply(function () {            
-            $scope.new_research.file = [];
-                if(args.file.size > 25000000){
-                   angular.forEach(
-    angular.element("input[type='file']"),
-    function(inputElem) {
-      angular.element(inputElem).val(null);
-    });
-                $alert({title:'เกิดข้อผิดพลาด', content:'ไฟล์ที่เลือกมีขนาดมากกว่า 25 MB',alertType:'warning',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
-            }
-            else        if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
-        || extension[extension.length-1] == 'bat' || extension[extension.length-1] == 'BAT'  || extension[extension.length-1] == 'ini' || extension[extension.length-1] == 'INIT' ){
-        
-                     angular.forEach(
-    angular.element("input[type='file']"),
-    function(inputElem) {
-      angular.element(inputElem).val(null);
-    });                 
-         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาตให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
-       }
-            else{
-                 $scope.new_research.file.push(args.file);
-            }
-        });
-    });
-
-     $scope.still_not_complete = function(){
-        if(! $scope.new_research.name || $scope.new_research.researcher.length ==0 || !$scope.new_research.year_publish || !$scope.new_research.file ){
-            return true;
-        }
-        else{
-            if(angular.isNumber($scope.new_research.year_publish)==false){
-                return true;
-            }
-             if($scope.new_research.year_publish <= 0){
-                    return true;
-                }
-             return false;
-        }
-     }
-    
-    $scope.close_modal = function(my_modal){
-        my_modal.$hide();
-    }
-
-    $scope.save_to_server = function(my_modal) {
-           $scope.please_wait = true;
- $scope.new_research.curri_id = $rootScope.manage_reseach_my_curri_id_now;
- $scope.new_research.file_name = $scope.new_research.file.name;
-
-      var formData = new FormData();
-
-    formData.append("model", angular.toJson( $scope.new_research));
-            formData.append("file", $scope.new_research.file[0] );
-        $http({
-            method: 'POST',
-            url: "/api/research/newresearch",
-
-            headers: { 'Content-Type': undefined },
-            data:formData,
-            transformRequest: angular.indentity 
-
-        }).
-        success(function (data, status, headers, config) {
-    $rootScope.manage_research_still_same();
-                $rootScope.manage_research_my_research_now =data;
-                $scope.close_modal(my_modal);
-                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-        }).
-        error(function (data, status, headers, config) {
-                      $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-        });
-    }
-});
-
-app.controller('fix_research_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
-$scope.init =function() {
-    $scope.new_file = [];
-    $scope.disabled_search = false;
-  $scope.please_wait = false;
-}
-
-$scope.init();
-
     $scope.still_not_complete = function(){
-        if(!$rootScope.manage_research_fix_this_research){
+        if(!$scope.research_obj){
             return true;
         }
-        if(!$rootScope.manage_research_fix_this_research.name || !$rootScope.manage_research_fix_this_research.year_publish ){
+        if(!$scope.research_obj.name || !$scope.research_obj.year_publish || $scope.research_obj.researcher.length == 0){
             return true;
         }
-        if($rootScope.manage_lab_research_this_research_init.length ==0){
+        if (angular.isNumber($scope.research_obj.year_publish) == false){
             return true;
         }
-        if (angular.isNumber($rootScope.manage_research_fix_this_research.year_publish) == false){
+        if($scope.research_obj.year_publish <=0){
             return true;
         }
-        if($rootScope.manage_research_fix_this_research.year_publish <=0){
-            return true;
-        }
-        if($rootScope.manage_research_fix_this_research.researcher.length == 0){
-            return true;
-        }
-        if($scope.disabled_search==true ){
+        if($scope.disabled_search==true){
             if($scope.new_file.length == 0){
                 return true;
             }
@@ -4543,9 +4440,6 @@ $scope.init();
     $scope.set_disabled_search = function(){
         $scope.disabled_search = true;
     }
-  $scope.$on("modal.hide", function (event, args) {
-     $scope.init();
-    });
 
   $scope.$on("modal.show", function (event, args) {
     $scope.init();
@@ -4553,26 +4447,27 @@ $scope.init();
 
   $scope.save_to_server = function(my_modal){
        $scope.please_wait = true;
-          $rootScope.manage_research_fix_this_research.researcher = [];
-        var index;
-
-$rootScope.manage_research_fix_this_research.researcher = $rootScope.manage_lab_research_this_research_init;
-
-          var formData = new FormData();
-        formData.append("model", angular.toJson($rootScope.manage_research_fix_this_research));
-            if($scope.disabled_search == true){
-                 $rootScope.manage_research_fix_this_research.file_name = $scope.new_file[0].name;
-        formData.append("file" , $scope.new_file[0]);
- }
+       var action,apiurl;
+       if($rootScope.research_ctrl_mode === 1){
+           action = 'POST';
+           apiurl = "/api/research/newresearch";
+        }
+        else{
+            action = 'PUT';
+            apiurl = "/api/research/edit";
+        }
+        var formData = new FormData();
+        formData.append("model", angular.toJson($scope.research_obj));
+        if($scope.disabled_search == true){
+            formData.append("file" , $scope.new_file[0]);
+        }
             $http({
-                method: 'PUT',
-                url: "/api/research/edit",
-
+                method: action,
+                url: apiurl,
                 headers: { 'Content-Type': undefined },
                 data:formData,
                 transformRequest: angular.indentity 
-            }).
-            success(function (data, status, headers, config) {
+            }).success(function (data, status, headers, config) {
                 $rootScope.manage_research_still_same();
                      $rootScope.manage_research_my_research_now = data;
                      $scope.close_modal(my_modal);
@@ -4580,20 +4475,15 @@ $rootScope.manage_research_fix_this_research.researcher = $rootScope.manage_lab_
                              placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});               
             }).
             error(function (data, status, headers, config) {
+                $scope.please_wait = false;
                 $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                              placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-                  $scope.please_wait = false;
             });
     }
-
         $scope.$on("fileSelected", function (event, args) {
-
         var extension = args.file.name.split('.');
-
-        $scope.$apply(function () {            
-             $scope.new_file = [];
-            //add the file object to the scope's files collection
-
+        $scope.new_file = [];
+        $scope.$apply(function () {
              if(args.file.size > 25000000){
                    angular.forEach(
     angular.element("input[type='file']"),
@@ -4603,24 +4493,21 @@ $rootScope.manage_research_fix_this_research.researcher = $rootScope.manage_lab_
                 $alert({title:'เกิดข้อผิดพลาด', content:'ไฟล์ที่เลือกมีขนาดมากกว่า 25 MB',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
             }
-            else        if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
-        || extension[extension.length-1] == 'bat' || extension[extension.length-1] == 'BAT'  || extension[extension.length-1] == 'ini' || extension[extension.length-1] == 'INIT' ){
-        
-                     angular.forEach(
+            else if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
+        || extension[extension.length-1] == 'bat' || extension[extension.length-1] == 'BAT'  || extension[extension.length-1] == 'ini' || extension[extension.length-1] == 'INI'){ 
+    angular.forEach(
     angular.element("input[type='file']"),
     function(inputElem) {
       angular.element(inputElem).val(null);
-    });
-                 
+    });             
          $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาตให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
        }
             else{
-                  $scope.new_file.push(args.file);
+                $scope.new_file.push(args.file);
             }
         });
     });
-
 });
 
 app.controller('create_edit_lab_controller', function($scope, $http,$alert,$loading,$rootScope) {
@@ -5516,17 +5403,15 @@ $rootScope.manage_research_still_same = function(){
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
     });
-
     $scope.download_research = function(path_research){
         $scope.download_file(path_research);
     }
-
     $scope.download_file = function(path) { 
         window.open(path, '_blank', "");  
     }
-
     $scope.go_to_fix_research = function(this_research){
-          $http.post(
+        $rootScope.research_ctrl_mode = 2;
+        $http.post(
              '/api/teacher/getname',
              JSON.stringify($scope.curri_choosen.curri_id),
              {
@@ -5536,16 +5421,14 @@ $rootScope.manage_research_still_same = function(){
              }
          ).success(function (data) {
             $rootScope.manage_research_all_teachers_in_curri = data;
-
-        $rootScope.manage_research_fix_this_research = angular.copy(this_research);       
-                var index;
+        $rootScope.manage_research_fix_this_research = angular.copy(this_research);    
+        $rootScope.manage_research_fix_this_research.researcher = [];   
+        var index;
         var inside_index;
-        $rootScope.manage_lab_research_this_research_init = [];
-
-        for(index =0;index<$rootScope.manage_research_fix_this_research.researcher.length;index++){
+        for(index =0;index<this_research.researcher.length;index++){
             for(inside_index=0;inside_index<$rootScope.manage_research_all_teachers_in_curri.length;inside_index++){
-                if($rootScope.manage_research_all_teachers_in_curri[inside_index].teacher_id  == $rootScope.manage_research_fix_this_research.researcher[index].teacher_id){
-                          $rootScope.manage_lab_research_this_research_init.push($rootScope.manage_research_all_teachers_in_curri[inside_index]);
+                if($rootScope.manage_research_all_teachers_in_curri[inside_index].teacher_id  == this_research.researcher[index].teacher_id){
+                          $rootScope.manage_research_fix_this_research.researcher.push($rootScope.manage_research_all_teachers_in_curri[inside_index]);break;
                 }
             }
         }
@@ -5553,7 +5436,8 @@ $rootScope.manage_research_still_same = function(){
     }   
 
     $scope.go_to_create_research =function(){
-            $rootScope.manage_reseach_my_curri_id_now = $scope.curri_choosen.curri_id;
+        $rootScope.research_ctrl_mode = 1;
+        $rootScope.manage_reseach_my_curri_id_now = $scope.curri_choosen.curri_id;
            $http.post(
              '/api/teacher/getname',
              JSON.stringify($scope.curri_choosen.curri_id),
