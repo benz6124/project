@@ -3410,6 +3410,7 @@ $rootScope.manage_lab_still_same = function(){
     }
 
     $scope.go_to_create_lab =function(){
+        $rootScope.lab_ctrl_mode = 1;
            $http.post(
              '/api/personnel/gettnameandid',
              JSON.stringify($scope.curri_choosen.curri_id),
@@ -3425,10 +3426,8 @@ $rootScope.manage_lab_still_same = function(){
 });
     }
 
-    $scope.initial_my_selected = function(){ 
-        $scope.my_manage_lab = $rootScope.manage_lab_fix_this_lab.officer;
-    }
       $scope.go_to_fix_lab = function(lab_to_fix){
+          $rootScope.lab_ctrl_mode = 2;
               $http.post(
              '/api/personnel/gettnameandid',
              JSON.stringify($scope.curri_choosen.curri_id),
@@ -3437,19 +3436,16 @@ $rootScope.manage_lab_still_same = function(){
                      'Content-Type': 'application/json'
                  }
              }
-         ).success(function (data) {      
-            $rootScope.manage_lab_all_personnels_in_curri = data;
- 
+         ).success(function (data) {
+            $rootScope.manage_lab_all_personnels_in_curri = data; 
              $rootScope.manage_lab_fix_this_lab = angular.copy(lab_to_fix);
-             $rootScope.manage_lab_fix_this_lab_init = [];
-         
+             $rootScope.manage_lab_fix_this_lab.officer = [];
              var index;
              var inside_index;
-
-        for(index =0;index<$rootScope.manage_lab_fix_this_lab.officer.length;index++){
+        for(index =0;index<lab_to_fix.officer.length;index++){
             for(inside_index=0;inside_index<$rootScope.manage_lab_all_personnels_in_curri.length;inside_index++){
-                if($rootScope.manage_lab_all_personnels_in_curri[inside_index].user_id  == $rootScope.manage_lab_fix_this_lab.officer[index].user_id){
-                          $rootScope.manage_lab_fix_this_lab_init.push($rootScope.manage_lab_all_personnels_in_curri[inside_index]);
+                if($rootScope.manage_lab_all_personnels_in_curri[inside_index].user_id  == lab_to_fix.officer[index].user_id){
+                          $rootScope.manage_lab_fix_this_lab.officer.push($rootScope.manage_lab_all_personnels_in_curri[inside_index]);break;
                 }
             }
         }
@@ -4627,43 +4623,57 @@ $rootScope.manage_research_fix_this_research.researcher = $rootScope.manage_lab_
 
 });
 
-app.controller('fix_lab_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
-$scope.init =function() {
+app.controller('create_edit_lab_controller', function($scope, $http,$alert,$loading,$rootScope) {
+$scope.init = function() {
+    if($rootScope.lab_ctrl_mode === 1){
+        $scope.mode_txt = "เพิ่ม"; 
+        $scope.lab_obj = {};
+        $scope.lab_obj.name = "";
+        $scope.lab_obj.room = "";
+        $scope.lab_obj.curri_id = $rootScope.manage_lab_curri_id;
+        $scope.lab_obj.aca_year = $rootScope.manage_lab_aca_year;
+        $scope.lab_obj.officer = [];
+    }
+    else{
+        $scope.mode_txt = "แก้ไข";
+        $scope.lab_obj = $rootScope.manage_lab_fix_this_lab;
+    }
 }
-    $scope.$on("modal.hide", function (event, args) {
-     $scope.init();      
-    });
 
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
     });
 
     $scope.still_not_complete = function(){
-        if(!$rootScope.manage_lab_fix_this_lab){
+        if(!$scope.lab_obj){
             return true;
         }
-        if(!$rootScope.manage_lab_fix_this_lab.name || !$rootScope.manage_lab_fix_this_lab.room ){
+        if(!$scope.lab_obj.name || !$scope.lab_obj.room ){
             return true;
         }
-        if($rootScope.manage_lab_fix_this_lab_init.length == 0){
+        if( $scope.lab_obj.officer.length == 0){
             return true;
         }     
     }
-
     $scope.close_modal = function(my_modal){
         my_modal.$hide();
     }
      $scope.save_to_server = function(my_modal){
-        $rootScope.manage_lab_fix_this_lab.officer = $rootScope.manage_lab_fix_this_lab_init;
-        $http.put(
-             '/api/lablist/edit',
-             JSON.stringify($rootScope.manage_lab_fix_this_lab),
-             {
-                 headers: {
-                     'Content-Type': 'application/json'
-                 }
-             }
-         ).success(function (data) {
+         var action,apiurl;
+         if($rootScope.lab_ctrl_mode === 1){
+             action = 'POST';
+             apiurl = '/api/lablist/newlablist';
+         }
+         else{
+             action = 'PUT';
+             apiurl = '/api/lablist/edit';
+         }
+         $http({
+            method: action,
+            url: apiurl,
+            headers: {'Content-Type': 'application/json'},
+            data:JSON.stringify($scope.lab_obj)
+        }).success(function (data) {
             $rootScope.manage_lab_still_same();
             $rootScope.manage_lab_my_world_wide_labs = data;
                  $scope.close_modal(my_modal);
@@ -4673,71 +4683,10 @@ $scope.init =function() {
     .error(function(data, status, headers, config) {
      $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-  }); 
+  });
     }
 });
 
-
-app.controller('create_lab_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
-$scope.init =function() {
-    $scope.my_new_lab = {};
-    $scope.my_new_lab.name = "";
-    $scope.my_new_lab.room = "";
-    $scope.my_new_lab.officer = [];
-}
-
-$scope.init();
-              
-    $scope.$on("modal.hide", function (event, args) {
-     $scope.init();
-    });
-  $scope.$on("modal.show", function (event, args) {
-              $scope.init();
-    });
-
-    $scope.still_not_complete = function(){
-        if(! $scope.my_new_lab){
-            return true;
-        }
-        if(! $scope.my_new_lab.name || ! $scope.my_new_lab.room ){
-            return true;
-        }
-        if( $scope.my_new_lab.officer.length == 0){
-            return true;
-        }     
-    }
-
-    $scope.close_modal = function(my_modal){
-        my_modal.$hide();
-    }
-
-     $scope.save_to_server = function(my_modal){
-      
-        $scope.my_new_lab.curri_id = $rootScope.manage_lab_curri_id ;
-        $scope.my_new_lab.aca_year = $rootScope.manage_lab_aca_year;
-    
-        $http.post(
-             '/api/lablist/newlablist',
-             JSON.stringify($scope.my_new_lab),
-             {
-                 headers: {
-                     'Content-Type': 'application/json'
-                 }
-             }
-         ).success(function (data) {
-            $rootScope.manage_lab_still_same();
-            $rootScope.manage_lab_my_world_wide_labs =data;
-                 $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-         })
-    .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-  }); 
-    }
-
-});
 app.controller('import_to_curri_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
