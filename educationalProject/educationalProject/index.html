@@ -1124,8 +1124,8 @@
     </div>
   </div>
   </div>
-  <div style="margin-left:20px;margin-top:3px;" ng-show="minute_obj.pictures.length">
-    <div ng-repeat="file in minute_obj.pictures" class="gallery-box">
+  <div style="margin-left:20px;margin-top:3px;" ng-show="old_pictures.length">
+    <div ng-repeat="file in old_pictures" class="gallery-box">
       <span class="title">{{return_just_name(file.file_name)}}</span>
       <div class="thumbnail">
         <img ng-src="{{file.file_name}}" />
@@ -4394,7 +4394,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>Build:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>468</p>
+                    <p>469</p>
                 </div>
             </div>
             <div class='row'>

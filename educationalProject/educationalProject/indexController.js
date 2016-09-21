@@ -5757,6 +5757,7 @@ $scope.init =function() {
     $scope.minute_obj.attendee = [];
     $scope.minute_obj.topic_name = "";
     $scope.my_file = [];
+    $scope.old_pictures = [];
     $scope.my_pictures.flow.cancel();
     angular.forEach(
         angular.element("input[type='file']"),
@@ -5769,14 +5770,18 @@ $scope.init =function() {
         $scope.minute_obj.curri_id = $rootScope.manage_minutes_curri_id;
         $scope.minute_obj.aca_year = $rootScope.manage_minutes_aca_year;
         $scope.minute_obj.teacher_id = $rootScope.current_user.user_id;
-        $scope.minute_obj.pictures = [];
     }
     else {
         $scope.mode_txt = "แก้ไข";
         $scope.add_more_pic_txt = "เพิ่ม";
         $scope.disabled_search = false;
         $scope.minute_obj = $rootScope.manage_minutes_fix_this_minute;
+        var index;
+        for(index = 0;index < $scope.minute_obj.pictures.length;index++){
+            $scope.old_pictures.push($scope.minute_obj.pictures[index]);
+        }
     }
+        $scope.minute_obj.pictures = [];
 }
   $scope.$on("modal.show", function (event, args) {
       $scope.init();
@@ -5816,7 +5821,7 @@ $scope.imgFileCheck = function(file){
             return true;
         }
         else{
-                if($scope.my_pictures.flow.files.length ==0 && $scope.minute_obj.pictures.length ==0){
+                if($scope.my_pictures.flow.files.length ==0 && $scope.old_pictures.length ==0){
                     return true;
                 }
             if($scope.disabled_search == true){
@@ -5831,12 +5836,17 @@ $scope.imgFileCheck = function(file){
         my_modal.$hide();
     }
     $scope.delete_picture = function(index_pic){
-        $scope.minute_obj.pictures.splice(index_pic,1);
+        $scope.old_pictures.splice(index_pic,1);
     }
     $scope.save_to_server = function(my_modal) {
    $scope.please_wait = true;
       var formData = new FormData();
-        var index = 0,configobj;
+        var index,configobj;
+        //Old minute picture obj
+        for (index = 0; index < $scope.old_pictures.length; index++) {
+            $scope.minute_obj.pictures.push($scope.old_pictures[index]);
+        }
+        //New minute picture obj
         for (index = 0 ;index< $scope.my_pictures.flow.files.length;index++){
         $scope.my_obj = {};
         $scope.my_obj.minutes_id = 0;
