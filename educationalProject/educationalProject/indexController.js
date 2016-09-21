@@ -21,6 +21,17 @@ app.service('fileChecker',function($alert){
         else
         return true;
     }
+
+    fileCheckerObj.imgFileChk = function(file){ /*file parameter as FlowFile object*/
+        if(!!{png:1,jpg:1,jpeg:1}[file.getExtension()] != 1)
+        return false;
+        if (file.size > 2000000){
+             return false;
+        }
+        return true;
+     }
+
+
     fileCheckerObj.resetFileInput = function(parentOfTarget){
         angular.forEach(
             angular.element(parentOfTarget + " input[type='file']"),
@@ -897,9 +908,7 @@ app.controller('add_aca_year', function($scope, $http,$alert,$loading,request_al
          $scope.$parent.scan_only_privilege_curri('2',$scope.all_curri_that_have_privileges);
       }
     }
-
 $scope.init();
-
        $scope.$on("modal.hide", function (event, args) {
            thisctrl.add_year_form.$setPristine();
            $scope.init();
@@ -920,13 +929,11 @@ $scope.init();
     }
     return false;
   }
-
     $scope.close_modal = function(my_modal){
         my_modal.$hide();
     }
     $scope.add_aca_year_to_server = function(my_modal){
          $scope.please_wait = true;
-    
 if( $scope.curri_choosen!= "none" && $scope.new_curri_academic.aca_year != ""){
         $scope.new_curri_academic.curri_id = $scope.curri_choosen.curri_id;
               $http.post(
@@ -968,7 +975,6 @@ $scope.init();
            thisctrl.create_curri_form.$setPristine();
      $scope.init();
     });
-
   $scope.$on("modal.show", function (event, args) {
       thisctrl.create_curri_form.$setPristine();
               $scope.init();
@@ -1036,7 +1042,6 @@ $scope.init =function() {
         $scope.corresponding_aca_years = data;
           });
     }
-
      $scope.$on("modal.hide", function (event, args) {
      $scope.init();
     });
@@ -1103,14 +1108,12 @@ $scope.init =function() {
                          $scope.corresponding_aca_years = [];
   $scope.$parent.scan_only_privilege_curri('13',$scope.all_curri_that_have_privileges);
 }
-
  $scope.$on("modal.hide", function (event, args) {
      $scope.init();
     });
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
     });
-
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {};
@@ -1148,7 +1151,6 @@ $scope.init =function() {
     $scope.close_modal = function(my_modal){
         my_modal.$hide();
     }
-
     $scope.save_to_server = function(my_modal){
         $http.put(
              '/api/studentcount',
@@ -2187,7 +2189,6 @@ if ($rootScope.manage_indicators_and_sub_result.length == 0){
     $rootScope.manage_indicators_and_sub_result = [];  
     $rootScope.manage_indicators_and_sub_result.push({'aca_year':$scope.year_to_create});
 }
-
         $http.put(
              '/api/indicatorsubIndicator/saveindicator',
              JSON.stringify($rootScope.manage_indicators_and_sub_result),
@@ -2215,7 +2216,6 @@ app.controller('change_evidence_file_controller', function($scope, $alert,$http,
        $scope.init =function() {
     $scope.please_wait = false;
        $scope.my_temp_secret = false;
-             
       $scope.files = [];
          angular.forEach(
     angular.element("input[type='file']"),
@@ -2263,7 +2263,6 @@ $rootScope.only_object_want_to_change.teacher_id = $rootScope.current_user.user_
 $rootScope.only_object_want_to_change.file_name = $scope.files[0].name;
     
     formData.append("model", angular.toJson($rootScope.only_object_want_to_change));
-
             formData.append("file" , $scope.files[0]);
 
         $http({
@@ -2297,7 +2296,6 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
    $scope.my_new_evidence.secret = false;
    $scope.my_new_evidence_file = [];
  $scope.my_temp_secret_new = false;
- 
         $scope.please_wait = false;
 
     $scope.init =function() {
@@ -2341,7 +2339,6 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
             }
         });
     });
-
     $scope.new_evidence_still_not_complete =  function(){
         if (!$scope.my_new_evidence.evidence_real_code || !$scope.my_new_evidence.evidence_name|| $scope.my_new_evidence_file.length ==0){
                 return true;
@@ -2370,7 +2367,6 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
  $scope.close_modal = function(my_modal){
         my_modal.$hide();
     }
-
     $scope.save_to_server =function(my_modal){
         $scope.please_wait = true;
         if($scope.my_temp_secret_new  == false){
@@ -2396,7 +2392,6 @@ $scope.to_sent.all_evidences = $rootScope.manage_evidences_world_evidences;
     
     formData.append("model", angular.toJson(  $scope.to_sent));
     formData.append("file" , $scope.my_new_evidence_file[0]);
-
         $http({
             method: 'PUT',
             url: "/api/evidence/newevidence",
@@ -5487,132 +5482,6 @@ $scope.init();
 }
 });
 
-app.controller('create_minute_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,fileChecker) {
-$scope.init =function() {
-                   $scope.my_new_minute = {};
-                      $scope.please_wait = false;
-$scope.my_pictures.flow.files = [];
-
-  $scope.my_new_minute.date = "";
-  $scope.my_new_minute.attendee =[];
-  $scope.my_new_minute.topic_name = "";
-  $scope.my_file = [];
-  $scope.show_gallery = false;
-
-   angular.forEach(
-    angular.element("input[type='file']"),
-    function(inputElem) {
-      angular.element(inputElem).val(null);
-    });
-}
-
-    $scope.$on("modal.hide", function (event, args) {
-     $scope.init();
-    });
-  $scope.$on("modal.show", function (event, args) {
-              $scope.init();
-    });
-
- $scope.show_gallery = false;
-            $scope.please_wait = false;
-                   $scope.my_new_minute = {};
-
-  $scope.my_new_minute.date = "";
-  $scope.my_new_minute.attendee =[];
-  $scope.my_new_minute.topic_name = "";
-  $scope.my_file = [];
-$scope.my_pictures = {};
-         $scope.my_pictures.flow={}; 
-      
-$scope.my_pictures.flow.files = [];
-    $scope.$on("fileSelected", function (event, args) {
-        $scope.$apply(function () {
-            $scope.my_file = [];
-            if (!fileChecker.stdFileChk(args.file)) {
-                fileChecker.resetFileInput('');
-            }
-            else {
-                $scope.my_file.push(args.file);
-            }
-        });
-    });
-
-     $scope.still_not_complete = function(){
-        if(!$scope.my_pictures.flow){
-            return true;
-        }
-        if( $scope.my_pictures.flow.files.length ==0 ||! $scope.my_new_minute.topic_name || $scope.my_file.length ==0 || !$scope.my_new_minute.date || $scope.my_new_minute.attendee.length ==0 ){
-            return true;
-        }
-        else{
-             return false;
-        }
-     }
-    
-    $scope.close_modal = function(my_modal){
-        my_modal.$hide();
-    }
-
-$scope.show_my_pictures=function(){
-     $scope.show_gallery = true;
-     var index;
-        $scope.to_del = [];
-     for(index=0;index<$scope.my_pictures.flow.files.length;index++){
-        if ($scope.my_pictures.flow.files[index].size > 2000000){
-             $scope.to_del.push($scope.my_pictures.flow.files[index]);
-        }
-     }
-    for(index=0;index<$scope.to_del.length;index++){
-       $scope.my_pictures.flow.files.splice($scope.my_pictures.flow.files.indexOf($scope.to_del[index]),1);
-    }
-}
-    $scope.save_to_server = function(my_modal) {
-           $scope.please_wait = true;
- $scope.my_new_minute.curri_id = $rootScope.manage_minutes_curri_id;
- $scope.my_new_minute.aca_year = $rootScope.manage_minutes_aca_year;
- $scope.my_new_minute.teacher_id =  $rootScope.current_user.user_id;
-  $scope.my_new_minute.file_name =  $scope.my_file[0].name;
-  $scope.my_new_minute.pictures =  [];
-      var formData = new FormData();
-        var index = 0;
-        for (index = 0 ;index< $scope.my_pictures.flow.files.length;index++){
-                $scope.my_obj = {};
-                $scope.my_obj.minutes_id = 0;
-                $scope.my_obj.file_name = $scope.my_pictures.flow.files[index].file.name;
-              $scope.my_new_minute.pictures.push($scope.my_obj);
-            formData.append("picture"+(index+1), $scope.my_pictures.flow.files[index].file );
-        }
-        formData.append("model", angular.toJson( $scope.my_new_minute));
-      formData.append("file", $scope.my_file[0] );
-
-        $http({
-            method: 'POST',
-            url: "/api/minutes/add",
-            headers: { 'Content-Type': undefined },
-            data:formData,
-            transformRequest: angular.indentity
-        }).
-        success(function (data, status, headers, config) {
-        $rootScope.manage_minutes_still_same();
-                $rootScope.manage_minutes_my_world_wide_minutes =data;
-                      $rootScope.manage_minutes_my_world_wide_minutes_fix_year = angular.copy( $rootScope.manage_minutes_my_world_wide_minutes );
-         var index;
-         for(index=0;index<$rootScope.manage_minutes_my_world_wide_minutes_fix_year.length;index++){
-          $rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date = $rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date.split("/")[0]  + "/" + $rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date.split("/")[1]+ "/" +( parseInt($rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date.split("/")[2])+543);
-         }
-                $scope.close_modal(my_modal);
-                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});      
-        }).
-        error(function (data, status, headers, config) {
-              $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-        });
-    }
-});
-
-
 app.controller('change_password_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
 
        $scope.$on("modal.hide", function (event, args) {
@@ -5878,34 +5747,40 @@ var index;
     }
 });
 
-app.controller('fix_minute_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox,fileChecker) {
- 
+app.controller('create_edit_minute_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox,fileChecker) {
+$scope.my_pictures = {}; /*Pre initial for flow object*/
 $scope.init =function() {
-                   $scope.my_new_minute = {};
-  $scope.my_new_minute.date = "";
-  $scope.my_new_minute.attendee =[];
-     $scope.please_wait = false;
-  $scope.my_new_minute.topic_name = "";
-  $scope.my_file = [];
- $scope.my_pictures.flow.files = [];
-  $scope.show_gallery = false;
- $scope.disabled_search = false;
-   angular.forEach(
-    angular.element("input[type='file']"),
-    function(inputElem) {
-      angular.element(inputElem).val(null);
-    });
+    $scope.please_wait = false;
+    $scope.disabled_search = true;
+    $scope.minute_obj = {};
+    $scope.minute_obj.date = "";
+    $scope.minute_obj.attendee = [];
+    $scope.minute_obj.topic_name = "";
+    $scope.my_file = [];
+    $scope.my_pictures.flow.cancel();
+    angular.forEach(
+        angular.element("input[type='file']"),
+        function (inputElem) {
+            angular.element(inputElem).val(null);
+        });
+    if ($rootScope.minutes_ctrl_mode === 1) {
+        $scope.mode_txt = "เพิ่ม";
+        $scope.add_more_pic_txt = "";
+        $scope.minute_obj.curri_id = $rootScope.manage_minutes_curri_id;
+        $scope.minute_obj.aca_year = $rootScope.manage_minutes_aca_year;
+        $scope.minute_obj.teacher_id = $rootScope.current_user.user_id;
+        $scope.minute_obj.pictures = [];
+    }
+    else {
+        $scope.mode_txt = "แก้ไข";
+        $scope.add_more_pic_txt = "เพิ่ม";
+        $scope.disabled_search = false;
+        $scope.minute_obj = $rootScope.manage_minutes_fix_this_minute;
+    }
 }
-   $scope.please_wait = false;
- $scope.show_gallery = false;
-                   $scope.my_new_minute = {};
-
-  $scope.my_new_minute.date = "";
-  $scope.my_new_minute.attendee =[];
-  $scope.my_new_minute.topic_name = "";
-  $scope.my_file = [];
-$scope.my_pictures = {};
- $scope.disabled_search = false;
+  $scope.$on("modal.show", function (event, args) {
+      $scope.init();
+    });
     $scope.$on("fileSelected", function (event, args) {
         $scope.$apply(function () {
             $scope.my_file = [];
@@ -5917,12 +5792,9 @@ $scope.my_pictures = {};
             }
         });
     });
-
-    $scope.test2 = function(){
-       
-     }
-     $scope.test = function(){
-     }
+$scope.imgFileCheck = function(file){
+    return fileChecker.imgFileChk(file);
+}
      $scope.return_just_name = function(full_name){
         var set = full_name.split('/');
         return set[set.length-1]
@@ -5930,21 +5802,21 @@ $scope.my_pictures = {};
     $scope.set_disabled_search = function(){  
         $scope.disabled_search = true;
     }
-    $scope.watch_file = function() { 
-                window.open($rootScope.manage_minutes_fix_this_minute.file_name, '_blank', "width=800, left=230,top=0,height=700");  
+    $scope.watch_file = function(){
+        window.open($scope.minute_obj.file_name, '_blank', "width=800, left=230,top=0,height=700");
     }
      $scope.still_not_complete = function(){
         if(!$scope.my_pictures.flow){
             return true;
         }
-        if(!$rootScope.manage_minutes_fix_this_minute){
+        if(!$scope.minute_obj){
             return true;
         }
-        if(!$rootScope.manage_minutes_fix_this_minute.topic_name || !$rootScope.manage_minutes_fix_this_minute.date || $rootScope.manage_minutes_fix_minute_select_attendee.length ==0 ){
+        if(!$scope.minute_obj.topic_name || !$scope.minute_obj.date || $scope.minute_obj.attendee.length ==0){
             return true;
         }
         else{
-                if($scope.my_pictures.flow.files.length ==0 && $rootScope.manage_minutes_fix_this_minute.pictures.length ==0){
+                if($scope.my_pictures.flow.files.length ==0 && $scope.minute_obj.pictures.length ==0){
                     return true;
                 }
             if($scope.disabled_search == true){
@@ -5952,63 +5824,57 @@ $scope.my_pictures = {};
                     return true;
                 }       
             }
-              return false;
         }
-return false;       
+        return false;    
      }
-    
     $scope.close_modal = function(my_modal){
-        $scope.init();
         my_modal.$hide();
     }
     $scope.delete_picture = function(index_pic){
-        $rootScope.manage_minutes_fix_this_minute.pictures.splice(index_pic,1);
+        $scope.minute_obj.pictures.splice(index_pic,1);
     }
-$scope.show_my_pictures=function(){
-     $scope.show_gallery = true;
-     var index;
-     $scope.to_del = [];
-     for(index=0;index<$scope.my_pictures.flow.files.length;index++){
-        if ($scope.my_pictures.flow.files[index].size > 2000000){
-             $scope.to_del.push($scope.my_pictures.flow.files[index]);
-        }
-     }
-    for(index=0;index<$scope.to_del.length;index++){
-       $scope.my_pictures.flow.files.splice( $scope.my_pictures.flow.files.indexOf($scope.to_del[index]),1);
-    }
-}
     $scope.save_to_server = function(my_modal) {
    $scope.please_wait = true;
       var formData = new FormData();
-        var index = 0;
+        var index = 0,configobj;
         for (index = 0 ;index< $scope.my_pictures.flow.files.length;index++){
         $scope.my_obj = {};
         $scope.my_obj.minutes_id = 0;
         $scope.my_obj.file_name = $scope.my_pictures.flow.files[index].file.name;
-            $rootScope.manage_minutes_fix_this_minute.pictures.push($scope.my_obj);
-            formData.append("picture"+(index+1), $scope.my_pictures.flow.files[index].file );
+            $scope.minute_obj.pictures.push($scope.my_obj);
+            formData.append("picture"+(index+1), $scope.my_pictures.flow.files[index].file);
         }
-       $rootScope.manage_minutes_fix_this_minute.attendee =  $rootScope.manage_minutes_fix_minute_select_attendee;
-  
    if($scope.disabled_search == true){
-      $rootScope.manage_minutes_fix_this_minute.file_name = $scope.my_file[0].name;
-         formData.append("file", $scope.my_file[0] );
+      $scope.minute_obj.file_name = $scope.my_file[0].name;
+      formData.append("file", $scope.my_file[0]);
     }
     else{
-          $rootScope.manage_minutes_fix_this_minute.file_name = "";
+          $scope.minute_obj.file_name = "";
     }
-       formData.append("model", angular.toJson( $rootScope.manage_minutes_fix_this_minute));
-        $http({
-            method: 'PUT',
-            url: "/api/minutes/edit",
-            headers: { 'Content-Type': undefined },
-            data:formData,
-            transformRequest: angular.indentity 
-        }).
+       formData.append("model", angular.toJson($scope.minute_obj));
+       if ($rootScope.minutes_ctrl_mode === 1) {
+           configobj = {
+               method: 'POST',
+               url: "/api/minutes/add",
+               headers: { 'Content-Type': undefined },
+               data: formData,
+               transformRequest: angular.indentity
+           };
+       }
+       else {
+           configobj = {
+               method: 'PUT',
+               url: "/api/minutes/edit",
+               headers: { 'Content-Type': undefined },
+               data: formData,
+               transformRequest: angular.indentity
+           };
+       }
+        $http(configobj).
         success(function (data, status, headers, config) {
         $rootScope.manage_minutes_still_same();
                 $rootScope.manage_minutes_my_world_wide_minutes =data;
-                      $rootScope.manage_minutes_my_world_wide_minutes_fix_year = angular.copy( $rootScope.manage_minutes_my_world_wide_minutes );
+                      $rootScope.manage_minutes_my_world_wide_minutes_fix_year = angular.copy($rootScope.manage_minutes_my_world_wide_minutes );
          var index;
          for(index=0;index<$rootScope.manage_minutes_my_world_wide_minutes_fix_year.length;index++){
           $rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date = $rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date.split("/")[0]  + "/" + $rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date.split("/")[1]+ "/" +( parseInt($rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date.split("/")[2])+543);
@@ -6030,7 +5896,6 @@ app.controller('manage_minutes_show_images_controller', function($scope, $http,$
   };
 });
 app.controller('manage_minutes_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
-
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -6068,8 +5933,8 @@ $rootScope.manage_minutes_still_same = function(){
             $scope.corresponding_aca_years = data;
           });
     }
-
     $scope.go_to_fix_minute = function(this_minute_index){
+        $rootScope.minutes_ctrl_mode = 2;
                $http.post(
              '/api/teacher/getname',
              JSON.stringify($scope.curri_choosen.curri_id),
@@ -6080,17 +5945,14 @@ $rootScope.manage_minutes_still_same = function(){
              }
          ).success(function (data) {
             $rootScope.manage_minutes_all_teachers_in_curri = data;
-        $rootScope.manage_minutes_curri_id = $scope.curri_choosen.curri_id;
-        $rootScope.manage_minutes_aca_year = $scope.year_choosen.aca_year;
         $rootScope.manage_minutes_fix_this_minute = angular.copy($rootScope.manage_minutes_my_world_wide_minutes[this_minute_index]);
-                var index;
+        var index;
         var inside_index;
-        $rootScope.manage_minutes_fix_minute_select_attendee = [];
-
-        for(index =0;index<$rootScope.manage_minutes_fix_this_minute.attendee.length;index++){
+        $rootScope.manage_minutes_fix_this_minute.attendee = [];
+        for(index =0;index<$rootScope.manage_minutes_my_world_wide_minutes[this_minute_index].attendee.length;index++){
             for(inside_index=0;inside_index<$rootScope.manage_minutes_all_teachers_in_curri.length;inside_index++){
-                if($rootScope.manage_minutes_all_teachers_in_curri[inside_index].teacher_id  == $rootScope.manage_minutes_fix_this_minute.attendee[index].teacher_id){
-                          $rootScope.manage_minutes_fix_minute_select_attendee.push($rootScope.manage_minutes_all_teachers_in_curri[inside_index]);
+                if($rootScope.manage_minutes_all_teachers_in_curri[inside_index].teacher_id == $rootScope.manage_minutes_my_world_wide_minutes[this_minute_index].attendee[index].teacher_id){
+                          $rootScope.manage_minutes_fix_this_minute.attendee.push($rootScope.manage_minutes_all_teachers_in_curri[inside_index]);
                 }
             }
         }
@@ -6100,6 +5962,7 @@ $rootScope.manage_minutes_still_same = function(){
         $rootScope.manage_minutes_see_this_attendee = this_minute.attendee;
     }
     $scope.go_to_create_minute =function(){
+        $rootScope.minutes_ctrl_mode = 1;
            $http.post(
              '/api/teacher/getname',
              JSON.stringify($scope.curri_choosen.curri_id),

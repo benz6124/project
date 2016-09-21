@@ -1054,199 +1054,88 @@
                         </div>
                     </div>
 </div>
-
-<div id="create_minute" data-nq-modal="" data-qo-fire-emit="true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_minute_controller">
+<div id="create_edit_minute" data-nq-modal="" data-qo-fire-emit="true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="create_edit_minute_controller">
        <div class="custom-header">
-                        <h1 class="headerModalH1">เพิ่มข้อมูลรายงานการประชุม</h1>
+                        <h1 class="headerModalH1">{{mode_txt}}ข้อมูลรายงานการประชุม</h1>
                     </div>
   <div class="row">
                             <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">หัวข้อการประชุม   </span></h3>
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">หัวข้อการประชุม</span></h3>
                             </div>
                             <div class="col-md-9" style="padding-right: 8px;">
-                                <input type="text" class="form-control" placeholder="" ng-model="my_new_minute.topic_name" required><span class="normal">  </span>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">วันที่ประชุม   </span></h3>
-                            </div>
-                            <div class="col-md-9">
-                           
-  <div class="input-group" style="margin-right:9px">
-  <input type="text" data-qo-format="DD/MM/YYYY" ng-model="my_new_minute.date" data-qo-model-type="string" class="form-control" data-nq-datepicker="" placeholder="กรุณาเลือกวันที่ประชุม" data-qo-icon-id="#iconId" />
-              <span id="iconId" class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-            </div>            
-                            </div>
-                        </div>
- 
-  <div class="row">
-  <div class="col-md-3">
-
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ผู้เข้าร่วมประชุม   </span></h3>
-                            </div>
- <div class="col-md-9" style="padding-right: 24px;">
-           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_minutes_all_teachers_in_curri track by each_teacher" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้เข้าร่วมประชุม"  data-ng-model="my_new_minute.attendee" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
-<option style="display:none" value=""></option></select>    
-</div>
-
-</div>
- 
-    <ul ng-show="my_new_minute.attendee.length!=0">
-                           <span class="topicHeader"> <li style="color:#6F002B;margin-left:10px" ng-repeat="each in my_new_minute.attendee">{{each.t_name}}</li></span>
-                        </ul>
-
-<div class="row">
-                            <div class="col-md-3">
-                               <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ไฟล์รายงานการประชุม   </span></h3>
-                            </div>
-                            <div class="col-md-9" style="padding-right: 6px;">
-                                <input type="file" name="upload_file_input" class="form-control" placeholder="ไฟล์รายงานการประชุม" file-upload  data-ng-model="my_file" required/>
-                            </div>
-                        </div>
-
-                        
-  <div class="col-md-3" style="padding-left:0px">
-                               <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ภาพบรรยากาศการประชุม   </span></h3>
-                            </div>
-
-<div flow-init
-     flow-name="$parent.my_pictures.flow"
-         flow-files-submitted="show_my_pictures()"
-     flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]" >
-  <div class="drop" flow-drop ng-class="dropClass">
-    <span class="btn btn-primary" style="margin-left:7px;font-size:18px" flow-btn><i class="glyphicon glyphicon-picture"></i> อัพโหลดรูปภาพ</span><span class="topicHeader" style="margin-top:"> (รองรับไฟล์ .png,.jpg,.jpeg ขนาดไม่เกิน 2MB) </span>
-  </div>
-
-  <br/>
-
-  <div style="margin-left:20px;margin-top:3px;" ng-show="show_gallery">
-    <div ng-repeat="file in $flow.files" class="gallery-box">
-      <span class="title">{{file.name}}</span>
-      <div class="thumbnail" ng-show="$flow.files.length"  >
-        <img flow-img="file" />
-      </div>      
-      <div class="btn-group">
-        <a class="btn btn-xs btn-danger" ng-click="file.cancel()" >
-          ลบรูปภาพ
-        </a>
-      </div>
-    </div>
-    <div class="clear"></div>
-  </div>
-  </div>
-
-           <div class="custom-footer">
-                        <div class="topicHeader pull-right">
-                            <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
-                            <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
-                        </div>
-                    </div>
-</div>
-
-<div id="fix_minute" data-nq-modal="" data-qo-fire-emit="true" data-qo-screen-mode="true" data-qo-placement="right" data-qo-independent="true" data-ng-controller="fix_minute_controller">
-       <div class="custom-header">
-                        <h1 class="headerModalH1">แก้ไขข้อมูลรายงานการประชุม</h1>
-                    </div>
-  <div class="row">
-                            <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;" data-ng-click="test2()"><span class="topicNewHeader">หัวข้อการประชุม   </span></h3>
-                            </div>
-                            <div class="col-md-9" style="padding-right: 8px;">
-                                <input type="text" class="form-control" placeholder="" ng-model="manage_minutes_fix_this_minute.topic_name" required><span class="normal">  </span>
+                                <input type="text" class="form-control" placeholder="" ng-model="minute_obj.topic_name" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;" data-ng-click="test()"><span class="topicNewHeader">วันที่ประชุม   </span></h3>
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">วันที่ประชุม</span></h3>
                             </div>
                             <div class="col-md-9">
-                           
   <div class="input-group" style="margin-right:9px">
-  <input type="text" data-qo-format="DD/MM/YYYY" ng-model="manage_minutes_fix_this_minute.date" data-qo-model-type="string"class="form-control" data-nq-datepicker="" placeholder="กรุณาเลือกวันที่ประชุม" data-qo-icon-id="#iconId" />
-      
+  <input type="text" data-qo-format="DD/MM/YYYY" ng-model="minute_obj.date" data-qo-model-type="string" class="form-control" data-nq-datepicker="" placeholder="กรุณาเลือกวันที่ประชุม" data-qo-icon-id="#iconId" />
               <span id="iconId" class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
                             </div>
                         </div>
-
   <div class="row">
   <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ผู้เข้าร่วมประชุม   </span></h3>
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ผู้เข้าร่วมประชุม</span></h3>
                             </div>
- <div class="col-md-9" style="padding-right: 24px;" >
-           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_minutes_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้เข้าร่วมประชุม"   data-ng-model="$root.manage_minutes_fix_minute_select_attendee" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
+ <div class="col-md-9" style="padding-right: 24px;">
+           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="each_teacher.t_name for each_teacher in manage_minutes_all_teachers_in_curri" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกผู้เข้าร่วมประชุม" data-ng-model="minute_obj.attendee" data-qo-disable-clear="true"  data-qo-max-length ="0" data-qo-multiple="true">
 <option style="display:none" value=""></option></select>    
 </div>
-
 </div>
-
-    <ul ng-show="manage_minutes_fix_minute_select_attendee.length!=0">
-                           <span class="topicHeader"> <li style="color:#6F002B;margin-left:10px" ng-repeat="each in manage_minutes_fix_minute_select_attendee">{{each.t_name}}</li></span>
+    <ul ng-show="minute_obj.attendee.length!=0">
+                           <span class="topicHeader"><li style="color:#6F002B;margin-left:10px" ng-repeat="each in minute_obj.attendee">{{each.t_name}}</li></span>
                         </ul>
 
                           <div class="row">
                             <div class="col-md-3">
-                                <h3 style="margin-left:10px;margin-top:5px;"><span class="topicNewHeader">ไฟล์รายงานการประชุม:  </span></h3>
+                                <h3 style="margin-left:10px;margin-top:5px;"><span class="topicNewHeader">ไฟล์รายงานการประชุม</span></h3>
                             </div>
                             <div class="col-md-8"  ng-hide="disabled_search" style="margin-bottom:5px">
   <span class="btn btn-danger" ng-click="watch_file()"  style="font-size:18px;"><i style="margin-top:3px" class="glyphicon glyphicon-search" ></i>  ดูไฟล์รายงานการประชุมเดิม</span>
                           <span  class="topicHeader" style="margin-left: 20px;margin-right: 20px;">หรือ</span>
     <span class="btn btn-success" ng-click="set_disabled_search()" style="font-size:18px;"><i style="margin-top:3px" class="glyphicon glyphicon-plus-sign"></i> อัพโหลดไฟล์ใหม่</span>
                             </div>
-
     <div class="col-md-9" ng-show="disabled_search" style="padding-right: 6px;">
                                 <input type="file" name="upload_file_input" class="form-control" placeholder="ไฟล์รายงานการประชุม" file-upload  data-ng-model="my_file" required/>
                             </div>
                         </div>
-
   <div class="col-md-3" style="padding-left:0px">
-                               <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ภาพบรรยากาศการประชุม   </span></h3>
+                               <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ภาพบรรยากาศการประชุม</span></h3>
                             </div>
-
-<div flow-init
-    flow-files-submitted="show_my_pictures()"
-     flow-name="$parent.my_pictures.flow"
-     flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]" >
+<div flow-init flow-name="$parent.my_pictures.flow" flow-file-added="imgFileCheck($file)">
   <div class="drop" flow-drop ng-class="dropClass">
-    <span class="btn btn-primary"style="margin-left:7px;font-size:18px" flow-btn><i class="glyphicon glyphicon-picture"></i> อัพโหลดรูปภาพเพิ่ม</span><span class="topicHeader" style="margin-top:"> (รองรับไฟล์ .png,.jpg,.jpeg ขนาดไม่เกิน 2MB) </span>
+    <span class="btn btn-primary" style="margin-left:7px;font-size:18px" flow-btn><i class="glyphicon glyphicon-picture"></i> อัพโหลดรูปภาพ{{add_more_pic_txt}}</span><span class="topicHeader" style="margin-top:"> (รองรับไฟล์ .png,.jpg,.jpeg ขนาดไม่เกิน 2MB) </span>
   </div>
   <br/>
 
-  <div style="margin-left:20px;margin-top:3px;" ng-show="show_gallery">
+  <div style="margin-left:20px;margin-top:3px;" ng-show="$flow.files.length">
     <div ng-repeat="file in $flow.files" class="gallery-box">
       <span class="title">{{file.name}}</span>
-      <div class="thumbnail" ng-show="$flow.files.length"  >
+      <div class="thumbnail">
         <img flow-img="file" />
       </div>
-      
       <div class="btn-group">
-        <a class="btn btn-xs btn-danger" ng-click="file.cancel()" >
-          ลบรูปภาพ
-        </a>
+        <a class="btn btn-xs btn-danger" ng-click="file.cancel()">ลบรูปภาพ</a>
       </div>
     </div>
-    <div class="clear"></div>
   </div>
-
   </div>
-  <div style="margin-left:20px;margin-top:3px;" ng-show="manage_minutes_fix_this_minute.pictures.length">
-    <div ng-repeat="file in manage_minutes_fix_this_minute.pictures" class="gallery-box">
+  <div style="margin-left:20px;margin-top:3px;" ng-show="minute_obj.pictures.length">
+    <div ng-repeat="file in minute_obj.pictures" class="gallery-box">
       <span class="title">{{return_just_name(file.file_name)}}</span>
-      <div class="thumbnail" ng-show="manage_minutes_fix_this_minute.pictures.length"  >
-        <img src="{{file.file_name}}" />
+      <div class="thumbnail">
+        <img ng-src="{{file.file_name}}" />
       </div>
       
       <div class="btn-group">
-        <a class="btn btn-xs btn-danger" ng-click="delete_picture($index)" >
-          ลบรูปภาพ
-        </a>
+        <a class="btn btn-xs btn-danger" ng-click="delete_picture($index)">ลบรูปภาพ</a>
       </div>
     </div>
-    <div class="clear"></div>
   </div>
-
            <div class="custom-footer">
                         <div class="topicHeader pull-right">
                             <button ng-disabled="still_not_complete() || please_wait" class="btn btn-success" ng-click="save_to_server(this)">ยืนยัน</button>
@@ -1911,7 +1800,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
   <div ng-repeat="pic in manage_minutes_show_images_of_this_minute.pictures" class="gallery-box">
 
       <div class="thumbnail">
-        <img src="{{pic.file_name}}" ng-click="openLightboxModal($index)" />
+        <img ng-src="{{pic.file_name}}" ng-click="openLightboxModal($index)" />
       </div>
     </div>
     <div class="clear"></div>
@@ -1946,7 +1835,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
 
-                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;" data-effect="from-right" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['8'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,4)" data-nq-toggle-modal="#create_minute" data-ng-click="go_to_create_minute()"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลรายงานการประชุม</button>
+                                  <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;" data-effect="from-right" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['8'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,4)" data-nq-toggle-modal="#create_edit_minute" data-ng-click="go_to_create_minute()"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลรายงานการประชุม</button>
 
 
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
@@ -1985,7 +1874,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                           <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['8'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,3)"> <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="download_file(minute.file_name)" >
                                         <span class="topic"><i style="color:#00802b" class="glyphicon glyphicon-download-alt"></i> </span>
                                     </a></td> 
-    <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['8'] >=5 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,5)"   > <a style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#fix_minute" data-ng-click="go_to_fix_minute($index)">
+    <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['8'] >=5 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,5)"   > <a style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#create_edit_minute" data-ng-click="go_to_fix_minute($index)">
                                         <span class="topic"><i style="color:#eea236;" class="glyphicon glyphicon-wrench"></i> </span>
                                     </a></td> 
                                           <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['8'] >=5 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,5)"> <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_minute($index)" >
@@ -2014,8 +1903,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                     </div>
                 </div>
 
-             
-<div id="show_edit_album" data-ng-controller="show_edit_album_controller" data-ng-init="init()"data-nq-modal="" data-qo-fire-emit="true"  data-qo-screen-mode="true" data-qo-independent="true">
+<div id="show_edit_album" data-ng-controller="show_edit_album_controller" data-ng-init="init()" data-nq-modal="" data-qo-fire-emit="true"  data-qo-screen-mode="true" data-qo-independent="true">
       <div class="custom-header">
           <h1 class="headerModalH1"><span class="headerModal">{{manage_album_show_this_album.name}}</span></h1>
       </div>
@@ -2059,7 +1947,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
   
         <input type="text" class="title-edit form-control" ng-model="pic.caption" ></input>
       <div class="thumbnail edit"  >
-        <img src="{{pic.file_name}}" ng-click="openLightboxModal($index)" />
+        <img ng-src="{{pic.file_name}}" ng-click="openLightboxModal($index)" />
       </div>
       
       <div class="btn-group">
@@ -2097,7 +1985,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
           <h3 style="margin-top: 0px;text-align:center;margin-bottom: 0px;"><span class="topicHeader">{{pic.caption}}  </span></h3>
 
       <div class="thumbnail show"  >
-        <img src="{{pic.file_name}}" ng-click="openLightboxModal($index)" />
+        <img ng-src="{{pic.file_name}}" ng-click="openLightboxModal($index)" />
       </div>
     </div>
     <div class="clear"></div>
@@ -4274,7 +4162,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                             
  <td style="padding-left: 0px;padding-right: 0px;"><span style="font-size:19px;" class="show_lightbox">
 
- <img ng-repeat ="pic in album.pictures" ng-click="openLightboxModal($index,album.pictures)" ng-if="$index<4" src="{{pic.file_name}}" class="img-rounded" style="margin-left:1px;margin-right:1px;margin-top:3px;margin-bottom:3px" height = "50px"  />
+ <img ng-repeat ="pic in album.pictures" ng-click="openLightboxModal($index,album.pictures)" ng-if="$index<4" ng-src="{{pic.file_name}}" class="img-rounded" style="margin-left:1px;margin-right:1px;margin-top:3px;margin-bottom:3px" height = "50px"  />
 <!-- <div class="thumb_center_please_album_preview " ng-repeat ="pic in album.pictures" ng-click="openLightboxModal($index,album.pictures)" ng-if="$index<4" style="background-image: url({{pic.file_name}});"></div> -->
  </span> </td>
           <td ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year)==false && $root.current_user.privilege[curri_choosen.curri_id]['6'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,4) == false"> <a href=""  style="margin-top:7px" data-nq-toggle-modal="#show_album" data-effect="from-left" data-ng-click="go_to_show_album(album)" class="hvr-pulse">
@@ -4506,7 +4394,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>Build:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>466</p>
+                    <p>468</p>
                 </div>
             </div>
             <div class='row'>
@@ -4514,7 +4402,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>ปรับปรุงล่าสุด:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>20 กันยายน 2559</p>
+                    <p>22 กันยายน 2559</p>
                 </div>
             </div>
             </div>
