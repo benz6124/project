@@ -3515,7 +3515,7 @@ $scope.right_target = function(targets){
     }
 });
 
-app.controller('show_edit_album_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox,alertCaller) {
+app.controller('show_edit_album_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox,fileChecker,alertCaller) {
   $scope.openLightboxModal = function (index) {
     Lightbox.openModal($rootScope.manage_album_show_this_album.pictures, index);
   }
@@ -3524,25 +3524,20 @@ app.controller('show_edit_album_controller', function($scope, $http,$alert,$load
         $scope.please_wait = false;
   $scope.close_modal = function(my_modal){
             $scope.please_wait = false;
-        $scope.my_pictures.flow.files = [];
+        $scope.my_pictures.flow.cancel();
         my_modal.$hide();
     }
+
+  $scope.$on("modal.show", function (event, args) {
+      $scope.please_wait = false;
+      $scope.my_pictures.flow.cancel();
+    });
 
   $scope.remove_pic = function(index_to_remove){
         $rootScope.manage_album_show_this_album.pictures.splice(index_to_remove,1);
   }
-
-  $scope.show_my_pictures=function(){
-       $scope.to_del = [];
-var index;
-     for(index=0;index<$scope.my_pictures.flow.files.length;index++){
-        if ($scope.my_pictures.flow.files[index].size > 2000000){
-             $scope.to_del.push($scope.my_pictures.flow.files[index]);
-        }    
-     }
-    for(index=0;index<$scope.to_del.length;index++){
-       $scope.my_pictures.flow.files.splice( $scope.my_pictures.flow.files.indexOf($scope.to_del[index]),1);
-    }
+$scope.imgFileCheck = function(file){
+    return fileChecker.imgFileChk(file);
 }
     $scope.still_not_choose_complete = function(){
                if(!$scope.my_pictures.flow){
@@ -5493,68 +5488,17 @@ $scope.error_msg = '';
   }
 });
 
-app.controller('create_album_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
+app.controller('create_album_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,fileChecker,alertCaller) {
+$scope.my_pictures = {};
 $scope.init =function() {
    $scope.please_wait = false;
         $scope.my_new_album = {};
       $scope.my_new_album.name = "";
-$scope.my_pictures.flow.files = [];
-   angular.forEach(
-    angular.element("input[type='file']"),
-    function(inputElem) {
-      angular.element(inputElem).val(null);
-    });
+$scope.my_pictures.flow.cancel();
 }
- $scope.show_gallery = false;
-                $scope.please_wait = false;
-     $scope.my_new_album = {};
-      $scope.my_new_album.name = "";
-$scope.my_pictures = {};
-         $scope.my_pictures.flow={}; 
-        
-$scope.my_pictures.flow.files = [];
-    $scope.$on("fileSelected", function (event, args) {     
-        var extension = args.file.name.split('.');
-
-        $scope.$apply(function () {            
-            $scope.my_file = [];
-             if(args.file.size > 25000000){
-                   angular.forEach(
-    angular.element("input[type='file']"),
-    function(inputElem) {
-      angular.element(inputElem).val(null);
-    });
-                $alert({title:'เกิดข้อผิดพลาด', content:'ไฟล์ที่เลือกมีขนาดมากกว่า 25 MB',alertType:'warning',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
-            }
-            else        if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
-        || extension[extension.length-1] == 'bat' || extension[extension.length-1] == 'BAT'  || extension[extension.length-1] == 'ini' || extension[extension.length-1] == 'INIT' ){
-        
-                     angular.forEach(
-    angular.element("input[type='file']"),
-    function(inputElem) {
-      angular.element(inputElem).val(null);
-    });
-                 
-         $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาตให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
-       }      else        if(extension[extension.length-1] != 'jpeg' && extension[extension.length-1]!='jpg' && extension[extension.length-1] != 'png' && extension[extension.length-1] != 'bmp'
-        && extension[extension.length-1] != 'JPEG' && extension[extension.length-1] !='JPG'  && extension[extension.length-1] != 'PNG' && extension[extension.length-1] != 'BMP' ){
-        
-                     angular.forEach(
-    angular.element("input[type='file']"),
-    function(inputElem) {
-      angular.element(inputElem).val(null);
-    });
-         $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาอัพโหลดไฟล์รูปภาพสกุล .jpg, .jpeg, .png, .bmp เท่านั้น',alertType:'warning',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
-       }
-            else{
-                 $scope.my_file.push(args.file);
-            }   
-        });
-    });
-
+$scope.please_wait = false;
+$scope.my_new_album = {};
+$scope.my_new_album.name = "";
     $scope.$on("modal.hide", function (event, args) {
      $scope.init();
     });
@@ -5578,27 +5522,15 @@ $scope.my_pictures.flow.files = [];
                    return false;
         }
      }
-    
     $scope.close_modal = function(my_modal){
         my_modal.$hide();
     }
-
-$scope.show_my_pictures=function(){
-var index;
-     $scope.show_gallery = true;
-         $scope.to_del = [];
-     for(index=0;index<$scope.my_pictures.flow.files.length;index++){
-        if ($scope.my_pictures.flow.files[index].size > 2000000){
-             $scope.to_del.push($scope.my_pictures.flow.files[index]);
-        }    
-     }
-    for(index=0;index<$scope.to_del.length;index++){
-       $scope.my_pictures.flow.files.splice( $scope.my_pictures.flow.files.indexOf($scope.to_del[index]),1);
-    }
+$scope.imgFileCheck = function(file){
+    return fileChecker.imgFileChk(file);
 }
     $scope.save_to_server = function(my_modal) {
            $scope.please_wait = true;
- $scope.my_new_album.curri_id =    $rootScope.manage_album_curri_id ;
+ $scope.my_new_album.curri_id =    $rootScope.manage_album_curri_id;
  $scope.my_new_album.aca_year =    $rootScope.manage_album_aca_year;
  $scope.my_new_album.personnel_id =   $rootScope.current_user.user_id;
 
@@ -5612,7 +5544,7 @@ var index;
             $scope.my_obj.file_name = $scope.my_pictures.flow.files[index].file.name;
             $scope.my_obj.gallery_id = 0;
               $scope.my_new_album.pictures.push($scope.my_obj);
-            formData.append("picture"+(index+1), $scope.my_pictures.flow.files[index].file );
+            formData.append("picture"+(index+1), $scope.my_pictures.flow.files[index].file);
         }
         formData.append("model", angular.toJson( $scope.my_new_album));
         $http({

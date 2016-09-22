@@ -1909,21 +1909,18 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
       </div>
   <div class="row">
                             <div class="col-md-2">
-                                <h3 style="margin-top:3px;margin-left:26px;"><span class="topicNewHeader">ชื่ออัลบั้มรูปภาพ   </span></h3>
+                                <h3 style="margin-top:3px;margin-left:26px;"><span class="topicNewHeader">ชื่ออัลบั้มรูปภาพ</span></h3>
                             </div>
                             <div class="col-md-10">
-                                <input type="text" class="form-control album-title" placeholder="" ng-model="manage_album_show_this_album.name" required><span class="normal">  </span>
+                                <input type="text" class="form-control album-title" placeholder="" ng-model="manage_album_show_this_album.name" required>
                             </div>
                         </div>
-<div flow-init
-    flow-files-submitted="show_my_pictures()"
-     flow-name="$parent.my_pictures.flow"
-     flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]" >
+<div flow-init flow-name="$parent.my_pictures.flow" flow-file-added="imgFileCheck($file)">
   <div class="drop" flow-drop ng-class="dropClass">
-    <span class="btn btn-primary"style="margin-left:25px;font-size:18px" flow-btn><i class="glyphicon glyphicon-picture"></i> อัพโหลดรูปภาพเพิ่ม</span><span class="topicHeader" style="margin-top:5px"> (รองรับไฟล์ .png,.jpg,.jpeg ขนาดไม่เกิน 2MB) </span>
+    <span class="btn btn-primary" style="margin-left:25px;font-size:18px" flow-btn><i class="glyphicon glyphicon-picture"></i> อัพโหลดรูปภาพเพิ่ม</span><span class="topicHeader" style="margin-top:5px"> (รองรับไฟล์ .png,.jpg,.jpeg ขนาดไม่เกิน 2MB)</span>
   </div>
 
-  <div style="margin-left:18px;margin-top:3px;" >
+  <div style="margin-left:18px;margin-top:3px;">
     <div ng-repeat="file in $flow.files" class="gallery-box-edit">
       <input type="text" class="title-edit form-control" ng-model="file.caption" ></input>
 
@@ -1944,9 +1941,8 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
        <div style="margin-left:18px;margin-top:3px;" class="show_lightbox">
     <div ng-repeat="pic in manage_album_show_this_album.pictures" class="gallery-box-edit">
-  
         <input type="text" class="title-edit form-control" ng-model="pic.caption" ></input>
-      <div class="thumbnail edit"  >
+      <div class="thumbnail edit">
         <img ng-src="{{pic.file_name}}" ng-click="openLightboxModal($index)" />
       </div>
       
@@ -2009,19 +2005,16 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                             </div>
                         </div>
  
-<div flow-init
-     flow-name="$parent.my_pictures.flow"
-         flow-files-submitted="show_my_pictures()"
-     flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]" >
+<div flow-init flow-name="$parent.my_pictures.flow" flow-file-added="imgFileCheck($file)">
   <div class="drop" flow-drop ng-class="dropClass">
-    <span class="btn btn-primary"style="margin-left:7px;font-size:18px" flow-btn><i class="glyphicon glyphicon-picture"></i> อัพโหลดรูปภาพ</span><span class="topicHeader" style="margin-top:"> (รองรับไฟล์ .png,.jpg,.jpeg ขนาดไม่เกิน 2MB) </span>
+    <span class="btn btn-primary" style="margin-left:7px;font-size:18px" flow-btn><i class="glyphicon glyphicon-picture"></i> อัพโหลดรูปภาพ</span><span class="topicHeader" style="margin-top:"> (รองรับไฟล์ .png,.jpg,.jpeg ขนาดไม่เกิน 2MB) </span>
   </div>
   <br/>
 
-  <div style="margin-left:20px;margin-top:3px;" ng-show="show_gallery">
+  <div style="margin-left:20px;margin-top:3px;" ng-show="$flow.files.length">
     <div ng-repeat="file in $flow.files" class="gallery-box">
       <input class="form-control title" ng-model="file.caption"></span>
-      <div class="thumbnail" ng-show="$flow.files.length"  >
+      <div class="thumbnail">
         <img flow-img="file" />
       </div>
       <div class="btn-group">
@@ -2158,9 +2151,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                                   <th style="width:3px">ดู</th>
                                                   <th style="width:30px" ng-show='$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) ||$root.current_user.privilege[curri_choosen.curri_id]["3"] >=4 '>แก้ไขไฟล์</th>
                                       
-                                                <th style="width:30px" ng-show='$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) ||$root.current_user.privilege[curri_choosen.curri_id]["3"] >=4 '>ลบ</th>
-                                              
-                                            
+                                                <th style="width:30px" ng-show='$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) ||$root.current_user.privilege[curri_choosen.curri_id]["3"] >=4 '>ลบ</th>       
                                             </tr>
                                         </thead>
                                         <tbody class="flattened">
@@ -2308,8 +2299,6 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
          </div>         </div>        
 
           </div>         </div>
-
-                    
         <div class="custom-footer">
           <div class="topicHeader pull-right">
               <button class="btn btn-success" ng-disabled="choose_not_complete ||  still_not_choose_complete() || nothing_change " ng-click="save_to_server(this)">ยืนยัน</button>
@@ -2333,7 +2322,6 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                         </div>
 
 <br />
-
 <!--       <img src="{{personnel_choose.file_name_pic}}" class="img-circle" width="240" style="" /> -->
  <div class="container-fluid" ng-hide="choose_not_complete">
                         <div class="clearfix">
@@ -2376,7 +2364,6 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
 </div>
 </div>
 </div>
-
      </div>
              <div class="custom-footer">
                         <div class="topicHeader pull-right">
@@ -2995,7 +2982,6 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
     <div class="col-md-8" ng-show="disabled_search" style="padding-right: 6px;">
                                 <input type="file" name="upload_file_input" class="form-control full" placeholder="ไฟล์รายงานการประชุม" file-upload  data-ng-model="my_file"  required/>
                             </div>
-
 <div class="col-md-1" style="margin-top:5px" ng-show="disabled_search">
 <a href=""   data-ng-click="back_to_default()" class="hvr-pulse">
                                         <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-remove"></i> </span>
@@ -3141,7 +3127,6 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
    </div>
 
          </div>         </div>         </div>         </div>
-
 
  <div class="custom-footer">
                         <div class="topicHeader pull-right">
@@ -4068,7 +4053,6 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
        <div class="custom-header">
                         <h1 class="headerModalH1">สร้างแบบสอบถาม</h1>
                     </div>
-
  <div class="container-fluid">
    <div class="clearfix">        
   <div class="row">
@@ -4394,7 +4378,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>Build:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>470</p>
+                    <p>471</p>
                 </div>
             </div>
             <div class='row'>
@@ -4402,7 +4386,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>ปรับปรุงล่าสุด:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>22 กันยายน 2559</p>
+                    <p>23 กันยายน 2559</p>
                 </div>
             </div>
             </div>
