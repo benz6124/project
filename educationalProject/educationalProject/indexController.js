@@ -1,4 +1,22 @@
 ﻿'use strict';
+app.service('alertCaller',function($alert){
+    var alertCallerObj = new Object();
+    alertCallerObj.success = function(title,success_msg){
+        var success_title = title || 'ดำเนินการสำเร็จ';
+        var success_content = success_msg || 'บันทึกข้อมูลเรียบร้อย';
+        $alert({title: success_title, content: success_content, alertType: 'success',
+            placement: 'bottom-right', effect: 'bounce-in', speed: 'slow', typeClass: 'alertPopSuccess'});
+    }
+    alertCallerObj.error = function(title,error_msg,cause){
+        var error_title = title || 'เกิดข้อผิดพลาด';
+        var error_content = error_msg || 'บันทึกข้อมูลไม่สำเร็จ ';
+        var error_cause = cause || '';
+        $alert({title:error_title, content:error_content + error_cause,alertType:'danger',
+            placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+    }
+    return alertCallerObj;
+});
+
 app.service('fileChecker',function($alert){
     var fileCheckerObj = new Object();
     fileCheckerObj.stdFileChk = function(file){
@@ -31,7 +49,6 @@ app.service('fileChecker',function($alert){
         return true;
      }
 
-
     fileCheckerObj.resetFileInput = function(parentOfTarget){
         angular.forEach(
             angular.element(parentOfTarget + " input[type='file']"),
@@ -42,7 +59,7 @@ app.service('fileChecker',function($alert){
     return fileCheckerObj;
 });
 
-app.controller('choice_index_controller', function($scope,$anchorScroll, $location,$http,$alert,$cookies,$loading,request_all_curriculums_service_server,$rootScope,$modal) {
+app.controller('choice_index_controller', function($scope,$anchorScroll, $location,$http,$alert,$cookies,$loading,request_all_curriculums_service_server,$rootScope,$modal,alertCaller) {
 
     $scope.not_select_curri_and_year = true;
     $scope.not_select_sub_indicator = true;
@@ -62,7 +79,6 @@ app.controller('choice_index_controller', function($scope,$anchorScroll, $locati
 $scope.send_please_wait = false;
   
    $scope.get_reason_other_evaluate = function(indicator_now){
-   
         $scope.to_sent = {}
         $scope.to_sent.indicator_num = indicator_now;
         $scope.to_sent.curri_id = $scope.curri_choosen.curri_id ;
@@ -86,7 +102,6 @@ $scope.selectThisSub_not_link = function(sub_indicator){
         $scope.sendSectionSaveAndGetSupportText(sub_indicator);
     var my_pattern = [];
     var index;
-
     for(index=1;index< sub_indicator.sub_indicator_num ;index++){
     my_pattern.push(0);
     }
@@ -409,10 +424,8 @@ $scope.send_please_wait = false;
          });
     }
     $scope.check_curri = function(){
-        
         if ($scope.already_select_curri == false){
-              $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกหลักสูตรที่ต้องการก่อน',alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});           
+            alertCaller.error(null,'กรุณาเลือกหลักสูตรที่ต้องการก่อน');     
         }
     }
 
@@ -449,12 +462,10 @@ $scope.which_active_sub = pattern;
              });
          }
          else if ($scope.already_select_curri == true){
-            $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกปีการศึกษา',alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+             alertCaller.error(null,'กรุณาเลือกปีการศึกษา');
          }
-         else{ 
-            $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกหลักสูตรและปีการศึกษา',alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+         else{
+             alertCaller.error(null,'กรุณาเลือกหลักสูตรและปีการศึกษา');
          }
     }
 
@@ -696,16 +707,14 @@ $modal({
     }
   }
   else{
-     $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกปีการศึกษา',alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});                
+      alertCaller.error(null,'กรุณาเลือกปีการศึกษา');            
   }
 }
 $scope.get_support_content_from_other_year = function (my_modal) {
     CKEDITOR.instances['support_text'].setData($scope.show_preview_support_text);
 
  my_modal.$hide();
-     $alert({title:'ดำเนินการสำเร็จ', content:'ดึงข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+     alertCaller.success(null,'ดึงข้อมูลเรียบร้อย');
 }
 
     $scope.find_curri_information = function(){
@@ -741,22 +750,19 @@ $scope.download_aun_book = function(){
              }
          ).success(function (data) {
             if(!data){
-                    $alert({title:'เกิดข้อผิดพลาด', content:'เล่มรายงานยังไม่ถูกอัพโหลด',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+                alertCaller.error(null,'เล่มรายงานยังไม่ถูกอัพโหลด');
             }
             else{
                 $scope.download_file(data);
             }
          })
          .error(function (data) {
-                $alert({title:'เกิดข้อผิดพลาด', content:'ไม่สามารถดาวน์โหลดได้ '+data.message,alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+             alertCaller.error(null,'ไม่สามารถดาวน์โหลดได้ ',data.message);
          });
     }
     else{
-    $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกหลักสูตรและปีการศึกษาก่อน'+data.message,alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-         }
+        alertCaller.error(null,'กรุณาเลือกหลักสูตรและปีการศึกษาก่อน');
+    }
 }
 $scope.send_support_text_change_to_server = function(){
     $scope.send_please_wait = true;
@@ -771,16 +777,13 @@ $scope.send_support_text_change_to_server = function(){
                  }
              }
          ).success(function (data) {
-                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+             alertCaller.success();
                     $scope.send_please_wait = false;
          })
     .error(function(data, status, headers, config) {
                 $scope.send_please_wait = false;
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-  }); 
-    
+                alertCaller.error(null,null,data.message);
+  });
 }
  $scope.sendSectionSaveAndGetPreviewSupportText = function () {
     if($scope.select_year_support_text!=0){
@@ -820,8 +823,7 @@ $scope.send_support_text_change_to_server = function(){
                  });
                  }
                  else{
-                      $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกปีการศึกษาก่อน',alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+                     alertCaller.error(null,'กรุณาเลือกปีการศึกษาก่อน');
                  }
     }
 
@@ -894,7 +896,7 @@ for(index=0;index<$scope.corresponding_sub_indicators.length;index++){
          });
     }
 });
-app.controller('add_aca_year', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope) {
+app.controller('add_aca_year', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,alertCaller) {
     var thisctrl = this;
     $scope.init = function(){
         $scope.curri_choosen = {};
@@ -945,25 +947,22 @@ if( $scope.curri_choosen!= "none" && $scope.new_curri_academic.aca_year != ""){
                  }
              }
          ).success(function (data) {
-                  $alert({title:'ดำเนินการสำเร็จ', content:'เพิ่มปีการศึกษาเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+             alertCaller.success(null,'เพิ่มปีการศึกษาเรียบร้อย');
                   my_modal.$hide();
          })
          .error(function(data, status, headers, config) {
  $scope.please_wait = false;
                   if(status==400){
-     $alert({title:'เกิดข้อผิดพลาด', content:data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+                      alertCaller.error(null,data.message);
      }
   });
      }else{
          $scope.please_wait = false;
-       $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกหลักสูตรและระบุปีการศึกษา',alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+         alertCaller.error(null,'กรุณาเลือกหลักสูตรและระบุปีการศึกษา');
      }
     }
 });
-app.controller('create_curriculum_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope) {
+app.controller('create_curriculum_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,alertCaller) {
     var thisctrl = this;
     $scope.init = function(){
         $scope.new_curri = {}
@@ -1011,19 +1010,17 @@ $scope.still_not_complete = function(){
          ).success(function (data) {
                  $rootScope.all_curriculums =data;
                  $rootScope.clear_choosen();
-                   $alert({title:'ดำเนินการสำเร็จ', content:'สร้างหลักสูตรเรียบร้อยแล้ว',alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+                 alertCaller.success(null,'สร้างหลักสูตรเรียบร้อยแล้ว');
                    my_modal.$hide();
          })
       .error(function(data, status, headers, config) {
   $scope.please_wait = false;
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+  alertCaller.error(null,null,data.message);
   });
 }
 });
 
-app.controller('stat_graduated_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('stat_graduated_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -1088,17 +1085,15 @@ $scope.init =function() {
              }
          ).success(function (data) {
                $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});            
+               alertCaller.success();         
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        alertCaller.error(null,null,data.message);
   }); 
     }
 });
 
-app.controller('stat_student_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('stat_student_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
         $scope.year_choosen = {};
@@ -1162,17 +1157,15 @@ $scope.init =function() {
              }
          ).success(function (data) {
                  $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+                 alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        alertCaller.error(null,null,data.message);
   }); 
     }
 });
 
-app.controller('stat_new_student_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('stat_new_student_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
        $scope.year_choosen = {};
@@ -1237,12 +1230,10 @@ $scope.init =function() {
              }
          ).success(function (data) {
                   $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+                  alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        alertCaller.error(null,null,data.message);
   }); 
     }
 });
@@ -1263,7 +1254,7 @@ app.directive('fileUpload', function () {
     };
 });
 
-app.controller('evaluate_by_me_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service,$rootScope) {
+app.controller('evaluate_by_me_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service,$rootScope,alertCaller) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
    $scope.year_choosen = {};
@@ -1367,19 +1358,17 @@ $scope.indicator_choosen = {};
                  }
              }
          ).success(function (data) {
-              $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+             alertCaller.success();
               my_modal.$hide();
               $rootScope.clear_choosen();
          })
          .error(function (data, status, headers, config) {
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+             alertCaller.error(null,null,data.message);
         });
     }
 });
 
-app.controller('evaluate_by_other_controller', function($scope,$rootScope, $alert,$http,request_years_from_curri_choosen_service,fileChecker) {
+app.controller('evaluate_by_other_controller', function($scope,$rootScope, $alert,$http,request_years_from_curri_choosen_service,fileChecker,alertCaller) {
     $scope.init =function() {
   $scope.please_wait = false;
      $scope.choose_not_complete = true;
@@ -1571,13 +1560,11 @@ for(index =0;index<$scope.corresponding_results.evaluation_detail.length;index++
         }).
         success(function (data, status, headers, config) {
                    my_modal.$hide();
-              $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});               
+                   alertCaller.success();           
         }).
         error(function (data, status, headers, config) {
               $scope.please_wait = false;
-               $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+              alertCaller.error(null,null,data.message);
         });
 }
 });
@@ -1669,7 +1656,7 @@ $scope.indicator_choosen = {};
     }
 });
 
-app.controller('upload_aun_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service,$rootScope,fileChecker) {
+app.controller('upload_aun_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service,$rootScope,fileChecker,alertCaller) {
 
     $scope.init =function() {
      $scope.choose_not_complete = true;
@@ -1745,19 +1732,17 @@ $scope.$parent.scan_only_privilege_curri('14',$scope.all_curri_that_have_privile
             transformRequest: angular.indentity
         }).
         success(function (data, status, headers, config) {
-                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-                $scope.close_modal(my_modal);
+            alertCaller.success();
+            $scope.close_modal(my_modal);
         }).
         error(function (data, status, headers, config) {
-                      $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+            $scope.please_wait = false;
+            alertCaller.error(null,null,data.message);
         });
     };
 });
 
-app.controller('manage_president_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service) {
+app.controller('manage_president_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
         $scope.year_choosen = {};
@@ -1912,18 +1897,16 @@ $scope.change_already = function(){
                  }
              }
          ).success(function (data) {
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-               $scope.close_modal(my_modal);
+             alertCaller.success();
+             $scope.close_modal(my_modal);
          })
-    .error(function(data, status, headers, config) {             
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                        placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+    .error(function(data, status, headers, config) {
+        alertCaller.error(null,null,data.message);
   }); 
     }
 });
  
-app.controller('manage_admin_add_admin_controller', function($scope, $rootScope,$alert,$http,request_years_from_curri_choosen_service) {
+app.controller('manage_admin_add_admin_controller', function($scope, $rootScope,$alert,$http,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
     $scope.new_admin = {};
     $scope.new_admin.t_name = "";
@@ -1967,20 +1950,17 @@ $scope.init();
            $http.get('/api/admin').success(function (data) {
              $rootScope.all_admins = data;
            });
-
-             $alert({title:'ดำเนินการสำเร็จ', content:'เพิ่มข้อมูลเรียบร้อย ตรวจสอบอีเมล์เพื่อรับรหัสผ่าน',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+           alertCaller.success(null,'เพิ่มข้อมูลเรียบร้อย ตรวจสอบอีเมล์เพื่อรับรหัสผ่าน');
                my_modal.$hide();
     })
              .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+                 alertCaller.error(null,null,data.message);
   }); 
     }
 
 });
 
-app.controller('manage_admin_who_controller', function($scope, $rootScope,$alert,$http,request_years_from_curri_choosen_service,Lightbox) {
+app.controller('manage_admin_who_controller', function($scope, $rootScope,$alert,$http,request_years_from_curri_choosen_service,Lightbox,alertCaller) {
 $scope.init =function() {   
                        $scope.email_new_admin = "";
                        $scope.add_admin_mode = false;
@@ -2013,7 +1993,7 @@ $scope.email_new_admin = "";
     }
 });
 
-app.controller('manage_indicators_controller', function($scope, $alert,$http,$rootScope,$modal){
+app.controller('manage_indicators_controller', function($scope, $alert,$http,$rootScope,$modal,alertCaller){
 $scope.init = function(){
      $scope.choose_not_complete = true;
      $scope.year_choosen = 0;
@@ -2076,11 +2056,9 @@ if( $scope.validate_year_to_create() != true){
          $rootScope.world_have_thai_name = $scope.have_thai_name;
          }
          else{
-             $alert({title:'เกิดข้อผิดพลาด', content:'กรุณากรอกปีการศึกษาให้ถูกต้อง',alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});    
+             alertCaller.error(null,'กรุณากรอกปีการศึกษาให้ถูกต้อง');  
          }
       }
-
               $scope.still_not_choose_complete =function(){
                   if(!$rootScope.manage_indicators_and_sub_result){
                 return true;
@@ -2200,19 +2178,15 @@ if ($rootScope.manage_indicators_and_sub_result.length == 0){
          ).success(function (data) {
                $scope.close_modal(my_modal);
             $rootScope.my_backup_indicators = angular.copy($rootScope.manage_indicators_and_sub_result);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
-                // $rootScope.manage_indicators_and_sub_result[$rootScope.manage_indicators_and_sub_save_indicator.save_index] = angular.copy($rootScope.manage_indicators_indicator_choosen);
-                // $rootScope.manage_indicators_and_sub_save_indicator.save_content = angular.copy($rootScope.manage_indicators_indicator_choosen);
+            alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        alertCaller.error(null,null,data.message);
   }); 
     }
 });
 
-app.controller('change_evidence_file_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service,$rootScope,fileChecker) {
+app.controller('change_evidence_file_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service,$rootScope,fileChecker,alertCaller) {
        $scope.init =function() {
     $scope.please_wait = false;
        $scope.my_temp_secret = false;
@@ -2277,18 +2251,16 @@ $rootScope.only_object_want_to_change.file_name = $scope.files[0].name;
     $rootScope.manage_evidences_still_same();
             $rootScope.manage_evidences_world_evidences = data;
             $scope.close_modal(this_modal);
-                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+            alertCaller.success();
         }).
         error(function (data, status, headers, config) {
                       $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+                      alertCaller.error(null,null,data.message);
         });
     }
 });
 
-app.controller('add_new_evidence_controller', function($scope, $alert,$http,$rootScope,request_years_from_curri_choosen_service,fileChecker){
+app.controller('add_new_evidence_controller', function($scope, $alert,$http,$rootScope,request_years_from_curri_choosen_service,fileChecker,alertCaller){
  
     $scope.my_new_evidence = {};
    $scope.my_new_evidence.evidence_real_code = "";
@@ -2400,24 +2372,19 @@ $scope.to_sent.all_evidences = $rootScope.manage_evidences_world_evidences;
             transformRequest: angular.indentity
         }).
         success(function (data, status, headers, config) {
-    
                 $rootScope.manage_evidences_still_same();
               $rootScope.manage_evidences_world_evidences = data;
-           
                $scope.close_modal(my_modal);
-                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});       
+               alertCaller.success();      
         }).
         error(function (data, status, headers, config) {
                       $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+                      alertCaller.error(null,null,data.message);
         });
     }
 });
 
-app.controller('add_new_primary_controller', function($scope, $alert,$http,$rootScope,request_years_from_curri_choosen_service,fileChecker){
- 
+app.controller('add_new_primary_controller', function($scope, $alert,$http,$rootScope,request_years_from_curri_choosen_service,fileChecker,alertCaller){
     $scope.my_new_evidence = {};
    $scope.my_new_evidence.evidence_real_code = "";
    $scope.my_new_evidence.evidence_name = "";
@@ -2521,26 +2488,23 @@ $scope.to_sent.all_evidences = $rootScope.manage_evidences_world_evidences;
             url: "/api/evidence/newprimaryevidence",
             headers: { 'Content-Type': undefined },
             data:formData,
-            transformRequest: angular.indentity 
-
+            transformRequest: angular.indentity
         }).
         success(function (data, status, headers, config) {
     
              $rootScope.manage_evidences_still_same();
               $rootScope.manage_evidences_world_evidences = data;
                $scope.close_modal(my_modal);
-                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});           
+               alertCaller.success();       
         }).
         error(function (data, status, headers, config) {
                       $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+                      alertCaller.error(null,null,data.message);
         });
     }
 });
 
-app.controller('manage_evidences_controller', function($scope, $alert,$http,$rootScope,request_years_from_curri_choosen_service){
+app.controller('manage_evidences_controller', function($scope, $alert,$http,$rootScope,request_years_from_curri_choosen_service,alertCaller){
 
         $scope.choose_not_complete = true;
         $scope.year_choosen = {};
@@ -2574,8 +2538,7 @@ $scope.sub_date = function(this_date) {
             $scope.nothing_change =false;
     }
 else{
-          $alert({title:'เกิดข้อผิดพลาด', content:'ไม่สามารถลบหลักฐานพื้นฐานได้',alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});  
+    alertCaller.error(null,'ไม่สามารถลบหลักฐานพื้นฐานได้');
     }
 }
 
@@ -2587,7 +2550,6 @@ $scope.still_not_choose_complete = function(){
      if(!$rootScope.manage_evidences_world_evidences){
         return true;
     }
-
   var index;
   $scope.all_evidence_real_code = [];
     $scope.all_evidence_name = [];
@@ -2751,17 +2713,15 @@ $scope.choose_not_complete =true;
              }
          ).success(function (data) {
               $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+              alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        alertCaller.error(null,null,data.message);
   }); 
     }
 });
 
-app.controller('manage_sub_indicators_controller', function($scope, $alert,$http,$rootScope,$modalBox){
+app.controller('manage_sub_indicators_controller', function($scope, $alert,$http,$rootScope,$modalBox,alertCaller){
 $scope.please_wait = false;
     $scope.nothing_change = true;
              $scope.still_not_choose_complete_sub =function(){
@@ -2882,8 +2842,7 @@ $scope.start_ka = function(){
                  }
              }
          ).success(function (data) {
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+             alertCaller.success();
                 $rootScope.manage_indicators_and_sub_result = angular.copy( $scope.to_sent);
                 $rootScope.my_backup_indicators= angular.copy( $scope.to_sent);
                 $rootScope.manage_indicators_and_sub_save_indicator.save_content = angular.copy($rootScope.manage_indicators_indicator_choosen);
@@ -2891,13 +2850,12 @@ $scope.start_ka = function(){
          })
     .error(function(data, status, headers, config) {
 $scope.please_wait = false;
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+alertCaller.error(null,null,data.message);
   }); 
     }
 });
 
-app.controller('manage_primary_evidences_admin_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_primary_evidences_admin_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 
 $scope.init =function() {
      $scope.choose_not_complete = true;
@@ -2994,17 +2952,15 @@ if($scope.go_request == true){
              }
          ).success(function (data) {
              $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+             alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        alertCaller.error(null,null,data.message);
   }); 
     }
 });
 
-app.controller('manage_primary_evidences_president_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_primary_evidences_president_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
         $scope.year_choosen = {};
@@ -3108,8 +3064,7 @@ $scope.choose_teacher = function(my_obj){
 $scope.send_email = function(primary_obj){
 primary_obj.wait_send_email = true;
 if(angular.isUndefined(primary_obj.teacher_id)){
-      $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกผู้รับผิดชอบหลักฐานก่อนส่ง',alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+    alertCaller.error(null,'กรุณาเลือกผู้รับผิดชอบหลักฐานก่อนส่ง');
 }else{
     $scope.to_sent = {};
     $scope.to_sent.curri_id = primary_obj.curri_id;
@@ -3124,14 +3079,12 @@ if(angular.isUndefined(primary_obj.teacher_id)){
              }
          ).success(function (data) {
             primary_obj.wait_send_email = false;
-                $alert({title:'ดำเนินการสำเร็จ', content:'ส่ง Email แจ้งเตือนเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+            alertCaller.success(null,'ส่ง Email แจ้งเตือนเรียบร้อย');
          })
     .error(function(data, status, headers, config) {
              primary_obj.wait_send_email = false;
-     $alert({title:'เกิดข้อผิดพลาด', content:'ส่ง Email แจ้งเตือนไม่สำเร็จ',alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-  }); 
+             alertCaller.error(null,'ส่ง Email แจ้งเตือนไม่สำเร็จ');
+  });
 }
 }
       $scope.remove_primary_evidence = function(index_primary_evidence_to_remove) {
@@ -3205,17 +3158,15 @@ $scope.save_to_server = function(my_modal){
              }
          ).success(function (data) {
                $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+               alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        alertCaller.error(null,null,data.message);
   }); 
     }
 });
 
-app.controller('result_survey_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('result_survey_controller', function($scope, $http,$alert,$loading,$rootScope) {
   $scope.$on("modal.show", function (event, args) {
 
       if($rootScope.no_open_result_survey == true){
@@ -3226,7 +3177,7 @@ app.controller('result_survey_controller', function($scope, $http,$alert,$loadin
     });
 });
 
-app.controller('answer_survey_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('answer_survey_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
                     $scope.suggestion = "";
                     $scope.please_wait = false;
@@ -3275,19 +3226,16 @@ $scope.init =function() {
              }
          ).success(function (data) {
             $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+            alertCaller.success();
          })
     .error(function(data, status, headers, config) {
          $scope.please_wait = false;
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+         alertCaller.error(null,null,data.message);
   }); 
     }
 });
 
-
-app.controller('manage_lab_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_lab_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -3409,17 +3357,15 @@ $rootScope.manage_lab_still_same = function(){
              }
          ).success(function (data) {
             $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});      
+            alertCaller.success();    
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        alertCaller.error(null,null,data.message);
   }); 
     }
 });
 
-app.controller('manage_survey_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_survey_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -3492,9 +3438,8 @@ $scope.right_target = function(targets){
          })        
          .error(function(data, status, headers, config) {
             $rootScope.no_open_answer_survey =true;
-     $alert({title:'เกิดข้อผิดพลาด', content:data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-  }); 
+            alertCaller.error(null,data.message);
+  });
         $rootScope.manage_survey_questionare_to_answer = this_survey;
     }
 
@@ -3511,8 +3456,7 @@ $scope.right_target = function(targets){
             $rootScope.manage_survey_result = data;
          })   .error(function(data, status, headers, config) {
            $rootScope.no_open_result_survey = true;
-                       $alert({title:'เกิดข้อผิดพลาด', content:data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+           alertCaller.error(null,data.message);
   }); 
         $rootScope.manage_survey_questionare_of_result = this_survey;
     }
@@ -3563,17 +3507,15 @@ $scope.right_target = function(targets){
              }
          ).success(function (data) {
             $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+            alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-  }); 
+        alertCaller.error(null,null,data.message);
+  });
     }
 });
 
-app.controller('show_edit_album_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
+app.controller('show_edit_album_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox,alertCaller) {
   $scope.openLightboxModal = function (index) {
     Lightbox.openModal($rootScope.manage_album_show_this_album.pictures, index);
   }
@@ -3659,13 +3601,11 @@ return false;
         $rootScope.manage_album_still_same();
                 $rootScope.manage_album_my_world_wide_album =data;
                 $scope.close_modal(my_modal);
-                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+                alertCaller.success();
         }).
         error(function (data, status, headers, config) {
                        $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+                       alertCaller.error(null,null,data.message);
         });
     }
 });
@@ -3676,7 +3616,7 @@ app.controller('show_album_controller', function($scope, $http,$alert,$loading,r
   }
 });
 
-app.controller('manage_album_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
+app.controller('manage_album_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox,alertCaller) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -3773,17 +3713,15 @@ $rootScope.manage_album_still_same = function(){
              }
          ).success(function (data) {
             $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});               
+            alertCaller.success();         
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-  }); 
+        alertCaller.error(null,null,data.message);
+  });
     }
 });
 
-app.controller('import_evidence_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('import_evidence_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
    $scope.watch_file = function(path) {
         window.open(path, '_blank', "width=800, left=230,top=0,height=700");  
     }
@@ -3815,8 +3753,7 @@ $scope.watch_preview = function(){
         $scope.watch_file($scope.evidence_we_want.file_name);
     }
     else{
-         $alert({title:'เกิดข้อผิดพลาด', content:'กรุณาเลือกหลักฐานที่ต้องการดู',alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        alertCaller.error(null,'กรุณาเลือกหลักฐานที่ต้องการดู');
     }
 }
 
@@ -3919,18 +3856,16 @@ $scope.evidence_we_want.teacher_id = $rootScope.current_user.user_id;
             $rootScope.manage_evidences_still_same();
              $rootScope.manage_evidences_world_evidences = data;
               $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});              
+              alertCaller.success();          
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-  }); 
+        alertCaller.error(null,null,data.message);
+  });
     }
 });
 
-app.controller('create_user_controller', function($scope, $http,$alert,$loading,$rootScope,fileChecker) {
-  $scope.init = function () {
+app.controller('create_user_controller', function($scope, $http,$alert,$loading,$rootScope,fileChecker,alertCaller) {
+  $scope.init = function(){
       angular.forEach(
           angular.element("input[type='file']"),
           function (inputElem) {
@@ -4016,8 +3951,7 @@ $scope.save_to_server = function(my_modal) {
         success(function (data, status, headers, config) {
             if(!data){
                   my_modal.$hide();
-                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลสำเร็จ',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+                  alertCaller.success();
             }
             else{
                 $rootScope.manage_user_email_duplicate  = data;
@@ -4028,8 +3962,7 @@ $scope.save_to_server = function(my_modal) {
         }).
         error(function (data, status, headers, config) {
               $scope.please_wait = false;
-               $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ เนื่องจาก' + data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+              alertCaller.error(null,'บันทึกข้อมูลไม่สำเร็จ เนื่องจาก',data.message);
         });
 }
 
@@ -4045,7 +3978,7 @@ $scope.save_to_server = function(my_modal) {
         });
     });
 });
-app.controller('manage_user_type_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_user_type_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
    $scope.my_type = '';
         $scope.please_wait = false;
     $scope.$on("modal.hide", function (event, args) {
@@ -4101,17 +4034,15 @@ $scope.save_to_server = function(my_modal) {
              }
          ).success(function (data) {
                   my_modal.$hide();
-                 $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลสำเร็จ',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+                  alertCaller.success();
          })
      .error(function (data, status, headers, config) {
               $scope.please_wait = false;
-               $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ เนื่องจาก' + data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+              alertCaller.error(null,'บันทึกข้อมูลไม่สำเร็จ เนื่องจาก',data.message);
         });
 }
 });
-app.controller('create_survey_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('create_survey_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
                     $scope.my_target = [];
                     $scope.questions =[];
@@ -4183,17 +4114,15 @@ $scope.init =function() {
             $rootScope.manage_survey_still_same();
             $rootScope.manage_survey_my_world_wide_surveys =data;
               $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+              alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        alertCaller.error(null,null,data.message);
   });
     }
 });
 
-app.controller('create_edit_research_controller', function($scope, $http,$alert,$loading,$rootScope,fileChecker) {
+app.controller('create_edit_research_controller', function($scope, $http,$alert,$loading,$rootScope,fileChecker,alertCaller) {
 $scope.init =function() {
     $scope.new_file = [];
     $scope.disabled_search = true;
@@ -4284,13 +4213,11 @@ $scope.init =function() {
                 $rootScope.manage_research_still_same();
                      $rootScope.manage_research_my_research_now = data;
                      $scope.close_modal(my_modal);
-                    $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                             placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});               
+                     alertCaller.success();           
             }).
             error(function (data, status, headers, config) {
                 $scope.please_wait = false;
-                $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                             placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+                alertCaller.error(null,null,data.message);
             });
     }
         $scope.$on("fileSelected", function (event, args) { 
@@ -4306,7 +4233,7 @@ $scope.init =function() {
     });
 });
 
-app.controller('create_edit_lab_controller', function($scope, $http,$alert,$loading,$rootScope) {
+app.controller('create_edit_lab_controller', function($scope, $http,$alert,$loading,$rootScope,alertCaller) {
 $scope.init = function() {
     if($rootScope.lab_ctrl_mode === 1){
         $scope.mode_txt = "เพิ่ม"; 
@@ -4360,17 +4287,15 @@ $scope.init = function() {
             $rootScope.manage_lab_still_same();
             $rootScope.manage_lab_my_world_wide_labs = data;
                  $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+            alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        alertCaller.error(null,null,data.message);
   });
     }
 });
 
-app.controller('import_to_curri_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('import_to_curri_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
               $scope.curri_choosen = {}
@@ -4455,16 +4380,14 @@ $scope.init =function() {
           $rootScope.all_id_we_have_now_in_curri.push($rootScope.manage_bind_all_people_in_curri[index].user_id);
     }
                    $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+                   alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-  }); 
+        alertCaller.error(null,null,data.message);
+  });
     }
 });
-app.controller('manage_bind_person_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_bind_person_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
               $scope.curri_choosen = {};
@@ -4512,8 +4435,7 @@ $rootScope.manage_bind_still_same = function(){
 
     $scope.remove_person = function(index_to_remove,obj){
         if(obj.user_id == $rootScope.current_user.user_id){
-     $alert({title:'เกิดข้อผิดพลาด', content:'ท่านไม่สามารถลบตัวท่านเองออกจากหลักสูตรได้',alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+            alertCaller.error(null,'ท่านไม่สามารถลบตัวท่านเองออกจากหลักสูตรได้');
         }
         else{
                      $rootScope.manage_bind_all_people_in_curri.splice(index_to_remove, 1);    
@@ -4548,8 +4470,7 @@ $scope.delete_myself = false;
                 else{
                     $rootScope.manage_bind_all_people_in_curri[index].delete_me = false;
                     $scope.delete_myself = true;
-                     $alert({title:'เกิดข้อผิดพลาด', content:'ท่านไม่สามารถลบตัวท่านเองออกจากหลักสูตรได้',alertType:'warning',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
+                    alertCaller.error(null,'ท่านไม่สามารถลบตัวท่านเองออกจากหลักสูตรได้');
                 }
             }
         }
@@ -4589,17 +4510,15 @@ $scope.delete_myself = false;
              }
          ).success(function (data) {
              $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+             alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-  }); 
+        alertCaller.error(null,null,data.message);
+  });
     }
 });
 
-app.controller('change_priviledge_by_type_president_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('change_priviledge_by_type_president_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
               $scope.curri_choosen = {};
@@ -4691,17 +4610,15 @@ $scope.title_choosen = {};
              }
          ).success(function (data) {
              $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+             alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        alertCaller.error(null,null,data.message);
   }); 
     }
 });
 
-app.controller('education_controller', function($scope, $http,$alert,$loading,$rootScope,AUTH_EVENTS, AuthService) {
+app.controller('education_controller', function($scope, $http,$alert,$loading,$rootScope,AUTH_EVENTS, AuthService,alertCaller) {
 $scope.init = function(){
     if($rootScope.edu_ctrl_mode === 1){
         $scope.mode_txt = 'เพิ่ม';
@@ -4763,16 +4680,14 @@ $scope.save_to_server = function(my_modal){
             $rootScope.current_user.information.education = data;
             $rootScope.save_obj.information.education = data;
                $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+               alertCaller.success();
          }).error(function(data, status, headers, config) {
-             $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                    placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-                });
+             alertCaller.error(null,null,data.message);
+            });
 }
 });
 
-app.controller('manage_profile_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
+app.controller('manage_profile_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService,alertCaller) {
 
 $scope.back_to_default = function(){
        angular.forEach(
@@ -4910,12 +4825,10 @@ $scope.remove_education = function(index_to_remove){
     $rootScope.current_user.information.education.splice(index_to_remove,1);
     $scope.nothing_change = false;
 }
-
  $scope.close_modal = function(my_modal){
      $scope.init();
         my_modal.$hide();
     }
-
     $scope.back_close_modal = function(my_modal){
         $rootScope.current_user = $rootScope.save_obj;
         my_modal.$hide();
@@ -4940,17 +4853,15 @@ formData.append("file" , $scope.files[0]);
         success(function (data, status, headers, config) {
     $rootScope.current_user = data;
  $scope.close_modal(my_modal);
-                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+ alertCaller.success();
         }).
         error(function (data, status, headers, config) {
                       $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+                      alertCaller.error(null,null,data.message);
         });
     }
  });
-app.controller('login_controller', function($scope, $http,$alert,$loading,$rootScope,request_all_curriculums_service_server,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService) {
+app.controller('login_controller', function($scope, $http,$alert,$loading,$rootScope,request_all_curriculums_service_server,request_years_from_curri_choosen_service,AUTH_EVENTS, AuthService,alertCaller) {
     $scope.credentials = {
         username: '',
         password: ''
@@ -4965,9 +4876,7 @@ app.controller('login_controller', function($scope, $http,$alert,$loading,$rootS
           $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);  
           $scope.setcurrent_user(user);
              my_modal.$hide();
-
-               $alert({title:'เข้าสู่ระบบสำเร็จ', content:'ยินดีต้อนรับ '+$rootScope.current_user.username,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+             alertCaller.success('เข้าสู่ระบบสำเร็จ','ยินดีต้อนรับ '+$rootScope.current_user.username);
                $rootScope.clear_choosen();
                      $scope.please_wait = false;
    if(!!$rootScope.current_user.not_send_primary){
@@ -4978,13 +4887,12 @@ app.controller('login_controller', function($scope, $http,$alert,$loading,$rootS
             console.log(something)
           $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
       $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'เข้าสู่ระบบไม่สำเร็จ '+something.data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+      alertCaller.error(null,'เข้าสู่ระบบไม่สำเร็จ ',something.data.message);
         });
       };
 });
 
-app.controller('change_priviledge_person_president_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('change_priviledge_person_president_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
               $scope.curri_choosen = {};
@@ -5010,7 +4918,6 @@ $scope.title_choosen = {};
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
     });
-
     $scope.still_not_complete = function(){
         var index;
         if(!$scope.manage_privilege_president_person_result){
@@ -5076,17 +4983,15 @@ $scope.title_choosen = {};
              }
          ).success(function (data) {
              $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+             alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-  }); 
+        alertCaller.error(null,null,data.message);
+  });
     }
 });
 
-app.controller('change_priviledge_by_type_admin_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('change_priviledge_by_type_admin_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
     $scope.not_choose_title_yet = true;
    $scope.manage_privilege_admin_result={};
@@ -5167,16 +5072,14 @@ $scope.title_choosen = {};
              }
          ).success(function (data) {
              $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+             alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-  }); 
+        alertCaller.error(null,null,data.message);
+  });
     }
 });
-app.controller('manage_research_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_research_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
               $scope.curri_choosen = {};
@@ -5286,17 +5189,15 @@ $rootScope.manage_research_still_same = function(){
              }
          ).success(function (data) {
              $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+             alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-  }); 
+        alertCaller.error(null,null,data.message);
+  });
     }
 });
 
-app.controller('add_committee_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('add_committee_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
                 $scope.choose_people = [];
    $http.post(
@@ -5347,17 +5248,15 @@ $scope.to_sent.aca_year = $rootScope.manage_committee_who_aca_year_now;
          ).success(function (data) {
             $rootScope.manage_committee_who_all_committees = data;
                    $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+                   alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-  }); 
+        alertCaller.error(null,null,data.message);
+  });
     }
 });
 
-app.controller('manage_committee_who_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_committee_who_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
    
@@ -5420,7 +5319,6 @@ $scope.init =function() {
            $scope.to_sent.aca_year = $scope.year_choosen.aca_year ;
             $scope.to_sent.curri_id = $scope.curri_choosen.curri_id ;
             $scope.to_sent.these_people = $rootScope.manage_committee_who_all_committees;
-     
         $http.put(
              '/api/committee/',
              JSON.stringify($scope.to_sent),
@@ -5431,13 +5329,11 @@ $scope.init =function() {
              }
          ).success(function (data) {
              $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+             alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-  }); 
+        alertCaller.error(null,null,data.message);
+  });
     }
 });
 
@@ -5482,7 +5378,7 @@ $scope.init();
 }
 });
 
-app.controller('change_password_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('change_password_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 
        $scope.$on("modal.hide", function (event, args) {
      $scope.init();
@@ -5538,18 +5434,15 @@ app.controller('change_password_controller', function($scope, $http,$alert,$load
              }
          ).success(function (data) {
                   $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+                  alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'รหัสผ่านเก่าไม่ถูกต้อง',alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        alertCaller.error(null,'รหัสผ่านเก่าไม่ถูกต้อง');
   });
   }
 });
 
-
-app.controller('change_username_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('change_username_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
        $scope.$on("modal.hide", function (event, args) {
      $scope.init();     
     });
@@ -5592,17 +5485,15 @@ $scope.error_msg = '';
               $rootScope.current_user.username = $scope.to_sent.username;
               $rootScope.save_obj.username = $scope.to_sent.username;
                   $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});    
+                  alertCaller.success();   
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'ชื่อผู้ใช้นี้มีอยู่แล้วในระบบ',alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+        alertCaller.error(null,'ชื่อผู้ใช้นี้มีอยู่แล้วในระบบ');
   });
   }
 });
 
-app.controller('create_album_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('create_album_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
    $scope.please_wait = false;
         $scope.my_new_album = {};
@@ -5701,7 +5592,6 @@ var index;
              $scope.to_del.push($scope.my_pictures.flow.files[index]);
         }    
      }
-
     for(index=0;index<$scope.to_del.length;index++){
        $scope.my_pictures.flow.files.splice( $scope.my_pictures.flow.files.indexOf($scope.to_del[index]),1);
     }
@@ -5736,18 +5626,16 @@ var index;
         $rootScope.manage_album_still_same();
                 $rootScope.manage_album_my_world_wide_album =data;
                 $scope.close_modal(my_modal);
-                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});      
+                alertCaller.success();   
         }).
         error(function (data, status, headers, config) {
               $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+              alertCaller.error(null,null,data.message);
         });
     }
 });
 
-app.controller('create_edit_minute_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox,fileChecker) {
+app.controller('create_edit_minute_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox,fileChecker,alertCaller) {
 $scope.my_pictures = {}; /*Pre initial for flow object*/
 $scope.init =function() {
     $scope.please_wait = false;
@@ -5890,13 +5778,11 @@ $scope.imgFileCheck = function(file){
           $rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date = $rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date.split("/")[0]  + "/" + $rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date.split("/")[1]+ "/" +( parseInt($rootScope.manage_minutes_my_world_wide_minutes_fix_year[index].date.split("/")[2])+543);
          }
                 $scope.close_modal(my_modal);
-                $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});           
+                alertCaller.success();        
         }).
         error(function (data, status, headers, config) {
               $scope.please_wait = false;
-            $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
+              alertCaller.error(null,null,data.message);
         });
     }
  });
@@ -5905,7 +5791,7 @@ app.controller('manage_minutes_show_images_controller', function($scope, $http,$
     Lightbox.openModal($rootScope.manage_minutes_show_images_of_this_minute.pictures, index);
   };
 });
-app.controller('manage_minutes_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service) {
+app.controller('manage_minutes_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -6035,12 +5921,10 @@ $rootScope.manage_minutes_still_same = function(){
              }
          ).success(function (data) {
             $scope.close_modal(my_modal);
-               $alert({title:'ดำเนินการสำเร็จ', content:'บันทึกข้อมูลเรียบร้อย',alertType:'success',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopSuccess'});
+            alertCaller.success();
          })
     .error(function(data, status, headers, config) {
-     $alert({title:'เกิดข้อผิดพลาด', content:'บันทึกข้อมูลไม่สำเร็จ '+data.message,alertType:'danger',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPop'});
-  }); 
+        alertCaller.error(null,null,data.message);
+  });
     }
 });
