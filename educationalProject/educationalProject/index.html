@@ -1984,7 +1984,6 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                         <div class="clearfix">
      <div class="panel-heading clearfix">
                                 </div>
-
                             <div class="panel panel-default"  data-nq-pageable=""
                                  data-qo-selectable="true">
                           <div align="center">
@@ -2004,13 +2003,11 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
 
                              
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher manage_evidence_table" style="margin-top:0px;">
-                                      
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
                                               <th style="width:30px">รหัส</th>
                                                 <th style="width:270px">ชื่อหลักฐาน</th>
                                                 <th style="width:80px">ผู้อัพโหลด</th>
-
                                                   <th style="width:3px">ดู</th>
                                                   <th style="width:30px" ng-show='$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) ||$root.current_user.privilege[curri_choosen.curri_id]["3"] >=4 '>แก้ไขไฟล์</th>
                                       
@@ -2027,15 +2024,10 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                                       <span  style="text-align:center;font-size:19px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['3'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) == false" >{{indicator_choosen.indicator_num}}-{{evidence.evidence_real_code}}</span>
 
           </td>
-
-<!-- </td>
-                                                <td class="topic_indicator left_column" ><span class="topicHeader" ng-hide="primary_evidence.just_create">{{evidence.evidence_name}}</span>
-     </td>
- -->
                                                 <td class=" left_column"><input ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['3'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4)" class="form-control"size="64" type="text" ng-model="evidence.evidence_name" style="margin-top:2px;margin-bottom:2px"  data-ng-change="something_change()" required/>
                                                   <span  style="text-align:center;font-size:19px" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['3'] <4 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,3,4) == false" >{{evidence.evidence_name}}</span>
                                                 </td>
-       <td><span style="margin-right:15px;font-size:19px">{{evidence.t_name}}</span> </td>
+       <td><span style="font-size:19px">{{evidence.t_name}}</span></td>
                                                <!--  <span class="topicHeader" ng-show="primary_evidence.just_create"> <input class="form-control"  type="text" ng-model="primary_evidence.evidence_name " required/></span> -->
 
    <td> <a style="margin-left:1.5px;margin-top:3.5px" href=""  class="hvr-pulse" ng-click="watch_file(evidence.file_name)">
@@ -4175,7 +4167,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>Build:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>472</p>
+                    <p>473</p>
                 </div>
             </div>
             <div class='row'>
