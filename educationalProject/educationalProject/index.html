@@ -700,10 +700,10 @@
                         </div>
                        <form name="add_aca_year_ctrl.add_year_form" novalidate>
                         <div class="row">
-                            <div class="col-md-2">
-                                <h3 style="margin-top:5px;"><span class="topicHeader">หลักสูตร:   </span></h3>
+                            <div class="col-xs-2">
+                                <h3 style="margin-top:5px;"><span class="topicHeader">หลักสูตร:</span></h3>
                             </div>
-                            <div class="col-md-10" style="padding-right: 25px;">
+                            <div class="col-xs-10" style="padding-right: 25px;">
                                 <div class="topicHeader">
                                    <select name = "choose_curri" data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
                                   <option style="display:none" value=""></option></select>
@@ -711,10 +711,10 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-2">
-                                <h3 style="margin-top:5px;"><span class="topicHeader">ปีการศึกษา: <span></h3>
+                            <div class="col-xs-2" style="padding-right: 0px;">
+                                <h3 style="margin-top:5px;"><span class="topicHeader">ปีการศึกษา:<span></h3>
                             </div>
-                            <div class="col-md-10">
+                            <div class="col-xs-10" style="padding-right: 16px;">
                                 <div class="topicHeader">
                                     <input type="number" ng-pattern="/^[0-9]*$/"  ng-class="{ little_danger: add_aca_year_ctrl.add_year_form.choose_aca_year.$invalid && add_aca_year_ctrl.add_year_form.$dirty && add_aca_year_ctrl.add_year_form.choose_aca_year.$dirty }" name ="choose_aca_year" class="form-control" ng-model="new_curri_academic.aca_year" placeholder="กรุณากรอกปีการศึกษา"  min="0" required><span class="normal">  </span>
                                 </div>
@@ -1563,7 +1563,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                             <h3 style="margin-left:210px;margin-top:4px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี1: <span></h3>
                         </div>
                               <div class="col-md-3" style="margin-right:60px;" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['11'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,11,3)">
-                            <input ng-class="{ danger: graduated_form.quity1.$invalid && graduated_form.quity1.$dirty }"name ="quity1" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" min="0" ng-model="result.quity1" ng-disabled="choose_not_complete" required><span class="normal">  </span>
+                            <input ng-class="{ danger: graduated_form.quity1.$invalid && graduated_form.quity1.$dirty }" name ="quity1" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" min="0" ng-model="result.quity1" ng-disabled="choose_not_complete" required><span class="normal">  </span>
                         </div>
                            <div class="col-md-3" style="margin-right:60px;text-align:center" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['11'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,11,3) == false && choose_not_complete == false">
                     
@@ -1577,7 +1577,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                             <h3 style="margin-left:210px;margin-top:4px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี2: <span></h3>
                         </div>
                               <div class="col-md-3" style="margin-right:60px;" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['11'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,11,3)">
-                            <input ng-class="{ danger: graduated_form.quity2.$invalid && graduated_form.quity2.$dirty }"name ="quity2" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" min="0" ng-disabled="choose_not_complete" ng-model="result.quity2" required><span class="normal">  </span>
+                            <input ng-class="{ danger: graduated_form.quity2.$invalid && graduated_form.quity2.$dirty }" name ="quity2" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" min="0" ng-disabled="choose_not_complete" ng-model="result.quity2" required><span class="normal">  </span>
                         </div>
 
                            <div class="col-md-3" style="margin-right:60px;text-align:center" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['11'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,11,3) == false && choose_not_complete == false">
@@ -1592,7 +1592,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                         </div>
 
                               <div class="col-md-3" style="margin-right:60px;" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['11'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,11,3)">
-                            <input ng-class="{ danger: graduated_form.quity3.$invalid && graduated_form.quity3.$dirty }"name ="quity3" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" min="0" ng-disabled="choose_not_complete" ng-model="result.quity3" required><span class="normal">  </span>
+                            <input ng-class="{ danger: graduated_form.quity3.$invalid && graduated_form.quity3.$dirty }" name ="quity3" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" min="0" ng-disabled="choose_not_complete" ng-model="result.quity3" required><span class="normal">  </span>
 
                         </div>
                            <div class="col-md-3" style="margin-right:60px;text-align:center" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['11'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,11,3) == false && choose_not_complete == false">
@@ -1607,7 +1607,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                             <h3 style="margin-left:210px;margin-top:4px;"><span class="topicHeader">จำนวนนักศึกษาลาออกตอนปี4: <span></h3>
                         </div>
                              <div class="col-md-3" style="margin-right:60px;" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['11'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,11,3)">
-                            <input ng-class="{ danger: graduated_form.quity4.$invalid && graduated_form.quity4.$dirty }"name ="quity4" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" min="0" ng-disabled="choose_not_complete" ng-model="result.quity4" required><span class="normal">  </span>
+                            <input ng-class="{ danger: graduated_form.quity4.$invalid && graduated_form.quity4.$dirty }" name ="quity4" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" min="0" ng-disabled="choose_not_complete" ng-model="result.quity4" required><span class="normal">  </span>
                         </div>
 
                            <div class="col-md-3" style="margin-right:60px;text-align:center" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['11'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,11,3) == false && choose_not_complete == false">
@@ -1621,7 +1621,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                             <h3 style="margin-left:210px;margin-top:4px;"><span class="topicHeader">จำนวนนักศึกษาที่ย้ายสาขาวิชามา: <span></h3>
                         </div>
                             <div class="col-md-3" style="margin-right:60px;" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['11'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,11,3)">
-            <input ng-class="{ danger: graduated_form.move_in.$invalid && graduated_form.move_in.$dirty }"name ="move_in" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" min="0" ng-disabled="choose_not_complete" ng-model="result.move_in" required>
+            <input ng-class="{ danger: graduated_form.move_in.$invalid && graduated_form.move_in.$dirty }" name ="move_in" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" min="0" ng-disabled="choose_not_complete" ng-model="result.move_in" required>
                         </div>
 
                            <div class="col-md-3" style="margin-right:60px;text-align:center" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['11'] <3 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,11,3) == false && choose_not_complete == false">
@@ -1681,7 +1681,6 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                     <div class="custom-header">
                         <h1 class="headerModalH1">ส่วนการจัดการรายงานการประชุม</h1>
                     </div>
-
           <div class="row" style="margin-left: 0px;margin-right: 0px;">
                         <div class="col-md-8">
                           <select data-qo-button-class="mySelect" data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curri_that_have_privileges" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="sendCurriAndGetYears()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
@@ -1697,12 +1696,8 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                         <div class="clearfix">
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
                                  data-qo-selectable="true">
-
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
-
                                   <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;" data-effect="from-right" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['8'] >=4 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,4)" data-nq-toggle-modal="#create_edit_minute" data-ng-click="go_to_create_minute()"><i class="fic glyphicon glyphicon-plus-sign"></i> เพิ่มข้อมูลรายงานการประชุม</button>
-
-
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
@@ -1721,12 +1716,9 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                         <tbody class="flattened">
                                         <form name="manage_survey_form" novalidate>
                                             <tr ng-repeat="minute in manage_minutes_my_world_wide_minutes_fix_year">
-                                           
  <td class="left_column" style="padding-left:10px;"><span style="font-size:19px;">{{minute.topic_name}}</span> </td>
-                                        
         <td>
-<span style="padding-left:0px;font-size:19px">{{minute.date}}</span>  </td>
-
+<span style="padding-left:0px;font-size:19px">{{minute.date}}</span></td>
           <td> <a style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#minute_attendees" data-ng-click="go_to_see_attendee(minute)" >
                                         <span class="topic"><i style="color:#484848" class="glyphicon glyphicon-user"></i> </span>
                                     </a></td> 
@@ -1749,7 +1741,6 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                             </form>
                                         </tbody>
                                     </table>
-
          </div>         </div>        
 
           </div>         </div>
@@ -1760,7 +1751,6 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                             <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div>
-
                          <div class="custom-footer" ng-show="($root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) == false && $root.current_user.privilege[curri_choosen.curri_id]['8'] <5 && $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,8,5) == false) || choose_not_complete == true">
                         <div class="topicHeader pull-right">
                            <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
@@ -1810,7 +1800,6 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
       <div class="thumbnail edit">
         <img ng-src="{{pic.file_name}}" ng-click="openLightboxModal($index)" />
       </div>
-      
       <div class="btn-group">
         <a class="btn btn-xs btn-danger" ng-click="remove_pic($index)" >
           ลบรูปภาพ
@@ -1819,7 +1808,6 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
     </div>
     <div class="clear"></div>
   </div>
-
      <div class="custom-footer">
           <div class="topicHeader pull-right">
               <button class="btn btn-success" ng-disabled="still_not_choose_complete() || please_wait" ng-click="save_to_server(this)">ยืนยัน</button>
@@ -1827,7 +1815,6 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
           </div>
       </div>   
       </div>
-
 
 <div id="show_album" data-ng-controller="show_album_controller" data-nq-modal="" data-qo-fire-emit="true"  data-qo-screen-mode="true" data-qo-independent="true">
       <div class="custom-header">
@@ -1845,7 +1832,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
     <div ng-repeat="pic in manage_album_show_this_album.pictures" class="gallery-box-show">
           <h3 style="margin-top: 0px;text-align:center;margin-bottom: 0px;"><span class="topicHeader">{{pic.caption}}  </span></h3>
 
-      <div class="thumbnail show"  >
+      <div class="thumbnail show">
         <img ng-src="{{pic.file_name}}" ng-click="openLightboxModal($index)" />
       </div>
     </div>
@@ -1862,7 +1849,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                     </div>       
   <div class="row">
                             <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่ออัลบั้มรูปภาพ   </span></h3>
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่ออัลบั้มรูปภาพ</span></h3>
                             </div>
                             <div class="col-md-9" style="padding-right: 8px;">
                                 <input type="text" class="form-control" placeholder="" ng-model="my_new_album.name" required><span class="normal">  </span>
@@ -2174,7 +2161,6 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                  data-qo-selectable="true">
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
      <table class="table table-bordered table-hover table_modal  evaluation  " style="width:100%">
-
      <thead>
                 <th class="col-md-1" width="100px">รูป</th>
                 <th class="col-md-7 topic">ชื่อผู้ดูแลหลักสูตร</th>
@@ -2196,7 +2182,6 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
 
                 <td> <button type="button" ng-click="remove_president(key,$index)"  class="btn" style="background-color:transparent;color:#d9534f;border:none;padding-left: 0px;" ><span class="glyphicon glyphicon-minus-sign"></span></button></td>
             </tr>
-
             <tr>
             <td colspan="4">
   <div align="center">
@@ -2256,7 +2241,6 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                  data-qo-selectable="true">
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
                                    <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;" data-effect="from-right" data-nq-toggle-modal ="#manage_admin_add_admin" data-ng-click="add_admin()"><i class="fic glyphicon glyphicon-plus-sign"></i> แต่งตั้งผู้ควบคุมระบบ</button>
-
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
@@ -2272,14 +2256,12 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                              <td style=" padding-left: 0px; padding-right: 0px;" class="show_lightbox"><span style="font-size:19px;">
 
                                             <div class="thumb_center_please click_me" ng-click="openLightboxModal(admin.file_name_pic)"   ng-style="{'background-image': 'url('+admin.file_name_pic+')'}"></div>
-                         <!--                     <img src="{{admin.file_name_pic}}" ng-click="openLightboxModal(admin.file_name_pic)"  height="90"> -->
                                              </span>
                                               </td>
-
-                          <td><span style="font-size:19px;">{{admin.t_name}}</span> </td>
-                          <td><span style="font-size:19px;">{{admin.email}}</span> </td>
-  <td style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{admin.creator_name}}</span> </td>
-<td style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{admin.timestamp}}</span> </td>
+                          <td><span style="font-size:19px;">{{admin.t_name}}</span></td>
+                          <td><span style="font-size:19px;">{{admin.email}}</span></td>
+  <td style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{admin.creator_name}}</span></td>
+<td style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{admin.timestamp}}</span></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -2333,7 +2315,6 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
                                  data-qo-selectable="true">              
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
-
                                   <button type="button" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;" data-effect="from-left" data-nq-toggle-modal="#add_committee" data-ng-click="go_to_add_committee()"><i class="fic glyphicon glyphicon-plus-sign"></i> แต่งตั้งกรรมการหลักสูตร</button>
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
                                         <thead class="nq-fix-table-scroll">
@@ -2806,7 +2787,6 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
 
     <span class="btn btn-success" ng-click="set_disabled_search()" style="font-size:18px;"><i style="margin-top:3px" class="glyphicon glyphicon-plus-sign"></i> อัพโหลดไฟล์ใหม่</span>
                             </div>
-
     <div class="col-md-8" ng-show="disabled_search" style="padding-right: 6px;">
                                 <input type="file" name="upload_file_input" class="form-control full" placeholder="ไฟล์รายงานการประชุม" file-upload  data-ng-model="my_file"  required/>
                             </div>
@@ -2824,7 +2804,6 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                             </div>
                         </div>
                     </div>
-
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
                             <button class="btn btn-success" ng-disabled="choose_not_complete || still_not_complete() || please_wait" ng-click="save_to_server(this)">ยืนยัน</button>
@@ -2949,7 +2928,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     </div> 
                     </div>
 
-                <div id="evaluate_me" data-nq-modal="" data-qo-fire-emit="true" data-ng-controller="evaluate_by_me_controller" data-ng-init = "init()"data-qo-screen-mode="true" data-qo-independent="true">
+                <div id="evaluate_me" data-nq-modal="" data-qo-fire-emit="true" data-ng-controller="evaluate_by_me_controller" data-ng-init = "init()" data-qo-screen-mode="true" data-qo-independent="true">
                     <div class="custom-header">
                         <h1 class="headerModalH1"><span class="headerModal">ประเมินหลักสูตรตนเอง</span></h1>
                     </div>
@@ -2988,12 +2967,11 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                             </tr>
                                         </thead>
                                         <tbody class="flattened">
-                                        <form name="evaluate_by_me_form" novalidate>
                                             <tr data-ng-repeat="result in corresponding_results">
                                                 <td ng-if="result.sub_indicator_num !=0">{{result.indicator_num}}.{{result.sub_indicator_num}}</td>
                                                       <td ng-if="result.sub_indicator_num ==0">{{result.indicator_num}}</td>
                                                 <td class="left_column">{{result.sub_indicator_name}}</td>
-                                                <td><input type="radio"  value="7" min="1" data-ng-model="result.evaluation_score" required> </td>
+                                                <td><input type="radio"  value="7" min="1" data-ng-model="result.evaluation_score"> </td>
                                                 <td><input type="radio"  value="6" min="1" data-ng-model="result.evaluation_score"> </td>
                                                 <td><input type="radio" value="5" min="1" data-ng-model="result.evaluation_score"> </td>
                                                 <td><input type="radio"  value="4" min="1" data-ng-model="result.evaluation_score"> </td>
@@ -3001,7 +2979,6 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                                 <td><input type="radio" value="2" min="1" data-ng-model="result.evaluation_score"> </td>
                                                 <td><input type="radio" value="1" min="1" data-ng-model="result.evaluation_score"> </td>
                                             </tr>
-                                            </form>
                                         </tbody>
                                     </table>
                                 </div>
@@ -3010,7 +2987,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     </div>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success" ng-disabled="evaluate_by_me_form.$invalid || choose_not_complete || still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-success" ng-disabled="choose_not_complete || still_not_complete()" ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
                         </div>
                     </div> 
@@ -3841,7 +3818,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
    <div class="clearfix">        
   <div class="row">
                             <div class="col-md-3">
-                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่อแบบสอบถาม   </span></h3>
+                                <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่อแบบสอบถาม</span></h3>
                             </div>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" placeholder="" ng-model="my_survey_name" required><span class="normal">  </span>
@@ -3908,9 +3885,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
               
                                 <div class="panel-body table-responsive" data-nq-scroll=""  data-qo-bar-offset="40" data-bar-model="tableScroller" style="overflow:hidden; overflow-y:auto;">
                                   <button type="button" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||$root.current_user.privilege[curri_choosen.curri_id]['6'] >=3 || $root.right_from_committee(curri_choosen.curri_id,year_choosen.aca_year,6,3)" class="btn btn-xs btn-success  hvr-buzz"  style="margin-bottom:15px;" data-nq-toggle-modal="#create_album" data-ng-click="go_to_create_album()" data-effect="from-right"><i class="fic glyphicon glyphicon-plus-sign" ></i> สร้างอัลบั้มรูป</button>
-
   <table class="table table-bordered table-hover bg-white table_modal evaluate_aun special_teacher">
-                            
                                         <thead class="nq-fix-table-scroll">
                                             <tr>
                                                 <th style="width:135px">ชื่ออัลบั้ม</th>
@@ -3925,9 +3900,8 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                         <tbody class="flattened">
                                         <form name="manage_survey_form" novalidate>
                                             <tr ng-repeat="album in manage_album_my_world_wide_album">
-                                           
  <td class="left_column" style="padding-left:10px;"><span style="font-size:19px;">{{album.name}}</span> </td>
-                                            
+
  <td style="padding-left: 0px;padding-right: 0px;"><span style="font-size:19px;" class="show_lightbox">
 
  <img ng-repeat ="pic in album.pictures" ng-click="openLightboxModal($index,album.pictures)" ng-if="$index<4" ng-src="{{pic.file_name}}" class="img-rounded" style="margin-left:1px;margin-right:1px;margin-top:3px;margin-bottom:3px" height = "50px"  />
