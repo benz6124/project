@@ -13,19 +13,11 @@
           }
 
 * {
-  font-family:"FreesiaUPC" ;
-
- /* font-size: 21px;*/
+  font-family:"FreesiaUPC";
 }
-
-.aside-body {
-
-}
-
 
 .mySelect{
   background-color: #E8E8E8    !important;
-
 }
 .mySelect_index{
   background-color: #f2f2f2    !important;
@@ -36,10 +28,7 @@
   background-color: #f2f2f2    !important;
   width: 15%;
   padding-top: 3px;
-  /*    margin-left: 2%;
-    margin-right: 2%; */
 }
-
 
 .mySelect_teacher{
   background-color: #e6e6e6
@@ -55,19 +44,16 @@ td.download > a:hover{
   color:#6F002B;
 }
 td,.normal{
-  font-size:18px ;
+  font-size:18px;
 }
 
-
 button{
-  vertical-align: middle ;
+  vertical-align: middle;
   text-align: center !important;
   font-size:20px !important;
   text-align: center;
-    font-family: "FreesiaUPC" !important;    
-
+    font-family: "FreesiaUPC" !important;
 }
-
 
 
 .nav-tabs>li>a{
@@ -78,22 +64,18 @@ button{
   background-color:#686868
 }
 .big-nav{
- /* margin-left:92px;*/
   width:90%;
   background-color:#484848;
 }
 
 .aside{
-  background-color:#686868 !important   ;
-  color:#E0E0E0 !important ;
-
+  background-color:#686868 !important;
+  color:#E0E0E0 !important;
 }
 
 .aside-body li a:visited,.aside-body li a:hover{
   background-color: #6F002B;
   color:#E0E0E0;
-
-
 }
 
 .aside-body li a{
@@ -102,34 +84,27 @@ button{
 }
 .aside-header{
   color:white;
-
   background-color:#484848;
-
 }
 
 div.navbar>div.container-fluid>ul>li>a:hover{
   background-color: #6F002B;
-
 }
 
 .navbar{
   background-color:#6F002B; 
   border-radius: 0px;
-
 }
 
 table.evidence, table.evidence th, table.evidence td{
     border: 1px solid #383838 ;
     background-color:#F0F0F0 ;
     color:black;
-/*    border-radius:5px;
-    border-collapse:separate;*/
-
 }
 
 table.evidence{
   border:none;
-  background-color:transparent;;
+  background-color:transparent;
 }
 table.evidence th{
   text-align: center;
@@ -150,49 +125,22 @@ padding:0px !important;
 td.larger{
     width:1200px;
     text-indent: 10px;
-
 }
 
-td.download{
+td.download,td.code{
   width:150px;
   text-align: center;
   padding-left: 0px;
 }
-
-td.code{
-  width:150px;
-  text-align: center;
-  padding-left: 0px;
-}
-
-
-/*.btn.editor:hover,.btn.editor:active {
-
-    background-color:#484848 !important;
-}
-*/
 
 .btn-warning {
   background-color:  #eb9114;
 }
 .btn.editor{
   border:none;
-  background-color:#909090   ; 
+  background-color:#909090; 
    color:white;
-
 }
-
-/*.btn.form-control:hover,.btn.form-control:active {
-
-    background-color:#B8B8B8  !important;
-}*/
-
-
-/*ul.nav.nav-stacked li{
-  padding: 0px !important;
-  background-color: pin
-}
-*/
 
 .btn.fetch:hover,.btn.fetch:active {
     color:#6F002B;
@@ -206,22 +154,17 @@ td.code{
 .modal-form{
   font-size: 22px;
    font-family: 'Helvetica',"FreesiaUPC" !important;
-
 }
-
 
 .modal-body{
   max-height: 400px;
-
 }
 th.point,td.point{
     text-align: center;
   width: 68px;
-  
 }
 .img-thumbnail{
   max-width: 250px;
-
 }
 
 .gall{
@@ -232,151 +175,87 @@ th.number,td.number{
   width: 70px;
 }
 
-
 th.topic{
   width: 800px;
-
 }
 
 td.topic{
   text-indent: 10px;
 }
-/*table.evaluation, table.evaluation th, table.evaluation td{
-   border: 1px solid #000000 ;
-    background-color:#F0F0F0 ;
-    color:black;
-  
-    border-collapse:collapse;
-    font-family: "FreesiaUPC";
-}
-*/
-
-
-
 
 optgroup {
   font-family: FreesiaUPC;
 }
 
-
 .btn.self-evaluate:hover,.btn.self-evaluate:active {
-
     background-color:#B8B8B8 !important;
 }
 
 .btn.self-evaluate{
   border:none;
-  background-color:white   ; 
+  background-color:white; 
   color:#6F002B;  
   font-weight: bold;
   font-size: 25px;
   font-style: italic;
 }
 
-.topicHeader {
+.topicHeader,span.topic {
   font-family:  "FreesiaUPC";
-
   font-size: 21px !important;
-
 }
-
 
 .topicNewHeader {
   font-family:  "FreesiaUPC";
-
   font-size: 22px !important;
-
 }
 
-span.topic{
-  font-family:  "FreesiaUPC";
-
-  font-size: 21px !important;
-}
 .headerModal {
   font-family:  "FreesiaUPC";
-
   font-size: 40px;
-
-  margin-bottom: 5px ;
-
+  margin-bottom: 5px;
 }
 
-/*.dropdown-menu {
-  background-color:#D3D3D3;
-}
-*/
 input[type='file']{
    font-family:  "FreesiaUPC" !important;
   font-size: 18px !important;
   vertical-align: middle !important;
   line-height:1px;
 }
- input[type='file']::-webkit-file-upload-button { 
-
+ input[type='file']::-webkit-file-upload-button {
   font-family:  "FreesiaUPC" !important;
   font-size: 18px !important;
   vertical-align: middle !important;
   line-height:1;
-
 }
- input[type='text'] { 
-
+ input[type='text'],input[type='email'] {
   font-family:  "FreesiaUPC";
   font-size: 21px !important;
-
-
 }
 
-
- input[type='email'] { 
-
-  font-family:  "FreesiaUPC";
-  font-size: 21px !important;
-
-
-}
-
-
- input[type='number'] { 
-
+ input[type='number'] {
   font-family:  "FreesiaUPC";
   font-size: 18px;
   text-align: center;
 }
- input[type='password'] { 
-
+ input[type='password'],input.form-control[placeholder] { 
   font-family:  "FreesiaUPC";
   font-size: 18px;
-
 }
-
-input.form-control[placeholder]{
-   font-size: 18px;
-   font-family:  "FreesiaUPC";
-
-}
-
 
 .select-option{
   text-align: center;
   font-family: "FreesiaUPC";
   font-size: 21px;
-
 }
-
- 
 
 .select-option:hover{
   background-color: #FFE6EE !important;
-
 }
-
 
 button[data-toggle="dropdown"]{
     font-size: 21px;
    font-family:  "FreesiaUPC";
-
 }
 
 button ul li label{
@@ -389,7 +268,6 @@ button ul li label{
    font-size: 19px !important;
    font-family:  "FreesiaUPC" !important;
 opacity: 0.9 !important;
-
 
 }
 .tooltip-inner {
@@ -405,13 +283,9 @@ table.plain {
   border-collapse: collapse;
 }
 
-
-
 table.plain tr {
-  color: #484848;;
+  color: #484848;
 }
-
-
 
 table.plain th{
  text-align: center;
@@ -424,11 +298,11 @@ table.plain td{
 }
 
 table.plain td.ppoint {
-  text-align: center;;
+  text-align: center;
 }
 
 table.plain th {
-  color: #6F002B;;
+  color: #6F002B;
 }
 
 .hvr-pulse{
@@ -445,8 +319,6 @@ td button li label{
     display: inline-block;
     width: 90px;
     height: 90px;
-/*    margin: 5px;
-    border: 3px solid #c99;*/
     border-radius:50%;
     background-position: center center;
     background-size: cover;
@@ -455,8 +327,6 @@ td button li label{
   float:left;margin-left:5%;
     width: 410px;
     height: 410px;
-/*    margin: 5px;
-    border: 3px solid #c99;*/
     border-radius:50%;
     background-position: center center;
     background-size: cover;
@@ -467,33 +337,24 @@ margin-left:1px;margin-right:1px;margin-top:3px;margin-bottom:3px;
     width: 75px;
     height: 50px;
         display: inline-block;
-/*    margin: 5px;
-    border: 3px solid #c99;*/
-/*    border-radius:50%;*/
+
     background-position: center center;
     background-size: cover;
         cursor: pointer;;
 }
 .thumb_center_please_show {
-
     float:right;margin-top:10px;margin-right:70px;
     width: 240px;
     height: 240px;
-/*    margin: 5px;
-    border: 3px solid #c99;*/
     border-radius:50%;
     background-position: center center;
     background-size: cover;
-
 }
 .thumb_center_please_profile_pic {
   margin-right:23px;
   margin-top:1px;
-    
     width: 79px;
     height: 79px;
-/*    margin: 5px;
-    border: 3px solid #c99;*/
     border-radius:50%;
     background-position: center center;
     background-size: cover;
@@ -501,33 +362,27 @@ margin-left:1px;margin-right:1px;margin-top:3px;margin-bottom:3px;
 }
     ul li ul.dropdown{
         min-width: 200px; /* Set width of the dropdown */
-        background: #6F002B  ;
+        background: #6F002B;
         display: none;
        
         z-index: 999;
         float: right;
     
-
      position: absolute;
           top: 62%;
           right: -200px;
           margin-top: -24.5px;
          padding-left: 0px;
          text-align: center;
-     
     }
-
-
 
    ul li ul.dropdownImg{
         min-width: 110px; /* Set width of the dropdown */
-
         display: none;
        
         z-index: 999;
         float: left;
     
-
      position: absolute;
           top: 39.5%;
           right: 7%;
@@ -535,35 +390,25 @@ margin-left:1px;margin-right:1px;margin-top:3px;margin-bottom:3px;
          padding-left: 0px;
 
          text-align: center;
-     
     }
 
     ul.dropdown li:hover{
-
       color: white;
-
     }
     ul li:hover ul.dropdown{
         display: block; 
         background-color: #484848;
-
     }
 
      ul li:hover ul.dropdownImg{
         display: block; 
         background-color: #6F002B;
-
     }
 
-     ul.dropdown li{
-    
+     ul.dropdown li,ul.dropdownImg li{
       list-style-type: none;
     }
 
-         ul.dropdownImg li{
-    
-      list-style-type: none;
-    }
     ul li ul.dropdown li a{
         display: block;
     }
@@ -581,8 +426,7 @@ margin-left:1px;margin-right:1px;margin-top:3px;margin-bottom:3px;
  
     }
     ul.dropdownImg li.bull:hover{
-      background-color: #686868 ;
-     
+      background-color: #686868;     
       color:#6F002B;
     }
 
@@ -592,25 +436,12 @@ div.aside-body ul.nav li:hover ul {display: block;}
     ul.dropdown a:hover{
       text-decoration: none;
       color: white;
-
     }
 
 div#leftMenuAside{
   overflow:visible !important;
 }
 
-
-
-/*select {
-  text-align: center !important;
-
-}
-
-option {
-  text-align: center !important;
-  
-}
-*/
 .topic-modal{
   text-align: center;
 }
@@ -632,7 +463,6 @@ a[data-title="Update"] i{
   color:#FF9900 !important;
 }
 
-
 a[data-title="Do"] i{
   color:#3399CC !important;
 }
@@ -646,28 +476,22 @@ a[data-title="Download"] i:hover{
 }
 thead.flattened tr td{
   text-align: center;
-
 }
 table.table_modal .user{
-  background-color:#808080  ;
+  background-color:#808080;
   vertical-align: middle;
-
 }
 
 table.table_modal .make_topic{
-  background-color:#989898 ;  
-  
+  background-color:#989898 ;
 }
 
 table.table_modal .data_topic{
- background-color:#B0B0B0  
-  
+ background-color:#B0B0B0 
 }
 
-
 table.table_modal .evaluate_topic{
- background-color:#C8C8C8  ; 
-  
+ background-color:#C8C8C8;
 }
 
 .btn-success{
@@ -679,12 +503,11 @@ table.table_modal .evaluate_topic{
   background-color: #5e8000 !important;
 }
 
-
 table.table_modal th{
   font-size: 23px !important;
   text-align: center;
   color: #6F002B;
-  background-color: #cccccc   ;
+  background-color: #cccccc;
 }
 
 table.table_modal td,table.table_modal td div{
@@ -697,10 +520,6 @@ table.table_modal td,table.table_modal td div{
 table.table_modal td.larger, table.table_modal td.topic{
   text-align: left;
 }
-/*tbody.pri td img{
-  margin-left: 30px;
-}*/
-
 
 .img-thumbnail{
   width: 200px;
@@ -712,7 +531,7 @@ table.table_modal td.larger, table.table_modal td.topic{
 .panel-title{
   font-size: 30px !important;
   color:#6F002B;
-  font-weight: bold;;
+  font-weight: bold;
 }
 
 button.plusgreen:hover{
@@ -725,58 +544,41 @@ button.plusgreen:hover{
   background-color:#6F002B;
   color:white;
 }
-.just_alert-backdrop{
-      opacity:0.8 !important;
 
-}
 div.aside-body ul.nav.nav-stacked li a i {
   margin-top: 5px;
 }
-/*.just_alert .modal-content{
-      width:1000px;
 
-}*/
 .just_alert .modal-header{
-
   margin-top: 10px;
   background-color:#bc2e29 !important;
-
 }
 .just_alert .modal-header h4.modal-title{
   color:white !important;
   font-size: 35px !important;
-  text-align: center;;
+  text-align: center;
 }
 
 .just_alert .modal-body {
   font-size: 21px!important;
 }
 .just_alert .modal-footer{
- 
   margin-top: 0px;
   background-color:#bc2e29 !important;
   color:white !important;
   font-size: 25px !important;
-
 }
 .just_alert .modal-footer button{
   margin-top: 2.5px!important;
 }
 
-
 .custom-footer{
   background-color:#6F002B !important;
-
 }
-/*.panel-heading{
-  background-color: #808080 !important;
-}*/
 
-.modal-backdrop
+.modal-backdrop,.modalbox-backdrop,.just_alert-backdrop
 {
     opacity:0.8 !important;
- /*      height: 100% !important;
-   z-index: -1 !important;*/
 }
 
 .just_alert-backdrop.in {
@@ -791,24 +593,14 @@ div.aside-body ul.nav.nav-stacked li a i {
     background-color:#000;
 }
 
-.modalbox-backdrop
-{
-    opacity:0.8 !important;
- /*      height: 100% !important;
-   z-index: -1 !important;*/
-}
-
-
 .modalbox .modal-header{
-
   margin-top: 10px;
   background-color:#bc2e29 !important;
-
 }
 .modalbox .modal-header h4.modal-title{
   color:white !important;
   font-size: 35px !important;
-  text-align: center;;
+  text-align: center;
 }
 
 .modalbox .modal-body {
@@ -816,18 +608,15 @@ div.aside-body ul.nav.nav-stacked li a i {
   text-align: center;
 }
 .modalbox .modal-footer{
- 
   margin-top: 0px;
   background-color:#bc2e29 !important;
   color:white !important;
   font-size: 25px !important;
-
 }
 .modalbox .modal-footer .btn.btn-primary{
     color: #333;
     background-color: #fff;
     border-color: #ccc;
-
 }
 .modalbox .modal-footer button{
   margin-top: 2.5px!important;
@@ -845,12 +634,6 @@ div.aside-body ul.nav.nav-stacked li a i {
     background-color:#000;
 }
 
-/*
-.modal-dialog{
-  z-index: 0 !important;
-}
-
-*/
 .custom-body{
   overflow:hidden !important;
 }
@@ -858,9 +641,8 @@ div.aside-body ul.nav.nav-stacked li a i {
 .headerModalH1{
 text-align:center;
 color:white;
-
   font-family:  "FreesiaUPC";
-  font-weight: normal !important;;
+  font-weight: normal !important;
   font-size: 35px;
   padding:0px !important; 
      margin-top:3px;
@@ -873,7 +655,7 @@ text-align:center;
 color:white;
 
   font-family:  "FreesiaUPC";
-  font-weight: normal !important;;
+  font-weight: normal !important;
   font-size: 34px;
   padding:0px !important; 
      margin-top:3px;
@@ -892,16 +674,11 @@ color:white;
 
 .custom-footer .topicHeader.pull-right {
   padding-top: 4px !important;
-
 }
 
 .custom-footer  button{
 padding-top: 4px!important;
 padding-bottom: 4px!important;
-}
-.panel-default{
-  /*margin-bottom:0px !important;
-  padding-top: 10px !important;*/
 }
 
 
@@ -940,25 +717,17 @@ table.research td, table.research td div{
 a{
   text-decoration: none !important;
 }
-/*.modal .modal-body {
-    max-height: 500px;
-    overflow-y: hidden;
-}*/
 
 textarea.form-control{
   font-family: "FreesiaUPC";
   font-size: 21px;
 }
 
-
-
 h1.headerPanel{
   font-family: "FreesiaUPC" !important;
   font-weight: bold;
   text-align: center;
 }
-
-
 
 h2.headerSubPanel{
   font-family: "FreesiaUPC" !important;
@@ -974,9 +743,8 @@ table.evaluation th{
 }
 
 table.evaluation td{
-  background-color: #F4F4F4  ;
+  background-color: #F4F4F4;
   color:black;
-
 }
 
 .table-hover tr:hover td {
@@ -989,22 +757,19 @@ table.evaluation td{
 }
 
 table.evaluation td.result{
-
   font-size: 23px !important;
 }
 
 table.evidence th{
   background-color: #6F002B;
     text-align: center;
-/*  font-weight: bold;*/
  font-size: 22px !important;
   color:white;
 
 }
 
-
 table.evidence td{
-   background-color: #F4F4F4  ;
+   background-color: #F4F4F4;
    color:black;
    font-size: 18px;
 
@@ -1012,35 +777,17 @@ table.evidence td{
 
 table.evaluation{
   width: 1100px;
-
 }
 
 table.evaluation td{
- 
      padding:0px !important; 
      margin:0px !important;
      vertical-align: middle !important;
 }
-/*table.evidence{
-  width: 650px;
-}
-*/
 
 table.evaluation{
    margin: auto !important;
 }
-
-/*.myTip{
-  font-family: "FreesiaUPC" !important;
-  font-size: 21px !important;
- 
-}*/
-
-.panel.pageable-edit-panel.panel-stretch .panel-footer .btn{
-  /*background-color: red !important;*/
-
-}
-
 
 
 .big-nav li a,.small-nav li a{
@@ -1065,25 +812,20 @@ table.evaluation{
 
 .alertPopFileSize{
   font-size: 18px !important;
-
     color: #fff;
     background-color: #ff6600;
     border-color: #e65c00;
 }
 
-
-
-
 li.headerWeb span.boldPlease{
-  font-family: 'Quicksand' ;
+  font-family: 'Quicksand';
 font-weight: bold;
  color:#E0E0E0;
 }
 
 li.headerWeb{
- 
   font-size:43px;
- color:#D8D8D8  ;
+ color:#D8D8D8;
   margin-top:18px;
     font-family: 'Quicksand' ;
     font-weight: normal;
@@ -1102,27 +844,18 @@ li.headerWeb{
     color:white !important;
 }
 
-
 .resultRed{
   color:red !important;
 }
 
-table.evaluation th{
+table.evaluation th,table.evaluate_aun th{
   vertical-align:middle !important;
-
 }
 
 ul.non_bullet {
 list-style-position:outside;
  list-style-type: none;
-
 }
-
-table.evaluate_aun th{
-  vertical-align:middle !important;
-
-}
-
 
 .alertPopSuccess{
     font-size: 18px !important;
@@ -1131,13 +864,9 @@ table.evaluate_aun th{
   border-color:  #6e8000;
 }
 
-
-
-
 .danger{
    background-color: #d9534f;
 }
-
 
 .little_danger{
   border:1px solid #d9534f;
@@ -1145,18 +874,16 @@ table.evaluate_aun th{
 }
 
 
-
 table.evaluate_aun td{
-
      padding-left: 5px ;
       padding-right: 5px ;
      padding-top: 1px!important;
      padding-bottom: 1px !important;
      vertical-align: middle !important;
-      background-color: #F4F4F4  ;
+      background-color: #F4F4F4;
 }
 table.special_teacher td{
-  background-color: #F8f8f8  ;
+  background-color: #F8f8f8;
 }
 table.evaluate_aun th{
   background-color:   #86002e;
@@ -1171,7 +898,6 @@ table.evaluate_aun .topic_evaluation{
   width: 500px;
 }
 
-
 .panel-footer{
   height: 0px!important;
 }
@@ -1182,31 +908,20 @@ table.evaluate_aun .topic_evaluation{
 
 .manage_president_in_hide{
   margin-left: 50px;
-
 }
-
 
 .manage_president_in_hide li{
-
-  margin-left:55px  !important  ;
+  margin-left:55px  !important;
 }
 
-
-th.number_indicator,td.number_indicator{
+th.number_indicator,td.number_indicator,th.noti,td.noti{
     text-align: center;
   width: 60px;
 }
 
-th.noti,td.noti{
-    text-align: center;
-  width: 60px;
-}
-
-th.assign_man,td.assign_man{
- 
+th.assign_man,td.assign_man,td.primary_evidence_admin{ 
   width: 200px;
 }
-
 
 td.number_indicator input[type=number]{
     width: 40px;
@@ -1217,18 +932,12 @@ td.topic_indicator{
 }
 
 
-
-td.primary_evidence_admin{
-  width: 200px;
-}
-
-
 th.number_sub_indicator,td.number_sub_indicator{
     text-align: center;
   width: 40px;
 }
 
-td.number_sub_indicator input[type=number]{
+td.number_sub_indicator input[type=number],td.code_evidence_column input[type=number]{
     width: 60px;
 } 
 
@@ -1236,9 +945,6 @@ td.code_evidence_column, th.code_evidence_column{
   width: 90px;
 }
 
-td.code_evidence_column input[type=number]{
-    width: 60px;
-} 
 .already_send {
   color:#4cae4c;
 }
@@ -1249,20 +955,12 @@ td.code_evidence_column input[type=number]{
 
 input.form-control{
       width: 98%;
-
 }
 input.form-control.fix_evidence_file{
    width: 93%;
 }
 
-
-.manage_evidence_table input[type='text']{
-    font-family:  "FreesiaUPC";
-  font-size: 19px !important;
-  vertical-align: middle !important;
-}
-
-.manage_evidence_table input[type='number']{
+.manage_evidence_table input[type='text'],.manage_evidence_table input[type='number']{
     font-family:  "FreesiaUPC";
   font-size: 19px !important;
   vertical-align: middle !important;
@@ -1271,8 +969,6 @@ input.form-control.fix_evidence_file{
 div#manage_primary_evidences_admin input.form-control{
    width: 99%;
 }
-
-
 
 a.highlight_evidence:hover{
   color:#6F002B;
@@ -1315,12 +1011,10 @@ a.highlight_evidence:hover{
   font-size: 17px;
 }
 
-.show_lightbox img:hover{
+.show_lightbox img:hover,.click_me:hover{
   cursor: pointer;
 }
-.click_me:hover{
-  cursor: pointer;
-}
+
 .gallery-box-edit{
       width: 255px;
     padding: 5px;
@@ -1329,7 +1023,6 @@ a.highlight_evidence:hover{
     min-height: 255px;
     border: 1px solid #ddd;
     overflow: hidden;
-
 }
 
 .gallery-box-show{
@@ -1341,7 +1034,6 @@ a.highlight_evidence:hover{
  max-height: 245px;
     border: 1px solid #ddd;
     overflow: hidden;
-
 }
 
 .thumbnail.edit{
@@ -1359,33 +1051,14 @@ a.highlight_evidence:hover{
     overflow: hidden;
     word-break: normal;
      max-height: 200px;
-
 }
 
-
-
-.gallery-box-show span.title-edit{
+.gallery-box-show span.title-edit,.gallery-box-show a,.gallery-box-edit span.title-edit,.gallery-box-edit a{
   font-size: 21px;
 }
-
-.gallery-box-show a{
- font-size: 21px;
-}
-
-
-
-.gallery-box-edit span.title-edit{
-  font-size: 21px;
-}
-
-.gallery-box-edit a{
- font-size: 21px;
-}
-
 
 input.form-control.title-edit,input.form-control.full{
       width: 100%;
-
 }
 
 input.form-control.album-title{
@@ -1396,7 +1069,6 @@ input.form-control.title{
     width: 100%;
     font-size: 19px;
 }
-
 
 .titile_priviledge{
   color:#6F002B;
@@ -1426,16 +1098,12 @@ font-size: 22px!important;
 
 .carousel-control:hover{
   opacity:.2; 
-  cursor: pointer;;
+  cursor: pointer;
 }
 .carousel.ng-isolate-scope{
   width: 100% !important;
   height: 100% !important;
 }
-
-
-
-
 
 .container {
   position: relative;
@@ -1447,13 +1115,10 @@ font-size: 22px!important;
     top: 99px !important;
     width: 100% !important;
     margin-left: 2% !important;
-
 }
 
 .login_indicator_row{
-
     margin-left: 3.8% !important;
-
 }
 
 .overflow_dont_care {
@@ -1504,7 +1169,7 @@ a.login_text:hover{
 
 .nav.select-render-nav > li > a{
   font-size: 17px;
-  vertical-align: middle;;
+  vertical-align: middle;
 }
 
 .nav.select-render-nav{
