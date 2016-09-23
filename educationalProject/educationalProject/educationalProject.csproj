@@ -297,16 +297,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.js" />
-    <Content Include="app\app.js" />
-    <Content Include="app\controllers\indexController.js" />
-    <Content Include="app\services\indexService.js" />
     <Content Include="Content\myCss.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="indexController.js" />
-    <Content Include="testAng.html" />
-    <Content Include="testtest.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -318,7 +313,9 @@
     </Content>
     <Content Include="Content\Site.css" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="app\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
