@@ -102,7 +102,7 @@ namespace educationalProject.Controllers
                 {
                     List<string> erroremail = (List<string>)resultfromdb;
                     if(userlist.Count == erroremail.Count)
-                        return BadRequest("ทุกอีเมล์ในไฟล์ดังกล่าวมีอยู่แล้วในระบบ");
+                        return BadRequest("ทุกอีเมล์ที่ต้องการสร้างมีอยู่แล้วในระบบ");
                     foreach (UsernamePassword item in nonencryptuserlist)
                     {
                         //If current mail is not in erroremail => SEND!

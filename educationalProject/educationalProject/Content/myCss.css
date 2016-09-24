@@ -1234,3 +1234,61 @@ padding-bottom:0px !important;
     padding-bottom: 19px;
 }
 /*End fix*/
+.well-transparent{
+  background-color:transparent;
+}
+
+/*Custom table will be use in further dev.*/
+table.tbl-custom{
+  border:none;
+}
+table.tbl-custom th{
+  font-size:23px !important;
+  background-color:  #86002e;
+  color:white;
+  text-align:center;
+  font-weight: normal;
+  border-bottom:0 !important;
+}
+table.tbl-custom td{
+  padding:1px 10px 1px 10px !important;
+  font-size:21px !important;
+  vertical-align: middle !important;
+  background-color: #F8f8f8;
+}
+table.tbl-custom th.edit{
+  width: 75px;
+}
+/*glyphicon action button fix*/
+td.action-btn i{
+  line-height:inherit !important;
+  top:inherit !important;
+  vertical-align: middle !important;
+}
+
+table.tbl-custom tr > td:first-child,table.tbl-custom tr > th:first-child{
+  border-left:0 !important;
+}
+table.tbl-custom tr > td:last-child,table.tbl-custom tr > th:last-child{
+  border-right:0 !important;
+}
+table.tbl-custom tr:last-child > th,table.tbl-custom tr:last-child > td{
+    border-bottom: 0;
+}
+/*End custom table*/
+
+/*action-btn fix*/
+button.action-btn{
+  margin-bottom: 15px;
+}
+
+/*fix stack modal-center*/
+.modal .modal.modal-center .modal-dialog{
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+/*Center for text number input*/
+input.number_input{
+  text-align:center;
+}

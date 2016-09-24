@@ -28,20 +28,23 @@ namespace educationalProject.Controllers
             return Ok(datacontext);
         }
 
-        public async Task<IHttpActionResult> PostNewCurriculum(oCu_curriculum data)
+        [ActionName("insertoredit")]
+        public async Task<IHttpActionResult> PostCurriculum2(oCu_curriculum data)
         {
             if (data == null)
                 return BadRequest("กรุณากรอกข้อมูลหลักสูตรให้ถูกต้องและมีค่าที่เหมาะสม");
-            else if(!(data.period > 0 && data.period < 10))
+            else if (!(data.period > 0x30 && data.period <= 0x39))
                 return BadRequest("กรุณากรอกข้อมูลระยะเวลาการศึกษาตามหลักสูตรให้ถูกต้อง");
-            data.year = (DateTime.Now.Year+543).ToString();
-            data.period += (char)0x30;
-            object result =  await data.Insert();
-            if (result == null)
-                return Ok(await datacontext.Select());
+            if(data.year == "")
+                data.year = (DateTime.Now.Year + 543).ToString();
+            object result = await data.InsertOrUpdate();
+            if (result.GetType().ToString() != "System.String")
+                return Ok(result);
             else
                 return BadRequest(result.ToString());
         }
+
+
 
     }
 }

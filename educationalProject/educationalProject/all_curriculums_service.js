@@ -1,25 +1,28 @@
 app.factory('request_all_curriculums_service_server', function($http,$rootScope) {
 
 
-      var my_curriculums = {
-	   async: function() {
-	 
-	      var promise = $http.get('/api/curriculum').then(function (response) {
-	       	
-	
-	        $rootScope.all_curriculums = response.data;
+  var my_curriculums = {
+	   async: function () {
 
-	        return response.data;
-	      });
-	  
-	      return promise;
-	    }
-	  };
+      var promise = $http.get('/api/curriculum').then(function (response) {
+        $rootScope.all_curriculums = response.data;
+
+        return response.data;
+      });
+
+      return promise;
+    },
+    get_all_curri : function () {
+      var promise = $http.get('/api/curriculum').then(function (success) {
+        return success.data;
+      }, function (error) {
+        return [];
+      });
+      return promise;
+    }
+  }
 return my_curriculums;
-
-
 });
-
 
 app.factory('request_years_from_curri_choosen_service', function($rootScope,$http) {
 

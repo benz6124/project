@@ -962,21 +962,39 @@ if( $scope.curri_choosen!= "none" && $scope.new_curri_academic.aca_year != ""){
      }
     }
 });
-app.controller('create_curriculum_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,alertCaller) {
-    var thisctrl = this;
-    $scope.init = function(){
-        $scope.new_curri = {}
- $scope.please_wait = false;
-  $scope.new_curri.level = {};
-    }
-$scope.init();
-       $scope.$on("modal.hide", function (event, args) {
-           thisctrl.create_curri_form.$setPristine();
-     $scope.init();
+
+app.controller('manage_curriculum_controller', function($scope, $http,$alert,request_all_curriculums_service_server,$rootScope,alertCaller){
+$scope.$on('modal.show',function(event,args){
+    $rootScope.curriculum_list = [];
+    request_all_curriculums_service_server.get_all_curri().then(function(data){
+    $rootScope.curriculum_list = data;
     });
+});
+$scope.go_to_create = function(){
+    $rootScope.curri_ctrl_mode = 1;
+};
+$scope.go_to_edit = function(index_to_edit){
+    $rootScope.curri_ctrl_mode = 2;
+    $rootScope.pass_curri_to_edit = angular.copy($rootScope.curriculum_list[index_to_edit]);
+};
+});
+
+app.controller('create_edit_curriculum_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,alertCaller) {
+    var thisctrl = this;
   $scope.$on("modal.show", function (event, args) {
-      thisctrl.create_curri_form.$setPristine();
-              $scope.init();
+      $scope.please_wait = false;
+      $scope.curri_obj = {};
+      $scope.curri_obj.level = {};
+      if ($rootScope.curri_ctrl_mode === 2) {
+          $scope.mode_txt = 'แก้ไขข้อมูล';
+          $scope.curri_obj = $rootScope.pass_curri_to_edit;
+      }
+      else{
+          $scope.mode_txt = 'สร้าง';
+          $scope.curri_obj.curri_id = '0';
+          $scope.curri_obj.year= "";
+      }
+      thisctrl.create_edit_curri_form.$setPristine();
     });
 
     $scope.close_modal = function(my_modal){
@@ -984,34 +1002,37 @@ $scope.init();
     }
 
 $scope.still_not_complete = function(){
-    if(!$scope.new_curri){
+    if(!$scope.curri_obj){
         return true;
     }
- if (!$scope.new_curri.curr_tname || !$scope.new_curri.curr_ename || !$scope.new_curri.degree_t_full ||  !$scope.new_curri.degree_t_bf || !$scope.new_curri.degree_e_full||  !$scope.new_curri.degree_e_bf ||  !$scope.new_curri.level || !$scope.new_curri.period ){
+ if (!$scope.curri_obj.curr_tname || !$scope.curri_obj.curr_ename || !$scope.curri_obj.degree_t_full ||  !$scope.curri_obj.degree_t_bf || !$scope.curri_obj.degree_e_full||  !$scope.curri_obj.degree_e_bf ||  !$scope.curri_obj.level || !$scope.curri_obj.period ){
     return true;
  }
- if($scope.new_curri.level != 1 && $scope.new_curri.level != 2 && $scope.new_curri.level != 3 ){
+ if($scope.curri_obj.level != 1 && $scope.curri_obj.level != 2 && $scope.curri_obj.level != 3){
     return true;
  }
  return false;
 }
 
-    $scope.create_curri = function(my_modal){
+    $scope.save_to_server = function(my_modal){
  $scope.please_wait = true;
-        $scope.new_curri.year= "";
          $http.post(
-             '/api/curriculum',
-             JSON.stringify($scope.new_curri),
+             '/api/curriculum/insertoredit',
+             JSON.stringify($scope.curri_obj),
              {
                  headers: {
                      'Content-Type': 'application/json'
                  }
              }
          ).success(function (data) {
-                 $rootScope.all_curriculums =data;
+                 $rootScope.all_curriculums = data;
+                 $rootScope.curriculum_list = angular.copy(data);
                  $rootScope.clear_choosen();
-                 alertCaller.success(null,'สร้างหลักสูตรเรียบร้อยแล้ว');
-                   my_modal.$hide();
+                 if($rootScope.curri_ctrl_mode === 1)
+                 alertCaller.success(null,'สร้างหลักสูตรเรียบร้อย');
+                 else
+                 alertCaller.success(null,'แก้ไขข้อมูลหลักสูตรเรียบร้อย');
+                 my_modal.$hide();
          })
       .error(function(data, status, headers, config) {
   $scope.please_wait = false;
