@@ -967,7 +967,17 @@ app.controller('manage_curriculum_controller', function($scope, $http,$alert,req
 $scope.$on('modal.show',function(event,args){
     $rootScope.curriculum_list = [];
     request_all_curriculums_service_server.get_all_curri().then(function(data){
-    $rootScope.curriculum_list = data;
+        if($rootScope.is_admin() == true){
+            $rootScope.curriculum_list = data;
+        }
+        else{
+            var index;
+            for(index = 0;index < data.length;index++){
+                if(!!$rootScope.current_user.president_in[data[index].curri_id]){
+                    $rootScope.curriculum_list.push(data[index]);
+                }
+            }
+        }
     });
 });
 $scope.go_to_create = function(){
@@ -1026,7 +1036,19 @@ $scope.still_not_complete = function(){
              }
          ).success(function (data) {
                  $rootScope.all_curriculums = data;
-                 $rootScope.curriculum_list = angular.copy(data);
+                 if ($rootScope.is_admin() == true) {
+                     $rootScope.curriculum_list = angular.copy(data);
+                 }
+                 else {
+                     $scope.templist = [];
+                     var index;
+                     for (index = 0; index < data.length; index++) {
+                         if (!!$rootScope.current_user.president_in[data[index].curri_id]) {
+                             $scope.templist.push(data[index]);
+                         }
+                     }
+                     $rootScope.curriculum_list = $scope.templist;
+                 }
                  $rootScope.clear_choosen();
                  if($rootScope.curri_ctrl_mode === 1)
                  alertCaller.success(null,'สร้างหลักสูตรเรียบร้อย');

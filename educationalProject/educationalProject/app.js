@@ -190,7 +190,6 @@ $rootScope.curri_that_be_president_in = function(obj){
 }
 
 $rootScope.president_in_this_curri = function(curri_id){
-
     if(!$rootScope.current_user){
       return false;
     }
@@ -344,13 +343,20 @@ if( $scope.already_login == false){
       return false;
     }
 
-    $scope.watch_only_president = function(){
-      if($rootScope.current_user.user_type == 'ประธานหลักสูตร'){
+  $rootScope.is_admin = function(){
+    if($rootScope.current_user.user_type == 'ผู้ดูแลระบบ'){
       return true;
     }
     else{
       return false;
     }
+  }
+
+  $rootScope.is_president = function(){
+    if(angular.isUndefined($rootScope.current_user.president_in)==true){
+        return false;
+    }
+    return true;
   }
 });
 

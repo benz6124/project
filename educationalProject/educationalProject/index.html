@@ -67,14 +67,12 @@
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;สร้างบัญชีรายชื่อ</span></span>
                             </a>
                         </li>
-
-                        <li  ng-show="have_privilege_to_open_modal('16')|| watch_only_admin() || fix_mode">
-                            <a href="" data-nq-toggle-modal="#create_curri" data-effect="from-left" data-placement="bottom">
-                                <i class="glyphicon glyphicon-book"></i>
-                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;สร้างหลักสูตร</span></span>
+              <li ng-show='is_admin() || is_president()'>
+                <a href="" data-nq-toggle-modal="#manage_curriculum">
+                    <i class="glyphicon glyphicon-book"></i>
+                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการข้อมูลหลักสูตร</span></span>
                             </a>
                         </li>
-
                         <li  ng-show='have_privilege_to_open_modal("2") || watch_only_admin() || fix_mode'>
                             <a href="" data-nq-toggle-modal="#add_aca_year" data-effect="from-left" data-placement="bottom">
                                 <i class="glyphicon glyphicon-calendar"></i>
@@ -251,12 +249,6 @@
                 <a href="" data-nq-toggle-modal="#about_app" data-effect="fall">
                     <i class="glyphicon glyphicon-modal-window"></i>
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;Application version</span></span>
-                            </a>
-                        </li>
-              <li>
-                <a href="" data-nq-toggle-modal="#manage_curriculum">
-                    <i class="glyphicon glyphicon-book"></i>
-                                <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการข้อมูลหลักสูตร</span></span>
                             </a>
                         </li>
                     </ul>
@@ -4139,7 +4131,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>Build:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>474</p>
+                    <p>481</p>
                 </div>
             </div>
             <div class='row'>
@@ -4147,7 +4139,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>ปรับปรุงล่าสุด:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>23 กันยายน 2559</p>
+                    <p>25 กันยายน 2559</p>
                 </div>
             </div>
             </div>
@@ -4166,7 +4158,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
         <div class='container-fluid'>
             <div class='clearfix'>
                 <div class='well well-transparent'>
-                    <button class='btn btn-xs btn-success action-btn hvr-buzz' nq-toggle-modal='#create_edit_curri' ng-click='go_to_create()'><i class='fic glyphicon glyphicon-plus-sign'></i> สร้างหลักสูตร</button>
+                    <button ng-show='is_admin()' class='btn btn-xs btn-success action-btn hvr-buzz' nq-toggle-modal='#create_edit_curri' ng-click='go_to_create()'><i class='fic glyphicon glyphicon-plus-sign'></i> สร้างหลักสูตร</button>
                     <table class='table table-bordered table-hover tbl-custom'>
                         <thead>
                             <th>ชื่อหลักสูตร</th>
