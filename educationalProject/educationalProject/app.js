@@ -358,8 +358,37 @@ if( $scope.already_login == false){
     }
     return true;
   }
-});
 
+  $rootScope.have_privilege = function(title_code,privilege_level,curri_id,aca_year){
+    if (angular.isUndefined($rootScope.current_user.privilege)) {
+      return false;
+    }
+    if(angular.isUndefined(curri_id) || angular.isUndefined(aca_year)){ /*prevent case curriculum or aca_year is not selected.*/
+      return false;
+    }
+    if($rootScope.current_user.privilege[curri_id][title_code] >= privilege_level){
+      return true;
+    }
+    
+    if(!aca_year){ //Check don't care aca_year
+      if($rootScope.president_in_this_curri(curri_id)){
+        return true;
+      }
+      if($rootScope.right_from_committee_just_curri(curri_id,title_code,privilege_level)){
+        return true;
+      }
+    }
+    else{
+      if($rootScope.president_in_this_curri_and_year(curri_id,aca_year)){
+        return true;
+      }
+      if($rootScope.right_from_committee(curri_id,aca_year,title_code,privilege_level)){
+        return true;
+      }
+    }
+    return false;
+  }
+});
 // app.factory('AuthResolver', function ($q, $rootScope, $state) {
 //   return {
 //     resolve: function () {
