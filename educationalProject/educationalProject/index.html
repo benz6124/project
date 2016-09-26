@@ -714,7 +714,7 @@
                             </div>
                             <div class="col-xs-10" style="padding-right: 16px;">
                                 <div class="topicHeader">
-                                    <input type="number" ng-pattern="/^[0-9]*$/"  ng-class="{ little_danger: add_aca_year_ctrl.add_year_form.choose_aca_year.$invalid && add_aca_year_ctrl.add_year_form.$dirty && add_aca_year_ctrl.add_year_form.choose_aca_year.$dirty }" name ="choose_aca_year" class="form-control" ng-model="new_curri_academic.aca_year" placeholder="กรุณากรอกปีการศึกษา"  min="0" required><span class="normal">  </span>
+                                    <input type="number" ng-pattern="/^[0-9]*$/"  ng-class="{ little_danger: add_aca_year_ctrl.add_year_form.choose_aca_year.$invalid && add_aca_year_ctrl.add_year_form.$dirty && add_aca_year_ctrl.add_year_form.choose_aca_year.$dirty }" name ="choose_aca_year" class="form-control" ng-model="new_curri_academic.aca_year" placeholder="กรุณากรอกปีการศึกษา"  min="0" required>
                                 </div>
                             </div>
                         </div>
@@ -1831,7 +1831,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่ออัลบั้มรูปภาพ</span></h3>
                             </div>
                             <div class="col-md-9" style="padding-right: 8px;">
-                                <input type="text" class="form-control" placeholder="" ng-model="my_new_album.name" required><span class="normal">  </span>
+                                <input type="text" class="form-control" placeholder="" ng-model="my_new_album.name" required>
                             </div>
                         </div>
 <div flow-init flow-name="$parent.my_pictures.flow" flow-file-added="imgFileCheck($file)">
@@ -2792,7 +2792,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
   <h3 style="margin-top:5px;margin-left:20px"><span class="topicHeader">ปีการศึกษาที่ตัวบ่งชี้ที่สร้างจะเริ่มมีผล:   </span></h3>
 </div>
 <div class="col-md-2" style="margin-left:0px">
-  <input style="margin-left:0px" type="number" ng-pattern="/^[0-9]*$/" class="form-control" ng-model="year_to_create" placeholder="กรุณากรอกปีการศึกษา"  min="max_year_curri_have" data-nq-tooltip="" data-qs-title="ค่าขั้นต่ำคือ {{max_year_curri_have}}" required><span class="normal">  </span>
+  <input style="margin-left:0px" type="number" ng-pattern="/^[0-9]*$/" class="form-control" ng-model="year_to_create" placeholder="กรุณากรอกปีการศึกษา"  min="max_year_curri_have" data-nq-tooltip="" data-qs-title="ค่าขั้นต่ำคือ {{max_year_curri_have}}" required>
 </div>
 </div>
     <div class="container-fluid" ng-hide="choose_not_complete">
@@ -2973,7 +2973,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                         <span class="topicHeader">{{manage_evidence_indicator_num}} -  </span>
                         </div>
  <div class="col-md-2" style="padding-left:0px">
-                            <input type="number" ng-pattern="/^[0-9]*$/"  ng-pattern="/^[0-9]*$/"  style="padding-top:3px" class="form-control" min="1" placeholder="รหัส" data-ng-model="my_new_evidence.evidence_real_code"><span class="normal">  </span>
+                            <input type="number" ng-pattern="/^[0-9]*$/"  ng-pattern="/^[0-9]*$/"  style="padding-top:3px" class="form-control" min="1" placeholder="รหัส" data-ng-model="my_new_evidence.evidence_real_code">
 </div>
                     </div>
                        <div class="row">
@@ -3038,7 +3038,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                         <span class="topicHeader">{{manage_evidence_indicator_num}} -  </span>                        
                         </div>
  <div class="col-md-2" style="padding-left:0px">
-                            <input type="number" ng-pattern="/^[0-9]*$/"  style="padding-top:3px" class="form-control" min="1" placeholder="รหัส" data-ng-model="my_new_evidence.evidence_real_code"><span class="normal">  </span>
+                            <input type="number" ng-pattern="/^[0-9]*$/"  style="padding-top:3px" class="form-control" min="1" placeholder="รหัส" data-ng-model="my_new_evidence.evidence_real_code">
 </div>
                     </div>
                     <div class="row">
@@ -3046,7 +3046,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                             <h3 style="margin-left:20px;margin-top:5px;"><span class="topicHeader">ชื่อหลักฐาน:   </span></h3>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" data-ng-model="my_new_evidence.evidence_name" class="form-control" placeholder="ชื่อหลักฐาน"><span class="normal">  </span>
+                            <input type="text" data-ng-model="my_new_evidence.evidence_name" class="form-control" placeholder="ชื่อหลักฐาน">
                         </div>
                     </div>
                     <div class="row">
@@ -3103,7 +3103,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                         <span class="topicHeader">{{manage_evidence_indicator_num}} -  </span>
                         </div>
  <div class="col-md-2" style="padding-left:0px">
-                            <input type="number" ng-pattern="/^[0-9]*$/"  style="padding-top:3px;margin-top:14px;" class="form-control" min="1" placeholder="รหัส" data-ng-model="code_we_want"><span class="normal">  </span>
+                            <input type="number" ng-pattern="/^[0-9]*$/"  style="padding-top:3px;margin-top:14px;" class="form-control" min="1" placeholder="รหัส" data-ng-model="code_we_want">
 </div>
                     </div>          
                     <div class="custom-footer">
@@ -3157,7 +3157,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                  <h3 ng-show="blank" style="margin-top:2px;text-align:center;color:#ac2925"><span class="topicHeader">--ไม่พบข้อมูล--   </span></h3>
                         </div>
                         <div class="col-md-2" ng-show="$root.have_privilege(12,3,curri_choosen.curri_id,year_choosen.aca_year)">
-                            <input type="number" ng-pattern="/^[0-9]*$/"  id="quota_study2"  class="form-control" ng-class="{ danger: new_student_stat_form.num_goodstudy_f.$invalid && new_student_stat_form.num_goodstudy_f.$dirty }"name ="num_goodstudy_f" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" ng-model="result.num_goodstudy_f" ng-disabled="choose_not_complete" min="0" required /> <span class="normal"> </span>
+                            <input type="number" ng-pattern="/^[0-9]*$/"  id="quota_study2"  class="form-control" ng-class="{ danger: new_student_stat_form.num_goodstudy_f.$invalid && new_student_stat_form.num_goodstudy_f.$dirty }"name ="num_goodstudy_f" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" ng-model="result.num_goodstudy_f" ng-disabled="choose_not_complete" min="0" required />
                         </div>
                                 <div class="col-md-2" ng-show="!$root.have_privilege(12,3,curri_choosen.curri_id,year_choosen.aca_year) && choose_not_complete == false">
 
@@ -3185,7 +3185,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                  <h3 ng-show="blank" style="margin-top:2px;text-align:center;color:#ac2925"><span class="topicHeader">--ไม่พบข้อมูล--   </span></h3>
                         </div>
                         <div class="col-md-2" ng-show="$root.have_privilege(12,3,curri_choosen.curri_id,year_choosen.aca_year)">
-                            <input type="number" ng-pattern="/^[0-9]*$/"   id="quota_child2"  class="form-control" ng-class="{ danger: new_student_stat_form.num_childstaff_f.$invalid && new_student_stat_form.num_childstaff_f.$dirty }"name ="num_childstaff_f" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" ng-model="result.num_childstaff_f" ng-disabled="choose_not_complete" min="0" required /> <span class="normal" ></span>
+                            <input type="number" ng-pattern="/^[0-9]*$/"   id="quota_child2"  class="form-control" ng-class="{ danger: new_student_stat_form.num_childstaff_f.$invalid && new_student_stat_form.num_childstaff_f.$dirty }"name ="num_childstaff_f" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" ng-model="result.num_childstaff_f" ng-disabled="choose_not_complete" min="0" required />
                         </div>
                         <div class="col-md-2" ng-show="!$root.have_privilege(12,3,curri_choosen.curri_id,year_choosen.aca_year) && choose_not_complete == false">
                                <h3 ng-hide="blank" style="margin-top:2px;text-align:center"><span class="topicHeader">{{result.num_childstaff_f}}   </span></h3>
@@ -3465,7 +3465,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                             <h3 style="margin-left:20px;margin-top:4px;"><span class="topicHeader">ชื่อผู้ใช้งานใหม่:   </span></h3>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" ng-pattern="/^[a-zA-Z0-9]*$/" ng-model = "new_username" placeholder="กรุณาใส่ชื่อผู้ใช้งานใหม่"><span class="normal">  </span>
+                            <input type="text" class="form-control" ng-pattern="/^[a-zA-Z0-9]*$/" ng-model = "new_username" placeholder="กรุณาใส่ชื่อผู้ใช้งานใหม่">
                         </div>
                     </div>
 
@@ -3487,7 +3487,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                             <h3 style="margin-left:20px;margin-top:3px;"><span class="topicHeader">รหัสผ่านเก่า:   </span></h3>
                         </div>
                         <div class="col-md-8">
-                            <input type="password" class="form-control" ng-model="old_password" placeholder="กรุณาใส่รหัสผ่านเก่า"><span class="normal">  </span>
+                            <input type="password" class="form-control" ng-model="old_password" placeholder="กรุณาใส่รหัสผ่านเก่า">
                         </div>
                     </div>
                     <div class="row">
@@ -3495,7 +3495,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                             <h3 style="margin-left:20px;margin-top:3px;"><span class="topicHeader">รหัสผ่านใหม่:   </span></h3>
                         </div>
                         <div class="col-md-8">
-                            <input type="password" class="form-control" ng-model="new_password" placeholder="กรุณาใส่รหัสผ่านใหม่"><span class="normal">  </span>
+                            <input type="password" class="form-control" ng-model="new_password" placeholder="กรุณาใส่รหัสผ่านใหม่">
                         </div>
                     </div>
                     <div class="row">
@@ -3503,7 +3503,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                             <h3 style="margin-left:20px;margin-top:3px;"><span class="topicHeader">ยืนยันรหัสผ่านใหม่:   </span></h3>
                         </div>
                         <div class="col-md-8">
-                            <input type="password" class="form-control" ng-model="new_password2" placeholder="กรุณาใส่รหัสผ่านใหม่ที่มีความยาวมากกว่า 8 อักขระ"><span class="normal">  </span>
+                            <input type="password" class="form-control" ng-model="new_password2" placeholder="กรุณาใส่รหัสผ่านใหม่ที่มีความยาวมากกว่า 8 อักขระ">
                         </div>
                     </div>
               <h3 style="margin-left:20px;margin-top:4px;color:#bc2e29;margin-bottom:0px" ng-show='show_error'><span class="topicHeader">{{error_msg}}</span></h3>
@@ -3634,7 +3634,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">name-surname:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" data-ng-change = "something_change()" class="full form-control" placeholder="" data-ng-model="current_user.information.e_name" ><span class="normal">  </span>
+                                <input type="text" data-ng-change = "something_change()" class="full form-control" placeholder="" data-ng-model="current_user.information.e_name">
                             </div>
                         </div>
                         <div class="row">
@@ -3661,7 +3661,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">ชื่อ-นามสกุล:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" data-ng-change = "something_change()" class="full form-control" placeholder="" data-ng-model="current_user.information.t_name" ><span class="normal">  </span>
+                                <input type="text" data-ng-change = "something_change()" class="full form-control" placeholder="" data-ng-model="current_user.information.t_name">
                             </div>
                         </div>
                         <div class="row">
@@ -3669,7 +3669,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">ที่อยู่:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" data-ng-change = "something_change()" class="full form-control" placeholder="" data-ng-model="current_user.information.addr"><span class="normal">  </span>
+                                <input type="text" data-ng-change = "something_change()" class="full form-control" placeholder="" data-ng-model="current_user.information.addr">
                             </div>
                         </div>
                         <div class="row">
@@ -3677,7 +3677,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">เบอร์โทร:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" data-ng-change = "something_change()" class="full form-control" placeholder=""  data-ng-model="current_user.information.tel"><span class="normal">  </span>
+                                <input type="text" data-ng-change = "something_change()" class="full form-control" placeholder=""  data-ng-model="current_user.information.tel">
                             </div>
                         </div>
                         <div class="row" ng-show="$root.current_user.user_type=='อาจารย์'">
@@ -3697,7 +3697,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">อีเมล์:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="full form-control" placeholder="" data-ng-model="current_user.information.email" data-ng-change = "something_change()"><span class="normal">  </span>
+                                <input type="text" class="full form-control" placeholder="" data-ng-model="current_user.information.email" data-ng-change = "something_change()">
                             </div>
                         </div>
 
@@ -3759,7 +3759,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่อแบบสอบถาม</span></h3>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" placeholder="" ng-model="my_survey_name" required><span class="normal">  </span>
+                                <input type="text" class="form-control" placeholder="" ng-model="my_survey_name" required>
                             </div>
                         </div>
   <div class="row">
@@ -4064,7 +4064,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>Build:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>483</p>
+                    <p>484</p>
                 </div>
             </div>
             <div class='row'>
