@@ -4740,7 +4740,6 @@ $scope.fix_not_complete = function(){
         return true;
     }
     if(!$rootScope.current_user.information.e_name || !$rootScope.current_user.information.t_name || !$rootScope.current_user.information.addr || !$rootScope.current_user.information.tel || !$rootScope.current_user.information.email){
-              
         return true;
     }
         if($rootScope.current_user.information.e_prename.length == 14 && $rootScope.current_user.information.e_prename  != 'Assoc.Prof.Dr.'){
@@ -4748,7 +4747,7 @@ $scope.fix_not_complete = function(){
         }
               if($rootScope.current_user.information.t_prename.length == 14){
                return true;
-        } 
+        }
 
         if($rootScope.current_user.user_type == 'อาจารย์'){
                   if($rootScope.current_user.information.status.length== 14){
@@ -4780,10 +4779,7 @@ $scope.fix_not_complete = function(){
 
 $scope.nothing_really_change = function(){
     var equal = true;
-    var dont_go = false;
     var index;
-    var index2;
-
     if (!$scope.save_interest || !$rootScope.current_user.information.interest){
         return true;
     }
@@ -4805,16 +4801,12 @@ $scope.nothing_really_change = function(){
         return false;
     }
 }
-$scope.same_interest = function(){
-    return $rootScope.current_user.information.interest == $scope.save_interest;
-}
  $scope.something_change = function(){
     $scope.nothing_change = false;
  }
  $scope.$on("fileSelected", function (event, args) {
         $scope.$apply(function () {            
            var extension = args.file.name.split('.');
-
  if(args.file.size > 2000000){
                    angular.forEach(
     angular.element("input[type='file']"),
@@ -4824,9 +4816,8 @@ $scope.same_interest = function(){
                 $alert({title:'เกิดข้อผิดพลาด', content:'ไฟล์ที่เลือกมีขนาดมากกว่า 2 MB',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
             }
-            else        if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
+            else if(extension[extension.length-1] == 'exe' || extension[extension.length-1] == 'EXE' || extension[extension.length-1] == 'vb' || extension[extension.length-1] == 'VB'
         || extension[extension.length-1] == 'bat' || extension[extension.length-1] == 'BAT'  || extension[extension.length-1] == 'ini' || extension[extension.length-1] == 'INIT' ){
-        
                      angular.forEach(
     angular.element("input[type='file']"),
     function(inputElem) {
@@ -4835,7 +4826,7 @@ $scope.same_interest = function(){
          $alert({title:'เกิดข้อผิดพลาด', content:'ไม่อนุญาตให้อัพโหลดไฟล์นามสกุลดังกล่าว',alertType:'warning',
                          placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
        }
-              else        if(extension[extension.length-1] != 'jpeg' && extension[extension.length-1]!='jpg' && extension[extension.length-1] != 'png' && extension[extension.length-1] != 'bmp'
+              else if(extension[extension.length-1] != 'jpeg' && extension[extension.length-1]!='jpg' && extension[extension.length-1] != 'png' && extension[extension.length-1] != 'bmp'
         && extension[extension.length-1] != 'JPEG' && extension[extension.length-1] !='JPG'  && extension[extension.length-1] != 'PNG' && extension[extension.length-1] != 'BMP' ){ 
                      angular.forEach(
     angular.element("input[type='file']"),
@@ -4868,12 +4859,10 @@ $scope.remove_education = function(index_to_remove){
         my_modal.$hide();
     }
     $scope.back_close_modal = function(my_modal){
-        $rootScope.current_user = $rootScope.save_obj;
         my_modal.$hide();
     }
     $scope.save_to_server = function(my_modal) {
    $scope.please_wait = true;
-     
       var formData = new FormData();
       if($scope.files.length != 0){
             $rootScope.current_user.information.file_name_pic = $scope.files[0].name;
