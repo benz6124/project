@@ -156,9 +156,6 @@ td.download,td.code{
    font-family: 'Helvetica',"FreesiaUPC" !important;
 }
 
-.modal-body{
-  max-height: 400px;
-}
 th.point,td.point{
     text-align: center;
   width: 68px;
@@ -1292,3 +1289,123 @@ button.action-btn{
 input.number_input{
   text-align:center;
 }
+
+/*profile-picure thumb*/
+div.profile-pic-thumb{
+  width:80px;
+  height:80px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center center;
+}
+
+/*Big profile pic thumb 1:1 aspect ratio*/
+div.one-by-one-ratio{
+  width:100%;
+  padding-top:100%;
+  position: relative;
+}
+div.one-by-one-ratio > *:first-child{ /*Element inside one-by-one-ratio must absolute positioned.*/
+  position:  absolute;
+  top: 0;left: 0;bottom: 0;right: 0;
+}
+div.profile-pic-big-thumb{ 
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center center;
+}
+
+@media (max-width:991px){ /*resize big profile pic thumb by half when in smaller screen*/
+div[class*="col-xs-"] div.one-by-one-ratio{
+  padding-top: 175px;
+}
+div[class*="col-xs-"] div.one-by-one-ratio > div.profile-pic-big-thumb{
+  width:175px;
+  margin-left: auto;
+  margin-right: auto;
+}
+}
+/*End big profile pic thumb 1:1 aspect ratio*/
+
+/*well-based class fix font size*/
+.well-custom{
+  font-size:21px !important;
+}
+
+/*Make modal height responsive to viewport*/
+.modal-dynamic .modal-body{
+  max-height: calc(100vh - 240px) !important;
+}
+
+.no-pad-right{
+  padding-right: 0px;
+}
+
+/*padding bottom for div row*/
+div.row.row-pad-bottom{
+  padding-bottom: 5px;
+}
+/*margin bottom for div row*/
+div.row.row-mar-bottom{
+  margin-bottom: 5px;
+}
+
+/*==profile header==*/
+/*margin bottom for edit profile header*/
+.edit-profile-header {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+}
+
+/*apply style only screen width >= 992*/
+@media (min-width:992px){
+  .edit-profile-header {
+    position:relative;
+}
+  .edit-profile-header-sub-content{
+   position: absolute;bottom: 30px;right:0;
+   }
+}
+/*apply style only screen width < 992*/
+@media (max-width:991px){
+  .edit-profile-header-sub-content{
+    text-align: center;
+}
+}
+
+.edit-profile-header-title{
+  font-size: 40px;
+  font-weight: 500;
+}
+.edit-profile-header-sub-title{
+  font-size: 32px;
+  font-weight: 500;
+}
+/*==end profile header==*/
+
+/*Fix form-control width design to default bootstrap setting*/
+.form-control.form-full{
+  width:100%;
+}
+
+/*Vertical spacing(instead of vertical padding) in smaller display*/
+@media (max-width:991px){
+div.row.row-pad-bottom > div[class*="col-xs"]{
+    margin-bottom: 5px;
+}
+div.row.row-pad-bottom.clear-xs-pad-bottom{
+  padding-bottom: 0px;
+}
+div.xs-col-margin-bottom{
+  margin-bottom: 5px;
+}
+}
+/*End vertical spacing*/
+
+/*hide element in less screen width*/
+@media (max-width:991px){
+.xs-hide{
+  display: none;
+}
+}
+

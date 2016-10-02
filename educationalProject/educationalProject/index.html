@@ -157,7 +157,12 @@
                                 <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการหลักฐานพื้นฐาน</span></span>
                             </a>
                         </li>
-
+            <li ng-show='is_admin()'>
+                <a href="" data-nq-toggle-modal="#manage_users_data_main">
+                    <i class="fa fa-archive"></i>
+                    <span ng-hide="$aside.$collapsed" class="menu-text"><span class="topic"> &nbsp;&nbsp;จัดการข้อมูลผู้ใช้งาน</span></span>
+                </a>
+            </li>
                          <li ng-show='have_privilege_to_open_modal("18")  || fix_mode'>
                             <a href="" data-nq-toggle-modal="#manage_bind_person" data-effect="from-left" data-placement="right">
                                 <i class="glyphicon glyphicon-link"></i>
@@ -4037,7 +4042,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>Build:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>487</p>
+                    <p>488</p>
                 </div>
             </div>
             <div class='row'>
@@ -4045,7 +4050,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>ปรับปรุงล่าสุด:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>28 กันยายน 2559</p>
+                    <p>2 ตุลาคม 2559</p>
                 </div>
             </div>
             </div>
@@ -4090,6 +4095,92 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
         </div>
 </div>
 
+<div id='manage_users_data_main' nq-modal='' data-qo-fire-emit="true" data-qo-independent="true" data-qo-screen-mode="true" qo-effect='from-left' qo-placement='right' data-ng-controller="manage_users_data_main_controller">
+    <div class="custom-header">
+        <h1 class="headerModalH1">จัดการข้อมูลผู้ใช้งาน</h1>
+    </div>
+        <div class='container-fluid'>
+            <div class='clearfix'>
+                <div class='well well-transparent'>
+                    <table class='table table-bordered table-hover tbl-custom'>
+                        <thead>
+                            <th>รูป</th>
+                            <th>ชื่อผู้ใช้งาน</th>
+                            <th>ชื่อ-นามสกุล</th>
+                            <th>กลุ่มผู้ใช้งาน</th>
+                            <th class='edit'>แก้ไข</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat='obj in main_obj.user_list'>
+                            <td align='center'><div class='profile-pic-thumb' ng-style="{'background-image':'url('+obj.file_name_pic+')'}"></div></td>
+                            <td class='text-center'>{{obj.username}}</td>
+                            <td class='text-center'>{{obj.t_name}}</td>
+                            <td class='text-center'>{{obj.user_type}}</td>
+                            <td class='text-center action-btn'><a href='' class='hvr-pulse' nq-toggle-modal='#edit_user_data_direct' ng-click='go_to_edit($index)'><span><i style="color:#eea236;" class="glyphicon glyphicon-wrench"></i></span>
+                            </a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="custom-footer">
+            <div class="topicHeader pull-right">
+                <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
+            </div>
+        </div>
+</div>
+
+<div id='edit_user_data_direct' nq-modal='' data-qo-fire-emit="true" qo-theme='center modal-dynamic' data-qo-independent="true" qo-size='lg' data-ng-controller="edit_user_data_direct_controller">
+    <div class="custom-header">
+        <h1 class="headerModalH1">แก้ไขข้อมูลผู้ใช้งาน</h1>
+    </div>
+        <div class='container-fluid'>
+            <div class='clearfix'>
+                <div class='well well-transparent well-custom'>
+                    <div class='row edit-profile-header' style='border-bottom:1px solid #e0d8d5;'>
+                        <div class='col-md-3 col-xs-12'>
+                            <div class='one-by-one-ratio'>
+                                <div class='profile-pic-big-thumb' ng-style="{'background-image':'url('+edit_profile_obj.main_info.file_name_pic+')'}"></div>
+                            </div>
+                        </div>
+                        <div class='col-md-9 col-xs-12 edit-profile-header-sub-content'>
+                            <span class='edit-profile-header-title'>{{edit_profile_obj.username}}</span><br>
+                            <span class='edit-profile-header-sub-title'>{{edit_profile_obj.fullname}}</span><br>
+                            <span class='edit-profile-header-sub-title'>{{edit_profile_obj.user_type}}</span>
+                        </div>
+                    </div>
+                    <div class='row row-pad-bottom clear-xs-pad-bottom'>
+                        <div class='col-md-2 col-xs-2 no-pad-right text-right'>Prename:</div>
+                        <div class='col-md-4 col-xs-10'>
+                            <select nq-select ng-model='edit_profile_obj.main_info.e_prename' qo-placeholder='Please select prename' qo-disable-clear="true" qo-filterable='false' qo-effect="flip-x" ng-options='opt for opt in e_prename_choices'>
+                                </select></div>
+                        <div class='col-md-1 col-xs-2 no-pad-right text-right'>Name:</div><div class='col-md-5 col-xs-10'><input type='text' class='form-control form-full' ng-model='edit_profile_obj.main_info.e_name'></div>
+                    </div>
+                    <div class='row row-pad-bottom clear-xs-pad-bottom'>
+                        <div class='col-md-2 col-xs-2 no-pad-right text-right'>คำนำหน้า<span class='xs-hide'>ชื่อ</span>:</div>
+                        <div class='col-md-4 col-xs-10'>
+                            <select nq-select ng-model='edit_profile_obj.main_info.t_prename' qo-placeholder='กรุณาเลือกคำนำหน้า' qo-disable-clear="true" qo-filterable='false' qo-effect="flip-x" ng-options='opt for opt in t_prename_choices'>
+                                </select></div>
+                        <div class='col-md-1 col-xs-2 no-pad-right text-right'>ชื่อ:</div><div class='col-md-5 col-xs-10'><input type='text' class='form-control form-full' ng-model='edit_profile_obj.main_info.t_name'></div>
+                    </div>
+                    <div class='row row-pad-bottom clear-xs-pad-bottom'>
+                        <div class='col-xs-2 no-pad-right text-right'>ที่อยู่:</div><div class='col-xs-10'><input type='text' class='form-control form-full' ng-model='edit_profile_obj.main_info.addr'></div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-md-2 col-xs-2 no-pad-right text-right xs-col-margin-bottom'>เบอร์โทร:</div><div class='col-md-4 col-xs-10 xs-col-margin-bottom'><input type='text' class='form-control form-full' ng-model='edit_profile_obj.main_info.tel'></div>
+                        <div class='col-md-1 col-xs-2 no-pad-right text-right'>อีเมล์:</div><div class='col-md-5 col-xs-10'><input type='email' class='form-control form-full' ng-model='edit_profile_obj.main_info.email'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="custom-footer">
+            <div class="topicHeader pull-right">
+                <button class="btn btn-success" ng-disabled="not_complete() || please_wait" ng-click="save_to_server(this)">ยืนยัน</button>
+                <button class="btn btn-default" ng-click="close_modal(this)">ยกเลิก</button>
+            </div>
+        </div>
+</div>
 
      <script type="text/javascript">
 

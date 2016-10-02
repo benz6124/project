@@ -5817,3 +5817,109 @@ $rootScope.manage_minutes_still_same = function(){
   });
     }
 });
+
+app.service('manage_users_data',function($http,$q,alertCaller){
+    var serviceObj = new Object();
+    serviceObj.user_list_data = {};
+    serviceObj.set_user_list_data = function(value){
+        serviceObj.user_list_data = value;
+    };
+    serviceObj.update_user_list_data = function(value){
+        if(angular.isUndefined(value)){
+            $http.get('/api/users/getuserlist').then(function (response) {
+                serviceObj.user_list_data.user_list = response.data;
+            }, function (error) {
+                alertCaller.error(null, 'ไม่สามารถโหลดรายชื่อผู้ใช้งานได้ กรุณาลองใหม่อีกครั้ง');
+            });
+        }
+        else{
+            serviceObj.user_list_data.user_list = value;
+        }
+    };
+
+    serviceObj.set_user_id_for_edit = function(value){
+        serviceObj.user_id_for_edit = value;
+    };
+    serviceObj.get_user_for_edit = function(){
+        var promise_obj = $http.post(
+            '/api/users/getuserdataforedit',
+            JSON.stringify(serviceObj.user_id_for_edit),
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        ).then(function(response){
+            return response.data;
+        },function(error){
+            return $q.reject(error.data);
+        });
+        return promise_obj;
+    }
+    return serviceObj;
+});
+
+
+app.controller('manage_users_data_main_controller', function($scope, $http,$alert,request_all_curriculums_service_server,$rootScope,alertCaller,manage_users_data){
+$scope.$on('modal.show',function(event,args){
+    $scope.main_obj = {};
+    $scope.main_obj.user_list = [];
+    manage_users_data.set_user_list_data($scope.main_obj);
+    manage_users_data.update_user_list_data();
+});
+
+$scope.go_to_edit = function(index_to_edit){
+    manage_users_data.set_user_id_for_edit($scope.main_obj.user_list[index_to_edit].user_id);
+};
+});
+
+app.controller('edit_user_data_direct_controller', function($scope, $http,$alert,$rootScope,alertCaller,manage_users_data){
+    $scope.edit_profile_obj = {};
+    $scope.e_prename_choices = ['Mr.','Mrs.','Miss.','Dr.','Asst.Prof.Dr.','Asst.Prof.','Assoc.Prof.Dr.','Assoc.Prof.','Prof.','Prof.Dr.'];
+    $scope.t_prename_choices = ['นาย','นางสาว','นาง','ดร.','ผศ.ดร.','รศ.ดร.','ศ.ดร.','ผศ.','รศ.','ศ.'];
+
+$scope.$on('modal.show',function(event,args){
+    $scope.edit_profile_obj = {};
+    manage_users_data.get_user_for_edit().then(function(data){
+        $scope.edit_profile_obj = data;
+    },function(error){
+        alertCaller.error(null, error.exceptionMessage);
+        args.hide();
+    });
+    $scope.please_wait = false;
+});
+$scope.close_modal = function(my_modal){
+    my_modal.$hide();
+}
+$scope.not_complete = function(){
+    if(angular.isUndefined($scope.edit_profile_obj.main_info))
+    return true;
+    if(!$scope.edit_profile_obj.main_info.email)
+    return true;
+    else
+    return false;
+};
+$scope.save_to_server = function(my_modal){
+    $scope.please_wait = true;
+    var formData = new FormData();
+    formData.append("model", angular.toJson($scope.edit_profile_obj));
+    //formData.append("file" , $scope.files[0]);
+    $http({
+            method: 'PUT',
+            url: "/api/users/edituserdatadirect",
+            headers: { 'Content-Type': undefined },
+            data:formData,
+            transformRequest: angular.indentity 
+        }).then(function(response){
+            manage_users_data.update_user_list_data(response.data);
+            alertCaller.success();
+            my_modal.$hide();
+        },function(error){
+            if(error.status == 400)
+            alertCaller.error(null,error.data.message);
+            else
+            alertCaller.error();
+            $scope.please_wait = false;
+        });
+};
+});

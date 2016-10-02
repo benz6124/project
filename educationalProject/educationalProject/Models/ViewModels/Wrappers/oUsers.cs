@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Dynamic;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using educationalProject.Models.Wrappers;
@@ -198,6 +199,204 @@ namespace educationalProject.Models.ViewModels.Wrappers
             
             return string.Format(" BEGIN {0} {1} {2} {3} {4} {5} {6} {7} END ", mainusrdataselect, selecteducation, selectcurri, selectpresin,
                    selectcommitteein, selecttopic, selectnotsendprimary, selectprivilege);
+        }
+
+        public async Task<object> SelectAllUsersByBrief()
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return WebApiApplication.CONNECTDBERRSTRING;
+            List<User_brief_detail> result = new List<User_brief_detail>();
+            d.iCommand.CommandText = string.Format("select {1},{2},{3},{4},{5},{6} from {0}", User_list.FieldName.TABLE_NAME,
+                User_list.FieldName.USER_ID, Personnel.FieldName.USERNAME, Personnel.FieldName.T_NAME,
+                Personnel.FieldName.T_PRENAME,Personnel.FieldName.FILE_NAME_PIC, User_list.FieldName.USER_TYPE);
+            try
+            {
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
+                if (res.HasRows)
+                {
+                    DataTable data = new DataTable();
+                    data.Load(res);
+                    foreach (DataRow item in data.Rows)
+                    {
+                        string tprename = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString();
+                        string usrtype = item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString();
+                        if (usrtype == "อาจารย์")
+                            tprename = NameManager.GatherPreName(tprename);
+                        result.Add(new User_brief_detail
+                        {
+                            user_id = Convert.ToInt32(item.ItemArray[data.Columns[User_list.FieldName.USER_ID].Ordinal]),
+                            username = item.ItemArray[data.Columns[Personnel.FieldName.USERNAME].Ordinal].ToString(),
+                            file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[Personnel.FieldName.FILE_NAME_PIC].Ordinal].ToString()),
+                            user_type = usrtype,
+                            t_name = tprename + item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString()
+                        });
+                    }
+                    data.Dispose();
+                }
+                else
+                {
+                    //Reserved for return error string
+                }
+                res.Close();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return result;
+        }
+        public async Task<object> selectUserDataForEdit(int user_id)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return WebApiApplication.CONNECTDBERRSTRING;
+            dynamic result = new ExpandoObject();
+            d.iCommand.CommandText = string.Format("select * from {0} where {1} = {2}", User_list.FieldName.TABLE_NAME,
+                User_list.FieldName.USER_ID, User_list.ParameterName.USER_ID);
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.USER_ID, user_id));
+            try
+            {
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
+                if (res.HasRows)
+                {
+                    DataTable data = new DataTable();
+                    data.Load(res);
+                    foreach (DataRow item in data.Rows)
+                    {
+                        string tprename = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString();
+                        string tname = item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString();
+                        string usrtype = item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString();
+                        if (usrtype == "อาจารย์")
+                            tprename = NameManager.GatherPreName(tprename);
+                        result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[User_list.FieldName.USER_ID].Ordinal]);
+                        result.username = item.ItemArray[data.Columns[Personnel.FieldName.USERNAME].Ordinal].ToString();
+                        result.user_type = usrtype;
+                        result.fullname = tprename + tname;
+
+                        result.main_info = new ExpandoObject();
+
+                        result.main_info.file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[Personnel.FieldName.FILE_NAME_PIC].Ordinal].ToString());
+
+                        /*Current editable data*/
+                        result.main_info.t_prename = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString();
+                        result.main_info.t_name = tname;
+                        result.main_info.e_prename = item.ItemArray[data.Columns[Personnel.FieldName.E_PRENAME].Ordinal].ToString();
+                        result.main_info.e_name = item.ItemArray[data.Columns[Personnel.FieldName.E_NAME].Ordinal].ToString();
+                        result.main_info.email = item.ItemArray[data.Columns[Personnel.FieldName.EMAIL].Ordinal].ToString();
+                        result.main_info.tel = item.ItemArray[data.Columns[Personnel.FieldName.TEL].Ordinal].ToString();
+                        result.main_info.addr = item.ItemArray[data.Columns[Personnel.FieldName.ADDR].Ordinal].ToString();
+                        /*=====================*/
+                    }
+                    data.Dispose();
+                }
+                else
+                {
+                    //Reserved for return error string
+                    return "ไม่พบข้อมูลผู้ใช้งานที่ต้องการแก้ไข";
+                }
+                res.Close();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return result;
+        }
+        public async Task<object> UpdateUserDataDirectWithSelect(dynamic updatedata)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return WebApiApplication.CONNECTDBERRSTRING;
+            List<User_brief_detail> result = new List<User_brief_detail>();
+
+            string mainupdatecmd = string.Format("update {0} set {1} = {2},{3} = {4},{5} = {6},{7} = {8}," +
+                "{9} = {10},{11} = {12} where {13} = {14} ",
+                User_list.FieldName.TABLE_NAME, User_list.FieldName.T_PRENAME, User_list.ParameterName.T_PRENAME,
+                User_list.FieldName.T_NAME, User_list.ParameterName.T_NAME,
+                User_list.FieldName.E_PRENAME, User_list.ParameterName.E_PRENAME,
+                User_list.FieldName.E_NAME, User_list.ParameterName.E_NAME,
+                User_list.FieldName.TEL, User_list.ParameterName.TEL,
+                User_list.FieldName.ADDR, User_list.ParameterName.ADDR,
+                User_list.FieldName.USER_ID, User_list.ParameterName.USER_ID
+                );
+
+            string selectemailexists = string.Format("select * from {0} where {1} = {2} and {3} != {4}",
+                User_list.FieldName.TABLE_NAME, User_list.FieldName.EMAIL, User_list.ParameterName.EMAIL,
+                User_list.FieldName.USER_ID, User_list.ParameterName.USER_ID);
+
+            string emailupdatecmd = string.Format("if not exists({5}) " +
+                "BEGIN update {0} set {1} = {2} where {3} = {4} END ",
+                User_list.FieldName.TABLE_NAME, User_list.FieldName.EMAIL, User_list.ParameterName.EMAIL,
+                User_list.FieldName.USER_ID, User_list.ParameterName.USER_ID, selectemailexists);
+
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.T_PRENAME, updatedata.main_info.t_prename));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.T_NAME, updatedata.main_info.t_name));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.E_PRENAME, updatedata.main_info.e_prename));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.E_NAME, updatedata.main_info.e_name));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.TEL, updatedata.main_info.tel));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.ADDR, updatedata.main_info.addr));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.EMAIL, updatedata.main_info.email));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.USER_ID, updatedata.user_id));
+
+            string selectcmd = string.Format("select {1},{2},{3},{4},{5},{6} from {0}", User_list.FieldName.TABLE_NAME,
+                User_list.FieldName.USER_ID, Personnel.FieldName.USERNAME, Personnel.FieldName.T_NAME,
+                Personnel.FieldName.T_PRENAME, Personnel.FieldName.FILE_NAME_PIC, User_list.FieldName.USER_TYPE);
+
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} END", mainupdatecmd, emailupdatecmd, selectcmd);
+            try
+            {
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
+                if (res.HasRows)
+                {
+                    DataTable data = new DataTable();
+                    data.Load(res);
+                    foreach (DataRow item in data.Rows)
+                    {
+                        string tprename = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString();
+                        string usrtype = item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString();
+                        if (usrtype == "อาจารย์")
+                            tprename = NameManager.GatherPreName(tprename);
+                        result.Add(new User_brief_detail
+                        {
+                            user_id = Convert.ToInt32(item.ItemArray[data.Columns[User_list.FieldName.USER_ID].Ordinal]),
+                            username = item.ItemArray[data.Columns[Personnel.FieldName.USERNAME].Ordinal].ToString(),
+                            file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[Personnel.FieldName.FILE_NAME_PIC].Ordinal].ToString()),
+                            user_type = usrtype,
+                            t_name = tprename + item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString()
+                        });
+                    }
+                    data.Dispose();
+                }
+                else
+                {
+                    //Reserved for return error string
+                }
+                res.Close();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return result;
         }
         public async Task<object> SelectUser(string preferredusername)
         {

@@ -211,6 +211,7 @@
     <Compile Include="Models\ViewModels\Section_save_with_sub_indicator_detail.cs" />
     <Compile Include="Models\ViewModels\Self_evaluation_tiny_detail.cs" />
     <Compile Include="Models\ViewModels\Sub_indicator_result.cs" />
+    <Compile Include="Models\ViewModels\User_brief_detail.cs" />
     <Compile Include="Models\ViewModels\User_curriculum_with_brief_detail.cs" />
     <Compile Include="Models\ViewModels\Default_privilege_by_type_list_with_privilege_choices.cs" />
     <Compile Include="Models\ViewModels\Evaluation_overall_result.cs" />

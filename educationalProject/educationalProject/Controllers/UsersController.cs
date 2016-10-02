@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Web.Http;
 using System.Threading.Tasks;
 using System.IO;
+using System.Dynamic;
 using Newtonsoft.Json.Linq;
 using educationalProject.Models.ViewModels;
 using educationalProject.Models.Wrappers;
@@ -23,6 +24,99 @@ namespace educationalProject.Controllers
         private oAssessor assessorcontext = new oAssessor();
         private oCompany companycontext = new oCompany();
         private oUsers userscontext = new oUsers();
+
+        [ActionName("getuserlist")]
+        public async Task<IHttpActionResult> Getuserlist()
+        {
+            object result = await userscontext.SelectAllUsersByBrief();
+            if (result.GetType().ToString() != "System.String")
+                return Ok(result);
+            return InternalServerError(new Exception(result.ToString()));
+        }
+        [ActionName("getuserdataforedit")]
+        public async Task<IHttpActionResult> PostForGetUserDataEdit([FromBody]int user_id)
+        {
+            object result = await userscontext.selectUserDataForEdit(user_id);
+            if (result.GetType().ToString() != "System.String")
+                return Ok(result);
+            else
+                return InternalServerError(new Exception(result.ToString()));
+        }
+
+
+        [ActionName("edituserdatadirect")]
+        public async Task<IHttpActionResult> PutForUpdateUserDataDirect()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                return new System.Web.Http.Results.StatusCodeResult(HttpStatusCode.UnsupportedMediaType, Request);
+            }
+
+            //savepath will determine later
+            string savepath = WebApiApplication.SERVERPATH + "temp";
+            var result = new MultipartFormDataStreamProvider(savepath);
+
+            try
+            {
+                await Request.Content.ReadAsMultipartAsync(result);
+                //READ JSON DATA PART
+                JObject datareceive = JObject.Parse(result.FormData.GetValues(result.FormData.AllKeys[0])[0]);
+                dynamic data = new ExpandoObject();
+                //Prerequisite
+                data.user_id = Convert.ToInt32(datareceive["user_id"]);
+
+                //user type ignore
+                //result.user_type
+
+                //file_name_pic will change later???
+                //result.main_info.file_name_pic
+
+                /*Current editable data*/
+                data.main_info = new ExpandoObject();
+                data.main_info.t_prename = datareceive["main_info"]["t_prename"].ToString();
+                data.main_info.t_name = datareceive["main_info"]["t_name"].ToString();
+                data.main_info.e_prename = datareceive["main_info"]["e_prename"].ToString();
+                data.main_info.e_name = datareceive["main_info"]["e_name"].ToString();
+                data.main_info.email = datareceive["main_info"]["email"].ToString();
+                data.main_info.tel = datareceive["main_info"]["tel"].ToString();
+                data.main_info.addr = datareceive["main_info"]["addr"].ToString();
+
+                //filenamepic will add later
+                if (result.FileData.Count > 0)
+                {
+
+                }
+                else
+                {
+
+                }
+                object resultfromdb = await userscontext.UpdateUserDataDirectWithSelect(data);
+                if (resultfromdb.GetType().ToString() != "System.String")
+                {/*
+                    //delete filename will inside file_name property of oUser object
+                    string delpath = WebApiApplication.SERVERPATH;
+                    if (datacontext.file_name_pic != null)
+                    {
+                        //Check whether file exists!
+                        if (File.Exists(string.Format("{0}{1}", delpath, datacontext.file_name_pic)))
+                            File.Delete(string.Format("{0}{1}", delpath, datacontext.file_name_pic));
+                    }
+                 */
+                    return Ok(resultfromdb);
+                }
+                else
+                    return InternalServerError(new Exception(resultfromdb.ToString()));
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+        }
+
+
+
+
+
         [ActionName("createnewusersbytyping")]
         public async Task<IHttpActionResult> PostForCreateNewUsersByTyping(JObject data)
         {
