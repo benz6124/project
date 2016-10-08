@@ -14,97 +14,85 @@ namespace educationalProject.Models.Wrappers
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return WebApiApplication.CONNECTDBERRSTRING;
-            Default_privilege_by_type_list_with_privilege_choices result = new Default_privilege_by_type_list_with_privilege_choices();
+            Default_privilege_by_type_with_privilege_choices result = new Default_privilege_by_type_with_privilege_choices();
 
-            string temp5tablename = "#temp5";
-            string createtabletemp5 = string.Format("CREATE TABLE {0}(" +
-                                      "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                      "[{1}] VARCHAR(40) NULL," +
-                                      "[{2}] INT NULL," +
-                                      "[{3}] INT null," +
-                                      "[{4}] varchar(80) null," +
-                                      "[{5}] varchar(80) null," +
-                                      "PRIMARY KEY([row_num])) " +
+            string selectTitle = string.Format("select * from {0} where {1} = {2} ", Title.FieldName.TABLE_NAME,
+                Title.FieldName.TITLE_CODE, title_code);
+            string selectPrivilegeChoices = string.Format("select * from {0} where {1} = {2} ",Title_privilege.FieldName.TABLE_NAME,
+                Title_privilege.FieldName.TITLE_CODE, title_code);
 
-                                      "alter table {0} " +
-                                      "alter column {1} varchar(40) collate database_default " +
+            string selectMainData = string.Format("select {0}.*,{1} " +
+                "from {0},{2} " +
+                "where {3} = {4} " +
+                "and {0}.{5} = {2}.{6} ",
+                FieldName.TABLE_NAME, User_type.FieldName.USER_TYPE_NAME,
+                User_type.FieldName.TABLE_NAME,
+                FieldName.TITLE_CODE, title_code, FieldName.USER_TYPE_ID, User_type.FieldName.USER_TYPE_ID);
 
-                                      "alter table {0} " +
-                                      "alter column {4} varchar(80) collate database_default " +
+            string selectSetDefaultData = string.Format("select {0}, {1},1 as {2},{3} " +
+                "from {4},{5} " +
+                "where {1} = {6} and {0} != 7 " +
+                "and not exists(select * from {7} " +
+                "where {7}.{8} = {5}.{1} " +
+                "and {7}.{9} = {4}.{0}) ",
+                User_type.FieldName.USER_TYPE_ID,Title.FieldName.TITLE_CODE,Title_privilege.FieldName.TITLE_PRIVILEGE_CODE,
+                User_type.FieldName.USER_TYPE_NAME, User_type.FieldName.TABLE_NAME,
+                Title.FieldName.TABLE_NAME,title_code,FieldName.TABLE_NAME,FieldName.TITLE_CODE,
+                FieldName.USER_TYPE_ID);
 
-                                      "alter table {0} " +
-                                      "alter column {5} varchar(80) collate database_default ",
-                                      temp5tablename, FieldName.USER_TYPE, FieldName.TITLE_CODE,
-                                      FieldName.TITLE_PRIVILEGE_CODE, Title.FieldName.NAME,
-                                      Title_privilege.FieldName.PRIVILEGE);
-
-            string insertintotemp5_1 = string.Format("insert into {8} " +
-                                       "select {0}.*, tp.{1}, tp.{2} " +
-                                       "from {0} , " +
-                                       "({3}) as tp " +
-                                       "where {0}.{4} = tp.{5} " +
-                                       "and {0}.{6} = tp.{6} " +
-                                       "and {0}.{4} = {7} ",
-                                       FieldName.TABLE_NAME, Title.FieldName.NAME, Title_privilege.FieldName.PRIVILEGE,
-                                       oTitle_privilege.getSelectTitlePrivilegeCommand(),
-                                       FieldName.TITLE_CODE, Title.FieldName.TITLE_CODE,
-                                       FieldName.TITLE_PRIVILEGE_CODE, title_code,temp5tablename);
-
-            string insertintotemp5_2 = string.Format("insert into {11} " +
-                                       "select {0}.{1},{2} as title_code,1 as title_privilege_code,tp.{3},{4} " +
-                                       "from {0},({5}) as tp " +
-                                       "where {6} = {2} and {7} = 1 and {1} != 'ผู้ดูแลระบบ' " +
-                                       "and not exists(select * from {8} " +
-                                       "where {8}.{9} = {2} " +
-                                       "and tp.{6} = {8}.{9} " +
-                                       "and {0}.{1} = {8}.{10}) ",
-                                       User_type.FieldName.TABLE_NAME, User_type.FieldName.USER_TYPE,
-                                       title_code, Title.FieldName.NAME, Title_privilege.FieldName.PRIVILEGE,
-                                       oTitle_privilege.getSelectTitlePrivilegeCommand(),
-                                       Title_privilege.FieldName.TITLE_CODE, Title_privilege.FieldName.TITLE_PRIVILEGE_CODE,
-                                       FieldName.TABLE_NAME, FieldName.TITLE_CODE, FieldName.USER_TYPE,temp5tablename);
-
-            string insertintotemp5_3 = string.Format("insert into {5} " +
-                                    "select null,{0},{1},null,{2} from {3} where {0} = {4} ",
-                                    FieldName.TITLE_CODE, FieldName.TITLE_PRIVILEGE_CODE, Title_privilege.FieldName.PRIVILEGE,
-                                    Title_privilege.FieldName.TABLE_NAME, title_code,temp5tablename);
-
-
-            string selcmd = string.Format("select * from {0} order by {1} ", temp5tablename,FieldName.USER_TYPE);
-
-            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} {4} END", createtabletemp5, insertintotemp5_1,
-                insertintotemp5_2, insertintotemp5_3, selcmd);
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} {3} END", selectTitle, selectPrivilegeChoices,
+                selectMainData, selectSetDefaultData);
             try
             {
                 System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
-                if (res.HasRows)
+
+                do
                 {
-                    DataTable data = new DataTable(); 
-                    data.Load(res);
-                    foreach (DataRow item in data.Rows)
+                    if (res.HasRows)
                     {
-                        if (item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString() != "" &&
-                            item.ItemArray[data.Columns[Title.FieldName.NAME].Ordinal].ToString() != "")
-                            result.list.Add(new Default_privilege_by_type_with_name
+                        DataTable tabledata = new DataTable();
+                        tabledata.Load(res);
+                        foreach (DataRow item in tabledata.Rows)
+                        {
+                            if (tabledata.Columns.Contains(Title.FieldName.NAME))
                             {
-                                my_privilege = new Title_privilege(Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_CODE].Ordinal]), Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_PRIVILEGE_CODE].Ordinal]),
-                                item.ItemArray[data.Columns[Title_privilege.FieldName.PRIVILEGE].Ordinal].ToString()),
-                                name = item.ItemArray[data.Columns[Title.FieldName.NAME].Ordinal].ToString(),
-                                user_type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString()
-                            });
-                        else
-                            result.choices.Add(new Title_privilege (
-                                Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_CODE].Ordinal]),
-                                Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TITLE_PRIVILEGE_CODE].Ordinal]),
-                                item.ItemArray[data.Columns[Title_privilege.FieldName.PRIVILEGE].Ordinal].ToString()
-                            ));
+                                //Set title name from title table result
+                                result.title_code = Convert.ToInt32(item.ItemArray[tabledata.Columns[Title.FieldName.TITLE_CODE].Ordinal]);
+                                result.name = item.ItemArray[tabledata.Columns[Title.FieldName.NAME].Ordinal].ToString();
+                            }
+                            else if (tabledata.Columns.Contains(Title_privilege.FieldName.PRIVILEGE))
+                            {
+                                //Set privilege choice for target title
+                                result.choices.Add(new Privilege_choice
+                                {
+                                    title_privilege_code = Convert.ToInt32(item.ItemArray[tabledata.Columns[Title_privilege.FieldName.TITLE_PRIVILEGE_CODE].Ordinal]),
+                                    privilege = item.ItemArray[tabledata.Columns[Title_privilege.FieldName.PRIVILEGE].Ordinal].ToString()
+                                });
+                            }
+                            else
+                            {
+                                //Read main privilege data
+                                int title_priv_code = Convert.ToInt32(item.ItemArray[tabledata.Columns[FieldName.TITLE_PRIVILEGE_CODE].Ordinal]);
+                                result.privilege_list.Add(new User_type_privilege
+                                {
+                                    user_type_id = Convert.ToInt32(item.ItemArray[tabledata.Columns[FieldName.USER_TYPE_ID].Ordinal]),
+                                    user_type = item.ItemArray[tabledata.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString(),
+                                    privilege = new Privilege_choice {
+                                        title_privilege_code = title_priv_code,
+                                        //Find privilege caption from choices array
+                                        privilege = result.choices.First(t => t.title_privilege_code == title_priv_code).privilege
+                                    }
+                                });
+                            }
+                        }
+                        tabledata.Dispose();
                     }
-                    data.Dispose();
-                }
-                else
-                {
-                    //Reserved for return error string
-                }
+                    else if (!res.IsClosed)
+                    {
+                        if (!res.NextResult())
+                            break;
+                    }
+                } while (!res.IsClosed);
                 res.Close();
             }
             catch (Exception ex)
@@ -120,14 +108,14 @@ namespace educationalProject.Models.Wrappers
             return result;
         }
 
-        public async Task<object> InsertOrUpdate(Default_privilege_by_type_list_with_privilege_choices ddata)
+        public async Task<object> InsertOrUpdate(Default_privilege_by_type_with_privilege_choices ddata)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return WebApiApplication.CONNECTDBERRSTRING;
 
             string InsertOrUpdateCommand = "";
-            foreach (Default_privilege_by_type_with_name ditem in ddata.list)
+            foreach (User_type_privilege ditem in ddata.privilege_list)
             {
                 InsertOrUpdateCommand += string.Format("IF NOT EXISTS(select * from {0} where {1} = '{2}' and {3} = {4}) " +
                                          "BEGIN " +
@@ -136,8 +124,8 @@ namespace educationalProject.Models.Wrappers
                                          "ELSE " +
                                          "BEGIN " +
                                          "UPDATE {0} set {6} = '{5}' where {1} = '{2}' and {3} = '{4}' " +
-                                         "END ", FieldName.TABLE_NAME, FieldName.USER_TYPE, ditem.user_type, 
-                                         FieldName.TITLE_CODE, ditem.my_privilege.title_code, ditem.my_privilege.title_privilege_code, FieldName.TITLE_PRIVILEGE_CODE);
+                                         "END ", FieldName.TABLE_NAME, FieldName.USER_TYPE_ID, ditem.user_type_id, 
+                                         FieldName.TITLE_CODE, ddata.title_code, ditem.privilege.title_privilege_code, FieldName.TITLE_PRIVILEGE_CODE);
             }
 
             d.iCommand.CommandText = InsertOrUpdateCommand;

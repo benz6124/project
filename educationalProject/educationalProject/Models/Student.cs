@@ -10,7 +10,7 @@ namespace educationalProject.Models
         {
             public static readonly string USERNAME = "USERNAME";
             public static readonly string PASSWORD = "PASSWORD";
-            public static readonly string USER_TYPE = "USER_TYPE";
+            public static readonly string USER_TYPE_ID = "USER_TYPE_ID";
             public static readonly string T_PRENAME = "T_PRENAME";
             public static readonly string T_NAME = "T_NAME";
             public static readonly string E_PRENAME = "E_PRENAME";

@@ -39,7 +39,7 @@ namespace educationalProject.Models.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        string usrtype = item.ItemArray[data.Columns[Personnel.FieldName.USER_TYPE].Ordinal].ToString();
+                        string usrtype = item.ItemArray[data.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString();
                         if (usrtype == "อาจารย์")
                             result.Add(new User_curriculum_with_brief_detail
                             {

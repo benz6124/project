@@ -133,7 +133,7 @@ namespace educationalProject.Controllers
                         curri_list.Add(value.ToString());
                     }
                 }
-                string select_user_type = data["type"]["user_type"].ToString();
+                int select_user_type = Convert.ToInt32(data["type"]["user_type_id"]);
 
 
                 //2.Read maillist
@@ -164,19 +164,19 @@ namespace educationalProject.Controllers
 
                 //3.Add user to database base on select_user_type
                 object resultfromdb = null;
-                if (select_user_type == "อาจารย์")
+                if (select_user_type == 1)
                     resultfromdb = await teachercontext.Insert(userlist, curri_list);
-                else if (select_user_type == "เจ้าหน้าที่")
+                else if (select_user_type == 2)
                     resultfromdb = await staffcontext.Insert(userlist, curri_list);
-                else if (select_user_type == "นักศึกษา")
+                else if (select_user_type == 3)
                     resultfromdb = await studentcontext.Insert(userlist, curri_list);
-                else if (select_user_type == "ศิษย์เก่า")
+                else if (select_user_type == 4)
                     resultfromdb = await alumnicontext.Insert(userlist, curri_list);
-                else if (select_user_type == "บริษัท")
+                else if (select_user_type == 5)
                     resultfromdb = await companycontext.Insert(userlist, curri_list);
-                else if (select_user_type == "ผู้ประเมินจากภายนอก")
+                else if (select_user_type == 6)
                     resultfromdb = await assessorcontext.Insert(userlist, curri_list);
-                else if (select_user_type != "")
+                else if (select_user_type != 0)
                     resultfromdb = await userscontext.InsertWithUserType(userlist, curri_list, select_user_type);
                 else
                     return BadRequest("กรุณาเลือกประเภทผู้ใช้งาน");
@@ -239,7 +239,7 @@ namespace educationalProject.Controllers
                         curri_list.Add(value.ToString());
                     }
                 }
-                string select_user_type = datareceive["type"]["user_type"].ToString();
+                int select_user_type = Convert.ToInt32(datareceive["type"]["user_type_id"]);
 
 
                 //2.Read maillist file
@@ -283,19 +283,19 @@ namespace educationalProject.Controllers
 
                 //4.Add user to database base on select_user_type
                 object resultfromdb = null;
-                if (select_user_type == "อาจารย์")
+                if (select_user_type == 1)
                     resultfromdb = await teachercontext.Insert(userlist, curri_list);
-                else if (select_user_type == "เจ้าหน้าที่")
+                else if (select_user_type == 2)
                     resultfromdb = await staffcontext.Insert(userlist, curri_list);
-                else if (select_user_type == "นักศึกษา")
+                else if (select_user_type == 3)
                     resultfromdb = await studentcontext.Insert(userlist, curri_list);
-                else if (select_user_type == "ศิษย์เก่า")
+                else if (select_user_type == 4)
                     resultfromdb = await alumnicontext.Insert(userlist, curri_list);
-                else if (select_user_type == "บริษัท")
+                else if (select_user_type == 5)
                     resultfromdb = await companycontext.Insert(userlist, curri_list);
-                else if (select_user_type == "ผู้ประเมินจากภายนอก")
+                else if (select_user_type == 6)
                     resultfromdb = await assessorcontext.Insert(userlist, curri_list);
-                else if (select_user_type != "")
+                else if (select_user_type != 0)
                     resultfromdb = await userscontext.InsertWithUserType(userlist, curri_list, select_user_type);
                 else
                     return BadRequest("กรุณาเลือกประเภทผู้ใช้งาน");

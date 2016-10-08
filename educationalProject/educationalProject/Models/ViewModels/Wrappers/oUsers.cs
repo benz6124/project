@@ -28,19 +28,19 @@ namespace educationalProject.Models.ViewModels.Wrappers
 
                                       "alter table {0} " +
                                       "alter column {2} {5} collate database_default ",
-                                      temp5tablename, Extra_privilege.FieldName.PERSONNEL_ID,
+                                      temp5tablename, Extra_privilege.FieldName.USER_ID,
                                       Extra_privilege.FieldName.CURRI_ID,
                                       Extra_privilege.FieldName.TITLE_CODE,
                                       Extra_privilege.FieldName.TITLE_PRIVILEGE_CODE,
                                       DBFieldDataType.CURRI_ID_TYPE);
 
             string select_user_type_subquery = string.Format("select {0} from {1} where {2} = {3}",
-            User_list.FieldName.USER_TYPE,User_list.FieldName.TABLE_NAME,User_list.FieldName.USER_ID,user_id);
+            User_list.FieldName.USER_TYPE_ID,User_list.FieldName.TABLE_NAME,User_list.FieldName.USER_ID,user_id);
 
             string insertintotemp5_1 = string.Format("insert into {0} " +
                                        "select 1,* from {1} where {2} = {3} ",
                                        temp5tablename, Extra_privilege.FieldName.TABLE_NAME,
-                                       Extra_privilege.FieldName.PERSONNEL_ID, user_id);
+                                       Extra_privilege.FieldName.USER_ID, user_id);
 
             string insertintotemp5_2 = string.Format("insert into {0} " +
                                        "select 1,{1}, {2}, {3}, {4} from {5} where {6} IN ({7}) " +
@@ -49,10 +49,10 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                        "and {11}.{13} = {5}.{2} and {11}.{14} = {5}.{3}) ",
                                        temp5tablename, user_id, Extra_privilege_by_type.FieldName.CURRI_ID,
                                        Extra_privilege_by_type.FieldName.TITLE_CODE, Extra_privilege_by_type.FieldName.TITLE_PRIVILEGE_CODE,
-                                       Extra_privilege_by_type.FieldName.TABLE_NAME, Extra_privilege_by_type.FieldName.USER_TYPE,
+                                       Extra_privilege_by_type.FieldName.TABLE_NAME, Extra_privilege_by_type.FieldName.USER_TYPE_ID,
                                        select_user_type_subquery, User_curriculum.FieldName.CURRI_ID, User_curriculum.FieldName.TABLE_NAME,
                                        User_curriculum.FieldName.USER_ID, Extra_privilege.FieldName.TABLE_NAME,
-                                       Extra_privilege.FieldName.PERSONNEL_ID,
+                                       Extra_privilege.FieldName.USER_ID,
                                        Extra_privilege.FieldName.CURRI_ID,
                                        Extra_privilege.FieldName.TITLE_CODE);
 
@@ -65,34 +65,34 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                        temp5tablename, user_id, User_curriculum.FieldName.CURRI_ID, Default_privilege_by_type.FieldName.TITLE_CODE,
                                        Default_privilege_by_type.FieldName.TITLE_PRIVILEGE_CODE, Default_privilege_by_type.FieldName.TABLE_NAME,
                                        User_curriculum.FieldName.TABLE_NAME, User_curriculum.FieldName.USER_ID,
-                                       Default_privilege_by_type.FieldName.USER_TYPE, select_user_type_subquery,
+                                       Default_privilege_by_type.FieldName.USER_TYPE_ID, select_user_type_subquery,
                                        Extra_privilege.FieldName.CURRI_ID,
                                        Extra_privilege.FieldName.TITLE_CODE);
             string insertintotemp5_4 = string.Format("insert into {0} " +
                                        "select 2, {1}, {2}, {3}, {4} " +
-                                       "from {5} where {6} = 'กรรมการหลักสูตร' " +
+                                       "from {5} where {6} = 8 " +
                                        "and {2} in (select distinct {7} from {8} where {9} = {1}) ",
                                        temp5tablename, user_id, Extra_privilege_by_type.FieldName.CURRI_ID,
                                        Extra_privilege_by_type.FieldName.TITLE_CODE, Extra_privilege_by_type.FieldName.TITLE_PRIVILEGE_CODE,
                                        Extra_privilege_by_type.FieldName.TABLE_NAME,
-                                       Extra_privilege_by_type.FieldName.USER_TYPE,
+                                       Extra_privilege_by_type.FieldName.USER_TYPE_ID,
                                        Committee.FieldName.CURRI_ID, Committee.FieldName.TABLE_NAME, Committee.FieldName.TEACHER_ID);
 
             string insertintotemp5_5 = string.Format("insert into {0} " +
                                        "select 2, {1}, {2}, {3}, {4} " +
                                        "from (select distinct {2} from {5} where {6} = {1}) as committeeres, {7} " +
-                                       "where {8} = 'กรรมการหลักสูตร' " +
+                                       "where {8} = 8 " +
                                        "and not exists(select * from {9} " +
-                                       "where {10} = 'กรรมการหลักสูตร' and {9}.{11} = committeeres.{2} " +
+                                       "where {10} = 8 and {9}.{11} = committeeres.{2} " +
                                        "and {9}.{12} = {7}.{13}) ",
                                        temp5tablename, user_id, Committee.FieldName.CURRI_ID,
                                        Default_privilege_by_type.FieldName.TITLE_CODE,
                                        Default_privilege_by_type.FieldName.TITLE_PRIVILEGE_CODE,
                                        Committee.FieldName.TABLE_NAME, Committee.FieldName.TEACHER_ID,
                                        Default_privilege_by_type.FieldName.TABLE_NAME,
-                                       Default_privilege_by_type.FieldName.USER_TYPE,
+                                       Default_privilege_by_type.FieldName.USER_TYPE_ID,
                                        Extra_privilege_by_type.FieldName.TABLE_NAME,
-                                       Extra_privilege_by_type.FieldName.USER_TYPE,
+                                       Extra_privilege_by_type.FieldName.USER_TYPE_ID,
                                        Extra_privilege_by_type.FieldName.CURRI_ID,
                                        Extra_privilege_by_type.FieldName.TITLE_CODE,
                                        Default_privilege_by_type.FieldName.TITLE_CODE);
@@ -137,8 +137,13 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 mainusrdataselect = string.Format("select * from ({0}) as sres where {1} = {2} ",
                 oAdmin.getSelectAdminByJoinCommand(), Admin.FieldName.ADMIN_ID, user_id);
             else
-                mainusrdataselect = string.Format("select * from {0} where {1} = {2} ",
-                User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_ID, user_id);
+                mainusrdataselect = string.Format("select {0}.*,{1} " +
+                "from {0},{2} " +
+                "where {3} = {4} " +
+                "and {0}.{5} = {2}.{6} ",
+                User_list.FieldName.TABLE_NAME, User_type.FieldName.USER_TYPE_NAME,
+                User_type.FieldName.TABLE_NAME, User_list.FieldName.USER_ID, user_id,
+                User_list.FieldName.USER_TYPE_ID, User_type.FieldName.USER_TYPE_ID);
             //1 select user_data from pre-defined select table command => mainusrdataselect
 
             //2 select education data(every user_type except student) => selecteducation
@@ -207,9 +212,18 @@ namespace educationalProject.Models.ViewModels.Wrappers
             if (!d.SQLConnect())
                 return WebApiApplication.CONNECTDBERRSTRING;
             List<User_brief_detail> result = new List<User_brief_detail>();
-            d.iCommand.CommandText = string.Format("select {1},{2},{3},{4},{5},{6} from {0}", User_list.FieldName.TABLE_NAME,
-                User_list.FieldName.USER_ID, Personnel.FieldName.USERNAME, Personnel.FieldName.T_NAME,
-                Personnel.FieldName.T_PRENAME,Personnel.FieldName.FILE_NAME_PIC, User_list.FieldName.USER_TYPE);
+
+            d.iCommand.CommandText = string.Format("select {0}, {1}," +
+                "{2} = {3} " +
+                ",{4},{5},{8}.{6},{7} " +
+                "from {8},{9} " +
+                "where {8}.{6} = {9}.{10} ",
+                User_list.FieldName.USER_ID, User_list.FieldName.USERNAME, User_list.FieldName.T_PRENAME,
+                NameManager.GatherSQLCASEForPrename(User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_TYPE_ID, User_list.FieldName.T_PRENAME),
+                User_list.FieldName.T_NAME, User_list.FieldName.FILE_NAME_PIC, User_list.FieldName.USER_TYPE_ID,
+                User_type.FieldName.USER_TYPE_NAME, User_list.FieldName.TABLE_NAME, User_type.FieldName.TABLE_NAME,
+                User_type.FieldName.USER_TYPE_ID);
+
             try
             {
                 System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
@@ -219,17 +233,13 @@ namespace educationalProject.Models.ViewModels.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        string tprename = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString();
-                        string usrtype = item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString();
-                        if (usrtype == "อาจารย์")
-                            tprename = NameManager.GatherPreName(tprename);
                         result.Add(new User_brief_detail
                         {
                             user_id = Convert.ToInt32(item.ItemArray[data.Columns[User_list.FieldName.USER_ID].Ordinal]),
-                            username = item.ItemArray[data.Columns[Personnel.FieldName.USERNAME].Ordinal].ToString(),
-                            file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[Personnel.FieldName.FILE_NAME_PIC].Ordinal].ToString()),
-                            user_type = usrtype,
-                            t_name = tprename + item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString()
+                            username = item.ItemArray[data.Columns[User_list.FieldName.USERNAME].Ordinal].ToString(),
+                            file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[User_list.FieldName.FILE_NAME_PIC].Ordinal].ToString()),
+                            user_type = item.ItemArray[data.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString(),
+                            t_name = item.ItemArray[data.Columns[User_list.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[User_list.FieldName.T_NAME].Ordinal].ToString()
                         });
                     }
                     data.Dispose();
@@ -258,8 +268,19 @@ namespace educationalProject.Models.ViewModels.Wrappers
             if (!d.SQLConnect())
                 return WebApiApplication.CONNECTDBERRSTRING;
             dynamic result = new ExpandoObject();
-            d.iCommand.CommandText = string.Format("select * from {0} where {1} = {2}", User_list.FieldName.TABLE_NAME,
-                User_list.FieldName.USER_ID, User_list.ParameterName.USER_ID);
+            d.iCommand.CommandText = string.Format("select *," +
+                "fullname = ({0}) + {1} " +
+                ",{2} " +
+                "from {3},{4} " +
+                "where {5} = {6} " +
+                "and {3}.{7} = {4}.{8} ",
+                NameManager.GatherSQLCASEForPrename(User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_TYPE_ID, User_list.FieldName.T_PRENAME),
+                User_list.FieldName.T_NAME,User_type.FieldName.USER_TYPE_NAME,
+                User_list.FieldName.TABLE_NAME, User_type.FieldName.TABLE_NAME,
+                User_list.FieldName.USER_ID, User_list.ParameterName.USER_ID,
+                User_list.FieldName.USER_TYPE_ID, User_type.FieldName.USER_TYPE_ID
+                );
+
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.USER_ID, user_id));
             try
             {
@@ -270,15 +291,10 @@ namespace educationalProject.Models.ViewModels.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        string tprename = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString();
-                        string tname = item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString();
-                        string usrtype = item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString();
-                        if (usrtype == "อาจารย์")
-                            tprename = NameManager.GatherPreName(tprename);
                         result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[User_list.FieldName.USER_ID].Ordinal]);
                         result.username = item.ItemArray[data.Columns[Personnel.FieldName.USERNAME].Ordinal].ToString();
-                        result.user_type = usrtype;
-                        result.fullname = tprename + tname;
+                        result.user_type = item.ItemArray[data.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString();
+                        result.fullname = item.ItemArray[data.Columns["fullname"].Ordinal].ToString();
 
                         result.main_info = new ExpandoObject();
 
@@ -286,7 +302,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
 
                         /*Current editable data*/
                         result.main_info.t_prename = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString();
-                        result.main_info.t_name = tname;
+                        result.main_info.t_name = item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString();
                         result.main_info.e_prename = item.ItemArray[data.Columns[Personnel.FieldName.E_PRENAME].Ordinal].ToString();
                         result.main_info.e_name = item.ItemArray[data.Columns[Personnel.FieldName.E_NAME].Ordinal].ToString();
                         result.main_info.email = item.ItemArray[data.Columns[Personnel.FieldName.EMAIL].Ordinal].ToString();
@@ -351,9 +367,16 @@ namespace educationalProject.Models.ViewModels.Wrappers
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.EMAIL, updatedata.main_info.email));
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.USER_ID, updatedata.user_id));
 
-            string selectcmd = string.Format("select {1},{2},{3},{4},{5},{6} from {0}", User_list.FieldName.TABLE_NAME,
-                User_list.FieldName.USER_ID, Personnel.FieldName.USERNAME, Personnel.FieldName.T_NAME,
-                Personnel.FieldName.T_PRENAME, Personnel.FieldName.FILE_NAME_PIC, User_list.FieldName.USER_TYPE);
+            string selectcmd = string.Format("select {0}, {1}," +
+                "{2} = {3} " +
+                ",{4},{5},{8}.{6},{7} " +
+                "from {8},{9} " +
+                "where {8}.{6} = {9}.{10} ",
+                User_list.FieldName.USER_ID, User_list.FieldName.USERNAME, User_list.FieldName.T_PRENAME,
+                NameManager.GatherSQLCASEForPrename(User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_TYPE_ID, User_list.FieldName.T_PRENAME),
+                User_list.FieldName.T_NAME, User_list.FieldName.FILE_NAME_PIC, User_list.FieldName.USER_TYPE_ID,
+                User_type.FieldName.USER_TYPE_NAME, User_list.FieldName.TABLE_NAME, User_type.FieldName.TABLE_NAME,
+                User_type.FieldName.USER_TYPE_ID);
 
             d.iCommand.CommandText = string.Format("BEGIN {0} {1} {2} END", mainupdatecmd, emailupdatecmd, selectcmd);
             try
@@ -365,17 +388,13 @@ namespace educationalProject.Models.ViewModels.Wrappers
                     data.Load(res);
                     foreach (DataRow item in data.Rows)
                     {
-                        string tprename = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString();
-                        string usrtype = item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString();
-                        if (usrtype == "อาจารย์")
-                            tprename = NameManager.GatherPreName(tprename);
                         result.Add(new User_brief_detail
                         {
                             user_id = Convert.ToInt32(item.ItemArray[data.Columns[User_list.FieldName.USER_ID].Ordinal]),
-                            username = item.ItemArray[data.Columns[Personnel.FieldName.USERNAME].Ordinal].ToString(),
-                            file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[Personnel.FieldName.FILE_NAME_PIC].Ordinal].ToString()),
-                            user_type = usrtype,
-                            t_name = tprename + item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString()
+                            username = item.ItemArray[data.Columns[User_list.FieldName.USERNAME].Ordinal].ToString(),
+                            file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[User_list.FieldName.FILE_NAME_PIC].Ordinal].ToString()),
+                            user_type = item.ItemArray[data.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString(),
+                            t_name = item.ItemArray[data.Columns[User_list.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[User_list.FieldName.T_NAME].Ordinal].ToString()
                         });
                     }
                     data.Dispose();
@@ -398,6 +417,9 @@ namespace educationalProject.Models.ViewModels.Wrappers
             }
             return result;
         }
+
+
+
         public async Task<object> SelectUser(string preferredusername)
         {
             DBConnector d = new DBConnector();
@@ -462,7 +484,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             if (tabledata.Columns.Contains(Teacher.FieldName.T_PRENAME))
                             {
                                 //1 retrieve user_data from pre-defined select table command
-                                string usrtype = item.ItemArray[tabledata.Columns[Teacher.FieldName.USER_TYPE].Ordinal].ToString();
+                                string usrtype = item.ItemArray[tabledata.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString();
 
                                 if (usrtype == "อาจารย์")
                                     result.user_id = Convert.ToInt32(item.ItemArray[tabledata.Columns[Teacher.FieldName.TEACHER_ID].Ordinal]);
@@ -772,7 +794,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             if (tabledata.Columns.Contains(Teacher.FieldName.T_PRENAME))
                             {
                                 //1 retrieve user_data from pre-defined select table command
-                                string usrtype = item.ItemArray[tabledata.Columns[Teacher.FieldName.USER_TYPE].Ordinal].ToString();
+                                string usrtype = item.ItemArray[tabledata.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString();
 
                                 if (usrtype == "อาจารย์")
                                     result.user_id = Convert.ToInt32(item.ItemArray[tabledata.Columns[Teacher.FieldName.TEACHER_ID].Ordinal]);
@@ -1084,7 +1106,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                             if (tabledata.Columns.Contains(Teacher.FieldName.T_PRENAME))
                             {
                                 //1 retrieve user_data from pre-defined select table command
-                                string usrtype = item.ItemArray[tabledata.Columns[Teacher.FieldName.USER_TYPE].Ordinal].ToString();
+                                string usrtype = item.ItemArray[tabledata.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString();
 
                                 if (usrtype == "อาจารย์")
                                     result.user_id = Convert.ToInt32(item.ItemArray[tabledata.Columns[Teacher.FieldName.TEACHER_ID].Ordinal]);
@@ -1267,7 +1289,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
             return result;
         }
 
-        public async Task<object> InsertWithUserType(List<UsernamePassword> list, List<string> target_curri_id_list,string usrtype)
+        public async Task<object> InsertWithUserType(List<UsernamePassword> list, List<string> target_curri_id_list,int usrtypeid)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
@@ -1347,9 +1369,9 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                    "insert into {12} values ('{2}') " +
                                    "end ", User_list.FieldName.TABLE_NAME, Personnel.FieldName.USERNAME, item.username,
                                    Personnel.FieldName.EMAIL, temp6tablename,
-                                   User_list.FieldName.USER_TYPE, Teacher.FieldName.PASSWORD, Teacher.FieldName.TIMESTAMP,
+                                   User_list.FieldName.USER_TYPE_ID, Teacher.FieldName.PASSWORD, Teacher.FieldName.TIMESTAMP,
                                    User_list.FieldName.USER_ID,
-                                   /*****9****/ usrtype, item.password, ts,
+                                   /*****9****/ usrtypeid, item.password, ts,
                                    /****12****/ temp5tablename,Personnel.FieldName.T_NAME
                                    );
 

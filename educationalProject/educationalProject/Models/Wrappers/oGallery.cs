@@ -14,16 +14,17 @@ namespace educationalProject.Models.Wrappers
             if (!isUpdate)
             {
                 return string.Format("select {0}.*,{1},{2},{3},{4},{5} " +
-                                     "from {0},{6},{7} where {8} = '{9}' and {10} = {11} " +
-                                     "and {0}.{12} = {6}.{13} and {14} = {15} order by {16} desc ",
+                                     "from {0},{6},{7},{8} where {9} = '{10}' and {11} = {12} " +
+                                     "and {0}.{13} = {6}.{14} and {15} = {16} " +
+                                     "and {7}.{18} = {8}.{19} order by {17} desc ",
                                      FieldName.TABLE_NAME, Picture.FieldName.FILE_NAME, Picture.FieldName.CAPTION,
-                                     User_list.FieldName.USER_TYPE, Personnel.FieldName.T_PRENAME,
+                                     User_type.FieldName.USER_TYPE_NAME, Personnel.FieldName.T_PRENAME,
                                      Personnel.FieldName.T_NAME,
-                                     Picture.FieldName.TABLE_NAME, User_list.FieldName.TABLE_NAME,
+                                     Picture.FieldName.TABLE_NAME, User_list.FieldName.TABLE_NAME,User_type.FieldName.TABLE_NAME,
                                      FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year,
                                      FieldName.GALLERY_ID, Picture.FieldName.GALLERY_ID,
                                      User_list.FieldName.USER_ID, FieldName.PERSONNEL_ID,
-                                     FieldName.DATE_CREATED);
+                                     FieldName.DATE_CREATED, User_list.FieldName.USER_TYPE_ID, User_type.FieldName.USER_TYPE_ID);
             }
 
             string temp1tablename = "#temp1";
@@ -66,22 +67,24 @@ namespace educationalProject.Models.Wrappers
                                       , temp5tablename, FieldName.GALLERY_ID, FieldName.PERSONNEL_ID, FieldName.NAME,
                                       FieldName.DATE_CREATED, FieldName.CURRI_ID, FieldName.ACA_YEAR,
                                       Picture.FieldName.FILE_NAME, Picture.FieldName.CAPTION,
-                                      User_list.FieldName.USER_TYPE,
+                                      User_type.FieldName.USER_TYPE_NAME,
                                       Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME,
                                       DBFieldDataType.CURRI_ID_TYPE,DBFieldDataType.FILE_NAME_TYPE);
 
-            string insertintotemp5_1 = string.Format("insert into {17} " +
+            string insertintotemp5_1 = string.Format("insert into {20} " +
                                      "select {0}.*,{1},{2},{3},{4},{5} " +
-                                     "from {0},{6},{7} where {8} = '{9}' and {10} = {11} " +
-                                     "and {0}.{12} = {6}.{13} and {14} = {15} order by {16} desc ",
+                                     "from {0},{6},{7},{8} where {9} = '{10}' and {11} = {12} " +
+                                     "and {0}.{13} = {6}.{14} and {15} = {16} " +
+                                     "and {7}.{18} = {8}.{19} order by {17} desc ",
                                      FieldName.TABLE_NAME, Picture.FieldName.FILE_NAME, Picture.FieldName.CAPTION,
-                                     User_list.FieldName.USER_TYPE, Personnel.FieldName.T_PRENAME,
+                                     User_type.FieldName.USER_TYPE_NAME, Personnel.FieldName.T_PRENAME,
                                      Personnel.FieldName.T_NAME,
-                                     Picture.FieldName.TABLE_NAME, User_list.FieldName.TABLE_NAME,
+                                     Picture.FieldName.TABLE_NAME, User_list.FieldName.TABLE_NAME, User_type.FieldName.TABLE_NAME,
                                      FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year,
                                      FieldName.GALLERY_ID, Picture.FieldName.GALLERY_ID,
                                      User_list.FieldName.USER_ID, FieldName.PERSONNEL_ID,
-                                     FieldName.DATE_CREATED,temp5tablename);
+                                     FieldName.DATE_CREATED, User_list.FieldName.USER_TYPE_ID, User_type.FieldName.USER_TYPE_ID,
+                                     temp5tablename);
 
             string insertintotemp5_2 = string.Format("insert into {0} select 0, null, null,null, null, null,{1}, null,null,null, null " +
                                        "from {2} ", temp5tablename, Picture.FieldName.FILE_NAME, temp1tablename);
@@ -111,7 +114,7 @@ namespace educationalProject.Models.Wrappers
                         if (result.FirstOrDefault(g => g.gallery_id == gallery_id) == null)
                         {
                             string real_t_prename;
-                            if (item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString() == "อาจารย์")
+                            if (item.ItemArray[data.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString() == "อาจารย์")
                                 real_t_prename = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString());
                             else
                                 real_t_prename = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString();
@@ -298,7 +301,7 @@ namespace educationalProject.Models.Wrappers
                         if (result.FirstOrDefault(g => g.gallery_id == gallery_id) == null)
                         {
                             string real_t_prename;
-                            if (item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString() == "อาจารย์")
+                            if (item.ItemArray[data.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString() == "อาจารย์")
                                 real_t_prename = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString());
                             else
                                 real_t_prename = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString();
@@ -427,7 +430,7 @@ namespace educationalProject.Models.Wrappers
                             if (result.FirstOrDefault(g => g.gallery_id == gallery_id) == null)
                             {
                                 string real_t_prename;
-                                if (item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString() == "อาจารย์")
+                                if (item.ItemArray[data.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString() == "อาจารย์")
                                     real_t_prename = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString());
                                 else
                                     real_t_prename = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString();

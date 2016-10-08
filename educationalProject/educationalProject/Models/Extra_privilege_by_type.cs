@@ -8,7 +8,7 @@ namespace educationalProject.Models
     {
         internal struct FieldName
         {
-            public static readonly string USER_TYPE = "USER_TYPE";
+            public static readonly string USER_TYPE_ID = "USER_TYPE_ID";
             public static readonly string CURRI_ID = "CURRI_ID";
             public static readonly string TITLE_CODE = "TITLE_CODE";
             public static readonly string TITLE_PRIVILEGE_CODE = "TITLE_PRIVILEGE_CODE";

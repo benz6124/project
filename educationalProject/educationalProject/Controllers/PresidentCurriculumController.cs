@@ -14,13 +14,6 @@ namespace educationalProject.Controllers
 {
     public class PresidentCurriculumController : ApiController
     {
-        [ActionName("getindividualpres")]
-        public async Task<IHttpActionResult> PostToQueryPresidentCurriAndAllTeacherInCurri(Curriculum_academic data)
-        {
-            oTeacher_educational datacontext = new oTeacher_educational();
-            return Ok(await datacontext.SelectPresidentCurriAndAllTeacherInCurri(data));
-        }
-
         [ActionName("getallpres")]
         public async Task<IHttpActionResult> PostToQueryAllPresident([FromBody] int aca_year)
         {

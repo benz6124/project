@@ -9,7 +9,7 @@ namespace educationalProject.Models
         internal struct FieldName
         {
             public static readonly string QUESTIONARE_SET_ID = "QUESTIONARE_SET_ID";
-            public static readonly string PRIVILEGE = "PRIVILEGE";
+            public static readonly string PRIVILEGE_TYPE_ID = "PRIVILEGE_TYPE_ID";
             public static readonly string TABLE_NAME = "QUESTIONARE_PRIVILEGE";
 
         }

@@ -25,7 +25,7 @@ namespace educationalProject.Controllers
             return Ok(await data.SelectByCurriculumAndTitle());
         }
 
-        public async Task<IHttpActionResult> Put(Extra_privilege_by_type_list_with_privilege_choices data)
+        public async Task<IHttpActionResult> Put(Extra_privilege_by_type_with_privilege_choices data)
         {
             object result = await datacontext.InsertOrUpdate(data);
             if (result == null)

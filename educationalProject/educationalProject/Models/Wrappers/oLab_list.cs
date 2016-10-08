@@ -11,15 +11,16 @@ namespace educationalProject.Models.Wrappers
     {
         private string getSelectByCurriculumAcademicCommand()
         {
-            return string.Format("select {0}.*,{1},{2},{3},{4} from {0},{5},{6} " +
-                                 "where {7} = '{8}' and {9} = {10} and " +
-                                 "{0}.{11} = {5}.{12} and {13} = {1} order by {14} ",
-                                 FieldName.TABLE_NAME,Lab_officer.FieldName.OFFICER,Personnel.FieldName.USER_TYPE,
+            return string.Format("select {0}.*,{1},{2},{3},{4} from {0},{5},{6},{7} " +
+                                 "where {8} = '{9}' and {10} = {11} and " +
+                                 "{0}.{12} = {5}.{13} and {14} = {1} " +
+                                 "and {6}.{16} = {7}.{17} order by {15} ",
+                                 FieldName.TABLE_NAME,Lab_officer.FieldName.OFFICER,User_type.FieldName.USER_TYPE_NAME,
                                  Personnel.FieldName.T_PRENAME, Personnel.FieldName.T_NAME,
-                                 Lab_officer.FieldName.TABLE_NAME,User_list.FieldName.TABLE_NAME,
+                                 Lab_officer.FieldName.TABLE_NAME,User_list.FieldName.TABLE_NAME, User_type.FieldName.TABLE_NAME,
                                  FieldName.CURRI_ID,curri_id,FieldName.ACA_YEAR,aca_year,
                                  FieldName.LAB_NUM,Lab_officer.FieldName.LAB_NUM,Personnel.FieldName.USER_ID,
-                                 FieldName.NAME) ;
+                                 FieldName.NAME, User_list.FieldName.USER_TYPE_ID, User_type.FieldName.USER_TYPE_ID);
         }
         public async Task<object> SelectByCurriculumAcademic()
         {
@@ -48,7 +49,7 @@ namespace educationalProject.Models.Wrappers
                                 name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString(),
                                 room = item.ItemArray[data.Columns[FieldName.ROOM].Ordinal].ToString()
                             });
-                        if (item.ItemArray[data.Columns[Personnel.FieldName.USER_TYPE].Ordinal].ToString() == "อาจารย์")
+                        if (item.ItemArray[data.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString() == "อาจารย์")
                             result.First(t => t.lab_num == labid).officer.Add(new Personnel_with_t_name
                             {
                                 user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
@@ -163,7 +164,7 @@ namespace educationalProject.Models.Wrappers
                                 name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString(),
                                 room = item.ItemArray[data.Columns[FieldName.ROOM].Ordinal].ToString()
                             });
-                        if (item.ItemArray[data.Columns[Personnel.FieldName.USER_TYPE].Ordinal].ToString() == "อาจารย์")
+                        if (item.ItemArray[data.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString() == "อาจารย์")
                             result.First(t => t.lab_num == labid).officer.Add(new Personnel_with_t_name
                             {
                                 user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
@@ -264,7 +265,7 @@ namespace educationalProject.Models.Wrappers
                                 name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString(),
                                 room = item.ItemArray[data.Columns[FieldName.ROOM].Ordinal].ToString()
                             });
-                        if (item.ItemArray[data.Columns[Personnel.FieldName.USER_TYPE].Ordinal].ToString() == "อาจารย์")
+                        if (item.ItemArray[data.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString() == "อาจารย์")
                             result.First(t => t.lab_num == labid).officer.Add(new Personnel_with_t_name
                             {
                                 user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),

@@ -15,8 +15,8 @@ namespace educationalProject.Models.Wrappers
             return string.Format("select {0}.{1},{2},{3},{4},{5}," +
             "{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}," +
             "{16},{17},{18},{19},{20},{21},{22} " +
-            "from {23},{0} where {1} = {24}",
-            /**tablename 0 **/ FieldName.TABLE_NAME, /**iden 1**/ FieldName.TEACHER_ID, FieldName.USER_TYPE, FieldName.USERNAME,
+            "from {23},{0},{24} where {1} = {25} and {23}.{26} = {24}.{27} ",
+            /**tablename 0 **/ FieldName.TABLE_NAME, /**iden 1**/ FieldName.TEACHER_ID, User_type.FieldName.USER_TYPE_NAME, FieldName.USERNAME,
             FieldName.PASSWORD, FieldName.T_PRENAME, FieldName.T_NAME, FieldName.E_PRENAME, FieldName.E_NAME,
             FieldName.CITIZEN_ID, FieldName.GENDER, FieldName.EMAIL, FieldName.TEL, FieldName.ADDR,
             FieldName.FILE_NAME_PIC, FieldName.TIMESTAMP,  /***common 15***/
@@ -25,7 +25,8 @@ namespace educationalProject.Models.Wrappers
             FieldName.ROOM, FieldName.DEGREE, FieldName.POSITION, FieldName.PERSONNEL_TYPE, FieldName.PERSON_ID,
             FieldName.STATUS, FieldName.ALIVE,
 
-            User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_ID);
+            User_list.FieldName.TABLE_NAME, User_type.FieldName.TABLE_NAME,
+            User_list.FieldName.USER_ID, User_list.FieldName.USER_TYPE_ID, User_type.FieldName.USER_TYPE_ID);
         }
         public async Task<object> SelectTeacherIdAndTName(string curri_id)
         {
@@ -151,9 +152,9 @@ namespace educationalProject.Models.Wrappers
                                    "insert into {14} values ('{2}') " +
                                    "end ",User_list.FieldName.TABLE_NAME,Personnel.FieldName.USERNAME,item.username,
                                    Personnel.FieldName.EMAIL,temp6tablename,
-                                   User_list.FieldName.USER_TYPE,FieldName.PASSWORD,FieldName.TIMESTAMP,
+                                   User_list.FieldName.USER_TYPE_ID,FieldName.PASSWORD,FieldName.TIMESTAMP,
                                    User_list.FieldName.USER_ID,
-                                   /*****9****/ "อาจารย์",item.password,ts,
+                                   /*****9****/ 1,item.password,ts,
                                    /****12****/ FieldName.TABLE_NAME,FieldName.TEACHER_ID,temp5tablename,
                                    Personnel.FieldName.T_NAME
                                    );

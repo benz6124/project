@@ -19,10 +19,10 @@ namespace educationalProject.Models.Wrappers
             if (!d.SQLConnect())
                 return WebApiApplication.CONNECTDBERRSTRING;
             List<Educational_teacher_staff> result = new List<Educational_teacher_staff>();
-            string insertcmd = string.Format("if not exists(select * from {7} where {8} = {1} and {9} = 'นักศึกษา') BEGIN " +
+            string insertcmd = string.Format("if not exists(select * from {7} where {8} = {1} and {9} = 3) BEGIN " +
                 "insert into {0} values ({1},{2},{3},{4},{5},{6}) ",
                 FieldName.TABLE_NAME, ParameterName.PERSONNEL_ID, ParameterName.DEGREE, ParameterName.PRE_MAJOR, ParameterName.MAJOR, ParameterName.GRAD_YEAR, ParameterName.COLLEGE,
-                User_list.FieldName.TABLE_NAME,User_list.FieldName.USER_ID,User_list.FieldName.USER_TYPE);
+                User_list.FieldName.TABLE_NAME,User_list.FieldName.USER_ID,User_list.FieldName.USER_TYPE_ID);
             string selectcmd = GetSelectEducationByPersonnelIdCommand();
 
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.PERSONNEL_ID, personnel_id));

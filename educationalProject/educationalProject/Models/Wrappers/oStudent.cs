@@ -14,8 +14,8 @@ namespace educationalProject.Models.Wrappers
             return string.Format("select {0}.{1},{2},{3},{4},{5}," +
             "{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}," +
             "{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27} " +
-            "from {28},{0} where {0}.{1} = {28}.{29}",
-            /**tablename 0 **/ FieldName.TABLE_NAME, /**iden 1**/ FieldName.USER_ID, FieldName.USER_TYPE, FieldName.USERNAME,
+            "from {28},{0},{29} where {0}.{1} = {28}.{30} and {28}.{31} = {29}.{32} ",
+            /**tablename 0 **/ FieldName.TABLE_NAME, /**iden 1**/ FieldName.USER_ID, User_type.FieldName.USER_TYPE_NAME, FieldName.USERNAME,
             FieldName.PASSWORD, FieldName.T_PRENAME, FieldName.T_NAME, FieldName.E_PRENAME, FieldName.E_NAME,
             FieldName.CITIZEN_ID, FieldName.GENDER, FieldName.EMAIL, FieldName.TEL, FieldName.ADDR,
             FieldName.FILE_NAME_PIC, FieldName.TIMESTAMP,  /***common 15***/
@@ -25,7 +25,8 @@ namespace educationalProject.Models.Wrappers
             FieldName.GRAD_YEAR,FieldName.GRAD_SEMESTER,FieldName.GRAD_DATE,FieldName.STATUS,FieldName.QUOTA,
             FieldName.SUBTYPE,FieldName.COOP,
 
-            User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_ID);
+            User_list.FieldName.TABLE_NAME,User_type.FieldName.TABLE_NAME,
+            User_list.FieldName.USER_ID, User_list.FieldName.USER_TYPE_ID,User_type.FieldName.USER_TYPE_ID);
         }
         public async Task<object> Insert(List<UsernamePassword> list, List<string> target_curri_id_list)
         {
@@ -105,9 +106,9 @@ namespace educationalProject.Models.Wrappers
                                    "insert into {14} values ('{2}') " +
                                    "end ", User_list.FieldName.TABLE_NAME, Personnel.FieldName.USERNAME, item.username,
                                    Personnel.FieldName.EMAIL, temp6tablename,
-                                   User_list.FieldName.USER_TYPE, FieldName.PASSWORD, FieldName.TIMESTAMP,
+                                   User_list.FieldName.USER_TYPE_ID, FieldName.PASSWORD, FieldName.TIMESTAMP,
                                    User_list.FieldName.USER_ID,
-                                   /*****9****/ "นักศึกษา", item.password, ts,
+                                   /*****9****/ 3, item.password, ts,
                                    /****12****/ FieldName.TABLE_NAME, FieldName.USER_ID, temp5tablename,
                                    Personnel.FieldName.T_NAME
                                    );

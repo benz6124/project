@@ -10,7 +10,7 @@ namespace educationalProject.Models
         {
             public static readonly string USERNAME = "USERNAME";
             public static readonly string USER_ID = "USER_ID";
-            public static readonly string USER_TYPE = "USER_TYPE";
+            public static readonly string USER_TYPE_ID = "USER_TYPE_ID";
             public static readonly string T_PRENAME = "T_PRENAME";
             public static readonly string T_NAME = "T_NAME";
             public static readonly string E_PRENAME = "E_PRENAME";
@@ -28,7 +28,7 @@ namespace educationalProject.Models
         {
             public static readonly string USER_ID = "@" + FieldName.USER_ID;
             public static readonly string USERNAME = "@" + FieldName.USERNAME;
-            public static readonly string USER_TYPE = "@" + FieldName.USER_TYPE;
+            public static readonly string USER_TYPE_ID = "@" + FieldName.USER_TYPE_ID;
             public static readonly string T_PRENAME = "@" + FieldName.T_PRENAME;
             public static readonly string T_NAME = "@" + FieldName.T_NAME;
             public static readonly string E_PRENAME = "@" + FieldName.E_PRENAME;

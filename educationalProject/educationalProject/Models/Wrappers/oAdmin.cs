@@ -15,8 +15,8 @@ namespace educationalProject.Models.Wrappers
             return string.Format("select {0}.{1},{2},{3},{4},{5}," +
             "{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}," +
             "{16} " +
-            "from {17},{0} where {1} = {18}",
-            /**tablename 0 **/ FieldName.TABLE_NAME, /**iden 1**/ FieldName.ADMIN_ID, FieldName.USER_TYPE, FieldName.USERNAME,
+            "from {17},{0},{18} where {1} = {19} and {17}.{20} = {18}.{21} ",
+            /**tablename 0 **/ FieldName.TABLE_NAME, /**iden 1**/ FieldName.ADMIN_ID, User_type.FieldName.USER_TYPE_NAME, FieldName.USERNAME,
             FieldName.PASSWORD, FieldName.T_PRENAME, FieldName.T_NAME, FieldName.E_PRENAME, FieldName.E_NAME,
             FieldName.CITIZEN_ID, FieldName.GENDER, FieldName.EMAIL, FieldName.TEL, FieldName.ADDR,
             FieldName.FILE_NAME_PIC, FieldName.TIMESTAMP,  /***common 15***/
@@ -24,7 +24,8 @@ namespace educationalProject.Models.Wrappers
             /**extended data**/
             FieldName.ADMIN_CREATOR_ID,
 
-            User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_ID);
+            User_list.FieldName.TABLE_NAME,User_type.FieldName.TABLE_NAME,
+            User_list.FieldName.USER_ID,User_list.FieldName.USER_TYPE_ID, User_type.FieldName.USER_TYPE_ID);
         }
         private string getselectcmd()
         {
@@ -67,7 +68,7 @@ namespace educationalProject.Models.Wrappers
 
                                       "alter table {0} " +
                                       "alter column [c_t_name] VARCHAR(60) collate database_default ",
-                                      temp5tablename, FieldName.ADMIN_ID, FieldName.USER_TYPE, FieldName.USERNAME,
+                                      temp5tablename, FieldName.ADMIN_ID, User_type.FieldName.USER_TYPE_NAME, FieldName.USERNAME,
                                       FieldName.T_PRENAME, FieldName.T_NAME, FieldName.EMAIL, FieldName.FILE_NAME_PIC,
                                       FieldName.TIMESTAMP, FieldName.ADMIN_CREATOR_ID, DBFieldDataType.USERNAME_TYPE,
                                       DBFieldDataType.FILE_NAME_TYPE);
@@ -76,7 +77,7 @@ namespace educationalProject.Models.Wrappers
                                        "select {1}, a1.{2}, a1.{3}, a1.{4}, a1.{5}, a1.{6}, a1.{7}, a1.{8}," +
                                        "a1.{9}, a2.{4}, a2.{5} " +
                                        "from ({10}) as a1, {11} as a2 where a1.{9} = a2.{12} ",
-                                       temp5tablename, FieldName.ADMIN_ID, FieldName.USER_TYPE, FieldName.USERNAME,
+                                       temp5tablename, FieldName.ADMIN_ID, User_type.FieldName.USER_TYPE_NAME, FieldName.USERNAME,
                                        FieldName.T_PRENAME, FieldName.T_NAME, FieldName.EMAIL, FieldName.FILE_NAME_PIC,
                                        FieldName.TIMESTAMP, FieldName.ADMIN_CREATOR_ID, getSelectAdminByJoinCommand(),
                                        User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_ID);
@@ -84,7 +85,7 @@ namespace educationalProject.Models.Wrappers
             string insertintotemp5_2 = string.Format("insert into {0} " +
                                        "select {1}, {2}, {3}, {4},{5}, {6}, {7}, {8}, null, null, null " +
                                        "from ({9}) as adm where {10} is null ",
-                                        temp5tablename, FieldName.ADMIN_ID, FieldName.USER_TYPE, FieldName.USERNAME,
+                                        temp5tablename, FieldName.ADMIN_ID, User_type.FieldName.USER_TYPE_NAME, FieldName.USERNAME,
                                        FieldName.T_PRENAME, FieldName.T_NAME, FieldName.EMAIL, FieldName.FILE_NAME_PIC,
                                        FieldName.TIMESTAMP, getSelectAdminByJoinCommand(), FieldName.ADMIN_CREATOR_ID);
 
@@ -93,7 +94,6 @@ namespace educationalProject.Models.Wrappers
             return string.Format("BEGIN {0} {1} {2} {3} END ", createtabletemp5, insertintotemp5_1,
                 insertintotemp5_2, selectcmd);
         }
-
 
         public async Task<object> Select()
         {
@@ -121,7 +121,7 @@ namespace educationalProject.Models.Wrappers
                             file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString()),
                             email = item.ItemArray[data.Columns[FieldName.EMAIL].Ordinal].ToString(),
                             username = item.ItemArray[data.Columns[FieldName.USERNAME].Ordinal].ToString(),
-                            user_type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString(),
+                            user_type = item.ItemArray[data.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString(),
                             admin_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ADMIN_ID].Ordinal])
                         });
                     }
@@ -179,9 +179,9 @@ namespace educationalProject.Models.Wrappers
                                "else " +
                                "RETURN ", User_list.FieldName.TABLE_NAME, Personnel.FieldName.USERNAME, username,
                                Personnel.FieldName.EMAIL, temp6tablename,
-                               User_list.FieldName.USER_TYPE, FieldName.PASSWORD, FieldName.TIMESTAMP,
+                               User_list.FieldName.USER_TYPE_ID, FieldName.PASSWORD, FieldName.TIMESTAMP,
                                User_list.FieldName.USER_ID,
-                               /*****9****/ "ผู้ดูแลระบบ", password, ts,
+                               /*****9****/ 7, password, ts,
                                /****12****/ FieldName.TABLE_NAME, FieldName.ADMIN_ID, FieldName.ADMIN_CREATOR_ID, admin_creator_id,
                                FieldName.T_NAME,t_name);
 
@@ -206,7 +206,7 @@ namespace educationalProject.Models.Wrappers
                             file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[FieldName.FILE_NAME_PIC].Ordinal].ToString()),
                             email = item.ItemArray[data.Columns[FieldName.EMAIL].Ordinal].ToString(),
                             username = item.ItemArray[data.Columns[FieldName.USERNAME].Ordinal].ToString(),
-                            user_type = item.ItemArray[data.Columns[FieldName.USER_TYPE].Ordinal].ToString(),
+                            user_type = item.ItemArray[data.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString(),
                             admin_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ADMIN_ID].Ordinal])
                         });
                     }

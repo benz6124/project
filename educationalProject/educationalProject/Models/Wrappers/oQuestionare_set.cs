@@ -11,63 +11,25 @@ namespace educationalProject.Models.Wrappers
     {
         private string getSelectByCurriculumAcademicCommand()
         {
-            return string.Format("select {0}.*,{1},{2},{3},{4} " +
-                                  "from {0},{5},{6} " +
-                                  "where {7} = '{8}' and {9} = {10} " +
-                                  "and {0}.{11} = {5}.{12} and {13} = {14} order by {15} desc ",
-                                  FieldName.TABLE_NAME,Questionare_privilege.FieldName.PRIVILEGE,
-                                  User_list.FieldName.USER_TYPE,Personnel.FieldName.T_PRENAME,Personnel.FieldName.T_NAME,
-                                  Questionare_privilege.FieldName.TABLE_NAME,User_list.FieldName.TABLE_NAME,
-                                  FieldName.CURRI_ID,curri_id,FieldName.ACA_YEAR,aca_year,
-                                  FieldName.QUESTIONARE_SET_ID,Questionare_privilege.FieldName.QUESTIONARE_SET_ID,
-                                  User_list.FieldName.USER_ID,FieldName.PERSONNEL_ID,FieldName.DATE
+            return string.Format("SELECT {0}.*,{1},{2}, " +
+                "{3} = {4}" +
+                ", {5} from {0}, {6}, {7}, {8} " +
+                "where {9} = '{10}' and {11} = {12} " +
+                "and {0}.{13} = {6}.{14} " +
+                "and {15} = {16} " +
+                "and {17}.{18} = {1} order by {19} desc ",
+                FieldName.TABLE_NAME,Questionare_privilege.FieldName.PRIVILEGE_TYPE_ID,
+                User_type.FieldName.USER_TYPE_NAME,User_list.FieldName.T_PRENAME,
+                NameManager.GatherSQLCASEForPrename(User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_TYPE_ID, User_list.FieldName.T_PRENAME),
+                User_list.FieldName.T_NAME,Questionare_privilege.FieldName.TABLE_NAME, /*6*/
+                User_type.FieldName.TABLE_NAME /*7*/,
+                User_list.FieldName.TABLE_NAME /*8*/,
+                FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year,
+                FieldName.QUESTIONARE_SET_ID, Questionare_privilege.FieldName.QUESTIONARE_SET_ID,
+                FieldName.PERSONNEL_ID,User_list.FieldName.USER_ID,
+                User_type.FieldName.TABLE_NAME, User_type.FieldName.USER_TYPE_ID,
+                FieldName.DATE
                 );
-        }
-        public object Select()
-        {
-            DBConnector d = new DBConnector();
-            if (!d.SQLConnect())
-                return WebApiApplication.CONNECTDBERRSTRING;
-            List<oQuestionare_set> result = new List<oQuestionare_set>();
-            d.iCommand.CommandText = string.Format("select * from {0}", FieldName.TABLE_NAME);
-            try
-            {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
-                if (res.HasRows)
-                {
-                    DataTable data = new DataTable();
-                    data.Load(res);
-                    foreach (DataRow item in data.Rows)
-                    {
-                        result.Add(new oQuestionare_set
-                        {
-                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                            name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString(),
-                            personnel_id = item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal]) : 0,
-                            questionare_set_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.QUESTIONARE_SET_ID].Ordinal]),
-                            date = Convert.ToDateTime(item.ItemArray[data.Columns[Self_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
-                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString()
-                        });
-                    }
-                    data.Dispose();
-                }
-                else
-                {
-                    //Reserved for return error string
-                }
-                res.Close();
-            }
-            catch (Exception ex)
-            {
-                //Handle error from sql execution
-                return ex.Message;
-            }
-            finally
-            {
-                //Whether it success or not it must close connection in order to end block
-                d.SQLDisconnect();
-            }
-            return result;
         }
 
         public async Task<object> SelectWithDetail(oCurriculum_academic curriacadata)
@@ -93,30 +55,21 @@ namespace educationalProject.Models.Wrappers
                         int qid = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.QUESTIONARE_SET_ID].Ordinal]);
                         if (result.FirstOrDefault(t => t.questionare_set_id == qid) == null)
                         {
-                            if(item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString() == "อาจารย์")
-                            result.Add(new Questionare_set_detail
-                            {
-                                aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                                name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString(),
-                                personnel_id = item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal]) : 0,
-                                questionare_set_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.QUESTIONARE_SET_ID].Ordinal]),
-                                date = Convert.ToDateTime(item.ItemArray[data.Columns[Self_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
-                                curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                                t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
-                            });
-                            else
                                 result.Add(new Questionare_set_detail
                                 {
                                     aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
                                     name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString(),
                                     personnel_id = item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal]) : 0,
                                     questionare_set_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.QUESTIONARE_SET_ID].Ordinal]),
-                                    date = Convert.ToDateTime(item.ItemArray[data.Columns[Self_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
+                                    date = Convert.ToDateTime(item.ItemArray[data.Columns[FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
                                     curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                                    t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
+                                    t_name = item.ItemArray[data.Columns[User_list.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
                                 });
                         }
-                        result.First(t => t.questionare_set_id == qid).target.Add(item.ItemArray[data.Columns[Questionare_privilege.FieldName.PRIVILEGE].Ordinal].ToString());
+                        result.First(t => t.questionare_set_id == qid).target.Add(new User_type {
+                            user_type_id = Convert.ToInt32(item.ItemArray[data.Columns[Questionare_privilege.FieldName.PRIVILEGE_TYPE_ID].Ordinal]),
+                            user_type = item.ItemArray[data.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString()
+                        });
                     }
                     data.Dispose();
                 }
@@ -312,11 +265,9 @@ namespace educationalProject.Models.Wrappers
 
              string createtabletemp3 = string.Format("create table {0} (" +
                                        "[row_num] INT IDENTITY(1, 1) NOT NULL," +
-                                       "[{1}] VARCHAR(30) NOT NULL," +
-                                       "PRIMARY KEY ([row_num])) " +
-                                       "ALTER TABLE {0} " +
-                                       "ALTER COLUMN {1} VARCHAR(30) COLLATE DATABASE_DEFAULT "
-                                       , temp3tablename, Questionare_privilege.FieldName.PRIVILEGE);
+                                       "[{1}] INT NULL," +
+                                       "PRIMARY KEY ([row_num])) "
+                                       , temp3tablename, Questionare_privilege.FieldName.PRIVILEGE_TYPE_ID);
 
 
             string insertintotemp1 = string.Format("INSERT INTO {0} " +
@@ -339,12 +290,12 @@ namespace educationalProject.Models.Wrappers
 
             foreach (User_type u in qdata.my_target)
             {
-                insertintotemp3 += string.Format(",('{0}')", u.user_type);
+                insertintotemp3 += string.Format(",('{0}')", u.user_type_id);
             }
 
             string insertintoquestionareprivilege = string.Format(" INSERT INTO {0} " +
                                         "select {1},{2} from {3},{4} where {2} is not null ",
-                                        Questionare_privilege.FieldName.TABLE_NAME, FieldName.QUESTIONARE_SET_ID, Questionare_privilege.FieldName.PRIVILEGE,
+                                        Questionare_privilege.FieldName.TABLE_NAME, FieldName.QUESTIONARE_SET_ID, Questionare_privilege.FieldName.PRIVILEGE_TYPE_ID,
                                         temp1tablename, temp3tablename);
 
             string insertintoquestionarequestionobj = string.Format(" INSERT INTO {0} " +
@@ -373,30 +324,22 @@ namespace educationalProject.Models.Wrappers
                         int qid = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.QUESTIONARE_SET_ID].Ordinal]);
                         if (result.FirstOrDefault(t => t.questionare_set_id == qid) == null)
                         {
-                            if (item.ItemArray[data.Columns[User_list.FieldName.USER_TYPE].Ordinal].ToString() == "อาจารย์")
-                                result.Add(new Questionare_set_detail
-                                {
-                                    aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                                    name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString(),
-                                    personnel_id = item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal]) : 0,
-                                    questionare_set_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.QUESTIONARE_SET_ID].Ordinal]),
-                                    date = Convert.ToDateTime(item.ItemArray[data.Columns[Self_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
-                                    curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                                    t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
-                                });
-                            else
-                                result.Add(new Questionare_set_detail
-                                {
-                                    aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                                    name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString(),
-                                    personnel_id = item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal]) : 0,
-                                    questionare_set_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.QUESTIONARE_SET_ID].Ordinal]),
-                                    date = Convert.ToDateTime(item.ItemArray[data.Columns[Self_evaluation.FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
-                                    curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                                    t_name = item.ItemArray[data.Columns[Teacher.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
-                                });
+                            result.Add(new Questionare_set_detail
+                            {
+                                aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
+                                name = item.ItemArray[data.Columns[FieldName.NAME].Ordinal].ToString(),
+                                personnel_id = item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PERSONNEL_ID].Ordinal]) : 0,
+                                questionare_set_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.QUESTIONARE_SET_ID].Ordinal]),
+                                date = Convert.ToDateTime(item.ItemArray[data.Columns[FieldName.DATE].Ordinal].ToString(), System.Globalization.CultureInfo.CurrentCulture).GetDateTimeFormats()[3],
+                                curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
+                                t_name = item.ItemArray[data.Columns[User_list.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Teacher.FieldName.T_NAME].Ordinal].ToString()
+                            });
                         }
-                        result.First(t => t.questionare_set_id == qid).target.Add(item.ItemArray[data.Columns[Questionare_privilege.FieldName.PRIVILEGE].Ordinal].ToString());
+                        result.First(t => t.questionare_set_id == qid).target.Add(new User_type
+                        {
+                            user_type_id = Convert.ToInt32(item.ItemArray[data.Columns[Questionare_privilege.FieldName.PRIVILEGE_TYPE_ID].Ordinal]),
+                            user_type = item.ItemArray[data.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString()
+                        });
                     }
                     data.Dispose();
                 }

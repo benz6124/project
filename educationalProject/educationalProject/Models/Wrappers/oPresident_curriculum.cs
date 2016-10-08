@@ -68,10 +68,10 @@ namespace educationalProject.Models.Wrappers
                                      FieldName.ACA_YEAR,ParameterName.ACA_YEAR);
 
             string selallteacherwithcurri = string.Format("select {0}.*,{1},{2},{3},{4} from {0},{5} " +
-                                            "where {6} = 'อาจารย์' and {0}.{7} = {5}.{8} " +
+                                            "where {6} = 1 and {0}.{7} = {5}.{8} " +
                                             "and {9} in (select {10} from {11} where {12} = {13}) ",
                                             User_curriculum.FieldName.TABLE_NAME, Teacher.FieldName.T_PRENAME, Teacher.FieldName.T_NAME, Teacher.FieldName.FILE_NAME_PIC,
-                                            Teacher.FieldName.EMAIL, User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_TYPE,
+                                            Teacher.FieldName.EMAIL, User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_TYPE_ID,
                                             User_curriculum.FieldName.USER_ID, User_list.FieldName.USER_ID,
                                             User_curriculum.FieldName.CURRI_ID,Curriculum_academic.FieldName.CURRI_ID, Curriculum_academic.FieldName.TABLE_NAME,
                                             Curriculum_academic.FieldName.ACA_YEAR,ParameterName.ACA_YEAR);
