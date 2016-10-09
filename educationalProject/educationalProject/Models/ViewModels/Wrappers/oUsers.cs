@@ -274,7 +274,7 @@ namespace educationalProject.Models.ViewModels.Wrappers
                 "from {3},{4} " +
                 "where {5} = {6} " +
                 "and {3}.{7} = {4}.{8} ",
-                NameManager.GatherSQLCASEForPrename(User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_TYPE_ID, User_list.FieldName.T_PRENAME),
+                NameManager.GatherSQLCASEForPrenameWithNullHandling(User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_TYPE_ID, User_list.FieldName.T_PRENAME),
                 User_list.FieldName.T_NAME,User_type.FieldName.USER_TYPE_NAME,
                 User_list.FieldName.TABLE_NAME, User_type.FieldName.TABLE_NAME,
                 User_list.FieldName.USER_ID, User_list.ParameterName.USER_ID,

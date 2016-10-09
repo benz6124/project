@@ -3947,8 +3947,7 @@ $scope.save_to_server = function(my_modal) {
         });
     });
 });
-app.controller('manage_user_type_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
-   $scope.my_type = '';
+app.controller('manage_user_type_controller', function($scope, $http,$alert,$loading,$rootScope,alertCaller) {
         $scope.please_wait = false;
     $scope.$on("modal.hide", function (event, args) {
      $scope.init();
@@ -3959,9 +3958,7 @@ app.controller('manage_user_type_controller', function($scope, $http,$alert,$loa
     
 $scope.init =function() {
 $scope.add_these_type= [];
-      $scope.my_type = '';
     $scope.please_wait = false;
-$scope.choose_type = false;
           $http.get('/api/usertype/getallusertype').success(function (data) {
                 $scope.all_usertype = data;
               });
@@ -4946,39 +4943,35 @@ $scope.title_choosen = {};
 });
 
 app.controller('change_priviledge_by_type_admin_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
-$scope.init =function() {
-    $scope.not_choose_title_yet = true;
-   $scope.manage_privilege_admin_result={};
-$scope.title_choosen = {};
+    $scope.init = function () {
+        $scope.not_choose_title_yet = true;
+        $scope.privilege_admin_obj = {};
+        $scope.title_choosen = {};
+        $http.get('/api/title').success(function (data) {
+            $scope.all_title = data;
+        });
+    }
 
-  $http.get('/api/title').success(function (data) {
-             $scope.all_title = data;
-           });
-}
-
     $scope.not_choose_title_yet = true;
 $scope.title_choosen = {};
-                 $scope.manage_privilege_admin_result = {};
+  $scope.privilege_admin_obj = {};
   
-      $scope.$on("modal.hide", function (event, args) {
-     $scope.init();
-    });
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
     });
 
     $scope.still_not_complete = function(){
         var index;
-        if(!$scope.manage_privilege_admin_result){
+        if(!$scope.privilege_admin_obj){
             return true;
         }
-        for(index=0;index<$scope.manage_privilege_admin_result.list.length;index++){
-            if(!$scope.manage_privilege_admin_result.list[index].my_privilege ){
+        for(index=0;index<$scope.privilege_admin_obj.privilege_list.length;index++){
+            if(!$scope.privilege_admin_obj.privilege_list[index].privilege ){
                 return true;
             }
         }
 
-        if(angular.equals($scope.copy_save,$scope.manage_privilege_admin_result.list)==true){
+        if(angular.equals($scope.copy_save,$scope.privilege_admin_obj.privilege_list)==true){
             return true;
         }
         return false;
@@ -4998,18 +4991,17 @@ $scope.title_choosen = {};
              }
          ).success(function (data) {
                    $scope.not_choose_title_yet = false;
-              $scope.manage_privilege_admin_result = data;
-               $scope.nothing_change = true;
+              $scope.privilege_admin_obj = data;
                var index;
                var index2;
-                for(index=0;index< $scope.manage_privilege_admin_result.list.length;index++){
-                for(index2=0;index2< $scope.manage_privilege_admin_result.choices.length;index2++){
-                    if($scope.manage_privilege_admin_result.list[index].my_privilege.title_privilege_code == $scope.manage_privilege_admin_result.choices[index2].title_privilege_code){
-                        $scope.manage_privilege_admin_result.list[index].my_privilege = $scope.manage_privilege_admin_result.choices[index2];
+                for(index=0;index< $scope.privilege_admin_obj.privilege_list.length;index++){
+                for(index2=0;index2< $scope.privilege_admin_obj.choices.length;index2++){
+                    if($scope.privilege_admin_obj.privilege_list[index].privilege.title_privilege_code == $scope.privilege_admin_obj.choices[index2].title_privilege_code){
+                        $scope.privilege_admin_obj.privilege_list[index].privilege = $scope.privilege_admin_obj.choices[index2];
                     }
                 }
             }
-            $scope.copy_save = angular.copy($scope.manage_privilege_admin_result.list);
+            $scope.copy_save = angular.copy($scope.privilege_admin_obj.privilege_list);
          });
     }
     $scope.close_modal = function(my_modal){
@@ -5018,7 +5010,7 @@ $scope.title_choosen = {};
     $scope.save_to_server = function(my_modal){
         $http.put(
              '/api/defaultprivilegebytype',
-             JSON.stringify($scope.manage_privilege_admin_result),
+             JSON.stringify($scope.privilege_admin_obj),
              {
                  headers: {
                      'Content-Type': 'application/json'

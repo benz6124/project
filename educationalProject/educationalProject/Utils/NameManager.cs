@@ -26,5 +26,18 @@ namespace educationalProject.Utils
                 "ELSE {0}.{2} " +
             "END ",tbl_name, col_to_check, col_to_return);
         }
+
+        public static string GatherSQLCASEForPrenameWithNullHandling(string tbl_name, string col_to_check, string col_to_return)
+        {
+            return string.Format(
+            "CASE " +
+                "WHEN {0}.{1} = 1 THEN " +
+                    "CASE " +
+                        "WHEN {0}.{2} in ('นาย','นางสาว','นาง') THEN 'อาจารย์' " +
+                        "ELSE isnull({0}.{2},'') " +
+                    "END " +
+                "ELSE isnull({0}.{2},'') " +
+            "END ", tbl_name, col_to_check, col_to_return);
+        }
     }
 }

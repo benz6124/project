@@ -1368,19 +1368,17 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                             <tr>
                                                   <th class="col-xs-1 " rowspan="2">ประเภทบุคลากร</th>
                                     <th class="col-xs-3 " colspan="3"> 
-
-    <select data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title.name for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.$parent.title_choosen" data-qo-disable-clear="true">
-<option style="display:none" value=""></option></select>   
-
+                        <select data-qo-button-class="mySelect titile_priviledge" data-qo-speed="fastest" data-nq-select="" data-ng-options="title.name for title in all_title" data-qo-effect="flip-x" data-ng-change="find_information()"  data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.$parent.title_choosen" data-qo-disable-clear="true">
+<option style="display:none" value=""></option></select>
                                         </th>
                                             </tr>
                                         </thead>
                                         <tbody class="flattened" ng-hide="not_choose_title_yet"> 
-                                            <tr ng-repeat="each_type in manage_privilege_admin_result.list">
+                                            <tr ng-repeat="each_type in privilege_admin_obj.privilege_list">
                           <td><span style="font-size:21px;">{{each_type.user_type}}</span> </td>
                                            
                                            <td style="padding-left: 0px;padding-right: 0px;">
-    <select data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_admin_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง"  data-ng-model="each_type.my_privilege" data-qo-disable-clear="true">
+    <select data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in privilege_admin_obj.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง"  data-ng-model="each_type.privilege" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>
                                            </td>
                                             </tr>
