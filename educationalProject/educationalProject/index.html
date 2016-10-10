@@ -1253,11 +1253,11 @@
                                             </tr>
                                         </thead>
                                         <tbody class="flattened" ng-hide="not_choose_title_yet"> 
-                                            <tr ng-repeat="each_type in manage_privilege_president_result.list">
+                                            <tr ng-repeat="each_type in privilege_pres_by_type.privilege_list">
                           <td><span style="font-size:21px;">{{each_type.user_type}}</span> </td>
                                            
                                            <td style="padding-left: 0px;padding-right: 0px;">
-    <select data-qo-disable-clear="true" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_president_result.choices track by choice.title_privilege_code" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกระดับการเข้าถึง" data-ng-model="$parent.each_type.my_privilege" >
+    <select data-qo-disable-clear="true" data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in privilege_pres_by_type.choices track by choice.title_privilege_code" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกระดับการเข้าถึง" data-ng-model="each_type.privilege" >
 <option style="display:none" value=""></option></select>  
                                            </td>
                                             </tr>
@@ -1331,13 +1331,13 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                             </tr>
                                         </thead>
                                         <tbody class="flattened" ng-hide="not_choose_title_yet"> 
-                                            <tr ng-repeat="each_person in manage_privilege_president_person_result.list">
+                                            <tr ng-repeat="each_person in privilege_pres_by_person.privilege_list">
                                               <td>
 <div class="thumb_center_please " ng-style="{'background-image': 'url('+each_person.file_name_pic+')'}"></div>
                                               </td>
                           <td><span style="font-size:21px;">{{each_person.t_name}}</span> </td>
                                            <td style="padding-left: 0px;padding-right: 0px;">
-    <select data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in manage_privilege_president_person_result.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="$parent.each_person.my_privilege" data-qo-disable-clear="true">
+    <select data-qo-button-class="mySelect pink_please" data-qo-speed="fastest" data-nq-select="" data-ng-options="choice.privilege for choice in privilege_pres_by_person.choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหัวข้อของระดับการเข้าถึง" data-ng-model="each_person.privilege" data-qo-disable-clear="true">
 <option style="display:none" value=""></option></select>
                                            </td>
                                             </tr>
@@ -3888,7 +3888,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                             <tr ng-repeat="survey in manage_survey_my_world_wide_surveys">                               
  <td class="left_column" style="padding-left:10px;"><span style="font-size:19px;">{{survey.name}}</span> </td>                                        
         <td>
-<span ng-repeat="each_target in survey.target" style="padding-left:0px;font-size:19px">{{each_target}}<br/></span>
+<span ng-repeat="each_target in survey.target" style="padding-left:0px;font-size:19px">{{each_target.user_type}}<br/></span>
   </td>
                       <td><span style="font-size:19px">{{survey.date}}</span> </td>              
                                                               <td><span style="font-size:19px">{{survey.t_name}}</span> </td>
@@ -4040,7 +4040,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>Build:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>488</p>
+                    <p>491</p>
                 </div>
             </div>
             <div class='row'>
@@ -4048,7 +4048,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>ปรับปรุงล่าสุด:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>2 ตุลาคม 2559</p>
+                    <p>10 ตุลาคม 2559</p>
                 </div>
             </div>
             </div>

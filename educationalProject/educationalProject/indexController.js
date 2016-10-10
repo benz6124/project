@@ -3381,11 +3381,11 @@ $rootScope.manage_survey_still_same = function(){
 $scope.right_target = function(targets){
     var i;
     for(i= 0 ;i<targets.length;i++ ){
-        if( $rootScope.current_user.user_type == targets[i]){
+        if( $rootScope.current_user.user_type == targets[i].user_type){
             return true;
         }
 
-        if(targets[i] == 'กรรมการหลักสูตร' && $rootScope.current_user.committee_in){
+        if(targets[i].user_type == 'กรรมการหลักสูตร' && $rootScope.current_user.committee_in){
             if($rootScope.current_user.committee_in[$scope.curri_choosen.curri_id]){
                 var index;
                 for(index=0;index<$rootScope.current_user.committee_in[$scope.curri_choosen.curri_id].length;index++){
@@ -4485,7 +4485,7 @@ $scope.init =function() {
      $scope.choose_not_complete = true;
               $scope.curri_choosen = {};
     $scope.not_choose_title_yet = true;
-   $scope.manage_privilege_president_result={};
+   $scope.privilege_pres_by_type={};
 $scope.title_choosen = {};
  $scope.all_curri_that_have_privileges = [];
       $rootScope.curri_that_be_president_in($scope.all_curri_that_have_privileges);
@@ -4495,30 +4495,27 @@ $scope.title_choosen = {};
            });
 }
 
-    $scope.not_choose_title_yet = true;
+  $scope.not_choose_title_yet = true;
 $scope.title_choosen = {};
-     $scope.choose_not_complete = true;
-              $scope.curri_choosen = {};
-                 $scope.manage_privilege_president_result = {};
+  $scope.choose_not_complete = true;
+  $scope.curri_choosen = {};
+  $scope.privilege_pres_by_type = {};
   
-      $scope.$on("modal.hide", function (event, args) {
-     $scope.init();
-    });
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
     });
 
     $scope.still_not_complete = function(){
         var index;
-        if(!$scope.manage_privilege_president_result){
+        if(!$scope.privilege_pres_by_type){
             return true;
         }
-        for(index=0;index<$scope.manage_privilege_president_result.list.length;index++){
-            if(!$scope.manage_privilege_president_result.list[index].my_privilege ){
+        for(index=0;index<$scope.privilege_pres_by_type.privilege_list.length;index++){
+            if(!$scope.privilege_pres_by_type.privilege_list[index].privilege ){
                 return true;
             }
         }
-           if(angular.equals($scope.copy_save,$scope.manage_privilege_president_result.list)==true){
+           if(angular.equals($scope.copy_save,$scope.privilege_pres_by_type.privilege_list)==true){
             return true;
         }
         return false;
@@ -4542,20 +4539,19 @@ $scope.title_choosen = {};
              }
          ).success(function (data) {    
                    $scope.not_choose_title_yet = false;
-              $scope.manage_privilege_president_result = data;
+              $scope.privilege_pres_by_type = data;
              $scope.choose_not_complete = false;
-               $scope.nothing_change = true;
                      var index;
             var index2;
            
-            for(index=0;index< $scope.manage_privilege_president_result.list.length;index++){
-                for(index2=0;index2< $scope.manage_privilege_president_result.choices.length;index2++){
-                    if($scope.manage_privilege_president_result.list[index].my_privilege.title_privilege_code == $scope.manage_privilege_president_result.choices[index2].title_privilege_code){
-                        $scope.manage_privilege_president_result.list[index].my_privilege = $scope.manage_privilege_president_result.choices[index2];      
+            for(index=0;index< $scope.privilege_pres_by_type.privilege_list.length;index++){
+                for(index2=0;index2< $scope.privilege_pres_by_type.choices.length;index2++){
+                    if($scope.privilege_pres_by_type.privilege_list[index].privilege.title_privilege_code == $scope.privilege_pres_by_type.choices[index2].title_privilege_code){
+                        $scope.privilege_pres_by_type.privilege_list[index].privilege = $scope.privilege_pres_by_type.choices[index2];      
                     }
                 }
             }
-   $scope.copy_save = angular.copy($scope.manage_privilege_president_result.list);
+   $scope.copy_save = angular.copy($scope.privilege_pres_by_type.privilege_list);
          });
     }
     $scope.close_modal = function(my_modal){
@@ -4564,7 +4560,7 @@ $scope.title_choosen = {};
     $scope.save_to_server = function(my_modal){
         $http.put(
              '/api/extraprivilegebytype',
-             JSON.stringify($scope.manage_privilege_president_result),
+             JSON.stringify($scope.privilege_pres_by_type),
              {
                  headers: {
                      'Content-Type': 'application/json'
@@ -4848,7 +4844,7 @@ $scope.init =function() {
      $scope.choose_not_complete = true;
               $scope.curri_choosen = {};
     $scope.not_choose_title_yet = true;
-   $scope.manage_privilege_president_result={};
+   $scope.privilege_pres_by_person={};
 $scope.title_choosen = {};
     $scope.all_curri_that_have_privileges = [];
       $rootScope.curri_that_be_president_in($scope.all_curri_that_have_privileges);
@@ -4862,24 +4858,21 @@ $scope.title_choosen = {};
 $scope.title_choosen = {};
      $scope.choose_not_complete = true;
               $scope.curri_choosen = {};
-                 $scope.manage_privilege_president_result = {};
-      $scope.$on("modal.hide", function (event, args) {
-     $scope.init();
-    });
+  $scope.privilege_pres_by_person = {};
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
     });
     $scope.still_not_complete = function(){
         var index;
-        if(!$scope.manage_privilege_president_person_result){
+        if(!$scope.privilege_pres_by_person){
             return true;
         }
-        for(index=0;index<$scope.manage_privilege_president_person_result.list.length;index++){
-            if(!$scope.manage_privilege_president_person_result.list[index].my_privilege ){
+        for(index=0;index<$scope.privilege_pres_by_person.privilege_list.length;index++){
+            if(!$scope.privilege_pres_by_person.privilege_list[index].privilege ){
                 return true;
             }
         }
-           if(angular.equals($scope.copy_save,$scope.manage_privilege_president_person_result.list)==true){
+           if(angular.equals($scope.copy_save,$scope.privilege_pres_by_person.privilege_list)==true){
             return true;
         }
         return false;
@@ -4904,20 +4897,20 @@ $scope.title_choosen = {};
              }
          ).success(function (data) {
                    $scope.not_choose_title_yet = false;
-              $scope.manage_privilege_president_person_result = data;
+              $scope.privilege_pres_by_person = data;
              $scope.choose_not_complete = false;
                $scope.nothing_change = true;
                      var index;
             var index2;
            
-            for(index=0;index< $scope.manage_privilege_president_person_result.list.length;index++){
-                for(index2=0;index2< $scope.manage_privilege_president_person_result.choices.length;index2++){      
-                    if($scope.manage_privilege_president_person_result.list[index].my_privilege.title_privilege_code == $scope.manage_privilege_president_person_result.choices[index2].title_privilege_code){
-                        $scope.manage_privilege_president_person_result.list[index].my_privilege = $scope.manage_privilege_president_person_result.choices[index2];
+            for(index=0;index< $scope.privilege_pres_by_person.privilege_list.length;index++){
+                for(index2=0;index2< $scope.privilege_pres_by_person.choices.length;index2++){      
+                    if($scope.privilege_pres_by_person.privilege_list[index].privilege.title_privilege_code == $scope.privilege_pres_by_person.choices[index2].title_privilege_code){
+                        $scope.privilege_pres_by_person.privilege_list[index].privilege = $scope.privilege_pres_by_person.choices[index2];
                     }
                 }
             }
-   $scope.copy_save = angular.copy($scope.manage_privilege_president_person_result.list);
+   $scope.copy_save = angular.copy($scope.privilege_pres_by_person.privilege_list);
          });
     }
     $scope.close_modal = function(my_modal){
@@ -4926,7 +4919,7 @@ $scope.title_choosen = {};
     $scope.save_to_server = function(my_modal){
         $http.put(
              '/api/extraprivilege',
-             JSON.stringify($scope.manage_privilege_president_person_result),
+             JSON.stringify($scope.privilege_pres_by_person),
              {
                  headers: {
                      'Content-Type': 'application/json'
