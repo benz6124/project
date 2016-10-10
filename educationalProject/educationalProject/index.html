@@ -1469,7 +1469,6 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                                 <th style="width:160px;padding-left: 0px; padding-right: 0px;">ชื่อ-นามสกุล</th>
  <th style="width:60px;padding-left: 0px;padding-right: 0px;">ประวัติการศึกษา</th>
                                    <th style="width:40px;padding-left: 0px; padding-right: 0px;">ประเภท</th>
-                                                <th style="width:60px;padding-left: 0px; padding-right: 0px;">ห้องพัก</th>
                                                 <th style="width:30px;padding-left: 0px; padding-right: 0px;">อีเมล์</th>
                                                 <th style="width:30px;padding-left: 0px; padding-right: 0px;">โทรศัพท์</th>
                                             </tr>
@@ -1479,14 +1478,13 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                              <td style=" padding-left: 0px; padding-right: 0px;" class="show_lightbox">
 <div class="thumb_center_please click_me" ng-click="openLightboxModal(person)" ng-style="{'background-image': 'url('+person.file_name_pic+')'}"></div>
                                               </td>
-                          <td><span style="font-size:19px;">{{person.t_name}}</span> </td>
+                          <td><span style="font-size:19px;">{{person.fullname}}</span> </td>
                                 <td>
 <span ng-repeat="each_edu in person.history" style="font-size:19px">{{each_edu.pre_major}} {{each_edu.major}} {{each_edu.college}}<br/></span>
 </td>
-  <td style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{person.user_type}}</span> </td>
-<td style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{person.room}}</span> </td>
-<td style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; " >{{person.email}}</span> </td>
-                         <td style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px; ">{{person.tel}}</span> </td>
+  <td style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px;">{{person.user_type}}</span> </td>
+<td style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px;" >{{person.email}}</span> </td>
+                         <td style="padding-left: 0px; padding-right: 0px;"><span style="font-size:19px;">{{person.tel}}</span> </td>
                                             </tr>
                                         </tbody>
                                     </table>
