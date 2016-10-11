@@ -1566,11 +1566,7 @@ $scope.indicator_choosen = {};
                  $scope.corresponding_indicators = [];
   $scope.disabled_search = false;
   $scope.all_curri_that_have_privileges = [];
-       var index;
-    var index2;
-
   $scope.$parent.scan_only_privilege_curri('28',$scope.all_curri_that_have_privileges);
-
    angular.forEach(
     angular.element("input[type='file']"),
     function(inputElem) {
@@ -1946,13 +1942,12 @@ $scope.init();
 app.controller('manage_admin_who_controller', function($scope, $rootScope,$alert,$http,request_years_from_curri_choosen_service,Lightbox,alertCaller) {
 $scope.init =function() {   
                        $scope.email_new_admin = "";
-                       $scope.add_admin_mode = false;
 
    $http.get('/api/admin').success(function (data) {
              $rootScope.all_admins = data;
            });
 }
-   $scope.add_admin_mode = false;
+
 $scope.email_new_admin = "";
 
  $scope.openLightboxModal = function (to_open) {
@@ -1960,10 +1955,6 @@ $scope.email_new_admin = "";
     $scope.fake_array.push(to_open);
     Lightbox.openModal( $scope.fake_array, 0);
   };
-
-   $scope.add_admin = function(){
-   $scope.add_admin_mode = true;
-   }
 
     $scope.$on("modal.hide", function (event, args) {
      $scope.init();
@@ -3593,7 +3584,6 @@ $scope.init =function() {
               $scope.curri_choosen = {};
                     $scope.result = {};
                     $scope.nothing_change = true;
-                      $rootScope.manage_survey_my_world_wide_surveys = [];
                           $scope.all_curri_that_have_privileges = [];
                           $scope.corresponding_aca_years = [];
   $scope.$parent.scan_only_privilege_curri('6',$scope.all_curri_that_have_privileges);
@@ -3728,13 +3718,10 @@ $scope.watch_preview = function(){
 }
 
 $scope.init =function() {
-                $scope.evidence_we_want = "";
-$scope.evidence_we_want = {};
-
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
               $scope.curri_choosen = {};
-                $scope.evidence_we_want = "";
+   $scope.evidence_we_want = "";
                     $scope.result = {};
                     $scope.code_we_want = "";
 $scope.corresponding_aca_years = [];
@@ -4401,7 +4388,7 @@ $rootScope.manage_bind_still_same = function(){
             alertCaller.error(null,'ท่านไม่สามารถลบตัวท่านเองออกจากหลักสูตรได้');
         }
         else{
-                     $rootScope.manage_bind_all_people_in_curri.splice(index_to_remove, 1);    
+        $rootScope.manage_bind_all_people_in_curri.splice(index_to_remove, 1);    
            $scope.nothing_change = false;
         }
     }
@@ -5354,9 +5341,7 @@ app.controller('change_password_controller', function($scope, $http,$alert,$load
   }
 
   $scope.save_to_server = function(my_modal){
-    
         $scope.to_sent = {};
-       
         $scope.to_sent.user_id =   $rootScope.current_user.user_id;
          $scope.to_sent.old_password = $scope.old_password;
         $scope.to_sent.new_password = $scope.new_password;
