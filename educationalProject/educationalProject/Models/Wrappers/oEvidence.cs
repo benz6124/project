@@ -9,59 +9,6 @@ namespace educationalProject.Models.Wrappers
 {
     public class oEvidence : Evidence
     {
-        public object Select()
-        {
-            DBConnector d = new DBConnector();
-            if (!d.SQLConnect())
-                return WebApiApplication.CONNECTDBERRSTRING;
-            List<oEvidence> result = new List<oEvidence>();
-            d.iCommand.CommandText =  string.Format("select * from {0}", FieldName.TABLE_NAME);
-            try
-            {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
-                if (res.HasRows)
-                {
-                    DataTable data = new DataTable();
-                    data.Load(res);
-                    foreach (DataRow item in data.Rows)
-                    {
-                        result.Add(new oEvidence
-                        {
-                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                            aca_year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.ACA_YEAR].Ordinal]),
-                            evidence_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_CODE].Ordinal]),
-                            evidence_name = item.ItemArray[data.Columns[FieldName.EVIDENCE_NAME].Ordinal].ToString(),
-                            file_name = item.ItemArray[data.Columns[FieldName.FILE_NAME].Ordinal].ToString(),
-                            secret = Convert.ToChar(item.ItemArray[data.Columns[FieldName.SECRET].Ordinal]),
-                            teacher_id = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal]),
-                            //DANGER NULLABLE ZONE
-                            primary_evidence_num = item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal].ToString() != "" ? Convert.ToInt32(item.ItemArray[data.Columns[FieldName.PRIMARY_EVIDENCE_NUM].Ordinal]):0,
-                            evidence_real_code = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.EVIDENCE_REAL_CODE].Ordinal]),
-                            indicator_num = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.INDICATOR_NUM].Ordinal])
-                        });
-                    }
-
-                    data.Dispose();
-                }
-                else
-                {
-                    //Reserved for return error string
-                }
-                res.Close();
-            }
-            catch (Exception ex)
-            {
-                //Handle error from sql execution
-                return ex.Message;
-            }
-            finally
-            {
-                //Whether it success or not it must close connection in order to end block
-                d.SQLDisconnect();
-            }
-            return result;
-        }
-
         public object SelectWhere(string wherecond)
         {
             DBConnector d = new DBConnector();
