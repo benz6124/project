@@ -9,7 +9,7 @@ namespace educationalProject.Models.Wrappers
 {
     public class oUser_curriculum : User_curriculum
     {
-        public async Task<object> InsertNewCurriculumTeacherStaffWithSelect(List<User_curriculum> list)
+        public async Task<object> InsertNewUserCurriculumWithSelect(List<User_curriculum> list)
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())

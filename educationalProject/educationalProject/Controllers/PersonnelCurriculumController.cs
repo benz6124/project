@@ -27,7 +27,7 @@ namespace educationalProject.Controllers
                 });
             }
 
-            object resultfromdb = await datacontext.InsertNewCurriculumTeacherStaffWithSelect(list);
+            object resultfromdb = await datacontext.InsertNewUserCurriculumWithSelect(list);
 
             if (resultfromdb.GetType().ToString() != "System.String")
                 return Ok(resultfromdb);

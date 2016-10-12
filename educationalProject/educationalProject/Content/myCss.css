@@ -696,9 +696,6 @@ input[type=radio] {
   cursor:pointer;
 }
 
-.profile_pic{
-  cursor:pointer;
-}
 .myColorBold{
   color:#6F002B;
   font-weight: bold;
@@ -1088,20 +1085,6 @@ font-size: 22px!important;
    padding-left: 14px;
 }
 
-.carousel-control{
-  opacity:0;
-}
-
-
-.carousel-control:hover{
-  opacity:.2; 
-  cursor: pointer;
-}
-.carousel.ng-isolate-scope{
-  width: 100% !important;
-  height: 100% !important;
-}
-
 .container {
   position: relative;
 }
@@ -1126,11 +1109,6 @@ font-size: 22px!important;
   overflow-x:hidden;
   overflow-y:auto;
 }
-
-.carousel{
-    max-height:100%;
-}
-
 
 .container_each {
   position: relative;
