@@ -18,8 +18,8 @@ namespace educationalProject.Models.Wrappers
                                      "and {0}.{13} = {6}.{14} and {15} = {16} " +
                                      "and {7}.{18} = {8}.{19} order by {17} desc ",
                                      FieldName.TABLE_NAME, Picture.FieldName.FILE_NAME, Picture.FieldName.CAPTION,
-                                     User_type.FieldName.USER_TYPE_NAME, Personnel.FieldName.T_PRENAME,
-                                     Personnel.FieldName.T_NAME,
+                                     User_type.FieldName.USER_TYPE_NAME, User_list.FieldName.T_PRENAME,
+                                     User_list.FieldName.T_NAME,
                                      Picture.FieldName.TABLE_NAME, User_list.FieldName.TABLE_NAME,User_type.FieldName.TABLE_NAME,
                                      FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year,
                                      FieldName.GALLERY_ID, Picture.FieldName.GALLERY_ID,
@@ -77,8 +77,8 @@ namespace educationalProject.Models.Wrappers
                                      "and {0}.{13} = {6}.{14} and {15} = {16} " +
                                      "and {7}.{18} = {8}.{19} order by {17} desc ",
                                      FieldName.TABLE_NAME, Picture.FieldName.FILE_NAME, Picture.FieldName.CAPTION,
-                                     User_type.FieldName.USER_TYPE_NAME, Personnel.FieldName.T_PRENAME,
-                                     Personnel.FieldName.T_NAME,
+                                     User_type.FieldName.USER_TYPE_NAME, User_list.FieldName.T_PRENAME,
+                                     User_list.FieldName.T_NAME,
                                      Picture.FieldName.TABLE_NAME, User_list.FieldName.TABLE_NAME, User_type.FieldName.TABLE_NAME,
                                      FieldName.CURRI_ID, curri_id, FieldName.ACA_YEAR, aca_year,
                                      FieldName.GALLERY_ID, Picture.FieldName.GALLERY_ID,

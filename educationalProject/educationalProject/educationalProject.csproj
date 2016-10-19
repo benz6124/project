@@ -223,7 +223,6 @@
     <Compile Include="Models\ViewModels\Minutes_detail.cs" />
     <Compile Include="Models\ViewModels\Others_evaluation_sub_indicator_name.cs" />
     <Compile Include="Models\ViewModels\Others_evaluation_s_indic_name_list_with_file_name.cs" />
-    <Compile Include="Models\ViewModels\Personnel.cs" />
     <Compile Include="Models\ViewModels\Personnel_educational.cs" />
     <Compile Include="Models\ViewModels\Personnel_with_t_name.cs" />
     <Compile Include="Models\ViewModels\Primary_evidence_detail.cs" />

@@ -69,7 +69,7 @@ namespace educationalProject.Models.Wrappers
                                 result.First(t => t.lab_num == labid).officer.Add(new Personnel_with_t_name
                                 {
                                     user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
-                                    t_name = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString()
+                                    t_name = item.ItemArray[data.Columns[User_list.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[User_list.FieldName.T_NAME].Ordinal].ToString()
                                 });
                             }
                         }
@@ -186,7 +186,7 @@ namespace educationalProject.Models.Wrappers
                                 result.First(t => t.lab_num == labid).officer.Add(new Personnel_with_t_name
                                 {
                                     user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
-                                    t_name = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString()
+                                    t_name = item.ItemArray[data.Columns[User_list.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[User_list.FieldName.T_NAME].Ordinal].ToString()
                                 });
                             }
                         }
@@ -287,7 +287,7 @@ namespace educationalProject.Models.Wrappers
                                 result.First(t => t.lab_num == labid).officer.Add(new Personnel_with_t_name
                                 {
                                     user_id = Convert.ToInt32(item.ItemArray[data.Columns[Lab_officer.FieldName.OFFICER].Ordinal]),
-                                    t_name = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString()
+                                    t_name = item.ItemArray[data.Columns[User_list.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[User_list.FieldName.T_NAME].Ordinal].ToString()
                                 });
                             }
                         }

@@ -38,8 +38,7 @@ namespace educationalProject.Controllers
         [ActionName("getonlynameandpfname")]
         public async Task<IHttpActionResult> PostToQueryTNamePFNameAndId([FromBody]string curri_id)
         {
-            datacontext.curri_id = curri_id;
-            return Ok(await datacontext.SelectPersonnelWithCurriculum());
+            return Ok(await datacontext.SelectPersonnelWithCurriculum(curri_id));
         }
     }
 }

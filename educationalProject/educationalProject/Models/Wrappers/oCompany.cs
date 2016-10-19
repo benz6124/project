@@ -102,13 +102,13 @@ namespace educationalProject.Models.Wrappers
                                    "else " +
                                    "begin " +
                                    "insert into {14} values ('{2}') " +
-                                   "end ", User_list.FieldName.TABLE_NAME, Personnel.FieldName.USERNAME, item.username,
-                                   Personnel.FieldName.EMAIL, temp6tablename,
+                                   "end ", User_list.FieldName.TABLE_NAME, User_list.FieldName.USERNAME, item.username,
+                                   User_list.FieldName.EMAIL, temp6tablename,
                                    User_list.FieldName.USER_TYPE_ID, FieldName.PASSWORD, FieldName.TIMESTAMP,
                                    User_list.FieldName.USER_ID,
                                    /*****9****/ 5, item.password, ts,
                                    /****12****/ FieldName.TABLE_NAME, FieldName.COMPANY_ID, temp5tablename,
-                                   Personnel.FieldName.T_NAME
+                                   User_list.FieldName.T_NAME
                                    );
 
             }

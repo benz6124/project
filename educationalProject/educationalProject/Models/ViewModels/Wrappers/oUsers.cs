@@ -292,22 +292,22 @@ namespace educationalProject.Models.ViewModels.Wrappers
                     foreach (DataRow item in data.Rows)
                     {
                         result.user_id = Convert.ToInt32(item.ItemArray[data.Columns[User_list.FieldName.USER_ID].Ordinal]);
-                        result.username = item.ItemArray[data.Columns[Personnel.FieldName.USERNAME].Ordinal].ToString();
+                        result.username = item.ItemArray[data.Columns[User_list.FieldName.USERNAME].Ordinal].ToString();
                         result.user_type = item.ItemArray[data.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString();
                         result.fullname = item.ItemArray[data.Columns["fullname"].Ordinal].ToString();
 
                         result.main_info = new ExpandoObject();
 
-                        result.main_info.file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[Personnel.FieldName.FILE_NAME_PIC].Ordinal].ToString());
+                        result.main_info.file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[User_list.FieldName.FILE_NAME_PIC].Ordinal].ToString());
 
                         /*Current editable data*/
-                        result.main_info.t_prename = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString();
-                        result.main_info.t_name = item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString();
-                        result.main_info.e_prename = item.ItemArray[data.Columns[Personnel.FieldName.E_PRENAME].Ordinal].ToString();
-                        result.main_info.e_name = item.ItemArray[data.Columns[Personnel.FieldName.E_NAME].Ordinal].ToString();
-                        result.main_info.email = item.ItemArray[data.Columns[Personnel.FieldName.EMAIL].Ordinal].ToString();
-                        result.main_info.tel = item.ItemArray[data.Columns[Personnel.FieldName.TEL].Ordinal].ToString();
-                        result.main_info.addr = item.ItemArray[data.Columns[Personnel.FieldName.ADDR].Ordinal].ToString();
+                        result.main_info.t_prename = item.ItemArray[data.Columns[User_list.FieldName.T_PRENAME].Ordinal].ToString();
+                        result.main_info.t_name = item.ItemArray[data.Columns[User_list.FieldName.T_NAME].Ordinal].ToString();
+                        result.main_info.e_prename = item.ItemArray[data.Columns[User_list.FieldName.E_PRENAME].Ordinal].ToString();
+                        result.main_info.e_name = item.ItemArray[data.Columns[User_list.FieldName.E_NAME].Ordinal].ToString();
+                        result.main_info.email = item.ItemArray[data.Columns[User_list.FieldName.EMAIL].Ordinal].ToString();
+                        result.main_info.tel = item.ItemArray[data.Columns[User_list.FieldName.TEL].Ordinal].ToString();
+                        result.main_info.addr = item.ItemArray[data.Columns[User_list.FieldName.ADDR].Ordinal].ToString();
                         /*=====================*/
                     }
                     data.Dispose();
@@ -1367,12 +1367,12 @@ namespace educationalProject.Models.ViewModels.Wrappers
                                    "else " +
                                    "begin " +
                                    "insert into {12} values ('{2}') " +
-                                   "end ", User_list.FieldName.TABLE_NAME, Personnel.FieldName.USERNAME, item.username,
-                                   Personnel.FieldName.EMAIL, temp6tablename,
+                                   "end ", User_list.FieldName.TABLE_NAME, User_list.FieldName.USERNAME, item.username,
+                                   User_list.FieldName.EMAIL, temp6tablename,
                                    User_list.FieldName.USER_TYPE_ID, Teacher.FieldName.PASSWORD, Teacher.FieldName.TIMESTAMP,
                                    User_list.FieldName.USER_ID,
                                    /*****9****/ usrtypeid, item.password, ts,
-                                   /****12****/ temp5tablename,Personnel.FieldName.T_NAME
+                                   /****12****/ temp5tablename, User_list.FieldName.T_NAME
                                    );
 
             }

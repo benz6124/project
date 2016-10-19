@@ -177,8 +177,8 @@ namespace educationalProject.Models.Wrappers
                                getselectcmd() + " " +
                                "end " +
                                "else " +
-                               "RETURN ", User_list.FieldName.TABLE_NAME, Personnel.FieldName.USERNAME, username,
-                               Personnel.FieldName.EMAIL, temp6tablename,
+                               "RETURN ", User_list.FieldName.TABLE_NAME, User_list.FieldName.USERNAME, username,
+                               User_list.FieldName.EMAIL, temp6tablename,
                                User_list.FieldName.USER_TYPE_ID, FieldName.PASSWORD, FieldName.TIMESTAMP,
                                User_list.FieldName.USER_ID,
                                /*****9****/ 7, password, ts,

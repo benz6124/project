@@ -43,21 +43,21 @@ namespace educationalProject.Models.Wrappers
                         if (usrtype == "อาจารย์")
                             result.Add(new User_curriculum_with_brief_detail
                             {
-                                user_id = Convert.ToInt32(item.ItemArray[data.Columns[Personnel.FieldName.USER_ID].Ordinal]),
-                                t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString()) +
-                                         item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString(),
+                                user_id = Convert.ToInt32(item.ItemArray[data.Columns[User_list.FieldName.USER_ID].Ordinal]),
+                                t_name = NameManager.GatherPreName(item.ItemArray[data.Columns[User_list.FieldName.T_PRENAME].Ordinal].ToString()) +
+                                         item.ItemArray[data.Columns[User_list.FieldName.T_NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                                file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[Personnel.FieldName.FILE_NAME_PIC].Ordinal].ToString()),
+                                file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[User_list.FieldName.FILE_NAME_PIC].Ordinal].ToString()),
                                 type = usrtype
                             });
                         else
                             result.Add(new User_curriculum_with_brief_detail
                             {
-                                user_id = Convert.ToInt32(item.ItemArray[data.Columns[Personnel.FieldName.USER_ID].Ordinal]),
-                                t_name = item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString() +
-                                     item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString(),
+                                user_id = Convert.ToInt32(item.ItemArray[data.Columns[User_list.FieldName.USER_ID].Ordinal]),
+                                t_name = item.ItemArray[data.Columns[User_list.FieldName.T_PRENAME].Ordinal].ToString() +
+                                     item.ItemArray[data.Columns[User_list.FieldName.T_NAME].Ordinal].ToString(),
                                 curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                                file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[Personnel.FieldName.FILE_NAME_PIC].Ordinal].ToString()),
+                                file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[User_list.FieldName.FILE_NAME_PIC].Ordinal].ToString()),
                                 type = usrtype
                             });
                     }

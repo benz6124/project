@@ -105,7 +105,7 @@ namespace educationalProject.Models.Wrappers
                                 curri_id = item.ItemArray[data.Columns[Cu_curriculum.FieldName.CURRI_ID].Ordinal].ToString();
                                 result.all_presidents[curri_id].presidents.Add(new Personnel_brief_detail
                                 {
-                                    tname = NameManager.GatherPreName(item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString(),
+                                    tname = NameManager.GatherPreName(item.ItemArray[data.Columns[User_list.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[User_list.FieldName.T_NAME].Ordinal].ToString(),
                                     pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[Teacher.FieldName.FILE_NAME_PIC].Ordinal].ToString()),
                                     email = item.ItemArray[data.Columns[Teacher.FieldName.EMAIL].Ordinal].ToString(),
                                     user_id = item.ItemArray[data.Columns[FieldName.TEACHER_ID].Ordinal].ToString()
@@ -119,7 +119,7 @@ namespace educationalProject.Models.Wrappers
                                 curri_id = item.ItemArray[data.Columns[Cu_curriculum.FieldName.CURRI_ID].Ordinal].ToString();
                                 result.all_presidents[curri_id].candidates.Add(new Personnel_brief_detail
                                 {
-                                    tname = NameManager.GatherPreName(item.ItemArray[data.Columns[Personnel.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[Personnel.FieldName.T_NAME].Ordinal].ToString(),
+                                    tname = NameManager.GatherPreName(item.ItemArray[data.Columns[User_list.FieldName.T_PRENAME].Ordinal].ToString()) + item.ItemArray[data.Columns[User_list.FieldName.T_NAME].Ordinal].ToString(),
                                     pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[Teacher.FieldName.FILE_NAME_PIC].Ordinal].ToString()),
                                     email = item.ItemArray[data.Columns[Teacher.FieldName.EMAIL].Ordinal].ToString(),
                                     user_id = item.ItemArray[data.Columns[User_list.FieldName.USER_ID].Ordinal].ToString()
