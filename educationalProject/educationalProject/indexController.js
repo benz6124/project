@@ -62,7 +62,6 @@ app.service('fileChecker',function($alert){
 app.controller('choice_index_controller', function($scope,$anchorScroll, $location,$http,$alert,$cookies,$loading,request_all_curriculums_service_server,$rootScope,$modal,alertCaller) {
 
     $scope.not_select_curri_and_year = true;
-    $scope.not_select_sub_indicator = true;
     $scope.year_choosen = {};
      $scope.curri_choosen={};
      $scope.indicator_choosen = {};
@@ -71,7 +70,6 @@ app.controller('choice_index_controller', function($scope,$anchorScroll, $locati
      $scope.select_year_support_text = 0;
      $scope.select_all_complete = false;
      $scope.already_select_curri = false;
-     $scope.questions = [];
      $scope.show_preview_support_text = 0;
      $scope.current_section_save = [];
      $scope.not_choose_year = true;
@@ -98,7 +96,6 @@ $scope.send_please_wait = false;
     }
 
 $scope.selectThisSub_not_link = function(sub_indicator){
-      $scope.not_select_sub_indicator = false;
         $scope.sendSectionSaveAndGetSupportText(sub_indicator);
     var my_pattern = [];
     var index;
@@ -114,7 +111,6 @@ $scope.selectThisSub_not_link = function(sub_indicator){
 }
 
 $rootScope.selectThisSub = function(sub_indicator){
-      $scope.not_select_sub_indicator = false;
         $scope.sendSectionSaveAndGetSupportText_to_link(sub_indicator);
     var my_pattern = [];
     var index;
@@ -132,7 +128,6 @@ $rootScope.selectThisSub = function(sub_indicator){
 
 }
 $rootScope.selectThisSub_and_move = function(sub_indicator){
-      $scope.not_select_sub_indicator = false;
         $scope.sendSectionSaveAndGetSupportText_to_link(sub_indicator);
     var my_pattern = [];
     var index;
@@ -153,7 +148,6 @@ $anchorScroll();
 $location.hash(null)
 }
 $rootScope.go_to_edit_reason = function (my_modal,sub_indicator){
-        $scope.not_select_sub_indicator = false;
         $scope.sendSectionSaveAndGetSupportText_to_link(sub_indicator);
 my_modal.$hide();
 var my_pattern = [];
@@ -205,7 +199,6 @@ $location.hash(null)
     }
     $rootScope.clear_choosen = function(){
        $scope.not_select_curri_and_year = true;
-        $scope.not_select_sub_indicator = true;
         $scope.year_choosen = {};
          $scope.curri_choosen={};
          $scope.indicator_choosen = {};
@@ -214,7 +207,6 @@ $location.hash(null)
          $scope.select_year_support_text = 0;
          $scope.select_all_complete = false;
          $scope.already_select_curri = false;
-         $scope.questions = [];
          $scope.show_preview_support_text = 0;
          $scope.current_section_save = [];
          $scope.not_choose_year = true;
@@ -309,7 +301,6 @@ $scope.download_plain_book = function(){
 
      $scope.init_var = function(){
     $scope.not_select_curri_and_year = true;
-    $scope.not_select_sub_indicator = true;
     $scope.year_choosen = {};
      $scope.curri_choosen={};
      $scope.indicator_choosen = {};
@@ -318,7 +309,6 @@ $scope.download_plain_book = function(){
      $scope.select_year_support_text = 0;
      $scope.select_all_complete = false;
      $scope.already_select_curri = false;
-     $scope.questions = [];
      $scope.show_preview_support_text = 0;
      $scope.current_section_save = [];
      $scope.not_choose_year = true;
@@ -374,7 +364,6 @@ $scope.send_please_wait = false;
              }
          ).success(function (data) {
              $scope.corresponding_aca_years = data;
-
          });
     }
     $scope.check_curri = function(){
@@ -401,7 +390,6 @@ $scope.which_active_sub = pattern;
                  $scope.corresponding_indicators = data;
                   $scope.not_select_curri_and_year = false;
            $scope.choose_overall();
-            $scope.not_select_sub_indicator = true;
                    $scope.not_choose_year = false;
                    $scope.which_active = [];
                    $scope.which_active.push(1);
@@ -425,7 +413,6 @@ $scope.which_active_sub = pattern;
 
     $scope.send_sub_indicator = function(sub_indicator){
         $scope.sub_indicator_choosen = sub_indicator;
-        $scope.not_select_sub_indicator = false;
         $scope.sendSectionSaveAndGetSupportText();
     }
 $scope.go_to_indicator = function(indicator){
@@ -451,7 +438,6 @@ $location.hash(null)
 }
 
      $scope.sendIndicatorAndGetSubIndicators_to_pass = function (indicator,sub_indicator) {
-        $scope.not_select_sub_indicator = true;
           $scope.indicator_choosen = indicator;
           $scope.select_overall = false;
         $http.post(
@@ -469,7 +455,6 @@ $location.hash(null)
               $rootScope.length_of_sub_indicators_now =$scope.corresponding_sub_indicators.length;
 
              if($scope.can_watch_reason() == true){
-                $scope.not_select_sub_indicator = false;
                 $scope.sendSectionSaveAndGetSupportText_to_link(sub_indicator.sub_indicator_num);
              }
                $scope.select_this_indi(indicator.indicator_num);
@@ -513,7 +498,6 @@ $scope.select_this_indi = function(indicator){
 }
 
      $scope.sendIndicatorAndGetSubIndicators = function (indicator) {
-        $scope.not_select_sub_indicator = true;
           $scope.indicator_choosen = indicator;
           $scope.select_overall = false;
         $http.post(
@@ -535,7 +519,6 @@ $scope.select_this_indi = function(indicator){
                          $scope.which_active_sub.push(0);
                    }
              if($scope.can_watch_reason() == true){
-                $scope.not_select_sub_indicator = false;
                 $scope.sendSectionSaveAndGetSupportText_to_link(1);
              }
          });
@@ -561,7 +544,6 @@ $scope.select_this_indi = function(indicator){
             $scope.others_count_overall = 0;
          $scope.others_sum_overall = 0;
             var index;
-            var inner_index;
             for(index=0;index<$scope.evaluation_overall.length;index++){
 
                 if(!$scope.evaluation_overall[index].self_time || !$scope.evaluation_overall[index].other_time){
@@ -781,7 +763,6 @@ $scope.send_support_text_change_to_server = function(){
     }
 
         $scope.sendSectionSaveAndGetSupportText_to_link = function (number_of_sub) {
-        $scope.not_select_sub_indicator = false;
 var index;
 for(index=0;index<$scope.corresponding_sub_indicators.length;index++){
     if( $scope.corresponding_sub_indicators[index].sub_indicator_num == number_of_sub ){
