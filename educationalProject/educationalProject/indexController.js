@@ -2233,7 +2233,6 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
    $scope.my_new_evidence.evidence_name = "";
    $scope.my_new_evidence_file = [];
      $scope.my_new_evidence.secret = false;
-      $scope.my_new_evidence.evidence_name = "";
       
         var index;
   $rootScope.my_evidence_real_code_we_have_now = [];
@@ -2364,10 +2363,8 @@ $scope.primary_choosen = {};
    $scope.my_new_evidence.evidence_name = "";
    $scope.my_new_evidence_file = [];
      $scope.my_new_evidence.secret = false;
-      $scope.my_new_evidence.evidence_name = "";
 
        $scope.primary_choosen = {};
-$scope.my_new_evidence.primary_choosen = {};
 
   var index;
   $rootScope.my_evidence_real_code_we_have_now = [];
@@ -2465,7 +2462,6 @@ app.controller('manage_evidences_controller', function($scope, $alert,$http,$roo
         $scope.year_choosen = {};
               $scope.curri_choosen = {}
                 $scope.indicator_choosen= {};
-                $scope.result={};
 $rootScope.my_evidence_real_code_we_have_now =[];
 
 $rootScope.my_all_primary_evidences_responsible = [];
@@ -2580,7 +2576,6 @@ $scope.init =function() {
         $scope.year_choosen = {};
               $scope.curri_choosen = {}
                 $scope.indicator_choosen= {};
-                $scope.result={};
                     $rootScope.my_evidence_real_code_we_have_now =[];
                     $scope.nothing_change =true;
                     $scope.all_curri_that_have_privileges = [];
@@ -3563,7 +3558,6 @@ $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
               $scope.curri_choosen = {};
-                    $scope.result = {};
                     $scope.nothing_change = true;
                           $scope.all_curri_that_have_privileges = [];
                           $scope.corresponding_aca_years = [];
@@ -3594,7 +3588,6 @@ $rootScope.manage_album_still_same = function(){
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
               $scope.curri_choosen = {};
-                    $scope.result = {};
   $scope.nothing_change = true;
 
         $scope.sendCurriAndGetYears = function () {
@@ -3703,7 +3696,6 @@ $scope.init =function() {
          $scope.year_choosen = {};
               $scope.curri_choosen = {};
    $scope.evidence_we_want = "";
-                    $scope.result = {};
                     $scope.code_we_want = "";
 $scope.corresponding_aca_years = [];
 $scope.all_evidences =[];
