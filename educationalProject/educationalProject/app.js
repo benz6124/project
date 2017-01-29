@@ -86,10 +86,7 @@ app.factory('AuthService', function ($http,$cookies) {
 //   };
 // })
 
-app.controller('main_controller', function ($scope,
-                                             
-                                               AuthService,$cookies,$rootScope,$http,$alert,$modal) {
-
+app.controller('main_controller', function ($scope,AuthService,$cookies,$rootScope,$http,$alert,$modal) {
    $rootScope.current_user = {};
   $scope.cookies_user_id = $cookies.getObject("mymy");
 
@@ -99,10 +96,8 @@ $scope.not_choose_curri_and_year_yet = true;
      $rootScope.have_privilege_in_these_curri = {};
   if(!$scope.cookies_user_id) {
   $scope.already_login = false;
-
   }
   else{
-
 
         $http.post(
              'api/users/getuserdata',
@@ -117,7 +112,6 @@ $scope.not_choose_curri_and_year_yet = true;
           console.log('$rootScope.current_user')
           console.log($rootScope.current_user)
            if(!!$rootScope.current_user.not_send_primary){
-         
               $scope.open_modal_primary_not_send();
          }
           $scope.already_login = true;
@@ -141,13 +135,11 @@ $scope.not_choose_curri_and_year_yet = true;
                 speed: 'fast',
                 backdrop:'static',
                typeClass: 'just_alert',
-               closeText :'ปิดหน้าต่าง'
-              
+               closeText :'ปิดหน้าต่าง'              
             }
             $modal(modalOptions);
         }
     
-
     $scope.logout = function(){
         console.log("log out")
         $cookies.remove('mymy');
