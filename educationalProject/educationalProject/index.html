@@ -59,6 +59,12 @@
                         </span>
                     </p> -->
                     <ul class="nav nav-stacked nav-aside">
+                        <li>
+                            <a href="" data-nq-toggle-modal="#select_curriculum_aca_year" data-effect="fall">
+                                <i class="fa fa-caret-square-o-right"></i>
+                                <span ng-hide="$aside.$collapsed" class="topic"> &nbsp;&nbsp;เลือกหลักสูตร-ปีการศึกษา</span>
+                            </a>
+                        </li>
                         <li ng-show="watch_only_admin() || have_privilege_to_open_modal('1') || fix_mode">
                             <a href="" data-nq-toggle-modal="#create_user_choose" data-effect="from-left" data-placement="bottom">
                                 <i class="glyphicon glyphicon-user"></i>
@@ -4047,6 +4053,35 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
         <div class="custom-footer">
             <div class="topicHeader pull-right">
                 <button class="btn btn-default hvr-skew-forward" ng-click="$hide()">ปิดหน้าต่าง</button>
+            </div>
+        </div>
+</div>
+
+<div id='select_curriculum_aca_year' nq-modal='' data-qo-fire-emit="true" qo-independent='true' qo-size="lg" ng-controller="select_curriculum_aca_year_controller">
+    <div class="custom-header">
+        <h1 class="headerModalH1">เลือกหลักสูตร-ปีการศึกษา {{$scope.curri_choosen}}</h1>
+        </div>
+        <div class='container-fluid'>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="txt-normal"><strong>ค่าปัจจุบัน:</strong> {{showpresentvalue()}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <select data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="get_aca_year()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                    </select>
+                        </div>
+                <div class="col-md-4">
+                    <select data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in aca_year_choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.aca_year_choosen" data-qo-disable-clear="true">
+                    </select>    
+                </div>
+            </div>
+        </div>
+        <div class="custom-footer">
+            <div class="topicHeader pull-right">
+                <button class="btn btn-success" ng-disabled="choose_not_complete()" ng-click="confirmselect(this)">ตกลง</button>
+                <button class="btn btn-default" ng-click="$hide()">ยกเลิก</button>
             </div>
         </div>
 </div>

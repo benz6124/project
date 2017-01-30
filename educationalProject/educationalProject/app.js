@@ -145,8 +145,10 @@ $scope.not_choose_curri_and_year_yet = true;
         $cookies.remove('mymy');
          $rootScope.current_user ={};
          $rootScope.have_privilege_in_these_curri = {};
-          $scope.already_login = false;
-          $rootScope.clear_choosen();
+        $scope.already_login = false;
+        $rootScope.clear_choosen();
+        $rootScope.current_curriculum = "";
+        $rootScope.current_aca_year = "";
     }
 
   $scope.setcurrent_user = function (user) {

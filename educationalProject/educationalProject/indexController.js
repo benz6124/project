@@ -314,6 +314,8 @@ $scope.download_plain_book = function(){
      $scope.not_choose_year = true;
        $rootScope.all_curriculums = [];
 $scope.send_please_wait = false;
+$rootScope.current_curriculum = "";
+$rootScope.current_aca_year = "";
      }
         request_all_curriculums_service_server.async().then(function(data) {
             $rootScope.all_curriculums = data;
@@ -830,7 +832,7 @@ for(index=0;index<$scope.corresponding_sub_indicators.length;index++){
          });
     }
 });
-app.controller('add_aca_year', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,alertCaller) {
+app.controller('add_aca_year', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,alertCaller,$filter) {
     var thisctrl = this;
     $scope.init = function(){
         $scope.curri_choosen = {};
@@ -852,6 +854,10 @@ $scope.init();
   $scope.$on("modal.show", function (event, args) {
       thisctrl.add_year_form.$setPristine();
       $scope.init();
+    var target_curri = $filter('filter')($scope.all_curri_that_have_privileges, {curri_id: $rootScope.current_curriculum},true);
+        if(target_curri.length > 0){
+        $scope.curri_choosen = target_curri[0];
+    }
     });
   $scope.still_not_complete = function(){
     if(!$scope.new_curri_academic){
@@ -997,7 +1003,7 @@ $scope.still_not_complete = function(){
 }
 });
 
-app.controller('stat_graduated_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
+app.controller('stat_graduated_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller,$filter,$q) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -1012,15 +1018,31 @@ $scope.init =function() {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {};
       
-        request_years_from_curri_choosen_service.async($scope.curri_choosen,11,2).then(function(data) {
+        var promise = request_years_from_curri_choosen_service.async($scope.curri_choosen,11,2).then(function(data) {
         $scope.corresponding_aca_years = data;
-          });
+        return $q.resolve("");
+        });
+        return promise;
     }
      $scope.$on("modal.hide", function (event, args) {
      $scope.init();
     });
   $scope.$on("modal.show", function (event, args) {
-              $scope.init();
+        $scope.init();
+//**********************************/
+    var target_curri = $filter('filter')($scope.all_curri_that_have_privileges, {curri_id: $rootScope.current_curriculum},true);
+    if(target_curri.length > 0){
+        $scope.curri_choosen = target_curri[0];
+
+        //Use promise functional to wait for aca_year api request
+        $scope.sendCurriAndGetYears().then(function(){
+            var target_aca_year = $filter('filter')($scope.corresponding_aca_years, {aca_year: $rootScope.current_aca_year},true);
+            if(target_aca_year.length > 0){
+                $scope.year_choosen = target_aca_year[0];
+                $scope.find_information();
+            }
+        });
+    }
     });
 
     $scope.find_information = function(){
@@ -1070,7 +1092,7 @@ $scope.init =function() {
     }
 });
 
-app.controller('stat_student_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
+app.controller('stat_student_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller,$filter,$q) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
         $scope.year_choosen = {};
@@ -1084,15 +1106,28 @@ $scope.init =function() {
      $scope.init();
     });
   $scope.$on("modal.show", function (event, args) {
-              $scope.init();
+    $scope.init();
+    var target_curri = $filter('filter')($scope.all_curri_that_have_privileges, {curri_id: $rootScope.current_curriculum},true);
+    if(target_curri.length > 0){
+        $scope.curri_choosen = target_curri[0];
+        $scope.sendCurriAndGetYears().then(function(){
+            var target_aca_year = $filter('filter')($scope.corresponding_aca_years, {aca_year: $rootScope.current_aca_year},true);
+            if(target_aca_year.length > 0){
+                $scope.year_choosen = target_aca_year[0];
+                $scope.find_information();
+            }
+        });
+    }
     });
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {};
 
-              request_years_from_curri_choosen_service.async($scope.curri_choosen,13,2).then(function(data) {
+            var promise = request_years_from_curri_choosen_service.async($scope.curri_choosen,13,2).then(function(data) {
             $scope.corresponding_aca_years = data;
+            return $q.resolve("");
           });
+          return promise;
     }
 
     $scope.find_information = function(){
@@ -1142,7 +1177,7 @@ $scope.init =function() {
     }
 });
 
-app.controller('stat_new_student_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
+app.controller('stat_new_student_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller,$filter,$q) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
        $scope.year_choosen = {};
@@ -1155,15 +1190,28 @@ $scope.init =function() {
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {};
-              request_years_from_curri_choosen_service.async($scope.curri_choosen,12,2).then(function(data) {
+        var promise = request_years_from_curri_choosen_service.async($scope.curri_choosen,12,2).then(function(data) {
             $scope.corresponding_aca_years = data;
-          });
+            return $q.resolve("");
+        });
+        return promise;
     }
      $scope.$on("modal.hide", function (event, args) {
      $scope.init(); 
     });
   $scope.$on("modal.show", function (event, args) {
-              $scope.init();
+    $scope.init();
+    var target_curri = $filter('filter')($scope.all_curri_that_have_privileges, {curri_id: $rootScope.current_curriculum},true);
+    if(target_curri.length > 0){
+        $scope.curri_choosen = target_curri[0];
+        $scope.sendCurriAndGetYears().then(function(){
+            var target_aca_year = $filter('filter')($scope.corresponding_aca_years, {aca_year: $rootScope.current_aca_year},true);
+            if(target_aca_year.length > 0){
+                $scope.year_choosen = target_aca_year[0];
+                $scope.find_information();
+            }
+        });
+    }
     });
 
     $scope.find_information = function(){
@@ -1617,7 +1665,7 @@ $scope.indicator_choosen = {};
     }
 });
 
-app.controller('upload_aun_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service,$rootScope,fileChecker,alertCaller) {
+app.controller('upload_aun_controller', function($scope, $alert,$http,request_years_from_curri_choosen_service,$rootScope,fileChecker,alertCaller,$filter,$q) {
 
     $scope.init =function() {
      $scope.choose_not_complete = true;
@@ -1643,6 +1691,17 @@ $scope.$parent.scan_only_privilege_curri('14',$scope.all_curri_that_have_privile
     });
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
+    var target_curri = $filter('filter')($scope.all_curri_that_have_privileges, {curri_id: $rootScope.current_curriculum},true);
+    if(target_curri.length > 0){
+        $scope.curri_choosen = target_curri[0];
+        $scope.sendCurriAndGetYears().then(function(){
+            var target_aca_year = $filter('filter')($scope.corresponding_aca_years, {aca_year: $rootScope.current_aca_year},true);
+            if(target_aca_year.length > 0){
+                $scope.year_choosen = target_aca_year[0];
+                $scope.find_information();
+            }
+        });
+    }
     });
 
   $scope.find_information = function(){
@@ -1655,9 +1714,11 @@ $scope.$parent.scan_only_privilege_curri('14',$scope.all_curri_that_have_privile
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
       
-              request_years_from_curri_choosen_service.async($scope.curri_choosen,14,2).then(function(data) {
+              var promise = request_years_from_curri_choosen_service.async($scope.curri_choosen,14,2).then(function(data) {
             $scope.corresponding_aca_years = data;
+            return $q.resolve("");
           });
+          return promise;
     }
    $scope.$on("fileSelected", function (event, args) {
        $scope.$apply(function () {
@@ -3177,7 +3238,7 @@ $scope.init =function() {
     }
 });
 
-app.controller('manage_lab_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
+app.controller('manage_lab_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller,$filter,$q) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -3197,7 +3258,18 @@ $rootScope.manage_lab_still_same = function(){
      $scope.init();
     });
   $scope.$on("modal.show", function (event, args) {
-              $scope.init();
+    $scope.init();
+    var target_curri = $filter('filter')($scope.all_curri_that_have_privileges, {curri_id: $rootScope.current_curriculum},true);
+    if(target_curri.length > 0){
+        $scope.curri_choosen = target_curri[0];
+        $scope.sendCurriAndGetYears().then(function(){
+            var target_aca_year = $filter('filter')($scope.corresponding_aca_years, {aca_year: $rootScope.current_aca_year},true);
+            if(target_aca_year.length > 0){
+                $scope.year_choosen = target_aca_year[0];
+                $scope.find_information();
+            }
+        });
+    }
     });
 
      $scope.choose_not_complete = true;
@@ -3211,9 +3283,11 @@ $rootScope.manage_lab_still_same = function(){
         $scope.year_choosen = {};
          $scope.nothing_change = true;
       
-              request_years_from_curri_choosen_service.async($scope.curri_choosen,10,2).then(function(data) {
+            var promise = request_years_from_curri_choosen_service.async($scope.curri_choosen,10,2).then(function(data) {
             $scope.corresponding_aca_years = data;
-          });
+            return $q.resolve("");
+            });
+          return promise;
     }
 
     $scope.go_to_create_lab =function(){
@@ -3307,7 +3381,7 @@ $rootScope.manage_lab_still_same = function(){
     }
 });
 
-app.controller('manage_survey_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
+app.controller('manage_survey_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller,$filter,$q) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -3327,7 +3401,18 @@ $rootScope.manage_survey_still_same = function(){
     });
 
   $scope.$on("modal.show", function (event, args) {
-              $scope.init();
+        $scope.init();
+        var target_curri = $filter('filter')($scope.all_curri_that_have_privileges, {curri_id: $rootScope.current_curriculum},true);
+    if(target_curri.length > 0){
+        $scope.curri_choosen = target_curri[0];
+        $scope.sendCurriAndGetYears().then(function(){
+            var target_aca_year = $filter('filter')($scope.corresponding_aca_years, {aca_year: $rootScope.current_aca_year},true);
+            if(target_aca_year.length > 0){
+                $scope.year_choosen = target_aca_year[0];
+                $scope.find_information();
+            }
+        });
+    }
     });
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -3340,9 +3425,11 @@ $rootScope.manage_survey_still_same = function(){
         $scope.year_choosen = {};
          $scope.nothing_change = true;
       
-              request_years_from_curri_choosen_service.async($scope.curri_choosen,5,2).then(function(data) {
+        var promise = request_years_from_curri_choosen_service.async($scope.curri_choosen,5,2).then(function(data) {
             $scope.corresponding_aca_years = data;
+            return $q.resolve("");
           });
+        return promise;
     }
 
 $scope.right_target = function(targets){
@@ -3553,7 +3640,7 @@ app.controller('show_album_controller', function($scope, $http,$alert,$loading,r
   }
 });
 
-app.controller('manage_album_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox,alertCaller) {
+app.controller('manage_album_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox,alertCaller,$filter,$q) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -3574,6 +3661,17 @@ $rootScope.manage_album_still_same = function(){
 
   $scope.$on("modal.show", function (event, args) {
     $scope.init();
+    var target_curri = $filter('filter')($scope.all_curri_that_have_privileges, {curri_id: $rootScope.current_curriculum},true);
+    if(target_curri.length > 0){
+        $scope.curri_choosen = target_curri[0];
+        $scope.sendCurriAndGetYears().then(function(){
+            var target_aca_year = $filter('filter')($scope.corresponding_aca_years, {aca_year: $rootScope.current_aca_year},true);
+            if(target_aca_year.length > 0){
+                $scope.year_choosen = target_aca_year[0];
+                $scope.find_information();
+            }
+        });
+    }
     });
   
    $scope.openLightboxModal = function (index,this_album) {
@@ -3595,9 +3693,11 @@ $rootScope.manage_album_still_same = function(){
         $scope.year_choosen = {};
          $scope.nothing_change = true;
       
-              request_years_from_curri_choosen_service.async($scope.curri_choosen,6,2).then(function(data) {
+        var promise = request_years_from_curri_choosen_service.async($scope.curri_choosen,6,2).then(function(data) {
             $scope.corresponding_aca_years = data;
-          });
+            return $q.resolve("");
+        });
+        return promise;
     }
     $scope.go_to_show_album = function(this_album){
         $rootScope.manage_album_curri_id = $scope.curri_choosen.curri_id;
@@ -4313,7 +4413,7 @@ $scope.init =function() {
   });
     }
 });
-app.controller('manage_bind_person_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
+app.controller('manage_bind_person_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller,$filter) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
               $scope.curri_choosen = {};
@@ -4353,7 +4453,12 @@ $rootScope.manage_bind_still_same = function(){
      $scope.init();      
     });
   $scope.$on("modal.show", function (event, args) {
-              $scope.init();
+        $scope.init();
+        var target_curri = $filter('filter')($scope.all_curri_that_have_privileges, {curri_id: $rootScope.current_curriculum},true);
+        if(target_curri.length > 0){
+        $scope.curri_choosen = target_curri[0];
+        $scope.find_information();
+    }
     });
 
     $scope.remove_person = function(index_to_remove,obj){
@@ -4978,7 +5083,7 @@ $scope.title_choosen = {};
   });
     }
 });
-app.controller('manage_research_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
+app.controller('manage_research_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller,$filter) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
               $scope.curri_choosen = {};
@@ -4999,7 +5104,12 @@ $rootScope.manage_research_still_same = function(){
      $scope.init();      
     });
   $scope.$on("modal.show", function (event, args) {
-              $scope.init();
+        $scope.init();
+        var target_curri = $filter('filter')($scope.all_curri_that_have_privileges, {curri_id: $rootScope.current_curriculum},true);
+        if(target_curri.length > 0){
+        $scope.curri_choosen = target_curri[0];
+        $scope.find_information();
+    }
     });
     $scope.download_research = function(path_research){
         $scope.download_file(path_research);
@@ -5155,7 +5265,7 @@ $scope.to_sent.aca_year = $rootScope.manage_committee_who_aca_year_now;
     }
 });
 
-app.controller('manage_committee_who_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
+app.controller('manage_committee_who_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller,$filter,$q) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
               $scope.year_choosen = {};
@@ -5175,6 +5285,17 @@ $scope.init =function() {
     });
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
+    var target_curri = $filter('filter')($scope.all_curri_that_have_privileges, {curri_id: $rootScope.current_curriculum},true);
+    if(target_curri.length > 0){
+        $scope.curri_choosen = target_curri[0];
+        $scope.sendCurriAndGetYears().then(function(){
+            var target_aca_year = $filter('filter')($scope.corresponding_aca_years, {aca_year: $rootScope.current_aca_year},true);
+            if(target_aca_year.length > 0){
+                $scope.year_choosen = target_aca_year[0];
+                $scope.find_information();
+            }
+        });
+    }
     });
 
       $scope.sendCurriAndGetYears = function () {
@@ -5182,9 +5303,11 @@ $scope.init =function() {
         $scope.year_choosen = {}
          $scope.nothing_change = true;
     
-              request_years_from_curri_choosen_service.async($scope.curri_choosen,999).then(function(data) {
+        var promise = request_years_from_curri_choosen_service.async($scope.curri_choosen,999).then(function(data) {
             $scope.corresponding_aca_years = data;
+            return $q.resolve("");
           });
+          return promise;
     }
     $scope.go_to_add_committee =function(){
           $rootScope.manage_committee_who_curri_id_now = $scope.curri_choosen.curri_id;
@@ -5235,7 +5358,7 @@ $scope.init =function() {
     }
 });
 
-app.controller('show_education_personnel_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox) {
+app.controller('show_education_personnel_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,Lightbox,$filter) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
               $scope.curri_choosen = {};
@@ -5248,6 +5371,11 @@ $scope.init =function() {
     });
   $scope.$on("modal.show", function (event, args) {
         $scope.init();
+        var target_curri = $filter('filter')($scope.all_curri_that_have_privileges, {curri_id: $rootScope.current_curriculum},true);
+        if(target_curri.length > 0){
+        $scope.curri_choosen = target_curri[0];
+        $scope.find_information();
+    }
     });
 $scope.init();
    $scope.openLightboxModal = function (pic) {
@@ -5623,7 +5751,7 @@ app.controller('manage_minutes_show_images_controller', function($scope, $http,$
     Lightbox.openModal($rootScope.manage_minutes_show_images_of_this_minute.pictures, index);
   };
 });
-app.controller('manage_minutes_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller) {
+app.controller('manage_minutes_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller,$filter,$q) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
          $scope.year_choosen = {};
@@ -5639,6 +5767,17 @@ $scope.init =function() {
     });
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
+        var target_curri = $filter('filter')($scope.all_curri_that_have_privileges, {curri_id: $rootScope.current_curriculum},true);
+    if(target_curri.length > 0){
+        $scope.curri_choosen = target_curri[0];
+        $scope.sendCurriAndGetYears().then(function(){
+            var target_aca_year = $filter('filter')($scope.corresponding_aca_years, {aca_year: $rootScope.current_aca_year},true);
+            if(target_aca_year.length > 0){
+                $scope.year_choosen = target_aca_year[0];
+                $scope.find_information();
+            }
+        });
+    }
     });
 
      $scope.choose_not_complete = true;
@@ -5656,10 +5795,12 @@ $rootScope.manage_minutes_still_same = function(){
         $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
          $scope.nothing_change = true;
-              request_years_from_curri_choosen_service.async($scope.curri_choosen,8,2).then(function(data) {
+              var promise = request_years_from_curri_choosen_service.async($scope.curri_choosen,8,2).then(function(data) {
  $scope.year_choosen = {};
             $scope.corresponding_aca_years = data;
+            return $q.resolve("");
           });
+          return promise;
     }
     $scope.go_to_fix_minute = function(this_minute_index){
         $rootScope.minutes_ctrl_mode = 2;
@@ -5864,5 +6005,58 @@ $scope.save_to_server = function(my_modal){
             alertCaller.error();
             $scope.please_wait = false;
         });
+};
+});
+
+app.controller('select_curriculum_aca_year_controller', function($scope, $http,$alert,$rootScope,alertCaller,$filter){
+    $scope.curri_choosen = "";
+    $scope.aca_year_choosen = "";
+    $scope.aca_year_choices = [];
+$scope.$on('modal.show',function(event,args){
+    $scope.curri_choosen = "";
+    $scope.aca_year_choosen = "";
+    $scope.aca_year_choices = [];
+});
+
+$scope.showpresentvalue = function(){
+    if(!$rootScope.current_aca_year)
+    return "ยังไม่มีการเลือก";
+    var target = $filter('filter')($rootScope.all_curriculums, {curri_id: $rootScope.current_curriculum},true);
+    return target[0].curr_tname + " ปีการศึกษา " + $rootScope.current_aca_year;
+}
+
+$scope.choose_not_complete = function(){
+    if(!$scope.curri_choosen)
+    return true;
+    else if(!$scope.aca_year_choosen)
+    return true;
+    else
+    return false;
+};
+
+$scope.get_aca_year = function(){
+    $scope.aca_year_choices = [];
+    $scope.aca_year_choosen = "";
+    $http.post(
+             '/api/curriculumacademic/getbycurriculum',
+             JSON.stringify($scope.curri_choosen),
+             {
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             }
+         ).success(function (data) {
+             $scope.aca_year_choices = data;
+         })
+         .error(function(data, status, headers, config) {
+             alertCaller.error(null,'กรุณาเลือกหลักสูตรใหม่อีกครั้ง');
+  });
+};
+
+$scope.confirmselect = function(my_modal){
+    $rootScope.current_curriculum = $scope.curri_choosen.curri_id;
+    $rootScope.current_aca_year = $scope.aca_year_choosen.aca_year;
+    alertCaller.success(null,"เลือกหลักสูตร-ปีการศึกษาเรียบร้อย");
+    my_modal.$hide();
 };
 });
