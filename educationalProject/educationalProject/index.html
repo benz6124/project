@@ -4037,7 +4037,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>Build:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>501</p>
+                    <p>506</p>
                 </div>
             </div>
             <div class='row'>
@@ -4045,7 +4045,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>ปรับปรุงล่าสุด:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>29 มกราคม 2560</p>
+                    <p>31 มกราคม 2560</p>
                 </div>
             </div>
             </div>
@@ -4064,17 +4064,37 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
         <div class='container-fluid'>
             <div class="row">
                 <div class="col-xs-12">
-                    <p class="txt-normal"><strong>ค่าปัจจุบัน:</strong> {{showpresentvalue()}}</p>
+                    <p class="txt-normal"><strong>ค่าปัจจุบัน:</strong> {{showcurrentcurriaca()}}</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-8">
                     <select data-qo-speed="fastest" data-nq-select="" data-ng-options="curri.curr_tname for curri in all_curriculums" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกหลักสูตร" data-ng-change="get_aca_year()"  data-ng-model="$parent.curri_choosen" data-qo-disable-clear="true">
+                    <option style="display:none" value=""></option>
                     </select>
                         </div>
                 <div class="col-md-4">
-                    <select data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in aca_year_choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.aca_year_choosen" data-qo-disable-clear="true">
+                    <select data-qo-speed="fastest" data-nq-select="" data-ng-options="year.aca_year for year in aca_year_choices" data-qo-effect="flip-x" data-qo-placeholder="กรุณาเลือกปีการศึกษา" data-ng-model="$parent.aca_year_choosen" ng-change="get_indicators()" data-qo-disable-clear="true">
+                    <option style="display:none" value=""></option>
                     </select>    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <hr style="border-color:#ccc">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="alert alert-info">
+                        <span class="txt-normal"><strong>ท่านสามารถเลือกตัวบ่งชี้ที่ต้องการทำงานด้วยได้ (ไม่บังคับเลือก)</strong></span>
+                    </div>
+                    <p class="txt-normal"><strong>ค่าปัจจุบัน:</strong> {{showcurrentindicator()}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                     <select data-qo-speed="fastest" data-nq-select="" data-ng-options="'AUN '+indicator.indicator_num +' '+indicator.indicator_name_e for indicator in indicator_choices" data-qo-effect="flip-x"  data-qo-placeholder="กรุณาเลือกตัวบ่งชี้" data-ng-model="$parent.indicator_choosen" data-qo-disable-clear="true"><option style="display:none" value=""></option></select>  
                 </div>
             </div>
         </div>

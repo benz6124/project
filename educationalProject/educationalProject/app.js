@@ -149,6 +149,7 @@ $scope.not_choose_curri_and_year_yet = true;
         $rootScope.clear_choosen();
         $rootScope.current_curriculum = "";
         $rootScope.current_aca_year = "";
+        $rootScope.current_indicator = "";
     }
 
   $scope.setcurrent_user = function (user) {
