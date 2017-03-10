@@ -286,11 +286,11 @@ $scope.download_plain_book = function(){
 
     $rootScope.can_watch_reason = function(){
     if($scope.$parent.already_login == true){
-        if(!$rootScope.current_user.privilege[$scope.curri_choosen.curri_id]){
-            return false;
-        }
         if($rootScope.current_user.user_type == 'ผู้ดูแลระบบ'){
             return true;
+        }
+        if(!$rootScope.current_user.privilege[$scope.curri_choosen.curri_id]){
+            return false;
         }
         if($rootScope.have_privilege(15,2,$scope.curri_choosen.curri_id,$scope.year_choosen.aca_year)){
             return true;
