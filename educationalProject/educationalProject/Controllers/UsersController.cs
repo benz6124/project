@@ -397,6 +397,19 @@ namespace educationalProject.Controllers
                 return InternalServerError(new Exception(result.ToString()));
         }
 
+        [ActionName("resetpwd")]
+        public async Task<IHttpActionResult> PostForResetPassword([FromBody]int user_id)
+        {
+            oUsers datacontext = new oUsers();
+
+            object result = await datacontext.ResetPassword(user_id);
+
+            if (result == null)
+                return Ok();
+            else
+                return InternalServerError(new Exception(result.ToString()));
+        }
+
         [ActionName("changepassword")]
         public IHttpActionResult PutForChangePassword(JObject userdata)
         {
@@ -405,7 +418,7 @@ namespace educationalProject.Controllers
             string new_password = userdata["new_password"].ToString();
             int user_id = Convert.ToInt32(userdata["user_id"]);
 
-            object result = datacontext.UpdatePassword(old_password,ref new_password,user_id);
+            object result = datacontext.UpdatePassword(old_password, ref new_password, user_id);
 
             if (result == null)
                 return Ok();

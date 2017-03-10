@@ -739,6 +739,47 @@ namespace educationalProject.Models.ViewModels.Wrappers
             }
         }
 
+
+
+
+        public async Task<object> ResetPassword(int user_id)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return WebApiApplication.CONNECTDBERRSTRING;
+
+            string newpwd = hasher.HashPassword("1234");
+
+            d.iCommand.CommandText = string.Format("update {0} set {1} = {2} where {3} = {4} ",
+                User_list.FieldName.TABLE_NAME, User_list.FieldName.PASSWORD, User_list.ParameterName.PASSWORD,
+                User_list.FieldName.USER_ID, User_list.ParameterName.USER_ID);
+
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.USER_ID, user_id));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.PASSWORD, newpwd));
+
+            try
+            {
+                int rowaffected = await d.iCommand.ExecuteNonQueryAsync();
+                if (rowaffected > 0)
+                    return null;
+                else
+                    return "Change password failed.";
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+        }
+
+
+
+
         public async Task<object> selectUserData(int usrid)
         {
             DBConnector d = new DBConnector();

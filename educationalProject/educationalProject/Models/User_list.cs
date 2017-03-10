@@ -23,6 +23,7 @@ namespace educationalProject.Models
             public static readonly string FILE_NAME_PIC = "FILE_NAME_PIC";
             public static readonly string TIMESTAMP = "TIMESTAMP";
             public static readonly string TABLE_NAME = "USER_LIST";
+            public static readonly string PASSWORD = "PASSWORD";
         }
         public struct ParameterName
         {
@@ -40,6 +41,7 @@ namespace educationalProject.Models
             public static readonly string ADDR = "@" + FieldName.ADDR;
             public static readonly string FILE_NAME_PIC = "@" + FieldName.FILE_NAME_PIC;
             public static readonly string TIMESTAMP = "@" + FieldName.TIMESTAMP;
+            public static readonly string PASSWORD = "@PASSWORD";
         }
         private int _user_id;
         private string _user_type;

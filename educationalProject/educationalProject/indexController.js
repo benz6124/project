@@ -6047,7 +6047,7 @@ $scope.go_to_edit = function(index_to_edit){
 };
 });
 
-app.controller('edit_user_data_direct_controller', function($scope, $http,$alert,$rootScope,alertCaller,manage_users_data){
+app.controller('edit_user_data_direct_controller', function($scope, $http,$alert,$rootScope,$modalBox,alertCaller,manage_users_data){
     $scope.edit_profile_obj = {};
     $scope.e_prename_choices = ['Mr.','Mrs.','Miss.','Dr.','Asst.Prof.Dr.','Asst.Prof.','Assoc.Prof.Dr.','Assoc.Prof.','Prof.','Prof.Dr.'];
     $scope.t_prename_choices = ['นาย','นางสาว','นาง','ดร.','ผศ.ดร.','รศ.ดร.','ศ.ดร.','ผศ.','รศ.','ศ.'];
@@ -6073,6 +6073,42 @@ $scope.not_complete = function(){
     else
     return false;
 };
+
+ $scope.show_confirm_resetpwd = function (username) {
+                var boxOptions = {
+                content: 'คุณต้องการ reset รหัสผ่านของผู้ใช้งาน '+username+' ใช่หรือไม่?<br>(รหัสผ่านจะถูก reset เป็น 1234)',
+                title:'แจ้งเตือน',
+                theme:'danger',
+                boxType: 'confirm',
+                backdrop:'static',
+                confirmText:'ใช่',
+                cancelText:'ไม่',
+                effect:'bounce-in',
+                afterConfirm:function(){ $scope.reset_password();},
+                }
+                $modalBox(boxOptions);
+            }
+
+$scope.reset_password = function(){
+    $http.post(
+            '/api/users/resetpwd',
+            JSON.stringify($scope.edit_profile_obj.user_id),
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        ).then(function(response){
+            alertCaller.success(null,"reset รหัสผ่านแล้ว");
+        },function(error){
+            if(error.status == 400)
+            alertCaller.error(null,error.data.message);
+            else
+            alertCaller.error();
+        });
+}
+
+
 $scope.save_to_server = function(my_modal){
     $scope.please_wait = true;
     var formData = new FormData();
