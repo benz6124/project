@@ -265,18 +265,17 @@
 								label: 'กรุณาเลือกหลักฐาน',
 								// 'default': 'http://',
 								items: 
-
-								items_evidence
-					
+								[]
 								,
 								setup: function( data ) {
-					
+								
+									this.clear();
+									var index;
+									var evidencearray = window.big_chunk;
+									for(index = 0;index < evidencearray.length;index++){
+										this.add(evidencearray[index][0], evidencearray[index][1]);
+									}
 
-							var linkType = this.getDialog().getContentElement( 'info', 'linkType' );
-							if ( linkType && linkType.getValue() == 'evidences' ){
-								this.focus();
-							
-							}
 						},
 								commit: function( data ) {
 									if ( !data.evidences )
