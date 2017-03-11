@@ -832,7 +832,12 @@ for(index=0;index<$scope.corresponding_sub_indicators.length;index++){
             CKEDITOR.instances['support_text'].setData(data.detail);
          });
     }
+
+    $scope.getresultcolor = function(sub_ind_result,ind_result){
+        return {resultGreen: sub_ind_result.sub_indicator_other_result>sub_ind_result.sub_indicator_self_result  &&  ind_result.complete_both , resultRed:sub_ind_result.sub_indicator_self_result>sub_ind_result.sub_indicator_other_result  &&  ind_result.complete_both };
+    }
 });
+
 app.controller('add_aca_year', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,alertCaller,$filter) {
     var thisctrl = this;
     $scope.init = function(){
