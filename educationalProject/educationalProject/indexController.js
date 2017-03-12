@@ -745,6 +745,7 @@ $scope.send_support_text_change_to_server = function(){
                      }
                  ).success(function (data) {
                     $scope.show_preview_support_text= data.detail;
+                    window.currentcurrisel = $scope.curri_choosen.curri_id;
            $http.post(
              '/api/evidence/getallevidence',
              JSON.stringify($scope.curri_choosen.curri_id),
@@ -754,9 +755,7 @@ $scope.send_support_text_change_to_server = function(){
                  }
              }
          ).success(function (data) {
-               
        window.big_chunk = data;
-            window.all_curris = $rootScope.all_curriculums;
          });
                  });
                  }
@@ -793,6 +792,7 @@ for(index=0;index<$scope.corresponding_sub_indicators.length;index++){
          ).success(function (data) {
             $scope.current_section_save = data;
             CKEDITOR.instances['support_text'].setData(data.detail);
+            window.currentcurrisel = $scope.curri_choosen.curri_id;
            $http.post(
              '/api/evidence/getallevidence',
              JSON.stringify($scope.curri_choosen.curri_id),
@@ -803,7 +803,6 @@ for(index=0;index<$scope.corresponding_sub_indicators.length;index++){
              }
          ).success(function (data) {
        window.big_chunk = data;
-            window.all_curris = $rootScope.all_curriculums;
          });
          });
     }
@@ -6222,3 +6221,12 @@ $scope.confirmselect = function(my_modal){
     my_modal.$hide();
 };
 });
+
+
+
+
+
+
+
+
+

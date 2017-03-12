@@ -7,20 +7,7 @@
 
 ( function() {
 
-
 	var items_evidence =window.big_chunk;
-
-// 										var index ;
-									
-// 										for(index=0;index<window.all_curris.length;index++){
-// 											var each_item = [];
-// 											each_item.push(window.all_curris[index].curr_tname);
-											
-// 											items_curri.push(each_item);
-									
-// 										}
-// console.log(window.big_chunk)
-// 										items_curri_na = items_curri;
 							
 	CKEDITOR.dialog.add( 'link', function( editor ) {
 		var plugin = CKEDITOR.plugins.link;
@@ -268,14 +255,27 @@
 								[]
 								,
 								setup: function( data ) {
-								
-									this.clear();
-									var index;
-									var evidencearray = window.big_chunk;
-									for(index = 0;index < evidencearray.length;index++){
-										this.add(evidencearray[index][0], evidencearray[index][1]);
-									}
-
+									var evidenceselectopt = this;
+									var httpservice = angular.injector(["ng"]).get("$http");
+									httpservice.post(
+										'/api/evidence/getallevidence',
+										JSON.stringify(window.currentcurrisel),
+										{
+											headers: {
+												'Content-Type': 'application/json'
+											}
+										}
+										).then(function (data) {
+											window.big_chunk = data.data;
+											evidenceselectopt.clear();
+											var index;
+											var evidencearray = window.big_chunk;
+											for(index = 0;index < evidencearray.length;index++){
+												evidenceselectopt.add(evidencearray[index][0], evidencearray[index][1]);
+											}
+										},function(error){
+											console.log("Error on loading evidence data. Use old evidence data instead.");
+										});
 						},
 								commit: function( data ) {
 									if ( !data.evidences )
