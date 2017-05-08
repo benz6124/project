@@ -26,9 +26,13 @@ namespace educationalProject.Controllers
         private oUsers userscontext = new oUsers();
 
         [ActionName("getuserlist")]
-        public async Task<IHttpActionResult> Getuserlist()
+        public async Task<IHttpActionResult> PostForGetuserlist([FromBody]string curri_id)
         {
-            object result = await userscontext.SelectAllUsersByBrief();
+            object result;
+            if (curri_id == "0")
+                result = await userscontext.SelectAllUsersByBrief();
+            else
+                result = await userscontext.SelectAllUsersByBriefFilterCurri(curri_id);
             if (result.GetType().ToString() != "System.String")
                 return Ok(result);
             return InternalServerError(new Exception(result.ToString()));
@@ -90,8 +94,8 @@ namespace educationalProject.Controllers
                 {
 
                 }
-                object resultfromdb = await userscontext.UpdateUserDataDirectWithSelect(data);
-                if (resultfromdb.GetType().ToString() != "System.String")
+                object resultfromdb = await userscontext.UpdateUserDataDirect(data);
+                if (resultfromdb == null)
                 {/*
                     //delete filename will inside file_name property of oUser object
                     string delpath = WebApiApplication.SERVERPATH;

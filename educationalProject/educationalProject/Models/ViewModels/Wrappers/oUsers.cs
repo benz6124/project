@@ -262,6 +262,68 @@ namespace educationalProject.Models.ViewModels.Wrappers
             }
             return result;
         }
+
+        public async Task<object> SelectAllUsersByBriefFilterCurri(string target_curri_id)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return WebApiApplication.CONNECTDBERRSTRING;
+            List<User_brief_detail> result = new List<User_brief_detail>();
+
+            d.iCommand.CommandText = string.Format("select {0}, {1}," +
+                "{2} = {3} " +
+                ",{4},{5},{8}.{6},{7} " +
+                "from {8},{9} " +
+                "where {8}.{6} = {9}.{10} " + 
+                "and {0} in (select {11} from {12} where {13} = {14}) "
+                ,
+                User_list.FieldName.USER_ID, User_list.FieldName.USERNAME, User_list.FieldName.T_PRENAME,
+                NameManager.GatherSQLCASEForPrename(User_list.FieldName.TABLE_NAME, User_list.FieldName.USER_TYPE_ID, User_list.FieldName.T_PRENAME),
+                User_list.FieldName.T_NAME, User_list.FieldName.FILE_NAME_PIC, User_list.FieldName.USER_TYPE_ID,
+                User_type.FieldName.USER_TYPE_NAME, User_list.FieldName.TABLE_NAME, User_type.FieldName.TABLE_NAME,
+                User_type.FieldName.USER_TYPE_ID,User_curriculum.FieldName.USER_ID,User_curriculum.FieldName.TABLE_NAME,
+                User_curriculum.FieldName.CURRI_ID, Cu_curriculum.ParameterName.CURRI_ID);
+
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(Cu_curriculum.ParameterName.CURRI_ID, target_curri_id));
+            try
+            {
+                System.Data.Common.DbDataReader res = await d.iCommand.ExecuteReaderAsync();
+                if (res.HasRows)
+                {
+                    DataTable data = new DataTable();
+                    data.Load(res);
+                    foreach (DataRow item in data.Rows)
+                    {
+                        result.Add(new User_brief_detail
+                        {
+                            user_id = Convert.ToInt32(item.ItemArray[data.Columns[User_list.FieldName.USER_ID].Ordinal]),
+                            username = item.ItemArray[data.Columns[User_list.FieldName.USERNAME].Ordinal].ToString(),
+                            file_name_pic = MiscUtils.GatherProfilePicturePath(item.ItemArray[data.Columns[User_list.FieldName.FILE_NAME_PIC].Ordinal].ToString()),
+                            user_type = item.ItemArray[data.Columns[User_type.FieldName.USER_TYPE_NAME].Ordinal].ToString(),
+                            t_name = item.ItemArray[data.Columns[User_list.FieldName.T_PRENAME].Ordinal].ToString() + item.ItemArray[data.Columns[User_list.FieldName.T_NAME].Ordinal].ToString()
+                        });
+                    }
+                    data.Dispose();
+                }
+                else
+                {
+                    //Reserved for return error string
+                }
+                res.Close();
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+            return result;
+        }
+
         public async Task<object> selectUserDataForEdit(int user_id)
         {
             DBConnector d = new DBConnector();
@@ -418,7 +480,59 @@ namespace educationalProject.Models.ViewModels.Wrappers
             return result;
         }
 
+        public async Task<object> UpdateUserDataDirect(dynamic updatedata)
+        {
+            DBConnector d = new DBConnector();
+            if (!d.SQLConnect())
+                return WebApiApplication.CONNECTDBERRSTRING;
+            List<User_brief_detail> result = new List<User_brief_detail>();
 
+            string mainupdatecmd = string.Format("update {0} set {1} = {2},{3} = {4},{5} = {6},{7} = {8}," +
+                "{9} = {10},{11} = {12} where {13} = {14} ",
+                User_list.FieldName.TABLE_NAME, User_list.FieldName.T_PRENAME, User_list.ParameterName.T_PRENAME,
+                User_list.FieldName.T_NAME, User_list.ParameterName.T_NAME,
+                User_list.FieldName.E_PRENAME, User_list.ParameterName.E_PRENAME,
+                User_list.FieldName.E_NAME, User_list.ParameterName.E_NAME,
+                User_list.FieldName.TEL, User_list.ParameterName.TEL,
+                User_list.FieldName.ADDR, User_list.ParameterName.ADDR,
+                User_list.FieldName.USER_ID, User_list.ParameterName.USER_ID
+                );
+
+            string selectemailexists = string.Format("select * from {0} where {1} = {2} and {3} != {4}",
+                User_list.FieldName.TABLE_NAME, User_list.FieldName.EMAIL, User_list.ParameterName.EMAIL,
+                User_list.FieldName.USER_ID, User_list.ParameterName.USER_ID);
+
+            string emailupdatecmd = string.Format("if not exists({5}) " +
+                "BEGIN update {0} set {1} = {2} where {3} = {4} END ",
+                User_list.FieldName.TABLE_NAME, User_list.FieldName.EMAIL, User_list.ParameterName.EMAIL,
+                User_list.FieldName.USER_ID, User_list.ParameterName.USER_ID, selectemailexists);
+
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.T_PRENAME, updatedata.main_info.t_prename));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.T_NAME, updatedata.main_info.t_name));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.E_PRENAME, updatedata.main_info.e_prename));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.E_NAME, updatedata.main_info.e_name));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.TEL, updatedata.main_info.tel));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.ADDR, updatedata.main_info.addr));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.EMAIL, updatedata.main_info.email));
+            d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(User_list.ParameterName.USER_ID, updatedata.user_id));
+
+            d.iCommand.CommandText = string.Format("BEGIN {0} {1} END", mainupdatecmd, emailupdatecmd);
+            try
+            {
+                await d.iCommand.ExecuteNonQueryAsync();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                //Handle error from sql execution
+                return ex.Message;
+            }
+            finally
+            {
+                //Whether it success or not it must close connection in order to end block
+                d.SQLDisconnect();
+            }
+        }
 
         public async Task<object> SelectUser(string preferredusername)
         {

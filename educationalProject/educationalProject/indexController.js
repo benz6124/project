@@ -6005,7 +6005,7 @@ $rootScope.manage_minutes_still_same = function(){
     }
 });
 
-app.service('manage_users_data',function($http,$q,alertCaller){
+app.service('manage_users_data',function($http,$q,$rootScope,alertCaller){
     var serviceObj = new Object();
     serviceObj.user_list_data = {};
     serviceObj.set_user_list_data = function(value){
@@ -6013,7 +6013,23 @@ app.service('manage_users_data',function($http,$q,alertCaller){
     };
     serviceObj.update_user_list_data = function(value){
         if(angular.isUndefined(value)){
-            $http.get('/api/users/getuserlist').then(function (response) {
+            var target_curri_id;
+            if($rootScope.is_admin())
+                target_curri_id = "0";
+            else{
+                target_curri_id = Object.keys($rootScope.current_user.president_in)[0];
+            }
+            $http.post(
+            '/api/users/getuserlist',
+            JSON.stringify(target_curri_id),
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+            ).
+            
+            then(function (response) {
                 serviceObj.user_list_data.user_list = response.data;
             }, function (error) {
                 alertCaller.error(null, 'ไม่สามารถโหลดรายชื่อผู้ใช้งานได้ กรุณาลองใหม่อีกครั้ง');
@@ -6134,7 +6150,7 @@ $scope.save_to_server = function(my_modal){
             data:formData,
             transformRequest: angular.indentity 
         }).then(function(response){
-            manage_users_data.update_user_list_data(response.data);
+            manage_users_data.update_user_list_data();
             alertCaller.success();
             my_modal.$hide();
         },function(error){
