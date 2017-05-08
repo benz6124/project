@@ -213,6 +213,12 @@ $location.hash(null)
          $scope.corresponding_aca_years = [];
          $scope.send_please_wait = false;
     }
+
+     $rootScope.update_curri_choosen = function(){
+         if(!angular.equals($scope.curri_choosen,{}) ){
+            $scope.curri_choosen = $rootScope.all_curriculums.find(t => t.curri_id == $scope.curri_choosen.curri_id);
+         }
+     }
         $scope.can_watch_result = function(){
     if($scope.$parent.already_login == true){
         if($rootScope.current_user.user_type == 'ผู้ดูแลระบบ'){
@@ -994,11 +1000,14 @@ $scope.still_not_complete = function(){
                      }
                      $rootScope.curriculum_list = $scope.templist;
                  }
-                 $rootScope.clear_choosen();
-                 if($rootScope.curri_ctrl_mode === 1)
-                 alertCaller.success(null,'สร้างหลักสูตรเรียบร้อย');
-                 else
-                 alertCaller.success(null,'แก้ไขข้อมูลหลักสูตรเรียบร้อย');
+                 if($rootScope.curri_ctrl_mode === 1){
+                     alertCaller.success(null,'สร้างหลักสูตรเรียบร้อย');
+                     $rootScope.clear_choosen();
+                 }
+                 else{
+                    alertCaller.success(null,'แก้ไขข้อมูลหลักสูตรเรียบร้อย');
+                    $rootScope.update_curri_choosen();
+                 }
                  my_modal.$hide();
          })
       .error(function(data, status, headers, config) {
