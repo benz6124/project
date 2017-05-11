@@ -5772,9 +5772,6 @@ $scope.imgFileCheck = function(file){
             return true;
         }
         else{
-                if($scope.my_pictures.flow.files.length ==0 && $scope.old_pictures.length ==0){
-                    return true;
-                }
             if($scope.disabled_search == true){
                 if($scope.my_file.length ==0){
                     return true;

@@ -552,7 +552,7 @@ namespace educationalProject.Models.Wrappers
                             });
                         }
 
-                        //Add file_name to delete into dummy obj : minute_id == 1 || minutes_id == -2
+                        //Add file_name to delete into dummy obj : minute_id == -1 || minutes_id == -2
                         else
                         {
                             dummyfordeleteminutes.pictures.Add(new Minutes_pic
