@@ -1017,15 +1017,40 @@ $scope.still_not_complete = function(){
 }
 });
 
-app.controller('stat_graduated_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller,$filter,$q) {
+
+
+app.service('curriculum_data_retrieve',function($rootScope){
+    var serviceObj = new Object();
+    serviceObj.getgradyear = function(wantedcurri){
+        var targetcurri = $rootScope.all_curriculums.find(t => t.curri_id == wantedcurri.curri_id);
+        if(targetcurri.period != 0)
+            return targetcurri.period;
+        else {
+            if(targetcurri.level == 1)
+                return 4;
+            else if(targetcurri.level == 2 || targetcurri.level == 3)
+                return 2;
+            else
+                return 0;
+        }
+    };
+    return serviceObj;
+});
+
+
+
+
+
+app.controller('stat_graduated_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller,$filter,$q,curriculum_data_retrieve) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
-         $scope.year_choosen = {};
-              $scope.curri_choosen = {};
-                    $scope.result = {};
-                     $scope.all_curri_that_have_privileges = [];
-                           $scope.corresponding_aca_years = [];
-  $scope.$parent.scan_only_privilege_curri('11',$scope.all_curri_that_have_privileges);
+     $scope.year_choosen = {};
+     $scope.curri_choosen = {};
+     $scope.result = {};
+     $scope.gradtime = 0;
+     $scope.all_curri_that_have_privileges = [];
+     $scope.corresponding_aca_years = [];
+   $scope.$parent.scan_only_privilege_curri('11',$scope.all_curri_that_have_privileges);
 }
   
         $scope.sendCurriAndGetYears = function () {
@@ -1069,6 +1094,7 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
+             $scope.gradtime = curriculum_data_retrieve.getgradyear($scope.curri_choosen);
               $scope.result = data;
              $scope.choose_not_complete = false;
               $scope.blank = false;

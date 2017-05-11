@@ -1520,7 +1520,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                      <form name="graduated_form" novalidate>
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 style="margin-left:210px;margin-top:4px;"><span class="topicHeader">จำนวนนักศึกษาที่จบภายใน 4 ปี: <span></h3>
+                            <h3 style="margin-left:210px;margin-top:4px;"><span class="topicHeader">จำนวนนักศึกษาที่จบภายใน {{gradtime}} ปี: <span></h3>
                         </div>
                         <div class="col-md-3" style="margin-right:60px;" ng-show="$root.have_privilege(11,3,curri_choosen.curri_id,year_choosen.aca_year)">
                             <input ng-class="{ danger: graduated_form.grad_in_time.$invalid && graduated_form.grad_in_time.$dirty }" name="grad_in_time" type="number" ng-pattern="/^[0-9]*$/"   class="form-control" ng-model="result.grad_in_time" ng-disabled="choose_not_complete" min="0" required>
@@ -1532,7 +1532,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                         </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 style="margin-left:210px;margin-top:4px;"><span class="topicHeader">จำนวนนักศึกษาที่จบมากกว่า 4 ปี: <span></h3>
+                            <h3 style="margin-left:210px;margin-top:4px;"><span class="topicHeader">จำนวนนักศึกษาที่จบมากกว่า {{gradtime}} ปี: <span></h3>
                         </div>
                             <div class="col-md-3" style="margin-right:60px;" ng-show="$root.have_privilege(11,3,curri_choosen.curri_id,year_choosen.aca_year)">
                             <input ng-class="{ danger: graduated_form.grad_over_time.$invalid && graduated_form.grad_over_time.$dirty }" name="grad_over_time" type="number" ng-pattern="/^[0-9]*$/"  min="0" class="form-control" ng-model="result.grad_over_time" ng-disabled="choose_not_complete" required>
@@ -4036,7 +4036,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>Build:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>521</p>
+                    <p>522</p>
                 </div>
             </div>
             <div class='row'>
