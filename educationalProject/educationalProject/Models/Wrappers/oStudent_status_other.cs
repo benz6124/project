@@ -8,63 +8,12 @@ namespace educationalProject.Models.Wrappers
 {
     public class oStudent_status_other : Student_status_other
     {
-        public object Select()
-        {
-            DBConnector d = new DBConnector();
-            if (!d.SQLConnect())
-                return WebApiApplication.CONNECTDBERRSTRING;
-            List<oStudent_status_other> result = new List<oStudent_status_other>();
-            d.iCommand.CommandText = string.Format("select * from {0}", FieldName.TABLE_NAME);
-            try
-            {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
-                if (res.HasRows)
-                {
-                    DataTable data = new DataTable();
-                    data.Load(res);
-
-                    foreach (DataRow item in data.Rows)
-                    {
-                        result.Add(new oStudent_status_other
-                        {
-                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                            grad_in_time = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.GRAD_IN_TIME].Ordinal]),
-                            grad_over_time = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.GRAD_OVER_TIME].Ordinal]),
-                            move_in = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.MOVE_IN].Ordinal]),
-                            quity1 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.QUITY1].Ordinal]),
-                            quity2 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.QUITY2].Ordinal]),
-                            quity3 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.QUITY3].Ordinal]),
-                            quity4 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.QUITY4].Ordinal]),
-                            year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.YEAR].Ordinal])
-                        });
-                    }
-                    res.Close();
-                    data.Dispose();
-                }
-                else
-                {
-                    //Reserved for return error string
-                }
-            }
-            catch (Exception ex)
-            {
-                //Handle error from sql execution
-                return ex.Message;
-            }
-            finally
-            {
-                //Whether it success or not it must close connection in order to end block
-                d.SQLDisconnect();
-            }
-            return result;
-        }
-
         public async Task<object> SelectWhereByCurriculumAcademic()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return WebApiApplication.CONNECTDBERRSTRING;
-            List<oStudent_status_other> result = new List<oStudent_status_other>();
+            oStudent_status_other result = new oStudent_status_other();
             d.iCommand.CommandText = string.Format("select * from {0} where {1} = {2} and {3} = {4}", FieldName.TABLE_NAME,
                 FieldName.CURRI_ID, ParameterName.CURRI_ID, FieldName.YEAR, ParameterName.YEAR);
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURRI_ID, curri_id));
@@ -76,27 +25,29 @@ namespace educationalProject.Models.Wrappers
                 {
                     DataTable data = new DataTable();
                     data.Load(res);
-
-                    foreach (DataRow item in data.Rows)
-                    {
-                        result.Add(new oStudent_status_other
-                        {
-                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                            grad_in_time = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.GRAD_IN_TIME].Ordinal]),
-                            grad_over_time = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.GRAD_OVER_TIME].Ordinal]),
-                            move_in = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.MOVE_IN].Ordinal]),
-                            quity1 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.QUITY1].Ordinal]),
-                            quity2 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.QUITY2].Ordinal]),
-                            quity3 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.QUITY3].Ordinal]),
-                            quity4 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.QUITY4].Ordinal]),
-                            year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.YEAR].Ordinal])
-                        });
-                    }
+                    //Set result to desired property
+                    result.grad_in_time = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns[FieldName.GRAD_IN_TIME].Ordinal]);
+                    result.grad_over_time = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns[FieldName.GRAD_OVER_TIME].Ordinal]);
+                    result.move_in = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns[FieldName.MOVE_IN].Ordinal]);
+                    result.quity1 = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns[FieldName.QUITY1].Ordinal]);
+                    result.quity2 = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns[FieldName.QUITY2].Ordinal]);
+                    result.quity3 = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns[FieldName.QUITY3].Ordinal]);
+                    result.quity4 = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns[FieldName.QUITY4].Ordinal]);
+                    result.curri_id = data.Rows[0].ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString();
+                    result.year = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns[FieldName.YEAR].Ordinal]);
                     data.Dispose();
                 }
-                else
+                else //if no row return => set default student stat other result to all zeros
                 {
-                    //Reserved for return error string
+                    result.grad_in_time = 0;
+                    result.grad_over_time = 0;
+                    result.move_in = 0;
+                    result.quity1 = 0;
+                    result.quity2 = 0;
+                    result.quity3 = 0;
+                    result.quity4 = 0;
+                    result.curri_id = curri_id;
+                    result.year = year;
                 }
                 res.Close();
             }

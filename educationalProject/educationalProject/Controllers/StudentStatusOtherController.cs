@@ -19,21 +19,9 @@ namespace educationalProject.Controllers
             object result = await datacontext.SelectWhereByCurriculumAcademic();
             if (result.GetType().ToString().CompareTo("System.String") == 0)
                 return InternalServerError(new Exception(result.ToString()));
-            else if (((List<oStudent_status_other>)result).Count != 0)
+            else
             {
-                return Ok(((IEnumerable<oStudent_status_other>)result).First());
-            }
-            else {
-                datacontext.curri_id = data.curri_id;
-                datacontext.year = data.aca_year;
-                datacontext.grad_in_time = -1;
-                datacontext.grad_over_time = -1;
-                datacontext.move_in = -1;
-                datacontext.quity1 = -1;
-                datacontext.quity2 = -1;
-                datacontext.quity3 = -1;
-                datacontext.quity4 = -1;
-                return Ok(datacontext);
+                return Ok(result);
             }
         }
         public async Task<IHttpActionResult> PutStudentStatusOther(oStudent_status_other data)

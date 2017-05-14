@@ -1100,17 +1100,6 @@ $scope.init =function() {
              $scope.gradtime = curriculum_related_data.getgradyear($scope.curri_choosen);
               $scope.result = data;
              $scope.choose_not_complete = false;
-              $scope.blank = false;
-              var value;
-              var key;
-             if ($scope.result.grad_in_time==-1){
-                angular.forEach($scope.result, function(value, key) {
-                  if(key !="year" && key != "curri_id"){
-                    $scope.result[key] = "";
-                    $scope.blank = true;
-                  }
-                });
-             }
          });
     }
     $scope.close_modal = function(my_modal){
@@ -1185,17 +1174,6 @@ $scope.init =function() {
          ).success(function (data) {
             $scope.result = data;
             $scope.choose_not_complete = false;
-              var value;
-              var key;
-              $scope.blank = false;
-             if ($scope.result.ny1==-1){
-                angular.forEach($scope.result, function(value, key) {
-                  if(key !="year" && key != "curri_id"){       
-                    $scope.result[key] = "";
-                      $scope.blank = true;
-                  }
-                });
-             }
          });
     }
     $scope.close_modal = function(my_modal){

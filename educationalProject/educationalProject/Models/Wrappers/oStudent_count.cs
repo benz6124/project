@@ -8,63 +8,12 @@ namespace educationalProject.Models.Wrappers
 {
     public class oStudent_count : Student_count
     {
-        public object Select()
-        {
-            DBConnector d = new DBConnector();
-            if (!d.SQLConnect())
-                return WebApiApplication.CONNECTDBERRSTRING;
-            List<oStudent_count> result = new List<oStudent_count>();
-            d.iCommand.CommandText = string.Format("select * from {0}", FieldName.TABLE_NAME);
-            try
-            {
-                System.Data.Common.DbDataReader res = d.iCommand.ExecuteReader();
-                if (res.HasRows)
-                {
-                    DataTable data = new DataTable();
-                    data.Load(res);
-                    foreach (DataRow item in data.Rows)
-                    {
-                        result.Add(new oStudent_count
-                        {
-                            ny1 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY1].Ordinal]),
-                            ny2 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY2].Ordinal]),
-                            ny3 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY3].Ordinal]),
-                            ny4 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY4].Ordinal]),
-                            ny5 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY5].Ordinal]),
-                            ny6 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY6].Ordinal]),
-                            ny7 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY7].Ordinal]),
-                            ny8 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY8].Ordinal]),
-                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                            year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.YEAR].Ordinal])
-                        });
-                    }
-                    res.Close();
-                    data.Dispose();
-                }
-                else
-                {
-                    //Reserved for return error string
-                }
-            }
-            catch (Exception ex)
-            {
-                //Handle error from sql execution
-                return ex.Message;
-            }
-            finally
-            {
-                //Whether it success or not it must close connection in order to end block
-                d.SQLDisconnect();
-            }
-            return result;
-        }
-
         public async Task<object> SelectWhereByCurriculumAcademic()
         {
             DBConnector d = new DBConnector();
             if (!d.SQLConnect())
                 return WebApiApplication.CONNECTDBERRSTRING;
-            List<oStudent_count> result = new List<oStudent_count>();
+            oStudent_count result = new oStudent_count();
             d.iCommand.CommandText = string.Format("select * from {0} where {1} = {2} and {3} = {4}", FieldName.TABLE_NAME,
                 FieldName.CURRI_ID,ParameterName.CURRI_ID,FieldName.YEAR,ParameterName.YEAR);
             d.iCommand.Parameters.Add(new System.Data.SqlClient.SqlParameter(ParameterName.CURRI_ID, curri_id));
@@ -76,27 +25,31 @@ namespace educationalProject.Models.Wrappers
                 {
                     DataTable data = new DataTable();
                     data.Load(res);
-                    foreach (DataRow item in data.Rows)
-                    {
-                        result.Add(new oStudent_count
-                        {
-                            ny1 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY1].Ordinal]),
-                            ny2 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY2].Ordinal]),
-                            ny3 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY3].Ordinal]),
-                            ny4 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY4].Ordinal]),
-                            ny5 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY5].Ordinal]),
-                            ny6 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY6].Ordinal]),
-                            ny7 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY7].Ordinal]),
-                            ny8 = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.NY8].Ordinal]),
-                            curri_id = item.ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString(),
-                            year = Convert.ToInt32(item.ItemArray[data.Columns[FieldName.YEAR].Ordinal])
-                        });
-                    }
+                    //Set result to desired property
+                    result.ny1 = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns[FieldName.NY1].Ordinal]);
+                    result.ny2 = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns[FieldName.NY2].Ordinal]);
+                    result.ny3 = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns[FieldName.NY3].Ordinal]);
+                    result.ny4 = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns[FieldName.NY4].Ordinal]);
+                    result.ny5 = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns[FieldName.NY5].Ordinal]);
+                    result.ny6 = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns[FieldName.NY6].Ordinal]);
+                    result.ny7 = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns[FieldName.NY7].Ordinal]);
+                    result.ny8 = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns[FieldName.NY8].Ordinal]);
+                    result.curri_id = data.Rows[0].ItemArray[data.Columns[FieldName.CURRI_ID].Ordinal].ToString();
+                    result.year = Convert.ToInt32(data.Rows[0].ItemArray[data.Columns[FieldName.YEAR].Ordinal]);
                     data.Dispose();
                 }
-                else
+                else //if no row return => set default student stat result to all zeros
                 {
-                    //Reserved for return error string
+                    result.ny1 = 0;
+                    result.ny2 = 0;
+                    result.ny3 = 0;
+                    result.ny4 = 0;
+                    result.ny5 = 0;
+                    result.ny6 = 0;
+                    result.ny7 = 0;
+                    result.ny8 = 0;
+                    result.curri_id = curri_id;
+                    result.year = year;
                 }
                 res.Close();
             }

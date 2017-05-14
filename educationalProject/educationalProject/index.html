@@ -1515,7 +1515,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                     <div ng-show= "choose_not_complete">
                         <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> 
                     </div>
-                    <div ng-hide="choose_not_complete"  >
+                    <div ng-hide="choose_not_complete">
                          <br /> 
                      <form name="graduated_form" novalidate>
                     <div class="row">
@@ -1526,8 +1526,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                             <input ng-class="{ danger: graduated_form.grad_in_time.$invalid && graduated_form.grad_in_time.$dirty }" name="grad_in_time" type="number" ng-pattern="/^[0-9]*$/"   class="form-control" ng-model="result.grad_in_time" min="0" required>
                         </div>
                        <div class="col-md-3" style="margin-right:60px;text-align:center" ng-show="!$root.have_privilege(11,3,curri_choosen.curri_id,year_choosen.aca_year)">
-                             <h3 style="margin-top:4px" ng-hide="blank"><span class="topicHeader">{{result.grad_in_time}}<span></h3>
-                               <h3 style="margin-top:4px;color:#ac2925" ng-show="blank"><span class="topicHeader">--ไม่พบข้อมูล--<span></h3>
+                             <h3 style="margin-top:4px"><span class="topicHeader">{{result.grad_in_time}}<span></h3>
                         </div>
                         </div>
                     <div class="row">
@@ -1538,9 +1537,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                             <input ng-class="{ danger: graduated_form.grad_over_time.$invalid && graduated_form.grad_over_time.$dirty }" name="grad_over_time" type="number" ng-pattern="/^[0-9]*$/"  min="0" class="form-control" ng-model="result.grad_over_time" required>
                         </div>
    <div class="col-md-3" style="margin-right:60px;text-align:center" ng-show="!$root.have_privilege(11,3,curri_choosen.curri_id,year_choosen.aca_year)">
-                    
-      <h3 style="margin-top:4px" ng-hide="blank"><span class="topicHeader">{{result.grad_over_time}}<span></h3>
-                               <h3 style="margin-top:4px;color:#ac2925" ng-show="blank"><span class="topicHeader">--ไม่พบข้อมูล--<span></h3>
+      <h3 style="margin-top:4px"><span class="topicHeader">{{result.grad_over_time}}<span></h3>
                         </div>
                     </div>
                     <div class="row">
@@ -1551,8 +1548,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                             <input ng-class="{ danger: graduated_form.quity1.$invalid && graduated_form.quity1.$dirty }" name ="quity1" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" min="0" ng-model="result.quity1" required>
                         </div>
                            <div class="col-md-3" style="margin-right:60px;text-align:center" ng-show="!$root.have_privilege(11,3,curri_choosen.curri_id,year_choosen.aca_year)">
-      <h3 style="margin-top:4px" ng-hide="blank"><span class="topicHeader">{{result.quity1}}<span></h3>
-                               <h3 style="margin-top:4px;color:#ac2925" ng-show="blank"><span class="topicHeader">--ไม่พบข้อมูล--<span></h3>
+      <h3 style="margin-top:4px"><span class="topicHeader">{{result.quity1}}<span></h3>
                         </div>
                     </div>
                     <div class="row">
@@ -1563,8 +1559,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                             <input ng-class="{ danger: graduated_form.quity2.$invalid && graduated_form.quity2.$dirty }" name ="quity2" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" min="0" ng-model="result.quity2" required>
                         </div>
                            <div class="col-md-3" style="margin-right:60px;text-align:center" ng-show="!$root.have_privilege(11,3,curri_choosen.curri_id,year_choosen.aca_year)">                 
-  <h3 style="margin-top:4px" ng-hide="blank"><span class="topicHeader">{{result.quity2}}<span></h3>
-                               <h3 style="margin-top:4px;color:#ac2925" ng-show="blank"><span class="topicHeader">--ไม่พบข้อมูล--<span></h3>
+  <h3 style="margin-top:4px"><span class="topicHeader">{{result.quity2}}<span></h3>
                         </div>
                     </div>
                     <div class="row">
@@ -1575,8 +1570,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                             <input ng-class="{ danger: graduated_form.quity3.$invalid && graduated_form.quity3.$dirty }" name ="quity3" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" min="0" ng-model="result.quity3" required>
                         </div>
                            <div class="col-md-3" style="margin-right:60px;text-align:center" ng-show="!$root.have_privilege(11,3,curri_choosen.curri_id,year_choosen.aca_year)">         
-  <h3 style="margin-top:4px" ng-hide="blank"><span class="topicHeader">{{result.quity3}}<span></h3>
-                               <h3 style="margin-top:4px;color:#ac2925" ng-show="blank"><span class="topicHeader">--ไม่พบข้อมูล--<span></h3>
+  <h3 style="margin-top:4px"><span class="topicHeader">{{result.quity3}}<span></h3>
                         </div>   
                     </div>
                     <div class="row">
@@ -1587,8 +1581,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                             <input ng-class="{ danger: graduated_form.quity4.$invalid && graduated_form.quity4.$dirty }" name ="quity4" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" min="0" ng-model="result.quity4" required>
                         </div>
                            <div class="col-md-3" style="margin-right:60px;text-align:center" ng-show="!$root.have_privilege(11,3,curri_choosen.curri_id,year_choosen.aca_year)">                   
-  <h3 style="margin-top:4px" ng-hide="blank"><span class="topicHeader">{{result.quity4}}<span></h3>
-                               <h3 style="margin-top:4px;color:#ac2925" ng-show="blank"><span class="topicHeader">--ไม่พบข้อมูล--<span></h3>
+  <h3 style="margin-top:4px"><span class="topicHeader">{{result.quity4}}<span></h3>
                         </div>                     
                     </div>
                     <div class="row">
@@ -1599,8 +1592,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
             <input ng-class="{ danger: graduated_form.move_in.$invalid && graduated_form.move_in.$dirty }" name ="move_in" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" min="0" ng-model="result.move_in" required>
                         </div>
                            <div class="col-md-3" style="margin-right:60px;text-align:center" ng-show="!$root.have_privilege(11,3,curri_choosen.curri_id,year_choosen.aca_year)">                    
-  <h3 style="margin-top:4px" ng-hide="blank"><span class="topicHeader">{{result.move_in}}<span></h3>
-                               <h3 style="margin-top:4px;color:#ac2925" ng-show="blank"><span class="topicHeader">--ไม่พบข้อมูล--<span></h3>
+  <h3 style="margin-top:4px"><span class="topicHeader">{{result.move_in}}<span></h3>
                         </div>
                     </div>
                           </form>
@@ -3394,8 +3386,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                             <input style="margin-left:10px;" ng-class="{danger: student_stat_form.ny1.$invalid && student_stat_form.ny1.$dirty }" name ="ny1" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" ng-model="result.ny1" min="0" required />
                         </div>
                                <div class="col-md-2" style="text-align:center" ng-show="!$root.have_privilege(13,3,curri_choosen.curri_id,year_choosen.aca_year)">
- <h3 ng-hide="blank" style="margin-top:0px;"><span class="topicHeader">{{result.ny1}}   </span></h3>
- <h3 ng-show="blank"  style="margin-top:0px;color:#ac2925"><span class="topicHeader">--ไม่พบข้อมูล-- </span></h3>
+                                   <h3 style="margin-top:0px;"><span class="topicHeader">{{result.ny1}}   </span></h3>
                         </div>
                     </div>
                     <div class="row">
@@ -3406,8 +3397,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                             <input style="margin-left:10px;" ng-class="{ danger: student_stat_form.ny2.$invalid  && student_stat_form.ny2.$dirty }" name ="ny2" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" ng-model="result.ny2" min="0" required />
                         </div>
                          <div class="col-md-2" style="text-align:center" ng-show="!$root.have_privilege(13,3,curri_choosen.curri_id,year_choosen.aca_year)">
- <h3 ng-hide="blank" style="margin-top:0px;"><span class="topicHeader">{{result.ny2}}   </span></h3>
- <h3 ng-show="blank"  style="margin-top:0px;color:#ac2925"><span class="topicHeader">--ไม่พบข้อมูล-- </span></h3>
+ <h3 style="margin-top:0px;"><span class="topicHeader">{{result.ny2}}   </span></h3>
                         </div>
                     </div>
                     <div class="row">
@@ -3418,8 +3408,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                 <input style="margin-left:10px;" ng-class="{ danger: student_stat_form.ny3.$invalid && student_stat_form.ny3.$dirty }"name ="ny3" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" ng-model="result.ny3" min="0" required />
                         </div>
                          <div class="col-md-2" style="text-align:center" ng-show="!$root.have_privilege(13,3,curri_choosen.curri_id,year_choosen.aca_year)">
- <h3 ng-hide="blank" style="margin-top:0px;"><span class="topicHeader">{{result.ny3}}   </span></h3>
- <h3 ng-show="blank"  style="margin-top:0px;color:#ac2925"><span class="topicHeader">--ไม่พบข้อมูล-- </span></h3>
+ <h3 style="margin-top:0px;"><span class="topicHeader">{{result.ny3}}   </span></h3>
                         </div>
                     </div>
                     <div class="row">
@@ -3430,8 +3419,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                         <input style="margin-left:10px;" ng-class="{ danger: student_stat_form.ny4.$invalid && student_stat_form.ny4.$dirty }"name ="ny4" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" ng-model="result.ny4" min="0" required />
                         </div>
                          <div class="col-md-2" style="text-align:center" ng-show="!$root.have_privilege(13,3,curri_choosen.curri_id,year_choosen.aca_year)">
- <h3 ng-hide="blank" style="margin-top:0px;"><span class="topicHeader">{{result.ny4}}   </span></h3>
- <h3 ng-show="blank"  style="margin-top:0px;color:#ac2925"><span class="topicHeader">--ไม่พบข้อมูล-- </span></h3>
+ <h3 style="margin-top:0px;"><span class="topicHeader">{{result.ny4}}   </span></h3>
                         </div>
                     </div>
                     <div class="row">
@@ -3442,8 +3430,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                <input style="margin-left:10px;" ng-class="{ danger: student_stat_form.ny5.$invalid && student_stat_form.ny5.$dirty }" name ="ny5" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" ng-model="result.ny5" min="0" required />
                         </div>
                          <div class="col-md-2" style="text-align:center" ng-show="!$root.have_privilege(13,3,curri_choosen.curri_id,year_choosen.aca_year)">
- <h3 ng-hide="blank" style="margin-top:0px;"><span class="topicHeader">{{result.ny5}}   </span></h3>
- <h3 ng-show="blank"  style="margin-top:0px;color:#ac2925"><span class="topicHeader">--ไม่พบข้อมูล-- </span></h3>
+ <h3 style="margin-top:0px;"><span class="topicHeader">{{result.ny5}}   </span></h3>
                         </div>
                     </div>
                     <div class="row">
@@ -3454,8 +3441,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                        <input style="margin-left:10px;" ng-class="{ danger: student_stat_form.ny6.$invalid && student_stat_form.ny6.$dirty }" name ="ny6" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" ng-model="result.ny6" min="0" required />
                         </div>
                          <div class="col-md-2" style="text-align:center" ng-show="!$root.have_privilege(13,3,curri_choosen.curri_id,year_choosen.aca_year)">
- <h3 ng-hide="blank" style="margin-top:0px;"><span class="topicHeader">{{result.ny6}}   </span></h3>
- <h3 ng-show="blank"  style="margin-top:0px;color:#ac2925"><span class="topicHeader">--ไม่พบข้อมูล-- </span></h3>
+ <h3 style="margin-top:0px;"><span class="topicHeader">{{result.ny6}}   </span></h3>
                         </div>
                     </div>
                     <div class="row">
@@ -3466,8 +3452,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                             <input style="margin-left:10px;" ng-class="{ danger: student_stat_form.ny7.$invalid && student_stat_form.ny7.$dirty }" name ="ny7" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" ng-model="result.ny7" min="0" required />
                         </div>
                          <div class="col-md-2" style="text-align:center" ng-show="!$root.have_privilege(13,3,curri_choosen.curri_id,year_choosen.aca_year)">
- <h3 ng-hide="blank" style="margin-top:0px;"><span class="topicHeader">{{result.ny7}}   </span></h3>
- <h3 ng-show="blank"  style="margin-top:0px;color:#ac2925"><span class="topicHeader">--ไม่พบข้อมูล-- </span></h3>
+ <h3 style="margin-top:0px;"><span class="topicHeader">{{result.ny7}}   </span></h3>
                         </div>
                     </div>
                     <div class="row">
@@ -3478,8 +3463,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                             <input style="margin-left:10px;" ng-class="{ danger: student_stat_form.ny8.$invalid && student_stat_form.ny8.$dirty }" name ="ny8" type="number" ng-pattern="/^[0-9]*$/"  class="form-control" ng-model="result.ny8" min="0" required />
                         </div>
                          <div class="col-md-2" style="text-align:center" ng-show="!$root.have_privilege(13,3,curri_choosen.curri_id,year_choosen.aca_year)">
- <h3 ng-hide="blank" style="margin-top:0px;"><span class="topicHeader">{{result.ny8}}   </span></h3>
- <h3 ng-show="blank"  style="margin-top:0px;color:#ac2925"><span class="topicHeader">--ไม่พบข้อมูล-- </span></h3>
+ <h3 style="margin-top:0px;"><span class="topicHeader">{{result.ny8}}   </span></h3>
                         </div>
                     </div>
 </form>
@@ -4110,7 +4094,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>Build:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>523</p>
+                    <p>524</p>
                 </div>
             </div>
             <div class='row'>
