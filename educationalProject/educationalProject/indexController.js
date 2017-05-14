@@ -1019,7 +1019,7 @@ $scope.still_not_complete = function(){
 
 
 
-app.service('curriculum_data_retrieve',function($rootScope){
+app.service('curriculum_related_data',function($rootScope){
     var serviceObj = new Object();
     serviceObj.getgradyear = function(wantedcurri){
         var targetcurri = $rootScope.all_curriculums.find(t => t.curri_id == wantedcurri.curri_id);
@@ -1034,6 +1034,9 @@ app.service('curriculum_data_retrieve',function($rootScope){
                 return 0;
         }
     };
+    serviceObj.getlevel = function(wantedcurri){
+        return $rootScope.all_curriculums.find(t => t.curri_id == wantedcurri.curri_id).level;
+    }
     return serviceObj;
 });
 
@@ -1041,7 +1044,7 @@ app.service('curriculum_data_retrieve',function($rootScope){
 
 
 
-app.controller('stat_graduated_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller,$filter,$q,curriculum_data_retrieve) {
+app.controller('stat_graduated_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller,$filter,$q,curriculum_related_data) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
      $scope.year_choosen = {};
@@ -1094,7 +1097,7 @@ $scope.init =function() {
                  }
              }
          ).success(function (data) {
-             $scope.gradtime = curriculum_data_retrieve.getgradyear($scope.curri_choosen);
+             $scope.gradtime = curriculum_related_data.getgradyear($scope.curri_choosen);
               $scope.result = data;
              $scope.choose_not_complete = false;
               $scope.blank = false;
@@ -1217,7 +1220,7 @@ $scope.init =function() {
     }
 });
 
-app.controller('stat_new_student_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller,$filter,$q) {
+app.controller('stat_new_student_controller', function($scope, $http,$alert,$loading,request_all_curriculums_service_server,$rootScope,request_years_from_curri_choosen_service,alertCaller,curriculum_related_data,$filter,$q) {
 $scope.init =function() {
      $scope.choose_not_complete = true;
        $scope.year_choosen = {};
@@ -1255,6 +1258,7 @@ $scope.init =function() {
     });
 
     $scope.find_information = function(){
+        $scope.year_choosen.lv = curriculum_related_data.getlevel($scope.curri_choosen);
         $http.post(
              '/api/newstudentcount',
              JSON.stringify($scope.year_choosen),
@@ -1266,18 +1270,16 @@ $scope.init =function() {
          ).success(function (data) {
              $scope.result = data;
              $scope.choose_not_complete = false; 
-              var value;
-              var key;
-                  $scope.blank = false;
-             if ($scope.result.num_admis_f==-1){
-                angular.forEach($scope.result, function(value, key) {
-                  if(key !="year" && key != "curri_id"){
-                    $scope.result[key] = "";
-                    $scope.blank = true;
-                  }
-                });
-             }
          });
+    }
+
+    $scope.is_data_invalid = function(){
+        for(var a in $scope.result){
+            if($scope.result[a] === undefined){
+            return true;
+            }
+        }
+        return false;
     }
 
     $scope.close_modal = function(my_modal){
@@ -1285,6 +1287,7 @@ $scope.init =function() {
     }
 
     $scope.save_to_server = function(my_modal){
+        $scope.result.lv = curriculum_related_data.getlevel($scope.curri_choosen);
         $http.put(
              '/api/newstudentcount',
              JSON.stringify($scope.result),

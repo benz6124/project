@@ -148,6 +148,7 @@
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Curriculum_academic.cs" />
     <Compile Include="Models\DBFieldDataType.cs" />
+    <Compile Include="Models\New_student_count_grad.cs" />
     <Compile Include="Models\Title.cs" />
     <Compile Include="Models\User_curriculum.cs" />
     <Compile Include="Models\Cu_curriculum.cs" />
@@ -164,7 +165,7 @@
     <Compile Include="Models\Minutes.cs" />
     <Compile Include="Models\Minutes_attendee.cs" />
     <Compile Include="Models\Minutes_pic.cs" />
-    <Compile Include="Models\New_student_count.cs" />
+    <Compile Include="Models\New_student_count_ungrad.cs" />
     <Compile Include="Models\Others_evaluation.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\President_curriculum.cs" />
