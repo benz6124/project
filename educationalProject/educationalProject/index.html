@@ -1134,7 +1134,7 @@
   </td>
   
                                    <td ng-show="$root.have_privilege(10,4,curri_choosen.curri_id,year_choosen.aca_year)"> <a style="margin-top:7px"  href=""  class="hvr-pulse"  data-ng-click="go_to_fix_lab(lab)" data-nq-toggle-modal="#create_edit_lab">
-                                        <span class="topic"><i style="color:#eea236;margin0" class="glyphicon glyphicon-wrench"></i> </span>
+                                        <span class="topic"><i style="color:#eea236;" class="glyphicon glyphicon-wrench"></i> </span>
                                     </a></td> 
                                           <td ng-show="$root.have_privilege(10,4,curri_choosen.curri_id,year_choosen.aca_year)"> <a href=""  style="margin-top:7px" class="hvr-pulse" data-ng-click="remove_lab($index)" >
                                         <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-minus-sign"></i> </span>
@@ -1200,7 +1200,7 @@
                                     </a></td> 
                                     
    <td ng-show="$root.have_privilege(9,5,curri_choosen.curri_id,null)"> <a style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#create_edit_research" data-ng-click="go_to_fix_research(research)">
-                                        <span class="topic"><i style="color:#eea236;margin0" class="glyphicon glyphicon-wrench"></i> </span>
+                                        <span class="topic"><i style="color:#eea236;" class="glyphicon glyphicon-wrench"></i> </span>
                                     </a></td>
                                           <td ng-show="$root.have_privilege(9,5,curri_choosen.curri_id,null)"> <a style="margin-top:7px" data-ng-click="remove_research($index)" href=""  class="hvr-pulse">
                                         <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-minus-sign"></i> </span>
@@ -2088,9 +2088,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                         <div ng-show="choose_not_complete">
                         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                         </div>
-
 <br />
-<!--       <img src="{{personnel_choose.file_name_pic}}" class="img-circle" width="240" style="" /> -->
  <div class="container-fluid" ng-hide="choose_not_complete">
                         <div class="clearfix">
                             <div class="panel panel-default" style="margin-bottom:0px" data-nq-pageable=""
@@ -2905,13 +2903,13 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                                 <td ng-if="result.sub_indicator_num !=0">{{result.indicator_num}}.{{result.sub_indicator_num}}</td>
                                                       <td ng-if="result.sub_indicator_num ==0">{{result.indicator_num}}</td>
                                                 <td class="left_column">{{result.sub_indicator_name}}</td>
-                                                <td><input type="radio"  value="7" min="1" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio"  value="6" min="1" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio" value="5" min="1" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio"  value="4" min="1" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio"  value="3" min="1" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio" value="2" min="1" data-ng-model="result.evaluation_score"> </td>
-                                                <td><input type="radio" value="1" min="1" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio"  value="7" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio"  value="6" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio" value="5" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio"  value="4" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio"  value="3" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio" value="2" data-ng-model="result.evaluation_score"> </td>
+                                                <td><input type="radio" value="1" data-ng-model="result.evaluation_score"> </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -3030,7 +3028,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     </div>
                     <div class="custom-footer">
                         <div class="topicHeader pull-right">
-                            <button class="btn btn-success" ng-disabled="upload_evidence_form.$invalide || new_evidence_still_not_complete() || please_wait" ng-click="save_to_server(this)">ยืนยัน</button>
+                            <button class="btn btn-success" ng-disabled="upload_evidence_form.$invalid || new_evidence_still_not_complete() || please_wait" ng-click="save_to_server(this)">ยืนยัน</button>
                             <button class="btn btn-default" ng-click="$hide()">ยกเลิก</button>
                         </div>
                     </div>
@@ -3761,7 +3759,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                             <td style="padding-left:10px;"><span style="font-size:19px;">{{each_education.pre_major}}</span> </td>
                                     <td style="padding-left:10px;"><span style="font-size:19px;">{{each_education.grad_year}}</span> </td>
    <td> <a style="margin-top:7px"  href=""  class="hvr-pulse" data-nq-toggle-modal="#education_modal" ng-click="go_to_fix(each_education)">
-                                        <span class="topic"><i style="color:#eea236;margin0" class="glyphicon glyphicon-wrench"></i></span>
+                                        <span class="topic"><i style="color:#eea236;" class="glyphicon glyphicon-wrench"></i></span>
                                     </a></td>
                                           <td> <a style="margin-top:7px" data-ng-click="remove_education($index)" href=""  class="hvr-pulse">
                                         <span class="topic"><i style="color:#d9534f" class="glyphicon glyphicon-minus-sign"></i> </span>
@@ -3947,7 +3945,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                       <td><span style="font-size:19px">{{survey.date}}</span> </td>              
                                                               <td><span style="font-size:19px">{{survey.t_name}}</span> </td>
    <td ng-show="$root.have_privilege(5,2,curri_choosen.curri_id,year_choosen.aca_year)"><a ng-show="right_target(survey.target)" href="" style="margin-top:7px" class="hvr-pulse" data-nq-toggle-modal="#do_survey" data-effect="from-left" data-ng-click="go_to_answer(survey)">
-                                        <span class="topic"><i style="color:#204d74;margin0" class="glyphicon glyphicon-hand-up"></i> </span>
+                                        <span class="topic"><i style="color:#204d74;" class="glyphicon glyphicon-hand-up"></i> </span>
                                     </a></td>
                                        <td> <a href="" ng-show="$root.president_in_this_curri_and_year(curri_choosen.curri_id,year_choosen.aca_year) ||survey.personnel_id == current_user.user_id" style="margin-top:7px" data-nq-toggle-modal="#result_survey" data-effect="from-left" data-ng-click="go_to_result(survey)" class="hvr-pulse">
                                         <span class="topic"><i style="color:#4cae4c" class="glyphicon glyphicon-stats"></i> </span>

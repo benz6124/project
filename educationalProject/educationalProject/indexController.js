@@ -1837,9 +1837,7 @@ $scope.init =function() {
               $scope.curri_choosen = {};
                 $scope.results={};
                 $scope.my_president ={};
-                       $scope.personnel_choose = {};
                        $scope.current_president = {};
-                       $scope.blank_please= false;
                     
                  $scope.old_pres_ob = {};
                                $http.get('/api/curriculumacademic/getdistinctacayear').success(function (data) {
@@ -1858,7 +1856,7 @@ $scope.remove_president = function(curri_key,index_to_remove){
 }
 
   $scope.$on("modal.hide", function (event, args) {
-     $scope.init();      
+     $scope.init();
     });
   $scope.$on("modal.show", function (event, args) {
               $scope.init();
@@ -1869,9 +1867,7 @@ $scope.remove_president = function(curri_key,index_to_remove){
               $scope.curri_choosen = {};
                 $scope.results={};
                 $scope.my_president ={};
-                $scope.personnel_choose = {};
                 $scope.current_president= {};
-  $scope.blank_please= false;
 
 $scope.nothing_change_object = function(){
       if(!$scope.old_pres_ob){
@@ -1911,33 +1907,8 @@ $scope.nothing_change_object = function(){
                 }
                   $scope.results.all_presidents[$scope.results.all_curri_id[index]].presidents = new_presidents;
             }
- //                     $scope.blank_please= false;
- //            if(!$scope.results[0].username){
-          
- //                $scope.results.splice(0,1);
- //                 $scope.personnel_choose = [];
- //            $scope.current_president = [];
- // $scope.blank_please= true;
- //            }
- //            else{
-
- //            $scope.personnel_choose = $scope.results[0];
- //            $scope.current_president = $scope.results[0];
- //            }
 $scope.old_pres_ob = angular.copy($scope.results);
          });
-    }
-$scope.change_already = function(){
-
-    $scope.blank_please= false;
-}
-    $scope.still_same_president = function(){
-        if($scope.personnel_choose.teacher_id == $scope.current_president.teacher_id){
-            return true;
-        }
-        else{
-            return false;
-        }
     }
 
     $scope.choose_same_presidents_or_not_choose = function(){
@@ -2197,7 +2168,6 @@ $scope.choose_not_complete = false;
                  }
              }
          ).success(function (data) {
-         
             $scope.nothing_change = true;
              $rootScope.my_backup_indicators = angular.copy(data);
             $rootScope.manage_indicators_and_sub_result =data;
@@ -2399,19 +2369,12 @@ app.controller('add_new_evidence_controller', function($scope, $alert,$http,$roo
         else{
              if ($scope.my_new_evidence.evidence_real_code <= 0 ){
                    return true;
-  $alert({title:'เกิดข้อผิดพลาด', content:'รหัสหลักฐานห้ามมีค่าน้อยกว่าศูนย์',alertType:'warning',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
                 }
-
             if($rootScope.my_evidence_real_code_we_have_now.indexOf($scope.my_new_evidence.evidence_real_code) != -1){
                    return true;
-                   $alert({title:'เกิดข้อผิดพลาด', content:'รหัสหลักฐานซ้ำกับรหัสหลักฐานที่มีอยู่แล้ว',alertType:'warning',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
             }
             if($rootScope.my_evidence_name_we_have_now.indexOf($scope.my_new_evidence.evidence_name) != -1){
                 return true;
-                   $alert({title:'เกิดข้อผิดพลาด', content:'หลักฐานที่เลือกมีชื่อซ้ำกับหลักฐานที่มีอยู่แล้ว',alertType:'warning',
-                         placement:'bottom-right', effect:'bounce-in',speed:'slow',typeClass:'alertPopFileSize'});
             }
             return false;
         }
@@ -2483,7 +2446,7 @@ $scope.primary_choosen = {};
       angular.element(inputElem).val(null);
     });
            
-                $scope.please_wait = false;
+        $scope.please_wait = false;
          $scope.my_temp_secret_new = false;
    $scope.my_new_evidence = {};
    $scope.my_new_evidence.evidence_real_code = "";
@@ -2656,11 +2619,9 @@ $scope.still_not_choose_complete = function(){
         if( $scope.all_evidence_real_code.indexOf($rootScope.manage_evidences_world_evidences[index].evidence_real_code)!=-1){
             return true;
         }
-
         if( $scope.all_evidence_name.indexOf($rootScope.manage_evidences_world_evidences[index].evidence_name)!=-1){
             return true;
         }
-
         $scope.all_evidence_name.push($rootScope.manage_evidences_world_evidences[index].evidence_name);
         $scope.all_evidence_real_code.push($rootScope.manage_evidences_world_evidences[index].evidence_real_code);
     }
@@ -2830,7 +2791,6 @@ $scope.please_wait = false;
                     return true;
                 }
             }
-
             $scope.my_num_indicators = [];
             for (index =0;index<  $rootScope.manage_indicators_indicator_choosen.sub_indicator_list.length ; index++){
 
@@ -2856,11 +2816,9 @@ $scope.please_wait = false;
          $rootScope.manage_indicators_and_sub_result[$rootScope.manage_indicators_and_sub_save_indicator.save_index] =  angular.copy($rootScope.manage_indicators_indicator_choosen);
    $scope.nothing_change = true;
     }
-
     $scope.$on("modal.hide", function (event, args) {
     $scope.start_ka();
     });
-
   $scope.$on("modal.show", function (event, args) {
     $scope.please_wait = false;
                  $scope.start_ka();
@@ -2873,16 +2831,13 @@ $scope.please_wait = false;
             "sub_indicator_num":"","sub_indicator_name":""});
         $scope.nothing_change = false;
       }
-
       $scope.remove_sub_indicator = function(index_sub_indicator_to_remove) { 
           $scope.nothing_change = false;
       $rootScope.manage_indicators_indicator_choosen.sub_indicator_list.splice(index_sub_indicator_to_remove, 1);     
     }
-
         $scope.close_modal = function(my_modal){
         my_modal.$hide();
     }
-
 $scope.start_ka = function(){
         $rootScope.manage_indicators_indicator_choosen = angular.copy($rootScope.manage_indicators_and_sub_save_indicator.save_content);
          $rootScope.manage_indicators_and_sub_result[$rootScope.manage_indicators_and_sub_save_indicator.save_index] =  angular.copy($rootScope.manage_indicators_indicator_choosen);
