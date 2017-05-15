@@ -2766,7 +2766,7 @@ $scope.choose_not_complete =true;
                  }
              }
          ).success(function (data) {
-              $scope.close_modal(my_modal);
+              $scope.find_information();
               alertCaller.success();
          })
     .error(function(data, status, headers, config) {
