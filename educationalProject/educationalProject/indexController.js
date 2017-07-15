@@ -1498,11 +1498,11 @@ for(index=0;index<$rootScope.all_curriculums.length;index++){
     if(!$scope.corresponding_results){
         return true;
     }
-    if($scope.disabled_search==true){
+    /*if($scope.disabled_search==true){
         if($scope.files.length ==0){
             return true;
         }
-    }
+    }*/
 
     if($scope.corresponding_results.evaluation_detail.length == 0){
         return true;
@@ -1556,15 +1556,24 @@ for(index=0;index<$rootScope.all_curriculums.length;index++){
           }
       });
     });
- $scope.file_not_already_upload = function(){
-        return $scope.files.length==0;
-    }
      $scope.sendCurriAndGetYears = function () {
         $scope.choose_not_complete =true;
         $scope.year_choosen = {}
         $scope.indicator_choosen= {};
         var promise = request_years_from_curri_choosen_service.async($scope.curri_choosen).then(function(data) {
-            $scope.corresponding_aca_years = data;
+            var ind;
+            var now = new Date(); 
+            var nowDate = new Date(now.getTime() + (420 + (420-(now.getTimezoneOffset() * -1))) * 60000);
+            var expTime = new Date("August 1, 2017 00:00:00 UTC");
+            $scope.corresponding_aca_years = [];
+            for(ind = 0;ind < data.length;ind++){
+                if(data[ind].aca_year != 2559)
+                    $scope.corresponding_aca_years.push(data[ind]);
+                else{
+                    if(nowDate < expTime)
+                        $scope.corresponding_aca_years.push(data[ind]);
+                }
+            }
              $scope.choose_not_complete = true;
         $scope.corresponding_indicators = [];
                     $scope.please_wait = false;

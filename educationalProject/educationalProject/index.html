@@ -741,7 +741,7 @@
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อหลักสูตรภาษาไทย</span></h3>
                             </div>
                             <div class="col-xs-8">
-                                <input ng-class="{ little_danger: create_edit_curri_ctrl.create_edit_curri_form.curr_tname.$invalid && create_edit_curri_ctrl.create_edit_curri_form.curr_tname.$dirty }" type="text" name="curr_tname" class="form-control" placeholder="" ng-model="curri_obj.curr_tname" required>
+                                <input ng-class="{ little_danger: create_edit_curri_ctrl.create_edit_curri_form.curr_tname.$invalid && create_edit_curri_ctrl.create_edit_curri_form.curr_tname.$dirty }" type="text" name="curr_tname" class="form-control" ng-model="curri_obj.curr_tname" required>
                             </div>
                         </div>
                   <div class="row">
@@ -749,7 +749,7 @@
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อหลักสูตรภาษาอังกฤษ</span></h3>
                             </div>
                                <div class="col-xs-8">
-                                <input ng-class="{ little_danger: create_edit_curri_ctrl.create_edit_curri_form.curr_ename.$invalid && create_edit_curri_ctrl.create_edit_curri_form.curr_ename.$dirty }" type="text" name="curr_ename" class="form-control" placeholder="" ng-model="curri_obj.curr_ename" required>
+                                <input ng-class="{ little_danger: create_edit_curri_ctrl.create_edit_curri_form.curr_ename.$invalid && create_edit_curri_ctrl.create_edit_curri_form.curr_ename.$dirty }" type="text" name="curr_ename" class="form-control" ng-model="curri_obj.curr_ename" required>
                             </div>   
                         </div>
                     <div class="row">
@@ -757,7 +757,7 @@
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(ย่อ)</span></h3>
                             </div>
                                 <div class="col-xs-8">
-                                <input ng-class="{ little_danger: create_edit_curri_ctrl.create_edit_curri_form.degree_t_bf.$invalid && create_edit_curri_ctrl.create_edit_curri_form.degree_t_bf.$dirty }" type="text" name="degree_t_bf" class="form-control" placeholder="" ng-model="curri_obj.degree_t_bf" required>
+                                <input ng-class="{ little_danger: create_edit_curri_ctrl.create_edit_curri_form.degree_t_bf.$invalid && create_edit_curri_ctrl.create_edit_curri_form.degree_t_bf.$dirty }" type="text" name="degree_t_bf" class="form-control" ng-model="curri_obj.degree_t_bf" required>
                             </div>
                         </div>
                       <div class="row">
@@ -765,7 +765,7 @@
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(ย่อ)</span></h3>
                             </div>
                              <div class="col-xs-8">
-                                <input ng-class="{ little_danger: create_edit_curri_ctrl.create_edit_curri_form.degree_e_bf.$invalid && create_edit_curri_ctrl.create_edit_curri_form.degree_e_bf.$dirty }" type="text" name="degree_e_bf" class="form-control" placeholder="" ng-model="curri_obj.degree_e_bf" required>
+                                <input ng-class="{ little_danger: create_edit_curri_ctrl.create_edit_curri_form.degree_e_bf.$invalid && create_edit_curri_ctrl.create_edit_curri_form.degree_e_bf.$dirty }" type="text" name="degree_e_bf" class="form-control" ng-model="curri_obj.degree_e_bf" required>
                             </div>
                         </div>
     <div class="row">
@@ -773,7 +773,7 @@
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาไทย(เต็ม)</span></h3>
                             </div>
                               <div class="col-xs-8">
-                                <input ng-class="{ little_danger: create_edit_curri_ctrl.create_edit_curri_form.degree_t_full.$invalid && create_edit_curri_ctrl.create_edit_curri_form.degree_t_full.$dirty }" type="text" name="degree_t_full" class="form-control" placeholder="" ng-model="curri_obj.degree_t_full" required>
+                                <input ng-class="{ little_danger: create_edit_curri_ctrl.create_edit_curri_form.degree_t_full.$invalid && create_edit_curri_ctrl.create_edit_curri_form.degree_t_full.$dirty }" type="text" name="degree_t_full" class="form-control" ng-model="curri_obj.degree_t_full" required>
                             </div>
                         </div>
                       <div class="row">
@@ -781,7 +781,7 @@
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ชื่อปริญญาภาษาอังกฤษ(เต็ม)</span></h3>
                             </div>
                                <div class="col-xs-8">
-                                <input ng-class="{ little_danger: create_edit_curri_ctrl.create_edit_curri_form.degree_e_full.$invalid && create_edit_curri_ctrl.create_edit_curri_form.degree_e_full.$dirty }" type="text" name="degree_e_full" class="form-control" placeholder="" ng-model="curri_obj.degree_e_full" required>
+                                <input ng-class="{ little_danger: create_edit_curri_ctrl.create_edit_curri_form.degree_e_full.$invalid && create_edit_curri_ctrl.create_edit_curri_form.degree_e_full.$dirty }" type="text" name="degree_e_full" class="form-control" ng-model="curri_obj.degree_e_full" required>
                             </div>
                         </div>
                      <div class="row">
@@ -801,7 +801,7 @@
                                 <h3 style="margin-top:3px;"><span class="topicHeader">ระยะเวลาการเรียน(ปี)</span></h3>
                             </div>
                                   <div class="col-xs-8">
-                                <input ng-class="{ little_danger: create_edit_curri_ctrl.create_edit_curri_form.period.$invalid && create_edit_curri_ctrl.create_edit_curri_form.period.$dirty }" ng-pattern="/^[1-9]$/"  name="period" class="form-control number_input" placeholder="" ng-model="curri_obj.period" required>
+                                <input ng-class="{ little_danger: create_edit_curri_ctrl.create_edit_curri_form.period.$invalid && create_edit_curri_ctrl.create_edit_curri_form.period.$dirty }" ng-pattern="/^[1-9]$/"  name="period" class="form-control number_input" ng-model="curri_obj.period" required>
                             </div>
                         </div>
 </form>
@@ -918,7 +918,7 @@
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่อห้องปฏิบัติการ</span></h3>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" placeholder="" ng-model="lab_obj.name" required>
+                                <input type="text" class="form-control" ng-model="lab_obj.name" required>
                             </div>
                         </div>
   <div class="row">
@@ -938,7 +938,7 @@
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">เลขห้อง</span></h3>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" placeholder="" ng-model="lab_obj.room" required>
+                                <input type="text" class="form-control" ng-model="lab_obj.room" required>
                             </div>
                         </div>
            <div class="custom-footer">
@@ -957,7 +957,7 @@
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">หัวข้อการประชุม</span></h3>
                             </div>
                             <div class="col-md-9" style="padding-right: 8px;">
-                                <input type="text" class="form-control" placeholder="" ng-model="minute_obj.topic_name" required>
+                                <input type="text" class="form-control" ng-model="minute_obj.topic_name" required>
                             </div>
                         </div>
                         <div class="row">
@@ -1046,7 +1046,7 @@
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่องานวิจัย</span></h3>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" placeholder="" ng-model="research_obj.name" required>
+                                <input type="text" class="form-control" ng-model="research_obj.name" required>
                             </div>
                         </div>
   <div class="row">
@@ -1066,7 +1066,7 @@
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ปีที่ตีพิมพ์</span></h3>
                             </div>
                             <div class="col-md-9">
-                                <input type="number" ng-pattern="/^[0-9]*$/"  class="form-control" placeholder="" ng-model="research_obj.year_publish" required>
+                                <input type="number" ng-pattern="/^[0-9]*$/"  class="form-control" ng-model="research_obj.year_publish" required>
                             </div>
                         </div>
    <div class="row">
@@ -1724,7 +1724,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                 <h3 style="margin-top:3px;margin-left:26px;"><span class="topicNewHeader">ชื่ออัลบั้มรูปภาพ</span></h3>
                             </div>
                             <div class="col-md-10">
-                                <input type="text" class="form-control album-title" placeholder="" ng-model="manage_album_show_this_album.name" required>
+                                <input type="text" class="form-control album-title" ng-model="manage_album_show_this_album.name" required>
                             </div>
                         </div>
 <div flow-init flow-name="$parent.my_pictures.flow" flow-file-added="imgFileCheck($file)">
@@ -1809,7 +1809,7 @@ glyphicon glyphicon-lock" ></i> รหัสผ่าน:   </span></h3>
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่ออัลบั้มรูปภาพ</span></h3>
                             </div>
                             <div class="col-md-9" style="padding-right: 8px;">
-                                <input type="text" class="form-control" placeholder="" ng-model="my_new_album.name" required>
+                                <input type="text" class="form-control" ng-model="my_new_album.name" required>
                             </div>
                         </div>
 <div flow-init flow-name="$parent.my_pictures.flow" flow-file-added="imgFileCheck($file)">
@@ -2720,7 +2720,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
     <span class="btn btn-success" ng-click="set_disabled_search()" style="font-size:18px;"><i style="margin-top:3px" class="glyphicon glyphicon-plus-sign"></i> อัพโหลดไฟล์ใหม่</span>
                             </div>
     <div class="col-md-8" ng-show="disabled_search" style="padding-right: 6px;">
-                                <input type="file" name="upload_file_input" class="form-control full" placeholder="ไฟล์รายงานการประชุม" file-upload  data-ng-model="my_file"  required/>
+                                <input type="file" name="upload_file_input" class="form-control full" file-upload  data-ng-model="my_file"  required/>
                             </div>
 <div class="col-md-1" style="margin-top:5px" ng-show="disabled_search">
 <a href=""   data-ng-click="back_to_default()" class="hvr-pulse">
@@ -3554,7 +3554,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่อภาควิชา</span></h3>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" placeholder="" ng-model="edu_obj.major" required>
+                                <input type="text" class="form-control" ng-model="edu_obj.major" required>
                             </div>
                         </div>
   <div class="row">
@@ -3562,7 +3562,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">สถาบัน</span></h3>
                             </div>
  <div class="col-md-9">
-  <input type="text" class="form-control" placeholder="" ng-model="edu_obj.college" required>
+  <input type="text" class="form-control" ng-model="edu_obj.college" required>
 </div>
 </div>
   <div class="row">
@@ -3570,7 +3570,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ปีที่จบการศึกษา</span></h3>
                             </div>
                             <div class="col-md-9">
-                                <input type="number" ng-pattern="/^[0-9]*$/"  class="form-control" placeholder="" ng-model="edu_obj.grad_year" required>
+                                <input type="number" ng-pattern="/^[0-9]*$/"  class="form-control" ng-model="edu_obj.grad_year" required>
                             </div>
                         </div>
   <div class="row">
@@ -3578,7 +3578,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ตัวย่อปริญญา</span></h3>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" placeholder="" ng-model="edu_obj.pre_major" required>
+                                <input type="text" class="form-control" ng-model="edu_obj.pre_major" required>
                             </div>
                         </div>
                         <div class="row">
@@ -3664,7 +3664,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">name-surname:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" data-ng-change = "something_change()" class="full form-control" placeholder="" data-ng-model="current_user.information.e_name">
+                                <input type="text" data-ng-change = "something_change()" class="full form-control" data-ng-model="current_user.information.e_name">
                             </div>
                         </div>
                         <div class="row">
@@ -3691,7 +3691,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">ชื่อ-นามสกุล:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" data-ng-change = "something_change()" class="full form-control" placeholder="" data-ng-model="current_user.information.t_name">
+                                <input type="text" data-ng-change = "something_change()" class="full form-control" data-ng-model="current_user.information.t_name">
                             </div>
                         </div>
                         <div class="row">
@@ -3699,7 +3699,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">ที่อยู่:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" data-ng-change = "something_change()" class="full form-control" placeholder="" data-ng-model="current_user.information.addr">
+                                <input type="text" data-ng-change = "something_change()" class="full form-control" data-ng-model="current_user.information.addr">
                             </div>
                         </div>
                         <div class="row">
@@ -3707,7 +3707,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">เบอร์โทร:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" data-ng-change = "something_change()" class="full form-control" placeholder=""  data-ng-model="current_user.information.tel">
+                                <input type="text" data-ng-change = "something_change()" class="full form-control" data-ng-model="current_user.information.tel">
                             </div>
                         </div>
                         <div class="row" ng-show="$root.current_user.user_type=='อาจารย์'">
@@ -3727,7 +3727,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                 <h3 style="margin-top:0px;"><span class="topicHeader">อีเมล์:   </span></h3>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="full form-control" placeholder="" data-ng-model="current_user.information.email" data-ng-change = "something_change()">
+                                <input type="text" class="full form-control" data-ng-model="current_user.information.email" data-ng-change = "something_change()">
                             </div>
                         </div>
 
@@ -3789,7 +3789,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                                 <h3 style="margin-top:3px;margin-left:10px;"><span class="topicNewHeader">ชื่อแบบสอบถาม</span></h3>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" placeholder="" ng-model="my_survey_name" required>
+                                <input type="text" class="form-control" ng-model="my_survey_name" required>
                             </div>
                         </div>
   <div class="row">
@@ -4092,7 +4092,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>Build:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>526</p>
+                    <p>527</p>
                 </div>
             </div>
             <div class='row'>
@@ -4100,7 +4100,7 @@ glyphicon glyphicon-wrench"></i> </span></a></td>
                     <p>ปรับปรุงล่าสุด:</p>
                 </div>
                 <div class='col-xs-9 txt-normal'>
-                    <p>15 พฤษภาคม 2560</p>
+                    <p>15 กรกฎาคม 2560</p>
                 </div>
             </div>
             </div>
